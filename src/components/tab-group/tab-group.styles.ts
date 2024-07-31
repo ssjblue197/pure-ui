@@ -2,8 +2,8 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --indicator-color: var(--sl-color-primary-600);
-    --track-color: var(--sl-color-neutral-200);
+    --indicator-color: var(--p-color-primary-600);
+    --track-color: var(--p-color-neutral-200);
     --track-width: 2px;
 
     display: block;
@@ -22,13 +22,13 @@ export default css`
   .tab-group__indicator {
     position: absolute;
     transition:
-      var(--sl-transition-fast) translate ease,
-      var(--sl-transition-fast) width ease;
+      var(--p-transition-fast) translate ease,
+      var(--p-transition-fast) width ease;
   }
 
   .tab-group--has-scroll-controls .tab-group__nav-container {
     position: relative;
-    padding: 0 var(--sl-spacing-x-large);
+    padding: 0 var(--p-spacing-x-large);
   }
 
   .tab-group__body {
@@ -43,7 +43,7 @@ export default css`
     position: absolute;
     top: 0;
     bottom: 0;
-    width: var(--sl-spacing-x-large);
+    width: var(--p-spacing-x-large);
   }
 
   .tab-group__scroll-button--start {
@@ -106,8 +106,8 @@ export default css`
     order: 2;
   }
 
-  .tab-group--top ::slotted(sl-tab-panel) {
-    --padding: var(--sl-spacing-medium) 0;
+  .tab-group--top ::slotted(p-tab-panel) {
+    --padding: var(--p-spacing-medium) 0;
   }
 
   /*
@@ -152,8 +152,8 @@ export default css`
     order: 1;
   }
 
-  .tab-group--bottom ::slotted(sl-tab-panel) {
-    --padding: var(--sl-spacing-medium) 0;
+  .tab-group--bottom ::slotted(p-tab-panel) {
+    --padding: var(--p-spacing-medium) 0;
   }
 
   /*
@@ -189,8 +189,8 @@ export default css`
     order: 2;
   }
 
-  .tab-group--start ::slotted(sl-tab-panel) {
-    --padding: 0 var(--sl-spacing-medium);
+  .tab-group--start ::slotted(p-tab-panel) {
+    --padding: 0 var(--p-spacing-medium);
   }
 
   /*
@@ -226,7 +226,7 @@ export default css`
     order: 1;
   }
 
-  .tab-group--end ::slotted(sl-tab-panel) {
-    --padding: 0 var(--sl-spacing-medium);
+  .tab-group--end ::slotted(p-tab-panel) {
+    --padding: 0 var(--p-spacing-medium);
   }
 `;

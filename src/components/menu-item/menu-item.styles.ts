@@ -15,14 +15,14 @@ export default css`
     position: relative;
     display: flex;
     align-items: stretch;
-    font-family: var(--sl-font-sans);
-    font-size: var(--sl-font-size-medium);
-    font-weight: var(--sl-font-weight-normal);
-    line-height: var(--sl-line-height-normal);
-    letter-spacing: var(--sl-letter-spacing-normal);
-    color: var(--sl-color-neutral-700);
-    padding: var(--sl-spacing-2x-small) var(--sl-spacing-2x-small);
-    transition: var(--sl-transition-fast) fill;
+    font-family: var(--p-font-sans);
+    font-size: var(--p-font-size-medium);
+    font-weight: var(--p-font-weight-normal);
+    line-height: var(--p-line-height-normal);
+    letter-spacing: var(--p-letter-spacing-normal);
+    color: var(--p-color-neutral-700);
+    padding: var(--p-spacing-2x-small) var(--p-spacing-2x-small);
+    transition: var(--p-transition-fast) fill;
     user-select: none;
     -webkit-user-select: none;
     white-space: nowrap;
@@ -40,11 +40,11 @@ export default css`
     cursor: wait;
   }
 
-  .menu-item.menu-item--loading *:not(sl-spinner) {
+  .menu-item.menu-item--loading *:not(p-spinner) {
     opacity: 0.5;
   }
 
-  .menu-item--loading sl-spinner {
+  .menu-item--loading p-spinner {
     --indicator-color: currentColor;
     --track-width: 1px;
     position: absolute;
@@ -68,7 +68,7 @@ export default css`
   }
 
   .menu-item .menu-item__prefix::slotted(*) {
-    margin-inline-end: var(--sl-spacing-x-small);
+    margin-inline-end: var(--p-spacing-x-small);
   }
 
   .menu-item .menu-item__suffix {
@@ -78,14 +78,14 @@ export default css`
   }
 
   .menu-item .menu-item__suffix::slotted(*) {
-    margin-inline-start: var(--sl-spacing-x-small);
+    margin-inline-start: var(--p-spacing-x-small);
   }
 
   /* Safe triangle */
   .menu-item--submenu-expanded::after {
     content: '';
     position: fixed;
-    z-index: calc(var(--sl-z-index-dropdown) - 1);
+    z-index: calc(var(--p-z-index-dropdown) - 1);
     top: 0;
     right: 0;
     bottom: 0;
@@ -103,14 +103,14 @@ export default css`
 
   :host(:hover:not([aria-disabled='true'], :focus-visible)) .menu-item,
   .menu-item--submenu-expanded {
-    background-color: var(--sl-color-neutral-100);
-    color: var(--sl-color-neutral-1000);
+    background-color: var(--p-color-neutral-100);
+    color: var(--p-color-neutral-1000);
   }
 
   :host(:focus-visible) .menu-item {
     outline: none;
-    background-color: var(--sl-color-primary-600);
-    color: var(--sl-color-neutral-0);
+    background-color: var(--p-color-primary-600);
+    color: var(--p-color-neutral-0);
     opacity: 1;
   }
 
@@ -130,13 +130,13 @@ export default css`
   }
 
   /* Add elevation and z-index to submenus */
-  sl-popup::part(popup) {
-    box-shadow: var(--sl-shadow-large);
-    z-index: var(--sl-z-index-dropdown);
+  p-popup::part(popup) {
+    box-shadow: var(--p-shadow-large);
+    z-index: var(--p-z-index-dropdown);
     margin-left: var(--submenu-offset);
   }
 
-  .menu-item--rtl sl-popup::part(popup) {
+  .menu-item--rtl p-popup::part(popup) {
     margin-left: calc(-1 * var(--submenu-offset));
   }
 
@@ -148,7 +148,7 @@ export default css`
     }
   }
 
-  ::slotted(sl-menu) {
+  ::slotted(p-menu) {
     max-width: var(--auto-size-available-width) !important;
     max-height: var(--auto-size-available-height) !important;
   }

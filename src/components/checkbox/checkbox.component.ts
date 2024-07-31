@@ -9,8 +9,8 @@ import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import formControlStyles from '../../styles/form-control.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlIcon from '../icon/icon.component.js';
+import PIcon from '../icon/icon.component.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './checkbox.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
@@ -21,34 +21,34 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @status stable
  * @since 2.0
  *
- * @dependency sl-icon
+ * @dependency p-icon
  *
  * @slot - The checkbox's label.
  * @slot help-text - Text that describes how to use the checkbox. Alternatively, you can use the `help-text` attribute.
  *
- * @event sl-blur - Emitted when the checkbox loses focus.
- * @event sl-change - Emitted when the checked state changes.
- * @event sl-focus - Emitted when the checkbox gains focus.
- * @event sl-input - Emitted when the checkbox receives input.
- * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
+ * @event p-blur - Emitted when the checkbox loses focus.
+ * @event p-change - Emitted when the checked state changes.
+ * @event p-focus - Emitted when the checkbox gains focus.
+ * @event p-input - Emitted when the checkbox receives input.
+ * @event p-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @csspart base - The component's base wrapper.
  * @csspart control - The square container that wraps the checkbox's checked state.
  * @csspart control--checked - Matches the control part when the checkbox is checked.
  * @csspart control--indeterminate - Matches the control part when the checkbox is indeterminate.
- * @csspart checked-icon - The checked icon, an `<sl-icon>` element.
- * @csspart indeterminate-icon - The indeterminate icon, an `<sl-icon>` element.
+ * @csspart checked-icon - The checked icon, an `<p-icon>` element.
+ * @csspart indeterminate-icon - The indeterminate icon, an `<p-icon>` element.
  * @csspart label - The container that wraps the checkbox's label.
  * @csspart form-control-help-text - The help text's wrapper.
  */
-export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormControl {
+export default class PCheckbox extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
-  static dependencies = { 'sl-icon': SlIcon };
+  static dependencies = { 'p-icon': PIcon };
 
   private readonly formControlController = new FormControlController(this, {
-    value: (control: SlCheckbox) => (control.checked ? control.value || 'on' : undefined),
-    defaultValue: (control: SlCheckbox) => control.defaultChecked,
-    setValue: (control: SlCheckbox, checked: boolean) => (control.checked = checked)
+    value: (control: PCheckbox) => (control.checked ? control.value || 'on' : undefined),
+    defaultValue: (control: PCheckbox) => control.defaultChecked,
+    setValue: (control: PCheckbox, checked: boolean) => (control.checked = checked)
   });
   private readonly hasSlotController = new HasSlotController(this, 'help-text');
 
@@ -112,16 +112,16 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
   private handleClick() {
     this.checked = !this.checked;
     this.indeterminate = false;
-    this.emit('sl-change');
+    this.emit('p-change');
   }
 
   private handleBlur() {
     this.hasFocus = false;
-    this.emit('sl-blur');
+    this.emit('p-blur');
   }
 
   private handleInput() {
-    this.emit('sl-input');
+    this.emit('p-input');
   }
 
   private handleInvalid(event: Event) {
@@ -131,7 +131,7 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
 
   private handleFocus() {
     this.hasFocus = true;
-    this.emit('sl-focus');
+    this.emit('p-focus');
   }
 
   @watch('disabled', { waitUntilFirstUpdate: true })
@@ -245,17 +245,17 @@ export default class SlCheckbox extends ShoelaceElement implements ShoelaceFormC
           >
             ${this.checked
               ? html`
-                  <sl-icon part="checked-icon" class="checkbox__checked-icon" library="system" name="check"></sl-icon>
+                  <p-icon part="checked-icon" class="checkbox__checked-icon" library="system" name="check"></p-icon>
                 `
               : ''}
             ${!this.checked && this.indeterminate
               ? html`
-                  <sl-icon
+                  <p-icon
                     part="indeterminate-icon"
                     class="checkbox__indeterminate-icon"
                     library="system"
                     name="indeterminate"
-                  ></sl-icon>
+                  ></p-icon>
                 `
               : ''}
           </span>

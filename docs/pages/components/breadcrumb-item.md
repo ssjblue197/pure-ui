@@ -6,30 +6,30 @@ layout: component
 ---
 
 ```html:preview
-<sl-breadcrumb>
-  <sl-breadcrumb-item>
-    <sl-icon slot="prefix" name="house"></sl-icon>
+<p-breadcrumb>
+  <p-breadcrumb-item>
+    <p-icon slot="prefix" name="house"></p-icon>
     Home
-  </sl-breadcrumb-item>
-  <sl-breadcrumb-item>Clothing</sl-breadcrumb-item>
-  <sl-breadcrumb-item>Shirts</sl-breadcrumb-item>
-</sl-breadcrumb>
+  </p-breadcrumb-item>
+  <p-breadcrumb-item>Clothing</p-breadcrumb-item>
+  <p-breadcrumb-item>Shirts</p-breadcrumb-item>
+</p-breadcrumb>
 ```
 
 ```jsx:react
-import SlBreadcrumb from '@shoelace-style/shoelace/dist/react/breadcrumb';
-import SlBreadcrumbItem from '@shoelace-style/shoelace/dist/react/breadcrumb-item';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PBreadcrumb from '@shoelace-style/shoelace/dist/react/breadcrumb';
+import PBreadcrumbItem from '@shoelace-style/shoelace/dist/react/breadcrumb-item';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
 
 const App = () => (
-  <SlBreadcrumb>
-    <SlBreadcrumbItem>
-      <SlIcon slot="prefix" name="house"></SlIcon>
+  <PBreadcrumb>
+    <PBreadcrumbItem>
+      <PIcon slot="prefix" name="house"></PIcon>
       Home
-    </SlBreadcrumbItem>
-    <SlBreadcrumbItem>Clothing</SlBreadcrumbItem>
-    <SlBreadcrumbItem>Shirts</SlBreadcrumbItem>
-  </SlBreadcrumb>
+    </PBreadcrumbItem>
+    <PBreadcrumbItem>Clothing</PBreadcrumbItem>
+    <PBreadcrumbItem>Shirts</PBreadcrumbItem>
+  </PBreadcrumb>
 );
 ```
 

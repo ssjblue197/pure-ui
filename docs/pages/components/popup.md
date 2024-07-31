@@ -10,75 +10,75 @@ This component's name is inspired by [`<popup>`](https://github.com/MicrosoftEdg
 Popup doesn't provide any styles — just positioning! The popup's preferred placement, distance, and skidding (offset) can be configured using attributes. An arrow that points to the anchor can be shown and customized to your liking. Additional positioning options are available and described in more detail below.
 
 :::warning
-Popup is a low-level utility built specifically for positioning elements. Do not mistake it for a [tooltip](/components/tooltip) or similar because _it does not facilitate an accessible experience!_ Almost every correct usage of `<sl-popup>` will involve building other components. It should rarely, if ever, occur directly in your HTML.
+Popup is a low-level utility built specifically for positioning elements. Do not mistake it for a [tooltip](/components/tooltip) or similar because _it does not facilitate an accessible experience!_ Almost every correct usage of `<p-popup>` will involve building other components. It should rarely, if ever, occur directly in your HTML.
 :::
 
 ```html:preview
 <div class="popup-overview">
-  <sl-popup placement="top" active>
+  <p-popup placement="top" active>
     <span slot="anchor"></span>
     <div class="box"></div>
-  </sl-popup>
+  </p-popup>
 
   <div class="popup-overview-options">
-    <sl-select label="Placement" name="placement" value="top" class="popup-overview-select">
-      <sl-option value="top">top</sl-option>
-      <sl-option value="top-start">top-start</sl-option>
-      <sl-option value="top-end">top-end</sl-option>
-      <sl-option value="bottom">bottom</sl-option>
-      <sl-option value="bottom-start">bottom-start</sl-option>
-      <sl-option value="bottom-end">bottom-end</sl-option>
-      <sl-option value="right">right</sl-option>
-      <sl-option value="right-start">right-start</sl-option>
-      <sl-option value="right-end">right-end</sl-option>
-      <sl-option value="left">left</sl-option>
-      <sl-option value="left-start">left-start</sl-option>
-      <sl-option value="left-end">left-end</sl-option>
-    </sl-select>
-    <sl-input type="number" name="distance" label="distance" value="0"></sl-input>
-    <sl-input type="number" name="skidding" label="Skidding" value="0"></sl-input>
+    <p-select label="Placement" name="placement" value="top" class="popup-overview-select">
+      <p-option value="top">top</p-option>
+      <p-option value="top-start">top-start</p-option>
+      <p-option value="top-end">top-end</p-option>
+      <p-option value="bottom">bottom</p-option>
+      <p-option value="bottom-start">bottom-start</p-option>
+      <p-option value="bottom-end">bottom-end</p-option>
+      <p-option value="right">right</p-option>
+      <p-option value="right-start">right-start</p-option>
+      <p-option value="right-end">right-end</p-option>
+      <p-option value="left">left</p-option>
+      <p-option value="left-start">left-start</p-option>
+      <p-option value="left-end">left-end</p-option>
+    </p-select>
+    <p-input type="number" name="distance" label="distance" value="0"></p-input>
+    <p-input type="number" name="skidding" label="Skidding" value="0"></p-input>
   </div>
 
   <div class="popup-overview-options">
-    <sl-switch name="active" checked>Active</sl-switch>
-    <sl-switch name="arrow">Arrow</sl-switch>
+    <p-switch name="active" checked>Active</p-switch>
+    <p-switch name="arrow">Arrow</p-switch>
   </div>
 </div>
 
 <script>
   const container = document.querySelector('.popup-overview');
-  const popup = container.querySelector('sl-popup');
-  const select = container.querySelector('sl-select[name="placement"]');
-  const distance = container.querySelector('sl-input[name="distance"]');
-  const skidding = container.querySelector('sl-input[name="skidding"]');
-  const active = container.querySelector('sl-switch[name="active"]');
-  const arrow = container.querySelector('sl-switch[name="arrow"]');
+  const popup = container.querySelector('p-popup');
+  const select = container.querySelector('p-select[name="placement"]');
+  const distance = container.querySelector('p-input[name="distance"]');
+  const skidding = container.querySelector('p-input[name="skidding"]');
+  const active = container.querySelector('p-switch[name="active"]');
+  const arrow = container.querySelector('p-switch[name="arrow"]');
 
-  select.addEventListener('sl-change', () => (popup.placement = select.value));
-  distance.addEventListener('sl-input', () => (popup.distance = distance.value));
-  skidding.addEventListener('sl-input', () => (popup.skidding = skidding.value));
-  active.addEventListener('sl-change', () => (popup.active = active.checked));
-  arrow.addEventListener('sl-change', () => (popup.arrow = arrow.checked));
+  select.addEventListener('p-change', () => (popup.placement = select.value));
+  distance.addEventListener('p-input', () => (popup.distance = distance.value));
+  skidding.addEventListener('p-input', () => (popup.skidding = skidding.value));
+  active.addEventListener('p-change', () => (popup.active = active.checked));
+  arrow.addEventListener('p-change', () => (popup.arrow = arrow.checked));
 </script>
 
 <style>
-  .popup-overview sl-popup {
-    --arrow-color: var(--sl-color-primary-600);
+  .popup-overview p-popup {
+    --arrow-color: var(--p-color-primary-600);
   }
 
   .popup-overview span[slot='anchor'] {
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-overview .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
   .popup-overview-options {
@@ -88,11 +88,11 @@ Popup is a low-level utility built specifically for positioning elements. Do not
     gap: 1rem;
   }
 
-  .popup-overview-options sl-select {
+  .popup-overview-options p-select {
     width: 160px;
   }
 
-  .popup-overview-options sl-input {
+  .popup-overview-options p-input {
     width: 100px;
   }
 
@@ -104,30 +104,30 @@ Popup is a low-level utility built specifically for positioning elements. Do not
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlSelect from '@shoelace-style/shoelace/dist/react/select';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
-import SlInput from '@shoelace-style/shoelace/dist/react/input';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PSelect from '@shoelace-style/shoelace/dist/react/select';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
-  .popup-overview sl-popup {
-    --arrow-color: var(--sl-color-primary-600);
+  .popup-overview p-popup {
+    --arrow-color: var(--p-color-primary-600);
   }
 
   .popup-overview span[slot='anchor'] {
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-overview .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
   .popup-overview-options {
@@ -137,11 +137,11 @@ const css = `
     gap: 1rem;
   }
 
-  .popup-overview-options sl-select {
+  .popup-overview-options p-select {
     width: 160px;
   }
 
-  .popup-overview-options sl-input {
+  .popup-overview-options p-input {
     width: 100px;
   }
 
@@ -160,7 +160,7 @@ const App = () => {
   return (
     <>
       <div className="popup-overview">
-        <SlPopup
+        <PPopup
           placement={placement}
           active={active || null}
           distance={distance}
@@ -169,52 +169,52 @@ const App = () => {
         >
           <span slot="anchor" />
           <div className="box" />
-        </SlPopup>
+        </PPopup>
 
         <div className="popup-overview-options">
-          <SlSelect
+          <PSelect
             label="Placement"
             name="placement"
             value={placement}
             className="popup-overview-select"
-            onSlChange={event => setPlacement(event.target.value)}
+            onPChange={event => setPlacement(event.target.value)}
           >
-            <SlMenuItem value="top">top</SlMenuItem>
-            <SlMenuItem value="top-start">top-start</SlMenuItem>
-            <SlMenuItem value="top-end">top-end</SlMenuItem>
-            <SlMenuItem value="bottom">bottom</SlMenuItem>
-            <SlMenuItem value="bottom-start">bottom-start</SlMenuItem>
-            <SlMenuItem value="bottom-end">bottom-end</SlMenuItem>
-            <SlMenuItem value="right">right</SlMenuItem>
-            <SlMenuItem value="right-start">right-start</SlMenuItem>
-            <SlMenuItem value="right-end">right-end</SlMenuItem>
-            <SlMenuItem value="left">left</SlMenuItem>
-            <SlMenuItem value="left-start">left-start</SlMenuItem>
-            <SlMenuItem value="left-end">left-end</SlMenuItem>
-          </SlSelect>
-          <SlInput
+            <PMenuItem value="top">top</PMenuItem>
+            <PMenuItem value="top-start">top-start</PMenuItem>
+            <PMenuItem value="top-end">top-end</PMenuItem>
+            <PMenuItem value="bottom">bottom</PMenuItem>
+            <PMenuItem value="bottom-start">bottom-start</PMenuItem>
+            <PMenuItem value="bottom-end">bottom-end</PMenuItem>
+            <PMenuItem value="right">right</PMenuItem>
+            <PMenuItem value="right-start">right-start</PMenuItem>
+            <PMenuItem value="right-end">right-end</PMenuItem>
+            <PMenuItem value="left">left</PMenuItem>
+            <PMenuItem value="left-start">left-start</PMenuItem>
+            <PMenuItem value="left-end">left-end</PMenuItem>
+          </PSelect>
+          <PInput
             type="number"
             name="distance"
             label="distance"
             value={distance}
-            onSlInput={event => setDistance(event.target.value)}
+            onPInput={event => setDistance(event.target.value)}
           />
-          <SlInput
+          <PInput
             type="number"
             name="skidding"
             label="Skidding"
             value={skidding}
-            onSlInput={event => setSkidding(event.target.value)}
+            onPInput={event => setSkidding(event.target.value)}
           />
         </div>
 
         <div className="popup-overview-options">
-          <SlSwitch checked={active} onSlChange={event => setActive(event.target.checked)}>
+          <PSwitch checked={active} onPChange={event => setActive(event.target.checked)}>
             Active
-          </SlSwitch>
-          <SlSwitch checked={arrow} onSlChange={event => setArrow(event.target.checked)}>
+          </PSwitch>
+          <PSwitch checked={arrow} onPChange={event => setArrow(event.target.checked)}>
             Arrow
-          </SlSwitch>
+          </PSwitch>
         </div>
       </div>
 
@@ -236,13 +236,13 @@ Popups are inactive and hidden until the `active` attribute is applied. Removing
 
 ```html:preview
 <div class="popup-active">
-  <sl-popup placement="top" active>
+  <p-popup placement="top" active>
     <span slot="anchor"></span>
     <div class="box"></div>
-  </sl-popup>
+  </p-popup>
 
   <br />
-  <sl-switch checked>Active</sl-switch>
+  <p-switch checked>Active</p-switch>
 </div>
 
 <style>
@@ -250,46 +250,46 @@ Popups are inactive and hidden until the `active` attribute is applied. Removing
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-active .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 </style>
 
 <script>
   const container = document.querySelector('.popup-active');
-  const popup = container.querySelector('sl-popup');
-  const active = container.querySelector('sl-switch');
+  const popup = container.querySelector('p-popup');
+  const active = container.querySelector('p-switch');
 
-  active.addEventListener('sl-change', () => (popup.active = active.checked));
+  active.addEventListener('p-change', () => (popup.active = active.checked));
 </script>
 ```
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-active span[slot='anchor'] {
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-active .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 `;
 
@@ -299,15 +299,15 @@ const App = () => {
   return (
     <>
       <div className="popup-active">
-        <SlPopup placement="top" active={active}>
+        <PPopup placement="top" active={active}>
           <span slot="anchor" />
           <div className="box" />
-        </SlPopup>
+        </PPopup>
 
         <br />
-        <SlSwitch checked={active} onSlChange={event => setActive(event.target.checked)}>
+        <PSwitch checked={active} onPChange={event => setActive(event.target.checked)}>
           Active
-        </SlSwitch>
+        </PSwitch>
       </div>
 
       <style>{css}</style>
@@ -323,45 +323,45 @@ By default, anchors are slotted into the popup using the `anchor` slot. If your 
 ```html:preview
 <span id="external-anchor"></span>
 
-<sl-popup anchor="external-anchor" placement="top" active>
+<p-popup anchor="external-anchor" placement="top" active>
   <div class="box"></div>
-</sl-popup>
+</p-popup>
 
 <style>
   #external-anchor {
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px 0 0 50px;
   }
 
-  #external-anchor ~ sl-popup .box {
+  #external-anchor ~ p-popup .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 </style>
 ```
 
 ```jsx:react
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
 
 const css = `
   #external-anchor {
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px 0 0 50px;
   }
 
-  #external-anchor ~ sl-popup .box {
+  #external-anchor ~ p-popup .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 `;
 
@@ -370,9 +370,9 @@ const App = () => {
     <>
       <span id="external-anchor" />
 
-      <SlPopup anchor="external-anchor" placement="top" active>
+      <PPopup anchor="external-anchor" placement="top" active>
         <div class="box" />
-      </SlPopup>
+      </PPopup>
 
       <style>{css}</style>
     </>
@@ -388,25 +388,25 @@ Since placement is preferred when using `flip`, you can observe the popup's curr
 
 ```html:preview
 <div class="popup-placement">
-  <sl-popup placement="top" active>
+  <p-popup placement="top" active>
     <span slot="anchor"></span>
     <div class="box"></div>
-  </sl-popup>
+  </p-popup>
 
-  <sl-select label="Placement" value="top">
-    <sl-option value="top">top</sl-option>
-    <sl-option value="top-start">top-start</sl-option>
-    <sl-option value="top-end">top-end</sl-option>
-    <sl-option value="bottom">bottom</sl-option>
-    <sl-option value="bottom-start">bottom-start</sl-option>
-    <sl-option value="bottom-end">bottom-end</sl-option>
-    <sl-option value="right">right</sl-option>
-    <sl-option value="right-start">right-start</sl-option>
-    <sl-option value="right-end">right-end</sl-option>
-    <sl-option value="left">left</sl-option>
-    <sl-option value="left-start">left-start</sl-option>
-    <sl-option value="left-end">left-end</sl-option>
-  </sl-select>
+  <p-select label="Placement" value="top">
+    <p-option value="top">top</p-option>
+    <p-option value="top-start">top-start</p-option>
+    <p-option value="top-end">top-end</p-option>
+    <p-option value="bottom">bottom</p-option>
+    <p-option value="bottom-start">bottom-start</p-option>
+    <p-option value="bottom-end">bottom-end</p-option>
+    <p-option value="right">right</p-option>
+    <p-option value="right-start">right-start</p-option>
+    <p-option value="right-end">right-end</p-option>
+    <p-option value="left">left</p-option>
+    <p-option value="left-start">left-start</p-option>
+    <p-option value="left-end">left-end</p-option>
+  </p-select>
 </div>
 
 <style>
@@ -414,54 +414,54 @@ Since placement is preferred when using `flip`, you can observe the popup's curr
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-placement .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
-  .popup-placement sl-select {
+  .popup-placement p-select {
     max-width: 280px;
   }
 </style>
 
 <script>
   const container = document.querySelector('.popup-placement');
-  const popup = container.querySelector('sl-popup');
-  const select = container.querySelector('sl-select');
+  const popup = container.querySelector('p-popup');
+  const select = container.querySelector('p-select');
 
-  select.addEventListener('sl-change', () => (popup.placement = select.value));
+  select.addEventListener('p-change', () => (popup.placement = select.value));
 </script>
 ```
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlSelect from '@shoelace-style/shoelace/dist/react/select';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PSelect from '@shoelace-style/shoelace/dist/react/select';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const css = `
   .popup-placement span[slot='anchor'] {
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-placement .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
-  .popup-placement sl-select {
+  .popup-placement p-select {
     max-width: 280px;
   }
 `;
@@ -472,25 +472,25 @@ const App = () => {
   return (
     <div className="popup-active">
       <div className="popup-placement">
-        <SlPopup placement={placement} active>
+        <PPopup placement={placement} active>
           <span slot="anchor" />
           <div className="box" />
-        </SlPopup>
+        </PPopup>
 
-        <SlSelect label="Placement" value={placement} onSlChange={event => setPlacement(event.target.value)}>
-          <SlMenuItem value="top">top</SlMenuItem>
-          <SlMenuItem value="top-start">top-start</SlMenuItem>
-          <SlMenuItem value="top-end">top-end</SlMenuItem>
-          <SlMenuItem value="bottom">bottom</SlMenuItem>
-          <SlMenuItem value="bottom-start">bottom-start</SlMenuItem>
-          <SlMenuItem value="bottom-end">bottom-end</SlMenuItem>
-          <SlMenuItem value="right">right</SlMenuItem>
-          <SlMenuItem value="right-start">right-start</SlMenuItem>
-          <SlMenuItem value="right-end">right-end</SlMenuItem>
-          <SlMenuItem value="left">left</SlMenuItem>
-          <SlMenuItem value="left-start">left-start</SlMenuItem>
-          <SlMenuItem value="left-end">left-end</SlMenuItem>
-        </SlSelect>
+        <PSelect label="Placement" value={placement} onPChange={event => setPlacement(event.target.value)}>
+          <PMenuItem value="top">top</PMenuItem>
+          <PMenuItem value="top-start">top-start</PMenuItem>
+          <PMenuItem value="top-end">top-end</PMenuItem>
+          <PMenuItem value="bottom">bottom</PMenuItem>
+          <PMenuItem value="bottom-start">bottom-start</PMenuItem>
+          <PMenuItem value="bottom-end">bottom-end</PMenuItem>
+          <PMenuItem value="right">right</PMenuItem>
+          <PMenuItem value="right-start">right-start</PMenuItem>
+          <PMenuItem value="right-end">right-end</PMenuItem>
+          <PMenuItem value="left">left</PMenuItem>
+          <PMenuItem value="left-start">left-start</PMenuItem>
+          <PMenuItem value="left-end">left-end</PMenuItem>
+        </PSelect>
       </div>
 
       <style>{css}</style>
@@ -505,12 +505,12 @@ Use the `distance` attribute to change the distance between the popup and its an
 
 ```html:preview
 <div class="popup-distance">
-  <sl-popup placement="top" distance="0" active>
+  <p-popup placement="top" distance="0" active>
     <span slot="anchor"></span>
     <div class="box"></div>
-  </sl-popup>
+  </p-popup>
 
-  <sl-range min="-50" max="50" step="1" value="0" label="Distance"></sl-range>
+  <p-range min="-50" max="50" step="1" value="0" label="Distance"></p-range>
 </div>
 
 <style>
@@ -518,53 +518,53 @@ Use the `distance` attribute to change the distance between the popup and its an
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-distance .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
-  .popup-distance sl-range {
+  .popup-distance p-range {
     max-width: 260px;
   }
 </style>
 
 <script>
   const container = document.querySelector('.popup-distance');
-  const popup = container.querySelector('sl-popup');
-  const distance = container.querySelector('sl-range');
+  const popup = container.querySelector('p-popup');
+  const distance = container.querySelector('p-range');
 
-  distance.addEventListener('sl-input', () => (popup.distance = distance.value));
+  distance.addEventListener('p-input', () => (popup.distance = distance.value));
 </script>
 ```
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlRange from '@shoelace-style/shoelace/dist/react/range';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PRange from '@shoelace-style/shoelace/dist/react/range';
 
 const css = `
   .popup-distance span[slot='anchor'] {
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-distance .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
-  .popup-distance sl-range {
+  .popup-distance p-range {
     max-width: 260px;
   }
 `;
@@ -575,18 +575,18 @@ const App = () => {
   return (
     <>
       <div className="popup-distance">
-        <SlPopup placement="top" distance={distance} active>
+        <PPopup placement="top" distance={distance} active>
           <span slot="anchor" />
           <div class="box" />
-        </SlPopup>
+        </PPopup>
 
-        <SlRange
+        <PRange
           label="Distance"
           min="-50"
           max="50"
           step="1"
           value={distance}
-          onSlChange={event => setDistance(event.target.value)}
+          onPChange={event => setDistance(event.target.value)}
         />
       </div>
 
@@ -602,12 +602,12 @@ The `skidding` attribute is similar to `distance`, but instead allows you to off
 
 ```html:preview
 <div class="popup-skidding">
-  <sl-popup placement="top" skidding="0" active>
+  <p-popup placement="top" skidding="0" active>
     <span slot="anchor"></span>
     <div class="box"></div>
-  </sl-popup>
+  </p-popup>
 
-  <sl-range min="-50" max="50" step="1" value="0" label="Skidding"></sl-range>
+  <p-range min="-50" max="50" step="1" value="0" label="Skidding"></p-range>
 </div>
 
 <style>
@@ -615,53 +615,53 @@ The `skidding` attribute is similar to `distance`, but instead allows you to off
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-skidding .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
-  .popup-skidding sl-range {
+  .popup-skidding p-range {
     max-width: 260px;
   }
 </style>
 
 <script>
   const container = document.querySelector('.popup-skidding');
-  const popup = container.querySelector('sl-popup');
-  const skidding = container.querySelector('sl-range');
+  const popup = container.querySelector('p-popup');
+  const skidding = container.querySelector('p-range');
 
-  skidding.addEventListener('sl-input', () => (popup.skidding = skidding.value));
+  skidding.addEventListener('p-input', () => (popup.skidding = skidding.value));
 </script>
 ```
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlRange from '@shoelace-style/shoelace/dist/react/range';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PRange from '@shoelace-style/shoelace/dist/react/range';
 
 const css = `
   .popup-skidding span[slot='anchor'] {
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-skidding .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
-  .popup-skidding sl-range {
+  .popup-skidding p-range {
     max-width: 260px;
   }
 `;
@@ -672,18 +672,18 @@ const App = () => {
   return (
     <>
       <div className="popup-skidding">
-        <SlPopup placement="top" skidding={skidding} active>
+        <PPopup placement="top" skidding={skidding} active>
           <span slot="anchor"></span>
           <div className="box"></div>
-        </SlPopup>
+        </PPopup>
 
-        <SlRange
+        <PRange
           label="Skidding"
           min="-50"
           max="50"
           step="1"
           value={skidding}
-          onSlChange={event => setSkidding(event.target.value)}
+          onPChange={event => setSkidding(event.target.value)}
         />
       </div>
 
@@ -701,57 +701,57 @@ By default, the arrow will be aligned as close to the center of the _anchor_ as 
 
 ```html:preview
 <div class="popup-arrow">
-  <sl-popup placement="top" arrow arrow-placement="anchor" distance="8" active>
+  <p-popup placement="top" arrow arrow-placement="anchor" distance="8" active>
     <span slot="anchor"></span>
     <div class="box"></div>
-  </sl-popup>
+  </p-popup>
 
   <div class="popup-arrow-options">
-    <sl-select label="Placement" name="placement" value="top" class="popup-overview-select">
-      <sl-option value="top">top</sl-option>
-      <sl-option value="top-start">top-start</sl-option>
-      <sl-option value="top-end">top-end</sl-option>
-      <sl-option value="bottom">bottom</sl-option>
-      <sl-option value="bottom-start">bottom-start</sl-option>
-      <sl-option value="bottom-end">bottom-end</sl-option>
-      <sl-option value="right">right</sl-option>
-      <sl-option value="right-start">right-start</sl-option>
-      <sl-option value="right-end">right-end</sl-option>
-      <sl-option value="left">left</sl-option>
-      <sl-option value="left-start">left-start</sl-option>
-      <sl-option value="left-end">left-end</sl-option>
-    </sl-select>
+    <p-select label="Placement" name="placement" value="top" class="popup-overview-select">
+      <p-option value="top">top</p-option>
+      <p-option value="top-start">top-start</p-option>
+      <p-option value="top-end">top-end</p-option>
+      <p-option value="bottom">bottom</p-option>
+      <p-option value="bottom-start">bottom-start</p-option>
+      <p-option value="bottom-end">bottom-end</p-option>
+      <p-option value="right">right</p-option>
+      <p-option value="right-start">right-start</p-option>
+      <p-option value="right-end">right-end</p-option>
+      <p-option value="left">left</p-option>
+      <p-option value="left-start">left-start</p-option>
+      <p-option value="left-end">left-end</p-option>
+    </p-select>
 
-    <sl-select label="Arrow Placement" name="arrow-placement" value="anchor">
-      <sl-option value="anchor">anchor</sl-option>
-      <sl-option value="start">start</sl-option>
-      <sl-option value="end">end</sl-option>
-      <sl-option value="center">center</sl-option>
-    </sl-select>
+    <p-select label="Arrow Placement" name="arrow-placement" value="anchor">
+      <p-option value="anchor">anchor</p-option>
+      <p-option value="start">start</p-option>
+      <p-option value="end">end</p-option>
+      <p-option value="center">center</p-option>
+    </p-select>
   </div>
 
   <div class="popup-arrow-options">
-    <sl-switch name="arrow" checked>Arrow</sl-switch>
+    <p-switch name="arrow" checked>Arrow</p-switch>
   </div>
 
   <style>
-    .popup-arrow sl-popup {
-      --arrow-color: var(--sl-color-primary-600);
+    .popup-arrow p-popup {
+      --arrow-color: var(--p-color-primary-600);
     }
 
     .popup-arrow span[slot='anchor'] {
       display: inline-block;
       width: 150px;
       height: 150px;
-      border: dashed 2px var(--sl-color-neutral-600);
+      border: dashed 2px var(--p-color-neutral-600);
       margin: 50px;
     }
 
     .popup-arrow .box {
       width: 100px;
       height: 50px;
-      background: var(--sl-color-primary-600);
-      border-radius: var(--sl-border-radius-medium);
+      background: var(--p-color-primary-600);
+      border-radius: var(--p-border-radius-medium);
     }
 
     .popup-arrow-options {
@@ -761,7 +761,7 @@ By default, the arrow will be aligned as close to the center of the _anchor_ as 
       gap: 1rem;
     }
 
-    .popup-arrow-options sl-select {
+    .popup-arrow-options p-select {
       width: 160px;
     }
 
@@ -772,43 +772,43 @@ By default, the arrow will be aligned as close to the center of the _anchor_ as 
 
   <script>
     const container = document.querySelector('.popup-arrow');
-    const popup = container.querySelector('sl-popup');
+    const popup = container.querySelector('p-popup');
     const placement = container.querySelector('[name="placement"]');
     const arrowPlacement = container.querySelector('[name="arrow-placement"]');
     const arrow = container.querySelector('[name="arrow"]');
 
-    placement.addEventListener('sl-change', () => (popup.placement = placement.value));
-    arrowPlacement.addEventListener('sl-change', () => (popup.arrowPlacement = arrowPlacement.value));
-    arrow.addEventListener('sl-change', () => (popup.arrow = arrow.checked));
+    placement.addEventListener('p-change', () => (popup.placement = placement.value));
+    arrowPlacement.addEventListener('p-change', () => (popup.arrowPlacement = arrowPlacement.value));
+    arrow.addEventListener('p-change', () => (popup.arrow = arrow.checked));
   </script>
 </div>
 ```
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlSelect from '@shoelace-style/shoelace/dist/react/select';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PSelect from '@shoelace-style/shoelace/dist/react/select';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
-  .popup-arrow sl-popup {
-    --arrow-color: var(--sl-color-primary-600);
+  .popup-arrow p-popup {
+    --arrow-color: var(--p-color-primary-600);
   }
 
   .popup-arrow span[slot='anchor'] {
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-arrow .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
   .popup-arrow-options {
@@ -818,7 +818,7 @@ const css = `
     gap: 1rem;
   }
 
-  .popup-arrow-options sl-select {
+  .popup-arrow-options p-select {
     width: 160px;
   }
 
@@ -835,50 +835,50 @@ const App = () => {
   return (
     <>
       <div className="popup-arrow">
-        <SlPopup placement={placement} arrow={arrow || null} arrow-placement={arrowPlacement} distance="8" active>
+        <PPopup placement={placement} arrow={arrow || null} arrow-placement={arrowPlacement} distance="8" active>
           <span slot="anchor" />
           <div className="box" />
-        </SlPopup>
+        </PPopup>
 
         <div className="popup-arrow-options">
-          <SlSelect
+          <PSelect
             label="Placement"
             name="placement"
             value={placement}
             className="popup-overview-select"
-            onSlChange={event => setPlacement(event.target.value)}
+            onPChange={event => setPlacement(event.target.value)}
           >
-            <SlMenuItem value="top">top</SlMenuItem>
-            <SlMenuItem value="top-start">top-start</SlMenuItem>
-            <SlMenuItem value="top-end">top-end</SlMenuItem>
-            <SlMenuItem value="bottom">bottom</SlMenuItem>
-            <SlMenuItem value="bottom-start">bottom-start</SlMenuItem>
-            <SlMenuItem value="bottom-end">bottom-end</SlMenuItem>
-            <SlMenuItem value="right">right</SlMenuItem>
-            <SlMenuItem value="right-start">right-start</SlMenuItem>
-            <SlMenuItem value="right-end">right-end</SlMenuItem>
-            <SlMenuItem value="left">left</SlMenuItem>
-            <SlMenuItem value="left-start">left-start</SlMenuItem>
-            <SlMenuItem value="left-end">left-end</SlMenuItem>
-          </SlSelect>
+            <PMenuItem value="top">top</PMenuItem>
+            <PMenuItem value="top-start">top-start</PMenuItem>
+            <PMenuItem value="top-end">top-end</PMenuItem>
+            <PMenuItem value="bottom">bottom</PMenuItem>
+            <PMenuItem value="bottom-start">bottom-start</PMenuItem>
+            <PMenuItem value="bottom-end">bottom-end</PMenuItem>
+            <PMenuItem value="right">right</PMenuItem>
+            <PMenuItem value="right-start">right-start</PMenuItem>
+            <PMenuItem value="right-end">right-end</PMenuItem>
+            <PMenuItem value="left">left</PMenuItem>
+            <PMenuItem value="left-start">left-start</PMenuItem>
+            <PMenuItem value="left-end">left-end</PMenuItem>
+          </PSelect>
 
-          <SlSelect
+          <PSelect
             label="Arrow Placement"
             name="arrow-placement"
             value={arrowPlacement}
-            onSlChange={event => setArrowPlacement(event.target.value)}
+            onPChange={event => setArrowPlacement(event.target.value)}
           >
-            <SlMenuItem value="anchor">anchor</SlMenuItem>
-            <SlMenuItem value="start">start</SlMenuItem>
-            <SlMenuItem value="end">end</SlMenuItem>
-            <SlMenuItem value="center">center</SlMenuItem>
-          </SlSelect>
+            <PMenuItem value="anchor">anchor</PMenuItem>
+            <PMenuItem value="start">start</PMenuItem>
+            <PMenuItem value="end">end</PMenuItem>
+            <PMenuItem value="center">center</PMenuItem>
+          </PSelect>
         </div>
 
         <div className="popup-arrow-options">
-          <SlSwitch name="arrow" checked={arrow} onSlChange={event => setArrow(event.target.checked)}>
+          <PSwitch name="arrow" checked={arrow} onPChange={event => setArrow(event.target.checked)}>
             Arrow
-          </SlSwitch>
+          </PSwitch>
         </div>
       </div>
 
@@ -894,17 +894,17 @@ Use the `sync` attribute to make the popup the same width or height as the ancho
 
 ```html:preview
 <div class="popup-sync">
-  <sl-popup placement="top" sync="width" active>
+  <p-popup placement="top" sync="width" active>
     <span slot="anchor"></span>
     <div class="box"></div>
-  </sl-popup>
+  </p-popup>
 
-  <sl-select value="width" label="Sync">
-    <sl-option value="width">Width</sl-option>
-    <sl-option value="height">Height</sl-option>
-    <sl-option value="both">Both</sl-option>
-    <sl-option value="">None</sl-option>
-  </sl-select>
+  <p-select value="width" label="Sync">
+    <p-option value="width">Width</p-option>
+    <p-option value="height">Height</p-option>
+    <p-option value="both">Both</p-option>
+    <p-option value="">None</p-option>
+  </p-select>
 </div>
 
 <style>
@@ -912,7 +912,7 @@ Use the `sync` attribute to make the popup the same width or height as the ancho
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
@@ -921,37 +921,37 @@ Use the `sync` attribute to make the popup the same width or height as the ancho
     height: 100%;
     min-width: 50px;
     min-height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
-  .popup-sync sl-select {
+  .popup-sync p-select {
     width: 160px;
   }
 </style>
 
 <script>
   const container = document.querySelector('.popup-sync');
-  const popup = container.querySelector('sl-popup');
-  const fixed = container.querySelector('sl-switch');
-  const sync = container.querySelector('sl-select');
+  const popup = container.querySelector('p-popup');
+  const fixed = container.querySelector('p-switch');
+  const sync = container.querySelector('p-select');
 
-  sync.addEventListener('sl-change', () => (popup.sync = sync.value));
+  sync.addEventListener('p-change', () => (popup.sync = sync.value));
 </script>
 ```
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlSelect from '@shoelace-style/shoelace/dist/react/select';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PSelect from '@shoelace-style/shoelace/dist/react/select';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const css = `
   .popup-sync span[slot='anchor'] {
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
@@ -960,11 +960,11 @@ const css = `
     height: 100%;
     min-width: 50px;
     min-height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
-  .popup-sync sl-switch {
+  .popup-sync p-switch {
     margin-top: 1rem;
   }
 `;
@@ -975,17 +975,17 @@ const App = () => {
   return (
     <>
       <div class="popup-sync">
-        <SlPopup placement="top" sync={sync} active>
+        <PPopup placement="top" sync={sync} active>
           <span slot="anchor" />
           <div class="box" />
-        </SlPopup>
+        </PPopup>
 
-        <SlSelect value={sync} label="Sync" onSlChange={event => setSync(event.target.value)}>
-          <SlMenuItem value="width">Width</SlMenuItem>
-          <SlMenuItem value="height">Height</SlMenuItem>
-          <SlMenuItem value="both">Both</SlMenuItem>
-          <SlMenuItem value="">None</SlMenuItem>
-        </SlSelect>
+        <PSelect value={sync} label="Sync" onPChange={event => setSync(event.target.value)}>
+          <PMenuItem value="width">Width</PMenuItem>
+          <PMenuItem value="height">Height</PMenuItem>
+          <PMenuItem value="both">Both</PMenuItem>
+          <PMenuItem value="">None</PMenuItem>
+        </PSelect>
       </div>
 
       <style>{css}</style>
@@ -1007,20 +1007,20 @@ Toggle the switch and scroll the container to see the difference.
 ```html:preview
 <div class="popup-strategy">
   <div class="overflow">
-    <sl-popup placement="top" strategy="fixed" active>
+    <p-popup placement="top" strategy="fixed" active>
       <span slot="anchor"></span>
       <div class="box"></div>
-    </sl-popup>
+    </p-popup>
   </div>
 
-  <sl-switch checked>Fixed</sl-switch>
+  <p-switch checked>Fixed</p-switch>
 </div>
 
 <style>
   .popup-strategy .overflow {
     position: relative;
     height: 300px;
-    border: solid 2px var(--sl-color-neutral-200);
+    border: solid 2px var(--p-color-neutral-200);
     overflow: auto;
   }
 
@@ -1028,41 +1028,41 @@ Toggle the switch and scroll the container to see the difference.
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 150px 50px;
   }
 
   .popup-strategy .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
-  .popup-strategy sl-switch {
+  .popup-strategy p-switch {
     margin-top: 1rem;
   }
 </style>
 
 <script>
   const container = document.querySelector('.popup-strategy');
-  const popup = container.querySelector('sl-popup');
-  const fixed = container.querySelector('sl-switch');
+  const popup = container.querySelector('p-popup');
+  const fixed = container.querySelector('p-switch');
 
-  fixed.addEventListener('sl-change', () => (popup.strategy = fixed.checked ? 'fixed' : 'absolute'));
+  fixed.addEventListener('p-change', () => (popup.strategy = fixed.checked ? 'fixed' : 'absolute'));
 </script>
 ```
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-strategy .overflow {
     position: relative;
     height: 300px;
-    border: solid 2px var(--sl-color-neutral-200);
+    border: solid 2px var(--p-color-neutral-200);
     overflow: auto;
   }
 
@@ -1070,18 +1070,18 @@ const css = `
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 150px 50px;
   }
 
   .popup-strategy .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
-  .popup-strategy sl-switch {
+  .popup-strategy p-switch {
     margin-top: 1rem;
   }
 `;
@@ -1093,15 +1093,15 @@ const App = () => {
     <>
       <div className="popup-strategy">
         <div className="overflow">
-          <SlPopup placement="top" strategy={fixed ? 'fixed' : 'absolute'} active>
+          <PPopup placement="top" strategy={fixed ? 'fixed' : 'absolute'} active>
             <span slot="anchor" />
             <div className="box" />
-          </SlPopup>
+          </PPopup>
         </div>
 
-        <SlSwitch checked={fixed} onSlChange={event => setFixed(event.target.checked)}>
+        <PSwitch checked={fixed} onPChange={event => setFixed(event.target.checked)}>
           Fixed
-        </SlSwitch>
+        </PSwitch>
       </div>
 
       <style>{css}</style>
@@ -1119,21 +1119,21 @@ Scroll the container to see how the popup flips to prevent clipping.
 ```html:preview
 <div class="popup-flip">
   <div class="overflow">
-    <sl-popup placement="top" flip active>
+    <p-popup placement="top" flip active>
       <span slot="anchor"></span>
       <div class="box"></div>
-    </sl-popup>
+    </p-popup>
   </div>
 
   <br />
-  <sl-switch checked>Flip</sl-switch>
+  <p-switch checked>Flip</p-switch>
 </div>
 
 <style>
   .popup-flip .overflow {
     position: relative;
     height: 300px;
-    border: solid 2px var(--sl-color-neutral-200);
+    border: solid 2px var(--p-color-neutral-200);
     overflow: auto;
   }
 
@@ -1141,37 +1141,37 @@ Scroll the container to see how the popup flips to prevent clipping.
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 150px 50px;
   }
 
   .popup-flip .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 </style>
 
 <script>
   const container = document.querySelector('.popup-flip');
-  const popup = container.querySelector('sl-popup');
-  const flip = container.querySelector('sl-switch');
+  const popup = container.querySelector('p-popup');
+  const flip = container.querySelector('p-switch');
 
-  flip.addEventListener('sl-change', () => (popup.flip = flip.checked));
+  flip.addEventListener('p-change', () => (popup.flip = flip.checked));
 </script>
 ```
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-flip .overflow {
     position: relative;
     height: 300px;
-    border: solid 2px var(--sl-color-neutral-200);
+    border: solid 2px var(--p-color-neutral-200);
     overflow: auto;
   }
 
@@ -1179,15 +1179,15 @@ const css = `
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 150px 50px;
   }
 
   .popup-flip .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 `;
 
@@ -1198,16 +1198,16 @@ const App = () => {
     <>
       <div className="popup-flip">
         <div className="overflow">
-          <SlPopup placement="top" flip={flip} active>
+          <PPopup placement="top" flip={flip} active>
             <span slot="anchor" />
             <div className="box" />
-          </SlPopup>
+          </PPopup>
         </div>
 
         <br />
-        <SlSwitch checked={flip} onSlChange={event => setFlip(event.target.checked)}>
+        <PSwitch checked={flip} onPChange={event => setFlip(event.target.checked)}>
           Flip
-        </SlSwitch>
+        </PSwitch>
       </div>
 
       <style>{css}</style>
@@ -1229,10 +1229,10 @@ Scroll the container to see how the popup changes it's fallback placement to pre
 ```html:preview
 <div class="popup-flip-fallbacks">
   <div class="overflow">
-    <sl-popup placement="top" flip flip-fallback-placements="right bottom" flip-fallback-strategy="initial" active>
+    <p-popup placement="top" flip flip-fallback-placements="right bottom" flip-fallback-strategy="initial" active>
       <span slot="anchor"></span>
       <div class="box"></div>
-    </sl-popup>
+    </p-popup>
   </div>
 </div>
 
@@ -1240,7 +1240,7 @@ Scroll the container to see how the popup changes it's fallback placement to pre
   .popup-flip-fallbacks .overflow {
     position: relative;
     height: 300px;
-    border: solid 2px var(--sl-color-neutral-200);
+    border: solid 2px var(--p-color-neutral-200);
     overflow: auto;
   }
 
@@ -1248,27 +1248,27 @@ Scroll the container to see how the popup changes it's fallback placement to pre
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 250px 50px;
   }
 
   .popup-flip-fallbacks .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 </style>
 ```
 
 ```jsx:react
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
 
 const css = `
   .popup-flip-fallbacks .overflow {
     position: relative;
     height: 300px;
-    border: solid 2px var(--sl-color-neutral-200);
+    border: solid 2px var(--p-color-neutral-200);
     overflow: auto;
   }
 
@@ -1276,15 +1276,15 @@ const css = `
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 250px 50px;
   }
 
   .popup-flip-fallbacks .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 `;
 
@@ -1293,10 +1293,10 @@ const App = () => {
     <>
       <div className="popup-flip-fallbacks">
         <div className="overflow">
-          <SlPopup placement="top" flip flip-fallback-placements="right bottom" flip-fallback-strategy="initial" active>
+          <PPopup placement="top" flip flip-fallback-placements="right bottom" flip-fallback-strategy="initial" active>
             <span slot="anchor" />
             <div className="box" />
-          </SlPopup>
+          </PPopup>
         </div>
       </div>
 
@@ -1315,19 +1315,19 @@ Toggle the switch to see the difference.
 ```html:preview
 <div class="popup-shift">
   <div class="overflow">
-    <sl-popup placement="top" shift shift-padding="10" active>
+    <p-popup placement="top" shift shift-padding="10" active>
       <span slot="anchor"></span>
       <div class="box"></div>
-    </sl-popup>
+    </p-popup>
   </div>
 
-  <sl-switch checked>Shift</sl-switch>
+  <p-switch checked>Shift</p-switch>
 </div>
 
 <style>
   .popup-shift .overflow {
     position: relative;
-    border: solid 2px var(--sl-color-neutral-200);
+    border: solid 2px var(--p-color-neutral-200);
     overflow: auto;
   }
 
@@ -1335,36 +1335,36 @@ Toggle the switch to see the difference.
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 60px 0 0 10px;
   }
 
   .popup-shift .box {
     width: 300px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 </style>
 
 <script>
   const container = document.querySelector('.popup-shift');
-  const popup = container.querySelector('sl-popup');
-  const shift = container.querySelector('sl-switch');
+  const popup = container.querySelector('p-popup');
+  const shift = container.querySelector('p-switch');
 
-  shift.addEventListener('sl-change', () => (popup.shift = shift.checked));
+  shift.addEventListener('p-change', () => (popup.shift = shift.checked));
 </script>
 ```
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-shift .overflow {
     position: relative;
-    border: solid 2px var(--sl-color-neutral-200);
+    border: solid 2px var(--p-color-neutral-200);
     overflow: auto;
   }
 
@@ -1372,15 +1372,15 @@ const css = `
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 60px 0 0 10px;
   }
 
   .popup-shift .box {
     width: 300px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 `;
 
@@ -1391,15 +1391,15 @@ const App = () => {
     <>
       <div className="popup-shift">
         <div className="overflow">
-          <SlPopup placement="top" shift={shift} shift-padding="10" active>
+          <PPopup placement="top" shift={shift} shift-padding="10" active>
             <span slot="anchor" />
             <div className="box" />
-          </SlPopup>
+          </PPopup>
         </div>
 
-        <SlSwitch checked={shift} onSlChange={event => setShift(event.target.checked)}>
+        <PSwitch checked={shift} onPChange={event => setShift(event.target.checked)}>
           Shift
-        </SlSwitch>
+        </PSwitch>
       </div>
 
       <style>{css}</style>
@@ -1419,21 +1419,21 @@ Scroll the container to see the popup resize as its available space changes.
 ```html:preview
 <div class="popup-auto-size">
   <div class="overflow">
-    <sl-popup placement="top" auto-size="both" auto-size-padding="10" active>
+    <p-popup placement="top" auto-size="both" auto-size-padding="10" active>
       <span slot="anchor"></span>
       <div class="box"></div>
-    </sl-popup>
+    </p-popup>
   </div>
 
   <br />
-  <sl-switch checked>Auto-size</sl-switch>
+  <p-switch checked>Auto-size</p-switch>
 </div>
 
 <style>
   .popup-auto-size .overflow {
     position: relative;
     height: 300px;
-    border: solid 2px var(--sl-color-neutral-200);
+    border: solid 2px var(--p-color-neutral-200);
     overflow: auto;
   }
 
@@ -1441,13 +1441,13 @@ Scroll the container to see the popup resize as its available space changes.
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 250px 50px 100px 50px;
   }
 
   .popup-auto-size .box {
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
 
     /* This sets the preferred size of the popup's content */
     width: 100px;
@@ -1462,23 +1462,23 @@ Scroll the container to see the popup resize as its available space changes.
 
 <script>
   const container = document.querySelector('.popup-auto-size');
-  const popup = container.querySelector('sl-popup');
-  const autoSize = container.querySelector('sl-switch');
+  const popup = container.querySelector('p-popup');
+  const autoSize = container.querySelector('p-switch');
 
-  autoSize.addEventListener('sl-change', () => (popup.autoSize = autoSize.checked ? 'both' : ''));
+  autoSize.addEventListener('p-change', () => (popup.autoSize = autoSize.checked ? 'both' : ''));
 </script>
 ```
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-auto-size .overflow {
     position: relative;
     height: 300px;
-    border: solid 2px var(--sl-color-neutral-200);
+    border: solid 2px var(--p-color-neutral-200);
     overflow: auto;
   }
 
@@ -1486,13 +1486,13 @@ const css = `
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 250px 50px 100px 50px;
   }
 
   .popup-auto-size .box {
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
 
     /* This sets the preferred size of the popup's content */
     width: 100px;
@@ -1512,16 +1512,16 @@ const App = () => {
     <>
       <div className="popup-auto-size">
         <div className="overflow">
-          <SlPopup placement="top" auto-size={autoSize ? 'both' || null} auto-size-padding="10" active>
+          <PPopup placement="top" auto-size={autoSize ? 'both' || null} auto-size-padding="10" active>
             <span slot="anchor" />
             <div className="box" />
-          </SlPopup>
+          </PPopup>
         </div>
 
         <br />
-        <SlSwitch checked={autoSize} onSlChange={event => setAutoSize(event.target.checked)}>
+        <PSwitch checked={autoSize} onPChange={event => setAutoSize(event.target.checked)}>
           Auto-size
-        </SlSwitch>
+        </PSwitch>
       </div>
 
       <style>{css}</style>
@@ -1536,15 +1536,15 @@ When a gap exists between the anchor and the popup element, this option will add
 
 ```html:preview
 <div class="popup-hover-bridge">
-  <sl-popup placement="top" hover-bridge distance="10" skidding="0" active>
+  <p-popup placement="top" hover-bridge distance="10" skidding="0" active>
     <span slot="anchor"></span>
     <div class="box"></div>
-  </sl-popup>
+  </p-popup>
 
   <br>
-  <sl-switch checked>Hover Bridge</sl-switch><br>
-  <sl-range min="0" max="50" step="1" value="10" label="Distance"></sl-range>
-  <sl-range min="-50" max="50" step="1" value="0" label="Skidding"></sl-range>
+  <p-switch checked>Hover Bridge</p-switch><br>
+  <p-range min="0" max="50" step="1" value="10" label="Distance"></p-range>
+  <p-range min="-50" max="50" step="1" value="0" label="Skidding"></p-range>
 </div>
 
 <style>
@@ -1552,23 +1552,23 @@ When a gap exists between the anchor and the popup element, this option will add
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-hover-bridge .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
-  .popup-hover-bridge sl-range {
+  .popup-hover-bridge p-range {
     max-width: 260px;
     margin-top: .5rem;
   }
 
-  .popup-hover-bridge sl-popup::part(hover-bridge) {
+  .popup-hover-bridge p-popup::part(hover-bridge) {
     background: tomato;
     opacity: .5;
   }
@@ -1576,45 +1576,45 @@ When a gap exists between the anchor and the popup element, this option will add
 
 <script>
   const container = document.querySelector('.popup-hover-bridge');
-  const popup = container.querySelector('sl-popup');
-  const hoverBridge = container.querySelector('sl-switch');
-  const distance = container.querySelector('sl-range[label="Distance"]');
-  const skidding = container.querySelector('sl-range[label="Skidding"]');
+  const popup = container.querySelector('p-popup');
+  const hoverBridge = container.querySelector('p-switch');
+  const distance = container.querySelector('p-range[label="Distance"]');
+  const skidding = container.querySelector('p-range[label="Skidding"]');
 
-  distance.addEventListener('sl-input', () => (popup.distance = distance.value));
-  skidding.addEventListener('sl-input', () => (popup.skidding = skidding.value));
-  hoverBridge.addEventListener('sl-change', () => (popup.hoverBridge = hoverBridge.checked));
+  distance.addEventListener('p-input', () => (popup.distance = distance.value));
+  skidding.addEventListener('p-input', () => (popup.skidding = skidding.value));
+  hoverBridge.addEventListener('p-change', () => (popup.hoverBridge = hoverBridge.checked));
 </script>
 ```
 
 ```jsx:react
 import { useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlRange from '@shoelace-style/shoelace/dist/react/range';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PRange from '@shoelace-style/shoelace/dist/react/range';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   .popup-hover-bridge span[slot='anchor'] {
     display: inline-block;
     width: 150px;
     height: 150px;
-    border: dashed 2px var(--sl-color-neutral-600);
+    border: dashed 2px var(--p-color-neutral-600);
     margin: 50px;
   }
 
   .popup-hover-bridge .box {
     width: 100px;
     height: 50px;
-    background: var(--sl-color-primary-600);
-    border-radius: var(--sl-border-radius-medium);
+    background: var(--p-color-primary-600);
+    border-radius: var(--p-border-radius-medium);
   }
 
-  .popup-hover-bridge sl-range {
+  .popup-hover-bridge p-range {
     max-width: 260px;
     margin-top: .5rem;
   }
 
-  .popup-hover-bridge sl-popup::part(hover-bridge) {
+  .popup-hover-bridge p-popup::part(hover-bridge) {
     background: tomato;
     opacity: .5;
   }
@@ -1628,33 +1628,33 @@ const App = () => {
   return (
     <>
       <div class="popup-hover-bridge">
-        <SlPopup placement="top" hover-bridge={hoverBridge} distance={distance} skidding={skidding} active>
+        <PPopup placement="top" hover-bridge={hoverBridge} distance={distance} skidding={skidding} active>
           <span slot="anchor" />
           <div class="box" />
-        </SlPopup>
+        </PPopup>
 
         <br />
-        <SlSwitch
+        <PSwitch
           checked={hoverBridge}
-          onSlChange={event => setHoverBridge(event.target.checked)}
+          onPChange={event => setHoverBridge(event.target.checked)}
          >
           Hover Bridge
-        </SlSwitch><br />
-        <SlRange
+        </PSwitch><br />
+        <PRange
           min="0"
           max="50"
           step="1"
           value={distance}
           label="Distance"
-          onSlInput={event => setDistance(event.target.value)}
+          onPInput={event => setDistance(event.target.value)}
         />
-        <SlRange
+        <PRange
           min="-50"
           max="50"
           step="1"
           value={skidding}
           label="Skidding"
-          onSlInput={event => setSkidding(event.target.value)}
+          onPInput={event => setSkidding(event.target.value)}
         />
       </div>
 
@@ -1681,18 +1681,18 @@ This example anchors a popup to the mouse cursor using a virtual element. As suc
 
 ```html:preview
 <div class="popup-virtual-element">
-  <sl-popup placement="right-start">
+  <p-popup placement="right-start">
     <div class="circle"></div>
-  </sl-popup>
+  </p-popup>
 
-  <sl-switch>Highlight mouse cursor</sl-switch>
+  <p-switch>Highlight mouse cursor</p-switch>
 </div>
 
 <script>
   const container = document.querySelector('.popup-virtual-element');
-  const popup = container.querySelector('sl-popup');
+  const popup = container.querySelector('p-popup');
   const circle = container.querySelector('.circle');
-  const enabled = container.querySelector('sl-switch');
+  const enabled = container.querySelector('p-switch');
   let clientX = 0;
   let clientY = 0;
 
@@ -1713,7 +1713,7 @@ This example anchors a popup to the mouse cursor using a virtual element. As suc
   };
 
   // Only activate the popup when the switch is checked
-  enabled.addEventListener('sl-change', () => {
+  enabled.addEventListener('p-change', () => {
     popup.active = enabled.checked;
   });
 
@@ -1734,7 +1734,7 @@ This example anchors a popup to the mouse cursor using a virtual element. As suc
 
 <style>
   /* If you need to set a z-index, set it on the popup part like this */
-  .popup-virtual-element sl-popup::part(popup) {
+  .popup-virtual-element p-popup::part(popup) {
     z-index: 1000;
     pointer-events: none;
   }
@@ -1742,7 +1742,7 @@ This example anchors a popup to the mouse cursor using a virtual element. As suc
   .popup-virtual-element .circle {
     width: 100px;
     height: 100px;
-    border: solid 4px var(--sl-color-primary-600);
+    border: solid 4px var(--p-color-primary-600);
     border-radius: 50%;
     translate: -50px -50px;
     animation: 1s virtual-cursor infinite;
@@ -1757,12 +1757,12 @@ This example anchors a popup to the mouse cursor using a virtual element. As suc
 
 ```jsx:react
 import { useRef, useState } from 'react';
-import SlPopup from '@shoelace-style/shoelace/dist/react/popup';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PPopup from '@shoelace-style/shoelace/dist/react/popup';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const css = `
   /* If you need to set a z-index, set it on the popup part like this */
-  .popup-virtual-element sl-popup::part(popup) {
+  .popup-virtual-element p-popup::part(popup) {
     z-index: 1000;
     pointer-events: none;
   }
@@ -1770,7 +1770,7 @@ const css = `
   .popup-virtual-element .circle {
     width: 100px;
     height: 100px;
-    border: solid 4px var(--sl-color-primary-600);
+    border: solid 4px var(--p-color-primary-600);
     border-radius: 50%;
     translate: -50px -50px;
     animation: 1s virtual-cursor infinite;
@@ -1820,18 +1820,18 @@ const App = () => {
   return (
     <>
       <div className="popup-virtual-element">
-        <SlPopup
+        <PPopup
           ref={popup}
           placement="right-start"
           active={enabled}
           anchor={virtualElement}
         >
           <div ref={circle} className="circle" />
-        </SlPopup>
+        </PPopup>
 
-        <SlSwitch checked={enabled} onSlChange={event => setEnabled(event.target.checked)}>
+        <PSwitch checked={enabled} onPChange={event => setEnabled(event.target.checked)}>
           Highlight mouse cursor
-        </SlSwitch>
+        </PSwitch>
       </div>
 
       <style>{css}</style>

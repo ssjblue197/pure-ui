@@ -1,37 +1,37 @@
 let count = 1;
 
 function escapeHtml(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 /**
  * Turns code fields with the :preview suffix into interactive code previews.
  */
-module.exports = function (doc, options) {
-  options = {
-    within: 'body', // the element containing the code fields to convert
-    ...options
-  };
+module.exports = function(doc, options) {
+        options = {
+            within: 'body', // the element containing the code fields to convert
+            ...options
+        };
 
-  const within = doc.querySelector(options.within);
-  if (!within) {
-    return doc;
-  }
+        const within = doc.querySelector(options.within);
+        if (!within) {
+            return doc;
+        }
 
-  within.querySelectorAll('[class*=":preview"]').forEach(code => {
-    const pre = code.closest('pre');
-    if (!pre) {
-      return;
-    }
-    const adjacentPre = pre.nextElementSibling?.tagName.toLowerCase() === 'pre' ? pre.nextElementSibling : null;
-    const reactCode = adjacentPre?.querySelector('code[class$="react"]');
-    const sourceGroupId = `code-preview-source-group-${count}`;
-    const isExpanded = code.getAttribute('class').includes(':expanded');
-    const noCodePen = code.getAttribute('class').includes(':no-codepen');
+        within.querySelectorAll('[class*=":preview"]').forEach(code => {
+                    const pre = code.closest('pre');
+                    if (!pre) {
+                        return;
+                    }
+                    const adjacentPre = pre.nextElementSibling?.tagName.toLowerCase() === 'pre' ? pre.nextElementSibling : null;
+                    const reactCode = adjacentPre?.querySelector('code[class$="react"]');
+                    const sourceGroupId = `code-preview-source-group-${count}`;
+                    const isExpanded = code.getAttribute('class').includes(':expanded');
+                    const noCodePen = code.getAttribute('class').includes(':no-codepen');
 
-    count++;
+                    count++;
 
-    const htmlButton = `
+                    const htmlButton = `
       <button type="button"
         title="Show HTML code"
         class="code-preview__button code-preview__button--html"
@@ -40,13 +40,13 @@ module.exports = function (doc, options) {
       </button>
     `;
 
-    const reactButton = `
+                    const reactButton = `
       <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
         React
       </button>
     `;
 
-    const codePenButton = `
+                    const codePenButton = `
       <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
         <svg
           width="138"
@@ -63,12 +63,12 @@ module.exports = function (doc, options) {
       </button>
     `;
 
-    const codePreview = `
+                    const codePreview = `
       <div class="code-preview ${isExpanded ? 'code-preview--expanded' : ''}">
         <div class="code-preview__preview">
           ${code.textContent}
           <div class="code-preview__resizer">
-            <sl-icon name="grip-vertical"></sl-icon>
+            <p-icon name="grip-vertical"></p-icon>
           </div>
         </div>
 

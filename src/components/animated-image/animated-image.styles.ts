@@ -33,10 +33,10 @@ export default css`
     background: none;
     border: solid 2px currentColor;
     background-color: rgb(0 0 0 /50%);
-    border-radius: var(--sl-border-radius-circle);
+    border-radius: var(--p-border-radius-circle);
     color: white;
     pointer-events: none;
-    transition: var(--sl-transition-fast) opacity;
+    transition: var(--p-transition-fast) opacity;
   }
 
   :host([play]:hover) .animated-image__control-box {

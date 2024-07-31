@@ -10,19 +10,19 @@ A tooltip's target is its _first child element_, so you should only wrap one ele
 Tooltips use `display: contents` so they won't interfere with how elements are positioned in a flex or grid layout.
 
 ```html:preview
-<sl-tooltip content="This is a tooltip">
-  <sl-button>Hover Me</sl-button>
-</sl-tooltip>
+<p-tooltip content="This is a tooltip">
+  <p-button>Hover Me</p-button>
+</p-tooltip>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => (
-  <SlTooltip content="This is a tooltip">
-    <SlButton>Hover Me</SlButton>
-  </SlTooltip>
+  <PTooltip content="This is a tooltip">
+    <PButton>Hover Me</PButton>
+  </PTooltip>
 );
 ```
 
@@ -35,61 +35,61 @@ Use the `placement` attribute to set the preferred placement of the tooltip.
 ```html:preview
 <div class="tooltip-placement-example">
   <div class="tooltip-placement-example-row">
-    <sl-tooltip content="top-start" placement="top-start">
-      <sl-button></sl-button>
-    </sl-tooltip>
+    <p-tooltip content="top-start" placement="top-start">
+      <p-button></p-button>
+    </p-tooltip>
 
-    <sl-tooltip content="top" placement="top">
-      <sl-button></sl-button>
-    </sl-tooltip>
+    <p-tooltip content="top" placement="top">
+      <p-button></p-button>
+    </p-tooltip>
 
-    <sl-tooltip content="top-end" placement="top-end">
-      <sl-button></sl-button>
-    </sl-tooltip>
+    <p-tooltip content="top-end" placement="top-end">
+      <p-button></p-button>
+    </p-tooltip>
   </div>
 
   <div class="tooltip-placement-example-row">
-    <sl-tooltip content="left-start" placement="left-start">
-      <sl-button></sl-button>
-    </sl-tooltip>
+    <p-tooltip content="left-start" placement="left-start">
+      <p-button></p-button>
+    </p-tooltip>
 
-    <sl-tooltip content="right-start" placement="right-start">
-      <sl-button></sl-button>
-    </sl-tooltip>
+    <p-tooltip content="right-start" placement="right-start">
+      <p-button></p-button>
+    </p-tooltip>
   </div>
 
   <div class="tooltip-placement-example-row">
-    <sl-tooltip content="left" placement="left">
-      <sl-button></sl-button>
-    </sl-tooltip>
+    <p-tooltip content="left" placement="left">
+      <p-button></p-button>
+    </p-tooltip>
 
-    <sl-tooltip content="right" placement="right">
-      <sl-button></sl-button>
-    </sl-tooltip>
+    <p-tooltip content="right" placement="right">
+      <p-button></p-button>
+    </p-tooltip>
   </div>
 
   <div class="tooltip-placement-example-row">
-    <sl-tooltip content="left-end" placement="left-end">
-      <sl-button></sl-button>
-    </sl-tooltip>
+    <p-tooltip content="left-end" placement="left-end">
+      <p-button></p-button>
+    </p-tooltip>
 
-    <sl-tooltip content="right-end" placement="right-end">
-      <sl-button></sl-button>
-    </sl-tooltip>
+    <p-tooltip content="right-end" placement="right-end">
+      <p-button></p-button>
+    </p-tooltip>
   </div>
 
   <div class="tooltip-placement-example-row">
-    <sl-tooltip content="bottom-start" placement="bottom-start">
-      <sl-button></sl-button>
-    </sl-tooltip>
+    <p-tooltip content="bottom-start" placement="bottom-start">
+      <p-button></p-button>
+    </p-tooltip>
 
-    <sl-tooltip content="bottom" placement="bottom">
-      <sl-button></sl-button>
-    </sl-tooltip>
+    <p-tooltip content="bottom" placement="bottom">
+      <p-button></p-button>
+    </p-tooltip>
 
-    <sl-tooltip content="bottom-end" placement="bottom-end">
-      <sl-button></sl-button>
-    </sl-tooltip>
+    <p-tooltip content="bottom-end" placement="bottom-end">
+      <p-button></p-button>
+    </p-tooltip>
   </div>
 </div>
 
@@ -105,29 +105,29 @@ Use the `placement` attribute to set the preferred placement of the tooltip.
     clear: both;
   }
 
-  .tooltip-placement-example sl-button {
+  .tooltip-placement-example p-button {
     float: left;
     width: 2.5rem;
     margin-right: 0.25rem;
     margin-bottom: 0.25rem;
   }
 
-  .tooltip-placement-example-row:nth-child(1) sl-tooltip:first-child sl-button,
-  .tooltip-placement-example-row:nth-child(5) sl-tooltip:first-child sl-button {
+  .tooltip-placement-example-row:nth-child(1) p-tooltip:first-child p-button,
+  .tooltip-placement-example-row:nth-child(5) p-tooltip:first-child p-button {
     margin-left: calc(40px + 0.25rem);
   }
 
-  .tooltip-placement-example-row:nth-child(2) sl-tooltip:nth-child(2) sl-button,
-  .tooltip-placement-example-row:nth-child(3) sl-tooltip:nth-child(2) sl-button,
-  .tooltip-placement-example-row:nth-child(4) sl-tooltip:nth-child(2) sl-button {
+  .tooltip-placement-example-row:nth-child(2) p-tooltip:nth-child(2) p-button,
+  .tooltip-placement-example-row:nth-child(3) p-tooltip:nth-child(2) p-button,
+  .tooltip-placement-example-row:nth-child(4) p-tooltip:nth-child(2) p-button {
     margin-left: calc((40px * 3) + (0.25rem * 3));
   }
 </style>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const css = `
   .tooltip-placement-example {
@@ -140,21 +140,21 @@ const css = `
     clear: both;
   }
 
-  .tooltip-placement-example sl-button {
+  .tooltip-placement-example p-button {
     float: left;
     width: 2.5rem;
     margin-right: 0.25rem;
     margin-bottom: 0.25rem;
   }
 
-  .tooltip-placement-example-row:nth-child(1) sl-tooltip:first-child sl-button,
-  .tooltip-placement-example-row:nth-child(5) sl-tooltip:first-child sl-button {
+  .tooltip-placement-example-row:nth-child(1) p-tooltip:first-child p-button,
+  .tooltip-placement-example-row:nth-child(5) p-tooltip:first-child p-button {
     margin-left: calc(40px + 0.25rem);
   }
 
-  .tooltip-placement-example-row:nth-child(2) sl-tooltip:nth-child(2) sl-button,
-  .tooltip-placement-example-row:nth-child(3) sl-tooltip:nth-child(2) sl-button,
-  .tooltip-placement-example-row:nth-child(4) sl-tooltip:nth-child(2) sl-button {
+  .tooltip-placement-example-row:nth-child(2) p-tooltip:nth-child(2) p-button,
+  .tooltip-placement-example-row:nth-child(3) p-tooltip:nth-child(2) p-button,
+  .tooltip-placement-example-row:nth-child(4) p-tooltip:nth-child(2) p-button {
     margin-left: calc((40px * 3) + (0.25rem * 3));
   }
 `;
@@ -163,61 +163,61 @@ const App = () => (
   <>
     <div className="tooltip-placement-example">
       <div className="tooltip-placement-example-row">
-        <SlTooltip content="top-start" placement="top-start">
-          <SlButton />
-        </SlTooltip>
+        <PTooltip content="top-start" placement="top-start">
+          <PButton />
+        </PTooltip>
 
-        <SlTooltip content="top" placement="top">
-          <SlButton />
-        </SlTooltip>
+        <PTooltip content="top" placement="top">
+          <PButton />
+        </PTooltip>
 
-        <SlTooltip content="top-end" placement="top-end">
-          <SlButton />
-        </SlTooltip>
+        <PTooltip content="top-end" placement="top-end">
+          <PButton />
+        </PTooltip>
       </div>
 
       <div className="tooltip-placement-example-row">
-        <SlTooltip content="left-start" placement="left-start">
-          <SlButton />
-        </SlTooltip>
+        <PTooltip content="left-start" placement="left-start">
+          <PButton />
+        </PTooltip>
 
-        <SlTooltip content="right-start" placement="right-start">
-          <SlButton />
-        </SlTooltip>
+        <PTooltip content="right-start" placement="right-start">
+          <PButton />
+        </PTooltip>
       </div>
 
       <div className="tooltip-placement-example-row">
-        <SlTooltip content="left" placement="left">
-          <SlButton />
-        </SlTooltip>
+        <PTooltip content="left" placement="left">
+          <PButton />
+        </PTooltip>
 
-        <SlTooltip content="right" placement="right">
-          <SlButton />
-        </SlTooltip>
+        <PTooltip content="right" placement="right">
+          <PButton />
+        </PTooltip>
       </div>
 
       <div className="tooltip-placement-example-row">
-        <SlTooltip content="left-end" placement="left-end">
-          <SlButton />
-        </SlTooltip>
+        <PTooltip content="left-end" placement="left-end">
+          <PButton />
+        </PTooltip>
 
-        <SlTooltip content="right-end" placement="right-end">
-          <SlButton />
-        </SlTooltip>
+        <PTooltip content="right-end" placement="right-end">
+          <PButton />
+        </PTooltip>
       </div>
 
       <div className="tooltip-placement-example-row">
-        <SlTooltip content="bottom-start" placement="bottom-start">
-          <SlButton />
-        </SlTooltip>
+        <PTooltip content="bottom-start" placement="bottom-start">
+          <PButton />
+        </PTooltip>
 
-        <SlTooltip content="bottom" placement="bottom">
-          <SlButton />
-        </SlTooltip>
+        <PTooltip content="bottom" placement="bottom">
+          <PButton />
+        </PTooltip>
 
-        <SlTooltip content="bottom-end" placement="bottom-end">
-          <SlButton />
-        </SlTooltip>
+        <PTooltip content="bottom-end" placement="bottom-end">
+          <PButton />
+        </PTooltip>
       </div>
     </div>
 
@@ -231,19 +231,19 @@ const App = () => (
 Set the `trigger` attribute to `click` to toggle the tooltip on click instead of hover.
 
 ```html:preview
-<sl-tooltip content="Click again to dismiss" trigger="click">
-  <sl-button>Click to Toggle</sl-button>
-</sl-tooltip>
+<p-tooltip content="Click again to dismiss" trigger="click">
+  <p-button>Click to Toggle</p-button>
+</p-tooltip>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => (
-  <SlTooltip content="Click again to dismiss" trigger="click">
-    <SlButton>Click to Toggle</SlButton>
-  </SlTooltip>
+  <PTooltip content="Click again to dismiss" trigger="click">
+    <PButton>Click to Toggle</PButton>
+  </PTooltip>
 );
 ```
 
@@ -252,11 +252,11 @@ const App = () => (
 Tooltips can be controlled programmatically by setting the `trigger` attribute to `manual`. Use the `open` attribute to control when the tooltip is shown.
 
 ```html:preview
-<sl-button style="margin-right: 4rem;">Toggle Manually</sl-button>
+<p-button style="margin-right: 4rem;">Toggle Manually</p-button>
 
-<sl-tooltip content="This is an avatar" trigger="manual" class="manual-tooltip">
-  <sl-avatar label="User"></sl-avatar>
-</sl-tooltip>
+<p-tooltip content="This is an avatar" trigger="manual" class="manual-tooltip">
+  <p-avatar label="User"></p-avatar>
+</p-tooltip>
 
 <script>
   const tooltip = document.querySelector('.manual-tooltip');
@@ -270,22 +270,22 @@ Tooltips can be controlled programmatically by setting the `trigger` attribute t
 
 ```jsx:react
 import { useState } from 'react';
-import SlAvatar from '@shoelace-style/shoelace/dist/react/avatar';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
+import PAvatar from '@shoelace-style/shoelace/dist/react/avatar';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <SlButton style={{ marginRight: '4rem' }} onClick={() => setOpen(!open)}>
+      <PButton style={{ marginRight: '4rem' }} onClick={() => setOpen(!open)}>
         Toggle Manually
-      </SlButton>
+      </PButton>
 
-      <SlTooltip open={open} content="This is an avatar" trigger="manual">
-        <SlAvatar />
-      </SlTooltip>
+      <PTooltip open={open} content="This is an avatar" trigger="manual">
+        <PAvatar />
+      </PTooltip>
     </>
   );
 };
@@ -295,40 +295,40 @@ const App = () => {
 
 ### Removing Arrows
 
-You can control the size of tooltip arrows by overriding the `--sl-tooltip-arrow-size` design token. To remove them, set the value to `0` as shown below.
+You can control the size of tooltip arrows by overriding the `--p-tooltip-arrow-size` design token. To remove them, set the value to `0` as shown below.
 
 ```html:preview
-<sl-tooltip content="This is a tooltip" style="--sl-tooltip-arrow-size: 0;">
-  <sl-button>No Arrow</sl-button>
-</sl-tooltip>
+<p-tooltip content="This is a tooltip" style="--p-tooltip-arrow-size: 0;">
+  <p-button>No Arrow</p-button>
+</p-tooltip>
 ```
 
 {% raw %}
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => (
-  <div style={{ '--sl-tooltip-arrow-size': '0' }}>
-    <SlTooltip content="This is a tooltip">
-      <SlButton>Above</SlButton>
-    </SlTooltip>
+  <div style={{ '--p-tooltip-arrow-size': '0' }}>
+    <PTooltip content="This is a tooltip">
+      <PButton>Above</PButton>
+    </PTooltip>
 
-    <SlTooltip content="This is a tooltip" placement="bottom">
-      <SlButton>Below</SlButton>
-    </SlTooltip>
+    <PTooltip content="This is a tooltip" placement="bottom">
+      <PButton>Below</PButton>
+    </PTooltip>
   </div>
 );
 ```
 
 {% endraw %}
 
-To override it globally, set it in a root block in your stylesheet after the Shoelace stylesheet is loaded.
+To override it globally, set it in a root block in your stylesheet after the Pure UI stylesheet is loaded.
 
 ```css
 :root {
-  --sl-tooltip-arrow-size: 0;
+  --p-tooltip-arrow-size: 0;
 }
 ```
 
@@ -337,25 +337,25 @@ To override it globally, set it in a root block in your stylesheet after the Sho
 Use the `content` slot to create tooltips with HTML content. Tooltips are designed only for text and presentational elements. Avoid placing interactive content, such as buttons, links, and form controls, in a tooltip.
 
 ```html:preview
-<sl-tooltip>
+<p-tooltip>
   <div slot="content">I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!</div>
 
-  <sl-button>Hover me</sl-button>
-</sl-tooltip>
+  <p-button>Hover me</p-button>
+</p-tooltip>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => (
-  <SlTooltip>
+  <PTooltip>
     <div slot="content">
       I'm not <strong>just</strong> a tooltip, I'm a <em>tooltip</em> with HTML!
     </div>
 
-    <SlButton>Hover Me</SlButton>
-  </SlTooltip>
+    <PButton>Hover Me</PButton>
+  </PTooltip>
 );
 ```
 
@@ -364,21 +364,21 @@ const App = () => (
 Use the `--max-width` custom property to change the width the tooltip can grow to before wrapping occurs.
 
 ```html:preview
-<sl-tooltip style="--max-width: 80px;" content="This tooltip will wrap after only 80 pixels.">
-  <sl-button>Hover me</sl-button>
-</sl-tooltip>
+<p-tooltip style="--max-width: 80px;" content="This tooltip will wrap after only 80 pixels.">
+  <p-button>Hover me</p-button>
+</p-tooltip>
 ```
 
 {% raw %}
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const App = () => (
-  <SlTooltip style={{ '--max-width': '80px' }} content="This tooltip will wrap after only 80 pixels.">
-    <SlButton>Hover Me</SlButton>
-  </SlTooltip>
+  <PTooltip style={{ '--max-width': '80px' }} content="This tooltip will wrap after only 80 pixels.">
+    <PButton>Hover Me</PButton>
+  </PTooltip>
 );
 ```
 
@@ -390,34 +390,34 @@ Tooltips will be clipped if they're inside a container that has `overflow: auto|
 
 ```html:preview
 <div class="tooltip-hoist">
-  <sl-tooltip content="This is a tooltip">
-    <sl-button>No Hoist</sl-button>
-  </sl-tooltip>
+  <p-tooltip content="This is a tooltip">
+    <p-button>No Hoist</p-button>
+  </p-tooltip>
 
-  <sl-tooltip content="This is a tooltip" hoist>
-    <sl-button>Hoist</sl-button>
-  </sl-tooltip>
+  <p-tooltip content="This is a tooltip" hoist>
+    <p-button>Hoist</p-button>
+  </p-tooltip>
 </div>
 
 <style>
   .tooltip-hoist {
     position: relative;
-    border: solid 2px var(--sl-panel-border-color);
+    border: solid 2px var(--p-panel-border-color);
     overflow: hidden;
-    padding: var(--sl-spacing-medium);
+    padding: var(--p-spacing-medium);
   }
 </style>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
 
 const css = `
   .tooltip-hoist {
-    border: solid 2px var(--sl-panel-border-color);
+    border: solid 2px var(--p-panel-border-color);
     overflow: hidden;
-    padding: var(--sl-spacing-medium);
+    padding: var(--p-spacing-medium);
     position: relative;
   }
 `;
@@ -425,13 +425,13 @@ const css = `
 const App = () => (
   <>
     <div class="tooltip-hoist">
-      <SlTooltip content="This is a tooltip">
-        <SlButton>No Hoist</SlButton>
-      </SlTooltip>
+      <PTooltip content="This is a tooltip">
+        <PButton>No Hoist</PButton>
+      </PTooltip>
 
-      <SlTooltip content="This is a tooltip" hoist>
-        <SlButton>Hoist</SlButton>
-      </SlTooltip>
+      <PTooltip content="This is a tooltip" hoist>
+        <PButton>Hoist</PButton>
+      </PTooltip>
     </div>
 
     <style>{css}</style>

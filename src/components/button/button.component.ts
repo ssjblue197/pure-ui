@@ -7,9 +7,9 @@ import { LocalizeController } from '../../utilities/localize.js';
 import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlIcon from '../icon/icon.component.js';
-import SlSpinner from '../spinner/spinner.component.js';
+import PIcon from '../icon/icon.component.js';
+import PSpinner from '../spinner/spinner.component.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './button.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
@@ -20,12 +20,12 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @status stable
  * @since 2.0
  *
- * @dependency sl-icon
- * @dependency sl-spinner
+ * @dependency p-icon
+ * @dependency p-spinner
  *
- * @event sl-blur - Emitted when the button loses focus.
- * @event sl-focus - Emitted when the button gains focus.
- * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
+ * @event p-blur - Emitted when the button loses focus.
+ * @event p-focus - Emitted when the button gains focus.
+ * @event p-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @slot - The button's label.
  * @slot prefix - A presentational prefix icon or similar element.
@@ -35,14 +35,14 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @csspart prefix - The container that wraps the prefix.
  * @csspart label - The button's label.
  * @csspart suffix - The container that wraps the suffix.
- * @csspart caret - The button's caret icon, an `<sl-icon>` element.
+ * @csspart caret - The button's caret icon, an `<p-icon>` element.
  * @csspart spinner - The spinner that shows when the button is in the loading state.
  */
-export default class SlButton extends ShoelaceElement implements ShoelaceFormControl {
+export default class PButton extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
-    'sl-icon': SlIcon,
-    'sl-spinner': SlSpinner
+    'p-icon': PIcon,
+    'p-spinner': PSpinner
   };
 
   private readonly formControlController = new FormControlController(this, {
@@ -81,7 +81,7 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
   @property({ type: Boolean, reflect: true }) pill = false;
 
   /**
-   * Draws a circular icon button. When this attribute is present, the button expects a single `<sl-icon>` in the
+   * Draws a circular icon button. When this attribute is present, the button expects a single `<p-icon>` in the
    * default slot.
    */
   @property({ type: Boolean, reflect: true }) circle = false;
@@ -169,12 +169,12 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
 
   private handleBlur() {
     this.hasFocus = false;
-    this.emit('sl-blur');
+    this.emit('p-blur');
   }
 
   private handleFocus() {
     this.hasFocus = true;
-    this.emit('sl-focus');
+    this.emit('p-focus');
   }
 
   private handleClick() {
@@ -308,10 +308,8 @@ export default class SlButton extends ShoelaceElement implements ShoelaceFormCon
         <slot name="prefix" part="prefix" class="button__prefix"></slot>
         <slot part="label" class="button__label"></slot>
         <slot name="suffix" part="suffix" class="button__suffix"></slot>
-        ${
-          this.caret ? html` <sl-icon part="caret" class="button__caret" library="system" name="caret"></sl-icon> ` : ''
-        }
-        ${this.loading ? html`<sl-spinner part="spinner"></sl-spinner>` : ''}
+        ${this.caret ? html` <p-icon part="caret" class="button__caret" library="system" name="caret"></p-icon> ` : ''}
+        ${this.loading ? html`<p-spinner part="spinner"></p-spinner>` : ''}
       </${tag}>
     `;
     /* eslint-enable lit/no-invalid-html */

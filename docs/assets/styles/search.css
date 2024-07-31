@@ -1,31 +1,31 @@
 /* Search plugin */
 :root,
-:root.sl-theme-dark {
-  --docs-search-box-background: var(--sl-color-neutral-0);
+:root.p-theme-dark {
+  --docs-search-box-background: var(--p-color-neutral-0);
   --docs-search-box-border-width: 1px;
-  --docs-search-box-border-color: var(--sl-color-neutral-300);
-  --docs-search-box-color: var(--sl-color-neutral-600);
-  --docs-search-dialog-background: var(--sl-color-neutral-0);
+  --docs-search-box-border-color: var(--p-color-neutral-300);
+  --docs-search-box-color: var(--p-color-neutral-600);
+  --docs-search-dialog-background: var(--p-color-neutral-0);
   --docs-search-border-width: var(--docs-border-width);
   --docs-search-border-color: var(--docs-border-color);
-  --docs-search-text-color: var(--sl-color-neutral-900);
-  --docs-search-text-color-muted: var(--sl-color-neutral-500);
-  --docs-search-font-weight-normal: var(--sl-font-weight-normal);
-  --docs-search-font-weight-semibold: var(--sl-font-weight-semibold);
+  --docs-search-text-color: var(--p-color-neutral-900);
+  --docs-search-text-color-muted: var(--p-color-neutral-500);
+  --docs-search-font-weight-normal: var(--p-font-weight-normal);
+  --docs-search-font-weight-semibold: var(--p-font-weight-semibold);
   --docs-search-border-radius: calc(2 * var(--docs-border-radius));
-  --docs-search-accent-color: var(--sl-color-primary-600);
-  --docs-search-icon-color: var(--sl-color-neutral-500);
-  --docs-search-icon-color-active: var(--sl-color-neutral-600);
+  --docs-search-accent-color: var(--p-color-primary-600);
+  --docs-search-icon-color: var(--p-color-neutral-500);
+  --docs-search-icon-color-active: var(--p-color-neutral-600);
   --docs-search-shadow: var(--docs-shadow-x-large);
-  --docs-search-result-background-hover: var(--sl-color-neutral-100);
-  --docs-search-result-color-hover: var(--sl-color-neutral-900);
-  --docs-search-result-background-active: var(--sl-color-primary-600);
-  --docs-search-result-color-active: var(--sl-color-neutral-0);
-  --docs-search-focus-ring: var(--sl-focus-ring);
+  --docs-search-result-background-hover: var(--p-color-neutral-100);
+  --docs-search-result-color-hover: var(--p-color-neutral-900);
+  --docs-search-result-background-active: var(--p-color-primary-600);
+  --docs-search-result-color-active: var(--p-color-neutral-0);
+  --docs-search-focus-ring: var(--p-focus-ring);
   --docs-search-overlay-background: rgb(0 0 0 / 0.33);
 }
 
-:root.sl-theme-dark {
+:root.p-theme-dark {
   --docs-search-overlay-background: rgb(71 71 71 / 0.33);
 }
 
@@ -47,7 +47,7 @@ body.search-visible {
   font: inherit;
   color: var(--docs-search-box-color);
   padding: 0.75rem 1rem;
-  margin: var(--sl-spacing-large) 0;
+  margin: var(--p-spacing-large) 0;
   cursor: pointer;
 }
 
@@ -150,7 +150,7 @@ body.search-visible {
   align-items: center;
 }
 
-.search__input-wrapper sl-icon {
+.search__input-wrapper p-icon {
   width: 1.5rem;
   height: 1.5rem;
   flex: 0 0 auto;
@@ -172,7 +172,7 @@ body.search-visible {
   display: none;
 }
 
-.search__clear-button:active sl-icon {
+.search__clear-button:active p-icon {
   color: var(--docs-search-icon-color-active);
 }
 
@@ -276,7 +276,7 @@ body.search-visible {
   color: var(--docs-search-text-color-muted);
 }
 
-.search__result-icon sl-icon {
+.search__result-icon p-icon {
   font-size: 1.5rem;
 }
 

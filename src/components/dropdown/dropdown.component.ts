@@ -9,14 +9,14 @@ import { property, query } from 'lit/decorators.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlPopup from '../popup/popup.component.js';
+import PPopup from '../popup/popup.component.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './dropdown.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type { SlSelectEvent } from '../../events/sl-select.js';
-import type SlButton from '../button/button.js';
-import type SlIconButton from '../icon-button/icon-button.js';
-import type SlMenu from '../menu/menu.js';
+import type { PSelectEvent } from '../../events/p-select.js';
+import type PButton from '../button/button.js';
+import type PIconButton from '../icon-button/icon-button.js';
+import type PMenu from '../menu/menu.js';
 
 /**
  * @summary Dropdowns expose additional content that "drops down" in a panel.
@@ -24,17 +24,17 @@ import type SlMenu from '../menu/menu.js';
  * @status stable
  * @since 2.0
  *
- * @dependency sl-popup
+ * @dependency p-popup
  *
  * @slot - The dropdown's main content.
- * @slot trigger - The dropdown's trigger, usually a `<sl-button>` element.
+ * @slot trigger - The dropdown's trigger, usually a `<p-button>` element.
  *
- * @event sl-show - Emitted when the dropdown opens.
- * @event sl-after-show - Emitted after the dropdown opens and all animations are complete.
- * @event sl-hide - Emitted when the dropdown closes.
- * @event sl-after-hide - Emitted after the dropdown closes and all animations are complete.
+ * @event p-show - Emitted when the dropdown opens.
+ * @event p-after-show - Emitted after the dropdown opens and all animations are complete.
+ * @event p-hide - Emitted when the dropdown closes.
+ * @event p-after-hide - Emitted after the dropdown closes and all animations are complete.
  *
- * @csspart base - The component's base wrapper, an `<sl-popup>` element.
+ * @csspart base - The component's base wrapper, an `<p-popup>` element.
  * @csspart base__popup - The popup's exported `popup` part. Use this to target the tooltip's popup container.
  * @csspart trigger - The container that wraps the trigger.
  * @csspart panel - The panel that gets shown when the dropdown is open.
@@ -42,11 +42,11 @@ import type SlMenu from '../menu/menu.js';
  * @animation dropdown.show - The animation to use when showing the dropdown.
  * @animation dropdown.hide - The animation to use when hiding the dropdown.
  */
-export default class SlDropdown extends ShoelaceElement {
+export default class PDropdown extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'sl-popup': SlPopup };
+  static dependencies = { 'p-popup': PPopup };
 
-  @query('.dropdown') popup: SlPopup;
+  @query('.dropdown') popup: PPopup;
   @query('.dropdown__trigger') trigger: HTMLSlotElement;
   @query('.dropdown__panel') panel: HTMLSlotElement;
 
@@ -141,8 +141,8 @@ export default class SlDropdown extends ShoelaceElement {
   }
 
   getMenu() {
-    return this.panel.assignedElements({ flatten: true }).find(el => el.tagName.toLowerCase() === 'sl-menu') as
-      | SlMenu
+    return this.panel.assignedElements({ flatten: true }).find(el => el.tagName.toLowerCase() === 'p-menu') as
+      | PMenu
       | undefined;
   }
 
@@ -168,7 +168,7 @@ export default class SlDropdown extends ShoelaceElement {
     // Handle tabbing
     if (event.key === 'Tab') {
       // Tabbing within an open menu should close the dropdown and refocus the trigger
-      if (this.open && document.activeElement?.tagName.toLowerCase() === 'sl-menu-item') {
+      if (this.open && document.activeElement?.tagName.toLowerCase() === 'p-menu-item') {
         event.preventDefault();
         this.hide();
         this.focusOnTrigger();
@@ -203,11 +203,11 @@ export default class SlDropdown extends ShoelaceElement {
     }
   };
 
-  private handlePanelSelect = (event: SlSelectEvent) => {
+  private handlePanelSelect = (event: PSelectEvent) => {
     const target = event.target as HTMLElement;
 
     // Hide the dropdown when a menu item is selected
-    if (!this.stayOpenOnSelect && target.tagName.toLowerCase() === 'sl-menu') {
+    if (!this.stayOpenOnSelect && target.tagName.toLowerCase() === 'p-menu') {
       this.hide();
       this.focusOnTrigger();
     }
@@ -287,7 +287,7 @@ export default class SlDropdown extends ShoelaceElement {
   // that gets slotted in) so screen readers will understand them. The accessible trigger could be the slotted element,
   // a child of the slotted element, or an element in the slotted element's shadow root.
   //
-  // For example, the accessible trigger of an <sl-button> is a <button> located inside its shadow root.
+  // For example, the accessible trigger of an <p-button> is a <button> located inside its shadow root.
   //
   // To determine this, we assume the first tabbable element in the trigger slot is the "accessible trigger."
   //
@@ -299,9 +299,9 @@ export default class SlDropdown extends ShoelaceElement {
     if (accessibleTrigger) {
       switch (accessibleTrigger.tagName.toLowerCase()) {
         // Shoelace buttons have to update the internal button so it's announced correctly by screen readers
-        case 'sl-button':
-        case 'sl-icon-button':
-          target = (accessibleTrigger as SlButton | SlIconButton).button;
+        case 'p-button':
+        case 'p-icon-button':
+          target = (accessibleTrigger as PButton | PIconButton).button;
           break;
 
         default:
@@ -320,7 +320,7 @@ export default class SlDropdown extends ShoelaceElement {
     }
 
     this.open = true;
-    return waitForEvent(this, 'sl-after-show');
+    return waitForEvent(this, 'p-after-show');
   }
 
   /** Hides the dropdown panel */
@@ -330,7 +330,7 @@ export default class SlDropdown extends ShoelaceElement {
     }
 
     this.open = false;
-    return waitForEvent(this, 'sl-after-hide');
+    return waitForEvent(this, 'p-after-hide');
   }
 
   /**
@@ -342,7 +342,7 @@ export default class SlDropdown extends ShoelaceElement {
   }
 
   addOpenListeners() {
-    this.panel.addEventListener('sl-select', this.handlePanelSelect);
+    this.panel.addEventListener('p-select', this.handlePanelSelect);
     if ('CloseWatcher' in window) {
       this.closeWatcher?.destroy();
       this.closeWatcher = new CloseWatcher();
@@ -359,7 +359,7 @@ export default class SlDropdown extends ShoelaceElement {
 
   removeOpenListeners() {
     if (this.panel) {
-      this.panel.removeEventListener('sl-select', this.handlePanelSelect);
+      this.panel.removeEventListener('p-select', this.handlePanelSelect);
       this.panel.removeEventListener('keydown', this.handleKeyDown);
     }
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
@@ -378,7 +378,7 @@ export default class SlDropdown extends ShoelaceElement {
 
     if (this.open) {
       // Show
-      this.emit('sl-show');
+      this.emit('p-show');
       this.addOpenListeners();
 
       await stopAnimations(this);
@@ -387,10 +387,10 @@ export default class SlDropdown extends ShoelaceElement {
       const { keyframes, options } = getAnimation(this, 'dropdown.show', { dir: this.localize.dir() });
       await animateTo(this.popup.popup, keyframes, options);
 
-      this.emit('sl-after-show');
+      this.emit('p-after-show');
     } else {
       // Hide
-      this.emit('sl-hide');
+      this.emit('p-hide');
       this.removeOpenListeners();
 
       await stopAnimations(this);
@@ -399,13 +399,13 @@ export default class SlDropdown extends ShoelaceElement {
       this.panel.hidden = true;
       this.popup.active = false;
 
-      this.emit('sl-after-hide');
+      this.emit('p-after-hide');
     }
   }
 
   render() {
     return html`
-      <sl-popup
+      <p-popup
         part="base"
         exportparts="popup:base__popup"
         id="dropdown"
@@ -437,7 +437,7 @@ export default class SlDropdown extends ShoelaceElement {
         <div aria-hidden=${this.open ? 'false' : 'true'} aria-labelledby="dropdown">
           <slot part="panel" class="dropdown__panel"></slot>
         </div>
-      </sl-popup>
+      </p-popup>
     `;
   }
 }

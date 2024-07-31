@@ -6,23 +6,23 @@ layout: component
 ---
 
 ```html:preview
-<sl-radio-group label="Select an option" name="a" value="1">
-  <sl-radio value="1">Option 1</sl-radio>
-  <sl-radio value="2">Option 2</sl-radio>
-  <sl-radio value="3">Option 3</sl-radio>
-</sl-radio-group>
+<p-radio-group label="Select an option" name="a" value="1">
+  <p-radio value="1">Option 1</p-radio>
+  <p-radio value="2">Option 2</p-radio>
+  <p-radio value="3">Option 3</p-radio>
+</p-radio-group>
 ```
 
 ```jsx:react
-import SlRadio from '@shoelace-style/shoelace/dist/react/radio';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PRadio from '@shoelace-style/shoelace/dist/react/radio';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" name="a" value="1">
-    <SlRadio value="1">Option 1</SlRadio>
-    <SlRadio value="2">Option 2</SlRadio>
-    <SlRadio value="3">Option 3</SlRadio>
-  </SlRadioGroup>
+  <PRadioGroup label="Select an option" name="a" value="1">
+    <PRadio value="1">Option 1</PRadio>
+    <PRadio value="2">Option 2</PRadio>
+    <PRadio value="3">Option 3</PRadio>
+  </PRadioGroup>
 );
 ```
 
@@ -33,23 +33,23 @@ const App = () => (
 Add descriptive help text to a radio group with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
 
 ```html:preview
-<sl-radio-group label="Select an option" help-text="Choose the most appropriate option." name="a" value="1">
-  <sl-radio value="1">Option 1</sl-radio>
-  <sl-radio value="2">Option 2</sl-radio>
-  <sl-radio value="3">Option 3</sl-radio>
-</sl-radio-group>
+<p-radio-group label="Select an option" help-text="Choose the most appropriate option." name="a" value="1">
+  <p-radio value="1">Option 1</p-radio>
+  <p-radio value="2">Option 2</p-radio>
+  <p-radio value="3">Option 3</p-radio>
+</p-radio-group>
 ```
 
 ```jsx:react
-import SlRadio from '@shoelace-style/shoelace/dist/react/radio';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PRadio from '@shoelace-style/shoelace/dist/react/radio';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" help-text="Choose the most appropriate option." name="a" value="1">
-    <SlRadio value="1">Option 1</SlRadio>
-    <SlRadio value="2">Option 2</SlRadio>
-    <SlRadio value="3">Option 3</SlRadio>
-  </SlRadioGroup>
+  <PRadioGroup label="Select an option" help-text="Choose the most appropriate option." name="a" value="1">
+    <PRadio value="1">Option 1</PRadio>
+    <PRadio value="2">Option 2</PRadio>
+    <PRadio value="3">Option 3</PRadio>
+  </PRadioGroup>
 );
 ```
 
@@ -58,23 +58,23 @@ const App = () => (
 [Radio buttons](/components/radio-button) offer an alternate way to display radio controls. In this case, an internal [button group](/components/button-group) is used to group the buttons into a single, cohesive control.
 
 ```html:preview
-<sl-radio-group label="Select an option" help-text="Select an option that makes you proud." name="a" value="1">
-  <sl-radio-button value="1">Option 1</sl-radio-button>
-  <sl-radio-button value="2">Option 2</sl-radio-button>
-  <sl-radio-button value="3">Option 3</sl-radio-button>
-</sl-radio-group>
+<p-radio-group label="Select an option" help-text="Select an option that makes you proud." name="a" value="1">
+  <p-radio-button value="1">Option 1</p-radio-button>
+  <p-radio-button value="2">Option 2</p-radio-button>
+  <p-radio-button value="3">Option 3</p-radio-button>
+</p-radio-group>
 ```
 
 ```jsx:react
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" name="a" value="1">
-    <SlRadioButton value="1">Option 1</SlRadioButton>
-    <SlRadioButton value="2">Option 2</SlRadioButton>
-    <SlRadioButton value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+  <PRadioGroup label="Select an option" name="a" value="1">
+    <PRadioButton value="1">Option 1</PRadioButton>
+    <PRadioButton value="2">Option 2</PRadioButton>
+    <PRadioButton value="3">Option 3</PRadioButton>
+  </PRadioGroup>
 );
 ```
 
@@ -83,25 +83,25 @@ const App = () => (
 Radios and radio buttons can be disabled by adding the `disabled` attribute to the respective options inside the radio group.
 
 ```html:preview
-<sl-radio-group label="Select an option" name="a" value="1">
-  <sl-radio value="1">Option 1</sl-radio>
-  <sl-radio value="2" disabled>Option 2</sl-radio>
-  <sl-radio value="3">Option 3</sl-radio>
-</sl-radio-group>
+<p-radio-group label="Select an option" name="a" value="1">
+  <p-radio value="1">Option 1</p-radio>
+  <p-radio value="2" disabled>Option 2</p-radio>
+  <p-radio value="3">Option 3</p-radio>
+</p-radio-group>
 ```
 
 ```jsx:react
-import SlRadio from '@shoelace-style/shoelace/dist/react/radio';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PRadio from '@shoelace-style/shoelace/dist/react/radio';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" name="a" value="1">
-    <SlRadio value="1">Option 1</SlRadio>
-    <SlRadio value="2" disabled>
+  <PRadioGroup label="Select an option" name="a" value="1">
+    <PRadio value="1">Option 1</PRadio>
+    <PRadio value="2" disabled>
       Option 2
-    </SlRadio>
-    <SlRadio value="3">Option 3</SlRadio>
-  </SlRadioGroup>
+    </PRadio>
+    <PRadio value="3">Option 3</PRadio>
+  </PRadioGroup>
 );
 ```
 
@@ -110,16 +110,16 @@ const App = () => (
 The size of [Radios](/components/radio) and [Radio Buttons](/components/radio-buttons) will be determined by the Radio Group's `size` attribute.
 
 ```html preview
-<sl-radio-group label="Select an option" size="medium" value="medium" class="radio-group-size">
-  <sl-radio value="small">Small</sl-radio>
-  <sl-radio value="medium">Medium</sl-radio>
-  <sl-radio value="large">Large</sl-radio>
-</sl-radio-group>
+<p-radio-group label="Select an option" size="medium" value="medium" class="radio-group-size">
+  <p-radio value="small">Small</p-radio>
+  <p-radio value="medium">Medium</p-radio>
+  <p-radio value="large">Large</p-radio>
+</p-radio-group>
 
 <script>
   const radioGroup = document.querySelector('.radio-group-size');
 
-  radioGroup.addEventListener('sl-change', () => {
+  radioGroup.addEventListener('p-change', () => {
     radioGroup.size = radioGroup.value;
   });
 </script>
@@ -127,25 +127,25 @@ The size of [Radios](/components/radio) and [Radio Buttons](/components/radio-bu
 
 ```jsx react
 import { useState } from 'react';
-import SlRadio from '@shoelace-style/shoelace/dist/react/radio';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PRadio from '@shoelace-style/shoelace/dist/react/radio';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 
 const App = () => {
   const [size, setSize] = useState('medium');
 
   return (
     <>
-      <SlRadioGroup
+      <PRadioGroup
         label="Select an option"
         size={size}
         value={size}
         class="radio-group-size"
-        onSlChange={event => setSize(event.target.value)}
+        onPChange={event => setSize(event.target.value)}
       >
-        <SlRadio value="small">Small</SlRadio>
-        <SlRadio value="medium">Medium</SlRadio>
-        <SlRadio value="large">Large</SlRadio>
-      </SlRadioGroup>
+        <PRadio value="small">Small</PRadio>
+        <PRadio value="medium">Medium</PRadio>
+        <PRadio value="large">Large</PRadio>
+      </PRadioGroup>
     </>
   );
 };
@@ -161,13 +161,13 @@ Setting the `required` attribute to make selecting an option mandatory. If a val
 
 ```html:preview
 <form class="validation">
-  <sl-radio-group label="Select an option" name="a" required>
-    <sl-radio value="1">Option 1</sl-radio>
-    <sl-radio value="2">Option 2</sl-radio>
-    <sl-radio value="3">Option 3</sl-radio>
-  </sl-radio-group>
+  <p-radio-group label="Select an option" name="a" required>
+    <p-radio value="1">Option 1</p-radio>
+    <p-radio value="2">Option 2</p-radio>
+    <p-radio value="3">Option 3</p-radio>
+  </p-radio-group>
   <br />
-  <sl-button type="submit" variant="primary">Submit</sl-button>
+  <p-button type="submit" variant="primary">Submit</p-button>
 </form>
 
 <script>
@@ -182,10 +182,10 @@ Setting the `required` attribute to make selecting an option mandatory. If a val
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
-import SlRadio from '@shoelace-style/shoelace/dist/react/radio';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PRadio from '@shoelace-style/shoelace/dist/react/radio';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 const App = () => {
   function handleSubmit(event) {
     event.preventDefault();
@@ -194,21 +194,21 @@ const App = () => {
 
   return (
     <form class="custom-validity" onSubmit={handleSubmit}>
-      <SlRadioGroup label="Select an option" name="a" required onSlChange={handleChange}>
-        <SlRadio value="1">
+      <PRadioGroup label="Select an option" name="a" required onPChange={handleChange}>
+        <PRadio value="1">
           Option 1
-        </SlRadio>
-        <SlRadiovalue="2">
+        </PRadio>
+        <PRadiovalue="2">
           Option 2
-        </SlRadio>
-        <SlRadio value="3">
+        </PRadio>
+        <PRadio value="3">
           Option 3
-        </SlRadio>
-      </SlRadioGroup>
+        </PRadio>
+      </PRadioGroup>
       <br />
-      <SlButton type="submit" variant="primary">
+      <PButton type="submit" variant="primary">
         Submit
-      </SlButton>
+      </PButton>
     </form>
   );
 };
@@ -220,27 +220,27 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
 
 ```html:preview
 <form class="custom-validity">
-  <sl-radio-group label="Select an option" name="a" value="1">
-    <sl-radio value="1">Not me</sl-radio>
-    <sl-radio value="2">Me neither</sl-radio>
-    <sl-radio value="3">Choose me</sl-radio>
-  </sl-radio-group>
+  <p-radio-group label="Select an option" name="a" value="1">
+    <p-radio value="1">Not me</p-radio>
+    <p-radio value="2">Me neither</p-radio>
+    <p-radio value="3">Choose me</p-radio>
+  </p-radio-group>
   <br />
-  <sl-button type="submit" variant="primary">Submit</sl-button>
+  <p-button type="submit" variant="primary">Submit</p-button>
 </form>
 
 <script>
   const form = document.querySelector('.custom-validity');
-  const radioGroup = form.querySelector('sl-radio-group');
+  const radioGroup = form.querySelector('p-radio-group');
   const errorMessage = 'You must choose the last option';
 
   // Set initial validity as soon as the element is defined
-  customElements.whenDefined('sl-radio').then(() => {
+  customElements.whenDefined('p-radio').then(() => {
     radioGroup.setCustomValidity(errorMessage);
   });
 
   // Update validity when a selection is made
-  form.addEventListener('sl-change', () => {
+  form.addEventListener('p-change', () => {
     const isValid = radioGroup.value === '3';
     radioGroup.setCustomValidity(isValid ? '' : errorMessage);
   });
@@ -255,10 +255,10 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
 
 ```jsx:react
 import { useEffect, useRef } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
-import SlRadio from '@shoelace-style/shoelace/dist/react/radio';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PRadio from '@shoelace-style/shoelace/dist/react/radio';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 const App = () => {
   const radioGroup = useRef(null);
   const errorMessage = 'You must choose this option';
@@ -278,15 +278,15 @@ const App = () => {
 
   return (
     <form class="custom-validity" onSubmit={handleSubmit}>
-      <SlRadioGroup ref={radioGroup} label="Select an option" name="a" value="1" onSlChange={handleChange}>
-        <SlRadio value="1">Not me</SlRadio>
-        <SlRadio value="2">Me neither</SlRadio>
-        <SlRadio value="3">Choose me</SlRadio>
-      </SlRadioGroup>
+      <PRadioGroup ref={radioGroup} label="Select an option" name="a" value="1" onPChange={handleChange}>
+        <PRadio value="1">Not me</PRadio>
+        <PRadio value="2">Me neither</PRadio>
+        <PRadio value="3">Choose me</PRadio>
+      </PRadioGroup>
       <br />
-      <SlButton type="submit" variant="primary">
+      <PButton type="submit" variant="primary">
         Submit
-      </SlButton>
+      </PButton>
     </form>
   );
 };

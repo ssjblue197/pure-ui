@@ -1,12 +1,12 @@
-import SlCard from './card.component.js';
+import PCard from './card.component.js';
 
 export * from './card.component.js';
-export default SlCard;
+export default PCard;
 
-SlCard.define('sl-card');
+PCard.define('p-card');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-card': SlCard;
+    'p-card': PCard;
   }
 }

@@ -4,7 +4,7 @@ import { isTemplateResult } from 'lit/directive-helpers.js';
 import { property, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './icon.styles.js';
 import type { CSSResultGroup, HTMLTemplateResult } from 'lit';
 
@@ -26,13 +26,13 @@ interface IconSource {
  * @status stable
  * @since 2.0
  *
- * @event sl-load - Emitted when the icon has loaded. When using `spriteSheet: true` this will not emit.
- * @event sl-error - Emitted when the icon fails to load due to an error. When using `spriteSheet: true` this will not emit.
+ * @event p-load - Emitted when the icon has loaded. When using `spriteSheet: true` this will not emit.
+ * @event p-error - Emitted when the icon fails to load due to an error. When using `spriteSheet: true` this will not emit.
  *
  * @csspart svg - The internal SVG element.
  * @csspart use - The <use> element generated when using `spriteSheet: true`
  */
-export default class SlIcon extends ShoelaceElement {
+export default class PIcon extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   private initialRender = false;
@@ -192,12 +192,12 @@ export default class SlIcon extends ShoelaceElement {
       case RETRYABLE_ERROR:
       case CACHEABLE_ERROR:
         this.svg = null;
-        this.emit('sl-error');
+        this.emit('p-error');
         break;
       default:
         this.svg = svg.cloneNode(true) as SVGElement;
         library?.mutator?.(this.svg);
-        this.emit('sl-load');
+        this.emit('p-load');
     }
   }
 

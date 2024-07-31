@@ -5,8 +5,8 @@ export default css`
   ${componentStyles}
 
   :host {
-    --border-color: var(--sl-color-neutral-200);
-    --border-radius: var(--sl-border-radius-medium);
+    --border-color: var(--p-color-neutral-200);
+    --border-radius: var(--p-border-radius-medium);
     --border-width: 0;
 
     display: block;
@@ -15,10 +15,10 @@ export default css`
   .calendar__header {
     display: flex;
     align-items: center;
-    margin-bottom: var(--sl-spacing-x-small);
+    margin-bottom: var(--p-spacing-x-small);
   }
 
-  .calendar__header sl-icon-button {
+  .calendar__header p-icon-button {
     flex: 0 0 auto;
   }
 
@@ -42,9 +42,9 @@ export default css`
     border: solid var(--border-width) var(--border-color);
     border-bottom: none;
     background: none;
-    background-color: var(--sl-color-neutral-0);
+    background-color: var(--p-color-neutral-0);
     font: inherit;
-    color: var(--sl-color-neutral-900);
+    color: var(--p-color-neutral-900);
     min-height: 3rem;
     padding: 0;
     margin: 0;
@@ -81,39 +81,39 @@ export default css`
   }
 
   .calendar__day:focus-visible {
-    outline: solid 2px var(--sl-color-primary-600);
+    outline: solid 2px var(--p-color-primary-600);
     z-index: 1;
   }
 
   .calendar__day[part~='day-weekend'] {
-    color: var(--sl-color-rose-600);
+    color: var(--p-color-rose-600);
   }
 
   .calendar__day[part~='day-today'] {
-    font-weight: var(--sl-font-weight-bold);
+    font-weight: var(--p-font-weight-bold);
   }
 
   .calendar__day[part~='day-selected'] {
-    background-color: var(--sl-color-primary-100);
+    background-color: var(--p-color-primary-100);
   }
 
   .calendar__day[part~='day-selection-start'] {
-    border-top-left-radius: var(--sl-border-radius-pill);
-    border-bottom-left-radius: var(--sl-border-radius-pill);
+    border-top-left-radius: var(--p-border-radius-pill);
+    border-bottom-left-radius: var(--p-border-radius-pill);
   }
 
   .calendar__day[part~='day-selection-end'] {
-    border-top-right-radius: var(--sl-border-radius-pill);
-    border-bottom-right-radius: var(--sl-border-radius-pill);
+    border-top-right-radius: var(--p-border-radius-pill);
+    border-bottom-right-radius: var(--p-border-radius-pill);
   }
 
   .calendar__day .calendar__day[part~='day-previous-month'],
   .calendar__day[part~='day-next-month'] {
-    color: var(--sl-color-neutral-400);
+    color: var(--p-color-neutral-400);
   }
 
   .calendar__day[part~='day-previous-month'][part~='day-weekend'],
   .calendar__day[part~='day-next-month'][part~='day-weekend'] {
-    color: var(--sl-color-rose-400);
+    color: var(--p-color-rose-400);
   }
 `;

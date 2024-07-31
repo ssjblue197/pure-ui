@@ -1,12 +1,12 @@
-import SlImageComparer from './image-comparer.component.js';
+import PImageComparer from './image-comparer.component.js';
 
 export * from './image-comparer.component.js';
-export default SlImageComparer;
+export default PImageComparer;
 
-SlImageComparer.define('sl-image-comparer');
+PImageComparer.define('p-image-comparer');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-image-comparer': SlImageComparer;
+    'p-image-comparer': PImageComparer;
   }
 }

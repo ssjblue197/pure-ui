@@ -6,21 +6,21 @@ layout: component
 ---
 
 ```html:preview
-<sl-alert open>
-  <sl-icon slot="icon" name="info-circle"></sl-icon>
+<p-alert open>
+  <p-icon slot="icon" name="info-circle"></p-icon>
   This is a standard alert. You can customize its content and even the icon.
-</sl-alert>
+</p-alert>
 ```
 
 ```jsx:react
-import SlAlert from '@shoelace-style/shoelace/dist/react/alert';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PAlert from '@shoelace-style/shoelace/dist/react/alert';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
 
 const App = () => (
-  <SlAlert open>
-    <SlIcon slot="icon" name="info-circle" />
+  <PAlert open>
+    <PIcon slot="icon" name="info-circle" />
     This is a standard alert. You can customize its content and even the icon.
-  </SlAlert>
+  </PAlert>
 );
 ```
 
@@ -35,93 +35,93 @@ Alerts will not be visible if the `open` attribute is not present.
 Set the `variant` attribute to change the alert's variant.
 
 ```html:preview
-<sl-alert variant="primary" open>
-  <sl-icon slot="icon" name="info-circle"></sl-icon>
+<p-alert variant="primary" open>
+  <p-icon slot="icon" name="info-circle"></p-icon>
   <strong>This is super informative</strong><br />
   You can tell by how pretty the alert is.
-</sl-alert>
+</p-alert>
 
 <br />
 
-<sl-alert variant="success" open>
-  <sl-icon slot="icon" name="check2-circle"></sl-icon>
+<p-alert variant="success" open>
+  <p-icon slot="icon" name="check2-circle"></p-icon>
   <strong>Your changes have been saved</strong><br />
   You can safely exit the app now.
-</sl-alert>
+</p-alert>
 
 <br />
 
-<sl-alert variant="neutral" open>
-  <sl-icon slot="icon" name="gear"></sl-icon>
+<p-alert variant="neutral" open>
+  <p-icon slot="icon" name="gear"></p-icon>
   <strong>Your settings have been updated</strong><br />
   Settings will take effect on next login.
-</sl-alert>
+</p-alert>
 
 <br />
 
-<sl-alert variant="warning" open>
-  <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
+<p-alert variant="warning" open>
+  <p-icon slot="icon" name="exclamation-triangle"></p-icon>
   <strong>Your session has ended</strong><br />
   Please login again to continue.
-</sl-alert>
+</p-alert>
 
 <br />
 
-<sl-alert variant="danger" open>
-  <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
+<p-alert variant="danger" open>
+  <p-icon slot="icon" name="exclamation-octagon"></p-icon>
   <strong>Your account has been deleted</strong><br />
   We're very sorry to see you go!
-</sl-alert>
+</p-alert>
 ```
 
 ```jsx:react
-import SlAlert from '@shoelace-style/shoelace/dist/react/alert';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PAlert from '@shoelace-style/shoelace/dist/react/alert';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
 
 const App = () => (
   <>
-    <SlAlert variant="primary" open>
-      <SlIcon slot="icon" name="info-circle" />
+    <PAlert variant="primary" open>
+      <PIcon slot="icon" name="info-circle" />
       <strong>This is super informative</strong>
       <br />
       You can tell by how pretty the alert is.
-    </SlAlert>
+    </PAlert>
 
     <br />
 
-    <SlAlert variant="success" open>
-      <SlIcon slot="icon" name="check2-circle" />
+    <PAlert variant="success" open>
+      <PIcon slot="icon" name="check2-circle" />
       <strong>Your changes have been saved</strong>
       <br />
       You can safely exit the app now.
-    </SlAlert>
+    </PAlert>
 
     <br />
 
-    <SlAlert variant="neutral" open>
-      <SlIcon slot="icon" name="gear" />
+    <PAlert variant="neutral" open>
+      <PIcon slot="icon" name="gear" />
       <strong>Your settings have been updated</strong>
       <br />
       Settings will take effect on next login.
-    </SlAlert>
+    </PAlert>
 
     <br />
 
-    <SlAlert variant="warning" open>
-      <SlIcon slot="icon" name="exclamation-triangle" />
+    <PAlert variant="warning" open>
+      <PIcon slot="icon" name="exclamation-triangle" />
       <strong>Your session has ended</strong>
       <br />
       Please login again to continue.
-    </SlAlert>
+    </PAlert>
 
     <br />
 
-    <SlAlert variant="danger" open>
-      <SlIcon slot="icon" name="exclamation-octagon" />
+    <PAlert variant="danger" open>
+      <PIcon slot="icon" name="exclamation-octagon" />
       <strong>Your account has been deleted</strong>
       <br />
       We're very sorry to see you go!
-    </SlAlert>
+    </PAlert>
   </>
 );
 ```
@@ -131,14 +131,14 @@ const App = () => (
 Add the `closable` attribute to show a close button that will hide the alert.
 
 ```html:preview
-<sl-alert variant="primary" open closable class="alert-closable">
-  <sl-icon slot="icon" name="info-circle"></sl-icon>
+<p-alert variant="primary" open closable class="alert-closable">
+  <p-icon slot="icon" name="info-circle"></p-icon>
   You can close this alert any time!
-</sl-alert>
+</p-alert>
 
 <script>
   const alert = document.querySelector('.alert-closable');
-  alert.addEventListener('sl-after-hide', () => {
+  alert.addEventListener('p-after-hide', () => {
     setTimeout(() => (alert.open = true), 2000);
   });
 </script>
@@ -146,8 +146,8 @@ Add the `closable` attribute to show a close button that will hide the alert.
 
 ```jsx:react
 import { useState } from 'react';
-import SlAlert from '@shoelace-style/shoelace/dist/react/alert';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PAlert from '@shoelace-style/shoelace/dist/react/alert';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
 
 const App = () => {
   const [open, setOpen] = useState(true);
@@ -158,10 +158,10 @@ const App = () => {
   }
 
   return (
-    <SlAlert open={open} closable onSlAfterHide={handleHide}>
-      <SlIcon slot="icon" name="info-circle" />
+    <PAlert open={open} closable onPAfterHide={handleHide}>
+      <PIcon slot="icon" name="info-circle" />
       You can close this alert any time!
-    </SlAlert>
+    </PAlert>
   );
 };
 ```
@@ -171,16 +171,16 @@ const App = () => {
 Icons are optional. Simply omit the `icon` slot if you don't want them.
 
 ```html:preview
-<sl-alert variant="primary" open> Nothing fancy here, just a simple alert. </sl-alert>
+<p-alert variant="primary" open> Nothing fancy here, just a simple alert. </p-alert>
 ```
 
 ```jsx:react
-import SlAlert from '@shoelace-style/shoelace/dist/react/alert';
+import PAlert from '@shoelace-style/shoelace/dist/react/alert';
 
 const App = () => (
-  <SlAlert variant="primary" open>
+  <PAlert variant="primary" open>
     Nothing fancy here, just a simple alert.
-  </SlAlert>
+  </PAlert>
 );
 ```
 
@@ -190,38 +190,38 @@ Set the `duration` attribute to automatically hide an alert after a period of ti
 
 ```html:preview
 <div class="alert-duration">
-  <sl-button variant="primary">Show Alert</sl-button>
+  <p-button variant="primary">Show Alert</p-button>
 
-  <sl-alert variant="primary" duration="3000" closable>
-    <sl-icon slot="icon" name="info-circle"></sl-icon>
+  <p-alert variant="primary" duration="3000" closable>
+    <p-icon slot="icon" name="info-circle"></p-icon>
     This alert will automatically hide itself after three seconds, unless you interact with it.
-  </sl-alert>
+  </p-alert>
 </div>
 
 <script>
   const container = document.querySelector('.alert-duration');
-  const button = container.querySelector('sl-button');
-  const alert = container.querySelector('sl-alert');
+  const button = container.querySelector('p-button');
+  const alert = container.querySelector('p-alert');
 
   button.addEventListener('click', () => alert.show());
 </script>
 
 <style>
-  .alert-duration sl-alert {
-    margin-top: var(--sl-spacing-medium);
+  .alert-duration p-alert {
+    margin-top: var(--p-spacing-medium);
   }
 </style>
 ```
 
 ```jsx:react
 import { useState } from 'react';
-import SlAlert from '@shoelace-style/shoelace/dist/react/alert';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PAlert from '@shoelace-style/shoelace/dist/react/alert';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
 
 const css = `
-  .alert-duration sl-alert {
-    margin-top: var(--sl-spacing-medium);
+  .alert-duration p-alert {
+    margin-top: var(--p-spacing-medium);
   }
 `;
 
@@ -231,14 +231,14 @@ const App = () => {
   return (
     <>
       <div className="alert-duration">
-        <SlButton variant="primary" onClick={() => setOpen(true)}>
+        <PButton variant="primary" onClick={() => setOpen(true)}>
           Show Alert
-        </SlButton>
+        </PButton>
 
-        <SlAlert variant="primary" duration="3000" open={open} closable onSlAfterHide={() => setOpen(false)}>
-          <SlIcon slot="icon" name="info-circle" />
+        <PAlert variant="primary" duration="3000" open={open} closable onPAfterHide={() => setOpen(false)}>
+          <PIcon slot="icon" name="info-circle" />
           This alert will automatically hide itself after three seconds, unless you interact with it.
-        </SlAlert>
+        </PAlert>
       </div>
 
       <style>{css}</style>
@@ -255,49 +255,49 @@ You should always use the `closable` attribute so users can dismiss the notifica
 
 ```html:preview
 <div class="alert-toast">
-  <sl-button variant="primary">Primary</sl-button>
-  <sl-button variant="success">Success</sl-button>
-  <sl-button variant="neutral">Neutral</sl-button>
-  <sl-button variant="warning">Warning</sl-button>
-  <sl-button variant="danger">Danger</sl-button>
+  <p-button variant="primary">Primary</p-button>
+  <p-button variant="success">Success</p-button>
+  <p-button variant="neutral">Neutral</p-button>
+  <p-button variant="warning">Warning</p-button>
+  <p-button variant="danger">Danger</p-button>
 
-  <sl-alert variant="primary" duration="3000" closable>
-    <sl-icon slot="icon" name="info-circle"></sl-icon>
+  <p-alert variant="primary" duration="3000" closable>
+    <p-icon slot="icon" name="info-circle"></p-icon>
     <strong>This is super informative</strong><br />
     You can tell by how pretty the alert is.
-  </sl-alert>
+  </p-alert>
 
-  <sl-alert variant="success" duration="3000" closable>
-    <sl-icon slot="icon" name="check2-circle"></sl-icon>
+  <p-alert variant="success" duration="3000" closable>
+    <p-icon slot="icon" name="check2-circle"></p-icon>
     <strong>Your changes have been saved</strong><br />
     You can safely exit the app now.
-  </sl-alert>
+  </p-alert>
 
-  <sl-alert variant="neutral" duration="3000" closable>
-    <sl-icon slot="icon" name="gear"></sl-icon>
+  <p-alert variant="neutral" duration="3000" closable>
+    <p-icon slot="icon" name="gear"></p-icon>
     <strong>Your settings have been updated</strong><br />
     Settings will take effect on next login.
-  </sl-alert>
+  </p-alert>
 
-  <sl-alert variant="warning" duration="3000" closable>
-    <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
+  <p-alert variant="warning" duration="3000" closable>
+    <p-icon slot="icon" name="exclamation-triangle"></p-icon>
     <strong>Your session has ended</strong><br />
     Please login again to continue.
-  </sl-alert>
+  </p-alert>
 
-  <sl-alert variant="danger" duration="3000" closable>
-    <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
+  <p-alert variant="danger" duration="3000" closable>
+    <p-icon slot="icon" name="exclamation-octagon"></p-icon>
     <strong>Your account has been deleted</strong><br />
     We're very sorry to see you go!
-  </sl-alert>
+  </p-alert>
 </div>
 
 <script>
   const container = document.querySelector('.alert-toast');
 
   ['primary', 'success', 'neutral', 'warning', 'danger'].map(variant => {
-    const button = container.querySelector(`sl-button[variant="${variant}"]`);
-    const alert = container.querySelector(`sl-alert[variant="${variant}"]`);
+    const button = container.querySelector(`p-button[variant="${variant}"]`);
+    const alert = container.querySelector(`p-alert[variant="${variant}"]`);
 
     button.addEventListener('click', () => alert.toast());
   });
@@ -306,9 +306,9 @@ You should always use the `closable` attribute so users can dismiss the notifica
 
 ```jsx:react
 import { useRef } from 'react';
-import SlAlert from '@shoelace-style/shoelace/dist/react/alert';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PAlert from '@shoelace-style/shoelace/dist/react/alert';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
 
 function showToast(alert) {
   alert.toast();
@@ -323,60 +323,60 @@ const App = () => {
 
   return (
     <>
-      <SlButton variant="primary" onClick={() => primary.current.toast()}>
+      <PButton variant="primary" onClick={() => primary.current.toast()}>
         Primary
-      </SlButton>
+      </PButton>
 
-      <SlButton variant="success" onClick={() => success.current.toast()}>
+      <PButton variant="success" onClick={() => success.current.toast()}>
         Success
-      </SlButton>
+      </PButton>
 
-      <SlButton variant="neutral" onClick={() => neutral.current.toast()}>
+      <PButton variant="neutral" onClick={() => neutral.current.toast()}>
         Neutral
-      </SlButton>
+      </PButton>
 
-      <SlButton variant="warning" onClick={() => warning.current.toast()}>
+      <PButton variant="warning" onClick={() => warning.current.toast()}>
         Warning
-      </SlButton>
+      </PButton>
 
-      <SlButton variant="danger" onClick={() => danger.current.toast()}>
+      <PButton variant="danger" onClick={() => danger.current.toast()}>
         Danger
-      </SlButton>
+      </PButton>
 
-      <SlAlert ref={primary} variant="primary" duration="3000" closable>
-        <SlIcon slot="icon" name="info-circle" />
+      <PAlert ref={primary} variant="primary" duration="3000" closable>
+        <PIcon slot="icon" name="info-circle" />
         <strong>This is super informative</strong>
         <br />
         You can tell by how pretty the alert is.
-      </SlAlert>
+      </PAlert>
 
-      <SlAlert ref={success} variant="success" duration="3000" closable>
-        <SlIcon slot="icon" name="check2-circle" />
+      <PAlert ref={success} variant="success" duration="3000" closable>
+        <PIcon slot="icon" name="check2-circle" />
         <strong>Your changes have been saved</strong>
         <br />
         You can safely exit the app now.
-      </SlAlert>
+      </PAlert>
 
-      <SlAlert ref={neutral} variant="neutral" duration="3000" closable>
-        <SlIcon slot="icon" name="gear" />
+      <PAlert ref={neutral} variant="neutral" duration="3000" closable>
+        <PIcon slot="icon" name="gear" />
         <strong>Your settings have been updated</strong>
         <br />
         Settings will take effect on next login.
-      </SlAlert>
+      </PAlert>
 
-      <SlAlert ref={warning} variant="warning" duration="3000" closable>
-        <SlIcon slot="icon" name="exclamation-triangle" />
+      <PAlert ref={warning} variant="warning" duration="3000" closable>
+        <PIcon slot="icon" name="exclamation-triangle" />
         <strong>Your session has ended</strong>
         <br />
         Please login again to continue.
-      </SlAlert>
+      </PAlert>
 
-      <SlAlert ref={danger} variant="danger" duration="3000" closable>
-        <SlIcon slot="icon" name="exclamation-octagon" />
+      <PAlert ref={danger} variant="danger" duration="3000" closable>
+        <PIcon slot="icon" name="exclamation-octagon" />
         <strong>Your account has been deleted</strong>
         <br />
         We're very sorry to see you go!
-      </SlAlert>
+      </PAlert>
     </>
   );
 };
@@ -388,12 +388,12 @@ For convenience, you can create a utility that emits toast notifications with a 
 
 ```html:preview
 <div class="alert-toast-wrapper">
-  <sl-button variant="primary">Create Toast</sl-button>
+  <p-button variant="primary">Create Toast</p-button>
 </div>
 
 <script>
   const container = document.querySelector('.alert-toast-wrapper');
-  const button = container.querySelector('sl-button');
+  const button = container.querySelector('p-button');
   let count = 0;
 
   // Always escape HTML for text arguments!
@@ -405,12 +405,12 @@ For convenience, you can create a utility that emits toast notifications with a 
 
   // Custom function to emit toast notifications
   function notify(message, variant = 'primary', icon = 'info-circle', duration = 3000) {
-    const alert = Object.assign(document.createElement('sl-alert'), {
+    const alert = Object.assign(document.createElement('p-alert'), {
       variant,
       closable: true,
       duration: duration,
       innerHTML: `
-        <sl-icon name="${icon}" slot="icon"></sl-icon>
+        <p-icon name="${icon}" slot="icon"></p-icon>
         ${escapeHtml(message)}
       `
     });
@@ -429,10 +429,10 @@ For convenience, you can create a utility that emits toast notifications with a 
 
 The toast stack is a fixed position singleton element created and managed internally by the alert component. It will be added and removed from the DOM as needed when toasts are shown. When more than one toast is visible, they will stack vertically in the toast stack.
 
-By default, the toast stack is positioned at the top-right of the viewport. You can change its position by targeting `.sl-toast-stack` in your stylesheet. To make toasts appear at the top-left of the viewport, for example, use the following styles.
+By default, the toast stack is positioned at the top-right of the viewport. You can change its position by targeting `.p-toast-stack` in your stylesheet. To make toasts appear at the top-left of the viewport, for example, use the following styles.
 
 ```css
-.sl-toast-stack {
+.p-toast-stack {
   left: 0;
   right: auto;
 }

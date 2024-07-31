@@ -6,31 +6,31 @@ meta:
 
 # Installation
 
-You can load Shoelace via CDN or by installing it locally. If you're using a framework, make sure to check out the pages for [React](/frameworks/react), [Vue](/frameworks/vue), and [Angular](/frameworks/angular) for additional information.
+You can load Pure UI via CDN or by installing it locally. If you're using a framework, make sure to check out the pages for [React](/frameworks/react), [Vue](/frameworks/vue), and [Angular](/frameworks/angular) for additional information.
 
 ## CDN Installation (Easiest)
 
-<sl-tab-group>
-<sl-tab slot="nav" panel="autoloader" active>Autoloader</sl-tab>
-<sl-tab slot="nav" panel="traditional">Traditional Loader</sl-tab>
+<p-tab-group>
+<p-tab slot="nav" panel="autoloader" active>Autoloader</p-tab>
+<p-tab slot="nav" panel="traditional">Traditional Loader</p-tab>
 
-<sl-tab-panel name="autoloader">
+<p-tab-panel name="autoloader">
 
-The experimental autoloader is the easiest and most efficient way to use Shoelace. A lightweight script watches the DOM for unregistered Shoelace elements and lazy loads them for you — even if they're added dynamically.
+The experimental autoloader is the easiest and most efficient way to use Pure UI. A lightweight script watches the DOM for unregistered Pure UI elements and lazy loads them for you — even if they're added dynamically.
 
 While convenient, autoloading may lead to a [Flash of Undefined Custom Elements](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/). The linked article describes some ways to alleviate it.
 
 <!-- prettier-ignore -->
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/shoelace-autoloader.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/pure-ui-autoloader.js"></script>
 ```
 
-</sl-tab-panel>
+</p-tab-panel>
 
-<sl-tab-panel name="traditional">
+<p-tab-panel name="traditional">
 
-The traditional CDN loader registers all Shoelace elements up front. Note that, if you're only using a handful of components, it will be much more efficient to stick with the autoloader. However, you can also [cherry pick](#cherry-picking) components if you want to load specific ones up front.
+The traditional CDN loader registers all Pure UI elements up front. Note that, if you're only using a handful of components, it will be much more efficient to stick with the autoloader. However, you can also [cherry pick](#cherry-picking) components if you want to load specific ones up front.
 
 <!-- prettier-ignore -->
 ```html
@@ -38,12 +38,12 @@ The traditional CDN loader registers all Shoelace elements up front. Note that, 
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/shoelace.js" ></script>
 ```
 
-</sl-tab-panel>
-</sl-tab-group>
+</p-tab-panel>
+</p-tab-group>
 
 ### Dark Theme
 
-The code above will load the light theme. If you want to use the [dark theme](/getting-started/themes#dark-theme) instead, update the stylesheet as shown below and add `<html class="sl-theme-dark">` to your page.
+The code above will load the light theme. If you want to use the [dark theme](/getting-started/themes#dark-theme) instead, update the stylesheet as shown below and add `<html class="p-theme-dark">` to your page.
 
 <!-- prettier-ignore -->
 ```html
@@ -64,15 +64,15 @@ If you want to load the light or dark theme based on the user's `prefers-color-s
   rel="stylesheet"
   media="(prefers-color-scheme:dark)"
   href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css"
-  onload="document.documentElement.classList.add('sl-theme-dark');"
+  onload="document.documentElement.classList.add('p-theme-dark');"
 />
 ```
 
-Now you can [start using Shoelace!](/getting-started/usage)
+Now you can [start using Pure UI!](/getting-started/usage)
 
 ## npm installation
 
-If you don't want to use the CDN, you can install Shoelace from npm with the following command.
+If you don't want to use the CDN, you can install Pure UI from npm with the following command.
 
 ```bash
 npm install @shoelace-style/shoelace
@@ -90,14 +90,14 @@ Once you've done that, add the following tags to your page. Make sure to update 
 Alternatively, [you can use a bundler](#bundling).
 
 :::tip
-For clarity, the docs will usually show imports from `@shoelace-style/shoelace`. If you're not using a module resolver or bundler, you'll need to adjust these paths to point to the folder Shoelace is in.
+For clarity, the docs will usually show imports from `@shoelace-style/shoelace`. If you're not using a module resolver or bundler, you'll need to adjust these paths to point to the folder Pure UI is in.
 :::
 
 ## Setting the Base Path
 
-Some components rely on assets (icons, images, etc.) and Shoelace needs to know where they're located. For convenience, Shoelace will try to auto-detect the correct location based on the script you've loaded it from. This assumes assets are colocated with `shoelace.js` or `shoelace-autoloader.js` and will "just work" for most users.
+Some components rely on assets (icons, images, etc.) and Pure UI needs to know where they're located. For convenience, Pure UI will try to auto-detect the correct location based on the script you've loaded it from. This assumes assets are colocated with `shoelace.js` or `pure-ui-autoloader.js` and will "just work" for most users.
 
-However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Shoelace, you'll need to set the base path. You can do this one of two ways.
+However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Pure UI, you'll need to set the base path. You can do this one of two ways.
 
 ```html
 <!-- Option 1: the data-shoelace attribute -->
@@ -117,7 +117,7 @@ An easy way to make sure the base path is configured properly is to check if [ic
 
 ### Referencing Assets
 
-Most of the magic behind assets is handled internally by Shoelace, but if you need to reference the base path for any reason, the same module exports a function called `getBasePath()`. An optional string argument can be passed, allowing you to get the full path to any asset.
+Most of the magic behind assets is handled internally by Pure UI, but if you need to reference the base path for any reason, the same module exports a function called `getBasePath()`. An optional string argument can be passed, allowing you to get the full path to any asset.
 
 ```html
 <script type="module">
@@ -139,7 +139,7 @@ Most of the magic behind assets is handled internally by Shoelace, but if you ne
 
 Cherry picking can be done from [the CDN](#cdn-installation-easiest) or from [npm](#npm-installation). This approach will load only the components you need up front, while limiting the number of files the browser has to download. The disadvantage is that you need to import each individual component.
 
-Here's an example that loads only the button component. Again, if you're not using a module resolver, you'll need to adjust the path to point to the folder Shoelace is in.
+Here's an example that loads only the button component. Again, if you're not using a module resolver, you'll need to adjust the path to point to the folder Pure UI is in.
 
 ```html
 <link rel="stylesheet" href="/path/to/shoelace/%NPMDIR%/themes/light.css" />
@@ -147,7 +147,7 @@ Here's an example that loads only the button component. Again, if you're not usi
 <script type="module" data-shoelace="/path/to/shoelace/%NPMDIR%">
   import '@shoelace-style/shoelace/%NPMDIR%/components/button/button.js';
 
-  // <sl-button> is ready to use!
+  // <p-button> is ready to use!
 </script>
 ```
 
@@ -163,9 +163,9 @@ You will see files named `chunk.[hash].js` in the `chunks` directory. Never impo
 
 ## Bundling
 
-Shoelace is distributed as a collection of standard ES modules that [all modern browsers can understand](https://caniuse.com/es6-module). However, importing a lot of modules can result in a lot of HTTP requests and potentially longer load times. Using a CDN can alleviate this, but some users may wish to further optimize their imports with a bundler.
+Pure UI is distributed as a collection of standard ES modules that [all modern browsers can understand](https://caniuse.com/es6-module). However, importing a lot of modules can result in a lot of HTTP requests and potentially longer load times. Using a CDN can alleviate this, but some users may wish to further optimize their imports with a bundler.
 
-To use Shoelace with a bundler, first install Shoelace along with your bundler of choice.
+To use Pure UI with a bundler, first install Pure UI along with your bundler of choice.
 
 ```bash
 npm install @shoelace-style/shoelace
@@ -176,7 +176,7 @@ Now it's time to configure your bundler. Configurations vary for each tool, but 
 - [Example webpack config](https://github.com/shoelace-style/webpack-example/blob/master/webpack.config.js)
 - [Example Rollup config](https://github.com/shoelace-style/rollup-example/blob/master/rollup.config.js)
 
-Once your bundler is configured, you'll be able to import Shoelace components and utilities.
+Once your bundler is configured, you'll be able to import Pure UI components and utilities.
 
 ```js
 import '@shoelace-style/shoelace/%NPMDIR%/themes/light.css';
@@ -186,10 +186,10 @@ import '@shoelace-style/shoelace/%NPMDIR%/components/input/input.js';
 import '@shoelace-style/shoelace/%NPMDIR%/components/rating/rating.js';
 import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path.js';
 
-// Set the base path to the folder you copied Shoelace's assets to
+// Set the base path to the folder you copied Pure UI's assets to
 setBasePath('/path/to/shoelace/%NPMDIR%');
 
-// <sl-button>, <sl-icon>, <sl-input>, and <sl-rating> are ready to use!
+// <p-button>, <p-icon>, <p-input>, and <p-rating> are ready to use!
 ```
 
 :::warning
@@ -220,4 +220,4 @@ TL;DR:
 - `@shoelace-style/shoelace/%CDNDIR%` is for CDN users
 - `@shoelace-style/shoelace/%NPMDIR%` is for npm users
 
-This change was introduced in `v2.5.0` to address issues around installations from npm loading multiple versions of libraries (such as the Lit) that Shoelace uses internally.
+This change was introduced in `v2.5.0` to address issues around installations from npm loading multiple versions of libraries (such as the Lit) that Pure UI uses internally.

@@ -1,12 +1,12 @@
-import SlCheckbox from './checkbox.component.js';
+import PCheckbox from './checkbox.component.js';
 
 export * from './checkbox.component.js';
-export default SlCheckbox;
+export default PCheckbox;
 
-SlCheckbox.define('sl-checkbox');
+PCheckbox.define('p-checkbox');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-checkbox': SlCheckbox;
+    'p-checkbox': PCheckbox;
   }
 }

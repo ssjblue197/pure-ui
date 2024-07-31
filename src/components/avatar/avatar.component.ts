@@ -3,8 +3,8 @@ import { html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlIcon from '../icon/icon.component.js';
+import PureElement from '../../internal/shoelace-element.js';
+import PIcon from '../icon/icon.component.js';
 import styles from './avatar.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -14,12 +14,12 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 2.0
  *
- * @dependency sl-icon
+ * @dependency p-icon
  *
- * @event sl-error - The image could not be loaded. This may because of an invalid URL, a temporary network condition, or some
+ * @event p-error - The image could not be loaded. This may because of an invalid URL, a temporary network condition, or some
  * unknown cause.
  *
- * @slot icon - The default icon to use when no image or initials are present. Works best with `<sl-icon>`.
+ * @slot icon - The default icon to use when no image or initials are present. Works best with `<p-icon>`.
  *
  * @csspart base - The component's base wrapper.
  * @csspart icon - The container that wraps the avatar's icon.
@@ -28,10 +28,10 @@ import type { CSSResultGroup } from 'lit';
  *
  * @cssproperty --size - The size of the avatar.
  */
-export default class SlAvatar extends ShoelaceElement {
+export default class PAvatar extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
-    'sl-icon': SlIcon
+    'p-icon': PIcon
   };
 
   @state() private hasError = false;
@@ -59,7 +59,7 @@ export default class SlAvatar extends ShoelaceElement {
 
   private handleImageLoadError() {
     this.hasError = true;
-    this.emit('sl-error');
+    this.emit('p-error');
   }
 
   render() {
@@ -82,7 +82,7 @@ export default class SlAvatar extends ShoelaceElement {
       avatarWithoutImage = html`
         <div part="icon" class="avatar__icon" aria-hidden="true">
           <slot name="icon">
-            <sl-icon name="person-fill" library="system"></sl-icon>
+            <p-icon name="person-fill" library="system"></p-icon>
           </slot>
         </div>
       `;

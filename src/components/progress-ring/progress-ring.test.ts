@@ -1,13 +1,13 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlProgressRing from './progress-ring.js';
+import type PProgressRing from './progress-ring.js';
 
-describe('<sl-progress-ring>', () => {
-  let el: SlProgressRing;
+describe('<p-progress-ring>', () => {
+  let el: PProgressRing;
 
   describe('when provided just a value parameter', () => {
     before(async () => {
-      el = await fixture<SlProgressRing>(html`<sl-progress-ring value="25"></sl-progress-ring>`);
+      el = await fixture<PProgressRing>(html`<p-progress-ring value="25"></p-progress-ring>`);
     });
 
     it('should pass accessibility tests', async () => {
@@ -19,8 +19,8 @@ describe('<sl-progress-ring>', () => {
     let base: HTMLDivElement;
 
     before(async () => {
-      el = await fixture<SlProgressRing>(
-        html`<sl-progress-ring title="Titled Progress Ring" value="25"></sl-progress-ring>`
+      el = await fixture<PProgressRing>(
+        html`<p-progress-ring title="Titled Progress Ring" value="25"></p-progress-ring>`
       );
       base = el.shadowRoot!.querySelector('[part~="base"]')!;
     });
@@ -40,8 +40,8 @@ describe('<sl-progress-ring>', () => {
 
   describe('when provided a ariaLabel, and value parameter', () => {
     before(async () => {
-      el = await fixture<SlProgressRing>(
-        html`<sl-progress-ring ariaLabel="Labelled Progress Ring" value="25"></sl-progress-ring>`
+      el = await fixture<PProgressRing>(
+        html`<p-progress-ring ariaLabel="Labelled Progress Ring" value="25"></p-progress-ring>`
       );
     });
 
@@ -52,9 +52,9 @@ describe('<sl-progress-ring>', () => {
 
   describe('when provided a ariaLabelledBy, and value parameter', () => {
     before(async () => {
-      el = await fixture<SlProgressRing>(html`
+      el = await fixture<PProgressRing>(html`
         <label id="labelledby">Progress Ring Label</label>
-        <sl-progress-ring ariaLabelledBy="labelledby" value="25"></sl-progress-ring>
+        <p-progress-ring ariaLabelledBy="labelledby" value="25"></p-progress-ring>
       `);
     });
 

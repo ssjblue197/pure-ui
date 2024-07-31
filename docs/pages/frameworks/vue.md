@@ -1,12 +1,12 @@
 ---
 meta:
   title: Vue
-  description: Tips for using Shoelace in your Vue 3 app.
+  description: Tips for using Pure UI in your Vue 3 app.
 ---
 
 # Vue
 
-Vue [plays nice](https://custom-elements-everywhere.com/#vue) with custom elements, so you can use Shoelace in your Vue apps with ease.
+Vue [plays nice](https://custom-elements-everywhere.com/#vue) with custom elements, so you can use Pure UI in your Vue apps with ease.
 
 :::tip
 These instructions are for Vue 3 and above. If you're using Vue 2, please see the [Vue 2 instructions](/frameworks/vue-2).
@@ -14,7 +14,7 @@ These instructions are for Vue 3 and above. If you're using Vue 2, please see th
 
 ## Installation
 
-To add Shoelace to your Vue app, install the package from npm.
+To add Pure UI to your Vue app, install the package from npm.
 
 ```bash
 npm install @shoelace-style/shoelace
@@ -38,11 +38,11 @@ If you'd rather not use the CDN for assets, you can create a build task that cop
 
 If you haven't configured your Vue.js project to work with custom elements/web components, follow [the instructions here](https://vuejs.org/guide/extras/web-components.html#using-custom-elements-in-vue) based on your project type to ensure your project will not throw an error when it encounters a custom element.
 
-Now you can start using Shoelace components in your app!
+Now you can start using Pure UI components in your app!
 
 ## Types
 
-Once you have configured your application for custom elements, you should be able to use Shoelace in your application without it causing any errors. Unfortunately, this doesn't register the custom elements to behave like components built using Vue. To provide autocomplete information and type safety for your components, you can import the Shoelace Vue types into your `tsconfig.json` to get better integration in your standard Vue and JSX templates.
+Once you have configured your application for custom elements, you should be able to use Pure UI in your application without it causing any errors. Unfortunately, this doesn't register the custom elements to behave like components built using Vue. To provide autocomplete information and type safety for your components, you can import the Pure UI Vue types into your `tsconfig.json` to get better integration in your standard Vue and JSX templates.
 
 ```json
 {
@@ -61,9 +61,9 @@ Once you have configured your application for custom elements, you should be abl
   <div class="container">
     <h1>QR code generator</h1>
 
-    <sl-input maxlength="255" clearable label="Value" v-model="qrCode"></sl-input>
+    <p-input maxlength="255" clearable label="Value" v-model="qrCode"></p-input>
 
-    <sl-qr-code :value="qrCode"></sl-qr-code>
+    <p-qr-code :value="qrCode"></p-qr-code>
   </div>
 </template>
 
@@ -81,8 +81,8 @@ Once you have configured your application for custom elements, you should be abl
     margin: 0 auto;
   }
 
-  sl-input {
-    margin: var(--sl-spacing-large) 0;
+  p-input {
+    margin: var(--p-spacing-large) 0;
   }
 </style>
 ```
@@ -92,7 +92,7 @@ Once you have configured your application for custom elements, you should be abl
 When binding complex data such as objects and arrays, use the `.prop` modifier to make Vue bind them as a property instead of an attribute.
 
 ```html
-<sl-color-picker :swatches.prop="mySwatches" />
+<p-color-picker :swatches.prop="mySwatches" />
 ```
 
 ### Two-way Binding
@@ -101,28 +101,28 @@ One caveat is there's currently [no support for v-model on custom elements](http
 
 ```html
 <!-- This doesn't work -->
-<sl-input v-model="name"></sl-input>
+<p-input v-model="name"></p-input>
 <!-- This works, but it's a bit longer -->
-<sl-input :value="name" @input="name = $event.target.value"></sl-input>
+<p-input :value="name" @input="name = $event.target.value"></p-input>
 ```
 
-If that's too verbose for your liking, you can use a custom directive instead. [This utility](https://www.npmjs.com/package/@shoelace-style/vue-sl-model) adds a custom directive that will work just like `v-model` but for Shoelace components.
+If that's too verbose for your liking, you can use a custom directive instead. [This utility](https://www.npmjs.com/package/@shoelace-style/vue-p-model) adds a custom directive that will work just like `v-model` but for Pure UI components.
 
 :::tip
-Are you using Shoelace with Vue? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/vue.md)
+Are you using Pure UI with Vue? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/vue.md)
 :::
 
 ### Slots
 
-Slots in Shoelace/web components are functionally the same as basic slots in Vue. Slots can be assigned to elements using the `slot` attribute followed by the name of the slot it is being assigned to.
+Slots in Pure UI/web components are functionally the same as basic slots in Vue. Slots can be assigned to elements using the `slot` attribute followed by the name of the slot it is being assigned to.
 
 Here is an example:
 
 ```html
-<sl-drawer label="Drawer" placement="start" class="drawer-placement-start" :open="drawerIsOpen">
+<p-drawer label="Drawer" placement="start" class="drawer-placement-start" :open="drawerIsOpen">
   This drawer slides in from the start.
   <div slot="footer">
-    <sl-button variant="primary" @click=" drawerIsOpen = false">Close</sl-button>
+    <p-button variant="primary" @click=" drawerIsOpen = false">Close</p-button>
   </div>
-</sl-drawer>
+</p-drawer>
 ```

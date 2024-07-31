@@ -4,8 +4,8 @@ import { LocalizeController } from '../../utilities/localize.js';
 import { property, query } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlIconButton from '../icon-button/icon-button.component.js';
+import PIconButton from '../icon-button/icon-button.component.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './tab.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -17,24 +17,24 @@ let id = 0;
  * @status stable
  * @since 2.0
  *
- * @dependency sl-icon-button
+ * @dependency p-icon-button
  *
  * @slot - The tab's label.
  *
- * @event sl-close - Emitted when the tab is closable and the close button is activated.
+ * @event p-close - Emitted when the tab is closable and the close button is activated.
  *
  * @csspart base - The component's base wrapper.
- * @csspart close-button - The close button, an `<sl-icon-button>`.
+ * @csspart close-button - The close button, an `<p-icon-button>`.
  * @csspart close-button__base - The close button's exported `base` part.
  */
-export default class SlTab extends ShoelaceElement {
+export default class PTab extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'sl-icon-button': SlIconButton };
+  static dependencies = { 'p-icon-button': PIconButton };
 
   private readonly localize = new LocalizeController(this);
 
   private readonly attrId = ++id;
-  private readonly componentId = `sl-tab-${this.attrId}`;
+  private readonly componentId = `p-tab-${this.attrId}`;
 
   @query('.tab') tab: HTMLElement;
 
@@ -63,7 +63,7 @@ export default class SlTab extends ShoelaceElement {
 
   private handleCloseClick(event: Event) {
     event.stopPropagation();
-    this.emit('sl-close');
+    this.emit('p-close');
   }
 
   @watch('active')
@@ -99,7 +99,7 @@ export default class SlTab extends ShoelaceElement {
         <slot></slot>
         ${this.closable
           ? html`
-              <sl-icon-button
+              <p-icon-button
                 part="close-button"
                 exportparts="base:close-button__base"
                 name="x-lg"
@@ -108,7 +108,7 @@ export default class SlTab extends ShoelaceElement {
                 class="tab__close-button"
                 @click=${this.handleCloseClick}
                 tabindex="-1"
-              ></sl-icon-button>
+              ></p-icon-button>
             `
           : ''}
       </div>
@@ -118,6 +118,6 @@ export default class SlTab extends ShoelaceElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-tab': SlTab;
+    'p-tab': PTab;
   }
 }

@@ -1,12 +1,12 @@
-import SlRadioButton from './radio-button.component.js';
+import PRadioButton from './radio-button.component.js';
 
 export * from './radio-button.component.js';
-export default SlRadioButton;
+export default PRadioButton;
 
-SlRadioButton.define('sl-radio-button');
+PRadioButton.define('p-radio-button');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-radio-button': SlRadioButton;
+    'p-radio-button': PRadioButton;
   }
 }

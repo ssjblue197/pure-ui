@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './tab-panel.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -21,11 +21,11 @@ let id = 0;
  *
  * @cssproperty --padding - The tab panel's padding.
  */
-export default class SlTabPanel extends ShoelaceElement {
+export default class PTabPanel extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   private readonly attrId = ++id;
-  private readonly componentId = `sl-tab-panel-${this.attrId}`;
+  private readonly componentId = `p-tab-panel-${this.attrId}`;
 
   /** The tab panel's name. */
   @property({ reflect: true }) name = '';

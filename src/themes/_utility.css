@@ -1,42 +1,42 @@
 /*
  * This file contains utility classes that can't be contained in a component and must be applied to the light DOM. None
- * of the rules in this stylesheet should target component tags or HTML tags, and all classes *must* start with ".sl-"
+ * of the rules in this stylesheet should target component tags or HTML tags, and all classes *must* start with ".p-"
  * to reduce the possibility of collisions.
  */
 
 @supports (scrollbar-gutter: stable) {
-  .sl-scroll-lock {
-    scrollbar-gutter: var(--sl-scroll-lock-gutter) !important;
+  .p-scroll-lock {
+    scrollbar-gutter: var(--p-scroll-lock-gutter) !important;
   }
 
-  .sl-scroll-lock body {
+  .p-scroll-lock body {
     overflow: hidden !important;
   }
 }
 
 /** This can go away once Safari has scrollbar-gutter support. */
 @supports not (scrollbar-gutter: stable) {
-  .sl-scroll-lock body {
-    padding-right: var(--sl-scroll-lock-size) !important;
+  .p-scroll-lock body {
+    padding-right: var(--p-scroll-lock-size) !important;
     overflow: hidden !important;
   }
 }
 
-.sl-toast-stack {
+.p-toast-stack {
   position: fixed;
   top: 0;
   inset-inline-end: 0;
-  z-index: var(--sl-z-index-toast);
+  z-index: var(--p-z-index-toast);
   width: 28rem;
   max-width: 100%;
   max-height: 100%;
   overflow: auto;
 }
 
-.sl-toast-stack sl-alert {
-  margin: var(--sl-spacing-medium);
+.p-toast-stack p-alert {
+  margin: var(--p-spacing-medium);
 }
 
-.sl-toast-stack sl-alert::part(base) {
-  box-shadow: var(--sl-shadow-large);
+.p-toast-stack p-alert::part(base) {
+  box-shadow: var(--p-shadow-large);
 }

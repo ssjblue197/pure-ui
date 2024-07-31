@@ -8,23 +8,23 @@ layout: component
 Radio buttons are designed to be used with [radio groups](/components/radio-group). When a radio button has focus, the arrow keys can be used to change the selected option just like standard radio controls.
 
 ```html:preview
-<sl-radio-group label="Select an option" name="a" value="1">
-  <sl-radio-button value="1">Option 1</sl-radio-button>
-  <sl-radio-button value="2">Option 2</sl-radio-button>
-  <sl-radio-button value="3">Option 3</sl-radio-button>
-</sl-radio-group>
+<p-radio-group label="Select an option" name="a" value="1">
+  <p-radio-button value="1">Option 1</p-radio-button>
+  <p-radio-button value="2">Option 2</p-radio-button>
+  <p-radio-button value="3">Option 3</p-radio-button>
+</p-radio-group>
 ```
 
 ```jsx:react
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" name="a" value="1">
-    <SlRadioButton value="1">Option 1</SlRadioButton>
-    <SlRadioButton value="2">Option 2</SlRadioButton>
-    <SlRadioButton value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+  <PRadioGroup label="Select an option" name="a" value="1">
+    <PRadioButton value="1">Option 1</PRadioButton>
+    <PRadioButton value="2">Option 2</PRadioButton>
+    <PRadioButton value="3">Option 3</PRadioButton>
+  </PRadioGroup>
 );
 ```
 
@@ -35,23 +35,23 @@ const App = () => (
 To set the initial value and checked state, use the `value` attribute on the containing radio group.
 
 ```html:preview
-<sl-radio-group label="Select an option" name="a" value="1">
-  <sl-radio-button value="1">Option 1</sl-radio-button>
-  <sl-radio-button value="2">Option 2</sl-radio-button>
-  <sl-radio-button value="3">Option 3</sl-radio-button>
-</sl-radio-group>
+<p-radio-group label="Select an option" name="a" value="1">
+  <p-radio-button value="1">Option 1</p-radio-button>
+  <p-radio-button value="2">Option 2</p-radio-button>
+  <p-radio-button value="3">Option 3</p-radio-button>
+</p-radio-group>
 ```
 
 ```jsx:react
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" name="a" value="1">
-    <SlRadioButton value="1">Option 1</SlRadioButton>
-    <SlRadioButton value="2">Option 2</SlRadioButton>
-    <SlRadioButton value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+  <PRadioGroup label="Select an option" name="a" value="1">
+    <PRadioButton value="1">Option 1</PRadioButton>
+    <PRadioButton value="2">Option 2</PRadioButton>
+    <PRadioButton value="3">Option 3</PRadioButton>
+  </PRadioGroup>
 );
 ```
 
@@ -60,25 +60,25 @@ const App = () => (
 Use the `disabled` attribute to disable a radio button.
 
 ```html:preview
-<sl-radio-group label="Select an option" name="a" value="1">
-  <sl-radio-button value="1">Option 1</sl-radio-button>
-  <sl-radio-button value="2" disabled>Option 2</sl-radio-button>
-  <sl-radio-button value="3">Option 3</sl-radio-button>
-</sl-radio-group>
+<p-radio-group label="Select an option" name="a" value="1">
+  <p-radio-button value="1">Option 1</p-radio-button>
+  <p-radio-button value="2" disabled>Option 2</p-radio-button>
+  <p-radio-button value="3">Option 3</p-radio-button>
+</p-radio-group>
 ```
 
 ```jsx:react
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" name="a" value="1">
-    <SlRadioButton value="1">Option 1</SlRadioButton>
-    <SlRadioButton value="2" disabled>
+  <PRadioGroup label="Select an option" name="a" value="1">
+    <PRadioButton value="1">Option 1</PRadioButton>
+    <PRadioButton value="2" disabled>
       Option 2
-    </SlRadioButton>
-    <SlRadioButton value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+    </PRadioButton>
+    <PRadioButton value="3">Option 3</PRadioButton>
+  </PRadioGroup>
 );
 ```
 
@@ -87,55 +87,55 @@ const App = () => (
 Use the `size` attribute to change a radio button's size.
 
 ```html:preview
-<sl-radio-group size="small" label="Select an option" name="a" value="1">
-  <sl-radio-button value="1">Option 1</sl-radio-button>
-  <sl-radio-button value="2">Option 2</sl-radio-button>
-  <sl-radio-button value="3">Option 3</sl-radio-button>
-</sl-radio-group>
+<p-radio-group size="small" label="Select an option" name="a" value="1">
+  <p-radio-button value="1">Option 1</p-radio-button>
+  <p-radio-button value="2">Option 2</p-radio-button>
+  <p-radio-button value="3">Option 3</p-radio-button>
+</p-radio-group>
 
 <br />
 
-<sl-radio-group size="medium" label="Select an option" name="a" value="1">
-  <sl-radio-button value="1">Option 1</sl-radio-button>
-  <sl-radio-button value="2">Option 2</sl-radio-button>
-  <sl-radio-button value="3">Option 3</sl-radio-button>
-</sl-radio-group>
+<p-radio-group size="medium" label="Select an option" name="a" value="1">
+  <p-radio-button value="1">Option 1</p-radio-button>
+  <p-radio-button value="2">Option 2</p-radio-button>
+  <p-radio-button value="3">Option 3</p-radio-button>
+</p-radio-group>
 
 <br />
 
-<sl-radio-group size="large" label="Select an option" name="a" value="1">
-  <sl-radio-button value="1">Option 1</sl-radio-button>
-  <sl-radio-button value="2">Option 2</sl-radio-button>
-  <sl-radio-button value="3">Option 3</sl-radio-button>
-</sl-radio-group>
+<p-radio-group size="large" label="Select an option" name="a" value="1">
+  <p-radio-button value="1">Option 1</p-radio-button>
+  <p-radio-button value="2">Option 2</p-radio-button>
+  <p-radio-button value="3">Option 3</p-radio-button>
+</p-radio-group>
 ```
 
 ```jsx:react
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 
 const App = () => (
-  <SlRadioGroup size="small" label="Select an option" name="a" value="1">
-    <SlRadioButton value="1">Option 1</SlRadioButton>
-    <SlRadioButton value="2">Option 2</SlRadioButton>
-    <SlRadioButton value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+  <PRadioGroup size="small" label="Select an option" name="a" value="1">
+    <PRadioButton value="1">Option 1</PRadioButton>
+    <PRadioButton value="2">Option 2</PRadioButton>
+    <PRadioButton value="3">Option 3</PRadioButton>
+  </PRadioGroup>
 
   <br />
 
-  <SlRadioGroup size="medium" label="Select an option" name="a" value="1">
-    <SlRadioButton value="1">Option 1</SlRadioButton>
-    <SlRadioButton value="2">Option 2</SlRadioButton>
-    <SlRadioButton value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+  <PRadioGroup size="medium" label="Select an option" name="a" value="1">
+    <PRadioButton value="1">Option 1</PRadioButton>
+    <PRadioButton value="2">Option 2</PRadioButton>
+    <PRadioButton value="3">Option 3</PRadioButton>
+  </PRadioGroup>
 
   <br />
 
-  <SlRadioGroup size="large" label="Select an option" name="a" value="1">
-    <SlRadioButton value="1">Option 1</SlRadioButton>
-    <SlRadioButton value="2">Option 2</SlRadioButton>
-    <SlRadioButton value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+  <PRadioGroup size="large" label="Select an option" name="a" value="1">
+    <PRadioButton value="1">Option 1</PRadioButton>
+    <PRadioButton value="2">Option 2</PRadioButton>
+    <PRadioButton value="3">Option 3</PRadioButton>
+  </PRadioGroup>
 );
 ```
 
@@ -144,55 +144,55 @@ const App = () => (
 Use the `pill` attribute to give radio buttons rounded edges.
 
 ```html:preview
-<sl-radio-group size="small" label="Select an option" name="a" value="1">
-  <sl-radio-button pill value="1">Option 1</sl-radio-button>
-  <sl-radio-button pill value="2">Option 2</sl-radio-button>
-  <sl-radio-button pill value="3">Option 3</sl-radio-button>
-</sl-radio-group>
+<p-radio-group size="small" label="Select an option" name="a" value="1">
+  <p-radio-button pill value="1">Option 1</p-radio-button>
+  <p-radio-button pill value="2">Option 2</p-radio-button>
+  <p-radio-button pill value="3">Option 3</p-radio-button>
+</p-radio-group>
 
 <br />
 
-<sl-radio-group size="medium" label="Select an option" name="a" value="1">
-  <sl-radio-button pill value="1">Option 1</sl-radio-button>
-  <sl-radio-button pill value="2">Option 2</sl-radio-button>
-  <sl-radio-button pill value="3">Option 3</sl-radio-button>
-</sl-radio-group>
+<p-radio-group size="medium" label="Select an option" name="a" value="1">
+  <p-radio-button pill value="1">Option 1</p-radio-button>
+  <p-radio-button pill value="2">Option 2</p-radio-button>
+  <p-radio-button pill value="3">Option 3</p-radio-button>
+</p-radio-group>
 
 <br />
 
-<sl-radio-group size="large" label="Select an option" name="a" value="1">
-  <sl-radio-button pill value="1">Option 1</sl-radio-button>
-  <sl-radio-button pill value="2">Option 2</sl-radio-button>
-  <sl-radio-button pill value="3">Option 3</sl-radio-button>
-</sl-radio-group>
+<p-radio-group size="large" label="Select an option" name="a" value="1">
+  <p-radio-button pill value="1">Option 1</p-radio-button>
+  <p-radio-button pill value="2">Option 2</p-radio-button>
+  <p-radio-button pill value="3">Option 3</p-radio-button>
+</p-radio-group>
 ```
 
 ```jsx:react
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 
 const App = () => (
-  <SlRadioGroup size="small" label="Select an option" name="a" value="1">
-    <SlRadioButton pill value="1">Option 1</SlRadioButton>
-    <SlRadioButton pill value="2">Option 2</SlRadioButton>
-    <SlRadioButton pill value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+  <PRadioGroup size="small" label="Select an option" name="a" value="1">
+    <PRadioButton pill value="1">Option 1</PRadioButton>
+    <PRadioButton pill value="2">Option 2</PRadioButton>
+    <PRadioButton pill value="3">Option 3</PRadioButton>
+  </PRadioGroup>
 
   <br />
 
-  <SlRadioGroup size="medium" label="Select an option" name="a" value="1">
-    <SlRadioButton pill value="1">Option 1</SlRadioButton>
-    <SlRadioButton pill value="2">Option 2</SlRadioButton>
-    <SlRadioButton pill value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+  <PRadioGroup size="medium" label="Select an option" name="a" value="1">
+    <PRadioButton pill value="1">Option 1</PRadioButton>
+    <PRadioButton pill value="2">Option 2</PRadioButton>
+    <PRadioButton pill value="3">Option 3</PRadioButton>
+  </PRadioGroup>
 
   <br />
 
-  <SlRadioGroup size="large" label="Select an option" name="a" value="1">
-    <SlRadioButton pill value="1">Option 1</SlRadioButton>
-    <SlRadioButton pill value="2">Option 2</SlRadioButton>
-    <SlRadioButton pill value="3">Option 3</SlRadioButton>
-  </SlRadioGroup>
+  <PRadioGroup size="large" label="Select an option" name="a" value="1">
+    <PRadioButton pill value="1">Option 1</PRadioButton>
+    <PRadioButton pill value="2">Option 2</PRadioButton>
+    <PRadioButton pill value="3">Option 3</PRadioButton>
+  </PRadioGroup>
 );
 ```
 
@@ -201,48 +201,48 @@ const App = () => (
 Use the `prefix` and `suffix` slots to add icons.
 
 ```html:preview
-<sl-radio-group label="Select an option" name="a" value="1">
-  <sl-radio-button value="1">
-    <sl-icon slot="prefix" name="archive"></sl-icon>
+<p-radio-group label="Select an option" name="a" value="1">
+  <p-radio-button value="1">
+    <p-icon slot="prefix" name="archive"></p-icon>
     Option 1
-  </sl-radio-button>
+  </p-radio-button>
 
-  <sl-radio-button value="2">
-    <sl-icon slot="suffix" name="bag"></sl-icon>
+  <p-radio-button value="2">
+    <p-icon slot="suffix" name="bag"></p-icon>
     Option 2
-  </sl-radio-button>
+  </p-radio-button>
 
-  <sl-radio-button value="3">
-    <sl-icon slot="prefix" name="gift"></sl-icon>
-    <sl-icon slot="suffix" name="cart"></sl-icon>
+  <p-radio-button value="3">
+    <p-icon slot="prefix" name="gift"></p-icon>
+    <p-icon slot="suffix" name="cart"></p-icon>
     Option 3
-  </sl-radio-button>
-</sl-radio-group>
+  </p-radio-button>
+</p-radio-group>
 ```
 
 ```jsx:react
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" name="a" value="1">
-    <SlRadioButton value="1">
-      <SlIcon slot="prefix" name="archive" />
+  <PRadioGroup label="Select an option" name="a" value="1">
+    <PRadioButton value="1">
+      <PIcon slot="prefix" name="archive" />
       Option 1
-    </SlRadioButton>
+    </PRadioButton>
 
-    <SlRadioButton value="2">
-      <SlIcon slot="suffix" name="bag" />
+    <PRadioButton value="2">
+      <PIcon slot="suffix" name="bag" />
       Option 2
-    </SlRadioButton>
+    </PRadioButton>
 
-    <SlRadioButton value="3">
-      <SlIcon slot="prefix" name="gift" />
-      <SlIcon slot="suffix" name="cart" />
+    <PRadioButton value="3">
+      <PIcon slot="prefix" name="gift" />
+      <PIcon slot="suffix" name="cart" />
       Option 3
-    </SlRadioButton>
-  </SlRadioGroup>
+    </PRadioButton>
+  </PRadioGroup>
 );
 ```
 
@@ -251,55 +251,55 @@ const App = () => (
 You can omit button labels and use icons instead. Make sure to set a `label` attribute on each icon so screen readers will announce each option correctly.
 
 ```html:preview
-<sl-radio-group label="Select an option" name="a" value="neutral">
-  <sl-radio-button value="angry">
-    <sl-icon name="emoji-angry" label="Angry"></sl-icon>
-  </sl-radio-button>
+<p-radio-group label="Select an option" name="a" value="neutral">
+  <p-radio-button value="angry">
+    <p-icon name="emoji-angry" label="Angry"></p-icon>
+  </p-radio-button>
 
-  <sl-radio-button value="sad">
-    <sl-icon name="emoji-frown" label="Sad"></sl-icon>
-  </sl-radio-button>
+  <p-radio-button value="sad">
+    <p-icon name="emoji-frown" label="Sad"></p-icon>
+  </p-radio-button>
 
-  <sl-radio-button value="neutral">
-    <sl-icon name="emoji-neutral" label="Neutral"></sl-icon>
-  </sl-radio-button>
+  <p-radio-button value="neutral">
+    <p-icon name="emoji-neutral" label="Neutral"></p-icon>
+  </p-radio-button>
 
-  <sl-radio-button value="happy">
-    <sl-icon name="emoji-smile" label="Happy"></sl-icon>
-  </sl-radio-button>
+  <p-radio-button value="happy">
+    <p-icon name="emoji-smile" label="Happy"></p-icon>
+  </p-radio-button>
 
-  <sl-radio-button value="laughing">
-    <sl-icon name="emoji-laughing" label="Laughing"></sl-icon>
-  </sl-radio-button>
-</sl-radio-group>
+  <p-radio-button value="laughing">
+    <p-icon name="emoji-laughing" label="Laughing"></p-icon>
+  </p-radio-button>
+</p-radio-group>
 ```
 
 ```jsx:react
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
-import SlRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
-import SlRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PRadioButton from '@shoelace-style/shoelace/dist/react/radio-button';
+import PRadioGroup from '@shoelace-style/shoelace/dist/react/radio-group';
 
 const App = () => (
-  <SlRadioGroup label="Select an option" name="a" value="neutral">
-    <SlRadioButton value="angry">
-      <SlIcon name="emoji-angry" label="Angry" />
-    </SlRadioButton>
+  <PRadioGroup label="Select an option" name="a" value="neutral">
+    <PRadioButton value="angry">
+      <PIcon name="emoji-angry" label="Angry" />
+    </PRadioButton>
 
-    <SlRadioButton value="sad">
-      <SlIcon name="emoji-frown" label="Sad" />
-    </SlRadioButton>
+    <PRadioButton value="sad">
+      <PIcon name="emoji-frown" label="Sad" />
+    </PRadioButton>
 
-    <SlRadioButton value="neutral">
-      <SlIcon name="emoji-neutral" label="Neutral" />
-    </SlRadioButton>
+    <PRadioButton value="neutral">
+      <PIcon name="emoji-neutral" label="Neutral" />
+    </PRadioButton>
 
-    <SlRadioButton value="happy">
-      <SlIcon name="emoji-smile" label="Happy" />
-    </SlRadioButton>
+    <PRadioButton value="happy">
+      <PIcon name="emoji-smile" label="Happy" />
+    </PRadioButton>
 
-    <SlRadioButton value="laughing">
-      <SlIcon name="emoji-laughing" label="Laughing" />
-    </SlRadioButton>
-  </SlRadioGroup>
+    <PRadioButton value="laughing">
+      <PIcon name="emoji-laughing" label="Laughing" />
+    </PRadioButton>
+  </PRadioGroup>
 );
 ```

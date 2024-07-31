@@ -11,8 +11,8 @@ import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import Modal from '../../internal/modal.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlIconButton from '../icon-button/icon-button.component.js';
+import PIconButton from '../icon-button/icon-button.component.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './dialog.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -22,20 +22,20 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 2.0
  *
- * @dependency sl-icon-button
+ * @dependency p-icon-button
  *
  * @slot - The dialog's main content.
  * @slot label - The dialog's label. Alternatively, you can use the `label` attribute.
- * @slot header-actions - Optional actions to add to the header. Works best with `<sl-icon-button>`.
+ * @slot header-actions - Optional actions to add to the header. Works best with `<p-icon-button>`.
  * @slot footer - The dialog's footer, usually one or more buttons representing various options.
  *
- * @event sl-show - Emitted when the dialog opens.
- * @event sl-after-show - Emitted after the dialog opens and all animations are complete.
- * @event sl-hide - Emitted when the dialog closes.
- * @event sl-after-hide - Emitted after the dialog closes and all animations are complete.
- * @event sl-initial-focus - Emitted when the dialog opens and is ready to receive focus. Calling
+ * @event p-show - Emitted when the dialog opens.
+ * @event p-after-show - Emitted after the dialog opens and all animations are complete.
+ * @event p-hide - Emitted when the dialog closes.
+ * @event p-after-hide - Emitted after the dialog closes and all animations are complete.
+ * @event p-initial-focus - Emitted when the dialog opens and is ready to receive focus. Calling
  *   `event.preventDefault()` will prevent focusing and allow you to set it on a different element, such as an input.
- * @event {{ source: 'close-button' | 'keyboard' | 'overlay' }} sl-request-close - Emitted when the user attempts to
+ * @event {{ source: 'close-button' | 'keyboard' | 'overlay' }} p-request-close - Emitted when the user attempts to
  *   close the dialog by clicking the close button, clicking the overlay, or pressing escape. Calling
  *   `event.preventDefault()` will keep the dialog open. Avoid using this unless closing the dialog will result in
  *   destructive behavior such as data loss.
@@ -44,9 +44,9 @@ import type { CSSResultGroup } from 'lit';
  * @csspart overlay - The overlay that covers the screen behind the dialog.
  * @csspart panel - The dialog's panel (where the dialog and its content are rendered).
  * @csspart header - The dialog's header. This element wraps the title and header actions.
- * @csspart header-actions - Optional actions to add to the header. Works best with `<sl-icon-button>`.
+ * @csspart header-actions - Optional actions to add to the header. Works best with `<p-icon-button>`.
  * @csspart title - The dialog's title.
- * @csspart close-button - The close button, an `<sl-icon-button>`.
+ * @csspart close-button - The close button, an `<p-icon-button>`.
  * @csspart close-button__base - The close button's exported `base` part.
  * @csspart body - The dialog's body.
  * @csspart footer - The dialog's footer.
@@ -66,10 +66,10 @@ import type { CSSResultGroup } from 'lit';
  *   trapping and allow third-party modals spawned from an active Shoelace modal, call `modal.activateExternal()` when
  *   the third-party modal opens. Upon closing, call `modal.deactivateExternal()` to restore Shoelace's focus trapping.
  */
-export default class SlDialog extends ShoelaceElement {
+export default class PDialog extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
-    'sl-icon-button': SlIconButton
+    'p-icon-button': PIconButton
   };
 
   private readonly hasSlotController = new HasSlotController(this, 'footer');
@@ -118,7 +118,7 @@ export default class SlDialog extends ShoelaceElement {
   }
 
   private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
-    const slRequestClose = this.emit('sl-request-close', {
+    const slRequestClose = this.emit('p-request-close', {
       cancelable: true,
       detail: { source }
     });
@@ -158,7 +158,7 @@ export default class SlDialog extends ShoelaceElement {
   async handleOpenChange() {
     if (this.open) {
       // Show
-      this.emit('sl-show');
+      this.emit('p-show');
       this.addOpenListeners();
       this.originalTrigger = document.activeElement as HTMLElement;
       this.modal.activate();
@@ -181,7 +181,7 @@ export default class SlDialog extends ShoelaceElement {
 
       // Set initial focus
       requestAnimationFrame(() => {
-        const slInitialFocus = this.emit('sl-initial-focus', { cancelable: true });
+        const slInitialFocus = this.emit('p-initial-focus', { cancelable: true });
 
         if (!slInitialFocus.defaultPrevented) {
           // Set focus to the autofocus target and restore the attribute
@@ -205,10 +205,10 @@ export default class SlDialog extends ShoelaceElement {
         animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
       ]);
 
-      this.emit('sl-after-show');
+      this.emit('p-after-show');
     } else {
       // Hide
-      this.emit('sl-hide');
+      this.emit('p-hide');
       this.removeOpenListeners();
       this.modal.deactivate();
 
@@ -242,7 +242,7 @@ export default class SlDialog extends ShoelaceElement {
         setTimeout(() => trigger.focus());
       }
 
-      this.emit('sl-after-hide');
+      this.emit('p-after-hide');
     }
   }
 
@@ -253,7 +253,7 @@ export default class SlDialog extends ShoelaceElement {
     }
 
     this.open = true;
-    return waitForEvent(this, 'sl-after-show');
+    return waitForEvent(this, 'p-after-show');
   }
 
   /** Hides the dialog */
@@ -263,7 +263,7 @@ export default class SlDialog extends ShoelaceElement {
     }
 
     this.open = false;
-    return waitForEvent(this, 'sl-after-hide');
+    return waitForEvent(this, 'p-after-hide');
   }
 
   render() {
@@ -296,7 +296,7 @@ export default class SlDialog extends ShoelaceElement {
                   </h2>
                   <div part="header-actions" class="dialog__header-actions">
                     <slot name="header-actions"></slot>
-                    <sl-icon-button
+                    <p-icon-button
                       part="close-button"
                       exportparts="base:close-button__base"
                       class="dialog__close"
@@ -304,7 +304,7 @@ export default class SlDialog extends ShoelaceElement {
                       label=${this.localize.term('close')}
                       library="system"
                       @click="${() => this.requestClose('close-button')}"
-                    ></sl-icon-button>
+                    ></p-icon-button>
                   </div>
                 </header>
               `

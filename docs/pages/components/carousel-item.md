@@ -6,77 +6,77 @@ layout: component
 ---
 
 ```html:preview
-<sl-carousel pagination>
-  <sl-carousel-item>
+<p-carousel pagination>
+  <p-carousel-item>
     <img
       alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
       src="/assets/examples/carousel/mountains.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
       src="/assets/examples/carousel/waterfall.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
       src="/assets/examples/carousel/sunset.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
       src="/assets/examples/carousel/field.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
       src="/assets/examples/carousel/valley.jpg"
     />
-  </sl-carousel-item>
-</sl-carousel>
+  </p-carousel-item>
+</p-carousel>
 ```
 
 ```jsx:react
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
 
 const App = () => (
-  <SlCarousel pagination>
-    <SlCarouselItem>
+  <PCarousel pagination>
+    <PCarouselItem>
       <img
         alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
         src="/assets/examples/carousel/mountains.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
         src="/assets/examples/carousel/waterfall.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
         src="/assets/examples/carousel/sunset.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
         src="/assets/examples/carousel/field.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
         src="/assets/examples/carousel/valley.jpg"
       />
-    </SlCarouselItem>
-  </SlCarousel>
+    </PCarouselItem>
+  </PCarousel>
 );
 ```
 

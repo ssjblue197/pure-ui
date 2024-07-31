@@ -1,12 +1,12 @@
-import SlRadioGroup from './radio-group.component.js';
+import PRadioGroup from './radio-group.component.js';
 
 export * from './radio-group.component.js';
-export default SlRadioGroup;
+export default PRadioGroup;
 
-SlRadioGroup.define('sl-radio-group');
+PRadioGroup.define('p-radio-group');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-radio-group': SlRadioGroup;
+    'p-radio-group': PRadioGroup;
   }
 }

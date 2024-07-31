@@ -1,12 +1,12 @@
-import SlSwitch from './switch.component.js';
+import PSwitch from './switch.component.js';
 
 export * from './switch.component.js';
-export default SlSwitch;
+export default PSwitch;
 
-SlSwitch.define('sl-switch');
+PSwitch.define('p-switch');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-switch': SlSwitch;
+    'p-switch': PSwitch;
   }
 }

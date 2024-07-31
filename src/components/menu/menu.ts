@@ -1,12 +1,12 @@
-import SlMenu from './menu.component.js';
+import PMenu from './menu.component.js';
 
 export * from './menu.component.js';
-export default SlMenu;
+export default PMenu;
 
-SlMenu.define('sl-menu');
+PMenu.define('p-menu');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-menu': SlMenu;
+    'p-menu': PMenu;
   }
 }

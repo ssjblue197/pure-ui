@@ -5,12 +5,12 @@ import { property, query, state } from 'lit/decorators.js';
 import { scrollIntoView } from '../../internal/scroll.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlIconButton from '../icon-button/icon-button.component.js';
+import PIconButton from '../icon-button/icon-button.component.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './tab-group.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type SlTab from '../tab/tab.js';
-import type SlTabPanel from '../tab-panel/tab-panel.js';
+import type PTab from '../tab/tab.js';
+import type PTabPanel from '../tab-panel/tab-panel.js';
 
 /**
  * @summary Tab groups organize content into a container that shows one section at a time.
@@ -18,20 +18,20 @@ import type SlTabPanel from '../tab-panel/tab-panel.js';
  * @status stable
  * @since 2.0
  *
- * @dependency sl-icon-button
+ * @dependency p-icon-button
  *
- * @slot - Used for grouping tab panels in the tab group. Must be `<sl-tab-panel>` elements.
- * @slot nav - Used for grouping tabs in the tab group. Must be `<sl-tab>` elements.
+ * @slot - Used for grouping tab panels in the tab group. Must be `<p-tab-panel>` elements.
+ * @slot nav - Used for grouping tabs in the tab group. Must be `<p-tab>` elements.
  *
- * @event {{ name: String }} sl-tab-show - Emitted when a tab is shown.
- * @event {{ name: String }} sl-tab-hide - Emitted when a tab is hidden.
+ * @event {{ name: String }} p-tab-show - Emitted when a tab is shown.
+ * @event {{ name: String }} p-tab-hide - Emitted when a tab is hidden.
  *
  * @csspart base - The component's base wrapper.
  * @csspart nav - The tab group's navigation container where tabs are slotted in.
  * @csspart tabs - The container that wraps the tabs.
  * @csspart active-tab-indicator - The line that highlights the currently selected tab.
  * @csspart body - The tab group's body where tab panels are slotted in.
- * @csspart scroll-button - The previous/next scroll buttons that show when tabs are scrollable, an `<sl-icon-button>`.
+ * @csspart scroll-button - The previous/next scroll buttons that show when tabs are scrollable, an `<p-icon-button>`.
  * @csspart scroll-button--start - The starting scroll button.
  * @csspart scroll-button--end - The ending scroll button.
  * @csspart scroll-button__base - The scroll button's exported `base` part.
@@ -40,18 +40,18 @@ import type SlTabPanel from '../tab-panel/tab-panel.js';
  * @cssproperty --track-color - The color of the indicator's track (the line that separates tabs from panels).
  * @cssproperty --track-width - The width of the indicator's track (the line that separates tabs from panels).
  */
-export default class SlTabGroup extends ShoelaceElement {
+export default class PTabGroup extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'sl-icon-button': SlIconButton };
+  static dependencies = { 'p-icon-button': PIconButton };
 
   private readonly localize = new LocalizeController(this);
 
-  private activeTab?: SlTab;
+  private activeTab?: PTab;
   private mutationObserver: MutationObserver;
   private resizeObserver: ResizeObserver;
-  private tabs: SlTab[] = [];
-  private focusableTabs: SlTab[] = [];
-  private panels: SlTabPanel[] = [];
+  private tabs: PTab[] = [];
+  private focusableTabs: PTab[] = [];
+  private panels: PTabPanel[] = [];
 
   @query('.tab-group') tabGroup: HTMLElement;
   @query('.tab-group__body') body: HTMLSlotElement;
@@ -74,8 +74,8 @@ export default class SlTabGroup extends ShoelaceElement {
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
-      customElements.whenDefined('sl-tab'),
-      customElements.whenDefined('sl-tab-panel')
+      customElements.whenDefined('p-tab'),
+      customElements.whenDefined('p-tab-panel')
     ]);
 
     super.connectedCallback();
@@ -127,11 +127,11 @@ export default class SlTabGroup extends ShoelaceElement {
   private getAllTabs() {
     const slot = this.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="nav"]')!;
 
-    return slot.assignedElements() as SlTab[];
+    return slot.assignedElements() as PTab[];
   }
 
   private getAllPanels() {
-    return [...this.body.assignedElements()].filter(el => el.tagName.toLowerCase() === 'sl-tab-panel') as [SlTabPanel];
+    return [...this.body.assignedElements()].filter(el => el.tagName.toLowerCase() === 'p-tab-panel') as [PTabPanel];
   }
 
   private getActiveTab() {
@@ -140,8 +140,8 @@ export default class SlTabGroup extends ShoelaceElement {
 
   private handleClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const tab = target.closest('sl-tab');
-    const tabGroup = tab?.closest('sl-tab-group');
+    const tab = target.closest('p-tab');
+    const tabGroup = tab?.closest('p-tab-group');
 
     // Ensure the target tab is in this tab group
     if (tabGroup !== this) {
@@ -155,8 +155,8 @@ export default class SlTabGroup extends ShoelaceElement {
 
   private handleKeyDown(event: KeyboardEvent) {
     const target = event.target as HTMLElement;
-    const tab = target.closest('sl-tab');
-    const tabGroup = tab?.closest('sl-tab-group');
+    const tab = target.closest('p-tab');
+    const tabGroup = tab?.closest('p-tab-group');
 
     // Ensure the target tab is in this tab group
     if (tabGroup !== this) {
@@ -175,9 +175,9 @@ export default class SlTabGroup extends ShoelaceElement {
     if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
       const activeEl = this.tabs.find(t => t.matches(':focus'));
       const isRtl = this.matches(':dir(rtl)');
-      let nextTab: null | SlTab = null;
+      let nextTab: null | PTab = null;
 
-      if (activeEl?.tagName.toLowerCase() === 'sl-tab') {
+      if (activeEl?.tagName.toLowerCase() === 'p-tab') {
         if (event.key === 'Home') {
           nextTab = this.focusableTabs[0];
         } else if (event.key === 'End') {
@@ -240,7 +240,7 @@ export default class SlTabGroup extends ShoelaceElement {
     });
   }
 
-  private setActiveTab(tab: SlTab, options?: { emitEvents?: boolean; scrollBehavior?: 'auto' | 'smooth' }) {
+  private setActiveTab(tab: PTab, options?: { emitEvents?: boolean; scrollBehavior?: 'auto' | 'smooth' }) {
     options = {
       emitEvents: true,
       scrollBehavior: 'auto',
@@ -266,10 +266,10 @@ export default class SlTabGroup extends ShoelaceElement {
       // Emit events
       if (options.emitEvents) {
         if (previousTab) {
-          this.emit('sl-tab-hide', { detail: { name: previousTab.panel } });
+          this.emit('p-tab-hide', { detail: { name: previousTab.panel } });
         }
 
-        this.emit('sl-tab-show', { detail: { name: this.activeTab.panel } });
+        this.emit('p-tab-show', { detail: { name: this.activeTab.panel } });
       }
     }
   }
@@ -422,7 +422,7 @@ export default class SlTabGroup extends ShoelaceElement {
         <div class="tab-group__nav-container" part="nav">
           ${this.hasScrollControls
             ? html`
-                <sl-icon-button
+                <p-icon-button
                   part="scroll-button scroll-button--start"
                   exportparts="base:scroll-button__base"
                   class="tab-group__scroll-button tab-group__scroll-button--start"
@@ -430,7 +430,7 @@ export default class SlTabGroup extends ShoelaceElement {
                   library="system"
                   label=${this.localize.term('scrollToStart')}
                   @click=${this.handleScrollToStart}
-                ></sl-icon-button>
+                ></p-icon-button>
               `
             : ''}
 
@@ -443,7 +443,7 @@ export default class SlTabGroup extends ShoelaceElement {
 
           ${this.hasScrollControls
             ? html`
-                <sl-icon-button
+                <p-icon-button
                   part="scroll-button scroll-button--end"
                   exportparts="base:scroll-button__base"
                   class="tab-group__scroll-button tab-group__scroll-button--end"
@@ -451,7 +451,7 @@ export default class SlTabGroup extends ShoelaceElement {
                   library="system"
                   label=${this.localize.term('scrollToEnd')}
                   @click=${this.handleScrollToEnd}
-                ></sl-icon-button>
+                ></p-icon-button>
               `
             : ''}
         </div>
@@ -464,6 +464,6 @@ export default class SlTabGroup extends ShoelaceElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-tab-group': SlTabGroup;
+    'p-tab-group': PTabGroup;
   }
 }

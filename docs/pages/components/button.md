@@ -6,13 +6,13 @@ layout: component
 ---
 
 ```html:preview
-<sl-button>Button</sl-button>
+<p-button>Button</p-button>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
 
-const App = () => <SlButton>Button</SlButton>;
+const App = () => <PButton>Button</PButton>;
 ```
 
 ## Examples
@@ -22,25 +22,25 @@ const App = () => <SlButton>Button</SlButton>;
 Use the `variant` attribute to set the button's variant.
 
 ```html:preview
-<sl-button variant="default">Default</sl-button>
-<sl-button variant="primary">Primary</sl-button>
-<sl-button variant="success">Success</sl-button>
-<sl-button variant="neutral">Neutral</sl-button>
-<sl-button variant="warning">Warning</sl-button>
-<sl-button variant="danger">Danger</sl-button>
+<p-button variant="default">Default</p-button>
+<p-button variant="primary">Primary</p-button>
+<p-button variant="success">Success</p-button>
+<p-button variant="neutral">Neutral</p-button>
+<p-button variant="warning">Warning</p-button>
+<p-button variant="danger">Danger</p-button>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
 
 const App = () => (
   <>
-    <SlButton variant="default">Default</SlButton>
-    <SlButton variant="primary">Primary</SlButton>
-    <SlButton variant="success">Success</SlButton>
-    <SlButton variant="neutral">Neutral</SlButton>
-    <SlButton variant="warning">Warning</SlButton>
-    <SlButton variant="danger">Danger</SlButton>
+    <PButton variant="default">Default</PButton>
+    <PButton variant="primary">Primary</PButton>
+    <PButton variant="success">Success</PButton>
+    <PButton variant="neutral">Neutral</PButton>
+    <PButton variant="warning">Warning</PButton>
+    <PButton variant="danger">Danger</PButton>
   </>
 );
 ```
@@ -50,19 +50,19 @@ const App = () => (
 Use the `size` attribute to change a button's size.
 
 ```html:preview
-<sl-button size="small">Small</sl-button>
-<sl-button size="medium">Medium</sl-button>
-<sl-button size="large">Large</sl-button>
+<p-button size="small">Small</p-button>
+<p-button size="medium">Medium</p-button>
+<p-button size="large">Large</p-button>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
 
 const App = () => (
   <>
-    <SlButton size="small">Small</SlButton>
-    <SlButton size="medium">Medium</SlButton>
-    <SlButton size="large">Large</SlButton>
+    <PButton size="small">Small</PButton>
+    <PButton size="medium">Medium</PButton>
+    <PButton size="large">Large</PButton>
   </>
 );
 ```
@@ -72,37 +72,37 @@ const App = () => (
 Use the `outline` attribute to draw outlined buttons with transparent backgrounds.
 
 ```html:preview
-<sl-button variant="default" outline>Default</sl-button>
-<sl-button variant="primary" outline>Primary</sl-button>
-<sl-button variant="success" outline>Success</sl-button>
-<sl-button variant="neutral" outline>Neutral</sl-button>
-<sl-button variant="warning" outline>Warning</sl-button>
-<sl-button variant="danger" outline>Danger</sl-button>
+<p-button variant="default" outline>Default</p-button>
+<p-button variant="primary" outline>Primary</p-button>
+<p-button variant="success" outline>Success</p-button>
+<p-button variant="neutral" outline>Neutral</p-button>
+<p-button variant="warning" outline>Warning</p-button>
+<p-button variant="danger" outline>Danger</p-button>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
 
 const App = () => (
   <>
-    <SlButton variant="default" outline>
+    <PButton variant="default" outline>
       Default
-    </SlButton>
-    <SlButton variant="primary" outline>
+    </PButton>
+    <PButton variant="primary" outline>
       Primary
-    </SlButton>
-    <SlButton variant="success" outline>
+    </PButton>
+    <PButton variant="success" outline>
       Success
-    </SlButton>
-    <SlButton variant="neutral" outline>
+    </PButton>
+    <PButton variant="neutral" outline>
       Neutral
-    </SlButton>
-    <SlButton variant="warning" outline>
+    </PButton>
+    <PButton variant="warning" outline>
       Warning
-    </SlButton>
-    <SlButton variant="danger" outline>
+    </PButton>
+    <PButton variant="danger" outline>
       Danger
-    </SlButton>
+    </PButton>
   </>
 );
 ```
@@ -112,62 +112,62 @@ const App = () => (
 Use the `pill` attribute to give buttons rounded edges.
 
 ```html:preview
-<sl-button size="small" pill>Small</sl-button>
-<sl-button size="medium" pill>Medium</sl-button>
-<sl-button size="large" pill>Large</sl-button>
+<p-button size="small" pill>Small</p-button>
+<p-button size="medium" pill>Medium</p-button>
+<p-button size="large" pill>Large</p-button>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
 
 const App = () => (
   <>
-    <SlButton size="small" pill>
+    <PButton size="small" pill>
       Small
-    </SlButton>
-    <SlButton size="medium" pill>
+    </PButton>
+    <PButton size="medium" pill>
       Medium
-    </SlButton>
-    <SlButton size="large" pill>
+    </PButton>
+    <PButton size="large" pill>
       Large
-    </SlButton>
+    </PButton>
   </>
 );
 ```
 
 ### Circle Buttons
 
-Use the `circle` attribute to create circular icon buttons. When this attribute is set, the button expects a single `<sl-icon>` in the default slot.
+Use the `circle` attribute to create circular icon buttons. When this attribute is set, the button expects a single `<p-icon>` in the default slot.
 
 ```html:preview
-<sl-button variant="default" size="small" circle>
-  <sl-icon name="gear" label="Settings"></sl-icon>
-</sl-button>
+<p-button variant="default" size="small" circle>
+  <p-icon name="gear" label="Settings"></p-icon>
+</p-button>
 
-<sl-button variant="default" size="medium" circle>
-  <sl-icon name="gear" label="Settings"></sl-icon>
-</sl-button>
+<p-button variant="default" size="medium" circle>
+  <p-icon name="gear" label="Settings"></p-icon>
+</p-button>
 
-<sl-button variant="default" size="large" circle>
-  <sl-icon name="gear" label="Settings"></sl-icon>
-</sl-button>
+<p-button variant="default" size="large" circle>
+  <p-icon name="gear" label="Settings"></p-icon>
+</p-button>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
 
 const App = () => (
   <>
-    <SlButton variant="default" size="small" circle>
-      <SlIcon name="gear" />
-    </SlButton>
-    <SlButton variant="default" size="medium" circle>
-      <SlIcon name="gear" />
-    </SlButton>
-    <SlButton variant="default" size="large" circle>
-      <SlIcon name="gear" />
-    </SlButton>
+    <PButton variant="default" size="small" circle>
+      <PIcon name="gear" />
+    </PButton>
+    <PButton variant="default" size="medium" circle>
+      <PIcon name="gear" />
+    </PButton>
+    <PButton variant="default" size="large" circle>
+      <PIcon name="gear" />
+    </PButton>
   </>
 );
 ```
@@ -177,25 +177,25 @@ const App = () => (
 Use the `text` variant to create text buttons that share the same size as regular buttons but don't have backgrounds or borders.
 
 ```html:preview
-<sl-button variant="text" size="small">Text</sl-button>
-<sl-button variant="text" size="medium">Text</sl-button>
-<sl-button variant="text" size="large">Text</sl-button>
+<p-button variant="text" size="small">Text</p-button>
+<p-button variant="text" size="medium">Text</p-button>
+<p-button variant="text" size="large">Text</p-button>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
 
 const App = () => (
   <>
-    <SlButton variant="text" size="small">
+    <PButton variant="text" size="small">
       Text
-    </SlButton>
-    <SlButton variant="text" size="medium">
+    </PButton>
+    <PButton variant="text" size="medium">
       Text
-    </SlButton>
-    <SlButton variant="text" size="large">
+    </PButton>
+    <PButton variant="text" size="large">
       Text
-    </SlButton>
+    </PButton>
   </>
 );
 ```
@@ -205,27 +205,27 @@ const App = () => (
 It's often helpful to have a button that works like a link. This is possible by setting the `href` attribute, which will make the component render an `<a>` under the hood. This gives you all the default link behavior the browser provides (e.g. [[CMD/CTRL/SHIFT]] + [[CLICK]]) and exposes the `target` and `download` attributes.
 
 ```html:preview
-<sl-button href="https://example.com/">Link</sl-button>
-<sl-button href="https://example.com/" target="_blank">New Window</sl-button>
-<sl-button href="/assets/images/wordmark.svg" download="shoelace.svg">Download</sl-button>
-<sl-button href="https://example.com/" disabled>Disabled</sl-button>
+<p-button href="https://example.com/">Link</p-button>
+<p-button href="https://example.com/" target="_blank">New Window</p-button>
+<p-button href="/assets/images/wordmark.svg" download="shoelace.svg">Download</p-button>
+<p-button href="https://example.com/" disabled>Disabled</p-button>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
 
 const App = () => (
   <>
-    <SlButton href="https://example.com/">Link</SlButton>
-    <SlButton href="https://example.com/" target="_blank">
+    <PButton href="https://example.com/">Link</PButton>
+    <PButton href="https://example.com/" target="_blank">
       New Window
-    </SlButton>
-    <SlButton href="/assets/images/wordmark.svg" download="shoelace.svg">
+    </PButton>
+    <PButton href="/assets/images/wordmark.svg" download="shoelace.svg">
       Download
-    </SlButton>
-    <SlButton href="https://example.com/" disabled>
+    </PButton>
+    <PButton href="https://example.com/" disabled>
       Disabled
-    </SlButton>
+    </PButton>
   </>
 );
 ```
@@ -239,27 +239,27 @@ When a `target` is set, the link will receive `rel="noreferrer noopener"` for [s
 As expected, buttons can be given a custom width by passing inline styles to the component (or using a class). This is useful for making buttons span the full width of their container on smaller screens.
 
 ```html:preview
-<sl-button variant="default" size="small" style="width: 100%; margin-bottom: 1rem;">Small</sl-button>
-<sl-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">Medium</sl-button>
-<sl-button variant="default" size="large" style="width: 100%;">Large</sl-button>
+<p-button variant="default" size="small" style="width: 100%; margin-bottom: 1rem;">Small</p-button>
+<p-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">Medium</p-button>
+<p-button variant="default" size="large" style="width: 100%;">Large</p-button>
 ```
 
 {% raw %}
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
 
 const App = () => (
   <>
-    <SlButton variant="default" size="small" style={{ width: '100%', marginBottom: '1rem' }}>
+    <PButton variant="default" size="small" style={{ width: '100%', marginBottom: '1rem' }}>
       Small
-    </SlButton>
-    <SlButton variant="default" size="medium" style={{ width: '100%', marginBottom: '1rem' }}>
+    </PButton>
+    <PButton variant="default" size="medium" style={{ width: '100%', marginBottom: '1rem' }}>
       Medium
-    </SlButton>
-    <SlButton variant="default" size="large" style={{ width: '100%' }}>
+    </PButton>
+    <PButton variant="default" size="large" style={{ width: '100%' }}>
       Large
-    </SlButton>
+    </PButton>
   </>
 );
 ```
@@ -271,118 +271,118 @@ const App = () => (
 Use the `prefix` and `suffix` slots to add icons.
 
 ```html:preview
-<sl-button variant="default" size="small">
-  <sl-icon slot="prefix" name="gear"></sl-icon>
+<p-button variant="default" size="small">
+  <p-icon slot="prefix" name="gear"></p-icon>
   Settings
-</sl-button>
+</p-button>
 
-<sl-button variant="default" size="small">
-  <sl-icon slot="suffix" name="arrow-counterclockwise"></sl-icon>
+<p-button variant="default" size="small">
+  <p-icon slot="suffix" name="arrow-counterclockwise"></p-icon>
   Refresh
-</sl-button>
+</p-button>
 
-<sl-button variant="default" size="small">
-  <sl-icon slot="prefix" name="link-45deg"></sl-icon>
-  <sl-icon slot="suffix" name="box-arrow-up-right"></sl-icon>
+<p-button variant="default" size="small">
+  <p-icon slot="prefix" name="link-45deg"></p-icon>
+  <p-icon slot="suffix" name="box-arrow-up-right"></p-icon>
   Open
-</sl-button>
+</p-button>
 
 <br /><br />
 
-<sl-button variant="default">
-  <sl-icon slot="prefix" name="gear"></sl-icon>
+<p-button variant="default">
+  <p-icon slot="prefix" name="gear"></p-icon>
   Settings
-</sl-button>
+</p-button>
 
-<sl-button variant="default">
-  <sl-icon slot="suffix" name="arrow-counterclockwise"></sl-icon>
+<p-button variant="default">
+  <p-icon slot="suffix" name="arrow-counterclockwise"></p-icon>
   Refresh
-</sl-button>
+</p-button>
 
-<sl-button variant="default">
-  <sl-icon slot="prefix" name="link-45deg"></sl-icon>
-  <sl-icon slot="suffix" name="box-arrow-up-right"></sl-icon>
+<p-button variant="default">
+  <p-icon slot="prefix" name="link-45deg"></p-icon>
+  <p-icon slot="suffix" name="box-arrow-up-right"></p-icon>
   Open
-</sl-button>
+</p-button>
 
 <br /><br />
 
-<sl-button variant="default" size="large">
-  <sl-icon slot="prefix" name="gear"></sl-icon>
+<p-button variant="default" size="large">
+  <p-icon slot="prefix" name="gear"></p-icon>
   Settings
-</sl-button>
+</p-button>
 
-<sl-button variant="default" size="large">
-  <sl-icon slot="suffix" name="arrow-counterclockwise"></sl-icon>
+<p-button variant="default" size="large">
+  <p-icon slot="suffix" name="arrow-counterclockwise"></p-icon>
   Refresh
-</sl-button>
+</p-button>
 
-<sl-button variant="default" size="large">
-  <sl-icon slot="prefix" name="link-45deg"></sl-icon>
-  <sl-icon slot="suffix" name="box-arrow-up-right"></sl-icon>
+<p-button variant="default" size="large">
+  <p-icon slot="prefix" name="link-45deg"></p-icon>
+  <p-icon slot="suffix" name="box-arrow-up-right"></p-icon>
   Open
-</sl-button>
+</p-button>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
 
 const App = () => (
   <>
-    <SlButton variant="default" size="small">
-      <SlIcon slot="prefix" name="gear"></SlIcon>
+    <PButton variant="default" size="small">
+      <PIcon slot="prefix" name="gear"></PIcon>
       Settings
-    </SlButton>
+    </PButton>
 
-    <SlButton variant="default" size="small">
-      <SlIcon slot="suffix" name="arrow-counterclockwise"></SlIcon>
+    <PButton variant="default" size="small">
+      <PIcon slot="suffix" name="arrow-counterclockwise"></PIcon>
       Refresh
-    </SlButton>
+    </PButton>
 
-    <SlButton variant="default" size="small">
-      <SlIcon slot="prefix" name="link-45deg"></SlIcon>
-      <SlIcon slot="suffix" name="box-arrow-up-right"></SlIcon>
+    <PButton variant="default" size="small">
+      <PIcon slot="prefix" name="link-45deg"></PIcon>
+      <PIcon slot="suffix" name="box-arrow-up-right"></PIcon>
       Open
-    </SlButton>
+    </PButton>
 
     <br />
     <br />
 
-    <SlButton variant="default">
-      <SlIcon slot="prefix" name="gear"></SlIcon>
+    <PButton variant="default">
+      <PIcon slot="prefix" name="gear"></PIcon>
       Settings
-    </SlButton>
+    </PButton>
 
-    <SlButton variant="default">
-      <SlIcon slot="suffix" name="arrow-counterclockwise"></SlIcon>
+    <PButton variant="default">
+      <PIcon slot="suffix" name="arrow-counterclockwise"></PIcon>
       Refresh
-    </SlButton>
+    </PButton>
 
-    <SlButton variant="default">
-      <SlIcon slot="prefix" name="link-45deg"></SlIcon>
-      <SlIcon slot="suffix" name="box-arrow-up-right"></SlIcon>
+    <PButton variant="default">
+      <PIcon slot="prefix" name="link-45deg"></PIcon>
+      <PIcon slot="suffix" name="box-arrow-up-right"></PIcon>
       Open
-    </SlButton>
+    </PButton>
 
     <br />
     <br />
 
-    <SlButton variant="default" size="large">
-      <SlIcon slot="prefix" name="gear"></SlIcon>
+    <PButton variant="default" size="large">
+      <PIcon slot="prefix" name="gear"></PIcon>
       Settings
-    </SlButton>
+    </PButton>
 
-    <SlButton variant="default" size="large">
-      <SlIcon slot="suffix" name="arrow-counterclockwise"></SlIcon>
+    <PButton variant="default" size="large">
+      <PIcon slot="suffix" name="arrow-counterclockwise"></PIcon>
       Refresh
-    </SlButton>
+    </PButton>
 
-    <SlButton variant="default" size="large">
-      <SlIcon slot="prefix" name="link-45deg"></SlIcon>
-      <SlIcon slot="suffix" name="box-arrow-up-right"></SlIcon>
+    <PButton variant="default" size="large">
+      <PIcon slot="prefix" name="link-45deg"></PIcon>
+      <PIcon slot="suffix" name="box-arrow-up-right"></PIcon>
       Open
-    </SlButton>
+    </PButton>
   </>
 );
 ```
@@ -392,25 +392,25 @@ const App = () => (
 Use the `caret` attribute to add a dropdown indicator when a button will trigger a dropdown, menu, or popover.
 
 ```html:preview
-<sl-button size="small" caret>Small</sl-button>
-<sl-button size="medium" caret>Medium</sl-button>
-<sl-button size="large" caret>Large</sl-button>
+<p-button size="small" caret>Small</p-button>
+<p-button size="medium" caret>Medium</p-button>
+<p-button size="large" caret>Large</p-button>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
 
 const App = () => (
   <>
-    <SlButton size="small" caret>
+    <PButton size="small" caret>
       Small
-    </SlButton>
-    <SlButton size="medium" caret>
+    </PButton>
+    <PButton size="medium" caret>
       Medium
-    </SlButton>
-    <SlButton size="large" caret>
+    </PButton>
+    <PButton size="large" caret>
       Large
-    </SlButton>
+    </PButton>
   </>
 );
 ```
@@ -420,37 +420,37 @@ const App = () => (
 Use the `loading` attribute to make a button busy. The width will remain the same as before, preventing adjacent elements from moving around.
 
 ```html:preview
-<sl-button variant="default" loading>Default</sl-button>
-<sl-button variant="primary" loading>Primary</sl-button>
-<sl-button variant="success" loading>Success</sl-button>
-<sl-button variant="neutral" loading>Neutral</sl-button>
-<sl-button variant="warning" loading>Warning</sl-button>
-<sl-button variant="danger" loading>Danger</sl-button>
+<p-button variant="default" loading>Default</p-button>
+<p-button variant="primary" loading>Primary</p-button>
+<p-button variant="success" loading>Success</p-button>
+<p-button variant="neutral" loading>Neutral</p-button>
+<p-button variant="warning" loading>Warning</p-button>
+<p-button variant="danger" loading>Danger</p-button>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
 
 const App = () => (
   <>
-    <SlButton variant="default" loading>
+    <PButton variant="default" loading>
       Default
-    </SlButton>
-    <SlButton variant="primary" loading>
+    </PButton>
+    <PButton variant="primary" loading>
       Primary
-    </SlButton>
-    <SlButton variant="success" loading>
+    </PButton>
+    <PButton variant="success" loading>
       Success
-    </SlButton>
-    <SlButton variant="neutral" loading>
+    </PButton>
+    <PButton variant="neutral" loading>
       Neutral
-    </SlButton>
-    <SlButton variant="warning" loading>
+    </PButton>
+    <PButton variant="warning" loading>
       Warning
-    </SlButton>
-    <SlButton variant="danger" loading>
+    </PButton>
+    <PButton variant="danger" loading>
       Danger
-    </SlButton>
+    </PButton>
   </>
 );
 ```
@@ -460,58 +460,58 @@ const App = () => (
 Use the `disabled` attribute to disable a button.
 
 ```html:preview
-<sl-button variant="default" disabled>Default</sl-button>
-<sl-button variant="primary" disabled>Primary</sl-button>
-<sl-button variant="success" disabled>Success</sl-button>
-<sl-button variant="neutral" disabled>Neutral</sl-button>
-<sl-button variant="warning" disabled>Warning</sl-button>
-<sl-button variant="danger" disabled>Danger</sl-button>
+<p-button variant="default" disabled>Default</p-button>
+<p-button variant="primary" disabled>Primary</p-button>
+<p-button variant="success" disabled>Success</p-button>
+<p-button variant="neutral" disabled>Neutral</p-button>
+<p-button variant="warning" disabled>Warning</p-button>
+<p-button variant="danger" disabled>Danger</p-button>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
 
 const App = () => (
   <>
-    <SlButton variant="default" disabled>
+    <PButton variant="default" disabled>
       Default
-    </SlButton>
+    </PButton>
 
-    <SlButton variant="primary" disabled>
+    <PButton variant="primary" disabled>
       Primary
-    </SlButton>
+    </PButton>
 
-    <SlButton variant="success" disabled>
+    <PButton variant="success" disabled>
       Success
-    </SlButton>
+    </PButton>
 
-    <SlButton variant="neutral" disabled>
+    <PButton variant="neutral" disabled>
       Neutral
-    </SlButton>
+    </PButton>
 
-    <SlButton variant="warning" disabled>
+    <PButton variant="warning" disabled>
       Warning
-    </SlButton>
+    </PButton>
 
-    <SlButton variant="danger" disabled>
+    <PButton variant="danger" disabled>
       Danger
-    </SlButton>
+    </PButton>
   </>
 );
 ```
 
 ### Styling Buttons
 
-This example demonstrates how to style buttons using a custom class. This is the recommended approach if you need to add additional variations. To customize an existing variation, modify the selector to target the button's `variant` attribute instead of a class (e.g. `sl-button[variant="primary"]`).
+This example demonstrates how to style buttons using a custom class. This is the recommended approach if you need to add additional variations. To customize an existing variation, modify the selector to target the button's `variant` attribute instead of a class (e.g. `p-button[variant="primary"]`).
 
 ```html:preview
-<sl-button class="pink">Pink Button</sl-button>
+<p-button class="pink">Pink Button</p-button>
 
 <style>
-  sl-button.pink::part(base) {
+  p-button.pink::part(base) {
     /* Set design tokens for height and border width */
-    --sl-input-height-medium: 48px;
-    --sl-input-border-width: 4px;
+    --p-input-height-medium: 48px;
+    --p-input-border-width: 4px;
 
     border-radius: 0;
     background-color: #ff1493;
@@ -522,14 +522,14 @@ This example demonstrates how to style buttons using a custom class. This is the
     color: white;
     font-size: 1.125rem;
     box-shadow: 0 2px 10px #0002;
-    transition: var(--sl-transition-medium) transform ease, var(--sl-transition-medium) border ease;
+    transition: var(--p-transition-medium) transform ease, var(--p-transition-medium) border ease;
   }
 
-  sl-button.pink::part(base):hover {
+  p-button.pink::part(base):hover {
     transform: scale(1.05) rotate(-1deg);
   }
 
-  sl-button.pink::part(base):active {
+  p-button.pink::part(base):active {
     border-top-color: #ad005c;
     border-right-color: #ff7ac1;
     border-bottom-color: #ff7ac1;
@@ -537,7 +537,7 @@ This example demonstrates how to style buttons using a custom class. This is the
     transform: scale(1.05) rotate(-1deg) translateY(2px);
   }
 
-  sl-button.pink::part(base):focus-visible {
+  p-button.pink::part(base):focus-visible {
     outline: dashed 2px deeppink;
     outline-offset: 4px;
   }

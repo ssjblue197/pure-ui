@@ -6,14 +6,14 @@ layout: component
 ---
 
 ```html:preview
-<sl-copy-button value="Shoelace rocks!"></sl-copy-button>
+<p-copy-button value="Pure UI rocks!"></p-copy-button>
 ```
 
 ```jsx:react
-import { SlCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
+import { PCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
 
 const App = () => (
-  <SlCopyButton value="Shoelace rocks!" />
+  <PCopyButton value="Pure UI rocks!" />
 );
 ```
 
@@ -24,19 +24,19 @@ const App = () => (
 Copy Buttons display feedback in a tooltip. You can customize the labels using the `copy-label`, `success-label`, and `error-label` attributes.
 
 ```html:preview
-<sl-copy-button
+<p-copy-button
   value="Custom labels are easy"
   copy-label="Click to copy"
   success-label="You did it!"
   error-label="Whoops, your browser doesn't support this!"
-></sl-copy-button>
+></p-copy-button>
 ```
 
 ```jsx:react
-import { SlCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
+import { PCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
 
 const App = () => (
-  <SlCopyButton
+  <PCopyButton
     value="Custom labels are easy"
     copy-label="Click to copy"
     success-label="You did it!"
@@ -47,27 +47,27 @@ const App = () => (
 
 ### Custom Icons
 
-Use the `copy-icon`, `success-icon`, and `error-icon` slots to customize the icons that get displayed for each state. You can use [`<sl-icon>`](/components/icon) or your own images.
+Use the `copy-icon`, `success-icon`, and `error-icon` slots to customize the icons that get displayed for each state. You can use [`<p-icon>`](/components/icon) or your own images.
 
 ```html:preview
-<sl-copy-button value="Copied from a custom button">
-  <sl-icon slot="copy-icon" name="clipboard"></sl-icon>
-  <sl-icon slot="success-icon" name="clipboard-check"></sl-icon>
-  <sl-icon slot="error-icon" name="clipboard-x"></sl-icon>
-</sl-copy-button>
+<p-copy-button value="Copied from a custom button">
+  <p-icon slot="copy-icon" name="clipboard"></p-icon>
+  <p-icon slot="success-icon" name="clipboard-check"></p-icon>
+  <p-icon slot="error-icon" name="clipboard-x"></p-icon>
+</p-copy-button>
 ```
 
 ```jsx:react
-import { SlCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
-import { SlIcon } from '@shoelace-style/shoelace/dist/react/icon';
+import { PCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
+import { PIcon } from '@shoelace-style/shoelace/dist/react/icon';
 
 const App = () => (
   <>
-    <SlCopyButton value="Copied from a custom button">
-      <SlIcon slot="copy-icon" name="clipboard" />
-      <SlIcon slot="success-icon" name="clipboard-check" />
-      <SlIcon slot="error-icon" name="clipboard-x" />
-    </SlCopyButton>
+    <PCopyButton value="Copied from a custom button">
+      <PIcon slot="copy-icon" name="clipboard" />
+      <PIcon slot="success-icon" name="clipboard-check" />
+      <PIcon slot="error-icon" name="clipboard-x" />
+    </PCopyButton>
   </>
 );
 ```
@@ -83,61 +83,61 @@ To copy data from an attribute, use `from="id[attr]"` where `id` is the id of th
 ```html:preview
 <!-- Copies the span's textContent -->
 <span id="my-phone">+1 (234) 456-7890</span>
-<sl-copy-button from="my-phone"></sl-copy-button>
+<p-copy-button from="my-phone"></p-copy-button>
 
 <br><br>
 
 <!-- Copies the input's "value" property -->
-<sl-input id="my-input" type="text" value="User input" style="display: inline-block; max-width: 300px;"></sl-input>
-<sl-copy-button from="my-input.value"></sl-copy-button>
+<p-input id="my-input" type="text" value="User input" style="display: inline-block; max-width: 300px;"></p-input>
+<p-copy-button from="my-input.value"></p-copy-button>
 
 <br><br>
 
 <!-- Copies the link's "href" attribute -->
-<a id="my-link" href="https://shoelace.style/">Shoelace Website</a>
-<sl-copy-button from="my-link[href]"></sl-copy-button>
+<a id="my-link" href="https://shoelace.style/">Pure UI Website</a>
+<p-copy-button from="my-link[href]"></p-copy-button>
 ```
 
 ```jsx:react
-import { SlCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
-import { SlInput } from '@shoelace-style/shoelace/dist/react/input';
+import { PCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
+import { PInput } from '@shoelace-style/shoelace/dist/react/input';
 
 const App = () => (
   <>
     {/* Copies the span's textContent */}
     <span id="my-phone">+1 (234) 456-7890</span>
-    <SlCopyButton from="my-phone" />
+    <PCopyButton from="my-phone" />
 
     <br /><br />
 
     {/* Copies the input's "value" property */}
-    <SlInput id="my-input" type="text" />
-    <SlCopyButton from="my-input.value" />
+    <PInput id="my-input" type="text" />
+    <PCopyButton from="my-input.value" />
 
     <br /><br />
 
     {/* Copies the link's "href" attribute */}
-    <a id="my-link" href="https://shoelace.style/">Shoelace Website</a>
-    <SlCopyButton from="my-link[href]" />
+    <a id="my-link" href="https://shoelace.style/">Pure UI Website</a>
+    <PCopyButton from="my-link[href]" />
   </>
 );
 ```
 
 ### Handling Errors
 
-A copy error will occur if the value is an empty string, if the `from` attribute points to an id that doesn't exist, or if the browser rejects the operation for any reason. When this happens, the `sl-error` event will be emitted.
+A copy error will occur if the value is an empty string, if the `from` attribute points to an id that doesn't exist, or if the browser rejects the operation for any reason. When this happens, the `p-error` event will be emitted.
 
 This example demonstrates what happens when a copy error occurs. You can customize the error label and icon using the `error-label` attribute and the `error-icon` slot, respectively.
 
 ```html:preview
-<sl-copy-button from="i-do-not-exist"></sl-copy-button>
+<p-copy-button from="i-do-not-exist"></p-copy-button>
 ```
 
 ```jsx:react
-import { SlCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
+import { PCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
 
 const App = () => (
-  <SlCopyButton from="i-do-not-exist" />
+  <PCopyButton from="i-do-not-exist" />
 );
 ```
 
@@ -146,14 +146,14 @@ const App = () => (
 Copy buttons can be disabled by adding the `disabled` attribute.
 
 ```html:preview
-<sl-copy-button value="You can't copy me" disabled></sl-copy-button>
+<p-copy-button value="You can't copy me" disabled></p-copy-button>
 ```
 
 ```jsx:react
-import { SlCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
+import { PCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
 
 const App = () => (
-  <SlCopyButton value="You can't copy me" disabled />
+  <PCopyButton value="You can't copy me" disabled />
 );
 ```
 
@@ -162,14 +162,14 @@ const App = () => (
 A success indicator is briefly shown after copying. You can customize the length of time the indicator is shown using the `feedback-duration` attribute.
 
 ```html:preview
-<sl-copy-button value="Shoelace rocks!" feedback-duration="250"></sl-copy-button>
+<p-copy-button value="Pure UI rocks!" feedback-duration="250"></p-copy-button>
 ```
 
 ```jsx:react
-import { SlCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
+import { PCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
 
 const App = () => (
-  <SlCopyButton value="Shoelace rocks!" feedback-duration={250} />
+  <PCopyButton value="Pure UI rocks!" feedback-duration={250} />
 );
 ```
 
@@ -178,11 +178,11 @@ const App = () => (
 You can customize the button to your liking with CSS.
 
 ```html:preview
-<sl-copy-button value="I'm so stylish" class="custom-styles">
-  <sl-icon slot="copy-icon" name="asterisk"></sl-icon>
-  <sl-icon slot="success-icon" name="check-lg"></sl-icon>
-  <sl-icon slot="error-icon" name="x-lg"></sl-icon>
-</sl-copy-button>
+<p-copy-button value="I'm so stylish" class="custom-styles">
+  <p-icon slot="copy-icon" name="asterisk"></p-icon>
+  <p-icon slot="success-icon" name="check-lg"></p-icon>
+  <p-icon slot="error-icon" name="x-lg"></p-icon>
+</p-copy-button>
 
 <style>
   .custom-styles {
@@ -216,7 +216,7 @@ You can customize the button to your liking with CSS.
 ```
 
 ```jsx:react
-import { SlCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
+import { PCopyButton } from '@shoelace-style/shoelace/dist/react/copy-button';
 
 const css = `
   .custom-styles {
@@ -250,7 +250,7 @@ const css = `
 
 const App = () => (
   <>
-    <SlCopyButton value="I'm so stylish" className="custom-styles" />
+    <PCopyButton value="I'm so stylish" className="custom-styles" />
 
     <style>{css}</style>
   </>

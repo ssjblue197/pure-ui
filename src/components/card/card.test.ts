@@ -1,14 +1,14 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlCard from './card.js';
+import type PCard from './card.js';
 
-describe('<sl-card>', () => {
-  let el: SlCard;
+describe('<p-card>', () => {
+  let el: PCard;
 
   describe('when provided no parameters', () => {
     before(async () => {
-      el = await fixture<SlCard>(html`
-        <sl-card>This is just a basic card. No image, no header, and no footer. Just your content.</sl-card>
+      el = await fixture<PCard>(html`
+        <p-card>This is just a basic card. No image, no header, and no footer. Just your content.</p-card>
       `);
     });
 
@@ -28,11 +28,11 @@ describe('<sl-card>', () => {
 
   describe('when provided an element in the slot "header" to render a header', () => {
     before(async () => {
-      el = await fixture<SlCard>(
-        html`<sl-card>
+      el = await fixture<PCard>(
+        html`<p-card>
           <div slot="header">Header Title</div>
           This card has a header. You can put all sorts of things in it!
-        </sl-card>`
+        </p-card>`
       );
     });
 
@@ -64,12 +64,12 @@ describe('<sl-card>', () => {
 
   describe('when provided an element in the slot "footer" to render a footer', () => {
     before(async () => {
-      el = await fixture<SlCard>(
-        html`<sl-card>
+      el = await fixture<PCard>(
+        html`<p-card>
           This card has a footer. You can put all sorts of things in it!
 
           <div slot="footer">Footer Content</div>
-        </sl-card>`
+        </p-card>`
       );
     });
 
@@ -101,15 +101,15 @@ describe('<sl-card>', () => {
 
   describe('when provided an element in the slot "image" to render a image', () => {
     before(async () => {
-      el = await fixture<SlCard>(
-        html`<sl-card>
+      el = await fixture<PCard>(
+        html`<p-card>
           <img
             slot="image"
             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             alt="A kitten walks towards camera on top of pallet."
           />
           This is a kitten, but not just any kitten. This kitten likes walking along pallets.
-        </sl-card>`
+        </p-card>`
       );
     });
 

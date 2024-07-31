@@ -1,12 +1,12 @@
-import SlOption from './option.component.js';
+import POption from './option.component.js';
 
 export * from './option.component.js';
-export default SlOption;
+export default POption;
 
-SlOption.define('sl-option');
+POption.define('p-option');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-option': SlOption;
+    'p-option': POption;
   }
 }

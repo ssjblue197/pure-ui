@@ -1,12 +1,12 @@
-import SlBadge from './badge.component.js';
+import PBadge from './badge.component.js';
 
 export * from './badge.component.js';
-export default SlBadge;
+export default PBadge;
 
-SlBadge.define('sl-badge');
+PBadge.define('p-badge');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-badge': SlBadge;
+    'p-badge': PBadge;
   }
 }

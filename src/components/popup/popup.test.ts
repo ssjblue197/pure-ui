@@ -1,9 +1,9 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
 
-describe('<sl-popup>', () => {
+describe('<p-popup>', () => {
   it('should render a component', async () => {
-    const el = await fixture(html` <sl-popup></sl-popup> `);
+    const el = await fixture(html` <p-popup></p-popup> `);
 
     expect(el).to.exist;
   });

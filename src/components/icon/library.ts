@@ -1,6 +1,6 @@
 import defaultLibrary from './library.default.js';
 import systemLibrary from './library.system.js';
-import type SlIcon from '../icon/icon.js';
+import type PIcon from '../icon/icon.js';
 
 export type IconLibraryResolver = (name: string) => string;
 export type IconLibraryMutator = (svg: SVGElement) => void;
@@ -12,15 +12,15 @@ export interface IconLibrary {
 }
 
 let registry: IconLibrary[] = [defaultLibrary, systemLibrary];
-let watchedIcons: SlIcon[] = [];
+let watchedIcons: PIcon[] = [];
 
 /** Adds an icon to the list of watched icons. */
-export function watchIcon(icon: SlIcon) {
+export function watchIcon(icon: PIcon) {
   watchedIcons.push(icon);
 }
 
 /** Removes an icon from the list of watched icons. */
-export function unwatchIcon(icon: SlIcon) {
+export function unwatchIcon(icon: PIcon) {
   watchedIcons = watchedIcons.filter(el => el !== icon);
 }
 

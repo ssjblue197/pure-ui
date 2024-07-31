@@ -1,12 +1,12 @@
-import SlColorPicker from './color-picker.component.js';
+import PColorPicker from './color-picker.component.js';
 
 export * from './color-picker.component.js';
-export default SlColorPicker;
+export default PColorPicker;
 
-SlColorPicker.define('sl-color-picker');
+PColorPicker.define('p-color-picker');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-color-picker': SlColorPicker;
+    'p-color-picker': PColorPicker;
   }
 }

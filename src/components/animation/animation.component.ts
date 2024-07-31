@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { property, queryAsync } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './animation.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -13,20 +13,20 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 2.0
  *
- * @event sl-cancel - Emitted when the animation is canceled.
- * @event sl-finish - Emitted when the animation finishes.
- * @event sl-start - Emitted when the animation starts or restarts.
+ * @event p-cancel - Emitted when the animation is canceled.
+ * @event p-finish - Emitted when the animation finishes.
+ * @event p-start - Emitted when the animation starts or restarts.
  *
  * @slot - The element to animate. Avoid slotting in more than one element, as subsequent ones will be ignored. To
- *  animate multiple elements, either wrap them in a single container or use multiple `<sl-animation>` elements.
+ *  animate multiple elements, either wrap them in a single container or use multiple `<p-animation>` elements.
  */
-export default class SlAnimation extends ShoelaceElement {
+export default class PAnimation extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   private animation?: Animation;
   private hasStarted = false;
 
-  @queryAsync('slot') defaultSlot: Promise<HTMLSlotElement>;
+  @queryAsync('slot') defaultPot: Promise<HTMLSlotElement>;
 
   /** The name of the built-in animation to use. For custom animations, use the `keyframes` prop. */
   @property() name = 'none';
@@ -101,16 +101,16 @@ export default class SlAnimation extends ShoelaceElement {
   private handleAnimationFinish = () => {
     this.play = false;
     this.hasStarted = false;
-    this.emit('sl-finish');
+    this.emit('p-finish');
   };
 
   private handleAnimationCancel = () => {
     this.play = false;
     this.hasStarted = false;
-    this.emit('sl-cancel');
+    this.emit('p-cancel');
   };
 
-  private handleSlotChange() {
+  private handlePotChange() {
     this.destroyAnimation();
     this.createAnimation();
   }
@@ -118,7 +118,7 @@ export default class SlAnimation extends ShoelaceElement {
   private async createAnimation() {
     const easing = animations.easings[this.easing] ?? this.easing;
     const keyframes = this.keyframes ?? (animations as unknown as Partial<Record<string, Keyframe[]>>)[this.name];
-    const slot = await this.defaultSlot;
+    const slot = await this.defaultPot;
     const element = slot.assignedElements()[0] as HTMLElement | undefined;
 
     if (!element || !keyframes) {
@@ -142,7 +142,7 @@ export default class SlAnimation extends ShoelaceElement {
 
     if (this.play) {
       this.hasStarted = true;
-      this.emit('sl-start');
+      this.emit('p-start');
     } else {
       this.animation.pause();
     }
@@ -184,7 +184,7 @@ export default class SlAnimation extends ShoelaceElement {
     if (this.animation) {
       if (this.play && !this.hasStarted) {
         this.hasStarted = true;
-        this.emit('sl-start');
+        this.emit('p-start');
       }
 
       if (this.play) {
@@ -216,6 +216,6 @@ export default class SlAnimation extends ShoelaceElement {
   }
 
   render() {
-    return html` <slot @slotchange=${this.handleSlotChange}></slot> `;
+    return html` <slot @slotchange=${this.handlePotChange}></slot> `;
   }
 }

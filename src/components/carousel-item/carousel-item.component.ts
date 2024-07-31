@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './carousel-item.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -15,7 +15,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --aspect-ratio - The slide's aspect ratio. Inherited from the carousel by default.
  *
  */
-export default class SlCarouselItem extends ShoelaceElement {
+export default class PCarouselItem extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   connectedCallback() {

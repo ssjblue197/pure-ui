@@ -68,7 +68,7 @@ export class FormControlController implements ReactiveController {
     this.options = {
       form: input => {
         // If there's a form attribute, use it to find the target form by id
-        // Controls may not always reflect the 'form' property. For example, `<sl-button>` doesn't reflect.
+        // Controls may not always reflect the 'form' property. For example, `<p-button>` doesn't reflect.
         const formId = input.form;
 
         if (formId) {
@@ -89,7 +89,7 @@ export class FormControlController implements ReactiveController {
       reportValidity: input => (typeof input.reportValidity === 'function' ? input.reportValidity() : true),
       checkValidity: input => (typeof input.checkValidity === 'function' ? input.checkValidity() : true),
       setValue: (input, value: string) => (input.value = value),
-      assumeInteractionOn: ['sl-input'],
+      assumeInteractionOn: ['p-input'],
       ...options
     };
   }
@@ -214,7 +214,7 @@ export class FormControlController implements ReactiveController {
 
     // For buttons, we only submit the value if they were the submitter. This is currently done in doAction() by
     // injecting the name/value on a temporary button, so we can just skip them here.
-    const isButton = this.host.tagName.toLowerCase() === 'sl-button';
+    const isButton = this.host.tagName.toLowerCase() === 'p-button';
 
     if (
       this.host.isConnected &&
@@ -417,14 +417,14 @@ export class FormControlController implements ReactiveController {
   }
 
   /**
-   * Dispatches a non-bubbling, cancelable custom event of type `sl-invalid`.
-   * If the `sl-invalid` event will be cancelled then the original `invalid`
+   * Dispatches a non-bubbling, cancelable custom event of type `p-invalid`.
+   * If the `p-invalid` event will be cancelled then the original `invalid`
    * event (which may have been passed as argument) will also be cancelled.
-   * If no original `invalid` event has been passed then the `sl-invalid`
+   * If no original `invalid` event has been passed then the `p-invalid`
    * event will be cancelled before being dispatched.
    */
   emitInvalidEvent(originalInvalidEvent?: Event) {
-    const slInvalidEvent = new CustomEvent<Record<PropertyKey, never>>('sl-invalid', {
+    const slInvalidEvent = new CustomEvent<Record<PropertyKey, never>>('p-invalid', {
       bubbles: false,
       composed: false,
       cancelable: true,

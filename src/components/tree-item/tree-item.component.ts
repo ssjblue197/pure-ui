@@ -8,10 +8,10 @@ import { property, query, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import { when } from 'lit/directives/when.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlCheckbox from '../checkbox/checkbox.component.js';
-import SlIcon from '../icon/icon.component.js';
-import SlSpinner from '../spinner/spinner.component.js';
+import PCheckbox from '../checkbox/checkbox.component.js';
+import PIcon from '../icon/icon.component.js';
+import PSpinner from '../spinner/spinner.component.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './tree-item.styles.js';
 import type { CSSResultGroup, PropertyValueMap } from 'lit';
 
@@ -21,16 +21,16 @@ import type { CSSResultGroup, PropertyValueMap } from 'lit';
  * @status stable
  * @since 2.0
  *
- * @dependency sl-checkbox
- * @dependency sl-icon
- * @dependency sl-spinner
+ * @dependency p-checkbox
+ * @dependency p-icon
+ * @dependency p-spinner
  *
- * @event sl-expand - Emitted when the tree item expands.
- * @event sl-after-expand - Emitted after the tree item expands and all animations are complete.
- * @event sl-collapse - Emitted when the tree item collapses.
- * @event sl-after-collapse - Emitted after the tree item collapses and all animations are complete.
- * @event sl-lazy-change - Emitted when the tree item's lazy state changes.
- * @event sl-lazy-load - Emitted when a lazy item is selected. Use this event to asynchronously load data and append
+ * @event p-expand - Emitted when the tree item expands.
+ * @event p-after-expand - Emitted after the tree item expands and all animations are complete.
+ * @event p-collapse - Emitted when the tree item collapses.
+ * @event p-after-collapse - Emitted after the tree item collapses and all animations are complete.
+ * @event p-lazy-change - Emitted when the tree item's lazy state changes.
+ * @event p-lazy-load - Emitted when a lazy item is selected. Use this event to asynchronously load data and append
  *  items to the tree before expanding. After appending new items, remove the `lazy` attribute to remove the loading
  *  state and update the tree.
  *
@@ -59,12 +59,12 @@ import type { CSSResultGroup, PropertyValueMap } from 'lit';
  * @csspart checkbox__indeterminate-icon - The checkbox's exported `indeterminate-icon` part.
  * @csspart checkbox__label - The checkbox's exported `label` part.
  */
-export default class SlTreeItem extends ShoelaceElement {
+export default class PTreeItem extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
-    'sl-checkbox': SlCheckbox,
-    'sl-icon': SlIcon,
-    'sl-spinner': SlSpinner
+    'p-checkbox': PCheckbox,
+    'p-icon': PIcon,
+    'p-spinner': PSpinner
   };
 
   static isTreeItem(node: Node) {
@@ -116,7 +116,7 @@ export default class SlTreeItem extends ShoelaceElement {
   }
 
   private async animateCollapse() {
-    this.emit('sl-collapse');
+    this.emit('p-collapse');
 
     await stopAnimations(this.childrenContainer);
 
@@ -128,13 +128,13 @@ export default class SlTreeItem extends ShoelaceElement {
     );
     this.childrenContainer.hidden = true;
 
-    this.emit('sl-after-collapse');
+    this.emit('p-after-collapse');
   }
 
   // Checks whether the item is nested into an item
   private isNestedItem(): boolean {
     const parent = this.parentElement;
-    return !!parent && SlTreeItem.isTreeItem(parent);
+    return !!parent && PTreeItem.isTreeItem(parent);
   }
 
   private handleChildrenSlotChange() {
@@ -142,14 +142,14 @@ export default class SlTreeItem extends ShoelaceElement {
     this.isLeaf = !this.lazy && this.getChildrenItems().length === 0;
   }
 
-  protected willUpdate(changedProperties: PropertyValueMap<SlTreeItem> | Map<PropertyKey, unknown>) {
+  protected willUpdate(changedProperties: PropertyValueMap<PTreeItem> | Map<PropertyKey, unknown>) {
     if (changedProperties.has('selected') && !changedProperties.has('indeterminate')) {
       this.indeterminate = false;
     }
   }
 
   private async animateExpand() {
-    this.emit('sl-expand');
+    this.emit('p-expand');
 
     await stopAnimations(this.childrenContainer);
     this.childrenContainer.hidden = false;
@@ -162,7 +162,7 @@ export default class SlTreeItem extends ShoelaceElement {
     );
     this.childrenContainer.style.height = 'auto';
 
-    this.emit('sl-after-expand');
+    this.emit('p-after-expand');
   }
 
   @watch('loading', { waitUntilFirstUpdate: true })
@@ -199,7 +199,7 @@ export default class SlTreeItem extends ShoelaceElement {
       if (this.lazy) {
         this.loading = true;
 
-        this.emit('sl-lazy-load');
+        this.emit('p-lazy-load');
       } else {
         this.animateExpand();
       }
@@ -210,15 +210,15 @@ export default class SlTreeItem extends ShoelaceElement {
 
   @watch('lazy', { waitUntilFirstUpdate: true })
   handleLazyChange() {
-    this.emit('sl-lazy-change');
+    this.emit('p-lazy-change');
   }
 
   /** Gets all the nested tree items in this node. */
-  getChildrenItems({ includeDisabled = true }: { includeDisabled?: boolean } = {}): SlTreeItem[] {
+  getChildrenItems({ includeDisabled = true }: { includeDisabled?: boolean } = {}): PTreeItem[] {
     return this.childrenSlot
       ? ([...this.childrenSlot.assignedElements({ flatten: true })].filter(
-          (item: SlTreeItem) => SlTreeItem.isTreeItem(item) && (includeDisabled || !item.disabled)
-        ) as SlTreeItem[])
+          (item: PTreeItem) => PTreeItem.isTreeItem(item) && (includeDisabled || !item.disabled)
+        ) as PTreeItem[])
       : [];
   }
 
@@ -259,22 +259,19 @@ export default class SlTreeItem extends ShoelaceElement {
             })}
             aria-hidden="true"
           >
-            ${when(
-              this.loading,
-              () => html` <sl-spinner part="spinner" exportparts="base:spinner__base"></sl-spinner> `
-            )}
+            ${when(this.loading, () => html` <p-spinner part="spinner" exportparts="base:spinner__base"></p-spinner> `)}
             <slot class="tree-item__expand-icon-slot" name="expand-icon">
-              <sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>
+              <p-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></p-icon>
             </slot>
             <slot class="tree-item__expand-icon-slot" name="collapse-icon">
-              <sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>
+              <p-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></p-icon>
             </slot>
           </div>
 
           ${when(
             this.selectable,
             () => html`
-              <sl-checkbox
+              <p-checkbox
                 part="checkbox"
                 exportparts="
                     base:checkbox__base,
@@ -290,7 +287,7 @@ export default class SlTreeItem extends ShoelaceElement {
                 ?checked="${live(this.selected)}"
                 ?indeterminate="${this.indeterminate}"
                 tabindex="-1"
-              ></sl-checkbox>
+              ></p-checkbox>
             `
           )}
 

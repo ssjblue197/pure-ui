@@ -2,9 +2,9 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --color: var(--sl-panel-border-color);
-    --width: var(--sl-panel-border-width);
-    --spacing: var(--sl-spacing-medium);
+    --color: var(--p-panel-border-color);
+    --width: var(--p-panel-border-width);
+    --spacing: var(--p-spacing-medium);
   }
 
   :host(:not([vertical])) {

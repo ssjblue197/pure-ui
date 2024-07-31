@@ -33,17 +33,17 @@
     <meta property="og:description" content="{{ meta.description }}" />
     <meta property="og:image" content="{{ assetUrl(meta.image, true) }}" />
 
-    {# Shoelace #}
+    {# Pure UI #}
     <link rel="stylesheet" href="/dist/themes/light.css" />
     <link rel="stylesheet" href="/dist/themes/dark.css" />
-    <script type="module" src="/dist/shoelace-autoloader.js"></script>
+    <script type="module" src="/dist/pure-ui-autoloader.js"></script>
 
     {# Set the initial theme and menu states here to prevent flashing #}
     <script>
       (() => {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const theme = localStorage.getItem('theme') || 'auto';
-        document.documentElement.classList.toggle('sl-theme-dark', theme === 'dark' || (theme === 'auto' && prefersDark));
+        document.documentElement.classList.toggle('p-theme-dark', theme === 'dark' || (theme === 'auto' && prefersDark));
       })();
     </script>
 
@@ -71,71 +71,42 @@
     {# Icon toolbar #}
     <div id="icon-toolbar">
       {# GitHub #}
-      <a href="https://github.com/shoelace-style/shoelace" title="View Shoelace on GitHub">
-        <sl-icon name="github"></sl-icon>
+      <a href="https://github.com/shoelace-style/shoelace" title="View Pure UI on GitHub">
+        <p-icon name="github"></p-icon>
       </a>
 
       {# Twitter #}
-      <a href="https://twitter.com/shoelace_style" title="Follow Shoelace on Twitter">
-        <sl-icon name="twitter"></sl-icon>
+      <a href="https://twitter.com/shoelace_style" title="Follow Pure UI on Twitter">
+        <p-icon name="twitter"></p-icon>
       </a>
 
       {# Theme selector #}
-      <sl-dropdown id="theme-selector" placement="bottom-end" distance="3">
-        <sl-button slot="trigger" size="small" variant="text" caret title="Press \ to toggle">
-          <sl-icon class="only-light" name="sun-fill"></sl-icon>
-          <sl-icon class="only-dark" name="moon-fill"></sl-icon>
-        </sl-button>
-        <sl-menu>
-          <sl-menu-item type="checkbox" value="light">Light</sl-menu-item>
-          <sl-menu-item type="checkbox" value="dark">Dark</sl-menu-item>
-          <sl-divider></sl-divider>
-          <sl-menu-item type="checkbox" value="auto">System</sl-menu-item>
-        </sl-menu>
-      </sl-dropdown>
+      <p-dropdown id="theme-selector" placement="bottom-end" distance="3">
+        <p-button slot="trigger" size="small" variant="text" caret title="Press \ to toggle">
+          <p-icon class="only-light" name="sun-fill"></p-icon>
+          <p-icon class="only-dark" name="moon-fill"></p-icon>
+        </p-button>
+        <p-menu>
+          <p-menu-item type="checkbox" value="light">Light</p-menu-item>
+          <p-menu-item type="checkbox" value="dark">Dark</p-menu-item>
+          <p-divider></p-divider>
+          <p-menu-item type="checkbox" value="auto">System</p-menu-item>
+        </p-menu>
+      </p-dropdown>
     </div>
-
-    <a
-      class="ks-banner{% if toc %} with-toc{% endif %}"
-      href="https://www.kickstarter.com/projects/fontawesome/web-awesome?ref=71ihfk"
-      target="_blank"
-    >
-      <span>
-        <svg viewBox="0 0 20 16" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#f36944" d="M11.63 1.625C11.63 2.27911 11.2435 2.84296 10.6865 3.10064L14 6L17.2622 5.34755C17.0968 5.10642 17 4.81452 17 4.5C17 3.67157 17.6716 3 18.5 3C19.3284 3 20 3.67157 20 4.5C20 5.31157 19.3555 5.9726 18.5504 5.99917L15.0307 13.8207C14.7077 14.5384 13.9939 15 13.2068 15H6.79317C6.00615 15 5.29229 14.5384 4.96933 13.8207L1.44963 5.99917C0.64452 5.9726 0 5.31157 0 4.5C0 3.67157 0.671573 3 1.5 3C2.32843 3 3 3.67157 3 4.5C3 4.81452 2.9032 5.10642 2.73777 5.34755L6 6L9.31702 3.09761C8.76346 2.83855 8.38 2.27656 8.38 1.625C8.38 0.727537 9.10754 0 10.005 0C10.9025 0 11.63 0.727537 11.63 1.625Z"/>
-        </svg>
-        <span>
-          <strong style="white-space: nowrap;">Get ready for more awesome!</strong>
-          Web Awesome, the next iteration of Shoelace, is on Kickstarter.
-        </span>
-      </span>
-      <span class="faux-button">Read Our Story</span>
-    </a>
 
     <aside id="sidebar" data-preserve-scroll>
       <header>
         <a href="/">
-          <img src="{{ assetUrl('images/wordmark.svg') }}" alt="Shoelace" />
+          <img src="{{ assetUrl('images/wordmark.svg') }}" alt="Pure UI" />
         </a>
         <div class="sidebar-version">
           {{ meta.version }}
         </div>
       </header>
 
-      <div class="sidebar-buttons">
-        <sl-button size="small" class="repo-button repo-button--github" href="https://github.com/shoelace-style/shoelace" target="_blank">
-          <sl-icon slot="prefix" name="github"></sl-icon> Code
-        </sl-button>
-        <sl-button size="small" class="repo-button repo-button--star" href="https://github.com/shoelace-style/shoelace/stargazers" target="_blank">
-          <sl-icon slot="prefix" name="star-fill"></sl-icon> Star
-        </sl-button>
-        <sl-button size="small" class="repo-button repo-button--twitter" href="https://twitter.com/shoelace_style" target="_blank">
-          <sl-icon slot="prefix" name="twitter"></sl-icon> Follow
-        </sl-button>
-      </div>
-
       <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
-        <sl-icon name="search"></sl-icon>
+        <p-icon name="search"></p-icon>
         <span>Search</span>
       </button>
 

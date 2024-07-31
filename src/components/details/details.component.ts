@@ -7,8 +7,8 @@ import { property, query } from 'lit/decorators.js';
 import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlIcon from '../icon/icon.component.js';
+import PIcon from '../icon/icon.component.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './details.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -18,17 +18,17 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 2.0
  *
- * @dependency sl-icon
+ * @dependency p-icon
  *
  * @slot - The details' main content.
  * @slot summary - The details' summary. Alternatively, you can use the `summary` attribute.
- * @slot expand-icon - Optional expand icon to use instead of the default. Works best with `<sl-icon>`.
- * @slot collapse-icon - Optional collapse icon to use instead of the default. Works best with `<sl-icon>`.
+ * @slot expand-icon - Optional expand icon to use instead of the default. Works best with `<p-icon>`.
+ * @slot collapse-icon - Optional collapse icon to use instead of the default. Works best with `<p-icon>`.
  *
- * @event sl-show - Emitted when the details opens.
- * @event sl-after-show - Emitted after the details opens and all animations are complete.
- * @event sl-hide - Emitted when the details closes.
- * @event sl-after-hide - Emitted after the details closes and all animations are complete.
+ * @event p-show - Emitted when the details opens.
+ * @event p-after-show - Emitted after the details opens and all animations are complete.
+ * @event p-hide - Emitted when the details closes.
+ * @event p-after-hide - Emitted after the details closes and all animations are complete.
  *
  * @csspart base - The component's base wrapper.
  * @csspart header - The header that wraps both the summary and the expand/collapse icon.
@@ -39,11 +39,11 @@ import type { CSSResultGroup } from 'lit';
  * @animation details.show - The animation to use when showing details. You can use `height: auto` with this animation.
  * @animation details.hide - The animation to use when hiding details. You can use `height: auto` with this animation.
  */
-export default class SlDetails extends ShoelaceElement {
+export default class PDetails extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   static dependencies = {
-    'sl-icon': SlIcon
+    'p-icon': PIcon
   };
 
   private readonly localize = new LocalizeController(this);
@@ -132,7 +132,7 @@ export default class SlDetails extends ShoelaceElement {
     if (this.open) {
       this.details.open = true;
       // Show
-      const slShow = this.emit('sl-show', { cancelable: true });
+      const slShow = this.emit('p-show', { cancelable: true });
       if (slShow.defaultPrevented) {
         this.open = false;
         this.details.open = false;
@@ -145,10 +145,10 @@ export default class SlDetails extends ShoelaceElement {
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
       this.body.style.height = 'auto';
 
-      this.emit('sl-after-show');
+      this.emit('p-after-show');
     } else {
       // Hide
-      const slHide = this.emit('sl-hide', { cancelable: true });
+      const slHide = this.emit('p-hide', { cancelable: true });
       if (slHide.defaultPrevented) {
         this.details.open = true;
         this.open = true;
@@ -162,7 +162,7 @@ export default class SlDetails extends ShoelaceElement {
       this.body.style.height = 'auto';
 
       this.details.open = false;
-      this.emit('sl-after-hide');
+      this.emit('p-after-hide');
     }
   }
 
@@ -173,7 +173,7 @@ export default class SlDetails extends ShoelaceElement {
     }
 
     this.open = true;
-    return waitForEvent(this, 'sl-after-show');
+    return waitForEvent(this, 'p-after-show');
   }
 
   /** Hides the details */
@@ -183,7 +183,7 @@ export default class SlDetails extends ShoelaceElement {
     }
 
     this.open = false;
-    return waitForEvent(this, 'sl-after-hide');
+    return waitForEvent(this, 'p-after-hide');
   }
 
   render() {
@@ -215,10 +215,10 @@ export default class SlDetails extends ShoelaceElement {
 
           <span part="summary-icon" class="details__summary-icon">
             <slot name="expand-icon">
-              <sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>
+              <p-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></p-icon>
             </slot>
             <slot name="collapse-icon">
-              <sl-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></sl-icon>
+              <p-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></p-icon>
             </slot>
           </span>
         </summary>

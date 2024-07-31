@@ -2,7 +2,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './skeleton.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -19,7 +19,7 @@ import type { CSSResultGroup } from 'lit';
  * @cssproperty --color - The color of the skeleton.
  * @cssproperty --sheen-color - The sheen color when the skeleton is in its loading state.
  */
-export default class SlSkeleton extends ShoelaceElement {
+export default class PSkeleton extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   /** Determines which effect the skeleton will use. */

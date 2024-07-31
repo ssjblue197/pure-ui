@@ -1,17 +1,17 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
-import type SlBadge from './badge.js';
+import type PBadge from './badge.js';
 
 // The default badge background just misses AA contrast, but the next step up is way too dark. We're going to relax this
 // rule for now.
 const ignoredRules = ['color-contrast'];
 
-describe('<sl-badge>', () => {
-  let el: SlBadge;
+describe('<p-badge>', () => {
+  let el: PBadge;
 
   describe('when provided no parameters', () => {
     before(async () => {
-      el = await fixture<SlBadge>(html` <sl-badge>Badge</sl-badge> `);
+      el = await fixture<PBadge>(html` <p-badge>Badge</p-badge> `);
     });
 
     it('should pass accessibility tests with a role of status on the base part.', async () => {
@@ -33,7 +33,7 @@ describe('<sl-badge>', () => {
 
   describe('when provided a pill parameter', () => {
     before(async () => {
-      el = await fixture<SlBadge>(html` <sl-badge pill>Badge</sl-badge> `);
+      el = await fixture<PBadge>(html` <p-badge pill>Badge</p-badge> `);
     });
 
     it('should pass accessibility tests', async () => {
@@ -48,7 +48,7 @@ describe('<sl-badge>', () => {
 
   describe('when provided a pulse parameter', () => {
     before(async () => {
-      el = await fixture<SlBadge>(html` <sl-badge pulse>Badge</sl-badge> `);
+      el = await fixture<PBadge>(html` <p-badge pulse>Badge</p-badge> `);
     });
 
     it('should pass accessibility tests', async () => {
@@ -64,7 +64,7 @@ describe('<sl-badge>', () => {
   ['primary', 'success', 'neutral', 'warning', 'danger'].forEach(variant => {
     describe(`when passed a variant attribute ${variant}`, () => {
       before(async () => {
-        el = await fixture<SlBadge>(html`<sl-badge variant="${variant}">Badge</sl-badge>`);
+        el = await fixture<PBadge>(html`<p-badge variant="${variant}">Badge</p-badge>`);
       });
 
       it('should pass accessibility tests', async () => {

@@ -1,26 +1,26 @@
 import '../../../dist/shoelace.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import sinon from 'sinon';
-import type SlRelativeTime from './relative-time.js';
+import type PRelativeTime from './relative-time.js';
 
-interface SlRelativeTimeTestCase {
+interface PRelativeTimeTestCase {
   date: Date;
   expectedOutput: string;
 }
 
-const extractTimeElement = (relativeTime: SlRelativeTime): HTMLTimeElement | null => {
+const extractTimeElement = (relativeTime: PRelativeTime): HTMLTimeElement | null => {
   return relativeTime.shadowRoot?.querySelector('time') || null;
 };
 
-const expectFormattedRelativeTimeToBe = async (relativeTime: SlRelativeTime, expectedOutput: string): Promise<void> => {
+const expectFormattedRelativeTimeToBe = async (relativeTime: PRelativeTime, expectedOutput: string): Promise<void> => {
   await relativeTime.updateComplete;
   const textContent = extractTimeElement(relativeTime)?.textContent;
   expect(textContent).to.equal(expectedOutput);
 };
 
-const createRelativeTimeWithDate = async (relativeDate: Date): Promise<SlRelativeTime> => {
-  const relativeTime: SlRelativeTime = await fixture<SlRelativeTime>(html`
-    <sl-relative-time lang="en-US"></sl-relative-time>
+const createRelativeTimeWithDate = async (relativeDate: Date): Promise<PRelativeTime> => {
+  const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
+    <p-relative-time lang="en-US"></p-relative-time>
   `);
   relativeTime.date = relativeDate;
   return relativeTime;
@@ -35,7 +35,7 @@ const nonLeapYearInSeconds = dayInSeconds * 356;
 
 const currentTime = new Date('2022-10-30T15:22:10.100Z');
 const yesterday = new Date(currentTime.getTime() - dayInSeconds);
-const testCases: SlRelativeTimeTestCase[] = [
+const testCases: PRelativeTimeTestCase[] = [
   {
     date: new Date(currentTime.getTime() - minuteInSeconds),
     expectedOutput: '1 minute ago'
@@ -70,7 +70,7 @@ const testCases: SlRelativeTimeTestCase[] = [
   }
 ];
 
-describe('sl-relative-time', () => {
+describe('p-relative-time', () => {
   it('should pass accessibility tests', async () => {
     const relativeTime = await createRelativeTimeWithDate(currentTime);
 
@@ -98,8 +98,8 @@ describe('sl-relative-time', () => {
       it(`shows the correct relative time given a String object: ${testCase.expectedOutput}`, async () => {
         const dateString = testCase.date.toISOString();
 
-        const relativeTime: SlRelativeTime = await fixture<SlRelativeTime>(html`
-          <sl-relative-time lang="en-US" date="${dateString}"></sl-relative-time>
+        const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
+          <p-relative-time lang="en-US" date="${dateString}"></p-relative-time>
         `);
 
         await expectFormattedRelativeTimeToBe(relativeTime, testCase.expectedOutput);
@@ -107,8 +107,8 @@ describe('sl-relative-time', () => {
     });
 
     it('always shows numeric if requested via numeric property', async () => {
-      const relativeTime: SlRelativeTime = await fixture<SlRelativeTime>(html`
-        <sl-relative-time lang="en-US" numeric="always"></sl-relative-time>
+      const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
+        <p-relative-time lang="en-US" numeric="always"></p-relative-time>
       `);
       relativeTime.date = yesterday;
 
@@ -116,8 +116,8 @@ describe('sl-relative-time', () => {
     });
 
     it('shows human readable form if appropriate and numeric property is auto', async () => {
-      const relativeTime: SlRelativeTime = await fixture<SlRelativeTime>(html`
-        <sl-relative-time lang="en-US" numeric="auto"></sl-relative-time>
+      const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
+        <p-relative-time lang="en-US" numeric="auto"></p-relative-time>
       `);
       relativeTime.date = yesterday;
 
@@ -134,8 +134,8 @@ describe('sl-relative-time', () => {
 
     it('allows to use a short form of the unit', async () => {
       const twoYearsAgo = new Date(currentTime.getTime() - 2 * nonLeapYearInSeconds);
-      const relativeTime: SlRelativeTime = await fixture<SlRelativeTime>(html`
-        <sl-relative-time lang="en-US" numeric="always" format="short"></sl-relative-time>
+      const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
+        <p-relative-time lang="en-US" numeric="always" format="short"></p-relative-time>
       `);
       relativeTime.date = twoYearsAgo;
 
@@ -144,8 +144,8 @@ describe('sl-relative-time', () => {
 
     it('allows to use a long form of the unit', async () => {
       const twoYearsAgo = new Date(currentTime.getTime() - 2 * nonLeapYearInSeconds);
-      const relativeTime: SlRelativeTime = await fixture<SlRelativeTime>(html`
-        <sl-relative-time lang="en-US" numeric="always" format="long"></sl-relative-time>
+      const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
+        <p-relative-time lang="en-US" numeric="always" format="long"></p-relative-time>
       `);
       relativeTime.date = twoYearsAgo;
 
@@ -153,8 +153,8 @@ describe('sl-relative-time', () => {
     });
 
     it('is formatted according to the requested locale', async () => {
-      const relativeTime: SlRelativeTime = await fixture<SlRelativeTime>(html`
-        <sl-relative-time lang="de-DE" numeric="auto"></sl-relative-time>
+      const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
+        <p-relative-time lang="de-DE" numeric="auto"></p-relative-time>
       `);
       relativeTime.date = yesterday;
 
@@ -176,8 +176,8 @@ describe('sl-relative-time', () => {
   it('does not display a time element on invalid time string', async () => {
     const invalidDateString = 'thisIsNotATimeString';
 
-    const relativeTime: SlRelativeTime = await fixture<SlRelativeTime>(html`
-      <sl-relative-time lang="en-US" date="${invalidDateString}"></sl-relative-time>
+    const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
+      <p-relative-time lang="en-US" date="${invalidDateString}"></p-relative-time>
     `);
 
     await relativeTime.updateComplete;

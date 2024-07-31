@@ -1,12 +1,12 @@
-import SlPopup from './popup.component.js';
+import PPopup from './popup.component.js';
 
 export * from './popup.component.js';
-export default SlPopup;
+export default PPopup;
 
-SlPopup.define('sl-popup');
+PPopup.define('p-popup');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-popup': SlPopup;
+    'p-popup': PPopup;
   }
 }

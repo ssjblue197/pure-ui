@@ -1,12 +1,12 @@
-import SlSpinner from './spinner.component.js';
+import PSpinner from './spinner.component.js';
 
 export * from './spinner.component.js';
-export default SlSpinner;
+export default PSpinner;
 
-SlSpinner.define('sl-spinner');
+PSpinner.define('p-spinner');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-spinner': SlSpinner;
+    'p-spinner': PSpinner;
   }
 }

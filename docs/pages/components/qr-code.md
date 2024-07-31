@@ -9,20 +9,20 @@ QR codes are useful for providing small pieces of information to users who can q
 
 ```html:preview
 <div class="qr-overview">
-  <sl-qr-code value="https://shoelace.style/" label="Scan this code to visit Shoelace on the web!"></sl-qr-code>
+  <p-qr-code value="https://shoelace.style/" label="Scan this code to visit Pure UI on the web!"></p-qr-code>
   <br />
 
-  <sl-input maxlength="255" clearable label="Value"></sl-input>
+  <p-input maxlength="255" clearable label="Value"></p-input>
 </div>
 
 <script>
   const container = document.querySelector('.qr-overview');
-  const qrCode = container.querySelector('sl-qr-code');
-  const input = container.querySelector('sl-input');
+  const qrCode = container.querySelector('p-qr-code');
+  const input = container.querySelector('p-input');
 
-  customElements.whenDefined('sl-qr-code').then(() => {
+  customElements.whenDefined('p-qr-code').then(() => {
     input.value = qrCode.value;
-    input.addEventListener('sl-input', () => (qrCode.value = input.value));
+    input.addEventListener('p-input', () => (qrCode.value = input.value));
   });
 </script>
 
@@ -31,7 +31,7 @@ QR codes are useful for providing small pieces of information to users who can q
     max-width: 256px;
   }
 
-  .qr-overview sl-input {
+  .qr-overview p-input {
     margin-top: 1rem;
   }
 </style>
@@ -39,15 +39,15 @@ QR codes are useful for providing small pieces of information to users who can q
 
 ```jsx:react
 import { useState } from 'react';
-import SlQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
-import SlInput from '@shoelace-style/shoelace/dist/react/input';
+import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
+import PInput from '@shoelace-style/shoelace/dist/react/input';
 
 const css = `
   .qr-overview {
     max-width: 256px;
   }
 
-  .qr-overview sl-input {
+  .qr-overview p-input {
     margin-top: 1rem;
   }
 `;
@@ -58,10 +58,10 @@ const App = () => {
   return (
     <>
       <div className="qr-overview">
-        <SlQrCode value={value} label="Scan this code to visit Shoelace on the web!" />
+        <PQrCode value={value} label="Scan this code to visit Pure UI on the web!" />
         <br />
 
-        <SlInput maxlength="255" clearable onInput={event => setValue(event.target.value)} />
+        <PInput maxlength="255" clearable onInput={event => setValue(event.target.value)} />
       </div>
 
       <style>{css}</style>
@@ -77,13 +77,13 @@ const App = () => {
 Use the `fill` and `background` attributes to modify the QR code's colors. You should always ensure good contrast for optimal compatibility with QR code scanners.
 
 ```html:preview
-<sl-qr-code value="https://shoelace.style/" fill="deeppink" background="white"></sl-qr-code>
+<p-qr-code value="https://shoelace.style/" fill="deeppink" background="white"></p-qr-code>
 ```
 
 ```jsx:react
-import SlQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
+import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
 
-const App = () => <SlQrCode value="https://shoelace.style/" fill="deeppink" background="white" />;
+const App = () => <PQrCode value="https://shoelace.style/" fill="deeppink" background="white" />;
 ```
 
 ### Size
@@ -91,13 +91,13 @@ const App = () => <SlQrCode value="https://shoelace.style/" fill="deeppink" back
 Use the `size` attribute to change the size of the QR code.
 
 ```html:preview
-<sl-qr-code value="https://shoelace.style/" size="64"></sl-qr-code>
+<p-qr-code value="https://shoelace.style/" size="64"></p-qr-code>
 ```
 
 ```jsx:react
-import SlQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
+import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
 
-const App = () => <SlQrCode value="https://shoelace.style/" size="64" />;
+const App = () => <PQrCode value="https://shoelace.style/" size="64" />;
 ```
 
 ### Radius
@@ -105,13 +105,13 @@ const App = () => <SlQrCode value="https://shoelace.style/" size="64" />;
 Create a rounded effect with the `radius` attribute.
 
 ```html:preview
-<sl-qr-code value="https://shoelace.style/" radius="0.5"></sl-qr-code>
+<p-qr-code value="https://shoelace.style/" radius="0.5"></p-qr-code>
 ```
 
 ```jsx:react
-import SlQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
+import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
 
-const App = () => <SlQrCode value="https://shoelace.style/" radius="0.5" />;
+const App = () => <PQrCode value="https://shoelace.style/" radius="0.5" />;
 ```
 
 ### Error Correction
@@ -120,10 +120,10 @@ QR codes can be rendered with various levels of [error correction](https://www.q
 
 ```html:preview
 <div class="qr-error-correction">
-  <sl-qr-code value="https://shoelace.style/" error-correction="L"></sl-qr-code>
-  <sl-qr-code value="https://shoelace.style/" error-correction="M"></sl-qr-code>
-  <sl-qr-code value="https://shoelace.style/" error-correction="Q"></sl-qr-code>
-  <sl-qr-code value="https://shoelace.style/" error-correction="H"></sl-qr-code>
+  <p-qr-code value="https://shoelace.style/" error-correction="L"></p-qr-code>
+  <p-qr-code value="https://shoelace.style/" error-correction="M"></p-qr-code>
+  <p-qr-code value="https://shoelace.style/" error-correction="Q"></p-qr-code>
+  <p-qr-code value="https://shoelace.style/" error-correction="H"></p-qr-code>
 </div>
 
 <style>
@@ -136,7 +136,7 @@ QR codes can be rendered with various levels of [error correction](https://www.q
 ```
 
 ```jsx:react
-import SlQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
+import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
 
 const css = `
   .qr-error-correction {
@@ -150,10 +150,10 @@ const App = () => {
   return (
     <>
       <div className="qr-error-correction">
-        <SlQrCode value="https://shoelace.style/" error-correction="L" />
-        <SlQrCode value="https://shoelace.style/" error-correction="M" />
-        <SlQrCode value="https://shoelace.style/" error-correction="Q" />
-        <SlQrCode value="https://shoelace.style/" error-correction="H" />
+        <PQrCode value="https://shoelace.style/" error-correction="L" />
+        <PQrCode value="https://shoelace.style/" error-correction="M" />
+        <PQrCode value="https://shoelace.style/" error-correction="Q" />
+        <PQrCode value="https://shoelace.style/" error-correction="H" />
       </div>
 
       <style>{css}</style>

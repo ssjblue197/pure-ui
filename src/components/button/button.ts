@@ -1,12 +1,12 @@
-import SlButton from './button.component.js';
+import PButton from './button.component.js';
 
 export * from './button.component.js';
-export default SlButton;
+export default PButton;
 
-SlButton.define('sl-button');
+PButton.define('p-button');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-button': SlButton;
+    'p-button': PButton;
   }
 }

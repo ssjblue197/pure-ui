@@ -1,12 +1,12 @@
-import SlSelect from './select.component.js';
+import PSelect from './select.component.js';
 
 export * from './select.component.js';
-export default SlSelect;
+export default PSelect;
 
-SlSelect.define('sl-select');
+PSelect.define('p-select');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-select': SlSelect;
+    'p-select': PSelect;
   }
 }

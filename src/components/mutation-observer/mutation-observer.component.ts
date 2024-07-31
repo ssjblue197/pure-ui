@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './mutation-observer.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -12,11 +12,11 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 2.0
  *
- * @event {{ mutationList: MutationRecord[] }} sl-mutation - Emitted when a mutation occurs.
+ * @event {{ mutationList: MutationRecord[] }} p-mutation - Emitted when a mutation occurs.
  *
  * @slot - The content to watch for mutations.
  */
-export default class SlMutationObserver extends ShoelaceElement {
+export default class PMutationObserver extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   private mutationObserver: MutationObserver;
@@ -58,7 +58,7 @@ export default class SlMutationObserver extends ShoelaceElement {
   }
 
   private handleMutation = (mutationList: MutationRecord[]) => {
-    this.emit('sl-mutation', {
+    this.emit('p-mutation', {
       detail: { mutationList }
     });
   };

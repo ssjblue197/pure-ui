@@ -1,12 +1,12 @@
-import SlRelativeTime from './relative-time.component.js';
+import PRelativeTime from './relative-time.component.js';
 
 export * from './relative-time.component.js';
-export default SlRelativeTime;
+export default PRelativeTime;
 
-SlRelativeTime.define('sl-relative-time');
+PRelativeTime.define('p-relative-time');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-relative-time': SlRelativeTime;
+    'p-relative-time': PRelativeTime;
   }
 }

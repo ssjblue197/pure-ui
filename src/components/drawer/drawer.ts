@@ -1,12 +1,12 @@
-import SlDrawer from './drawer.component.js';
+import PDrawer from './drawer.component.js';
 
 export * from './drawer.component.js';
-export default SlDrawer;
+export default PDrawer;
 
-SlDrawer.define('sl-drawer');
+PDrawer.define('p-drawer');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-drawer': SlDrawer;
+    'p-drawer': PDrawer;
   }
 }

@@ -1,12 +1,12 @@
-import SlTooltip from './tooltip.component.js';
+import PTooltip from './tooltip.component.js';
 
 export * from './tooltip.component.js';
-export default SlTooltip;
+export default PTooltip;
 
-SlTooltip.define('sl-tooltip');
+PTooltip.define('p-tooltip');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-tooltip': SlTooltip;
+    'p-tooltip': PTooltip;
   }
 }

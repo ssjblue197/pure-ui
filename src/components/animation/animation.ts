@@ -1,12 +1,12 @@
-import SlAnimation from './animation.component.js';
+import PAnimation from './animation.component.js';
 
 export * from './animation.component.js';
-export default SlAnimation;
+export default PAnimation;
 
-SlAnimation.define('sl-animation');
+PAnimation.define('p-animation');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-animation': SlAnimation;
+    'p-animation': PAnimation;
   }
 }

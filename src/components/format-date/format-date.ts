@@ -1,12 +1,12 @@
-import SlFormatDate from './format-date.component.js';
+import PFormatDate from './format-date.component.js';
 
 export * from './format-date.component.js';
-export default SlFormatDate;
+export default PFormatDate;
 
-SlFormatDate.define('sl-format-date');
+PFormatDate.define('p-format-date');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-format-date': SlFormatDate;
+    'p-format-date': PFormatDate;
   }
 }

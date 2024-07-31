@@ -46,7 +46,7 @@ export default css`
     top: 0;
     width: var(--divider-width);
     height: 100%;
-    background-color: var(--sl-color-neutral-0);
+    background-color: var(--p-color-neutral-0);
     translate: calc(var(--divider-width) / -2);
     cursor: ew-resize;
   }
@@ -59,16 +59,16 @@ export default css`
     top: calc(50% - (var(--handle-size) / 2));
     width: var(--handle-size);
     height: var(--handle-size);
-    background-color: var(--sl-color-neutral-0);
-    border-radius: var(--sl-border-radius-circle);
+    background-color: var(--p-color-neutral-0);
+    border-radius: var(--p-border-radius-circle);
     font-size: calc(var(--handle-size) * 0.5);
-    color: var(--sl-color-neutral-700);
+    color: var(--p-color-neutral-700);
     cursor: inherit;
     z-index: 10;
   }
 
   .image-comparer__handle:focus-visible {
-    outline: var(--sl-focus-ring);
-    outline-offset: var(--sl-focus-ring-offset);
+    outline: var(--p-focus-ring);
+    outline-offset: var(--p-focus-ring-offset);
   }
 `;

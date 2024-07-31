@@ -1,12 +1,12 @@
-import SlMutationObserver from './mutation-observer.component.js';
+import PMutationObserver from './mutation-observer.component.js';
 
 export * from './mutation-observer.component.js';
-export default SlMutationObserver;
+export default PMutationObserver;
 
-SlMutationObserver.define('sl-mutation-observer');
+PMutationObserver.define('p-mutation-observer');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-mutation-observer': SlMutationObserver;
+    'p-mutation-observer': PMutationObserver;
   }
 }

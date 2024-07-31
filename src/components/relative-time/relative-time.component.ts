@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { property, state } from 'lit/decorators.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/shoelace-element.js';
 
 interface UnitConfig {
   max: number;
@@ -24,7 +24,7 @@ const availableUnits: UnitConfig[] = [
  * @status stable
  * @since 2.0
  */
-export default class SlRelativeTime extends ShoelaceElement {
+export default class PRelativeTime extends PureElement {
   private readonly localize = new LocalizeController(this);
   private updateTimeout: number;
 

@@ -2,10 +2,10 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --border-color: var(--sl-color-neutral-200);
-    --border-radius: var(--sl-border-radius-medium);
+    --border-color: var(--p-color-neutral-200);
+    --border-radius: var(--p-border-radius-medium);
     --border-width: 1px;
-    --padding: var(--sl-spacing-large);
+    --padding: var(--p-spacing-large);
 
     display: inline-block;
   }
@@ -13,8 +13,8 @@ export default css`
   .card {
     display: flex;
     flex-direction: column;
-    background-color: var(--sl-panel-background-color);
-    box-shadow: var(--sl-shadow-x-small);
+    background-color: var(--p-panel-background-color);
+    box-shadow: var(--p-shadow-x-small);
     border: solid var(--border-width) var(--border-color);
     border-radius: var(--border-radius);
   }

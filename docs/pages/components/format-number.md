@@ -9,17 +9,17 @@ Localization is handled by the browser's [`Intl.NumberFormat` API](https://devel
 
 ```html:preview
 <div class="format-number-overview">
-  <sl-format-number value="1000"></sl-format-number>
+  <p-format-number value="1000"></p-format-number>
   <br /><br />
-  <sl-input type="number" value="1000" label="Number to Format" style="max-width: 180px;"></sl-input>
+  <p-input type="number" value="1000" label="Number to Format" style="max-width: 180px;"></p-input>
 </div>
 
 <script>
   const container = document.querySelector('.format-number-overview');
-  const formatter = container.querySelector('sl-format-number');
-  const input = container.querySelector('sl-input');
+  const formatter = container.querySelector('p-format-number');
+  const input = container.querySelector('p-input');
 
-  input.addEventListener('sl-input', () => (formatter.value = input.value || 0));
+  input.addEventListener('p-input', () => (formatter.value = input.value || 0));
 </script>
 ```
 
@@ -27,23 +27,23 @@ Localization is handled by the browser's [`Intl.NumberFormat` API](https://devel
 
 ```jsx:react
 import { useState } from 'react';
-import SlFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
-import SlInput from '@shoelace-style/shoelace/dist/react/input';
+import PFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
+import PInput from '@shoelace-style/shoelace/dist/react/input';
 
 const App = () => {
   const [value, setValue] = useState(1000);
 
   return (
     <>
-      <SlFormatNumber value={value} />
+      <PFormatNumber value={value} />
       <br />
       <br />
-      <SlInput
+      <PInput
         type="number"
         value={value}
         label="Number to Format"
         style={{ maxWidth: '180px' }}
-        onSlInput={event => setValue(event.target.value)}
+        onPInput={event => setValue(event.target.value)}
       />
     </>
   );
@@ -59,27 +59,27 @@ const App = () => {
 To get the value as a percent, set the `type` attribute to `percent`.
 
 ```html:preview
-<sl-format-number type="percent" value="0"></sl-format-number><br />
-<sl-format-number type="percent" value="0.25"></sl-format-number><br />
-<sl-format-number type="percent" value="0.50"></sl-format-number><br />
-<sl-format-number type="percent" value="0.75"></sl-format-number><br />
-<sl-format-number type="percent" value="1"></sl-format-number>
+<p-format-number type="percent" value="0"></p-format-number><br />
+<p-format-number type="percent" value="0.25"></p-format-number><br />
+<p-format-number type="percent" value="0.50"></p-format-number><br />
+<p-format-number type="percent" value="0.75"></p-format-number><br />
+<p-format-number type="percent" value="1"></p-format-number>
 ```
 
 ```jsx:react
-import SlFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
+import PFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
 
 const App = () => (
   <>
-    <SlFormatNumber type="percent" value={0} />
+    <PFormatNumber type="percent" value={0} />
     <br />
-    <SlFormatNumber type="percent" value={0.25} />
+    <PFormatNumber type="percent" value={0.25} />
     <br />
-    <SlFormatNumber type="percent" value={0.5} />
+    <PFormatNumber type="percent" value={0.5} />
     <br />
-    <SlFormatNumber type="percent" value={0.75} />
+    <PFormatNumber type="percent" value={0.75} />
     <br />
-    <SlFormatNumber type="percent" value={1} />
+    <PFormatNumber type="percent" value={1} />
   </>
 );
 ```
@@ -89,21 +89,21 @@ const App = () => (
 Use the `lang` attribute to set the number formatting locale.
 
 ```html:preview
-English: <sl-format-number value="2000" lang="en" minimum-fraction-digits="2"></sl-format-number><br />
-German: <sl-format-number value="2000" lang="de" minimum-fraction-digits="2"></sl-format-number><br />
-Russian: <sl-format-number value="2000" lang="ru" minimum-fraction-digits="2"></sl-format-number>
+English: <p-format-number value="2000" lang="en" minimum-fraction-digits="2"></p-format-number><br />
+German: <p-format-number value="2000" lang="de" minimum-fraction-digits="2"></p-format-number><br />
+Russian: <p-format-number value="2000" lang="ru" minimum-fraction-digits="2"></p-format-number>
 ```
 
 ```jsx:react
-import SlFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
+import PFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
 
 const App = () => (
   <>
-    English: <SlFormatNumber value="2000" lang="en" minimum-fraction-digits="2" />
+    English: <PFormatNumber value="2000" lang="en" minimum-fraction-digits="2" />
     <br />
-    German: <SlFormatNumber value="2000" lang="de" minimum-fraction-digits="2" />
+    German: <PFormatNumber value="2000" lang="de" minimum-fraction-digits="2" />
     <br />
-    Russian: <SlFormatNumber value="2000" lang="ru" minimum-fraction-digits="2" />
+    Russian: <PFormatNumber value="2000" lang="ru" minimum-fraction-digits="2" />
   </>
 );
 ```
@@ -113,27 +113,27 @@ const App = () => (
 To format a number as a monetary value, set the `type` attribute to `currency` and set the `currency` attribute to the desired ISO 4217 currency code. You should also specify `lang` to ensure the the number is formatted correctly for the target locale.
 
 ```html:preview
-<sl-format-number type="currency" currency="USD" value="2000" lang="en-US"></sl-format-number><br />
-<sl-format-number type="currency" currency="GBP" value="2000" lang="en-GB"></sl-format-number><br />
-<sl-format-number type="currency" currency="EUR" value="2000" lang="de"></sl-format-number><br />
-<sl-format-number type="currency" currency="RUB" value="2000" lang="ru"></sl-format-number><br />
-<sl-format-number type="currency" currency="CNY" value="2000" lang="zh-cn"></sl-format-number>
+<p-format-number type="currency" currency="USD" value="2000" lang="en-US"></p-format-number><br />
+<p-format-number type="currency" currency="GBP" value="2000" lang="en-GB"></p-format-number><br />
+<p-format-number type="currency" currency="EUR" value="2000" lang="de"></p-format-number><br />
+<p-format-number type="currency" currency="RUB" value="2000" lang="ru"></p-format-number><br />
+<p-format-number type="currency" currency="CNY" value="2000" lang="zh-cn"></p-format-number>
 ```
 
 ```jsx:react
-import SlFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
+import PFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
 
 const App = () => (
   <>
-    <SlFormatNumber type="currency" currency="USD" value="2000" lang="en-US" />
+    <PFormatNumber type="currency" currency="USD" value="2000" lang="en-US" />
     <br />
-    <SlFormatNumber type="currency" currency="GBP" value="2000" lang="en-GB" />
+    <PFormatNumber type="currency" currency="GBP" value="2000" lang="en-GB" />
     <br />
-    <SlFormatNumber type="currency" currency="EUR" value="2000" lang="de" />
+    <PFormatNumber type="currency" currency="EUR" value="2000" lang="de" />
     <br />
-    <SlFormatNumber type="currency" currency="RUB" value="2000" lang="ru" />
+    <PFormatNumber type="currency" currency="RUB" value="2000" lang="ru" />
     <br />
-    <SlFormatNumber type="currency" currency="CNY" value="2000" lang="zh-cn" />
+    <PFormatNumber type="currency" currency="CNY" value="2000" lang="zh-cn" />
   </>
 );
 ```

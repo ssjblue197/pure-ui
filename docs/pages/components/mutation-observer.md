@@ -5,21 +5,21 @@ meta:
 layout: component
 ---
 
-The mutation observer will report changes to the content it wraps through the `sl-mutation` event. When emitted, a collection of [MutationRecord](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord) objects will be attached to `event.detail` that contains information about how it changed.
+The mutation observer will report changes to the content it wraps through the `p-mutation` event. When emitted, a collection of [MutationRecord](https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord) objects will be attached to `event.detail` that contains information about how it changed.
 
 ```html:preview
 <div class="mutation-overview">
-  <sl-mutation-observer attr="variant">
-    <sl-button variant="primary">Click to mutate</sl-button>
-  </sl-mutation-observer>
+  <p-mutation-observer attr="variant">
+    <p-button variant="primary">Click to mutate</p-button>
+  </p-mutation-observer>
 
   <br />
   👆 Click the button and watch the console
 
   <script>
     const container = document.querySelector('.mutation-overview');
-    const mutationObserver = container.querySelector('sl-mutation-observer');
-    const button = container.querySelector('sl-button');
+    const mutationObserver = container.querySelector('p-mutation-observer');
+    const button = container.querySelector('p-button');
     const variants = ['primary', 'success', 'neutral', 'warning', 'danger'];
     let clicks = 0;
 
@@ -30,13 +30,13 @@ The mutation observer will report changes to the content it wraps through the `s
     });
 
     // Log mutations
-    mutationObserver.addEventListener('sl-mutation', event => {
+    mutationObserver.addEventListener('p-mutation', event => {
       console.log(event.detail);
     });
   </script>
 
   <style>
-    .mutation-overview sl-button {
+    .mutation-overview p-button {
       margin-bottom: 1rem;
     }
   </style>
@@ -45,13 +45,13 @@ The mutation observer will report changes to the content it wraps through the `s
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlMutationObserver from '@shoelace-style/shoelace/dist/react/mutation-observer';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PMutationObserver from '@shoelace-style/shoelace/dist/react/mutation-observer';
 
 const css = `
   .resize-observer-overview div {
     display: flex;
-    border: solid 2px var(--sl-input-border-color);
+    border: solid 2px var(--p-input-border-color);
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -72,11 +72,11 @@ const App = () => {
 
   return (
     <>
-      <SlMutationObserver attr="*" onSlMutation={event => console.log(event.detail)}>
-        <SlButton variant={variant} onClick={handleClick}>
+      <PMutationObserver attr="*" onPMutation={event => console.log(event.detail)}>
+        <PButton variant={variant} onClick={handleClick}>
           Click to mutate
-        </SlButton>
-      </SlMutationObserver>
+        </PButton>
+      </PMutationObserver>
 
       <style>{css}</style>
     </>
@@ -96,31 +96,31 @@ Use the `child-list` attribute to watch for new child elements that are added or
 
 ```html:preview
 <div class="mutation-child-list">
-  <sl-mutation-observer child-list>
+  <p-mutation-observer child-list>
     <div class="buttons">
-      <sl-button variant="primary">Add button</sl-button>
+      <p-button variant="primary">Add button</p-button>
     </div>
-  </sl-mutation-observer>
+  </p-mutation-observer>
 
   👆 Add and remove buttons and watch the console
 
   <script>
     const container = document.querySelector('.mutation-child-list');
-    const mutationObserver = container.querySelector('sl-mutation-observer');
+    const mutationObserver = container.querySelector('p-mutation-observer');
     const buttons = container.querySelector('.buttons');
-    const button = container.querySelector('sl-button[variant="primary"]');
+    const button = container.querySelector('p-button[variant="primary"]');
     let i = 0;
 
     // Add a button
     button.addEventListener('click', () => {
-      const button = document.createElement('sl-button');
+      const button = document.createElement('p-button');
       button.textContent = ++i;
       buttons.append(button);
     });
 
     // Remove a button
     buttons.addEventListener('click', event => {
-      const target = event.target.closest('sl-button:not([variant="primary"])');
+      const target = event.target.closest('p-button:not([variant="primary"])');
       event.stopPropagation();
 
       if (target) {
@@ -129,7 +129,7 @@ Use the `child-list` attribute to watch for new child elements that are added or
     });
 
     // Log mutations
-    mutationObserver.addEventListener('sl-mutation', event => {
+    mutationObserver.addEventListener('p-mutation', event => {
       console.log(event.detail);
     });
   </script>
@@ -147,8 +147,8 @@ Use the `child-list` attribute to watch for new child elements that are added or
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlMutationObserver from '@shoelace-style/shoelace/dist/react/mutation-observer';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PMutationObserver from '@shoelace-style/shoelace/dist/react/mutation-observer';
 
 const css = `
   .mutation-child-list .buttons {
@@ -175,18 +175,18 @@ const App = () => {
   return (
     <>
       <div className="mutation-child-list">
-        <SlMutationObserver child-list onSlMutation={event => console.log(event.detail)}>
+        <PMutationObserver child-list onPMutation={event => console.log(event.detail)}>
           <div className="buttons">
-            <SlButton variant="primary" onClick={addButton}>
+            <PButton variant="primary" onClick={addButton}>
               Add button
-            </SlButton>
+            </PButton>
             {buttonIds.map(id => (
-              <SlButton key={id} variant="default" onClick={() => removeButton(id)}>
+              <PButton key={id} variant="default" onClick={() => removeButton(id)}>
                 {id}
-              </SlButton>
+              </PButton>
             ))}
           </div>
-        </SlMutationObserver>
+        </PMutationObserver>
       </div>
       👆 Add and remove buttons and watch the console
       <style>{css}</style>

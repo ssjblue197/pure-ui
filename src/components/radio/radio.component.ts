@@ -3,8 +3,8 @@ import { html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlIcon from '../icon/icon.component.js';
+import PIcon from '../icon/icon.component.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './radio.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -14,22 +14,22 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 2.0
  *
- * @dependency sl-icon
+ * @dependency p-icon
  *
  * @slot - The radio's label.
  *
- * @event sl-blur - Emitted when the control loses focus.
- * @event sl-focus - Emitted when the control gains focus.
+ * @event p-blur - Emitted when the control loses focus.
+ * @event p-focus - Emitted when the control gains focus.
  *
  * @csspart base - The component's base wrapper.
  * @csspart control - The circular container that wraps the radio's checked state.
  * @csspart control--checked - The radio control when the radio is checked.
- * @csspart checked-icon - The checked icon, an `<sl-icon>` element.
+ * @csspart checked-icon - The checked icon, an `<p-icon>` element.
  * @csspart label - The container that wraps the radio's label.
  */
-export default class SlRadio extends ShoelaceElement {
+export default class PRadio extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'sl-icon': SlIcon };
+  static dependencies = { 'p-icon': PIcon };
 
   @state() checked = false;
   @state() protected hasFocus = false;
@@ -60,7 +60,7 @@ export default class SlRadio extends ShoelaceElement {
 
   private handleBlur = () => {
     this.hasFocus = false;
-    this.emit('sl-blur');
+    this.emit('p-blur');
   };
 
   private handleClick = () => {
@@ -71,7 +71,7 @@ export default class SlRadio extends ShoelaceElement {
 
   private handleFocus = () => {
     this.hasFocus = true;
-    this.emit('sl-focus');
+    this.emit('p-focus');
   };
 
   private setInitialAttributes() {
@@ -107,7 +107,7 @@ export default class SlRadio extends ShoelaceElement {
       >
         <span part="${`control${this.checked ? ' control--checked' : ''}`}" class="radio__control">
           ${this.checked
-            ? html` <sl-icon part="checked-icon" class="radio__checked-icon" library="system" name="radio"></sl-icon> `
+            ? html` <p-icon part="checked-icon" class="radio__checked-icon" library="system" name="radio"></p-icon> `
             : ''}
         </span>
 

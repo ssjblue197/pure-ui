@@ -1,12 +1,12 @@
-import SlCopyButton from './copy-button.component.js';
+import PCopyButton from './copy-button.component.js';
 
 export * from './copy-button.component.js';
-export default SlCopyButton;
+export default PCopyButton;
 
-SlCopyButton.define('sl-copy-button');
+PCopyButton.define('p-copy-button');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-copy-button': SlCopyButton;
+    'p-copy-button': PCopyButton;
   }
 }

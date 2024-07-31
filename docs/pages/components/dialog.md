@@ -8,17 +8,17 @@ layout: component
 <!-- cspell:dictionaries lorem-ipsum -->
 
 ```html:preview
-<sl-dialog label="Dialog" class="dialog-overview">
+<p-dialog label="Dialog" class="dialog-overview">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  <sl-button slot="footer" variant="primary">Close</sl-button>
-</sl-dialog>
+  <p-button slot="footer" variant="primary">Close</p-button>
+</p-dialog>
 
-<sl-button>Open Dialog</sl-button>
+<p-button>Open Dialog</p-button>
 
 <script>
   const dialog = document.querySelector('.dialog-overview');
   const openButton = dialog.nextElementSibling;
-  const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+  const closeButton = dialog.querySelector('p-button[slot="footer"]');
 
   openButton.addEventListener('click', () => dialog.show());
   closeButton.addEventListener('click', () => dialog.hide());
@@ -27,22 +27,22 @@ layout: component
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDialog from '@shoelace-style/shoelace/dist/react/dialog';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDialog from '@shoelace-style/shoelace/dist/react/dialog';
 
 const App = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <SlDialog label="Dialog" open={open} onSlAfterHide={() => setOpen(false)}>
+      <PDialog label="Dialog" open={open} onPAfterHide={() => setOpen(false)}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
+        <PButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
-        </SlButton>
-      </SlDialog>
+        </PButton>
+      </PDialog>
 
-      <SlButton onClick={() => setOpen(true)}>Open Dialog</SlButton>
+      <PButton onClick={() => setOpen(true)}>Open Dialog</PButton>
     </>
   );
 };
@@ -55,17 +55,17 @@ const App = () => {
 Use the `--width` custom property to set the dialog's width.
 
 ```html:preview
-<sl-dialog label="Dialog" class="dialog-width" style="--width: 50vw;">
+<p-dialog label="Dialog" class="dialog-width" style="--width: 50vw;">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  <sl-button slot="footer" variant="primary">Close</sl-button>
-</sl-dialog>
+  <p-button slot="footer" variant="primary">Close</p-button>
+</p-dialog>
 
-<sl-button>Open Dialog</sl-button>
+<p-button>Open Dialog</p-button>
 
 <script>
   const dialog = document.querySelector('.dialog-width');
   const openButton = dialog.nextElementSibling;
-  const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+  const closeButton = dialog.querySelector('p-button[slot="footer"]');
 
   openButton.addEventListener('click', () => dialog.show());
   closeButton.addEventListener('click', () => dialog.hide());
@@ -76,22 +76,22 @@ Use the `--width` custom property to set the dialog's width.
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDialog from '@shoelace-style/shoelace/dist/react/dialog';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDialog from '@shoelace-style/shoelace/dist/react/dialog';
 
 const App = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <SlDialog label="Dialog" open={open} style={{ '--width': '50vw' }} onSlAfterHide={() => setOpen(false)}>
+      <PDialog label="Dialog" open={open} style={{ '--width': '50vw' }} onPAfterHide={() => setOpen(false)}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
+        <PButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
-        </SlButton>
-      </SlDialog>
+        </PButton>
+      </PDialog>
 
-      <SlButton onClick={() => setOpen(true)}>Open Dialog</SlButton>
+      <PButton onClick={() => setOpen(true)}>Open Dialog</PButton>
     </>
   );
 };
@@ -104,19 +104,19 @@ const App = () => {
 By design, a dialog's height will never exceed that of the viewport. As such, dialogs will not scroll with the page ensuring the header and footer are always accessible to the user.
 
 ```html:preview
-<sl-dialog label="Dialog" class="dialog-scrolling">
-  <div style="height: 150vh; border: dashed 2px var(--sl-color-neutral-200); padding: 0 1rem;">
+<p-dialog label="Dialog" class="dialog-scrolling">
+  <div style="height: 150vh; border: dashed 2px var(--p-color-neutral-200); padding: 0 1rem;">
     <p>Scroll down and give it a try! 👇</p>
   </div>
-  <sl-button slot="footer" variant="primary">Close</sl-button>
-</sl-dialog>
+  <p-button slot="footer" variant="primary">Close</p-button>
+</p-dialog>
 
-<sl-button>Open Dialog</sl-button>
+<p-button>Open Dialog</p-button>
 
 <script>
   const dialog = document.querySelector('.dialog-scrolling');
   const openButton = dialog.nextElementSibling;
-  const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+  const closeButton = dialog.querySelector('p-button[slot="footer"]');
 
   openButton.addEventListener('click', () => dialog.show());
   closeButton.addEventListener('click', () => dialog.hide());
@@ -127,31 +127,31 @@ By design, a dialog's height will never exceed that of the viewport. As such, di
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDialog from '@shoelace-style/shoelace/dist/react/dialog';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDialog from '@shoelace-style/shoelace/dist/react/dialog';
 
 const App = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <SlDialog label="Dialog" open={open} onSlAfterHide={() => setOpen(false)}>
+      <PDialog label="Dialog" open={open} onPAfterHide={() => setOpen(false)}>
         <div
           style={{
             height: '150vh',
-            border: 'dashed 2px var(--sl-color-neutral-200)',
+            border: 'dashed 2px var(--p-color-neutral-200)',
             padding: '0 1rem'
           }}
         >
           <p>Scroll down and give it a try! 👇</p>
         </div>
 
-        <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
+        <PButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
-        </SlButton>
-      </SlDialog>
+        </PButton>
+      </PDialog>
 
-      <SlButton onClick={() => setOpen(true)}>Open Dialog</SlButton>
+      <PButton onClick={() => setOpen(true)}>Open Dialog</PButton>
     </>
   );
 };
@@ -164,18 +164,18 @@ const App = () => {
 The header shows a functional close button by default. You can use the `header-actions` slot to add additional [icon buttons](/components/icon-button) if needed.
 
 ```html:preview
-<sl-dialog label="Dialog" class="dialog-header-actions">
-  <sl-icon-button class="new-window" slot="header-actions" name="box-arrow-up-right"></sl-icon-button>
+<p-dialog label="Dialog" class="dialog-header-actions">
+  <p-icon-button class="new-window" slot="header-actions" name="box-arrow-up-right"></p-icon-button>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  <sl-button slot="footer" variant="primary">Close</sl-button>
-</sl-dialog>
+  <p-button slot="footer" variant="primary">Close</p-button>
+</p-dialog>
 
-<sl-button>Open Dialog</sl-button>
+<p-button>Open Dialog</p-button>
 
 <script>
   const dialog = document.querySelector('.dialog-header-actions');
   const openButton = dialog.nextElementSibling;
-  const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+  const closeButton = dialog.querySelector('p-button[slot="footer"]');
   const newWindowButton = dialog.querySelector('.new-window');
 
   openButton.addEventListener('click', () => dialog.show());
@@ -186,29 +186,29 @@ The header shows a functional close button by default. You can use the `header-a
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDialog from '@shoelace-style/shoelace/dist/react/dialog';
-import SlIconButton from '@shoelace-style/shoelace/dist/react/icon-button';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDialog from '@shoelace-style/shoelace/dist/react/dialog';
+import PIconButton from '@shoelace-style/shoelace/dist/react/icon-button';
 
 const App = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <SlDialog label="Dialog" open={open} onSlAfterHide={() => setOpen(false)}>
-        <SlIconButton
+      <PDialog label="Dialog" open={open} onPAfterHide={() => setOpen(false)}>
+        <PIconButton
           class="new-window"
           slot="header-actions"
           name="box-arrow-up-right"
           onClick={() => window.open(location.href)}
         />
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
+        <PButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
-        </SlButton>
-      </SlDialog>
+        </PButton>
+      </PDialog>
 
-      <SlButton onClick={() => setOpen(true)}>Open Dialog</SlButton>
+      <PButton onClick={() => setOpen(true)}>Open Dialog</PButton>
     </>
   );
 };
@@ -218,28 +218,28 @@ const App = () => {
 
 By default, dialogs will close when the user clicks the close button, clicks the overlay, or presses the [[Escape]] key. In most cases, the default behavior is the best behavior in terms of UX. However, there are situations where this may be undesirable, such as when data loss will occur.
 
-To keep the dialog open in such cases, you can cancel the `sl-request-close` event. When canceled, the dialog will remain open and pulse briefly to draw the user's attention to it.
+To keep the dialog open in such cases, you can cancel the `p-request-close` event. When canceled, the dialog will remain open and pulse briefly to draw the user's attention to it.
 
 You can use `event.detail.source` to determine what triggered the request to close. This example prevents the dialog from closing when the overlay is clicked, but allows the close button or [[Escape]] to dismiss it.
 
 ```html:preview
-<sl-dialog label="Dialog" class="dialog-deny-close">
+<p-dialog label="Dialog" class="dialog-deny-close">
   This dialog will not close when you click on the overlay.
-  <sl-button slot="footer" variant="primary">Close</sl-button>
-</sl-dialog>
+  <p-button slot="footer" variant="primary">Close</p-button>
+</p-dialog>
 
-<sl-button>Open Dialog</sl-button>
+<p-button>Open Dialog</p-button>
 
 <script>
   const dialog = document.querySelector('.dialog-deny-close');
   const openButton = dialog.nextElementSibling;
-  const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+  const closeButton = dialog.querySelector('p-button[slot="footer"]');
 
   openButton.addEventListener('click', () => dialog.show());
   closeButton.addEventListener('click', () => dialog.hide());
 
   // Prevent the dialog from closing when the user clicks on the overlay
-  dialog.addEventListener('sl-request-close', event => {
+  dialog.addEventListener('p-request-close', event => {
     if (event.detail.source === 'overlay') {
       event.preventDefault();
     }
@@ -249,8 +249,8 @@ You can use `event.detail.source` to determine what triggered the request to clo
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDialog from '@shoelace-style/shoelace/dist/react/dialog';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDialog from '@shoelace-style/shoelace/dist/react/dialog';
 
 const App = () => {
   const [open, setOpen] = useState(false);
@@ -264,14 +264,14 @@ const App = () => {
 
   return (
     <>
-      <SlDialog label="Dialog" open={open} onSlRequestClose={handleRequestClose} onSlAfterHide={() => setOpen(false)}>
+      <PDialog label="Dialog" open={open} onPRequestClose={handleRequestClose} onPAfterHide={() => setOpen(false)}>
         This dialog will not close when you click on the overlay.
-        <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
+        <PButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
-        </SlButton>
-      </SlDialog>
+        </PButton>
+      </PDialog>
 
-      <SlButton onClick={() => setOpen(true)}>Open Dialog</SlButton>
+      <PButton onClick={() => setOpen(true)}>Open Dialog</PButton>
     </>
   );
 };
@@ -282,18 +282,18 @@ const App = () => {
 By default, the dialog's panel will gain focus when opened. This allows a subsequent tab press to focus on the first tabbable element in the dialog. If you want a different element to have focus, add the `autofocus` attribute to it as shown below.
 
 ```html:preview
-<sl-dialog label="Dialog" class="dialog-focus">
-  <sl-input autofocus placeholder="I will have focus when the dialog is opened"></sl-input>
-  <sl-button slot="footer" variant="primary">Close</sl-button>
-</sl-dialog>
+<p-dialog label="Dialog" class="dialog-focus">
+  <p-input autofocus placeholder="I will have focus when the dialog is opened"></p-input>
+  <p-button slot="footer" variant="primary">Close</p-button>
+</p-dialog>
 
-<sl-button>Open Dialog</sl-button>
+<p-button>Open Dialog</p-button>
 
 <script>
   const dialog = document.querySelector('.dialog-focus');
-  const input = dialog.querySelector('sl-input');
+  const input = dialog.querySelector('p-input');
   const openButton = dialog.nextElementSibling;
-  const closeButton = dialog.querySelector('sl-button[slot="footer"]');
+  const closeButton = dialog.querySelector('p-button[slot="footer"]');
 
   openButton.addEventListener('click', () => dialog.show());
   closeButton.addEventListener('click', () => dialog.hide());
@@ -302,28 +302,28 @@ By default, the dialog's panel will gain focus when opened. This allows a subseq
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDialog from '@shoelace-style/shoelace/dist/react/dialog';
-import SlInput from '@shoelace-style/shoelace/dist/react/input';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDialog from '@shoelace-style/shoelace/dist/react/dialog';
+import PInput from '@shoelace-style/shoelace/dist/react/input';
 
 const App = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <SlDialog label="Dialog" open={open} onSlAfterHide={() => setOpen(false)}>
-        <SlInput autofocus placeholder="I will have focus when the dialog is opened" />
-        <SlButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
+      <PDialog label="Dialog" open={open} onPAfterHide={() => setOpen(false)}>
+        <PInput autofocus placeholder="I will have focus when the dialog is opened" />
+        <PButton slot="footer" variant="primary" onClick={() => setOpen(false)}>
           Close
-        </SlButton>
-      </SlDialog>
+        </PButton>
+      </PDialog>
 
-      <SlButton onClick={() => setOpen(true)}>Open Dialog</SlButton>
+      <PButton onClick={() => setOpen(true)}>Open Dialog</PButton>
     </>
   );
 };
 ```
 
 :::tip
-You can further customize initial focus behavior by canceling the `sl-initial-focus` event and setting focus yourself inside the event handler.
+You can further customize initial focus behavior by canceling the `p-initial-focus` event and setting focus yourself inside the event handler.
 :::

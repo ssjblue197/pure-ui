@@ -25,7 +25,7 @@ let buildResults;
 
 const bundleDirectories = [cdndir, outdir];
 let packageData = JSON.parse(readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
-const shoelaceVersion = JSON.stringify(packageData.version.toString());
+const pureUIVersion = JSON.stringify(packageData.version.toString());
 
 //
 // Runs 11ty and builds the docs. The returned promise resolves after the initial publish has completed. The child
@@ -97,9 +97,9 @@ async function buildTheSource() {
       // NOTE: Entry points must be mapped in package.json > exports, otherwise users won't be able to import them!
       //
       // The whole shebang
-      './src/shoelace.ts',
+      './src/pure-ui.ts',
       // The auto-loader
-      './src/shoelace-autoloader.ts',
+      './src/pure-ui-autoloader.ts',
       // Components
       ...(await globby('./src/components/**/!(*.(style|test)).ts')),
       // Translations
@@ -128,7 +128,7 @@ async function buildTheSource() {
     splitting: true,
     plugins: [
       replace({
-        __SHOELACE_VERSION__: shoelaceVersion
+        __SHOELACE_VERSION__: pureUIVersion
       })
     ]
   };
@@ -252,7 +252,7 @@ if (serve) {
     startPath: '/',
     port,
     logLevel: 'silent',
-    logPrefix: '[shoelace]',
+    logPrefix: '[pure-ui]',
     logFileChanges: true,
     notify: false,
     single: false,

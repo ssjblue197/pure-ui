@@ -4,52 +4,52 @@ import { expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
-import type { SlSelectEvent } from '../../events/sl-select.js';
-import type SlMenu from './menu.js';
-import type SlMenuItem from '../menu-item/menu-item.component.js';
+import type { PSelectEvent } from '../../events/p-select.js';
+import type PMenu from './menu.js';
+import type PMenuItem from '../menu-item/menu-item.component.js';
 
-describe('<sl-menu>', () => {
-  it('emits sl-select with the correct event detail when clicking an item', async () => {
-    const menu = await fixture<SlMenu>(html`
-      <sl-menu>
-        <sl-menu-item value="item-1">Item 1</sl-menu-item>
-        <sl-menu-item value="item-2">Item 2</sl-menu-item>
-        <sl-menu-item value="item-3">Item 3</sl-menu-item>
-        <sl-menu-item value="item-4">Item 4</sl-menu-item>
-      </sl-menu>
+describe('<p-menu>', () => {
+  it('emits p-select with the correct event detail when clicking an item', async () => {
+    const menu = await fixture<PMenu>(html`
+      <p-menu>
+        <p-menu-item value="item-1">Item 1</p-menu-item>
+        <p-menu-item value="item-2">Item 2</p-menu-item>
+        <p-menu-item value="item-3">Item 3</p-menu-item>
+        <p-menu-item value="item-4">Item 4</p-menu-item>
+      </p-menu>
     `);
-    const item2 = menu.querySelectorAll('sl-menu-item')[1];
-    const selectHandler = sinon.spy((event: SlSelectEvent) => {
+    const item2 = menu.querySelectorAll('p-menu-item')[1];
+    const selectHandler = sinon.spy((event: PSelectEvent) => {
       const item = event.detail.item;
       if (item !== item2) {
-        expect.fail('Incorrect event detail emitted with sl-select');
+        expect.fail('Incorrect event detail emitted with p-select');
       }
     });
 
-    menu.addEventListener('sl-select', selectHandler);
+    menu.addEventListener('p-select', selectHandler);
     await clickOnElement(item2);
 
     expect(selectHandler).to.have.been.calledOnce;
   });
 
   it('can be selected via keyboard', async () => {
-    const menu = await fixture<SlMenu>(html`
-      <sl-menu>
-        <sl-menu-item value="item-1">Item 1</sl-menu-item>
-        <sl-menu-item value="item-2">Item 2</sl-menu-item>
-        <sl-menu-item value="item-3">Item 3</sl-menu-item>
-        <sl-menu-item value="item-4">Item 4</sl-menu-item>
-      </sl-menu>
+    const menu = await fixture<PMenu>(html`
+      <p-menu>
+        <p-menu-item value="item-1">Item 1</p-menu-item>
+        <p-menu-item value="item-2">Item 2</p-menu-item>
+        <p-menu-item value="item-3">Item 3</p-menu-item>
+        <p-menu-item value="item-4">Item 4</p-menu-item>
+      </p-menu>
     `);
-    const [item1, item2] = menu.querySelectorAll('sl-menu-item');
-    const selectHandler = sinon.spy((event: SlSelectEvent) => {
+    const [item1, item2] = menu.querySelectorAll('p-menu-item');
+    const selectHandler = sinon.spy((event: PSelectEvent) => {
       const item = event.detail.item;
       if (item !== item2) {
         expect.fail('Incorrect item selected');
       }
     });
 
-    menu.addEventListener('sl-select', selectHandler);
+    menu.addEventListener('p-select', selectHandler);
 
     item1.focus();
     await item1.updateComplete;
@@ -60,18 +60,18 @@ describe('<sl-menu>', () => {
   });
 
   it('does not select disabled items when clicking', async () => {
-    const menu = await fixture<SlMenu>(html`
-      <sl-menu>
-        <sl-menu-item value="item-1">Item 1</sl-menu-item>
-        <sl-menu-item value="item-2" disabled>Item 2</sl-menu-item>
-        <sl-menu-item value="item-3">Item 3</sl-menu-item>
-        <sl-menu-item value="item-4">Item 4</sl-menu-item>
-      </sl-menu>
+    const menu = await fixture<PMenu>(html`
+      <p-menu>
+        <p-menu-item value="item-1">Item 1</p-menu-item>
+        <p-menu-item value="item-2" disabled>Item 2</p-menu-item>
+        <p-menu-item value="item-3">Item 3</p-menu-item>
+        <p-menu-item value="item-4">Item 4</p-menu-item>
+      </p-menu>
     `);
-    const item2 = menu.querySelectorAll('sl-menu-item')[1];
+    const item2 = menu.querySelectorAll('p-menu-item')[1];
     const selectHandler = sinon.spy();
 
-    menu.addEventListener('sl-select', selectHandler);
+    menu.addEventListener('p-select', selectHandler);
 
     await clickOnElement(item2);
 
@@ -79,18 +79,18 @@ describe('<sl-menu>', () => {
   });
 
   it('does not select disabled items when pressing enter', async () => {
-    const menu = await fixture<SlMenu>(html`
-      <sl-menu>
-        <sl-menu-item value="item-1">Item 1</sl-menu-item>
-        <sl-menu-item value="item-2" disabled>Item 2</sl-menu-item>
-        <sl-menu-item value="item-3">Item 3</sl-menu-item>
-        <sl-menu-item value="item-4">Item 4</sl-menu-item>
-      </sl-menu>
+    const menu = await fixture<PMenu>(html`
+      <p-menu>
+        <p-menu-item value="item-1">Item 1</p-menu-item>
+        <p-menu-item value="item-2" disabled>Item 2</p-menu-item>
+        <p-menu-item value="item-3">Item 3</p-menu-item>
+        <p-menu-item value="item-4">Item 4</p-menu-item>
+      </p-menu>
     `);
-    const [item1, item2] = menu.querySelectorAll('sl-menu-item');
+    const [item1, item2] = menu.querySelectorAll('p-menu-item');
     const selectHandler = sinon.spy();
 
-    menu.addEventListener('sl-select', selectHandler);
+    menu.addEventListener('p-select', selectHandler);
 
     item1.focus();
     await item1.updateComplete;
@@ -103,19 +103,19 @@ describe('<sl-menu>', () => {
   });
 
   // @see https://github.com/shoelace-style/shoelace/issues/1596
-  it('Should fire "sl-select" when clicking an element within a menu-item', async () => {
+  it('Should fire "p-select" when clicking an element within a menu-item', async () => {
     // eslint-disable-next-line
     const selectHandler = sinon.spy(() => {});
 
-    const menu: SlMenu = await fixture(html`
-      <sl-menu>
-        <sl-menu-item>
+    const menu: PMenu = await fixture(html`
+      <p-menu>
+        <p-menu-item>
           <span>Menu item</span>
-        </sl-menu-item>
-      </sl-menu>
+        </p-menu-item>
+      </p-menu>
     `);
 
-    menu.addEventListener('sl-select', selectHandler);
+    menu.addEventListener('p-select', selectHandler);
     const span = menu.querySelector('span')!;
     await clickOnElement(span);
 
@@ -124,19 +124,19 @@ describe('<sl-menu>', () => {
 
   // @see https://github.com/shoelace-style/shoelace/issues/2115
   it('Should be able to check a checkbox menu item in a submenu', async () => {
-    const menu: SlMenu = await fixture(html`
-      <sl-menu style="max-width: 200px;">
-        <sl-menu-item>
+    const menu: PMenu = await fixture(html`
+      <p-menu style="max-width: 200px;">
+        <p-menu-item>
           <span>Menu item</span>
-          <sl-menu slot="submenu">
-            <sl-menu-item type="checkbox" checked>Checkbox</sl-menu-item>
-          </sl-menu>
-        </sl-menu-item>
-      </sl-menu>
+          <p-menu slot="submenu">
+            <p-menu-item type="checkbox" checked>Checkbox</p-menu-item>
+          </p-menu>
+        </p-menu-item>
+      </p-menu>
     `);
 
-    const menuItem = menu.querySelector<SlMenuItem>('sl-menu-item')!;
-    const checkbox = menu.querySelector<SlMenuItem>("[type='checkbox']")!;
+    const menuItem = menu.querySelector<PMenuItem>('p-menu-item')!;
+    const checkbox = menu.querySelector<PMenuItem>("[type='checkbox']")!;
 
     expect(checkbox.checked).to.equal(true);
     await clickOnElement(menuItem); // Focus the menu item

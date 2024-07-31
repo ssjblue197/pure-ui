@@ -2,13 +2,13 @@ import { createRef, ref, type Ref } from 'lit/directives/ref.js';
 import { type HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
-import type SlMenuItem from './menu-item.js';
-import type SlPopup from '../popup/popup.js';
+import type PMenuItem from './menu-item.js';
+import type PPopup from '../popup/popup.js';
 
 /** A reactive controller to manage the registration of event listeners for submenus. */
 export class SubmenuController implements ReactiveController {
-  private host: ReactiveControllerHost & SlMenuItem;
-  private popupRef: Ref<SlPopup> = createRef();
+  private host: ReactiveControllerHost & PMenuItem;
+  private popupRef: Ref<PPopup> = createRef();
   private enableSubmenuTimer = -1;
   private isConnected = false;
   private isPopupConnected = false;
@@ -16,7 +16,7 @@ export class SubmenuController implements ReactiveController {
   private readonly hasSlotController: HasSlotController;
   private readonly submenuOpenDelay = 100;
 
-  constructor(host: ReactiveControllerHost & SlMenuItem, hasSlotController: HasSlotController) {
+  constructor(host: ReactiveControllerHost & PMenuItem, hasSlotController: HasSlotController) {
     (this.host = host).addController(this);
     this.hasSlotController = hasSlotController;
   }
@@ -55,7 +55,7 @@ export class SubmenuController implements ReactiveController {
     if (!this.isPopupConnected) {
       if (this.popupRef.value) {
         this.popupRef.value.addEventListener('mouseover', this.handlePopupMouseover);
-        this.popupRef.value.addEventListener('sl-reposition', this.handlePopupReposition);
+        this.popupRef.value.addEventListener('p-reposition', this.handlePopupReposition);
         this.isPopupConnected = true;
       }
     }
@@ -73,7 +73,7 @@ export class SubmenuController implements ReactiveController {
     if (this.isPopupConnected) {
       if (this.popupRef.value) {
         this.popupRef.value.removeEventListener('mouseover', this.handlePopupMouseover);
-        this.popupRef.value.removeEventListener('sl-reposition', this.handlePopupReposition);
+        this.popupRef.value.removeEventListener('p-reposition', this.handlePopupReposition);
         this.isPopupConnected = false;
       }
     }
@@ -104,7 +104,7 @@ export class SubmenuController implements ReactiveController {
     // Menus
     let menuItems: NodeListOf<Element> | null = null;
     for (const elt of submenuSlot.assignedElements()) {
-      menuItems = elt.querySelectorAll("sl-menu-item, [role^='menuitem']");
+      menuItems = elt.querySelectorAll("p-menu-item, [role^='menuitem']");
       if (menuItems.length !== 0) {
         break;
       }
@@ -130,8 +130,8 @@ export class SubmenuController implements ReactiveController {
       } else {
         this.enableSubmenu(false);
         this.host.updateComplete.then(() => {
-          if (menuItems![0] instanceof HTMLElement) {
-            menuItems![0].focus();
+          if (menuItems[0] instanceof HTMLElement) {
+            menuItems[0].focus();
           }
         });
         this.host.requestUpdate();
@@ -172,7 +172,7 @@ export class SubmenuController implements ReactiveController {
       event.stopPropagation();
     } else if (
       event.target instanceof Element &&
-      (event.target.tagName === 'sl-menu-item' || event.target.role?.startsWith('menuitem'))
+      (event.target.tagName === 'p-menu-item' || event.target.role?.startsWith('menuitem'))
     ) {
       this.disableSubmenu();
     }
@@ -194,7 +194,7 @@ export class SubmenuController implements ReactiveController {
   // Set the safe triangle values for the submenu when the position changes
   private handlePopupReposition = () => {
     const submenuSlot: HTMLSlotElement | null = this.host.renderRoot.querySelector("slot[name='submenu']");
-    const menu = submenuSlot?.assignedElements({ flatten: true }).filter(el => el.localName === 'sl-menu')[0];
+    const menu = submenuSlot?.assignedElements({ flatten: true }).filter(el => el.localName === 'p-menu')[0];
     const isRtl = this.host.matches(':dir(rtl)');
     if (!menu) {
       return;
@@ -261,13 +261,13 @@ export class SubmenuController implements ReactiveController {
   renderSubmenu() {
     const isRtl = this.host.matches(':dir(rtl)');
 
-    // Always render the slot, but conditionally render the outer <sl-popup>
+    // Always render the slot, but conditionally render the outer <p-popup>
     if (!this.isConnected) {
       return html` <slot name="submenu" hidden></slot> `;
     }
 
     return html`
-      <sl-popup
+      <p-popup
         ${ref(this.popupRef)}
         placement=${isRtl ? 'left-start' : 'right-start'}
         anchor="anchor"
@@ -279,7 +279,7 @@ export class SubmenuController implements ReactiveController {
         auto-size-padding="10"
       >
         <slot name="submenu"></slot>
-      </sl-popup>
+      </p-popup>
     `;
   }
 }

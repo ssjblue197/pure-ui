@@ -6,7 +6,7 @@ import { LocalizeController } from '../../utilities/localize.js';
 import { partMap } from '../../internal/part-map.js';
 import { property } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './calendar.styles.js';
 import type { CSSResultGroup, TemplateResult } from 'lit';
 
@@ -22,9 +22,9 @@ export interface RenderDayOptions {
  * @since 2.0
  * @status experimental
  *
- * @dependency sl-example
+ * @dependency p-example
  *
- * @event sl-change - Emitted when the date changes.
+ * @event p-change - Emitted when the date changes.
  *
  * @slot footer - Optional content to place in the calendar's footer.
  *
@@ -44,7 +44,7 @@ export interface RenderDayOptions {
  * @cssproperty --border-width - The calendar's border width.
  * @cssproperty --border-radius - The border radius of the calendar.
  */
-export default class SlCalendar extends ShoelaceElement {
+export default class PCalendar extends PureElement {
   static styles: CSSResultGroup = styles;
 
   private readonly localize = new LocalizeController(this);
@@ -97,7 +97,7 @@ export default class SlCalendar extends ShoelaceElement {
   @watch('month')
   @watch('year')
   handleMonthChange() {
-    this.emit('sl-change');
+    this.emit('p-change');
   }
 
   render() {
@@ -123,22 +123,22 @@ export default class SlCalendar extends ShoelaceElement {
         })}
       >
         <header class="calendar__header">
-          <sl-icon-button
+          <p-icon-button
             name="chevron-left"
             label=${this.localize.term('previousMonth')}
             @click=${this.goToPreviousMonth}
-          ></sl-icon-button>
+          ></p-icon-button>
 
           <span class="calendar__label">
             <span class="calendar__month-label">${getMonthName(month, lang, this.monthLabels)}</span>
             <span class="calendar__year-label">${month.getFullYear()}</span>
           </span>
 
-          <sl-icon-button
+          <p-icon-button
             name="chevron-right"
             label=${this.localize.term('nextMonth')}
             @click=${this.goToNextMonth}
-          ></sl-icon-button>
+          ></p-icon-button>
         </header>
 
         <div class="calendar__days">

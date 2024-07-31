@@ -1,37 +1,37 @@
 ---
 meta:
   title: Customizing
-  description: Learn how to customize Shoelace through parts and custom properties.
+  description: Learn how to customize Pure UI through parts and custom properties.
 ---
 
 # Customizing
 
-Shoelace components can be customized at a high level through design tokens. This gives you control over theme colors and general styling. For more advanced customizations, you can make use of CSS parts and custom properties to target individual components.
+Pure UI components can be customized at a high level through design tokens. This gives you control over theme colors and general styling. For more advanced customizations, you can make use of CSS parts and custom properties to target individual components.
 
 ## Design Tokens
 
-Shoelace makes use of several design tokens to provide a consistent appearance across components. You can customize them and use them in your own application with pure CSS — no preprocessor required.
+Pure UI makes use of several design tokens to provide a consistent appearance across components. You can customize them and use them in your own application with pure CSS — no preprocessor required.
 
 Design tokens offer a high-level way to customize the library with minimal effort. There are no component-specific variables, however, as design tokens are intended to be generic and highly reusable. To customize an individual component, refer to the section entitled [CSS Parts](#css-parts).
 
-Design tokens are accessed through CSS custom properties that are defined in your theme. Because design tokens live at the page level, they're prefixed with `--sl-` to avoid collisions with other libraries.
+Design tokens are accessed through CSS custom properties that are defined in your theme. Because design tokens live at the page level, they're prefixed with `--p-` to avoid collisions with other libraries.
 
 To customize a design token, simply override it in your stylesheet using a `:root` block. Here's an example that changes the primary theme to purple based on existing [color primitives](/tokens/color#primitives).
 
 ```css
 :root {
   /* Changes the primary theme color to purple using primitives */
-  --sl-color-primary-50: var(--sl-color-purple-50);
-  --sl-color-primary-100: var(--sl-color-purple-100);
-  --sl-color-primary-200: var(--sl-color-purple-200);
-  --sl-color-primary-300: var(--sl-color-purple-300);
-  --sl-color-primary-400: var(--sl-color-purple-400);
-  --sl-color-primary-500: var(--sl-color-purple-500);
-  --sl-color-primary-600: var(--sl-color-purple-600);
-  --sl-color-primary-700: var(--sl-color-purple-700);
-  --sl-color-primary-800: var(--sl-color-purple-800);
-  --sl-color-primary-900: var(--sl-color-purple-900);
-  --sl-color-primary-950: var(--sl-color-purple-950);
+  --p-color-primary-50: var(--p-color-purple-50);
+  --p-color-primary-100: var(--p-color-purple-100);
+  --p-color-primary-200: var(--p-color-purple-200);
+  --p-color-primary-300: var(--p-color-purple-300);
+  --p-color-primary-400: var(--p-color-purple-400);
+  --p-color-primary-500: var(--p-color-purple-500);
+  --p-color-primary-600: var(--p-color-purple-600);
+  --p-color-primary-700: var(--p-color-purple-700);
+  --p-color-primary-800: var(--p-color-purple-800);
+  --p-color-primary-900: var(--p-color-purple-900);
+  --p-color-primary-950: var(--p-color-purple-950);
 }
 ```
 
@@ -41,16 +41,16 @@ Many design tokens are described further along in this documentation. For a comp
 
 Whereas design tokens offer a high-level way to customize the library, CSS parts offer a low-level way to customize individual components. Again, this is done with pure CSS — no preprocessor required.
 
-Shoelace components use a [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) to encapsulate their styles and behaviors. As a result, you can't simply target their internals with the usual CSS selectors. Instead, components expose "parts" that can be targeted with the [CSS part selector](https://developer.mozilla.org/en-US/docs/Web/CSS/::part), or `::part()`.
+Pure UI components use a [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) to encapsulate their styles and behaviors. As a result, you can't simply target their internals with the usual CSS selectors. Instead, components expose "parts" that can be targeted with the [CSS part selector](https://developer.mozilla.org/en-US/docs/Web/CSS/::part), or `::part()`.
 
 Here's an example that modifies buttons with the `tomato-button` class.
 
 ```html:preview
-<sl-button class="tomato-button"> Tomato Button </sl-button>
+<p-button class="tomato-button"> Tomato Button </p-button>
 
 <style>
   .tomato-button::part(base) {
-    background: var(--sl-color-neutral-0);
+    background: var(--p-color-neutral-0);
     border: solid 1px tomato;
   }
 
@@ -84,12 +84,12 @@ Most (but not all) components expose parts. You can find them in each component'
 
 ## Custom Properties
 
-For convenience, some components expose CSS custom properties you can override. These are not design tokens, nor do they have the same `--sl-` prefix since they're scoped to a component.
+For convenience, some components expose CSS custom properties you can override. These are not design tokens, nor do they have the same `--p-` prefix since they're scoped to a component.
 
 You can set custom properties on a component in your stylesheet.
 
 ```css
-sl-avatar {
+p-avatar {
   --size: 6rem;
 }
 ```
@@ -97,7 +97,7 @@ sl-avatar {
 This will also work if you need to target a subset of components with a specific class.
 
 ```css
-sl-avatar.your-class {
+p-avatar.your-class {
   --size: 6rem;
 }
 ```
@@ -105,14 +105,14 @@ sl-avatar.your-class {
 Alternatively, you can set them inline directly on the element.
 
 ```html
-<sl-avatar style="--size: 6rem;"></sl-avatar>
+<p-avatar style="--size: 6rem;"></p-avatar>
 ```
 
 Not all components expose CSS custom properties. For those that do, they can be found in the component's API documentation.
 
 ## Animations
 
-Some components use animation, such as when a dialog is shown or hidden. Animations are performed using the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) rather than CSS. However, you can still customize them through Shoelace's animation registry. If a component has customizable animations, they'll be listed in the "Animation" section of its documentation.
+Some components use animation, such as when a dialog is shown or hidden. Animations are performed using the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) rather than CSS. However, you can still customize them through Pure UI's animation registry. If a component has customizable animations, they'll be listed in the "Animation" section of its documentation.
 
 To customize a default animation, use the `setDefaultAnimation()` method. The function accepts an animation name (found in the component's docs) and an object with `keyframes`, and `options` or `null` to disable the animation.
 

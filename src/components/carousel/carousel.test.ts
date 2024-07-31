@@ -6,9 +6,9 @@ import { range } from 'lit/directives/range.js';
 import { resetMouse } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import type { SinonStub } from 'sinon';
-import type SlCarousel from './carousel.js';
+import type PCarousel from './carousel.js';
 
-describe('<sl-carousel>', () => {
+describe('<p-carousel>', () => {
   const sandbox = sinon.createSandbox();
   const ioCallbacks = new Map<IntersectionObserver, SinonStub>();
   const intersectionObserverCallbacks = () => {
@@ -39,11 +39,11 @@ describe('<sl-carousel>', () => {
   it('should render a carousel with default configuration', async () => {
     // Arrange
     const el = await fixture(html`
-      <sl-carousel>
-        <sl-carousel-item>Node 1</sl-carousel-item>
-        <sl-carousel-item>Node 2</sl-carousel-item>
-        <sl-carousel-item>Node 3</sl-carousel-item>
-      </sl-carousel>
+      <p-carousel>
+        <p-carousel-item>Node 1</p-carousel-item>
+        <p-carousel-item>Node 2</p-carousel-item>
+        <p-carousel-item>Node 3</p-carousel-item>
+      </p-carousel>
     `);
 
     // Assert
@@ -65,12 +65,12 @@ describe('<sl-carousel>', () => {
 
     it('should scroll forwards every `autoplay-interval` milliseconds', async () => {
       // Arrange
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel autoplay autoplay-interval="10">
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-        </sl-carousel>
+      const el = await fixture<PCarousel>(html`
+        <p-carousel autoplay autoplay-interval="10">
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+        </p-carousel>
       `);
       sandbox.stub(el, 'next');
 
@@ -86,12 +86,12 @@ describe('<sl-carousel>', () => {
 
     it('should pause the autoplay while the user is interacting', async () => {
       // Arrange
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel autoplay autoplay-interval="10">
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-        </sl-carousel>
+      const el = await fixture<PCarousel>(html`
+        <p-carousel autoplay autoplay-interval="10">
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+        </p-carousel>
       `);
       sandbox.stub(el, 'next');
 
@@ -109,12 +109,12 @@ describe('<sl-carousel>', () => {
 
     it('should not resume if the user is still interacting', async () => {
       // Arrange
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel autoplay autoplay-interval="10">
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-        </sl-carousel>
+      const el = await fixture<PCarousel>(html`
+        <p-carousel autoplay autoplay-interval="10">
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+        </p-carousel>
       `);
       sandbox.stub(el, 'next');
 
@@ -139,12 +139,12 @@ describe('<sl-carousel>', () => {
   describe('when `loop` attribute is provided', () => {
     it('should create clones of the first and last slides', async () => {
       // Arrange
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel loop>
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-        </sl-carousel>
+      const el = await fixture<PCarousel>(html`
+        <p-carousel loop>
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+        </p-carousel>
       `);
 
       // Act
@@ -158,12 +158,12 @@ describe('<sl-carousel>', () => {
     describe('and `slides-per-page` is provided', () => {
       it('should create multiple clones', async () => {
         // Arrange
-        const el = await fixture<SlCarousel>(html`
-          <sl-carousel loop slides-per-page="2">
-            <sl-carousel-item>Node 1</sl-carousel-item>
-            <sl-carousel-item>Node 2</sl-carousel-item>
-            <sl-carousel-item>Node 3</sl-carousel-item>
-          </sl-carousel>
+        const el = await fixture<PCarousel>(html`
+          <p-carousel loop slides-per-page="2">
+            <p-carousel-item>Node 1</p-carousel-item>
+            <p-carousel-item>Node 2</p-carousel-item>
+            <p-carousel-item>Node 3</p-carousel-item>
+          </p-carousel>
         `);
 
         // Act
@@ -180,11 +180,11 @@ describe('<sl-carousel>', () => {
     it('should render pagination controls', async () => {
       // Arrange
       const el = await fixture(html`
-        <sl-carousel pagination>
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-        </sl-carousel>
+        <p-carousel pagination>
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+        </p-carousel>
       `);
 
       // Assert
@@ -196,12 +196,12 @@ describe('<sl-carousel>', () => {
     describe('and user clicks on a pagination button', () => {
       it('should scroll the carousel to the nth slide', async () => {
         // Arrange
-        const el = await fixture<SlCarousel>(html`
-          <sl-carousel pagination>
-            <sl-carousel-item>Node 1</sl-carousel-item>
-            <sl-carousel-item>Node 2</sl-carousel-item>
-            <sl-carousel-item>Node 3</sl-carousel-item>
-          </sl-carousel>
+        const el = await fixture<PCarousel>(html`
+          <p-carousel pagination>
+            <p-carousel-item>Node 1</p-carousel-item>
+            <p-carousel-item>Node 2</p-carousel-item>
+            <p-carousel-item>Node 3</p-carousel-item>
+          </p-carousel>
         `);
         sandbox.stub(el, 'goToSlide');
         await el.updateComplete;
@@ -219,11 +219,11 @@ describe('<sl-carousel>', () => {
     it('should render navigation controls', async () => {
       // Arrange
       const el = await fixture(html`
-        <sl-carousel navigation>
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-        </sl-carousel>
+        <p-carousel navigation>
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+        </p-carousel>
       `);
 
       // Assert
@@ -236,12 +236,12 @@ describe('<sl-carousel>', () => {
   describe('when `slides-per-page` attribute is provided', () => {
     it('should show multiple slides at a given time', async () => {
       // Arrange
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel slides-per-page="2">
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-        </sl-carousel>
+      const el = await fixture<PCarousel>(html`
+        <p-carousel slides-per-page="2">
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+        </p-carousel>
       `);
 
       // Act
@@ -263,16 +263,16 @@ describe('<sl-carousel>', () => {
         loop ? ' (loop)' : ''
       }`, async () => {
         // Arrange
-        const el = await fixture<SlCarousel>(html`
-          <sl-carousel
+        const el = await fixture<PCarousel>(html`
+          <p-carousel
             pagination
             navigation
             slides-per-page="${slidesPerPage}"
             slides-per-move="${slidesPerMove}"
             ?loop=${loop}
           >
-            ${map(range(slides), i => html`<sl-carousel-item>${i}</sl-carousel-item>`)}
-          </sl-carousel>
+            ${map(range(slides), i => html`<p-carousel-item>${i}</p-carousel-item>`)}
+          </p-carousel>
         `);
 
         // Assert
@@ -286,13 +286,13 @@ describe('<sl-carousel>', () => {
     it('should set the granularity of snapping', async () => {
       // Arrange
       const expectedSnapGranularity = 2;
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel slides-per-page="${expectedSnapGranularity}" slides-per-move="${expectedSnapGranularity}">
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-          <sl-carousel-item>Node 4</sl-carousel-item>
-        </sl-carousel>
+      const el = await fixture<PCarousel>(html`
+        <p-carousel slides-per-page="${expectedSnapGranularity}" slides-per-move="${expectedSnapGranularity}">
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+          <p-carousel-item>Node 4</p-carousel-item>
+        </p-carousel>
       `);
 
       // Act
@@ -312,17 +312,17 @@ describe('<sl-carousel>', () => {
 
     it('should be possible to move by the given number of slides at a time', async () => {
       // Arrange
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel navigation slides-per-move="2" slides-per-page="2">
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item class="expected">Node 3</sl-carousel-item>
-          <sl-carousel-item class="expected">Node 4</sl-carousel-item>
-          <sl-carousel-item>Node 5</sl-carousel-item>
-          <sl-carousel-item>Node 6</sl-carousel-item>
-        </sl-carousel>
+      const el = await fixture<PCarousel>(html`
+        <p-carousel navigation slides-per-move="2" slides-per-page="2">
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item class="expected">Node 3</p-carousel-item>
+          <p-carousel-item class="expected">Node 4</p-carousel-item>
+          <p-carousel-item>Node 5</p-carousel-item>
+          <p-carousel-item>Node 6</p-carousel-item>
+        </p-carousel>
       `);
-      const expectedSlides = el.querySelectorAll('.expected')!;
+      const expectedSlides = el.querySelectorAll('.expected');
       const nextButton: HTMLElement = el.shadowRoot!.querySelector('.carousel__navigation-button--next')!;
 
       // Act
@@ -341,17 +341,17 @@ describe('<sl-carousel>', () => {
 
     it('should be possible to move by a number that is less than the displayed number', async () => {
       // Arrange
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel navigation slides-per-move="1" slides-per-page="2">
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-          <sl-carousel-item>Node 4</sl-carousel-item>
-          <sl-carousel-item class="expected">Node 5</sl-carousel-item>
-          <sl-carousel-item class="expected">Node 6</sl-carousel-item>
-        </sl-carousel>
+      const el = await fixture<PCarousel>(html`
+        <p-carousel navigation slides-per-move="1" slides-per-page="2">
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+          <p-carousel-item>Node 4</p-carousel-item>
+          <p-carousel-item class="expected">Node 5</p-carousel-item>
+          <p-carousel-item class="expected">Node 6</p-carousel-item>
+        </p-carousel>
       `);
-      const expectedSlides = el.querySelectorAll('.expected')!;
+      const expectedSlides = el.querySelectorAll('.expected');
       const nextButton: HTMLElement = el.shadowRoot!.querySelector('.carousel__navigation-button--next')!;
 
       // Act
@@ -381,15 +381,15 @@ describe('<sl-carousel>', () => {
     it('should not be possible to move by a number that is greater than the displayed number', async () => {
       // Arrange
       const expectedSlidesPerMove = 2;
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel slides-per-page="${expectedSlidesPerMove}">
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-          <sl-carousel-item>Node 4</sl-carousel-item>
-          <sl-carousel-item>Node 5</sl-carousel-item>
-          <sl-carousel-item>Node 6</sl-carousel-item>
-        </sl-carousel>
+      const el = await fixture<PCarousel>(html`
+        <p-carousel slides-per-page="${expectedSlidesPerMove}">
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+          <p-carousel-item>Node 4</p-carousel-item>
+          <p-carousel-item>Node 5</p-carousel-item>
+          <p-carousel-item>Node 6</p-carousel-item>
+        </p-carousel>
       `);
 
       // Act
@@ -405,11 +405,11 @@ describe('<sl-carousel>', () => {
     describe('and value is `vertical`', () => {
       it('should make the scrollable along the y-axis', async () => {
         // Arrange
-        const el = await fixture<SlCarousel>(html`
-          <sl-carousel orientation="vertical" style="height: 100px">
-            <sl-carousel-item>Node 1</sl-carousel-item>
-            <sl-carousel-item>Node 2</sl-carousel-item>
-          </sl-carousel>
+        const el = await fixture<PCarousel>(html`
+          <p-carousel orientation="vertical" style="height: 100px">
+            <p-carousel-item>Node 1</p-carousel-item>
+            <p-carousel-item>Node 2</p-carousel-item>
+          </p-carousel>
         `);
 
         // Act
@@ -424,11 +424,11 @@ describe('<sl-carousel>', () => {
     describe('and value is `horizontal`', () => {
       it('should make the scrollable along the x-axis', async () => {
         // Arrange
-        const el = await fixture<SlCarousel>(html`
-          <sl-carousel orientation="horizontal" style="height: 100px">
-            <sl-carousel-item>Node 1</sl-carousel-item>
-            <sl-carousel-item>Node 2</sl-carousel-item>
-          </sl-carousel>
+        const el = await fixture<PCarousel>(html`
+          <p-carousel orientation="horizontal" style="height: 100px">
+            <p-carousel-item>Node 1</p-carousel-item>
+            <p-carousel-item>Node 2</p-carousel-item>
+          </p-carousel>
         `);
 
         // Act
@@ -445,12 +445,12 @@ describe('<sl-carousel>', () => {
     // TODO(alenaksu): skipping because failing in webkit, PointerEvent.movementX and PointerEvent.movementY seem to return incorrect values
     it.skip('should be possible to drag the carousel using the mouse', async () => {
       // Arrange
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel mouse-dragging>
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-        </sl-carousel>
+      const el = await fixture<PCarousel>(html`
+        <p-carousel mouse-dragging>
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+        </p-carousel>
       `);
 
       // Act
@@ -467,12 +467,12 @@ describe('<sl-carousel>', () => {
 
     it('should be possible to interact with clickable elements', async () => {
       // Arrange
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel mouse-dragging>
-          <sl-carousel-item><button>click me</button></sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-        </sl-carousel>
+      const el = await fixture<PCarousel>(html`
+        <p-carousel mouse-dragging>
+          <p-carousel-item><button>click me</button></p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+        </p-carousel>
       `);
       const button = el.querySelector('button')!;
 
@@ -492,12 +492,12 @@ describe('<sl-carousel>', () => {
     describe('when the user clicks the next button', () => {
       it('should scroll to the next slide', async () => {
         // Arrange
-        const el = await fixture<SlCarousel>(html`
-          <sl-carousel navigation>
-            <sl-carousel-item>Node 1</sl-carousel-item>
-            <sl-carousel-item>Node 2</sl-carousel-item>
-            <sl-carousel-item>Node 3</sl-carousel-item>
-          </sl-carousel>
+        const el = await fixture<PCarousel>(html`
+          <p-carousel navigation>
+            <p-carousel-item>Node 1</p-carousel-item>
+            <p-carousel-item>Node 2</p-carousel-item>
+            <p-carousel-item>Node 3</p-carousel-item>
+          </p-carousel>
         `);
         const nextButton: HTMLElement = el.shadowRoot!.querySelector('.carousel__navigation-button--next')!;
         sandbox.stub(el, 'next');
@@ -515,12 +515,12 @@ describe('<sl-carousel>', () => {
       describe('and carousel is positioned on the last slide', () => {
         it('should not scroll', async () => {
           // Arrange
-          const el = await fixture<SlCarousel>(html`
-            <sl-carousel navigation>
-              <sl-carousel-item>Node 1</sl-carousel-item>
-              <sl-carousel-item>Node 2</sl-carousel-item>
-              <sl-carousel-item>Node 3</sl-carousel-item>
-            </sl-carousel>
+          const el = await fixture<PCarousel>(html`
+            <p-carousel navigation>
+              <p-carousel-item>Node 1</p-carousel-item>
+              <p-carousel-item>Node 2</p-carousel-item>
+              <p-carousel-item>Node 3</p-carousel-item>
+            </p-carousel>
           `);
           const nextButton: HTMLElement = el.shadowRoot!.querySelector('.carousel__navigation-button--next')!;
           sandbox.stub(el, 'next');
@@ -542,12 +542,12 @@ describe('<sl-carousel>', () => {
         describe('and `loop` attribute is provided', () => {
           it('should scroll to the first slide', async () => {
             // Arrange
-            const el = await fixture<SlCarousel>(html`
-              <sl-carousel navigation loop>
-                <sl-carousel-item>Node 1</sl-carousel-item>
-                <sl-carousel-item>Node 2</sl-carousel-item>
-                <sl-carousel-item>Node 3</sl-carousel-item>
-              </sl-carousel>
+            const el = await fixture<PCarousel>(html`
+              <p-carousel navigation loop>
+                <p-carousel-item>Node 1</p-carousel-item>
+                <p-carousel-item>Node 2</p-carousel-item>
+                <p-carousel-item>Node 3</p-carousel-item>
+              </p-carousel>
             `);
             const nextButton: HTMLElement = el.shadowRoot!.querySelector('.carousel__navigation-button--next')!;
 
@@ -577,12 +577,12 @@ describe('<sl-carousel>', () => {
     describe('and clicks the previous button', () => {
       it('should scroll to the previous slide', async () => {
         // Arrange
-        const el = await fixture<SlCarousel>(html`
-          <sl-carousel navigation>
-            <sl-carousel-item>Node 1</sl-carousel-item>
-            <sl-carousel-item>Node 2</sl-carousel-item>
-            <sl-carousel-item>Node 3</sl-carousel-item>
-          </sl-carousel>
+        const el = await fixture<PCarousel>(html`
+          <p-carousel navigation>
+            <p-carousel-item>Node 1</p-carousel-item>
+            <p-carousel-item>Node 2</p-carousel-item>
+            <p-carousel-item>Node 3</p-carousel-item>
+          </p-carousel>
         `);
 
         // Go to the second slide so that the previous button will be enabled
@@ -606,12 +606,12 @@ describe('<sl-carousel>', () => {
       describe('and carousel is positioned on the first slide', () => {
         it('should not scroll', async () => {
           // Arrange
-          const el = await fixture<SlCarousel>(html`
-            <sl-carousel navigation>
-              <sl-carousel-item>Node 1</sl-carousel-item>
-              <sl-carousel-item>Node 2</sl-carousel-item>
-              <sl-carousel-item>Node 3</sl-carousel-item>
-            </sl-carousel>
+          const el = await fixture<PCarousel>(html`
+            <p-carousel navigation>
+              <p-carousel-item>Node 1</p-carousel-item>
+              <p-carousel-item>Node 2</p-carousel-item>
+              <p-carousel-item>Node 3</p-carousel-item>
+            </p-carousel>
           `);
 
           const previousButton: HTMLElement = el.shadowRoot!.querySelector('.carousel__navigation-button--previous')!;
@@ -630,12 +630,12 @@ describe('<sl-carousel>', () => {
         describe('and `loop` attribute is provided', () => {
           it('should scroll to the last slide', async () => {
             // Arrange
-            const el = await fixture<SlCarousel>(html`
-              <sl-carousel navigation loop>
-                <sl-carousel-item>Node 1</sl-carousel-item>
-                <sl-carousel-item>Node 2</sl-carousel-item>
-                <sl-carousel-item>Node 3</sl-carousel-item>
-              </sl-carousel>
+            const el = await fixture<PCarousel>(html`
+              <p-carousel navigation loop>
+                <p-carousel-item>Node 1</p-carousel-item>
+                <p-carousel-item>Node 2</p-carousel-item>
+                <p-carousel-item>Node 3</p-carousel-item>
+              </p-carousel>
             `);
 
             const previousButton: HTMLElement = el.shadowRoot!.querySelector('.carousel__navigation-button--previous')!;
@@ -664,15 +664,15 @@ describe('<sl-carousel>', () => {
     describe('#next', () => {
       it('should scroll the carousel to the next slide', async () => {
         // Arrange
-        const el = await fixture<SlCarousel>(html`
-          <sl-carousel>
-            <sl-carousel-item>Node 1</sl-carousel-item>
-            <sl-carousel-item>Node 2</sl-carousel-item>
-            <sl-carousel-item>Node 3</sl-carousel-item>
-          </sl-carousel>
+        const el = await fixture<PCarousel>(html`
+          <p-carousel>
+            <p-carousel-item>Node 1</p-carousel-item>
+            <p-carousel-item>Node 2</p-carousel-item>
+            <p-carousel-item>Node 3</p-carousel-item>
+          </p-carousel>
         `);
         sandbox.spy(el, 'goToSlide');
-        const expectedCarouselItem: HTMLElement = el.querySelector('sl-carousel-item:nth-child(2)')!;
+        const expectedCarouselItem: HTMLElement = el.querySelector('p-carousel-item:nth-child(2)')!;
 
         // Act
         el.next();
@@ -692,14 +692,14 @@ describe('<sl-carousel>', () => {
     describe('#previous', () => {
       it('should scroll the carousel to the previous slide', async () => {
         // Arrange
-        const el = await fixture<SlCarousel>(html`
-          <sl-carousel>
-            <sl-carousel-item>Node 1</sl-carousel-item>
-            <sl-carousel-item>Node 2</sl-carousel-item>
-            <sl-carousel-item>Node 3</sl-carousel-item>
-          </sl-carousel>
+        const el = await fixture<PCarousel>(html`
+          <p-carousel>
+            <p-carousel-item>Node 1</p-carousel-item>
+            <p-carousel-item>Node 2</p-carousel-item>
+            <p-carousel-item>Node 3</p-carousel-item>
+          </p-carousel>
         `);
-        const expectedCarouselItem: HTMLElement = el.querySelector('sl-carousel-item:nth-child(1)')!;
+        const expectedCarouselItem: HTMLElement = el.querySelector('p-carousel-item:nth-child(1)')!;
 
         el.goToSlide(1);
 
@@ -727,12 +727,12 @@ describe('<sl-carousel>', () => {
     describe('#goToSlide', () => {
       it('should scroll the carousel to the nth slide', async () => {
         // Arrange
-        const el = await fixture<SlCarousel>(html`
-          <sl-carousel>
-            <sl-carousel-item>Node 1</sl-carousel-item>
-            <sl-carousel-item>Node 2</sl-carousel-item>
-            <sl-carousel-item>Node 3</sl-carousel-item>
-          </sl-carousel>
+        const el = await fixture<PCarousel>(html`
+          <p-carousel>
+            <p-carousel-item>Node 1</p-carousel-item>
+            <p-carousel-item>Node 2</p-carousel-item>
+            <p-carousel-item>Node 3</p-carousel-item>
+          </p-carousel>
         `);
         await el.updateComplete;
 
@@ -751,12 +751,12 @@ describe('<sl-carousel>', () => {
   describe('Accessibility', () => {
     it('should pass accessibility tests', async () => {
       // Arrange
-      const el = await fixture<SlCarousel>(html`
-        <sl-carousel navigation pagination>
-          <sl-carousel-item>Node 1</sl-carousel-item>
-          <sl-carousel-item>Node 2</sl-carousel-item>
-          <sl-carousel-item>Node 3</sl-carousel-item>
-        </sl-carousel>
+      const el = await fixture<PCarousel>(html`
+        <p-carousel navigation pagination>
+          <p-carousel-item>Node 1</p-carousel-item>
+          <p-carousel-item>Node 2</p-carousel-item>
+          <p-carousel-item>Node 3</p-carousel-item>
+        </p-carousel>
       `);
       const pagination = el.shadowRoot!.querySelector('.carousel__pagination')!;
       const navigation = el.shadowRoot!.querySelector('.carousel__navigation')!;
@@ -786,12 +786,12 @@ describe('<sl-carousel>', () => {
     describe('when scrolling', () => {
       it('should update aria-busy attribute', async () => {
         // Arrange
-        const el = await fixture<SlCarousel>(html`
-          <sl-carousel autoplay>
-            <sl-carousel-item>Node 1</sl-carousel-item>
-            <sl-carousel-item>Node 2</sl-carousel-item>
-            <sl-carousel-item>Node 3</sl-carousel-item>
-          </sl-carousel>
+        const el = await fixture<PCarousel>(html`
+          <p-carousel autoplay>
+            <p-carousel-item>Node 1</p-carousel-item>
+            <p-carousel-item>Node 2</p-carousel-item>
+            <p-carousel-item>Node 3</p-carousel-item>
+          </p-carousel>
         `);
 
         await el.updateComplete;

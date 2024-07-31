@@ -1,15 +1,15 @@
 ---
 meta:
-  title: 'Shoelace: A forward-thinking library of web components.'
+  title: 'Pure UI: Keep UI simplest.'
   description: Hand-crafted custom elements for any occasion.
 toc: false
 ---
 
 <div class="splash">
 <div class="splash-start">
-<img class="splash-logo" src="/assets/images/wordmark.svg" alt="Shoelace">
+<img class="splash-logo" src="/assets/images/wordmark.svg" alt="Pure UI">
 
-# <sl-visually-hidden>Shoelace:</sl-visually-hidden> A forward-thinking library of web components.
+# <p-visually-hidden>Pure UI:</p-visually-hidden> A forward-thinking library of web components.
 
 - Works with all frameworks 🧩
 - Works with CDNs 🚛
@@ -19,23 +19,11 @@ toc: false
 - First-class [React support](/frameworks/react) ⚛️
 - Built-in localization 💬
 - Open source 😸
-- [More awesome than ever](https://blog.fontawesome.com/shoelace-joins-font-awesome/) ![Awesome emoji](/assets/images/awesome.svg)
 
 </div>
 <div class="splash-end">
 <img class="splash-image" src="/assets/images/undraw-content-team.svg" alt="Cartoon of people assembling components while standing on a giant laptop.">
 </div>
-</div>
-
-<div class="badges">
-
-[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/@shoelace-style/shoelace/badge)](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace)
-[![npm](https://img.shields.io/npm/dw/@shoelace-style/shoelace?label=npm&style=flat-square)](https://www.npmjs.com/package/@shoelace-style/shoelace)
-[![License](https://img.shields.io/badge/license-MIT-232323.svg?style=flat-square)](https://github.com/shoelace-style/shoelace/blob/next/LICENSE.md)<br>
-[![Discord](https://img.shields.io/badge/Discord-Join%20the%20chat-5965f2.svg?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/mg8f26C)
-[![Twitter](https://img.shields.io/badge/Twitter-Follow-00acee.svg?style=flat-square&logo=twitter&logoColor=white)](https://twitter.com/shoelace_style)
-[![Sponsor](https://img.shields.io/badge/GitHub-Code-232323.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/shoelace-style/shoelace)
-
 </div>
 
 ## Quick Start
@@ -45,17 +33,17 @@ Add the following code to your page.
 <!-- prettier-ignore -->
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/shoelace-autoloader.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/pure-ui-autoloader.js"></script>
 ```
 
-Now you have access to all of Shoelace's components! Try adding a button:
+Now you have access to all of Pure UI's components! Try adding a button:
 
 ```html:preview:expanded:no-codepen
-<sl-button>Click me</sl-button>
+<p-button>Click me</p-button>
 ```
 
 :::tip
-This will activate Shoelace's experimental autoloader, which registers components on the fly as you use them. To learn more about it, or for other ways to install Shoelace, refer to the [installation instructions](getting-started/installation).
+This will activate Pure UI's experimental autoloader, which registers components on the fly as you use them. To learn more about it, or for other ways to install Pure UI, refer to the [installation instructions](getting-started/installation).
 :::
 
 ## New to Web Components?
@@ -72,13 +60,13 @@ Unfortunately, _framework-specific_ components fail us in a number of ways:
 
 Web components solve these problems. They're [supported by all modern browsers](https://caniuse.com/#feat=custom-elementsv1), they're framework-agnostic, and they're [part of the standard](https://developer.mozilla.org/en-US/docs/Web/Web_Components), so we know they'll be supported for many years to come.
 
-This is the technology that Shoelace is built on.
+This is the technology that Pure UI is built on.
 
 ## What Problem Does This Solve?
 
-Shoelace provides a collection of professionally designed, highly customizable UI components built on a framework agnostic technology. Why spend hundreds of hours (or more) building a design system from scratch? Why make a component library that only works with one framework?
+Pure UI provides a collection of professionally designed, highly customizable UI components built on a framework agnostic technology. Why spend hundreds of hours (or more) building a design system from scratch? Why make a component library that only works with one framework?
 
-With Shoelace, you can:
+With Pure UI, you can:
 
 - Start building things faster (no need to roll your own buttons)
 - Build multiple apps with different frameworks that all share the same UI components
@@ -86,13 +74,13 @@ With Shoelace, you can:
 - Incrementally adopt components as needed (no need to ditch your framework)
 - Upgrade or switch frameworks without rebuilding foundational components
 
-If your organization is looking to build a design system, [Shoelace will save you thousands of dollars](https://medium.com/eightshapes-llc/and-you-thought-buttons-were-easy-26eb5b5c1871). All the foundational components you need are right here, ready to be customized for your brand. And since it's built on web standards, browsers will continue to support it for many years to come.
+If your organization is looking to build a design system, [Pure UI will save you thousands of dollars](https://medium.com/eightshapes-llc/and-you-thought-buttons-were-easy-26eb5b5c1871). All the foundational components you need are right here, ready to be customized for your brand. And since it's built on web standards, browsers will continue to support it for many years to come.
 
-Whether you use Shoelace as a starting point for your organization's design system or for a fun personal project, there's no limit to what you can do with it.
+Whether you use Pure UI as a starting point for your organization's design system or for a fun personal project, there's no limit to what you can do with it.
 
 ## Browser Support
 
-Shoelace is tested in the latest two versions of the following browsers.
+Pure UI is tested in the latest two versions of the following browsers.
 
 <img src="/assets/images/chrome.png" alt="Chrome" width="64" height="64">
 <img src="/assets/images/edge.png" alt="Edge" width="64" height="64">
@@ -102,15 +90,11 @@ Shoelace is tested in the latest two versions of the following browsers.
 
 Critical bug fixes in earlier versions will be addressed based on their severity and impact.
 
-If you need to support IE11 or pre-Chromium Edge, this library isn't for you. Although web components can (to some degree) be polyfilled for legacy browsers, supporting them is outside the scope of this project. If you're using Shoelace in such a browser, you're gonna have a bad time. ⛷
-
-## License
-
-Shoelace was created in New Hampshire by [Cory LaViska](https://twitter.com/claviska). It's available under the terms of the [MIT license](https://github.com/shoelace-style/shoelace/blob/next/LICENSE.md).
+If you need to support IE11 or pre-Chromium Edge, this library isn't for you. Although web components can (to some degree) be polyfilled for legacy browsers, supporting them is outside the scope of this project. If you're using Pure UI in such a browser, you're gonna have a bad time. ⛷
 
 ## Attribution
 
-Special thanks to the following projects and individuals that help make Shoelace possible.
+Special thanks to the following projects and individuals that help make Pure UI possible.
 
 - Components are built with [Lit](https://lit.dev/)
 - Component metadata is generated by the [Custom Elements Manifest Analyzer](https://github.com/open-wc/custom-elements-manifest)
@@ -122,4 +106,3 @@ Special thanks to the following projects and individuals that help make Shoelace
 - Positioning of dropdowns, tooltips, et al is handled by [Floating UI](https://floating-ui.com/)
 - Animations are courtesy of [animate.css](https://animate.style/)
 - Search is powered by [Lunr](https://lunrjs.com/)
-- The Shoelace logo was designed with a single shoelace by [Adam K Olson](https://twitter.com/adamkolson)

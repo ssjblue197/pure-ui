@@ -6,78 +6,78 @@ layout: component
 ---
 
 ```html:preview
-<sl-carousel pagination navigation mouse-dragging loop>
-  <sl-carousel-item>
+<p-carousel pagination navigation mouse-dragging loop>
+  <p-carousel-item>
     <img
       alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
       src="/assets/examples/carousel/mountains.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
       src="/assets/examples/carousel/waterfall.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
       src="/assets/examples/carousel/sunset.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
       src="/assets/examples/carousel/field.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
       src="/assets/examples/carousel/valley.jpg"
     />
-  </sl-carousel-item>
-</sl-carousel>
+  </p-carousel-item>
+</p-carousel>
 ```
 
 ```jsx:react
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
 
 const App = () => (
   <>
-    <SlCarousel pagination mouse-dragging>
-      <SlCarouselItem>
+    <PCarousel pagination mouse-dragging>
+      <PCarouselItem>
         <img
           alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
           src="/assets/examples/carousel/mountains.jpg"
         />
-      </SlCarouselItem>
-      <SlCarouselItem>
+      </PCarouselItem>
+      <PCarouselItem>
         <img
           alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
           src="/assets/examples/carousel/waterfall.jpg"
         />
-      </SlCarouselItem>
-      <SlCarouselItem>
+      </PCarouselItem>
+      <PCarouselItem>
         <img
           alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
           src="/assets/examples/carousel/sunset.jpg"
         />
-      </SlCarouselItem>
-      <SlCarouselItem>
+      </PCarouselItem>
+      <PCarouselItem>
         <img
           alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
           src="/assets/examples/carousel/field.jpg"
         />
-      </SlCarouselItem>
-      <SlCarouselItem>
+      </PCarouselItem>
+      <PCarouselItem>
         <img
           alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
           src="/assets/examples/carousel/valley.jpg"
         />
-      </SlCarouselItem>
-    </SlCarousel>
+      </PCarouselItem>
+    </PCarousel>
   </>
 );
 ```
@@ -89,77 +89,77 @@ const App = () => (
 Use the `pagination` attribute to show the total number of slides and the current slide as a set of interactive dots.
 
 ```html:preview
-<sl-carousel pagination>
-  <sl-carousel-item>
+<p-carousel pagination>
+  <p-carousel-item>
     <img
       alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
       src="/assets/examples/carousel/mountains.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
       src="/assets/examples/carousel/waterfall.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
       src="/assets/examples/carousel/sunset.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
       src="/assets/examples/carousel/field.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
       src="/assets/examples/carousel/valley.jpg"
     />
-  </sl-carousel-item>
-</sl-carousel>
+  </p-carousel-item>
+</p-carousel>
 ```
 
 ```jsx:react
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
 
 const App = () => (
-  <SlCarousel pagination>
-    <SlCarouselItem>
+  <PCarousel pagination>
+    <PCarouselItem>
       <img
         alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
         src="/assets/examples/carousel/mountains.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
         src="/assets/examples/carousel/waterfall.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
         src="/assets/examples/carousel/sunset.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
         src="/assets/examples/carousel/field.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
         src="/assets/examples/carousel/valley.jpg"
       />
-    </SlCarouselItem>
-  </SlCarousel>
+    </PCarouselItem>
+  </PCarousel>
 );
 ```
 
@@ -168,77 +168,77 @@ const App = () => (
 Use the `navigation` attribute to show previous and next buttons.
 
 ```html:preview
-<sl-carousel navigation>
-  <sl-carousel-item>
+<p-carousel navigation>
+  <p-carousel-item>
     <img
       alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
       src="/assets/examples/carousel/mountains.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
       src="/assets/examples/carousel/waterfall.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
       src="/assets/examples/carousel/sunset.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
       src="/assets/examples/carousel/field.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
       src="/assets/examples/carousel/valley.jpg"
     />
-  </sl-carousel-item>
-</sl-carousel>
+  </p-carousel-item>
+</p-carousel>
 ```
 
 ```jsx:react
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
 
 const App = () => (
-  <SlCarousel navigation>
-    <SlCarouselItem>
+  <PCarousel navigation>
+    <PCarouselItem>
       <img
         alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
         src="/assets/examples/carousel/mountains.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
         src="/assets/examples/carousel/waterfall.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
         src="/assets/examples/carousel/sunset.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
         src="/assets/examples/carousel/field.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
         src="/assets/examples/carousel/valley.jpg"
       />
-    </SlCarouselItem>
-  </SlCarousel>
+    </PCarouselItem>
+  </PCarousel>
 );
 ```
 
@@ -247,77 +247,77 @@ const App = () => (
 By default, the carousel will not advanced beyond the first and last slides. You can change this behavior and force the carousel to "wrap" with the `loop` attribute.
 
 ```html:preview
-<sl-carousel loop navigation pagination>
-  <sl-carousel-item>
+<p-carousel loop navigation pagination>
+  <p-carousel-item>
     <img
       alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
       src="/assets/examples/carousel/mountains.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
       src="/assets/examples/carousel/waterfall.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
       src="/assets/examples/carousel/sunset.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
       src="/assets/examples/carousel/field.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
       src="/assets/examples/carousel/valley.jpg"
     />
-  </sl-carousel-item>
-</sl-carousel>
+  </p-carousel-item>
+</p-carousel>
 ```
 
 ```jsx:react
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
 
 const App = () => (
-  <SlCarousel loop navigation pagination>
-    <SlCarouselItem>
+  <PCarousel loop navigation pagination>
+    <PCarouselItem>
       <img
         alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
         src="/assets/examples/carousel/mountains.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
         src="/assets/examples/carousel/waterfall.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
         src="/assets/examples/carousel/sunset.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
         src="/assets/examples/carousel/field.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
         src="/assets/examples/carousel/valley.jpg"
       />
-    </SlCarouselItem>
-  </SlCarousel>
+    </PCarouselItem>
+  </PCarousel>
 );
 ```
 
@@ -326,77 +326,77 @@ const App = () => (
 The carousel will automatically advance when the `autoplay` attribute is used. To change how long a slide is shown before advancing, set `autoplay-interval` to the desired number of milliseconds. For best results, use the `loop` attribute when autoplay is enabled. Note that autoplay will pause while the user interacts with the carousel.
 
 ```html:preview
-<sl-carousel autoplay loop pagination>
-  <sl-carousel-item>
+<p-carousel autoplay loop pagination>
+  <p-carousel-item>
     <img
       alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
       src="/assets/examples/carousel/mountains.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
       src="/assets/examples/carousel/waterfall.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
       src="/assets/examples/carousel/sunset.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
       src="/assets/examples/carousel/field.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
       src="/assets/examples/carousel/valley.jpg"
     />
-  </sl-carousel-item>
-</sl-carousel>
+  </p-carousel-item>
+</p-carousel>
 ```
 
 ```jsx:react
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
 
 const App = () => (
-  <SlCarousel autoplay loop pagination>
-    <SlCarouselItem>
+  <PCarousel autoplay loop pagination>
+    <PCarouselItem>
       <img
         alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
         src="/assets/examples/carousel/mountains.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
         src="/assets/examples/carousel/waterfall.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
         src="/assets/examples/carousel/sunset.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
         src="/assets/examples/carousel/field.jpg"
       />
-    </SlCarouselItem>
-    <SlCarouselItem>
+    </PCarouselItem>
+    <PCarouselItem>
       <img
         alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
         src="/assets/examples/carousel/valley.jpg"
       />
-    </SlCarouselItem>
-  </SlCarousel>
+    </PCarouselItem>
+  </PCarousel>
 );
 ```
 
@@ -408,50 +408,50 @@ This example is best demonstrated using a mouse. Try clicking and dragging the s
 
 ```html:preview
 <div class="mouse-dragging">
-  <sl-carousel pagination>
-    <sl-carousel-item>
+  <p-carousel pagination>
+    <p-carousel-item>
       <img
         alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
         src="/assets/examples/carousel/mountains.jpg"
       />
-    </sl-carousel-item>
-    <sl-carousel-item>
+    </p-carousel-item>
+    <p-carousel-item>
       <img
         alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
         src="/assets/examples/carousel/waterfall.jpg"
       />
-    </sl-carousel-item>
-    <sl-carousel-item>
+    </p-carousel-item>
+    <p-carousel-item>
       <img
         alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
         src="/assets/examples/carousel/sunset.jpg"
       />
-    </sl-carousel-item>
-    <sl-carousel-item>
+    </p-carousel-item>
+    <p-carousel-item>
       <img
         alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
         src="/assets/examples/carousel/field.jpg"
       />
-    </sl-carousel-item>
-    <sl-carousel-item>
+    </p-carousel-item>
+    <p-carousel-item>
       <img
         alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
         src="/assets/examples/carousel/valley.jpg"
       />
-    </sl-carousel-item>
-  </sl-carousel>
+    </p-carousel-item>
+  </p-carousel>
 
-  <sl-divider></sl-divider>
+  <p-divider></p-divider>
 
-  <sl-switch>Enable mouse dragging</sl-switch>
+  <p-switch>Enable mouse dragging</p-switch>
 </div>
 
 <script>
   const container = document.querySelector('.mouse-dragging');
-  const carousel = container.querySelector('sl-carousel');
-  const toggle = container.querySelector('sl-switch');
+  const carousel = container.querySelector('p-carousel');
+  const toggle = container.querySelector('p-switch');
 
-  toggle.addEventListener('sl-change', () => {
+  toggle.addEventListener('p-change', () => {
     carousel.toggleAttribute('mouse-dragging', toggle.checked);
   });
 </script>
@@ -459,108 +459,108 @@ This example is best demonstrated using a mouse. Try clicking and dragging the s
 
 ```jsx:react
 import { useState } from 'react';
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
-import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PDivider from '@shoelace-style/shoelace/dist/react/divider';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const App = () => {
   const [isEnabled, setIsEnabled] = useState(false);
 
   return (
     <>
-      <SlCarousel navigation mouseDragging={isEnabled}>
-        <SlCarouselItem>
+      <PCarousel navigation mouseDragging={isEnabled}>
+        <PCarouselItem>
           <img
             alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
             src="/assets/examples/carousel/mountains.jpg"
           />
-        </SlCarouselItem>
-        <SlCarouselItem>
+        </PCarouselItem>
+        <PCarouselItem>
           <img
             alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
             src="/assets/examples/carousel/waterfall.jpg"
           />
-        </SlCarouselItem>
-        <SlCarouselItem>
+        </PCarouselItem>
+        <PCarouselItem>
           <img
             alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
             src="/assets/examples/carousel/sunset.jpg"
           />
-        </SlCarouselItem>
-        <SlCarouselItem>
+        </PCarouselItem>
+        <PCarouselItem>
           <img
             alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
             src="/assets/examples/carousel/field.jpg"
           />
-        </SlCarouselItem>
-        <SlCarouselItem>
+        </PCarouselItem>
+        <PCarouselItem>
           <img
             alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
             src="/assets/examples/carousel/valley.jpg"
           />
-        </SlCarouselItem>
-      </SlCarousel>
+        </PCarouselItem>
+      </PCarousel>
 
-      <SlDivider></SlDivider>
+      <PDivider></PDivider>
 
-      <SlSwitch checked={isEnabled} onSlInput={() => setIsEnabled(!isEnabled)}>
+      <PSwitch checked={isEnabled} onPInput={() => setIsEnabled(!isEnabled)}>
         Enable mouse dragging
-      </SlSwitch>
+      </PSwitch>
     </>
   );
 };
 ```
 
-### Multiple Slides Per View
+### Multiple Pides Per View
 
 The `slides-per-page` attribute makes it possible to display multiple slides at a time. You can also use the `slides-per-move` attribute to advance more than once slide at a time, if desired.
 
 ```html:preview
-<sl-carousel navigation pagination slides-per-page="2" slides-per-move="2">
-  <sl-carousel-item style="background: var(--sl-color-red-200);">Slide 1</sl-carousel-item>
-  <sl-carousel-item style="background: var(--sl-color-orange-200);">Slide 2</sl-carousel-item>
-  <sl-carousel-item style="background: var(--sl-color-yellow-200);">Slide 3</sl-carousel-item>
-  <sl-carousel-item style="background: var(--sl-color-green-200);">Slide 4</sl-carousel-item>
-  <sl-carousel-item style="background: var(--sl-color-blue-200);">Slide 5</sl-carousel-item>
-  <sl-carousel-item style="background: var(--sl-color-violet-200);">Slide 6</sl-carousel-item>
-</sl-carousel>
+<p-carousel navigation pagination slides-per-page="2" slides-per-move="2">
+  <p-carousel-item style="background: var(--p-color-red-200);">Pide 1</p-carousel-item>
+  <p-carousel-item style="background: var(--p-color-orange-200);">Pide 2</p-carousel-item>
+  <p-carousel-item style="background: var(--p-color-yellow-200);">Pide 3</p-carousel-item>
+  <p-carousel-item style="background: var(--p-color-green-200);">Pide 4</p-carousel-item>
+  <p-carousel-item style="background: var(--p-color-blue-200);">Pide 5</p-carousel-item>
+  <p-carousel-item style="background: var(--p-color-violet-200);">Pide 6</p-carousel-item>
+</p-carousel>
 ```
 
 {% raw %}
 
 ```jsx:react
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
 
 const App = () => (
-  <SlCarousel navigation pagination slidesPerPage={2} slidesPerMove={2}>
-    <SlCarouselItem style={{ background: 'var(--sl-color-red-200)' }}>Slide 1</SlCarouselItem>
-    <SlCarouselItem style={{ background: 'var(--sl-color-orange-200)' }}>Slide 2</SlCarouselItem>
-    <SlCarouselItem style={{ background: 'var(--sl-color-yellow-200)' }}>Slide 3</SlCarouselItem>
-    <SlCarouselItem style={{ background: 'var(--sl-color-green-200)' }}>Slide 4</SlCarouselItem>
-    <SlCarouselItem style={{ background: 'var(--sl-color-blue-200)' }}>Slide 5</SlCarouselItem>
-    <SlCarouselItem style={{ background: 'var(--sl-color-violet-200)' }}>Slide 6</SlCarouselItem>
-  </SlCarousel>
+  <PCarousel navigation pagination slidesPerPage={2} slidesPerMove={2}>
+    <PCarouselItem style={{ background: 'var(--p-color-red-200)' }}>Pide 1</PCarouselItem>
+    <PCarouselItem style={{ background: 'var(--p-color-orange-200)' }}>Pide 2</PCarouselItem>
+    <PCarouselItem style={{ background: 'var(--p-color-yellow-200)' }}>Pide 3</PCarouselItem>
+    <PCarouselItem style={{ background: 'var(--p-color-green-200)' }}>Pide 4</PCarouselItem>
+    <PCarouselItem style={{ background: 'var(--p-color-blue-200)' }}>Pide 5</PCarouselItem>
+    <PCarouselItem style={{ background: 'var(--p-color-violet-200)' }}>Pide 6</PCarouselItem>
+  </PCarousel>
 );
 ```
 
 {% endraw %}
 
-### Adding and Removing Slides
+### Adding and Removing Pides
 
 The content of the carousel can be changed by adding or removing carousel items. The carousel will update itself automatically.
 
 ```html:preview
-<sl-carousel class="dynamic-carousel" pagination navigation>
-  <sl-carousel-item style="background: var(--sl-color-red-200)">Slide 1</sl-carousel-item>
-  <sl-carousel-item style="background: var(--sl-color-orange-200)">Slide 2</sl-carousel-item>
-  <sl-carousel-item style="background: var(--sl-color-yellow-200)">Slide 3</sl-carousel-item>
-</sl-carousel>
+<p-carousel class="dynamic-carousel" pagination navigation>
+  <p-carousel-item style="background: var(--p-color-red-200)">Pide 1</p-carousel-item>
+  <p-carousel-item style="background: var(--p-color-orange-200)">Pide 2</p-carousel-item>
+  <p-carousel-item style="background: var(--p-color-yellow-200)">Pide 3</p-carousel-item>
+</p-carousel>
 
 <div class="carousel-options">
-  <sl-button id="dynamic-add">Add slide</sl-button>
-  <sl-button id="dynamic-remove">Remove slide</sl-button>
+  <p-button id="dynamic-add">Add slide</p-button>
+  <p-button id="dynamic-remove">Remove slide</p-button>
 </div>
 
 <style>
@@ -571,16 +571,16 @@ The content of the carousel can be changed by adding or removing carousel items.
   .dynamic-carousel ~ .carousel-options {
     display: flex;
     justify-content: center;
-    gap: var(--sl-spacing-x-small);
-    margin-top: var(--sl-spacing-large);
+    gap: var(--p-spacing-x-small);
+    margin-top: var(--p-spacing-large);
   }
 
-  .dynamic-carousel sl-carousel-item {
+  .dynamic-carousel p-carousel-item {
     flex: 0 0 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--sl-font-size-2x-large);
+    font-size: var(--p-font-size-2x-large);
   }
 </style>
 
@@ -592,29 +592,29 @@ The content of the carousel can be changed by adding or removing carousel items.
     const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'violet'];
     let colorIndex = 2;
 
-    const addSlide = () => {
-      const slide = document.createElement('sl-carousel-item');
+    const addPide = () => {
+      const slide = document.createElement('p-carousel-item');
       const color = colors[++colorIndex % colors.length];
-      slide.innerText = `Slide ${dynamicCarousel.children.length + 1}`;
-      slide.style.setProperty('background', `var(--sl-color-${color}-200)`);
+      slide.innerText = `Pide ${dynamicCarousel.children.length + 1}`;
+      slide.style.setProperty('background', `var(--p-color-${color}-200)`);
       dynamicCarousel.appendChild(slide);
       dynamicRemove.disabled = false;
     };
 
-    const removeSlide = () => {
+    const removePide = () => {
       const slide = dynamicCarousel.children[dynamicCarousel.children.length - 1];
-      const numSlides = dynamicCarousel.querySelectorAll('sl-carousel-item').length;
+      const numPides = dynamicCarousel.querySelectorAll('p-carousel-item').length;
 
-      if (numSlides > 1) {
+      if (numPides > 1) {
         slide.remove();
         colorIndex--;
       }
 
-      dynamicRemove.disabled = numSlides - 1 <= 1;
+      dynamicRemove.disabled = numPides - 1 <= 1;
     };
 
-    dynamicAdd.addEventListener('click', addSlide);
-    dynamicRemove.addEventListener('click', removeSlide);
+    dynamicAdd.addEventListener('click', addPide);
+    dynamicRemove.addEventListener('click', removePide);
   })();
 </script>
 ```
@@ -623,8 +623,8 @@ The content of the carousel can be changed by adding or removing carousel items.
 
 ```jsx:react
 import { useState } from 'react';
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
 
 const css = `
   .dynamic-carousel {
@@ -634,44 +634,44 @@ const css = `
   .dynamic-carousel ~ .carousel-options {
     display: flex;
     justify-content: center;
-    margin-top: var(--sl-spacing-large);
+    margin-top: var(--p-spacing-large);
   }
 
-  .dynamic-carousel sl-carousel-item {
+  .dynamic-carousel p-carousel-item {
     flex: 0 0 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: var(--sl-font-size-2x-large);
+    font-size: var(--p-font-size-2x-large);
   }
 `;
 
 const App = () => {
-  const [slides, setSlides] = useState(['#204ed8', '#be133d', '#6e28d9']);
+  const [slides, setPides] = useState(['#204ed8', '#be133d', '#6e28d9']);
   const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'violet'];
 
-  const addSlide = () => {
-    setSlides([...slides, getRandomColor()]);
+  const addPide = () => {
+    setPides([...slides, getRandomColor()]);
   };
 
-  const removeSlide = () => {
-    setSlides(slides.slice(0, -1));
+  const removePide = () => {
+    setPides(slides.slice(0, -1));
   };
 
   return (
     <>
-      <SlCarousel className="dynamic-carousel" pagination navigation>
+      <PCarousel className="dynamic-carousel" pagination navigation>
         {slides.map((color, i) => (
-          <SlCarouselItem style={{ background: colors[i % colors.length }}>
-            Slide {i}
-          </SlCarouselItem>
+          <PCarouselItem style={{ background: colors[i % colors.length }}>
+            Pide {i}
+          </PCarouselItem>
         ))}
-      </SlCarousel>
+      </PCarousel>
 
       <div className="carousel-options">
-        <SlButton onClick={addSlide}>Add slide</SlButton>
-        <SlButton onClick={removeSlide}>Remove slide</SlButton>
+        <PButton onClick={addPide}>Add slide</PButton>
+        <PButton onClick={removePide}>Remove slide</PButton>
       </div>
 
       <style>{css}</style>
@@ -687,38 +687,38 @@ const App = () => {
 Setting the `orientation` attribute to `vertical` will render the carousel in a vertical layout. If the content of your slides vary in height, you will need to set amn explicit `height` or `max-height` on the carousel using CSS.
 
 ```html:preview
-<sl-carousel class="vertical" pagination orientation="vertical">
-  <sl-carousel-item>
+<p-carousel class="vertical" pagination orientation="vertical">
+  <p-carousel-item>
     <img
       alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
       src="/assets/examples/carousel/mountains.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
       src="/assets/examples/carousel/waterfall.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
       src="/assets/examples/carousel/sunset.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
       src="/assets/examples/carousel/field.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
       src="/assets/examples/carousel/valley.jpg"
     />
-  </sl-carousel-item>
-</sl-carousel>
+  </p-carousel-item>
+</p-carousel>
 <style>
   .vertical {
     max-height: 400px;
@@ -740,8 +740,8 @@ Setting the `orientation` attribute to `vertical` will render the carousel in a 
 ```
 
 ```jsx:react
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
 
 const css = `
   .vertical {
@@ -764,38 +764,38 @@ const css = `
 
 const App = () => (
   <>
-    <SlCarousel className="vertical" loop pagination orientation="vertical">
-      <SlCarouselItem>
+    <PCarousel className="vertical" loop pagination orientation="vertical">
+      <PCarouselItem>
         <img
           alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
           src="/assets/examples/carousel/mountains.jpg"
         />
-      </SlCarouselItem>
-      <SlCarouselItem>
+      </PCarouselItem>
+      <PCarouselItem>
         <img
           alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
           src="/assets/examples/carousel/waterfall.jpg"
         />
-      </SlCarouselItem>
-      <SlCarouselItem>
+      </PCarouselItem>
+      <PCarouselItem>
         <img
           alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
           src="/assets/examples/carousel/sunset.jpg"
         />
-      </SlCarouselItem>
-      <SlCarouselItem>
+      </PCarouselItem>
+      <PCarouselItem>
         <img
           alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
           src="/assets/examples/carousel/field.jpg"
         />
-      </SlCarouselItem>
-      <SlCarouselItem>
+      </PCarouselItem>
+      <PCarouselItem>
         <img
           alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
           src="/assets/examples/carousel/valley.jpg"
         />
-      </SlCarouselItem>
-    </SlCarousel>
+      </PCarouselItem>
+    </PCarousel>
     <style>{css}</style>
   </>
 );
@@ -806,53 +806,53 @@ const App = () => (
 Use the `--aspect-ratio` custom property to customize the size of the carousel's viewport from the default value of 16/9.
 
 ```html:preview
-<sl-carousel class="aspect-ratio" navigation pagination style="--aspect-ratio: 3/2;">
-  <sl-carousel-item>
+<p-carousel class="aspect-ratio" navigation pagination style="--aspect-ratio: 3/2;">
+  <p-carousel-item>
     <img
       alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
       src="/assets/examples/carousel/mountains.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
       src="/assets/examples/carousel/waterfall.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
       src="/assets/examples/carousel/sunset.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
       src="/assets/examples/carousel/field.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
       src="/assets/examples/carousel/valley.jpg"
     />
-  </sl-carousel-item>
-</sl-carousel>
+  </p-carousel-item>
+</p-carousel>
 
-<sl-divider></sl-divider>
+<p-divider></p-divider>
 
-<sl-select label="Aspect ratio" name="aspect" value="3/2">
-  <sl-option value="1/1">1/1</sl-option>
-  <sl-option value="3/2">3/2</sl-option>
-  <sl-option value="16/9">16/9</sl-option>
-</sl-select>
+<p-select label="Aspect ratio" name="aspect" value="3/2">
+  <p-option value="1/1">1/1</p-option>
+  <p-option value="3/2">3/2</p-option>
+  <p-option value="16/9">16/9</p-option>
+</p-select>
 
 <script>
   (() => {
-    const carousel = document.querySelector('sl-carousel.aspect-ratio');
-    const aspectRatio = document.querySelector('sl-select[name="aspect"]');
+    const carousel = document.querySelector('p-carousel.aspect-ratio');
+    const aspectRatio = document.querySelector('p-select[name="aspect"]');
 
-    aspectRatio.addEventListener('sl-change', () => {
+    aspectRatio.addEventListener('p-change', () => {
       carousel.style.setProperty('--aspect-ratio', aspectRatio.value);
     });
   })();
@@ -863,62 +863,62 @@ Use the `--aspect-ratio` custom property to customize the size of the carousel's
 
 ```jsx:react
 import { useState } from 'react';
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
-import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
-import SlSelect from '@shoelace-style/shoelace/dist/react/select';
-import SlOption from '@shoelace-style/shoelace/dist/react/option';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PDivider from '@shoelace-style/shoelace/dist/react/divider';
+import PSelect from '@shoelace-style/shoelace/dist/react/select';
+import POption from '@shoelace-style/shoelace/dist/react/option';
 
 const App = () => {
   const [aspectRatio, setAspectRatio] = useState('3/2');
 
   return (
     <>
-      <SlCarousel className="aspect-ratio" navigation pagination style={{ '--aspect-ratio': aspectRatio }}>
-        <SlCarouselItem>
+      <PCarousel className="aspect-ratio" navigation pagination style={{ '--aspect-ratio': aspectRatio }}>
+        <PCarouselItem>
           <img
             alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
             src="/assets/examples/carousel/mountains.jpg"
           />
-        </SlCarouselItem>
-        <SlCarouselItem>
+        </PCarouselItem>
+        <PCarouselItem>
           <img
             alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
             src="/assets/examples/carousel/waterfall.jpg"
           />
-        </SlCarouselItem>
-        <SlCarouselItem>
+        </PCarouselItem>
+        <PCarouselItem>
           <img
             alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
             src="/assets/examples/carousel/sunset.jpg"
           />
-        </SlCarouselItem>
-        <SlCarouselItem>
+        </PCarouselItem>
+        <PCarouselItem>
           <img
             alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
             src="/assets/examples/carousel/field.jpg"
           />
-        </SlCarouselItem>
-        <SlCarouselItem>
+        </PCarouselItem>
+        <PCarouselItem>
           <img
             alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
             src="/assets/examples/carousel/valley.jpg"
           />
-        </SlCarouselItem>
-      </SlCarousel>
+        </PCarouselItem>
+      </PCarousel>
 
-      <SlDivider />
+      <PDivider />
 
-      <SlSelect
+      <PSelect
         label="Aspect ratio"
         name="aspect"
         value={aspectRatio}
-        onSlChange={event => setAspectRatio(event.target.value)}
+        onPChange={event => setAspectRatio(event.target.value)}
       >
-        <SlOption value="1 / 1">1 / 1</SlOption>
-        <SlOption value="3 / 2">3 / 2</SlOption>
-        <SlOption value="16 / 9">16 / 9</SlOption>
-      </SlSelect>
+        <POption value="1 / 1">1 / 1</POption>
+        <POption value="3 / 2">3 / 2</POption>
+        <POption value="16 / 9">16 / 9</POption>
+      </PSelect>
 
       <style>{css}</style>
     </>
@@ -933,83 +933,83 @@ const App = () => {
 Use the `--scroll-hint` custom property to add inline padding in horizontal carousels and block padding in vertical carousels. This will make the closest slides slightly visible, hinting that there are more items in the carousel.
 
 ```html:preview
-<sl-carousel class="scroll-hint" pagination style="--scroll-hint: 10%;">
-  <sl-carousel-item>
+<p-carousel class="scroll-hint" pagination style="--scroll-hint: 10%;">
+  <p-carousel-item>
     <img
       alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
       src="/assets/examples/carousel/mountains.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
       src="/assets/examples/carousel/waterfall.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
       src="/assets/examples/carousel/sunset.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
       src="/assets/examples/carousel/field.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
       src="/assets/examples/carousel/valley.jpg"
     />
-  </sl-carousel-item>
-</sl-carousel>
+  </p-carousel-item>
+</p-carousel>
 ```
 
 {% raw %}
 
 ```jsx:react
 import { useState } from 'react';
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
-import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
-import SlRange from '@shoelace-style/shoelace/dist/react/range';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PDivider from '@shoelace-style/shoelace/dist/react/divider';
+import PRange from '@shoelace-style/shoelace/dist/react/range';
 
 const App = () => (
   <>
-    <SlCarousel className="scroll-hint" pagination style={{ '--scroll-hint': '10%' }}>
-      <SlCarouselItem>
+    <PCarousel className="scroll-hint" pagination style={{ '--scroll-hint': '10%' }}>
+      <PCarouselItem>
         <img
           alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
           src="/assets/examples/carousel/mountains.jpg"
         />
-      </SlCarouselItem>
-      <SlCarouselItem>
+      </PCarouselItem>
+      <PCarouselItem>
         <img
           alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
           src="/assets/examples/carousel/waterfall.jpg"
         />
-      </SlCarouselItem>
-      <SlCarouselItem>
+      </PCarouselItem>
+      <PCarouselItem>
         <img
           alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
           src="/assets/examples/carousel/sunset.jpg"
         />
-      </SlCarouselItem>
-      <SlCarouselItem>
+      </PCarouselItem>
+      <PCarouselItem>
         <img
           alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
           src="/assets/examples/carousel/field.jpg"
         />
-      </SlCarouselItem>
-      <SlCarouselItem>
+      </PCarouselItem>
+      <PCarouselItem>
         <img
           alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
           src="/assets/examples/carousel/valley.jpg"
         />
-      </SlCarouselItem>
-    </SlCarousel>
+      </PCarouselItem>
+    </PCarousel>
   </>
 );
 ```
@@ -1021,38 +1021,38 @@ const App = () => (
 The carousel has a robust API that makes it possible to extend and customize. This example syncs the active slide with a set of thumbnails, effectively creating a gallery-style carousel.
 
 ```html:preview
-<sl-carousel class="carousel-thumbnails" navigation loop>
-  <sl-carousel-item>
+<p-carousel class="carousel-thumbnails" navigation loop>
+  <p-carousel-item>
     <img
       alt="The sun shines on the mountains and trees (by Adam Kool on Unsplash)"
       src="/assets/examples/carousel/mountains.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A waterfall in the middle of a forest (by Thomas Kelly on Unsplash)"
       src="/assets/examples/carousel/waterfall.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="The sun is setting over a lavender field (by Leonard Cotte on Unsplash)"
       src="/assets/examples/carousel/sunset.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A field of grass with the sun setting in the background (by Sapan Patel on Unsplash)"
       src="/assets/examples/carousel/field.jpg"
     />
-  </sl-carousel-item>
-  <sl-carousel-item>
+  </p-carousel-item>
+  <p-carousel-item>
     <img
       alt="A scenic view of a mountain with clouds rolling in (by V2osk on Unsplash)"
       src="/assets/examples/carousel/valley.jpg"
     />
-  </sl-carousel-item>
-</sl-carousel>
+  </p-carousel-item>
+</p-carousel>
 
 <div class="thumbnails">
   <div class="thumbnails__scroller">
@@ -1076,11 +1076,11 @@ The carousel has a robust API that makes it possible to extend and customize. Th
 
   .thumbnails__scroller {
     display: flex;
-    gap: var(--sl-spacing-small);
+    gap: var(--p-spacing-small);
     overflow-x: auto;
     scrollbar-width: none;
     scroll-behavior: smooth;
-    scroll-padding: var(--sl-spacing-small);
+    scroll-padding: var(--p-spacing-small);
   }
 
   .thumbnails__scroller::-webkit-scrollbar {
@@ -1115,11 +1115,11 @@ The carousel has a robust API that makes it possible to extend and customize. Th
 
       if (target.matches('.thumbnails__image')) {
         const index = [...thumbnails].indexOf(target);
-        carousel.goToSlide(index);
+        carousel.goToPide(index);
       }
     });
 
-    carousel.addEventListener('sl-slide-change', e => {
+    carousel.addEventListener('p-slide-change', e => {
       const slideIndex = e.detail.index;
 
       [...thumbnails].forEach((thumb, i) => {
@@ -1137,10 +1137,10 @@ The carousel has a robust API that makes it possible to extend and customize. Th
 
 ```jsx:react
 import { useRef } from 'react';
-import SlCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import SlCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
-import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
-import SlRange from '@shoelace-style/shoelace/dist/react/range';
+import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
+import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PDivider from '@shoelace-style/shoelace/dist/react/divider';
+import PRange from '@shoelace-style/shoelace/dist/react/range';
 
 const css = `
   .carousel-thumbnails {
@@ -1154,11 +1154,11 @@ const css = `
 
   .thumbnails__scroller {
     display: flex;
-    gap: var(--sl-spacing-small);
+    gap: var(--p-spacing-small);
     overflow-x: auto;
     scrollbar-width: none;
     scroll-behavior: smooth;
-    scroll-padding: var(--sl-spacing-small);
+    scroll-padding: var(--p-spacing-small);
   }
 
   .thumbnails__scroller::-webkit-scrollbar {
@@ -1208,44 +1208,44 @@ const images = [
 const App = () => {
   const carouselRef = useRef();
   const thumbnailsRef = useRef();
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentPide, setCurrentPide] = useState(0);
 
   useEffect(() => {
     const thumbnails = Array.from(thumbnailsRef.current.querySelectorAll('.thumbnails__image'));
 
-    thumbnails[currentSlide]..scrollIntoView({
+    thumbnails[currentPide]..scrollIntoView({
       block: 'nearest'
     });
-  }, [currentSlide]);
+  }, [currentPide]);
 
   const handleThumbnailClick = (index) => {
-    carouselRef.current.goToSlide(index);
+    carouselRef.current.goToPide(index);
   }
 
-  const handleSlideChange = (event) => {
+  const handlePideChange = (event) => {
     const slideIndex = e.detail.index;
-    setCurrentSlide(slideIndex);
+    setCurrentPide(slideIndex);
   }
 
   return (
     <>
-      <SlCarousel className="carousel-thumbnails" navigation loop onSlSlideChange={handleSlideChange}>
+      <PCarousel className="carousel-thumbnails" navigation loop onPPideChange={handlePideChange}>
         {images.map({ src, alt }) => (
-          <SlCarouselItem>
+          <PCarouselItem>
             <img
               alt={alt}
               src={src}
             />
-          </SlCarouselItem>
+          </PCarouselItem>
         )}
-      </SlCarousel>
+      </PCarousel>
 
       <div class="thumbnails">
         <div class="thumbnails__scroller">
           {images.map({ src, alt }, i) => (
             <img
               alt={`Thumbnail by ${i + 1}`}
-              className={`thumbnails__image ${i === currentSlide ? 'active' : ''}`}
+              className={`thumbnails__image ${i === currentPide ? 'active' : ''}`}
               onClick={() => handleThumbnailClick(i)}
               src={src}
             />

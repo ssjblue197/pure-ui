@@ -1,12 +1,12 @@
-import SlFormatBytes from './format-bytes.component.js';
+import PFormatBytes from './format-bytes.component.js';
 
 export * from './format-bytes.component.js';
-export default SlFormatBytes;
+export default PFormatBytes;
 
-SlFormatBytes.define('sl-format-bytes');
+PFormatBytes.define('p-format-bytes');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-format-bytes': SlFormatBytes;
+    'p-format-bytes': PFormatBytes;
   }
 }

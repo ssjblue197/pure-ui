@@ -6,13 +6,13 @@ layout: component
 ---
 
 ```html:preview
-<sl-switch>Switch</sl-switch>
+<p-switch>Switch</p-switch>
 ```
 
 ```jsx:react
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
-const App = () => <SlSwitch>Switch</SlSwitch>;
+const App = () => <PSwitch>Switch</PSwitch>;
 ```
 
 :::tip
@@ -26,13 +26,13 @@ This component works with standard `<form>` elements. Please refer to the sectio
 Use the `checked` attribute to activate the switch.
 
 ```html:preview
-<sl-switch checked>Checked</sl-switch>
+<p-switch checked>Checked</p-switch>
 ```
 
 ```jsx:react
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
-const App = () => <SlSwitch checked>Checked</SlSwitch>;
+const App = () => <PSwitch checked>Checked</PSwitch>;
 ```
 
 ### Disabled
@@ -40,13 +40,13 @@ const App = () => <SlSwitch checked>Checked</SlSwitch>;
 Use the `disabled` attribute to disable the switch.
 
 ```html:preview
-<sl-switch disabled>Disabled</sl-switch>
+<p-switch disabled>Disabled</p-switch>
 ```
 
 ```jsx:react
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
-const App = () => <SlSwitch disabled>Disabled</SlSwitch>;
+const App = () => <PSwitch disabled>Disabled</PSwitch>;
 ```
 
 ### Sizes
@@ -54,23 +54,23 @@ const App = () => <SlSwitch disabled>Disabled</SlSwitch>;
 Use the `size` attribute to change a switch's size.
 
 ```html:preview
-<sl-switch size="small">Small</sl-switch>
+<p-switch size="small">Small</p-switch>
 <br />
-<sl-switch size="medium">Medium</sl-switch>
+<p-switch size="medium">Medium</p-switch>
 <br />
-<sl-switch size="large">Large</sl-switch>
+<p-switch size="large">Large</p-switch>
 ```
 
 ```jsx:react
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const App = () => (
   <>
-    <SlSwitch size="small">Small</SlSwitch>
+    <PSwitch size="small">Small</PSwitch>
     <br />
-    <SlSwitch size="medium">Medium</SlSwitch>
+    <PSwitch size="medium">Medium</PSwitch>
     <br />
-    <SlSwitch size="large">Large</SlSwitch>
+    <PSwitch size="large">Large</PSwitch>
   </>
 );
 ```
@@ -80,13 +80,13 @@ const App = () => (
 Add descriptive help text to a switch with the `help-text` attribute. For help texts that contain HTML, use the `help-text` slot instead.
 
 ```html:preview
-<sl-switch help-text="What should the user know about the switch?">Label</sl-switch>
+<p-switch help-text="What should the user know about the switch?">Label</p-switch>
 ```
 
 ```jsx:react
-import SlSwitch from '@shoelace-style/shoelace/dist/react/checkbox';
+import PSwitch from '@shoelace-style/shoelace/dist/react/checkbox';
 
-const App = () => <SlSwitch help-text="What should the user know about the switch?">Label</SlSwitch>;
+const App = () => <PSwitch help-text="What should the user know about the switch?">Label</PSwitch>;
 ```
 
 ### Custom Styles
@@ -94,16 +94,16 @@ const App = () => <SlSwitch help-text="What should the user know about the switc
 Use the available custom properties to change how the switch is styled.
 
 ```html:preview
-<sl-switch style="--width: 80px; --height: 40px; --thumb-size: 36px;">Really big</sl-switch>
+<p-switch style="--width: 80px; --height: 40px; --thumb-size: 36px;">Really big</p-switch>
 ```
 
 {% raw %}
 
 ```jsx:react
-import SlSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
 
 const App = () => (
-  <SlSwitch
+  <PSwitch
     style={{
       '--width': '80px',
       '--height': '32px',

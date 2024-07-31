@@ -1,12 +1,12 @@
-import SlCalendar from './calendar.component.js';
+import PCalendar from './calendar.component.js';
 
 export * from './calendar.component.js';
-export default SlCalendar;
+export default PCalendar;
 
-SlCalendar.define('sl-calendar');
+PCalendar.define('p-calendar');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-calendar': SlCalendar;
+    'p-calendar': PCalendar;
   }
 }

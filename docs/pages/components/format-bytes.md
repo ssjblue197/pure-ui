@@ -7,16 +7,16 @@ layout: component
 
 ```html:preview
 <div class="format-bytes-overview">
-  The file is <sl-format-bytes value="1000"></sl-format-bytes> in size. <br /><br />
-  <sl-input type="number" value="1000" label="Number to Format" style="max-width: 180px;"></sl-input>
+  The file is <p-format-bytes value="1000"></p-format-bytes> in size. <br /><br />
+  <p-input type="number" value="1000" label="Number to Format" style="max-width: 180px;"></p-input>
 </div>
 
 <script>
   const container = document.querySelector('.format-bytes-overview');
-  const formatter = container.querySelector('sl-format-bytes');
-  const input = container.querySelector('sl-input');
+  const formatter = container.querySelector('p-format-bytes');
+  const input = container.querySelector('p-input');
 
-  input.addEventListener('sl-input', () => (formatter.value = input.value || 0));
+  input.addEventListener('p-input', () => (formatter.value = input.value || 0));
 </script>
 ```
 
@@ -24,24 +24,24 @@ layout: component
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlFormatBytes from '@shoelace-style/shoelace/dist/react/format-bytes';
-import SlInput from '@shoelace-style/shoelace/dist/react/input';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PFormatBytes from '@shoelace-style/shoelace/dist/react/format-bytes';
+import PInput from '@shoelace-style/shoelace/dist/react/input';
 
 const App = () => {
   const [value, setValue] = useState(1000);
 
   return (
     <>
-      The file is <SlFormatBytes value={value} /> in size.
+      The file is <PFormatBytes value={value} /> in size.
       <br />
       <br />
-      <SlInput
+      <PInput
         type="number"
         value={value}
         label="Number to Format"
         style={{ maxWidth: '180px' }}
-        onSlInput={event => setValue(event.target.value)}
+        onPInput={event => setValue(event.target.value)}
       />
     </>
   );
@@ -57,24 +57,24 @@ const App = () => {
 Set the `value` attribute to a number to get the value in bytes.
 
 ```html:preview
-<sl-format-bytes value="12"></sl-format-bytes><br />
-<sl-format-bytes value="1200"></sl-format-bytes><br />
-<sl-format-bytes value="1200000"></sl-format-bytes><br />
-<sl-format-bytes value="1200000000"></sl-format-bytes>
+<p-format-bytes value="12"></p-format-bytes><br />
+<p-format-bytes value="1200"></p-format-bytes><br />
+<p-format-bytes value="1200000"></p-format-bytes><br />
+<p-format-bytes value="1200000000"></p-format-bytes>
 ```
 
 ```jsx:react
-import SlFormatBytes from '@shoelace-style/shoelace/dist/react/format-bytes';
+import PFormatBytes from '@shoelace-style/shoelace/dist/react/format-bytes';
 
 const App = () => (
   <>
-    <SlFormatBytes value="12" />
+    <PFormatBytes value="12" />
     <br />
-    <SlFormatBytes value="1200" />
+    <PFormatBytes value="1200" />
     <br />
-    <SlFormatBytes value="1200000" />
+    <PFormatBytes value="1200000" />
     <br />
-    <SlFormatBytes value="1200000000" />
+    <PFormatBytes value="1200000000" />
   </>
 );
 ```
@@ -84,24 +84,24 @@ const App = () => (
 To get the value in bits, set the `unit` attribute to `bit`.
 
 ```html:preview
-<sl-format-bytes value="12" unit="bit"></sl-format-bytes><br />
-<sl-format-bytes value="1200" unit="bit"></sl-format-bytes><br />
-<sl-format-bytes value="1200000" unit="bit"></sl-format-bytes><br />
-<sl-format-bytes value="1200000000" unit="bit"></sl-format-bytes>
+<p-format-bytes value="12" unit="bit"></p-format-bytes><br />
+<p-format-bytes value="1200" unit="bit"></p-format-bytes><br />
+<p-format-bytes value="1200000" unit="bit"></p-format-bytes><br />
+<p-format-bytes value="1200000000" unit="bit"></p-format-bytes>
 ```
 
 ```jsx:react
-import SlFormatBytes from '@shoelace-style/shoelace/dist/react/format-bytes';
+import PFormatBytes from '@shoelace-style/shoelace/dist/react/format-bytes';
 
 const App = () => (
   <>
-    <SlFormatBytes value="12" unit="bit" />
+    <PFormatBytes value="12" unit="bit" />
     <br />
-    <SlFormatBytes value="1200" unit="bit" />
+    <PFormatBytes value="1200" unit="bit" />
     <br />
-    <SlFormatBytes value="1200000" unit="bit" />
+    <PFormatBytes value="1200000" unit="bit" />
     <br />
-    <SlFormatBytes value="1200000000" unit="bit" />
+    <PFormatBytes value="1200000000" unit="bit" />
   </>
 );
 ```
@@ -111,24 +111,24 @@ const App = () => (
 Use the `lang` attribute to set the number formatting locale.
 
 ```html:preview
-<sl-format-bytes value="12" lang="de"></sl-format-bytes><br />
-<sl-format-bytes value="1200" lang="de"></sl-format-bytes><br />
-<sl-format-bytes value="1200000" lang="de"></sl-format-bytes><br />
-<sl-format-bytes value="1200000000" lang="de"></sl-format-bytes>
+<p-format-bytes value="12" lang="de"></p-format-bytes><br />
+<p-format-bytes value="1200" lang="de"></p-format-bytes><br />
+<p-format-bytes value="1200000" lang="de"></p-format-bytes><br />
+<p-format-bytes value="1200000000" lang="de"></p-format-bytes>
 ```
 
 ```jsx:react
-import SlFormatBytes from '@shoelace-style/shoelace/dist/react/format-bytes';
+import PFormatBytes from '@shoelace-style/shoelace/dist/react/format-bytes';
 
 const App = () => (
   <>
-    <SlFormatBytes value="12" lang="de" />
+    <PFormatBytes value="12" lang="de" />
     <br />
-    <SlFormatBytes value="1200" lang="de" />
+    <PFormatBytes value="1200" lang="de" />
     <br />
-    <SlFormatBytes value="1200000" lang="de" />
+    <PFormatBytes value="1200000" lang="de" />
     <br />
-    <SlFormatBytes value="1200000000" lang="de" />
+    <PFormatBytes value="1200000000" lang="de" />
   </>
 );
 ```

@@ -1,12 +1,12 @@
-import SlDetails from './details.component.js';
+import PDetails from './details.component.js';
 
 export * from './details.component.js';
-export default SlDetails;
+export default PDetails;
 
-SlDetails.define('sl-details');
+PDetails.define('p-details');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-details': SlDetails;
+    'p-details': PDetails;
   }
 }

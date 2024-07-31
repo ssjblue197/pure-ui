@@ -1,11 +1,11 @@
 import '../../../dist/shoelace.js';
 import { elementUpdated, expect, fixture, html } from '@open-wc/testing';
-import type SlFormatBytes from './format-bytes.js';
+import type PFormatBytes from './format-bytes.js';
 
-describe('<sl-format-bytes>', () => {
+describe('<p-format-bytes>', () => {
   describe('defaults ', () => {
     it('default properties', async () => {
-      const el = await fixture<SlFormatBytes>(html` <sl-format-bytes></sl-format-bytes> `);
+      const el = await fixture<PFormatBytes>(html` <p-format-bytes></p-format-bytes> `);
 
       expect(el.value).to.equal(0);
       expect(el.unit).to.equal('byte');
@@ -44,7 +44,7 @@ describe('<sl-format-bytes>', () => {
 
     results.forEach(expected => {
       it('bytes : display formats', async () => {
-        const el = await fixture<SlFormatBytes>(html` <sl-format-bytes></sl-format-bytes> `);
+        const el = await fixture<PFormatBytes>(html` <p-format-bytes></p-format-bytes> `);
         // short
         el.value = expected.value;
         await elementUpdated(el);
@@ -95,7 +95,7 @@ describe('<sl-format-bytes>', () => {
 
     results.forEach(expected => {
       it('bits : display formats', async () => {
-        const el = await fixture<SlFormatBytes>(html` <sl-format-bytes unit="bit"></sl-format-bytes> `);
+        const el = await fixture<PFormatBytes>(html` <p-format-bytes unit="bit"></p-format-bytes> `);
         // short
         el.value = expected.value;
         await elementUpdated(el);

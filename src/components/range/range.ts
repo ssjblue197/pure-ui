@@ -1,12 +1,12 @@
-import SlRange from './range.component.js';
+import PRange from './range.component.js';
 
 export * from './range.component.js';
-export default SlRange;
+export default PRange;
 
-SlRange.define('sl-range');
+PRange.define('p-range');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-range': SlRange;
+    'p-range': PRange;
   }
 }

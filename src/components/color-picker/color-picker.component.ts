@@ -11,18 +11,18 @@ import { styleMap } from 'lit/directives/style-map.js';
 import { TinyColor } from '@ctrl/tinycolor';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlButton from '../button/button.component.js';
-import SlButtonGroup from '../button-group/button-group.component.js';
-import SlDropdown from '../dropdown/dropdown.component.js';
-import SlIcon from '../icon/icon.component.js';
-import SlInput from '../input/input.component.js';
-import SlVisuallyHidden from '../visually-hidden/visually-hidden.component.js';
+import PButton from '../button/button.component.js';
+import PButtonGroup from '../button-group/button-group.component.js';
+import PDropdown from '../dropdown/dropdown.component.js';
+import PIcon from '../icon/icon.component.js';
+import PInput from '../input/input.component.js';
+import PureElement from '../../internal/shoelace-element.js';
+import PVisuallyHidden from '../visually-hidden/visually-hidden.component.js';
 import styles from './color-picker.styles.js';
 import type { CSSResultGroup } from 'lit';
+import type { PChangeEvent } from '../../events/p-change.js';
+import type { PInputEvent } from '../../events/p-input.js';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
-import type { SlChangeEvent } from '../../events/sl-change.js';
-import type { SlInputEvent } from '../../events/sl-input.js';
 
 const hasEyeDropper = 'EyeDropper' in window;
 
@@ -42,19 +42,19 @@ declare const EyeDropper: EyeDropperConstructor;
  * @status stable
  * @since 2.0
  *
- * @dependency sl-button
- * @dependency sl-button-group
- * @dependency sl-dropdown
- * @dependency sl-input
- * @dependency sl-visually-hidden
+ * @dependency p-button
+ * @dependency p-button-group
+ * @dependency p-dropdown
+ * @dependency p-input
+ * @dependency p-visually-hidden
  *
  * @slot label - The color picker's form label. Alternatively, you can use the `label` attribute.
  *
- * @event sl-blur - Emitted when the color picker loses focus.
- * @event sl-change - Emitted when the color picker's value changes.
- * @event sl-focus - Emitted when the color picker receives focus.
- * @event sl-input - Emitted when the color picker receives input.
- * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
+ * @event p-blur - Emitted when the color picker loses focus.
+ * @event p-change - Emitted when the color picker's value changes.
+ * @event p-focus - Emitted when the color picker receives focus.
+ * @event p-input - Emitted when the color picker receives input.
+ * @event p-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @csspart base - The component's base wrapper.
  * @csspart trigger - The color picker's dropdown trigger.
@@ -90,16 +90,16 @@ declare const EyeDropper: EyeDropperConstructor;
  * @cssproperty --slider-handle-size - The diameter of the slider's handle.
  * @cssproperty --swatch-size - The size of each predefined color swatch.
  */
-export default class SlColorPicker extends ShoelaceElement implements ShoelaceFormControl {
+export default class PColorPicker extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   static dependencies = {
-    'sl-button-group': SlButtonGroup,
-    'sl-button': SlButton,
-    'sl-dropdown': SlDropdown,
-    'sl-icon': SlIcon,
-    'sl-input': SlInput,
-    'sl-visually-hidden': SlVisuallyHidden
+    'p-button-group': PButtonGroup,
+    'p-button': PButton,
+    'p-dropdown': PDropdown,
+    'p-icon': PIcon,
+    'p-input': PInput,
+    'p-visually-hidden': PVisuallyHidden
   };
 
   private readonly formControlController = new FormControlController(this);
@@ -107,8 +107,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
   private readonly localize = new LocalizeController(this);
 
   @query('[part~="base"]') base: HTMLElement;
-  @query('[part~="input"]') input: SlInput;
-  @query('.color-dropdown') dropdown: SlDropdown;
+  @query('[part~="input"]') input: PInput;
+  @query('.color-dropdown') dropdown: PDropdown;
   @query('[part~="preview"]') previewButton: HTMLButtonElement;
   @query('[part~="trigger"]') trigger: HTMLButtonElement;
 
@@ -223,12 +223,12 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
   private handleFocusIn = () => {
     this.hasFocus = true;
-    this.emit('sl-focus');
+    this.emit('p-focus');
   };
 
   private handleFocusOut = () => {
     this.hasFocus = false;
-    this.emit('sl-blur');
+    this.emit('p-blur');
   };
 
   private handleFormatToggle() {
@@ -236,8 +236,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     const nextIndex = (formats.indexOf(this.format) + 1) % formats.length;
     this.format = formats[nextIndex] as 'hex' | 'rgb' | 'hsl' | 'hsv';
     this.setColor(this.value);
-    this.emit('sl-change');
-    this.emit('sl-input');
+    this.emit('p-change');
+    this.emit('p-input');
   }
 
   private handleAlphaDrag(event: PointerEvent) {
@@ -257,13 +257,13 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
         if (this.value !== currentValue) {
           currentValue = this.value;
-          this.emit('sl-input');
+          this.emit('p-input');
         }
       },
       onStop: () => {
         if (this.value !== initialValue) {
           initialValue = this.value;
-          this.emit('sl-change');
+          this.emit('p-change');
         }
       },
       initialEvent: event
@@ -287,13 +287,13 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
         if (this.value !== currentValue) {
           currentValue = this.value;
-          this.emit('sl-input');
+          this.emit('p-input');
         }
       },
       onStop: () => {
         if (this.value !== initialValue) {
           initialValue = this.value;
-          this.emit('sl-change');
+          this.emit('p-change');
         }
       },
       initialEvent: event
@@ -320,14 +320,14 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
         if (this.value !== currentValue) {
           currentValue = this.value;
-          this.emit('sl-input');
+          this.emit('p-input');
         }
       },
       onStop: () => {
         this.isDraggingGridHandle = false;
         if (this.value !== initialValue) {
           initialValue = this.value;
-          this.emit('sl-change');
+          this.emit('p-change');
         }
       },
       initialEvent: event
@@ -363,8 +363,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     }
 
     if (this.value !== oldValue) {
-      this.emit('sl-change');
-      this.emit('sl-input');
+      this.emit('p-change');
+      this.emit('p-input');
     }
   }
 
@@ -397,8 +397,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     }
 
     if (this.value !== oldValue) {
-      this.emit('sl-change');
-      this.emit('sl-input');
+      this.emit('p-change');
+      this.emit('p-input');
     }
   }
 
@@ -431,16 +431,16 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     }
 
     if (this.value !== oldValue) {
-      this.emit('sl-change');
-      this.emit('sl-input');
+      this.emit('p-change');
+      this.emit('p-input');
     }
   }
 
-  private handleInputChange(event: SlChangeEvent) {
+  private handleInputChange(event: PChangeEvent) {
     const target = event.target as HTMLInputElement;
     const oldValue = this.value;
 
-    // Prevent the <sl-input>'s sl-change event from bubbling up
+    // Prevent the <p-input>'s p-change event from bubbling up
     event.stopPropagation();
 
     if (this.input.value) {
@@ -451,15 +451,15 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     }
 
     if (this.value !== oldValue) {
-      this.emit('sl-change');
-      this.emit('sl-input');
+      this.emit('p-change');
+      this.emit('p-input');
     }
   }
 
-  private handleInputInput(event: SlInputEvent) {
+  private handleInputInput(event: PInputEvent) {
     this.formControlController.updateValidity();
 
-    // Prevent the <sl-input>'s sl-input event from bubbling up
+    // Prevent the <p-input>'s p-input event from bubbling up
     event.stopPropagation();
   }
 
@@ -472,8 +472,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
         this.input.value = this.value;
 
         if (this.value !== oldValue) {
-          this.emit('sl-change');
-          this.emit('sl-input');
+          this.emit('p-change');
+          this.emit('p-input');
         }
 
         setTimeout(() => this.input.select());
@@ -645,8 +645,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
         this.setColor(colorSelectionResult.sRGBHex);
 
         if (this.value !== oldValue) {
-          this.emit('sl-change');
-          this.emit('sl-input');
+          this.emit('p-change');
+          this.emit('p-input');
         }
       })
       .catch(() => {
@@ -661,8 +661,8 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
       this.setColor(color);
 
       if (this.value !== oldValue) {
-        this.emit('sl-change');
-        this.emit('sl-input');
+        this.emit('p-change');
+        this.emit('p-input');
       }
     }
   }
@@ -792,10 +792,10 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
     if (!this.inline && !this.validity.valid) {
       // If the input is inline and invalid, show the dropdown so the browser can focus on it
       this.dropdown.show();
-      this.addEventListener('sl-after-show', () => this.input.reportValidity(), { once: true });
+      this.addEventListener('p-after-show', () => this.input.reportValidity(), { once: true });
 
       if (!this.disabled) {
-        // By standards we have to emit a `sl-invalid` event here synchronously.
+        // By standards we have to emit a `p-invalid` event here synchronously.
         this.formControlController.emitInvalidEvent();
       }
 
@@ -833,9 +833,9 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
       >
         ${this.inline
           ? html`
-              <sl-visually-hidden id="label">
+              <p-visually-hidden id="label">
                 <slot name="label">${this.label}</slot>
-              </sl-visually-hidden>
+              </p-visually-hidden>
             `
           : null}
 
@@ -940,7 +940,7 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
         </div>
 
         <div class="color-picker__user-input" aria-live="polite">
-          <sl-input
+          <p-input
             part="input"
             type="text"
             name=${this.name}
@@ -953,17 +953,17 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
             ?disabled=${this.disabled}
             aria-label=${this.localize.term('currentValue')}
             @keydown=${this.handleInputKeyDown}
-            @sl-change=${this.handleInputChange}
-            @sl-input=${this.handleInputInput}
-            @sl-invalid=${this.handleInputInvalid}
-            @sl-blur=${this.stopNestedEventPropagation}
-            @sl-focus=${this.stopNestedEventPropagation}
-          ></sl-input>
+            @p-change=${this.handleInputChange}
+            @p-input=${this.handleInputInput}
+            @p-invalid=${this.handleInputInvalid}
+            @p-blur=${this.stopNestedEventPropagation}
+            @p-focus=${this.stopNestedEventPropagation}
+          ></p-input>
 
-          <sl-button-group>
+          <p-button-group>
             ${!this.noFormatToggle
               ? html`
-                  <sl-button
+                  <p-button
                     part="format-button"
                     aria-label=${this.localize.term('toggleColorFormat')}
                     exportparts="
@@ -974,16 +974,16 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
                       caret:format-button__caret
                     "
                     @click=${this.handleFormatToggle}
-                    @sl-blur=${this.stopNestedEventPropagation}
-                    @sl-focus=${this.stopNestedEventPropagation}
+                    @p-blur=${this.stopNestedEventPropagation}
+                    @p-focus=${this.stopNestedEventPropagation}
                   >
                     ${this.setLetterCase(this.format)}
-                  </sl-button>
+                  </p-button>
                 `
               : ''}
             ${hasEyeDropper
               ? html`
-                  <sl-button
+                  <p-button
                     part="eye-dropper-button"
                     exportparts="
                       base:eye-dropper-button__base,
@@ -993,18 +993,18 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
                       caret:eye-dropper-button__caret
                     "
                     @click=${this.handleEyeDropper}
-                    @sl-blur=${this.stopNestedEventPropagation}
-                    @sl-focus=${this.stopNestedEventPropagation}
+                    @p-blur=${this.stopNestedEventPropagation}
+                    @p-focus=${this.stopNestedEventPropagation}
                   >
-                    <sl-icon
+                    <p-icon
                       library="system"
                       name="eyedropper"
                       label=${this.localize.term('selectAColorFromTheScreen')}
-                    ></sl-icon>
-                  </sl-button>
+                    ></p-icon>
+                  </p-button>
                 `
               : ''}
-          </sl-button-group>
+          </p-button-group>
         </div>
 
         ${swatches.length > 0
@@ -1050,13 +1050,13 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
 
     // Render as a dropdown
     return html`
-      <sl-dropdown
+      <p-dropdown
         class="color-dropdown"
         aria-disabled=${this.disabled ? 'true' : 'false'}
         .containing-element=${this}
         ?disabled=${this.disabled}
         ?hoist=${this.hoist}
-        @sl-after-hide=${this.handleAfterHide}
+        @p-after-hide=${this.handleAfterHide}
       >
         <button
           part="trigger"
@@ -1076,12 +1076,12 @@ export default class SlColorPicker extends ShoelaceElement implements ShoelaceFo
           })}
           type="button"
         >
-          <sl-visually-hidden>
+          <p-visually-hidden>
             <slot name="label">${this.label}</slot>
-          </sl-visually-hidden>
+          </p-visually-hidden>
         </button>
         ${colorPicker}
-      </sl-dropdown>
+      </p-dropdown>
     `;
   }
 }

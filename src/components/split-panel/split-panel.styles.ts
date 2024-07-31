@@ -21,8 +21,8 @@ export default css`
     position: relative;
     align-items: center;
     justify-content: center;
-    background-color: var(--sl-color-neutral-200);
-    color: var(--sl-color-neutral-900);
+    background-color: var(--p-color-neutral-200);
+    color: var(--p-color-neutral-900);
     z-index: 1;
   }
 
@@ -31,8 +31,8 @@ export default css`
   }
 
   :host(:not([disabled])) .divider:focus-visible {
-    background-color: var(--sl-color-primary-600);
-    color: var(--sl-color-neutral-0);
+    background-color: var(--p-color-primary-600);
+    color: var(--p-color-neutral-0);
   }
 
   :host([disabled]) .divider {

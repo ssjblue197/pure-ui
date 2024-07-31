@@ -4,9 +4,9 @@ import { html } from 'lit';
 import { LocalizeController } from '../../utilities/localize.js';
 import { property, query, state } from 'lit/decorators.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
-import SlIcon from '../icon/icon.component.js';
-import SlTooltip from '../tooltip/tooltip.component.js';
+import PIcon from '../icon/icon.component.js';
+import PTooltip from '../tooltip/tooltip.component.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './copy-button.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -16,15 +16,15 @@ import type { CSSResultGroup } from 'lit';
  * @status experimental
  * @since 2.7
  *
- * @dependency sl-icon
- * @dependency sl-tooltip
+ * @dependency p-icon
+ * @dependency p-tooltip
  *
- * @event sl-copy - Emitted when the data has been copied.
- * @event sl-error - Emitted when the data could not be copied.
+ * @event p-copy - Emitted when the data has been copied.
+ * @event p-error - Emitted when the data could not be copied.
  *
- * @slot copy-icon - The icon to show in the default copy state. Works best with `<sl-icon>`.
- * @slot success-icon - The icon to show when the content is copied. Works best with `<sl-icon>`.
- * @slot error-icon - The icon to show when a copy error occurs. Works best with `<sl-icon>`.
+ * @slot copy-icon - The icon to show in the default copy state. Works best with `<p-icon>`.
+ * @slot success-icon - The icon to show when the content is copied. Works best with `<p-icon>`.
+ * @slot error-icon - The icon to show when a copy error occurs. Works best with `<p-icon>`.
  *
  * @csspart button - The internal `<button>` element.
  * @csspart copy-icon - The container that holds the copy icon.
@@ -41,11 +41,11 @@ import type { CSSResultGroup } from 'lit';
  * @animation copy.in - The animation to use when feedback icons animate in.
  * @animation copy.out - The animation to use when feedback icons animate out.
  */
-export default class SlCopyButton extends ShoelaceElement {
+export default class PCopyButton extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
-    'sl-icon': SlIcon,
-    'sl-tooltip': SlTooltip
+    'p-icon': PIcon,
+    'p-tooltip': PTooltip
   };
 
   private readonly localize = new LocalizeController(this);
@@ -53,7 +53,7 @@ export default class SlCopyButton extends ShoelaceElement {
   @query('slot[name="copy-icon"]') copyIcon: HTMLSlotElement;
   @query('slot[name="success-icon"]') successIcon: HTMLSlotElement;
   @query('slot[name="error-icon"]') errorIcon: HTMLSlotElement;
-  @query('sl-tooltip') tooltip: SlTooltip;
+  @query('p-tooltip') tooltip: PTooltip;
 
   @state() isCopying = false;
   @state() status: 'rest' | 'success' | 'error' = 'rest';
@@ -137,19 +137,19 @@ export default class SlCopyButton extends ShoelaceElement {
       } else {
         // No target
         this.showStatus('error');
-        this.emit('sl-error');
+        this.emit('p-error');
       }
     }
 
     // No value
     if (!valueToCopy) {
       this.showStatus('error');
-      this.emit('sl-error');
+      this.emit('p-error');
     } else {
       try {
         await navigator.clipboard.writeText(valueToCopy);
         this.showStatus('success');
-        this.emit('sl-copy', {
+        this.emit('p-copy', {
           detail: {
             value: valueToCopy
           }
@@ -157,7 +157,7 @@ export default class SlCopyButton extends ShoelaceElement {
       } catch (error) {
         // Rejected by browser
         this.showStatus('error');
-        this.emit('sl-error');
+        this.emit('p-error');
       }
     }
   }
@@ -196,7 +196,7 @@ export default class SlCopyButton extends ShoelaceElement {
     const copyLabel = this.copyLabel || this.localize.term('copy');
 
     return html`
-      <sl-tooltip
+      <p-tooltip
         class=${classMap({
           'copy-button': true,
           'copy-button--success': this.status === 'success',
@@ -221,16 +221,16 @@ export default class SlCopyButton extends ShoelaceElement {
           @click=${this.handleCopy}
         >
           <slot part="copy-icon" name="copy-icon">
-            <sl-icon library="system" name="copy"></sl-icon>
+            <p-icon library="system" name="copy"></p-icon>
           </slot>
           <slot part="success-icon" name="success-icon" hidden>
-            <sl-icon library="system" name="check"></sl-icon>
+            <p-icon library="system" name="check"></p-icon>
           </slot>
           <slot part="error-icon" name="error-icon" hidden>
-            <sl-icon library="system" name="x-lg"></sl-icon>
+            <p-icon library="system" name="x-lg"></p-icon>
           </slot>
         </button>
-      </sl-tooltip>
+      </p-tooltip>
     `;
   }
 }

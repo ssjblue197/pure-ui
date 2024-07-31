@@ -6,68 +6,68 @@ layout: component
 ---
 
 ```html:preview
-<sl-tree>
-  <sl-tree-item>
+<p-tree>
+  <p-tree-item>
     Deciduous
-    <sl-tree-item>Birch</sl-tree-item>
-    <sl-tree-item>
+    <p-tree-item>Birch</p-tree-item>
+    <p-tree-item>
       Maple
-      <sl-tree-item>Field maple</sl-tree-item>
-      <sl-tree-item>Red maple</sl-tree-item>
-      <sl-tree-item>Sugar maple</sl-tree-item>
-    </sl-tree-item>
-    <sl-tree-item>Oak</sl-tree-item>
-  </sl-tree-item>
+      <p-tree-item>Field maple</p-tree-item>
+      <p-tree-item>Red maple</p-tree-item>
+      <p-tree-item>Sugar maple</p-tree-item>
+    </p-tree-item>
+    <p-tree-item>Oak</p-tree-item>
+  </p-tree-item>
 
-  <sl-tree-item>
+  <p-tree-item>
     Coniferous
-    <sl-tree-item>Cedar</sl-tree-item>
-    <sl-tree-item>Pine</sl-tree-item>
-    <sl-tree-item>Spruce</sl-tree-item>
-  </sl-tree-item>
+    <p-tree-item>Cedar</p-tree-item>
+    <p-tree-item>Pine</p-tree-item>
+    <p-tree-item>Spruce</p-tree-item>
+  </p-tree-item>
 
-  <sl-tree-item>
+  <p-tree-item>
     Non-trees
-    <sl-tree-item>Bamboo</sl-tree-item>
-    <sl-tree-item>Cactus</sl-tree-item>
-    <sl-tree-item>Fern</sl-tree-item>
-  </sl-tree-item>
-</sl-tree>
+    <p-tree-item>Bamboo</p-tree-item>
+    <p-tree-item>Cactus</p-tree-item>
+    <p-tree-item>Fern</p-tree-item>
+  </p-tree-item>
+</p-tree>
 ```
 
 <!-- prettier-ignore -->
 ```jsx:react
-import SlTree from '@shoelace-style/shoelace/dist/react/tree';
-import SlTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@shoelace-style/shoelace/dist/react/tree';
+import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
 
 const App = () => (
-  <SlTree>
-    <SlTreeItem>
+  <PTree>
+    <PTreeItem>
       Deciduous
-      <SlTreeItem>Birch</SlTreeItem>
-      <SlTreeItem>
+      <PTreeItem>Birch</PTreeItem>
+      <PTreeItem>
         Maple
-        <SlTreeItem>Field maple</SlTreeItem>
-        <SlTreeItem>Red maple</SlTreeItem>
-        <SlTreeItem>Sugar maple</SlTreeItem>
-      </SlTreeItem>
-      <SlTreeItem>Oak</SlTreeItem>
-    </SlTreeItem>
+        <PTreeItem>Field maple</PTreeItem>
+        <PTreeItem>Red maple</PTreeItem>
+        <PTreeItem>Sugar maple</PTreeItem>
+      </PTreeItem>
+      <PTreeItem>Oak</PTreeItem>
+    </PTreeItem>
 
-    <SlTreeItem>
+    <PTreeItem>
       Coniferous
-      <SlTreeItem>Cedar</SlTreeItem>
-      <SlTreeItem>Pine</SlTreeItem>
-      <SlTreeItem>Spruce</SlTreeItem>
-    </SlTreeItem>
+      <PTreeItem>Cedar</PTreeItem>
+      <PTreeItem>Pine</PTreeItem>
+      <PTreeItem>Spruce</PTreeItem>
+    </PTreeItem>
 
-    <SlTreeItem>
+    <PTreeItem>
       Non-trees
-      <SlTreeItem>Bamboo</SlTreeItem>
-      <SlTreeItem>Cactus</SlTreeItem>
-      <SlTreeItem>Fern</SlTreeItem>
-    </SlTreeItem>
-  </SlTree>
+      <PTreeItem>Bamboo</PTreeItem>
+      <PTreeItem>Cactus</PTreeItem>
+      <PTreeItem>Fern</PTreeItem>
+    </PTreeItem>
+  </PTree>
 );
 ```
 
@@ -82,36 +82,36 @@ The `selection` attribute lets you change the selection behavior of the tree.
 - Use `leaf` to only allow leaf nodes to be selected.
 
 ```html:preview
-<sl-select id="selection-mode" value="single" label="Selection">
-  <sl-option value="single">Single</sl-option>
-  <sl-option value="multiple">Multiple</sl-option>
-  <sl-option value="leaf">Leaf</sl-option>
-</sl-select>
+<p-select id="selection-mode" value="single" label="Selection">
+  <p-option value="single">Single</p-option>
+  <p-option value="multiple">Multiple</p-option>
+  <p-option value="leaf">Leaf</p-option>
+</p-select>
 
 <br />
 
-<sl-tree class="tree-selectable">
-  <sl-tree-item>
+<p-tree class="tree-selectable">
+  <p-tree-item>
     Item 1
-    <sl-tree-item>
+    <p-tree-item>
       Item A
-      <sl-tree-item>Item Z</sl-tree-item>
-      <sl-tree-item>Item Y</sl-tree-item>
-      <sl-tree-item>Item X</sl-tree-item>
-    </sl-tree-item>
-    <sl-tree-item>Item B</sl-tree-item>
-    <sl-tree-item>Item C</sl-tree-item>
-  </sl-tree-item>
-  <sl-tree-item>Item 2</sl-tree-item>
-  <sl-tree-item>Item 3</sl-tree-item>
-</sl-tree>
+      <p-tree-item>Item Z</p-tree-item>
+      <p-tree-item>Item Y</p-tree-item>
+      <p-tree-item>Item X</p-tree-item>
+    </p-tree-item>
+    <p-tree-item>Item B</p-tree-item>
+    <p-tree-item>Item C</p-tree-item>
+  </p-tree-item>
+  <p-tree-item>Item 2</p-tree-item>
+  <p-tree-item>Item 3</p-tree-item>
+</p-tree>
 
 <script>
   const selectionMode = document.querySelector('#selection-mode');
   const tree = document.querySelector('.tree-selectable');
 
-  selectionMode.addEventListener('sl-change', () => {
-    tree.querySelectorAll('sl-tree-item').forEach(item => (item.selected = false));
+  selectionMode.addEventListener('p-change', () => {
+    tree.querySelectorAll('p-tree-item').forEach(item => (item.selected = false));
     tree.selection = selectionMode.value;
   });
 </script>
@@ -119,37 +119,37 @@ The `selection` attribute lets you change the selection behavior of the tree.
 
 <!-- prettier-ignore -->
 ```jsx:react
-import SlTree from '@shoelace-style/shoelace/dist/react/tree';
-import SlTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@shoelace-style/shoelace/dist/react/tree';
+import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
 
 const App = () => {
   const [selection, setSelection] = useState('single');
 
   return (
     <>
-      <SlSelect label="Selection" value={selection} onSlChange={event => setSelection(event.target.value)}>
-        <SlMenuItem value="single">single</SlMenuItem>
-        <SlMenuItem value="multiple">multiple</SlMenuItem>
-        <SlMenuItem value="leaf">leaf</SlMenuItem>
-      </SlSelect>
+      <PSelect label="Selection" value={selection} onPChange={event => setSelection(event.target.value)}>
+        <PMenuItem value="single">single</PMenuItem>
+        <PMenuItem value="multiple">multiple</PMenuItem>
+        <PMenuItem value="leaf">leaf</PMenuItem>
+      </PSelect>
 
       <br />
 
-      <SlTree selection={selection}>
-        <SlTreeItem>
+      <PTree selection={selection}>
+        <PTreeItem>
           Item 1
-          <SlTreeItem>
+          <PTreeItem>
             Item A
-            <SlTreeItem>Item Z</SlTreeItem>
-            <SlTreeItem>Item Y</SlTreeItem>
-            <SlTreeItem>Item X</SlTreeItem>
-          </SlTreeItem>
-          <SlTreeItem>Item B</SlTreeItem>
-          <SlTreeItem>Item C</SlTreeItem>
-        </SlTreeItem>
-        <SlTreeItem>Item 2</SlTreeItem>
-        <SlTreeItem>Item 3</SlTreeItem>
-      </SlTree>
+            <PTreeItem>Item Z</PTreeItem>
+            <PTreeItem>Item Y</PTreeItem>
+            <PTreeItem>Item X</PTreeItem>
+          </PTreeItem>
+          <PTreeItem>Item B</PTreeItem>
+          <PTreeItem>Item C</PTreeItem>
+        </PTreeItem>
+        <PTreeItem>Item 2</PTreeItem>
+        <PTreeItem>Item 3</PTreeItem>
+      </PTree>
     </>
   );
 };
@@ -160,33 +160,33 @@ const App = () => {
 Indent guides can be drawn by setting `--indent-guide-width`. You can also change the color, offset, and style, using `--indent-guide-color`, `--indent-guide-style`, and `--indent-guide-offset`, respectively.
 
 ```html:preview
-<sl-tree class="tree-with-lines">
-  <sl-tree-item expanded>
+<p-tree class="tree-with-lines">
+  <p-tree-item expanded>
     Deciduous
-    <sl-tree-item>Birch</sl-tree-item>
-    <sl-tree-item expanded>
+    <p-tree-item>Birch</p-tree-item>
+    <p-tree-item expanded>
       Maple
-      <sl-tree-item>Field maple</sl-tree-item>
-      <sl-tree-item>Red maple</sl-tree-item>
-      <sl-tree-item>Sugar maple</sl-tree-item>
-    </sl-tree-item>
-    <sl-tree-item>Oak</sl-tree-item>
-  </sl-tree-item>
+      <p-tree-item>Field maple</p-tree-item>
+      <p-tree-item>Red maple</p-tree-item>
+      <p-tree-item>Sugar maple</p-tree-item>
+    </p-tree-item>
+    <p-tree-item>Oak</p-tree-item>
+  </p-tree-item>
 
-  <sl-tree-item>
+  <p-tree-item>
     Coniferous
-    <sl-tree-item>Cedar</sl-tree-item>
-    <sl-tree-item>Pine</sl-tree-item>
-    <sl-tree-item>Spruce</sl-tree-item>
-  </sl-tree-item>
+    <p-tree-item>Cedar</p-tree-item>
+    <p-tree-item>Pine</p-tree-item>
+    <p-tree-item>Spruce</p-tree-item>
+  </p-tree-item>
 
-  <sl-tree-item>
+  <p-tree-item>
     Non-trees
-    <sl-tree-item>Bamboo</sl-tree-item>
-    <sl-tree-item>Cactus</sl-tree-item>
-    <sl-tree-item>Fern</sl-tree-item>
-  </sl-tree-item>
-</sl-tree>
+    <p-tree-item>Bamboo</p-tree-item>
+    <p-tree-item>Cactus</p-tree-item>
+    <p-tree-item>Fern</p-tree-item>
+  </p-tree-item>
+</p-tree>
 
 <style>
   .tree-with-lines {
@@ -199,37 +199,37 @@ Indent guides can be drawn by setting `--indent-guide-width`. You can also chang
 
 <!-- prettier-ignore -->
 ```jsx:react
-import SlTree from '@shoelace-style/shoelace/dist/react/tree';
-import SlTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@shoelace-style/shoelace/dist/react/tree';
+import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
 
 const App = () => (
-  <SlTree class="tree-with-lines" style={{ '--indent-guide-width': '1px' }}>
-    <SlTreeItem expanded>
+  <PTree class="tree-with-lines" style={{ '--indent-guide-width': '1px' }}>
+    <PTreeItem expanded>
       Deciduous
-      <SlTreeItem>Birch</SlTreeItem>
-      <SlTreeItem expanded>
+      <PTreeItem>Birch</PTreeItem>
+      <PTreeItem expanded>
         Maple
-        <SlTreeItem>Field maple</SlTreeItem>
-        <SlTreeItem>Red maple</SlTreeItem>
-        <SlTreeItem>Sugar maple</SlTreeItem>
-      </SlTreeItem>
-      <SlTreeItem>Oak</SlTreeItem>
-    </SlTreeItem>
+        <PTreeItem>Field maple</PTreeItem>
+        <PTreeItem>Red maple</PTreeItem>
+        <PTreeItem>Sugar maple</PTreeItem>
+      </PTreeItem>
+      <PTreeItem>Oak</PTreeItem>
+    </PTreeItem>
 
-    <SlTreeItem>
+    <PTreeItem>
       Coniferous
-      <SlTreeItem>Cedar</SlTreeItem>
-      <SlTreeItem>Pine</SlTreeItem>
-      <SlTreeItem>Spruce</SlTreeItem>
-    </SlTreeItem>
+      <PTreeItem>Cedar</PTreeItem>
+      <PTreeItem>Pine</PTreeItem>
+      <PTreeItem>Spruce</PTreeItem>
+    </PTreeItem>
 
-    <SlTreeItem>
+    <PTreeItem>
       Non-trees
-      <SlTreeItem>Bamboo</SlTreeItem>
-      <SlTreeItem>Cactus</SlTreeItem>
-      <SlTreeItem>Fern</SlTreeItem>
-    </SlTreeItem>
-  </SlTree>
+      <PTreeItem>Bamboo</PTreeItem>
+      <PTreeItem>Cactus</PTreeItem>
+      <PTreeItem>Fern</PTreeItem>
+    </PTreeItem>
+  </PTree>
 );
 ```
 
@@ -237,25 +237,25 @@ const App = () => (
 
 ### Lazy Loading
 
-Use the `lazy` attribute on a tree item to indicate that the content is not yet present and will be loaded later. When the user tries to expand the node, the `loading` state is set to `true` and the `sl-lazy-load` event will be emitted to allow you to load data asynchronously. The item will remain in a loading state until its content is changed.
+Use the `lazy` attribute on a tree item to indicate that the content is not yet present and will be loaded later. When the user tries to expand the node, the `loading` state is set to `true` and the `p-lazy-load` event will be emitted to allow you to load data asynchronously. The item will remain in a loading state until its content is changed.
 
 If you want to disable this behavior after the first load, simply remove the `lazy` attribute and, on the next expand, the existing content will be shown instead.
 
 ```html:preview
-<sl-tree>
-  <sl-tree-item lazy>Available Trees</sl-tree-item>
-</sl-tree>
+<p-tree>
+  <p-tree-item lazy>Available Trees</p-tree-item>
+</p-tree>
 
 <script type="module">
-  const lazyItem = document.querySelector('sl-tree-item[lazy]');
+  const lazyItem = document.querySelector('p-tree-item[lazy]');
 
-  lazyItem.addEventListener('sl-lazy-load', () => {
+  lazyItem.addEventListener('p-lazy-load', () => {
     // Simulate asynchronous loading
     setTimeout(() => {
       const subItems = ['Birch', 'Cedar', 'Maple', 'Pine'];
 
       for (const item of subItems) {
-        const treeItem = document.createElement('sl-tree-item');
+        const treeItem = document.createElement('p-tree-item');
         treeItem.innerText = item;
         lazyItem.append(treeItem);
       }
@@ -268,8 +268,8 @@ If you want to disable this behavior after the first load, simply remove the `la
 ```
 
 ```jsx:react
-import SlTree from '@shoelace-style/shoelace/dist/react/tree';
-import SlTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@shoelace-style/shoelace/dist/react/tree';
+import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
 
 const App = () => {
   const [childItems, setChildItems] = useState([]);
@@ -286,14 +286,14 @@ const App = () => {
   };
 
   return (
-    <SlTree>
-      <SlTreeItem lazy={lazy} onSlLazyLoad={handleLazyLoad}>
+    <PTree>
+      <PTreeItem lazy={lazy} onPLazyLoad={handleLazyLoad}>
         Available Trees
         {childItems.map(item => (
-          <SlTreeItem>{item}</SlTreeItem>
+          <PTreeItem>{item}</PTreeItem>
         ))}
-      </SlTreeItem>
-    </SlTree>
+      </PTreeItem>
+    </PTree>
   );
 };
 ```
@@ -303,39 +303,39 @@ const App = () => {
 Use the `expand-icon` and `collapse-icon` slots to change the expand and collapse icons, respectively. To disable the animation, override the `rotate` property on the `expand-button` part as shown below.
 
 ```html:preview
-<sl-tree class="custom-icons">
-  <sl-icon name="plus-square" slot="expand-icon"></sl-icon>
-  <sl-icon name="dash-square" slot="collapse-icon"></sl-icon>
+<p-tree class="custom-icons">
+  <p-icon name="plus-square" slot="expand-icon"></p-icon>
+  <p-icon name="dash-square" slot="collapse-icon"></p-icon>
 
-  <sl-tree-item>
+  <p-tree-item>
     Deciduous
-    <sl-tree-item>Birch</sl-tree-item>
-    <sl-tree-item>
+    <p-tree-item>Birch</p-tree-item>
+    <p-tree-item>
       Maple
-      <sl-tree-item>Field maple</sl-tree-item>
-      <sl-tree-item>Red maple</sl-tree-item>
-      <sl-tree-item>Sugar maple</sl-tree-item>
-    </sl-tree-item>
-    <sl-tree-item>Oak</sl-tree-item>
-  </sl-tree-item>
+      <p-tree-item>Field maple</p-tree-item>
+      <p-tree-item>Red maple</p-tree-item>
+      <p-tree-item>Sugar maple</p-tree-item>
+    </p-tree-item>
+    <p-tree-item>Oak</p-tree-item>
+  </p-tree-item>
 
-  <sl-tree-item>
+  <p-tree-item>
     Coniferous
-    <sl-tree-item>Cedar</sl-tree-item>
-    <sl-tree-item>Pine</sl-tree-item>
-    <sl-tree-item>Spruce</sl-tree-item>
-  </sl-tree-item>
+    <p-tree-item>Cedar</p-tree-item>
+    <p-tree-item>Pine</p-tree-item>
+    <p-tree-item>Spruce</p-tree-item>
+  </p-tree-item>
 
-  <sl-tree-item>
+  <p-tree-item>
     Non-trees
-    <sl-tree-item>Bamboo</sl-tree-item>
-    <sl-tree-item>Cactus</sl-tree-item>
-    <sl-tree-item>Fern</sl-tree-item>
-  </sl-tree-item>
-</sl-tree>
+    <p-tree-item>Bamboo</p-tree-item>
+    <p-tree-item>Cactus</p-tree-item>
+    <p-tree-item>Fern</p-tree-item>
+  </p-tree-item>
+</p-tree>
 
 <style>
-  .custom-icons sl-tree-item::part(expand-button) {
+  .custom-icons p-tree-item::part(expand-button) {
     /* Disable the expand/collapse animation */
     rotate: none;
   }
@@ -344,40 +344,40 @@ Use the `expand-icon` and `collapse-icon` slots to change the expand and collaps
 
 <!-- prettier-ignore -->
 ```jsx:react
-import SlTree from '@shoelace-style/shoelace/dist/react/tree';
-import SlTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@shoelace-style/shoelace/dist/react/tree';
+import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
 
 const App = () => (
-  <SlTree>
-    <SlIcon name="plus-square" slot="expand-icon"></SlIcon>
-    <SlIcon name="dash-square" slot="collapse-icon"></SlIcon>
+  <PTree>
+    <PIcon name="plus-square" slot="expand-icon"></PIcon>
+    <PIcon name="dash-square" slot="collapse-icon"></PIcon>
 
-    <SlTreeItem>
+    <PTreeItem>
       Deciduous
-      <SlTreeItem>Birch</SlTreeItem>
-      <SlTreeItem>
+      <PTreeItem>Birch</PTreeItem>
+      <PTreeItem>
         Maple
-        <SlTreeItem>Field maple</SlTreeItem>
-        <SlTreeItem>Red maple</SlTreeItem>
-        <SlTreeItem>Sugar maple</SlTreeItem>
-      </SlTreeItem>
-      <SlTreeItem>Oak</SlTreeItem>
-    </SlTreeItem>
+        <PTreeItem>Field maple</PTreeItem>
+        <PTreeItem>Red maple</PTreeItem>
+        <PTreeItem>Sugar maple</PTreeItem>
+      </PTreeItem>
+      <PTreeItem>Oak</PTreeItem>
+    </PTreeItem>
 
-    <SlTreeItem>
+    <PTreeItem>
       Coniferous
-      <SlTreeItem>Cedar</SlTreeItem>
-      <SlTreeItem>Pine</SlTreeItem>
-      <SlTreeItem>Spruce</SlTreeItem>
-    </SlTreeItem>
+      <PTreeItem>Cedar</PTreeItem>
+      <PTreeItem>Pine</PTreeItem>
+      <PTreeItem>Spruce</PTreeItem>
+    </PTreeItem>
 
-    <SlTreeItem>
+    <PTreeItem>
       Non-trees
-      <SlTreeItem>Bamboo</SlTreeItem>
-      <SlTreeItem>Cactus</SlTreeItem>
-      <SlTreeItem>Fern</SlTreeItem>
-    </SlTreeItem>
-  </SlTree>
+      <PTreeItem>Bamboo</PTreeItem>
+      <PTreeItem>Cactus</PTreeItem>
+      <PTreeItem>Fern</PTreeItem>
+    </PTreeItem>
+  </PTree>
 );
 ```
 
@@ -386,91 +386,91 @@ const App = () => (
 Decorative icons can be used before labels to provide hints for each node.
 
 ```html:preview
-<sl-tree class="tree-with-icons">
-  <sl-tree-item expanded>
-    <sl-icon name="folder"></sl-icon>
+<p-tree class="tree-with-icons">
+  <p-tree-item expanded>
+    <p-icon name="folder"></p-icon>
     Documents
 
-    <sl-tree-item>
-      <sl-icon name="folder"> </sl-icon>
+    <p-tree-item>
+      <p-icon name="folder"> </p-icon>
       Photos
-      <sl-tree-item>
-        <sl-icon name="image"></sl-icon>
+      <p-tree-item>
+        <p-icon name="image"></p-icon>
         birds.jpg
-      </sl-tree-item>
-      <sl-tree-item>
-        <sl-icon name="image"></sl-icon>
+      </p-tree-item>
+      <p-tree-item>
+        <p-icon name="image"></p-icon>
         kitten.jpg
-      </sl-tree-item>
-      <sl-tree-item>
-        <sl-icon name="image"></sl-icon>
+      </p-tree-item>
+      <p-tree-item>
+        <p-icon name="image"></p-icon>
         puppy.jpg
-      </sl-tree-item>
-    </sl-tree-item>
+      </p-tree-item>
+    </p-tree-item>
 
-    <sl-tree-item>
-      <sl-icon name="folder"></sl-icon>
+    <p-tree-item>
+      <p-icon name="folder"></p-icon>
       Writing
-      <sl-tree-item>
-        <sl-icon name="file"></sl-icon>
+      <p-tree-item>
+        <p-icon name="file"></p-icon>
         draft.txt
-      </sl-tree-item>
-      <sl-tree-item>
-        <sl-icon name="file-pdf"></sl-icon>
+      </p-tree-item>
+      <p-tree-item>
+        <p-icon name="file-pdf"></p-icon>
         final.pdf
-      </sl-tree-item>
-      <sl-tree-item>
-        <sl-icon name="file-bar-graph"></sl-icon>
+      </p-tree-item>
+      <p-tree-item>
+        <p-icon name="file-bar-graph"></p-icon>
         sales.xls
-      </sl-tree-item>
-    </sl-tree-item>
-  </sl-tree-item>
-</sl-tree>
+      </p-tree-item>
+    </p-tree-item>
+  </p-tree-item>
+</p-tree>
 ```
 
 ```jsx:react
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
-import SlTree from '@shoelace-style/shoelace/dist/react/tree';
-import SlTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PTree from '@shoelace-style/shoelace/dist/react/tree';
+import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
 
 const App = () => {
   return (
-    <SlTree class="tree-with-icons">
-      <SlTreeItem expanded>
-        <SlIcon name="folder" />
+    <PTree class="tree-with-icons">
+      <PTreeItem expanded>
+        <PIcon name="folder" />
         Root
-        <SlTreeItem>
-          <SlIcon name="folder" />
-          Folder 1<SlTreeItem>
-            <SlIcon name="files" />
+        <PTreeItem>
+          <PIcon name="folder" />
+          Folder 1<PTreeItem>
+            <PIcon name="files" />
             File 1 - 1
-          </SlTreeItem>
-          <SlTreeItem disabled>
-            <SlIcon name="files" />
+          </PTreeItem>
+          <PTreeItem disabled>
+            <PIcon name="files" />
             File 1 - 2
-          </SlTreeItem>
-          <SlTreeItem>
-            <SlIcon name="files" />
+          </PTreeItem>
+          <PTreeItem>
+            <PIcon name="files" />
             File 1 - 3
-          </SlTreeItem>
-        </SlTreeItem>
-        <SlTreeItem>
-          <SlIcon name="files" />
-          Folder 2<SlTreeItem>
-            <SlIcon name="files" />
+          </PTreeItem>
+        </PTreeItem>
+        <PTreeItem>
+          <PIcon name="files" />
+          Folder 2<PTreeItem>
+            <PIcon name="files" />
             File 2 - 1
-          </SlTreeItem>
-          <SlTreeItem>
-            <SlIcon name="files" />
+          </PTreeItem>
+          <PTreeItem>
+            <PIcon name="files" />
             File 2 - 2
-          </SlTreeItem>
-        </SlTreeItem>
-        <SlTreeItem>
-          <SlIcon name="files" />
+          </PTreeItem>
+        </PTreeItem>
+        <PTreeItem>
+          <PIcon name="files" />
           File 1
-        </SlTreeItem>
-      </SlTreeItem>
-    </SlTree>
+        </PTreeItem>
+      </PTreeItem>
+    </PTree>
   );
 };
 ```

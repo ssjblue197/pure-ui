@@ -7,15 +7,15 @@ import { expect, fixture, html, waitUntil } from '@open-wc/testing';
 it('Should still run form validations if an element is removed', async () => {
   const form = await fixture<HTMLFormElement>(html`
     <form>
-      <sl-input name="name" label="Name" required></sl-input>
-      <sl-textarea name="comment" label="Comment" required></sl-textarea>
+      <p-input name="name" label="Name" required></p-input>
+      <p-textarea name="comment" label="Comment" required></p-textarea>
     </form>
   `);
 
   expect(form.checkValidity()).to.equal(false);
   expect(form.reportValidity()).to.equal(false);
 
-  form.querySelector('sl-input')!.remove();
+  form.querySelector('p-input')!.remove();
 
   expect(form.checkValidity()).to.equal(false);
   expect(form.reportValidity()).to.equal(false);
@@ -24,14 +24,14 @@ it('Should still run form validations if an element is removed', async () => {
 it('should submit the correct form values', async () => {
   const form = await fixture<HTMLFormElement>(html`
     <form>
-      <sl-input name="a" value="1"></sl-input>
-      <sl-input name="b" value="2"></sl-input>
-      <sl-input name="c" value="3"></sl-input>
-      <sl-button type="submit">Submit</sl-button>
+      <p-input name="a" value="1"></p-input>
+      <p-input name="b" value="2"></p-input>
+      <p-input name="c" value="3"></p-input>
+      <p-button type="submit">Submit</p-button>
     </form>
   `);
 
-  const button = form.querySelector('sl-button')!;
+  const button = form.querySelector('p-button')!;
   const submitHandler = sinon.spy((event: SubmitEvent) => {
     formData = new FormData(form);
     event.preventDefault();
@@ -51,14 +51,14 @@ it('should submit the correct form values', async () => {
 it('should submit the correct form values when form controls are removed from the DOM', async () => {
   const form = await fixture<HTMLFormElement>(html`
     <form>
-      <sl-input name="a" value="1"></sl-input>
-      <sl-input name="b" value="2"></sl-input>
-      <sl-input name="c" value="3"></sl-input>
-      <sl-button type="submit">Submit</sl-button>
+      <p-input name="a" value="1"></p-input>
+      <p-input name="b" value="2"></p-input>
+      <p-input name="c" value="3"></p-input>
+      <p-button type="submit">Submit</p-button>
     </form>
   `);
 
-  const button = form.querySelector('sl-button')!;
+  const button = form.querySelector('p-button')!;
   const submitHandler = sinon.spy((event: SubmitEvent) => {
     formData = new FormData(form);
     event.preventDefault();

@@ -10,12 +10,12 @@ export default css`
   }
 
   .tooltip {
-    --arrow-size: var(--sl-tooltip-arrow-size);
-    --arrow-color: var(--sl-tooltip-background-color);
+    --arrow-size: var(--p-tooltip-arrow-size);
+    --arrow-color: var(--p-tooltip-background-color);
   }
 
   .tooltip::part(popup) {
-    z-index: var(--sl-z-index-tooltip);
+    z-index: var(--p-z-index-tooltip);
   }
 
   .tooltip[placement^='top']::part(popup) {
@@ -38,16 +38,16 @@ export default css`
     display: block;
     width: max-content;
     max-width: var(--max-width);
-    border-radius: var(--sl-tooltip-border-radius);
-    background-color: var(--sl-tooltip-background-color);
-    font-family: var(--sl-tooltip-font-family);
-    font-size: var(--sl-tooltip-font-size);
-    font-weight: var(--sl-tooltip-font-weight);
-    line-height: var(--sl-tooltip-line-height);
+    border-radius: var(--p-tooltip-border-radius);
+    background-color: var(--p-tooltip-background-color);
+    font-family: var(--p-tooltip-font-family);
+    font-size: var(--p-tooltip-font-size);
+    font-weight: var(--p-tooltip-font-weight);
+    line-height: var(--p-tooltip-line-height);
     text-align: start;
     white-space: normal;
-    color: var(--sl-tooltip-color);
-    padding: var(--sl-tooltip-padding);
+    color: var(--p-tooltip-color);
+    padding: var(--p-tooltip-padding);
     pointer-events: none;
     user-select: none;
     -webkit-user-select: none;

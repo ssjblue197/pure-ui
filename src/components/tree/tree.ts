@@ -1,12 +1,12 @@
-import SlTree from './tree.component.js';
+import PTree from './tree.component.js';
 
 export * from './tree.component.js';
-export default SlTree;
+export default PTree;
 
-SlTree.define('sl-tree');
+PTree.define('p-tree');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-tree': SlTree;
+    'p-tree': PTree;
   }
 }

@@ -1,12 +1,12 @@
-import SlTag from './tag.component.js';
+import PTag from './tag.component.js';
 
 export * from './tag.component.js';
-export default SlTag;
+export default PTag;
 
-SlTag.define('sl-tag');
+PTag.define('p-tag');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-tag': SlTag;
+    'p-tag': PTag;
   }
 }

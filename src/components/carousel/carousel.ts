@@ -1,12 +1,12 @@
-import SlCarousel from './carousel.component.js';
+import PCarousel from './carousel.component.js';
 
 export * from './carousel.component.js';
-export default SlCarousel;
+export default PCarousel;
 
-SlCarousel.define('sl-carousel');
+PCarousel.define('p-carousel');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-carousel': SlCarousel;
+    'p-carousel': PCarousel;
   }
 }

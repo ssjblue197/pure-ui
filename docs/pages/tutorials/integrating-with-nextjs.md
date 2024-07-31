@@ -1,12 +1,12 @@
 ---
 meta:
   title: Integrating with NextJS
-  description: This page explains how to integrate Shoelace with a NextJS app.
+  description: This page explains how to integrate Pure UI with a NextJS app.
 ---
 
 # Integrating with NextJS
 
-This page explains how to integrate Shoelace with a NextJS app.
+This page explains how to integrate Pure UI with a NextJS app.
 
 :::tip
 This is a community-maintained document. Please [ask the community](/resources/community) if you have questions about this integration. You can also [suggest improvements](https://github.com/shoelace-style/shoelace/blob/next/docs/tutorials/integrating-with-nextjs.md) to make it better.
@@ -21,13 +21,13 @@ There are 2 guides available:
 
 - Node: v20.11.1
 - NextJS: 14.2.4
-- Shoelace: 2.15.1
+- Pure UI: 2.15.1
 
 ### Working with ESM
 
 If you haven't already, create your NextJS app. You can find the documentation for that here: <https://nextjs.org/docs/getting-started/installation>
 
-After you've created your app, the first step to using Shoelace is modifying your `package.json` to have `"type": "module"` in it since Shoelace ships ES Modules.
+After you've created your app, the first step to using Pure UI is modifying your `package.json` to have `"type": "module"` in it since Pure UI ships ES Modules.
 
 ```json
 // package.json
@@ -38,23 +38,23 @@ After you've created your app, the first step to using Shoelace is modifying you
 
 ### Installing packages
 
-To get started using Shoelace with NextJS, the following packages must be installed.
+To get started using Pure UI with NextJS, the following packages must be installed.
 
 ```bash
 npm install @shoelace-style/shoelace copy-webpack-plugin
 ```
 
-Shoelace for obvious reasons, and the `copy-webpack-plugin` will be used later for adding our icons to our `public/` folder.
+Pure UI for obvious reasons, and the `copy-webpack-plugin` will be used later for adding our icons to our `public/` folder.
 
 ### Modifying your Next Config
 
-We'll start with modifying our `next.config.js` to copy Shoelace's assets and to properly work with ESM.
+We'll start with modifying our `next.config.js` to copy Pure UI's assets and to properly work with ESM.
 
 Here's what your `next.config.js` should look like:
 
 ### NextJS 14 Webpack Config
 
-In order to add Shoelace's assets to the final build output, we need to modify `next.config.js` to look like this.
+In order to add Pure UI's assets to the final build output, we need to modify `next.config.js` to look like this.
 
 ```javascript
 // next.config.js
@@ -90,9 +90,9 @@ export default nextConfig;
 This will copy the files from `node_modules/@shoelace-style/shoelace/dist/assets` into your `public/shoelace-assets` folder on every development serve or build. You may want to avoid committing these into your repo. To do so, simply add `public/shoelace-assets` into your `.gitignore` folder
 :::
 
-### Importing the Shoelace's CSS (default theme)
+### Importing the Pure UI's CSS (default theme)
 
-Once we've got our webpack config / next config setup, lets modify our `app/layout.tsx` to include Shoelace's default theme.
+Once we've got our webpack config / next config setup, lets modify our `app/layout.tsx` to include Pure UI's default theme.
 
 ```javascript
 // app/layout.tsx
@@ -104,7 +104,7 @@ import '@shoelace-style/shoelace/dist/themes/light.css';
 
 ### Writing a "setup" component
 
-Now, we need to create a `ShoelaceSetup` component that will be a client component in charge of setting the `basePath` for our assets / icons.
+Now, we need to create a `Pure UISetup` component that will be a client component in charge of setting the `basePath` for our assets / icons.
 
 To do so, create a file called `app/shoelace-setup.tsx`
 
@@ -114,7 +114,7 @@ To do so, create a file called `app/shoelace-setup.tsx`
 
 import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js"
 
-export default function ShoelaceSetup({
+export default function Pure UISetup({
   children,
 }: {
   children: React.ReactNode
@@ -125,7 +125,7 @@ export default function ShoelaceSetup({
 ```
 
 :::warning
-Don't forget to mark your Shoelace components and Shoelace setup with 'use client'.
+Don't forget to mark your Pure UI components and Pure UI setup with 'use client'.
 :::
 
 Then we'll add this setup component into `app/layout.tsx`
@@ -138,7 +138,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 + import "@shoelace-style/shoelace/dist/themes/light.css";
 
-+ import ShoelaceSetup from "./shoelace-setup";
++ import Pure UISetup from "./shoelace-setup";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -155,18 +155,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-+         <ShoelaceSetup>
++         <Pure UISetup>
             {children}
-+         </ShoelaceSetup>
++         </Pure UISetup>
       </body>
     </html>
   );
 }
 ```
 
-### Writing components that use Shoelace
+### Writing components that use Pure UI
 
-Now that we have the setup in place, we can write an `app/page.tsx` to use Shoelace components in combination with the `dynamic()` component loader from NextJS.
+Now that we have the setup in place, we can write an `app/page.tsx` to use Pure UI components in combination with the `dynamic()` component loader from NextJS.
 
 Here's what that would look like, do note the `"use client";` at the top of the component is required.
 
@@ -204,7 +204,7 @@ export default function Home() {
 }
 ```
 
-Now you should be up and running with NextJS + Shoelace!
+Now you should be up and running with NextJS + Pure UI!
 
 If you're stuck, there's an [example repo here](https://github.com/konnorRogers/shoelace-nextjs-lazy) you can checkout.
 
@@ -212,9 +212,9 @@ If you're stuck, there's an [example repo here](https://github.com/konnorRogers/
 
 - Node: 16.13.1
 - NextJS: 12.1.6
-- Shoelace: 2.0.0-beta.74
+- Pure UI: 2.0.0-beta.74
 
-To get started using Shoelace with NextJS, the following packages must be installed.
+To get started using Pure UI with NextJS, the following packages must be installed.
 
 ```bash
 yarn add @shoelace-style/shoelace copy-webpack-plugin next-compose-plugins next-transpile-modules
@@ -222,7 +222,7 @@ yarn add @shoelace-style/shoelace copy-webpack-plugin next-compose-plugins next-
 
 ### Enabling ESM
 
-Because Shoelace utilizes ESM, we need to modify our `package.json` to support ESM packages. Simply add the following to
+Because Pure UI utilizes ESM, we need to modify our `package.json` to support ESM packages. Simply add the following to
 your root of `package.json`:
 
 ```
@@ -233,7 +233,7 @@ There's one more step to enable ESM in NextJS, but we'll tackle that in our Next
 
 ### Importing the Default Theme
 
-The next step is to import Shoelace's default theme (stylesheet) in your `_app.js` file:
+The next step is to import Pure UI's default theme (stylesheet) in your `_app.js` file:
 
 ```css
 import '@shoelace-style/shoelace/dist/themes/light.css';
@@ -241,7 +241,7 @@ import '@shoelace-style/shoelace/dist/themes/light.css';
 
 ### Defining Custom Elements
 
-After importing the theme, you'll need to import the JavaScript files for Shoelace. However, this is a bit tricky to do in NextJS thanks to the SSR environment not having any of the required browser APIs to define endpoints.
+After importing the theme, you'll need to import the JavaScript files for Pure UI. However, this is a bit tricky to do in NextJS thanks to the SSR environment not having any of the required browser APIs to define endpoints.
 
 We'll want to create a component that uses [React's `useLayoutEffect`](https://reactjs.org/docs/hooks-reference.html#uselayouteffect) to add in the custom components before the first render:
 
@@ -272,11 +272,11 @@ function CustomEls({ URL }) {
 ```
 
 :::tip
-If we use `useEffect` instead of `useLayoutEffect`, the initial render will occur with the expected `sl-` props applied, but the subsequent render (caused by the `useEffect`) will remove those props as the custom components initialize. We _must_ use `useLayoutEffect` to have expected behavior
+If we use `useEffect` instead of `useLayoutEffect`, the initial render will occur with the expected `p-` props applied, but the subsequent render (caused by the `useEffect`) will remove those props as the custom components initialize. We _must_ use `useLayoutEffect` to have expected behavior
 :::
 
 :::tip
-This will import all Shoelace components for convenience. To selectively import components, refer to the [Using webpack](/getting-started/installation#using-webpack) section of the docs.
+This will import all Pure UI components for convenience. To selectively import components, refer to the [Using webpack](/getting-started/installation#using-webpack) section of the docs.
 :::
 
 You may be wondering where the `URL` property is coming from. We'll address that in the next few sections.

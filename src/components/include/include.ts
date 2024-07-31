@@ -1,12 +1,12 @@
-import SlInclude from './include.component.js';
+import PInclude from './include.component.js';
 
 export * from './include.component.js';
-export default SlInclude;
+export default PInclude;
 
-SlInclude.define('sl-include');
+PInclude.define('p-include');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-include': SlInclude;
+    'p-include': PInclude;
   }
 }

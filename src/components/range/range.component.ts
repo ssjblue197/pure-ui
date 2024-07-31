@@ -10,7 +10,7 @@ import { LocalizeController } from '../../utilities/localize.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import formControlStyles from '../../styles/form-control.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './range.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
@@ -24,11 +24,11 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @slot label - The range's label. Alternatively, you can use the `label` attribute.
  * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
  *
- * @event sl-blur - Emitted when the control loses focus.
- * @event sl-change - Emitted when an alteration to the control's value is committed by the user.
- * @event sl-focus - Emitted when the control gains focus.
- * @event sl-input - Emitted when the control receives input.
- * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
+ * @event p-blur - Emitted when the control loses focus.
+ * @event p-change - Emitted when an alteration to the control's value is committed by the user.
+ * @event p-focus - Emitted when the control gains focus.
+ * @event p-input - Emitted when the control receives input.
+ * @event p-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
  *
  * @csspart form-control - The form control that wraps the label, input, and help text.
  * @csspart form-control-label - The label's wrapper.
@@ -45,7 +45,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
  * @cssproperty --track-height - The height of the track.
  * @cssproperty --track-active-offset - The point of origin of the active track.
  */
-export default class SlRange extends ShoelaceElement implements ShoelaceFormControl {
+export default class PRange extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
 
   private readonly formControlController = new FormControlController(this);
@@ -136,25 +136,25 @@ export default class SlRange extends ShoelaceElement implements ShoelaceFormCont
   }
 
   private handleChange() {
-    this.emit('sl-change');
+    this.emit('p-change');
   }
 
   private handleInput() {
     this.value = parseFloat(this.input.value);
-    this.emit('sl-input');
+    this.emit('p-input');
     this.syncRange();
   }
 
   private handleBlur() {
     this.hasFocus = false;
     this.hasTooltip = false;
-    this.emit('sl-blur');
+    this.emit('p-blur');
   }
 
   private handleFocus() {
     this.hasFocus = true;
     this.hasTooltip = true;
-    this.emit('sl-focus');
+    this.emit('p-focus');
   }
 
   @eventOptions({ passive: true })

@@ -3,7 +3,7 @@ import { property } from 'lit/decorators.js';
 import { requestInclude } from './request.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import ShoelaceElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/shoelace-element.js';
 import styles from './include.styles.js';
 import type { CSSResultGroup } from 'lit';
 
@@ -13,10 +13,10 @@ import type { CSSResultGroup } from 'lit';
  * @status stable
  * @since 2.0
  *
- * @event sl-load - Emitted when the included file is loaded.
- * @event {{ status: number }} sl-error - Emitted when the included file fails to load due to an error.
+ * @event p-load - Emitted when the included file is loaded.
+ * @event {{ status: number }} p-error - Emitted when the included file fails to load due to an error.
  */
-export default class SlInclude extends ShoelaceElement {
+export default class PInclude extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   /**
@@ -54,7 +54,7 @@ export default class SlInclude extends ShoelaceElement {
       }
 
       if (!file.ok) {
-        this.emit('sl-error', { detail: { status: file.status } });
+        this.emit('p-error', { detail: { status: file.status } });
         return;
       }
 
@@ -64,9 +64,9 @@ export default class SlInclude extends ShoelaceElement {
         [...this.querySelectorAll('script')].forEach(script => this.executeScript(script));
       }
 
-      this.emit('sl-load');
+      this.emit('p-load');
     } catch {
-      this.emit('sl-error', { detail: { status: -1 } });
+      this.emit('p-error', { detail: { status: -1 } });
     }
   }
 

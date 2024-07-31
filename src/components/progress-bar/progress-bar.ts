@@ -1,12 +1,12 @@
-import SlProgressBar from './progress-bar.component.js';
+import PProgressBar from './progress-bar.component.js';
 
 export * from './progress-bar.component.js';
-export default SlProgressBar;
+export default PProgressBar;
 
-SlProgressBar.define('sl-progress-bar');
+PProgressBar.define('p-progress-bar');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-progress-bar': SlProgressBar;
+    'p-progress-bar': PProgressBar;
   }
 }

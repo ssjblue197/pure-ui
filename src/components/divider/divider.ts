@@ -1,12 +1,12 @@
-import SlDivider from './divider.component.js';
+import PDivider from './divider.component.js';
 
 export * from './divider.component.js';
-export default SlDivider;
+export default PDivider;
 
-SlDivider.define('sl-divider');
+PDivider.define('p-divider');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-divider': SlDivider;
+    'p-divider': PDivider;
   }
 }

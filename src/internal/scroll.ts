@@ -30,9 +30,9 @@ export function lockBodyScrolling(lockingEl: HTMLElement) {
 
   // When the first lock is created, set the scroll lock size to match the scrollbar's width to prevent content from
   // shifting. We only do this on the first lock because the scrollbar width will measure zero after overflow is hidden.
-  if (!document.documentElement.classList.contains('sl-scroll-lock')) {
+  if (!document.documentElement.classList.contains('p-scroll-lock')) {
     /** Scrollbar width + body padding calculation can go away once Safari has scrollbar-gutter support. */
-    const scrollbarWidth = getScrollbarWidth() + getExistingBodyPadding(); // must be measured before the `sl-scroll-lock` class is applied
+    const scrollbarWidth = getScrollbarWidth() + getExistingBodyPadding(); // must be measured before the `p-scroll-lock` class is applied
 
     let scrollbarGutterProperty = getComputedStyle(document.documentElement).scrollbarGutter;
 
@@ -46,9 +46,9 @@ export function lockBodyScrolling(lockingEl: HTMLElement) {
       // if there's no scrollbar, just set it to an empty string so whatever the user has set gets used. This is useful if the page is not overflowing and showing a scrollbar, or if the user has overflow: hidden, or any other reason a scrollbar may not be showing.
       scrollbarGutterProperty = '';
     }
-    document.documentElement.style.setProperty('--sl-scroll-lock-gutter', scrollbarGutterProperty);
-    document.documentElement.classList.add('sl-scroll-lock');
-    document.documentElement.style.setProperty('--sl-scroll-lock-size', `${scrollbarWidth}px`);
+    document.documentElement.style.setProperty('--p-scroll-lock-gutter', scrollbarGutterProperty);
+    document.documentElement.classList.add('p-scroll-lock');
+    document.documentElement.style.setProperty('--p-scroll-lock-size', `${scrollbarWidth}px`);
   }
 }
 
@@ -59,8 +59,8 @@ export function unlockBodyScrolling(lockingEl: HTMLElement) {
   locks.delete(lockingEl);
 
   if (locks.size === 0) {
-    document.documentElement.classList.remove('sl-scroll-lock');
-    document.documentElement.style.removeProperty('--sl-scroll-lock-size');
+    document.documentElement.classList.remove('p-scroll-lock');
+    document.documentElement.style.removeProperty('--p-scroll-lock-size');
   }
 }
 

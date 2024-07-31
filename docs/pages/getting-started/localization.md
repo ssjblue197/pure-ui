@@ -1,12 +1,12 @@
 ---
 meta:
   title: Localization
-  description: Discover how to localize Shoelace with minimal effort.
+  description: Discover how to localize Pure UI with minimal effort.
 ---
 
 # Localization
 
-Components can be localized by importing the appropriate translation file and setting the desired [`lang` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) and/or [`dir` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir) on the `<html>` element. Here's an example that renders Shoelace components in Spanish.
+Components can be localized by importing the appropriate translation file and setting the desired [`lang` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) and/or [`dir` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir) on the `<html>` element. Here's an example that renders Pure UI components in Spanish.
 
 ```html
 <html lang="es">
@@ -24,9 +24,9 @@ Through the magic of a mutation observer, changing the `lang` attribute will aut
 
 ## Available Translations
 
-Shoelace ships with a number of translations. The default is English (US), which also serves as the fallback locale. As such, you do not need to import the English translation. To see a list of all available translations in the latest version, [refer to this directory](https://github.com/shoelace-style/shoelace/tree/current/src/translations).
+Pure UI ships with a number of translations. The default is English (US), which also serves as the fallback locale. As such, you do not need to import the English translation. To see a list of all available translations in the latest version, [refer to this directory](https://github.com/shoelace-style/shoelace/tree/current/src/translations).
 
-The location of translations depends on how you're consuming Shoelace.
+The location of translations depends on how you're consuming Pure UI.
 
 - If you're using the CDN, [import them from the CDN](https://www.jsdelivr.com/package/npm/@shoelace-style/shoelace?path=%CDNDIR%%2Ftranslations)
 - If you're using a bundler, import them from `@shoelace-style/shoelace/%NPMDIR%/translations/[lang].js`
@@ -49,7 +49,7 @@ The locale set by `<html lang="...">` is the default locale for the document. If
 2. Look for `es`
 3. Fall back to `en`
 
-Shoelace uses English as a fallback to provide a better experience than rendering nothing or throwing an error.
+Pure UI uses English as a fallback to provide a better experience than rendering nothing or throwing an error.
 
 ### Submitting New Translations or Improvements
 
@@ -60,7 +60,7 @@ Regional translations are welcome! For example, if a German translation (`de`) e
 If you have any questions, please start a [discussion](https://github.com/shoelace-style/shoelace/discussions) or ask in the [community chat](https://discord.gg/mg8f26C).
 
 :::tip
-Shoelace provides a localization mechanism for component internals. This is not designed to be used as localization tool for your entire application. You should use a more appropriate tool such as [i18next](https://www.i18next.com/) if you need to localize content in your app.
+Pure UI provides a localization mechanism for component internals. This is not designed to be used as localization tool for your entire application. You should use a more appropriate tool such as [i18next](https://www.i18next.com/) if you need to localize content in your app.
 :::
 
 ## Multiple Locales Per Page
@@ -72,8 +72,8 @@ You can use a different locale for an individual component by setting its `lang`
   ...
 
   <body>
-    <sl-button><!-- Spanish --></sl-button>
-    <sl-button lang="ru"><!-- Russian --></sl-button>
+    <p-button><!-- Spanish --></p-button>
+    <p-button lang="ru"><!-- Russian --></p-button>
   </body>
 </html>
 ```
@@ -86,7 +86,7 @@ For performance reasons, the `lang` and `dir` attributes must be on the componen
 
   <body>
     <div lang="ru">
-      <sl-button><!-- still in Spanish --></sl-button>
+      <p-button><!-- still in Spanish --></p-button>
     </div>
   </body>
 </html>

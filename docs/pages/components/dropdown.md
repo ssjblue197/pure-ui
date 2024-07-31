@@ -10,61 +10,61 @@ Dropdowns consist of a trigger and a panel. By default, activating the trigger w
 Dropdowns are designed to work well with [menus](/components/menu) to provide a list of options the user can select from. However, dropdowns can also be used in lower-level applications (e.g. [color picker](/components/color-picker)). The API gives you complete control over showing, hiding, and positioning the panel.
 
 ```html:preview
-<sl-dropdown>
-  <sl-button slot="trigger" caret>Dropdown</sl-button>
-  <sl-menu>
-    <sl-menu-item>Dropdown Item 1</sl-menu-item>
-    <sl-menu-item>Dropdown Item 2</sl-menu-item>
-    <sl-menu-item>Dropdown Item 3</sl-menu-item>
-    <sl-divider></sl-divider>
-    <sl-menu-item type="checkbox" checked>Checkbox</sl-menu-item>
-    <sl-menu-item disabled>Disabled</sl-menu-item>
-    <sl-divider></sl-divider>
-    <sl-menu-item>
+<p-dropdown>
+  <p-button slot="trigger" caret>Dropdown</p-button>
+  <p-menu>
+    <p-menu-item>Dropdown Item 1</p-menu-item>
+    <p-menu-item>Dropdown Item 2</p-menu-item>
+    <p-menu-item>Dropdown Item 3</p-menu-item>
+    <p-divider></p-divider>
+    <p-menu-item type="checkbox" checked>Checkbox</p-menu-item>
+    <p-menu-item disabled>Disabled</p-menu-item>
+    <p-divider></p-divider>
+    <p-menu-item>
       Prefix
-      <sl-icon slot="prefix" name="gift"></sl-icon>
-    </sl-menu-item>
-    <sl-menu-item>
+      <p-icon slot="prefix" name="gift"></p-icon>
+    </p-menu-item>
+    <p-menu-item>
       Suffix Icon
-      <sl-icon slot="suffix" name="heart"></sl-icon>
-    </sl-menu-item>
-  </sl-menu>
-</sl-dropdown>
+      <p-icon slot="suffix" name="heart"></p-icon>
+    </p-menu-item>
+  </p-menu>
+</p-dropdown>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
-import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDivider from '@shoelace-style/shoelace/dist/react/divider';
+import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
-  <SlDropdown>
-    <SlButton slot="trigger" caret>
+  <PDropdown>
+    <PButton slot="trigger" caret>
       Dropdown
-    </SlButton>
-    <SlMenu>
-      <SlMenuItem>Dropdown Item 1</SlMenuItem>
-      <SlMenuItem>Dropdown Item 2</SlMenuItem>
-      <SlMenuItem>Dropdown Item 3</SlMenuItem>
-      <SlDivider />
-      <SlMenuItem type="checkbox" checked>
+    </PButton>
+    <PMenu>
+      <PMenuItem>Dropdown Item 1</PMenuItem>
+      <PMenuItem>Dropdown Item 2</PMenuItem>
+      <PMenuItem>Dropdown Item 3</PMenuItem>
+      <PDivider />
+      <PMenuItem type="checkbox" checked>
         Checkbox
-      </SlMenuItem>
-      <SlMenuItem disabled>Disabled</SlMenuItem>
-      <SlDivider />
-      <SlMenuItem>
+      </PMenuItem>
+      <PMenuItem disabled>Disabled</PMenuItem>
+      <PDivider />
+      <PMenuItem>
         Prefix
-        <SlIcon slot="prefix" name="gift" />
-      </SlMenuItem>
-      <SlMenuItem>
+        <PIcon slot="prefix" name="gift" />
+      </PMenuItem>
+      <PMenuItem>
         Suffix Icon
-        <SlIcon slot="suffix" name="heart" />
-      </SlMenuItem>
-    </SlMenu>
-  </SlDropdown>
+        <PIcon slot="suffix" name="heart" />
+      </PMenuItem>
+    </PMenu>
+  </PDropdown>
 );
 ```
 
@@ -72,25 +72,25 @@ const App = () => (
 
 ### Getting the Selected Item
 
-When dropdowns are used with [menus](/components/menu), you can listen for the [`sl-select`](/components/menu#events) event to determine which menu item was selected. The menu item element will be exposed in `event.detail.item`. You can set `value` props to make it easier to identify commands.
+When dropdowns are used with [menus](/components/menu), you can listen for the [`p-select`](/components/menu#events) event to determine which menu item was selected. The menu item element will be exposed in `event.detail.item`. You can set `value` props to make it easier to identify commands.
 
 ```html:preview
 <div class="dropdown-selection">
-  <sl-dropdown>
-    <sl-button slot="trigger" caret>Edit</sl-button>
-    <sl-menu>
-      <sl-menu-item value="cut">Cut</sl-menu-item>
-      <sl-menu-item value="copy">Copy</sl-menu-item>
-      <sl-menu-item value="paste">Paste</sl-menu-item>
-    </sl-menu>
-  </sl-dropdown>
+  <p-dropdown>
+    <p-button slot="trigger" caret>Edit</p-button>
+    <p-menu>
+      <p-menu-item value="cut">Cut</p-menu-item>
+      <p-menu-item value="copy">Copy</p-menu-item>
+      <p-menu-item value="paste">Paste</p-menu-item>
+    </p-menu>
+  </p-dropdown>
 </div>
 
 <script>
   const container = document.querySelector('.dropdown-selection');
-  const dropdown = container.querySelector('sl-dropdown');
+  const dropdown = container.querySelector('p-dropdown');
 
-  dropdown.addEventListener('sl-select', event => {
+  dropdown.addEventListener('p-select', event => {
     const selectedItem = event.detail.item;
     console.log(selectedItem.value);
   });
@@ -98,10 +98,10 @@ When dropdowns are used with [menus](/components/menu), you can listen for the [
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => {
   function handleSelect(event) {
@@ -110,16 +110,16 @@ const App = () => {
   }
 
   return (
-    <SlDropdown>
-      <SlButton slot="trigger" caret>
+    <PDropdown>
+      <PButton slot="trigger" caret>
         Edit
-      </SlButton>
-      <SlMenu onSlSelect={handleSelect}>
-        <SlMenuItem value="cut">Cut</SlMenuItem>
-        <SlMenuItem value="copy">Copy</SlMenuItem>
-        <SlMenuItem value="paste">Paste</SlMenuItem>
-      </SlMenu>
-    </SlDropdown>
+      </PButton>
+      <PMenu onPSelect={handleSelect}>
+        <PMenuItem value="cut">Cut</PMenuItem>
+        <PMenuItem value="copy">Copy</PMenuItem>
+        <PMenuItem value="paste">Paste</PMenuItem>
+      </PMenu>
+    </PDropdown>
   );
 };
 ```
@@ -128,21 +128,21 @@ Alternatively, you can listen for the `click` event on individual menu items. No
 
 ```html:preview
 <div class="dropdown-selection-alt">
-  <sl-dropdown>
-    <sl-button slot="trigger" caret>Edit</sl-button>
-    <sl-menu>
-      <sl-menu-item value="cut">Cut</sl-menu-item>
-      <sl-menu-item value="copy">Copy</sl-menu-item>
-      <sl-menu-item value="paste">Paste</sl-menu-item>
-    </sl-menu>
-  </sl-dropdown>
+  <p-dropdown>
+    <p-button slot="trigger" caret>Edit</p-button>
+    <p-menu>
+      <p-menu-item value="cut">Cut</p-menu-item>
+      <p-menu-item value="copy">Copy</p-menu-item>
+      <p-menu-item value="paste">Paste</p-menu-item>
+    </p-menu>
+  </p-dropdown>
 </div>
 
 <script>
   const container = document.querySelector('.dropdown-selection-alt');
-  const cut = container.querySelector('sl-menu-item[value="cut"]');
-  const copy = container.querySelector('sl-menu-item[value="copy"]');
-  const paste = container.querySelector('sl-menu-item[value="paste"]');
+  const cut = container.querySelector('p-menu-item[value="cut"]');
+  const copy = container.querySelector('p-menu-item[value="copy"]');
+  const paste = container.querySelector('p-menu-item[value="paste"]');
 
   cut.addEventListener('click', () => console.log('cut'));
   copy.addEventListener('click', () => console.log('copy'));
@@ -151,10 +151,10 @@ Alternatively, you can listen for the `click` event on individual menu items. No
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => {
   function handleCut() {
@@ -170,16 +170,16 @@ const App = () => {
   }
 
   return (
-    <SlDropdown>
-      <SlButton slot="trigger" caret>
+    <PDropdown>
+      <PButton slot="trigger" caret>
         Edit
-      </SlButton>
-      <SlMenu>
-        <SlMenuItem onClick={handleCut}>Cut</SlMenuItem>
-        <SlMenuItem onClick={handleCopy}>Copy</SlMenuItem>
-        <SlMenuItem onClick={handlePaste}>Paste</SlMenuItem>
-      </SlMenu>
-    </SlDropdown>
+      </PButton>
+      <PMenu>
+        <PMenuItem onClick={handleCut}>Cut</PMenuItem>
+        <PMenuItem onClick={handleCopy}>Copy</PMenuItem>
+        <PMenuItem onClick={handlePaste}>Paste</PMenuItem>
+      </PMenu>
+    </PDropdown>
   );
 };
 ```
@@ -189,40 +189,40 @@ const App = () => {
 The preferred placement of the dropdown can be set with the `placement` attribute. Note that the actual position may vary to ensure the panel remains in the viewport.
 
 ```html:preview
-<sl-dropdown placement="top-start">
-  <sl-button slot="trigger" caret>Edit</sl-button>
-  <sl-menu>
-    <sl-menu-item>Cut</sl-menu-item>
-    <sl-menu-item>Copy</sl-menu-item>
-    <sl-menu-item>Paste</sl-menu-item>
-    <sl-divider></sl-divider>
-    <sl-menu-item>Find</sl-menu-item>
-    <sl-menu-item>Replace</sl-menu-item>
-  </sl-menu>
-</sl-dropdown>
+<p-dropdown placement="top-start">
+  <p-button slot="trigger" caret>Edit</p-button>
+  <p-menu>
+    <p-menu-item>Cut</p-menu-item>
+    <p-menu-item>Copy</p-menu-item>
+    <p-menu-item>Paste</p-menu-item>
+    <p-divider></p-divider>
+    <p-menu-item>Find</p-menu-item>
+    <p-menu-item>Replace</p-menu-item>
+  </p-menu>
+</p-dropdown>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
-import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDivider from '@shoelace-style/shoelace/dist/react/divider';
+import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
-  <SlDropdown placement="top-start">
-    <SlButton slot="trigger" caret>
+  <PDropdown placement="top-start">
+    <PButton slot="trigger" caret>
       Edit
-    </SlButton>
-    <SlMenu>
-      <SlMenuItem>Cut</SlMenuItem>
-      <SlMenuItem>Copy</SlMenuItem>
-      <SlMenuItem>Paste</SlMenuItem>
-      <SlDivider />
-      <SlMenuItem>Find</SlMenuItem>
-      <SlMenuItem>Replace</SlMenuItem>
-    </SlMenu>
-  </SlDropdown>
+    </PButton>
+    <PMenu>
+      <PMenuItem>Cut</PMenuItem>
+      <PMenuItem>Copy</PMenuItem>
+      <PMenuItem>Paste</PMenuItem>
+      <PDivider />
+      <PMenuItem>Find</PMenuItem>
+      <PMenuItem>Replace</PMenuItem>
+    </PMenu>
+  </PDropdown>
 );
 ```
 
@@ -231,40 +231,40 @@ const App = () => (
 The distance from the panel to the trigger can be customized using the `distance` attribute. This value is specified in pixels.
 
 ```html:preview
-<sl-dropdown distance="30">
-  <sl-button slot="trigger" caret>Edit</sl-button>
-  <sl-menu>
-    <sl-menu-item>Cut</sl-menu-item>
-    <sl-menu-item>Copy</sl-menu-item>
-    <sl-menu-item>Paste</sl-menu-item>
-    <sl-divider></sl-divider>
-    <sl-menu-item>Find</sl-menu-item>
-    <sl-menu-item>Replace</sl-menu-item>
-  </sl-menu>
-</sl-dropdown>
+<p-dropdown distance="30">
+  <p-button slot="trigger" caret>Edit</p-button>
+  <p-menu>
+    <p-menu-item>Cut</p-menu-item>
+    <p-menu-item>Copy</p-menu-item>
+    <p-menu-item>Paste</p-menu-item>
+    <p-divider></p-divider>
+    <p-menu-item>Find</p-menu-item>
+    <p-menu-item>Replace</p-menu-item>
+  </p-menu>
+</p-dropdown>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
-import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDivider from '@shoelace-style/shoelace/dist/react/divider';
+import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
-  <SlDropdown distance={30}>
-    <SlButton slot="trigger" caret>
+  <PDropdown distance={30}>
+    <PButton slot="trigger" caret>
       Edit
-    </SlButton>
-    <SlMenu>
-      <SlMenuItem>Cut</SlMenuItem>
-      <SlMenuItem>Copy</SlMenuItem>
-      <SlMenuItem>Paste</SlMenuItem>
-      <SlDivider />
-      <SlMenuItem>Find</SlMenuItem>
-      <SlMenuItem>Replace</SlMenuItem>
-    </SlMenu>
-  </SlDropdown>
+    </PButton>
+    <PMenu>
+      <PMenuItem>Cut</PMenuItem>
+      <PMenuItem>Copy</PMenuItem>
+      <PMenuItem>Paste</PMenuItem>
+      <PDivider />
+      <PMenuItem>Find</PMenuItem>
+      <PMenuItem>Replace</PMenuItem>
+    </PMenu>
+  </PDropdown>
 );
 ```
 
@@ -273,125 +273,125 @@ const App = () => (
 The offset of the panel along the trigger can be customized using the `skidding` attribute. This value is specified in pixels.
 
 ```html:preview
-<sl-dropdown skidding="30">
-  <sl-button slot="trigger" caret>Edit</sl-button>
-  <sl-menu>
-    <sl-menu-item>Cut</sl-menu-item>
-    <sl-menu-item>Copy</sl-menu-item>
-    <sl-menu-item>Paste</sl-menu-item>
-    <sl-divider></sl-divider>
-    <sl-menu-item>Find</sl-menu-item>
-    <sl-menu-item>Replace</sl-menu-item>
-  </sl-menu>
-</sl-dropdown>
+<p-dropdown skidding="30">
+  <p-button slot="trigger" caret>Edit</p-button>
+  <p-menu>
+    <p-menu-item>Cut</p-menu-item>
+    <p-menu-item>Copy</p-menu-item>
+    <p-menu-item>Paste</p-menu-item>
+    <p-divider></p-divider>
+    <p-menu-item>Find</p-menu-item>
+    <p-menu-item>Replace</p-menu-item>
+  </p-menu>
+</p-dropdown>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
-import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDivider from '@shoelace-style/shoelace/dist/react/divider';
+import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
-  <SlDropdown skidding={30}>
-    <SlButton slot="trigger" caret>
+  <PDropdown skidding={30}>
+    <PButton slot="trigger" caret>
       Edit
-    </SlButton>
-    <SlMenu>
-      <SlMenuItem>Cut</SlMenuItem>
-      <SlMenuItem>Copy</SlMenuItem>
-      <SlMenuItem>Paste</SlMenuItem>
-      <SlDivider />
-      <SlMenuItem>Find</SlMenuItem>
-      <SlMenuItem>Replace</SlMenuItem>
-    </SlMenu>
-  </SlDropdown>
+    </PButton>
+    <PMenu>
+      <PMenuItem>Cut</PMenuItem>
+      <PMenuItem>Copy</PMenuItem>
+      <PMenuItem>Paste</PMenuItem>
+      <PDivider />
+      <PMenuItem>Find</PMenuItem>
+      <PMenuItem>Replace</PMenuItem>
+    </PMenu>
+  </PDropdown>
 );
 ```
 
 ### Submenus
 
-To create a submenu, nest an `<sl-menu slot="submenu">` element in a [menu item](/components/menu-item).
+To create a submenu, nest an `<p-menu slot="submenu">` element in a [menu item](/components/menu-item).
 
 ```html:preview
-<sl-dropdown>
-  <sl-button slot="trigger" caret>Edit</sl-button>
+<p-dropdown>
+  <p-button slot="trigger" caret>Edit</p-button>
 
-  <sl-menu style="max-width: 200px;">
-    <sl-menu-item value="undo">Undo</sl-menu-item>
-    <sl-menu-item value="redo">Redo</sl-menu-item>
-    <sl-divider></sl-divider>
-    <sl-menu-item value="cut">Cut</sl-menu-item>
-    <sl-menu-item value="copy">Copy</sl-menu-item>
-    <sl-menu-item value="paste">Paste</sl-menu-item>
-    <sl-divider></sl-divider>
-    <sl-menu-item>
+  <p-menu style="max-width: 200px;">
+    <p-menu-item value="undo">Undo</p-menu-item>
+    <p-menu-item value="redo">Redo</p-menu-item>
+    <p-divider></p-divider>
+    <p-menu-item value="cut">Cut</p-menu-item>
+    <p-menu-item value="copy">Copy</p-menu-item>
+    <p-menu-item value="paste">Paste</p-menu-item>
+    <p-divider></p-divider>
+    <p-menu-item>
       Find
-      <sl-menu slot="submenu">
-        <sl-menu-item value="find">Find…</sl-menu-item>
-        <sl-menu-item value="find-previous">Find Next</sl-menu-item>
-        <sl-menu-item value="find-next">Find Previous</sl-menu-item>
-      </sl-menu>
-    </sl-menu-item>
-    <sl-menu-item>
+      <p-menu slot="submenu">
+        <p-menu-item value="find">Find…</p-menu-item>
+        <p-menu-item value="find-previous">Find Next</p-menu-item>
+        <p-menu-item value="find-next">Find Previous</p-menu-item>
+      </p-menu>
+    </p-menu-item>
+    <p-menu-item>
       Transformations
-      <sl-menu slot="submenu">
-        <sl-menu-item value="uppercase">Make uppercase</sl-menu-item>
-        <sl-menu-item value="lowercase">Make lowercase</sl-menu-item>
-        <sl-menu-item value="capitalize">Capitalize</sl-menu-item>
-      </sl-menu>
-    </sl-menu-item>
-  </sl-menu>
-</sl-dropdown>
+      <p-menu slot="submenu">
+        <p-menu-item value="uppercase">Make uppercase</p-menu-item>
+        <p-menu-item value="lowercase">Make lowercase</p-menu-item>
+        <p-menu-item value="capitalize">Capitalize</p-menu-item>
+      </p-menu>
+    </p-menu-item>
+  </p-menu>
+</p-dropdown>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
-import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDivider from '@shoelace-style/shoelace/dist/react/divider';
+import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const css = `
   .dropdown-hoist {
-    border: solid 2px var(--sl-panel-border-color);
-    padding: var(--sl-spacing-medium);
+    border: solid 2px var(--p-panel-border-color);
+    padding: var(--p-spacing-medium);
     overflow: hidden;
   }
 `;
 
 const App = () => (
   <>
-    <SlDropdown>
-      <SlButton slot="trigger" caret>Edit</SlButton>
+    <PDropdown>
+      <PButton slot="trigger" caret>Edit</PButton>
 
-      <SlMenu style="max-width: 200px;">
-        <SlMenuItem value="undo">Undo</SlMenuItem>
-        <SlMenuItem value="redo">Redo</SlMenuItem>
-        <SlDivider />
-        <SlMenuItem value="cut">Cut</SlMenuItem>
-        <SlMenuItem value="copy">Copy</SlMenuItem>
-        <SlMenuItem value="paste">Paste</SlMenuItem>
-        <SlDivider />
-        <SlMenuItem>
+      <PMenu style="max-width: 200px;">
+        <PMenuItem value="undo">Undo</PMenuItem>
+        <PMenuItem value="redo">Redo</PMenuItem>
+        <PDivider />
+        <PMenuItem value="cut">Cut</PMenuItem>
+        <PMenuItem value="copy">Copy</PMenuItem>
+        <PMenuItem value="paste">Paste</PMenuItem>
+        <PDivider />
+        <PMenuItem>
           Find
-          <SlMenu slot="submenu">
-            <SlMenuItem value="find">Find…</SlMenuItem>
-            <SlMenuItem value="find-previous">Find Next</SlMenuItem>
-            <SlMenuItem value="find-next">Find Previous</SlMenuItem>
-          </SlMenu>
-        </SlMenuItem>
-        <SlMenuItem>
+          <PMenu slot="submenu">
+            <PMenuItem value="find">Find…</PMenuItem>
+            <PMenuItem value="find-previous">Find Next</PMenuItem>
+            <PMenuItem value="find-next">Find Previous</PMenuItem>
+          </PMenu>
+        </PMenuItem>
+        <PMenuItem>
           Transformations
-          <SlMenu slot="submenu">
-            <SlMenuItem value="uppercase">Make uppercase</SlMenuItem>
-            <SlMenuItem value="lowercase">Make lowercase</SlMenuItem>
-            <SlMenuItem value="capitalize">Capitalize</SlMenuItem>
-          </SlMenu>
-        </SlMenuItem>
-      </SlMenu>
-    </SlDropdown>
+          <PMenu slot="submenu">
+            <PMenuItem value="uppercase">Make uppercase</PMenuItem>
+            <PMenuItem value="lowercase">Make lowercase</PMenuItem>
+            <PMenuItem value="capitalize">Capitalize</PMenuItem>
+          </PMenu>
+        </PMenuItem>
+      </PMenu>
+    </PDropdown>
   </>
 );
 ```
@@ -406,46 +406,46 @@ Dropdown panels will be clipped if they're inside a container that has `overflow
 
 ```html:preview
 <div class="dropdown-hoist">
-  <sl-dropdown>
-    <sl-button slot="trigger" caret>No Hoist</sl-button>
-    <sl-menu>
-      <sl-menu-item>Item 1</sl-menu-item>
-      <sl-menu-item>Item 2</sl-menu-item>
-      <sl-menu-item>Item 3</sl-menu-item>
-    </sl-menu>
-  </sl-dropdown>
+  <p-dropdown>
+    <p-button slot="trigger" caret>No Hoist</p-button>
+    <p-menu>
+      <p-menu-item>Item 1</p-menu-item>
+      <p-menu-item>Item 2</p-menu-item>
+      <p-menu-item>Item 3</p-menu-item>
+    </p-menu>
+  </p-dropdown>
 
-  <sl-dropdown hoist>
-    <sl-button slot="trigger" caret>Hoist</sl-button>
-    <sl-menu>
-      <sl-menu-item>Item 1</sl-menu-item>
-      <sl-menu-item>Item 2</sl-menu-item>
-      <sl-menu-item>Item 3</sl-menu-item>
-    </sl-menu>
-  </sl-dropdown>
+  <p-dropdown hoist>
+    <p-button slot="trigger" caret>Hoist</p-button>
+    <p-menu>
+      <p-menu-item>Item 1</p-menu-item>
+      <p-menu-item>Item 2</p-menu-item>
+      <p-menu-item>Item 3</p-menu-item>
+    </p-menu>
+  </p-dropdown>
 </div>
 
 <style>
   .dropdown-hoist {
     position: relative;
-    border: solid 2px var(--sl-panel-border-color);
-    padding: var(--sl-spacing-medium);
+    border: solid 2px var(--p-panel-border-color);
+    padding: var(--p-spacing-medium);
     overflow: hidden;
   }
 </style>
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
-import SlDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PDivider from '@shoelace-style/shoelace/dist/react/divider';
+import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const css = `
   .dropdown-hoist {
-    border: solid 2px var(--sl-panel-border-color);
-    padding: var(--sl-spacing-medium);
+    border: solid 2px var(--p-panel-border-color);
+    padding: var(--p-spacing-medium);
     overflow: hidden;
   }
 `;
@@ -453,27 +453,27 @@ const css = `
 const App = () => (
   <>
     <div className="dropdown-hoist">
-      <SlDropdown>
-        <SlButton slot="trigger" caret>
+      <PDropdown>
+        <PButton slot="trigger" caret>
           No Hoist
-        </SlButton>
-        <SlMenu>
-          <SlMenuItem>Item 1</SlMenuItem>
-          <SlMenuItem>Item 2</SlMenuItem>
-          <SlMenuItem>Item 3</SlMenuItem>
-        </SlMenu>
-      </SlDropdown>
+        </PButton>
+        <PMenu>
+          <PMenuItem>Item 1</PMenuItem>
+          <PMenuItem>Item 2</PMenuItem>
+          <PMenuItem>Item 3</PMenuItem>
+        </PMenu>
+      </PDropdown>
 
-      <SlDropdown hoist>
-        <SlButton slot="trigger" caret>
+      <PDropdown hoist>
+        <PButton slot="trigger" caret>
           Hoist
-        </SlButton>
-        <SlMenu>
-          <SlMenuItem>Item 1</SlMenuItem>
-          <SlMenuItem>Item 2</SlMenuItem>
-          <SlMenuItem>Item 3</SlMenuItem>
-        </SlMenu>
-      </SlDropdown>
+        </PButton>
+        <PMenu>
+          <PMenuItem>Item 1</PMenuItem>
+          <PMenuItem>Item 2</PMenuItem>
+          <PMenuItem>Item 3</PMenuItem>
+        </PMenu>
+      </PDropdown>
     </div>
 
     <style>{css}</style>

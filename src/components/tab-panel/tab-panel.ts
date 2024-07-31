@@ -1,12 +1,12 @@
-import SlTabPanel from './tab-panel.component.js';
+import PTabPanel from './tab-panel.component.js';
 
 export * from './tab-panel.component.js';
-export default SlTabPanel;
+export default PTabPanel;
 
-SlTabPanel.define('sl-tab-panel');
+PTabPanel.define('p-tab-panel');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-tab-panel': SlTabPanel;
+    'p-tab-panel': PTabPanel;
   }
 }

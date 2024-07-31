@@ -1,12 +1,12 @@
-import SlTextarea from './textarea.component.js';
+import PTextarea from './textarea.component.js';
 
 export * from './textarea.component.js';
-export default SlTextarea;
+export default PTextarea;
 
-SlTextarea.define('sl-textarea');
+PTextarea.define('p-textarea');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-textarea': SlTextarea;
+    'p-textarea': PTextarea;
   }
 }

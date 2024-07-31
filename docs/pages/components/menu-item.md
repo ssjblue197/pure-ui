@@ -6,53 +6,53 @@ layout: component
 ---
 
 ```html:preview
-<sl-menu style="max-width: 200px;">
-  <sl-menu-item>Option 1</sl-menu-item>
-  <sl-menu-item>Option 2</sl-menu-item>
-  <sl-menu-item>Option 3</sl-menu-item>
-  <sl-divider></sl-divider>
-  <sl-menu-item type="checkbox" checked>Checkbox</sl-menu-item>
-  <sl-menu-item disabled>Disabled</sl-menu-item>
-  <sl-divider></sl-divider>
-  <sl-menu-item>
+<p-menu style="max-width: 200px;">
+  <p-menu-item>Option 1</p-menu-item>
+  <p-menu-item>Option 2</p-menu-item>
+  <p-menu-item>Option 3</p-menu-item>
+  <p-divider></p-divider>
+  <p-menu-item type="checkbox" checked>Checkbox</p-menu-item>
+  <p-menu-item disabled>Disabled</p-menu-item>
+  <p-divider></p-divider>
+  <p-menu-item>
     Prefix Icon
-    <sl-icon slot="prefix" name="gift"></sl-icon>
-  </sl-menu-item>
-  <sl-menu-item>
+    <p-icon slot="prefix" name="gift"></p-icon>
+  </p-menu-item>
+  <p-menu-item>
     Suffix Icon
-    <sl-icon slot="suffix" name="heart"></sl-icon>
-  </sl-menu-item>
-</sl-menu>
+    <p-icon slot="suffix" name="heart"></p-icon>
+  </p-menu-item>
+</p-menu>
 ```
 
 {% raw %}
 
 ```jsx:react
-import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PDivider from '@shoelace-style/shoelace/dist/react/divider';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
-  <SlMenu style={{ maxWidth: '200px' }}>
-    <SlMenuItem>Option 1</SlMenuItem>
-    <SlMenuItem>Option 2</SlMenuItem>
-    <SlMenuItem>Option 3</SlMenuItem>
-    <SlDivider />
-    <SlMenuItem type="checkbox" checked>
+  <PMenu style={{ maxWidth: '200px' }}>
+    <PMenuItem>Option 1</PMenuItem>
+    <PMenuItem>Option 2</PMenuItem>
+    <PMenuItem>Option 3</PMenuItem>
+    <PDivider />
+    <PMenuItem type="checkbox" checked>
       Checkbox
-    </SlMenuItem>
-    <SlMenuItem disabled>Disabled</SlMenuItem>
-    <SlDivider />
-    <SlMenuItem>
+    </PMenuItem>
+    <PMenuItem disabled>Disabled</PMenuItem>
+    <PDivider />
+    <PMenuItem>
       Prefix Icon
-      <SlIcon slot="prefix" name="gift" />
-    </SlMenuItem>
-    <SlMenuItem>
+      <PIcon slot="prefix" name="gift" />
+    </PMenuItem>
+    <PMenuItem>
       Suffix Icon
-      <SlIcon slot="suffix" name="heart" />
-    </SlMenuItem>
-  </SlMenu>
+      <PIcon slot="suffix" name="heart" />
+    </PMenuItem>
+  </PMenu>
 );
 ```
 
@@ -65,58 +65,58 @@ const App = () => (
 Add content to the start and end of menu items using the `prefix` and `suffix` slots.
 
 ```html:preview
-<sl-menu style="max-width: 200px;">
-  <sl-menu-item>
-    <sl-icon slot="prefix" name="house"></sl-icon>
+<p-menu style="max-width: 200px;">
+  <p-menu-item>
+    <p-icon slot="prefix" name="house"></p-icon>
     Home
-  </sl-menu-item>
+  </p-menu-item>
 
-  <sl-menu-item>
-    <sl-icon slot="prefix" name="envelope"></sl-icon>
+  <p-menu-item>
+    <p-icon slot="prefix" name="envelope"></p-icon>
     Messages
-    <sl-badge slot="suffix" variant="primary" pill>12</sl-badge>
-  </sl-menu-item>
+    <p-badge slot="suffix" variant="primary" pill>12</p-badge>
+  </p-menu-item>
 
-  <sl-divider></sl-divider>
+  <p-divider></p-divider>
 
-  <sl-menu-item>
-    <sl-icon slot="prefix" name="gear"></sl-icon>
+  <p-menu-item>
+    <p-icon slot="prefix" name="gear"></p-icon>
     Settings
-  </sl-menu-item>
-</sl-menu>
+  </p-menu-item>
+</p-menu>
 ```
 
 {% raw %}
 
 ```jsx:react
-import SlBadge from '@shoelace-style/shoelace/dist/react/badge';
-import SlDivider from '@shoelace-style/shoelace/dist/react/divider';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PBadge from '@shoelace-style/shoelace/dist/react/badge';
+import PDivider from '@shoelace-style/shoelace/dist/react/divider';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
-  <SlMenu style={{ maxWidth: '200px' }}>
-    <SlMenuItem>
-      <SlIcon slot="prefix" name="house" />
+  <PMenu style={{ maxWidth: '200px' }}>
+    <PMenuItem>
+      <PIcon slot="prefix" name="house" />
       Home
-    </SlMenuItem>
+    </PMenuItem>
 
-    <SlMenuItem>
-      <SlIcon slot="prefix" name="envelope" />
+    <PMenuItem>
+      <PIcon slot="prefix" name="envelope" />
       Messages
-      <SlBadge slot="suffix" variant="primary" pill>
+      <PBadge slot="suffix" variant="primary" pill>
         12
-      </SlBadge>
-    </SlMenuItem>
+      </PBadge>
+    </PMenuItem>
 
-    <SlDivider />
+    <PDivider />
 
-    <SlMenuItem>
-      <SlIcon slot="prefix" name="gear" />
+    <PMenuItem>
+      <PIcon slot="prefix" name="gear" />
       Settings
-    </SlMenuItem>
-  </SlMenu>
+    </PMenuItem>
+  </PMenu>
 );
 ```
 
@@ -127,25 +127,25 @@ const App = () => (
 Add the `disabled` attribute to disable the menu item so it cannot be selected.
 
 ```html:preview
-<sl-menu style="max-width: 200px;">
-  <sl-menu-item>Option 1</sl-menu-item>
-  <sl-menu-item disabled>Option 2</sl-menu-item>
-  <sl-menu-item>Option 3</sl-menu-item>
-</sl-menu>
+<p-menu style="max-width: 200px;">
+  <p-menu-item>Option 1</p-menu-item>
+  <p-menu-item disabled>Option 2</p-menu-item>
+  <p-menu-item>Option 3</p-menu-item>
+</p-menu>
 ```
 
 {% raw %}
 
 ```jsx:react
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
-  <SlMenu style={{ maxWidth: '200px' }}>
-    <SlMenuItem>Option 1</SlMenuItem>
-    <SlMenuItem disabled>Option 2</SlMenuItem>
-    <SlMenuItem>Option 3</SlMenuItem>
-  </SlMenu>
+  <PMenu style={{ maxWidth: '200px' }}>
+    <PMenuItem>Option 1</PMenuItem>
+    <PMenuItem disabled>Option 2</PMenuItem>
+    <PMenuItem>Option 3</PMenuItem>
+  </PMenu>
 );
 ```
 
@@ -156,25 +156,25 @@ const App = () => (
 Use the `loading` attribute to indicate that a menu item is busy. Like a disabled menu item, clicks will be suppressed until the loading state is removed.
 
 ```html:preview
-<sl-menu style="max-width: 200px;">
-  <sl-menu-item>Option 1</sl-menu-item>
-  <sl-menu-item loading>Option 2</sl-menu-item>
-  <sl-menu-item>Option 3</sl-menu-item>
-</sl-menu>
+<p-menu style="max-width: 200px;">
+  <p-menu-item>Option 1</p-menu-item>
+  <p-menu-item loading>Option 2</p-menu-item>
+  <p-menu-item>Option 3</p-menu-item>
+</p-menu>
 ```
 
 {% raw %}
 
 ```jsx:react
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
-  <SlMenu style={{ maxWidth: '200px' }}>
-    <SlMenuItem>Option 1</SlMenuItem>
-    <SlMenuItem loading>Option 2</SlMenuItem>
-    <SlMenuItem>Option 3</SlMenuItem>
-  </SlMenu>
+  <PMenu style={{ maxWidth: '200px' }}>
+    <PMenuItem>Option 1</PMenuItem>
+    <PMenuItem loading>Option 2</PMenuItem>
+    <PMenuItem>Option 3</PMenuItem>
+  </PMenu>
 );
 ```
 
@@ -187,27 +187,27 @@ Set the `type` attribute to `checkbox` to create a menu item that will toggle on
 Checkbox menu items are visually indistinguishable from regular menu items. Their ability to be toggled is primarily inferred from context, much like you'd find in the menu of a native app.
 
 ```html:preview
-<sl-menu style="max-width: 200px;">
-  <sl-menu-item type="checkbox">Autosave</sl-menu-item>
-  <sl-menu-item type="checkbox" checked>Check Spelling</sl-menu-item>
-  <sl-menu-item type="checkbox">Word Wrap</sl-menu-item>
-</sl-menu>
+<p-menu style="max-width: 200px;">
+  <p-menu-item type="checkbox">Autosave</p-menu-item>
+  <p-menu-item type="checkbox" checked>Check Spelling</p-menu-item>
+  <p-menu-item type="checkbox">Word Wrap</p-menu-item>
+</p-menu>
 ```
 
 {% raw %}
 
 ```jsx:react
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => (
-  <SlMenu style={{ maxWidth: '200px' }}>
-    <SlMenuItem type="checkbox">Autosave</SlMenuItem>
-    <SlMenuItem type="checkbox" checked>
+  <PMenu style={{ maxWidth: '200px' }}>
+    <PMenuItem type="checkbox">Autosave</PMenuItem>
+    <PMenuItem type="checkbox" checked>
       Check Spelling
-    </SlMenuItem>
-    <SlMenuItem type="checkbox">Word Wrap</SlMenuItem>
-  </SlMenu>
+    </PMenuItem>
+    <PMenuItem type="checkbox">Word Wrap</PMenuItem>
+  </PMenu>
 );
 ```
 
@@ -215,23 +215,23 @@ const App = () => (
 
 ### Value & Selection
 
-The `value` attribute can be used to assign a hidden value, such as a unique identifier, to a menu item. When an item is selected, the `sl-select` event will be emitted and a reference to the item will be available at `event.detail.item`. You can use this reference to access the selected item's value, its checked state, and more.
+The `value` attribute can be used to assign a hidden value, such as a unique identifier, to a menu item. When an item is selected, the `p-select` event will be emitted and a reference to the item will be available at `event.detail.item`. You can use this reference to access the selected item's value, its checked state, and more.
 
 ```html:preview
-<sl-menu class="menu-value" style="max-width: 200px;">
-  <sl-menu-item value="opt-1">Option 1</sl-menu-item>
-  <sl-menu-item value="opt-2">Option 2</sl-menu-item>
-  <sl-menu-item value="opt-3">Option 3</sl-menu-item>
-  <sl-divider></sl-divider>
-  <sl-menu-item type="checkbox" value="opt-4">Checkbox 4</sl-menu-item>
-  <sl-menu-item type="checkbox" value="opt-5">Checkbox 5</sl-menu-item>
-  <sl-menu-item type="checkbox" value="opt-6">Checkbox 6</sl-menu-item>
-</sl-menu>
+<p-menu class="menu-value" style="max-width: 200px;">
+  <p-menu-item value="opt-1">Option 1</p-menu-item>
+  <p-menu-item value="opt-2">Option 2</p-menu-item>
+  <p-menu-item value="opt-3">Option 3</p-menu-item>
+  <p-divider></p-divider>
+  <p-menu-item type="checkbox" value="opt-4">Checkbox 4</p-menu-item>
+  <p-menu-item type="checkbox" value="opt-5">Checkbox 5</p-menu-item>
+  <p-menu-item type="checkbox" value="opt-6">Checkbox 6</p-menu-item>
+</p-menu>
 
 <script>
   const menu = document.querySelector('.menu-value');
 
-  menu.addEventListener('sl-select', event => {
+  menu.addEventListener('p-select', event => {
     const item = event.detail.item;
 
     // Log value
@@ -247,8 +247,8 @@ The `value` attribute can be used to assign a hidden value, such as a unique ide
 {% raw %}
 
 ```jsx:react
-import SlMenu from '@shoelace-style/shoelace/dist/react/menu';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PMenu from '@shoelace-style/shoelace/dist/react/menu';
+import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
 
 const App = () => {
   function handleSelect(event) {
@@ -262,11 +262,11 @@ const App = () => {
   }
 
   return (
-    <SlMenu style={{ maxWidth: '200px' }} onSlSelect={handleSelect}>
-      <SlMenuItem value="opt-1">Option 1</SlMenuItem>
-      <SlMenuItem value="opt-2">Option 2</SlMenuItem>
-      <SlMenuItem value="opt-3">Option 3</SlMenuItem>
-    </SlMenu>
+    <PMenu style={{ maxWidth: '200px' }} onPSelect={handleSelect}>
+      <PMenuItem value="opt-1">Option 1</PMenuItem>
+      <PMenuItem value="opt-2">Option 2</PMenuItem>
+      <PMenuItem value="opt-3">Option 3</PMenuItem>
+    </PMenu>
   );
 };
 ```

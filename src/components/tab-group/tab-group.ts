@@ -1,12 +1,12 @@
-import SlTabGroup from './tab-group.component.js';
+import PTabGroup from './tab-group.component.js';
 
 export * from './tab-group.component.js';
-export default SlTabGroup;
+export default PTabGroup;
 
-SlTabGroup.define('sl-tab-group');
+PTabGroup.define('p-tab-group');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-tab-group': SlTabGroup;
+    'p-tab-group': PTabGroup;
   }
 }

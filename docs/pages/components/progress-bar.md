@@ -6,13 +6,13 @@ layout: component
 ---
 
 ```html:preview
-<sl-progress-bar value="50"></sl-progress-bar>
+<p-progress-bar value="50"></p-progress-bar>
 ```
 
 ```jsx:react
-import SlProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
+import PProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
 
-const App = () => <SlProgressBar value={50} />;
+const App = () => <PProgressBar value={50} />;
 ```
 
 ## Examples
@@ -22,13 +22,13 @@ const App = () => <SlProgressBar value={50} />;
 Use the `label` attribute to label the progress bar and tell assistive devices how to announce it.
 
 ```html:preview
-<sl-progress-bar value="50" label="Upload progress"></sl-progress-bar>
+<p-progress-bar value="50" label="Upload progress"></p-progress-bar>
 ```
 
 ```jsx:react
-import SlProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
+import PProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
 
-const App = () => <SlProgressBar value="50" label="Upload progress" />;
+const App = () => <PProgressBar value="50" label="Upload progress" />;
 ```
 
 ### Custom Height
@@ -36,15 +36,15 @@ const App = () => <SlProgressBar value="50" label="Upload progress" />;
 Use the `--height` custom property to set the progress bar's height.
 
 ```html:preview
-<sl-progress-bar value="50" style="--height: 6px;"></sl-progress-bar>
+<p-progress-bar value="50" style="--height: 6px;"></p-progress-bar>
 ```
 
 {% raw %}
 
 ```jsx:react
-import SlProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
+import PProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
 
-const App = () => <SlProgressBar value={50} style={{ '--height': '6px' }} />;
+const App = () => <PProgressBar value={50} style={{ '--height': '6px' }} />;
 ```
 
 {% endraw %}
@@ -54,12 +54,12 @@ const App = () => <SlProgressBar value={50} style={{ '--height': '6px' }} />;
 Use the default slot to show a value.
 
 ```html:preview
-<sl-progress-bar value="50" class="progress-bar-values">50%</sl-progress-bar>
+<p-progress-bar value="50" class="progress-bar-values">50%</p-progress-bar>
 
 <br />
 
-<sl-button circle><sl-icon name="dash" label="Decrease"></sl-icon></sl-button>
-<sl-button circle><sl-icon name="plus" label="Increase"></sl-icon></sl-button>
+<p-button circle><p-icon name="dash" label="Decrease"></p-icon></p-button>
+<p-button circle><p-icon name="plus" label="Increase"></p-icon></p-button>
 
 <script>
   const progressBar = document.querySelector('.progress-bar-values');
@@ -82,9 +82,9 @@ Use the default slot to show a value.
 
 ```jsx:react
 import { useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlIcon from '@shoelace-style/shoelace/dist/react/icon';
-import SlProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
+import PButton from '@shoelace-style/shoelace/dist/react/button';
+import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
 
 const App = () => {
   const [value, setValue] = useState(50);
@@ -98,17 +98,17 @@ const App = () => {
 
   return (
     <>
-      <SlProgressBar value={value}>{value}%</SlProgressBar>
+      <PProgressBar value={value}>{value}%</PProgressBar>
 
       <br />
 
-      <SlButton circle onClick={() => adjustValue(-10)}>
-        <SlIcon name="dash" label="Decrease" />
-      </SlButton>
+      <PButton circle onClick={() => adjustValue(-10)}>
+        <PIcon name="dash" label="Decrease" />
+      </PButton>
 
-      <SlButton circle onClick={() => adjustValue(10)}>
-        <SlIcon name="plus" label="Increase" />
-      </SlButton>
+      <PButton circle onClick={() => adjustValue(10)}>
+        <PIcon name="plus" label="Increase" />
+      </PButton>
     </>
   );
 };
@@ -119,11 +119,11 @@ const App = () => {
 The `indeterminate` attribute can be used to inform the user that the operation is pending, but its status cannot currently be determined. In this state, `value` is ignored and the label, if present, will not be shown.
 
 ```html:preview
-<sl-progress-bar indeterminate></sl-progress-bar>
+<p-progress-bar indeterminate></p-progress-bar>
 ```
 
 ```jsx:react
-import SlProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
+import PProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
 
-const App = () => <SlProgressBar indeterminate />;
+const App = () => <PProgressBar indeterminate />;
 ```

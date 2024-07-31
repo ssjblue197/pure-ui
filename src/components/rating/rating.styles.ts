@@ -2,10 +2,10 @@ import { css } from 'lit';
 
 export default css`
   :host {
-    --symbol-color: var(--sl-color-neutral-300);
-    --symbol-color-active: var(--sl-color-amber-500);
+    --symbol-color: var(--p-color-neutral-300);
+    --symbol-color-active: var(--p-color-amber-500);
     --symbol-size: 1.2rem;
-    --symbol-spacing: var(--sl-spacing-3x-small);
+    --symbol-spacing: var(--p-spacing-3x-small);
 
     display: inline-flex;
   }
@@ -13,7 +13,7 @@ export default css`
   .rating {
     position: relative;
     display: inline-flex;
-    border-radius: var(--sl-border-radius-medium);
+    border-radius: var(--p-border-radius-medium);
     vertical-align: middle;
   }
 
@@ -22,8 +22,8 @@ export default css`
   }
 
   .rating:focus-visible {
-    outline: var(--sl-focus-ring);
-    outline-offset: var(--sl-focus-ring-offset);
+    outline: var(--p-focus-ring);
+    outline-offset: var(--p-focus-ring-offset);
   }
 
   .rating__symbols {
@@ -56,7 +56,7 @@ export default css`
   }
 
   .rating__symbol {
-    transition: var(--sl-transition-fast) scale;
+    transition: var(--p-transition-fast) scale;
     pointer-events: none;
   }
 

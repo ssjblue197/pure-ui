@@ -1,12 +1,12 @@
-import SlDialog from './dialog.component.js';
+import PDialog from './dialog.component.js';
 
 export * from './dialog.component.js';
-export default SlDialog;
+export default PDialog;
 
-SlDialog.define('sl-dialog');
+PDialog.define('p-dialog');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-dialog': SlDialog;
+    'p-dialog': PDialog;
   }
 }

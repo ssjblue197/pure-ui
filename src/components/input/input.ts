@@ -1,12 +1,12 @@
-import SlInput from './input.component.js';
+import PInput from './input.component.js';
 
 export * from './input.component.js';
-export default SlInput;
+export default PInput;
 
-SlInput.define('sl-input');
+PInput.define('p-input');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-input': SlInput;
+    'p-input': PInput;
   }
 }

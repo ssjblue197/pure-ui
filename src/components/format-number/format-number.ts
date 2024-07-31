@@ -1,12 +1,12 @@
-import SlFormatNumber from './format-number.component.js';
+import PFormatNumber from './format-number.component.js';
 
 export * from './format-number.component.js';
-export default SlFormatNumber;
+export default PFormatNumber;
 
-SlFormatNumber.define('sl-format-number');
+PFormatNumber.define('p-format-number');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-format-number': SlFormatNumber;
+    'p-format-number': PFormatNumber;
   }
 }

@@ -5,29 +5,29 @@ import { runFormControlBaseTests } from '../../internal/test/form-control-base-t
 import { sendKeys } from '@web/test-runner-commands';
 import { serialize } from '../../utilities/form.js';
 import sinon from 'sinon';
-import type SlOption from '../option/option.js';
-import type SlSelect from './select.js';
+import type POption from '../option/option.js';
+import type PSelect from './select.js';
 
-describe('<sl-select>', () => {
+describe('<p-select>', () => {
   describe('accessibility', () => {
     it('should pass accessibility tests when closed', async () => {
-      const select = await fixture<SlSelect>(html`
-        <sl-select label="Select one">
-          <sl-option value="option-1">Option 1</sl-option>
-          <sl-option value="option-2">Option 2</sl-option>
-          <sl-option value="option-3">Option 3</sl-option>
-        </sl-select>
+      const select = await fixture<PSelect>(html`
+        <p-select label="Select one">
+          <p-option value="option-1">Option 1</p-option>
+          <p-option value="option-2">Option 2</p-option>
+          <p-option value="option-3">Option 3</p-option>
+        </p-select>
       `);
       await expect(select).to.be.accessible();
     });
 
     it('should pass accessibility tests when open', async () => {
-      const select = await fixture<SlSelect>(html`
-        <sl-select label="Select one">
-          <sl-option value="option-1">Option 1</sl-option>
-          <sl-option value="option-2">Option 2</sl-option>
-          <sl-option value="option-3">Option 3</sl-option>
-        </sl-select>
+      const select = await fixture<PSelect>(html`
+        <p-select label="Select one">
+          <p-option value="option-1">Option 1</p-option>
+          <p-option value="option-2">Option 2</p-option>
+          <p-option value="option-3">Option 3</p-option>
+        </p-select>
       `);
 
       await select.show();
@@ -37,23 +37,23 @@ describe('<sl-select>', () => {
   });
 
   it('should be disabled with the disabled attribute', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select disabled>
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
+    const el = await fixture<PSelect>(html`
+      <p-select disabled>
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2">Option 2</p-option>
+        <p-option value="option-3">Option 3</p-option>
+      </p-select>
     `);
     expect(el.displayInput.disabled).to.be.true;
   });
 
   it('should show a placeholder when no options are selected', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select placeholder="Select one">
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
+    const el = await fixture<PSelect>(html`
+      <p-select placeholder="Select one">
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2">Option 2</p-option>
+        <p-option value="option-3">Option 3</p-option>
+      </p-select>
     `);
     const displayInput = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="display-input"]')!;
 
@@ -62,12 +62,12 @@ describe('<sl-select>', () => {
   });
 
   it('should show a placeholder when no options are selected and multiple is set', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select placeholder="Select a few" multiple>
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
+    const el = await fixture<PSelect>(html`
+      <p-select placeholder="Select a few" multiple>
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2">Option 2</p-option>
+        <p-option value="option-3">Option 3</p-option>
+      </p-select>
     `);
     const displayInput = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="display-input"]')!;
 
@@ -76,13 +76,13 @@ describe('<sl-select>', () => {
   });
 
   it('should not allow selection when the option is disabled', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select value="option-1">
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2" disabled>Option 2</sl-option>
-      </sl-select>
+    const el = await fixture<PSelect>(html`
+      <p-select value="option-1">
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2" disabled>Option 2</p-option>
+      </p-select>
     `);
-    const disabledOption = el.querySelector('sl-option[disabled]')!;
+    const disabledOption = el.querySelector('p-option[disabled]')!;
 
     await el.show();
     await clickOnElement(disabledOption);
@@ -92,17 +92,17 @@ describe('<sl-select>', () => {
   });
 
   it('should focus the select when clicking on the label', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select label="Select One">
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
+    const el = await fixture<PSelect>(html`
+      <p-select label="Select One">
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2">Option 2</p-option>
+        <p-option value="option-3">Option 3</p-option>
+      </p-select>
     `);
     const label = el.shadowRoot!.querySelector('[part~="form-control-label"]')!;
     const submitHandler = sinon.spy();
 
-    el.addEventListener('sl-focus', submitHandler);
+    el.addEventListener('p-focus', submitHandler);
     (label as HTMLLabelElement).click();
     await waitUntil(() => submitHandler.calledOnce);
 
@@ -110,20 +110,20 @@ describe('<sl-select>', () => {
   });
 
   describe('when the value changes', () => {
-    it('should emit sl-change when the value is changed with the mouse', async () => {
-      const el = await fixture<SlSelect>(html`
-        <sl-select value="option-1">
-          <sl-option value="option-1">Option 1</sl-option>
-          <sl-option value="option-2">Option 2</sl-option>
-          <sl-option value="option-3">Option 3</sl-option>
-        </sl-select>
+    it('should emit p-change when the value is changed with the mouse', async () => {
+      const el = await fixture<PSelect>(html`
+        <p-select value="option-1">
+          <p-option value="option-1">Option 1</p-option>
+          <p-option value="option-2">Option 2</p-option>
+          <p-option value="option-3">Option 3</p-option>
+        </p-select>
       `);
-      const secondOption = el.querySelectorAll<SlOption>('sl-option')[1];
+      const secondOption = el.querySelectorAll<POption>('p-option')[1];
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
-      el.addEventListener('sl-change', changeHandler);
-      el.addEventListener('sl-input', inputHandler);
+      el.addEventListener('p-change', changeHandler);
+      el.addEventListener('p-input', inputHandler);
 
       await el.show();
       await clickOnElement(secondOption);
@@ -134,19 +134,19 @@ describe('<sl-select>', () => {
       expect(el.value).to.equal('option-2');
     });
 
-    it('should emit sl-change and sl-input when the value is changed with the keyboard', async () => {
-      const el = await fixture<SlSelect>(html`
-        <sl-select value="option-1">
-          <sl-option value="option-1">Option 1</sl-option>
-          <sl-option value="option-2">Option 2</sl-option>
-          <sl-option value="option-3">Option 3</sl-option>
-        </sl-select>
+    it('should emit p-change and p-input when the value is changed with the keyboard', async () => {
+      const el = await fixture<PSelect>(html`
+        <p-select value="option-1">
+          <p-option value="option-1">Option 1</p-option>
+          <p-option value="option-2">Option 2</p-option>
+          <p-option value="option-3">Option 3</p-option>
+        </p-select>
       `);
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
-      el.addEventListener('sl-change', changeHandler);
-      el.addEventListener('sl-input', inputHandler);
+      el.addEventListener('p-change', changeHandler);
+      el.addEventListener('p-input', inputHandler);
 
       el.focus();
       await el.updateComplete;
@@ -165,39 +165,39 @@ describe('<sl-select>', () => {
       expect(el.value).to.equal('option-3');
     });
 
-    it('should not emit sl-change or sl-input when the value is changed programmatically', async () => {
-      const el = await fixture<SlSelect>(html`
-        <sl-select value="option-1">
-          <sl-option value="option-1">Option 1</sl-option>
-          <sl-option value="option-2">Option 2</sl-option>
-          <sl-option value="option-3">Option 3</sl-option>
-        </sl-select>
+    it('should not emit p-change or p-input when the value is changed programmatically', async () => {
+      const el = await fixture<PSelect>(html`
+        <p-select value="option-1">
+          <p-option value="option-1">Option 1</p-option>
+          <p-option value="option-2">Option 2</p-option>
+          <p-option value="option-3">Option 3</p-option>
+        </p-select>
       `);
 
-      el.addEventListener('sl-change', () => expect.fail('sl-change should not be emitted'));
-      el.addEventListener('sl-input', () => expect.fail('sl-input should not be emitted'));
+      el.addEventListener('p-change', () => expect.fail('p-change should not be emitted'));
+      el.addEventListener('p-input', () => expect.fail('p-input should not be emitted'));
       el.value = 'option-2';
 
       await el.updateComplete;
     });
 
-    it('should emit sl-change and sl-input with the correct validation message when the value changes', async () => {
-      const el = await fixture<SlSelect>(html`
-        <sl-select required>
-          <sl-option value="option-1">Option 1</sl-option>
-          <sl-option value="option-2">Option 2</sl-option>
-          <sl-option value="option-3">Option 3</sl-option>
-        </sl-select>
+    it('should emit p-change and p-input with the correct validation message when the value changes', async () => {
+      const el = await fixture<PSelect>(html`
+        <p-select required>
+          <p-option value="option-1">Option 1</p-option>
+          <p-option value="option-2">Option 2</p-option>
+          <p-option value="option-3">Option 3</p-option>
+        </p-select>
       `);
-      const option2 = el.querySelectorAll('sl-option')[1];
+      const option2 = el.querySelectorAll('p-option')[1];
       const handler = sinon.spy((event: CustomEvent) => {
         if (el.validationMessage) {
           expect.fail(`Validation message should be empty when ${event.type} is emitted and a value is set`);
         }
       });
 
-      el.addEventListener('sl-change', handler);
-      el.addEventListener('sl-input', handler);
+      el.addEventListener('p-change', handler);
+      el.addEventListener('p-input', handler);
 
       await clickOnElement(el);
       await aTimeout(500);
@@ -208,13 +208,13 @@ describe('<sl-select>', () => {
     });
   });
 
-  it('should open the listbox when any letter key is pressed with sl-select is on focus', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select>
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
+  it('should open the listbox when any letter key is pressed with p-select is on focus', async () => {
+    const el = await fixture<PSelect>(html`
+      <p-select>
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2">Option 2</p-option>
+        <p-option value="option-3">Option 3</p-option>
+      </p-select>
     `);
     const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>('.select__display-input')!;
 
@@ -225,13 +225,13 @@ describe('<sl-select>', () => {
     expect(displayInput.getAttribute('aria-expanded')).to.equal('true');
   });
 
-  it('should not open the listbox when ctrl + R is pressed with sl-select is on focus', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select>
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
+  it('should not open the listbox when ctrl + R is pressed with p-select is on focus', async () => {
+    const el = await fixture<PSelect>(html`
+      <p-select>
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2">Option 2</p-option>
+        <p-option value="option-3">Option 3</p-option>
+      </p-select>
     `);
     const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>('.select__display-input')!;
 
@@ -247,55 +247,55 @@ describe('<sl-select>', () => {
     it('should be valid by default', async () => {
       const el = await fixture<HTMLFormElement>(html`
         <form>
-          <sl-select>
-            <sl-option value="option-1">Option 1</sl-option>
-            <sl-option value="option-2">Option 2</sl-option>
-            <sl-option value="option-3">Option 3</sl-option>
-          </sl-select>
+          <p-select>
+            <p-option value="option-1">Option 1</p-option>
+            <p-option value="option-2">Option 2</p-option>
+            <p-option value="option-3">Option 3</p-option>
+          </p-select>
         </form>
       `);
-      const select = el.querySelector<SlSelect>('sl-select')!;
+      const select = el.querySelector<PSelect>('p-select')!;
       expect(select.checkValidity()).to.be.true;
     });
 
     it('should be invalid when required and empty', async () => {
       const el = await fixture<HTMLFormElement>(html`
         <form>
-          <sl-select required>
-            <sl-option value="option-1">Option 1</sl-option>
-            <sl-option value="option-2">Option 2</sl-option>
-            <sl-option value="option-3">Option 3</sl-option>
-          </sl-select>
+          <p-select required>
+            <p-option value="option-1">Option 1</p-option>
+            <p-option value="option-2">Option 2</p-option>
+            <p-option value="option-3">Option 3</p-option>
+          </p-select>
         </form>
       `);
-      const select = el.querySelector<SlSelect>('sl-select')!;
+      const select = el.querySelector<PSelect>('p-select')!;
       expect(select.checkValidity()).to.be.false;
     });
 
     it('should focus on the displayInput when constraint validation occurs', async () => {
       const el = await fixture<HTMLFormElement>(html`
         <form>
-          <sl-select required>
-            <sl-option value="option-1">Option 1</sl-option>
-            <sl-option value="option-2">Option 2</sl-option>
-            <sl-option value="option-3">Option 3</sl-option>
-          </sl-select>
+          <p-select required>
+            <p-option value="option-1">Option 1</p-option>
+            <p-option value="option-2">Option 2</p-option>
+            <p-option value="option-3">Option 3</p-option>
+          </p-select>
         </form>
       `);
-      const select = el.querySelector<SlSelect>('sl-select')!;
+      const select = el.querySelector<PSelect>('p-select')!;
       el.requestSubmit();
       expect(select.shadowRoot!.activeElement).to.equal(select.displayInput);
     });
 
     it('should receive the correct validation attributes ("states") when valid', async () => {
-      const el = await fixture<SlSelect>(html`
-        <sl-select label="Select one" required value="option-1">
-          <sl-option value="option-1">Option 1</sl-option>
-          <sl-option value="option-2">Option 2</sl-option>
-          <sl-option value="option-3">Option 3</sl-option>
-        </sl-select>
+      const el = await fixture<PSelect>(html`
+        <p-select label="Select one" required value="option-1">
+          <p-option value="option-1">Option 1</p-option>
+          <p-option value="option-2">Option 2</p-option>
+          <p-option value="option-3">Option 3</p-option>
+        </p-select>
       `);
-      const secondOption = el.querySelectorAll('sl-option')[1]!;
+      const secondOption = el.querySelectorAll('p-option')[1];
 
       expect(el.checkValidity()).to.be.true;
       expect(el.hasAttribute('data-required')).to.be.true;
@@ -317,14 +317,14 @@ describe('<sl-select>', () => {
     });
 
     it('should receive the correct validation attributes ("states") when invalid', async () => {
-      const el = await fixture<SlSelect>(html`
-        <sl-select label="Select one" required>
-          <sl-option value="option-1">Option 1</sl-option>
-          <sl-option value="option-2">Option 2</sl-option>
-          <sl-option value="option-3">Option 3</sl-option>
-        </sl-select>
+      const el = await fixture<PSelect>(html`
+        <p-select label="Select one" required>
+          <p-option value="option-1">Option 1</p-option>
+          <p-option value="option-2">Option 2</p-option>
+          <p-option value="option-3">Option 3</p-option>
+        </p-select>
       `);
-      const secondOption = el.querySelectorAll('sl-option')[1]!;
+      const secondOption = el.querySelectorAll('p-option')[1];
 
       expect(el.hasAttribute('data-required')).to.be.true;
       expect(el.hasAttribute('data-optional')).to.be.false;
@@ -347,14 +347,14 @@ describe('<sl-select>', () => {
     it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
       const el = await fixture<HTMLFormElement>(html`
         <form novalidate>
-          <sl-select required>
-            <sl-option value="option-1">Option 1</sl-option>
-            <sl-option value="option-2">Option 2</sl-option>
-            <sl-option value="option-3">Option 3</sl-option>
-          </sl-select>
+          <p-select required>
+            <p-option value="option-1">Option 1</p-option>
+            <p-option value="option-2">Option 2</p-option>
+            <p-option value="option-3">Option 3</p-option>
+          </p-select>
         </form>
       `);
-      const select = el.querySelector<SlSelect>('sl-select')!;
+      const select = el.querySelector<PSelect>('p-select')!;
 
       expect(select.hasAttribute('data-required')).to.be.true;
       expect(select.hasAttribute('data-optional')).to.be.false;
@@ -369,11 +369,11 @@ describe('<sl-select>', () => {
     it('should serialize its name and value with FormData', async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
-          <sl-select name="a" value="option-1">
-            <sl-option value="option-1">Option 1</sl-option>
-            <sl-option value="option-2">Option 2</sl-option>
-            <sl-option value="option-3">Option 3</sl-option>
-          </sl-select>
+          <p-select name="a" value="option-1">
+            <p-option value="option-1">Option 1</p-option>
+            <p-option value="option-2">Option 2</p-option>
+            <p-option value="option-3">Option 3</p-option>
+          </p-select>
         </form>
       `);
       const formData = new FormData(form);
@@ -383,11 +383,11 @@ describe('<sl-select>', () => {
     it('should serialize its name and value in FormData when multiple options are selected', async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
-          <sl-select name="a" value="option-2 option-3" multiple>
-            <sl-option value="option-1">Option 1</sl-option>
-            <sl-option value="option-2">Option 2</sl-option>
-            <sl-option value="option-3">Option 3</sl-option>
-          </sl-select>
+          <p-select name="a" value="option-2 option-3" multiple>
+            <p-option value="option-1">Option 1</p-option>
+            <p-option value="option-2">Option 2</p-option>
+            <p-option value="option-3">Option 3</p-option>
+          </p-select>
         </form>
       `);
       const formData = new FormData(form);
@@ -398,11 +398,11 @@ describe('<sl-select>', () => {
     it('should serialize its name and value in JSON', async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
-          <sl-select name="a" value="option-1">
-            <sl-option value="option-1">Option 1</sl-option>
-            <sl-option value="option-2">Option 2</sl-option>
-            <sl-option value="option-3">Option 3</sl-option>
-          </sl-select>
+          <p-select name="a" value="option-1">
+            <p-option value="option-1">Option 1</p-option>
+            <p-option value="option-2">Option 2</p-option>
+            <p-option value="option-3">Option 3</p-option>
+          </p-select>
         </form>
       `);
       const json = serialize(form);
@@ -412,11 +412,11 @@ describe('<sl-select>', () => {
     it('should serialize its name and value in JSON when multiple options are selected', async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
-          <sl-select name="a" value="option-2 option-3" multiple>
-            <sl-option value="option-1">Option 1</sl-option>
-            <sl-option value="option-2">Option 2</sl-option>
-            <sl-option value="option-3">Option 3</sl-option>
-          </sl-select>
+          <p-select name="a" value="option-2 option-3" multiple>
+            <p-option value="option-1">Option 1</p-option>
+            <p-option value="option-2">Option 2</p-option>
+            <p-option value="option-3">Option 3</p-option>
+          </p-select>
         </form>
       `);
       const json = serialize(form);
@@ -427,13 +427,13 @@ describe('<sl-select>', () => {
       const el = await fixture<HTMLFormElement>(html`
         <div>
           <form id="f">
-            <sl-button type="submit">Submit</sl-button>
+            <p-button type="submit">Submit</p-button>
           </form>
-          <sl-select form="f" name="a" value="option-1">
-            <sl-option value="option-1">Option 1</sl-option>
-            <sl-option value="option-2">Option 2</sl-option>
-            <sl-option value="option-3">Option 3</sl-option>
-          </sl-select>
+          <p-select form="f" name="a" value="option-1">
+            <p-option value="option-1">Option 1</p-option>
+            <p-option value="option-2">Option 2</p-option>
+            <p-option value="option-3">Option 3</p-option>
+          </p-select>
         </div>
       `);
       const form = el.querySelector('form')!;
@@ -447,16 +447,16 @@ describe('<sl-select>', () => {
     it('should reset the element to its initial value', async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
-          <sl-select value="option-1">
-            <sl-option value="option-1">Option 1</sl-option>
-            <sl-option value="option-2">Option 2</sl-option>
-            <sl-option value="option-3">Option 3</sl-option>
-          </sl-select>
-          <sl-button type="reset">Reset</sl-button>
+          <p-select value="option-1">
+            <p-option value="option-1">Option 1</p-option>
+            <p-option value="option-2">Option 2</p-option>
+            <p-option value="option-3">Option 3</p-option>
+          </p-select>
+          <p-button type="reset">Reset</p-button>
         </form>
       `);
-      const resetButton = form.querySelector('sl-button')!;
-      const select = form.querySelector('sl-select')!;
+      const resetButton = form.querySelector('p-button')!;
+      const select = form.querySelector('p-select')!;
 
       select.value = 'option-3';
       await select.updateComplete;
@@ -470,15 +470,15 @@ describe('<sl-select>', () => {
   });
 
   it('should update the display label when an option changes', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select value="option-1">
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
+    const el = await fixture<PSelect>(html`
+      <p-select value="option-1">
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2">Option 2</p-option>
+        <p-option value="option-3">Option 3</p-option>
+      </p-select>
     `);
     const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>('.select__display-input')!;
-    const option = el.querySelector('sl-option')!;
+    const option = el.querySelector('p-option')!;
 
     expect(displayInput.value).to.equal('Option 1');
 
@@ -489,19 +489,19 @@ describe('<sl-select>', () => {
     expect(displayInput.value).to.equal('updated');
   });
 
-  it('should emit sl-focus and sl-blur when receiving and losing focus', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select value="option-1">
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
+  it('should emit p-focus and p-blur when receiving and losing focus', async () => {
+    const el = await fixture<PSelect>(html`
+      <p-select value="option-1">
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2">Option 2</p-option>
+        <p-option value="option-3">Option 3</p-option>
+      </p-select>
     `);
     const focusHandler = sinon.spy();
     const blurHandler = sinon.spy();
 
-    el.addEventListener('sl-focus', focusHandler);
-    el.addEventListener('sl-blur', blurHandler);
+    el.addEventListener('p-focus', focusHandler);
+    el.addEventListener('p-blur', blurHandler);
 
     el.focus();
     await el.updateComplete;
@@ -512,18 +512,18 @@ describe('<sl-select>', () => {
     expect(blurHandler).to.have.been.calledOnce;
   });
 
-  it('should emit sl-clear when the clear button is clicked', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select value="option-1" clearable>
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
+  it('should emit p-clear when the clear button is clicked', async () => {
+    const el = await fixture<PSelect>(html`
+      <p-select value="option-1" clearable>
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2">Option 2</p-option>
+        <p-option value="option-3">Option 3</p-option>
+      </p-select>
     `);
     const clearHandler = sinon.spy();
     const clearButton = el.shadowRoot!.querySelector('[part~="clear-button"]')!;
 
-    el.addEventListener('sl-clear', clearHandler);
+    el.addEventListener('p-clear', clearHandler);
     await el.show();
     await clickOnElement(clearButton);
     await el.updateComplete;
@@ -531,21 +531,21 @@ describe('<sl-select>', () => {
     expect(clearHandler).to.have.been.calledOnce;
   });
 
-  it('should emit sl-change and sl-input when a tag is removed', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select value="option-1 option-2 option-3" multiple>
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
+  it('should emit p-change and p-input when a tag is removed', async () => {
+    const el = await fixture<PSelect>(html`
+      <p-select value="option-1 option-2 option-3" multiple>
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2">Option 2</p-option>
+        <p-option value="option-3">Option 3</p-option>
+      </p-select>
     `);
     const changeHandler = sinon.spy();
     const inputHandler = sinon.spy();
     const tag = el.shadowRoot!.querySelector('[part~="tag"]')!;
     const removeButton = tag.shadowRoot!.querySelector('[part~="remove-button"]')!;
 
-    el.addEventListener('sl-change', changeHandler);
-    el.addEventListener('sl-input', inputHandler);
+    el.addEventListener('p-change', changeHandler);
+    el.addEventListener('p-input', inputHandler);
 
     await clickOnElement(removeButton);
     await el.updateComplete;
@@ -554,23 +554,23 @@ describe('<sl-select>', () => {
     expect(inputHandler).to.have.been.calledOnce;
   });
 
-  it('should emit sl-show, sl-after-show, sl-hide, and sl-after-hide events when the listbox opens and closes', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select value="option-1">
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
+  it('should emit p-show, p-after-show, p-hide, and p-after-hide events when the listbox opens and closes', async () => {
+    const el = await fixture<PSelect>(html`
+      <p-select value="option-1">
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2">Option 2</p-option>
+        <p-option value="option-3">Option 3</p-option>
+      </p-select>
     `);
     const showHandler = sinon.spy();
     const afterShowHandler = sinon.spy();
     const hideHandler = sinon.spy();
     const afterHideHandler = sinon.spy();
 
-    el.addEventListener('sl-show', showHandler);
-    el.addEventListener('sl-after-show', afterShowHandler);
-    el.addEventListener('sl-hide', hideHandler);
-    el.addEventListener('sl-after-hide', afterHideHandler);
+    el.addEventListener('p-show', showHandler);
+    el.addEventListener('p-after-show', afterShowHandler);
+    el.addEventListener('p-hide', hideHandler);
+    el.addEventListener('p-after-hide', afterHideHandler);
 
     await el.show();
     expect(showHandler).to.have.been.calledOnce;
@@ -582,17 +582,17 @@ describe('<sl-select>', () => {
   });
 
   it('should have rounded tags when using the pill attribute', async () => {
-    const el = await fixture<SlSelect>(html`
-      <sl-select value="option-1 option-2" multiple pill>
-        <sl-option value="option-1">Option 1</sl-option>
-        <sl-option value="option-2">Option 2</sl-option>
-        <sl-option value="option-3">Option 3</sl-option>
-      </sl-select>
+    const el = await fixture<PSelect>(html`
+      <p-select value="option-1 option-2" multiple pill>
+        <p-option value="option-1">Option 1</p-option>
+        <p-option value="option-2">Option 2</p-option>
+        <p-option value="option-3">Option 3</p-option>
+      </p-select>
     `);
     const tag = el.shadowRoot!.querySelector('[part~="tag"]')!;
 
     expect(tag.hasAttribute('pill')).to.be.true;
   });
 
-  runFormControlBaseTests('sl-select');
+  runFormControlBaseTests('p-select');
 });

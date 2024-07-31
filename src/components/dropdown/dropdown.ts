@@ -1,12 +1,12 @@
-import SlDropdown from './dropdown.component.js';
+import PDropdown from './dropdown.component.js';
 
 export * from './dropdown.component.js';
-export default SlDropdown;
+export default PDropdown;
 
-SlDropdown.define('sl-dropdown');
+PDropdown.define('p-dropdown');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-dropdown': SlDropdown;
+    'p-dropdown': PDropdown;
   }
 }

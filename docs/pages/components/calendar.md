@@ -6,7 +6,7 @@ layout: component
 ---
 
 ```html:preview
-<sl-calendar></sl-calendar>
+<p-calendar></p-calendar>
 ```
 
 ## Examples
@@ -16,7 +16,7 @@ layout: component
 Month and day labels can be customized using the `month-labels` and `day-labels` attributes. Note that month names are localized automatically based on the component's `lang` attribute, falling back to the document language.
 
 ```html:preview
-<sl-calendar month-labels="short" day-labels="narrow"></sl-calendar>
+<p-calendar month-labels="short" day-labels="narrow"></p-calendar>
 ```
 
 ### Showing Adjacent Dates
@@ -24,7 +24,7 @@ Month and day labels can be customized using the `month-labels` and `day-labels`
 By default, only dates in the target month are shown. You can fill the grid with adjacent dates using the `show-adjacent-dates` attribute.
 
 ```html:preview
-<sl-calendar show-adjacent-dates></sl-calendar>
+<p-calendar show-adjacent-dates></p-calendar>
 ```
 
 ### Date Selection
@@ -32,7 +32,7 @@ By default, only dates in the target month are shown. You can fill the grid with
 One or more dates can be selected by setting the `selectedDates` property. An array of dates is accepted and the selection does not have to be continuous.
 
 ```html:preview
-<sl-calendar class="calendar-selection"></sl-calendar>
+<p-calendar class="calendar-selection"></p-calendar>
 
 <script>
   const calendar = document.querySelector('.calendar-selection');
@@ -53,7 +53,7 @@ One or more dates can be selected by setting the `selectedDates` property. An ar
 To add a border, set the `--border-width` custom property. You can further customize the border with `--border-color` and `--border-radius`.
 
 ```html:preview
-<sl-calendar style="--border-width: 1px;"></sl-calendar>
+<p-calendar style="--border-width: 1px;"></p-calendar>
 ```
 
 ### Localizing the Calendar
@@ -61,7 +61,7 @@ To add a border, set the `--border-width` custom property. You can further custo
 By default, the calendar will use the document's locale. You can use the `lang` attribute to change this.
 
 ```html:preview
-<sl-calendar lang="es"></sl-calendar>
+<p-calendar lang="es"></p-calendar>
 ```
 
-[component-metadata:sl-calendar]
+[component-metadata:p-calendar]

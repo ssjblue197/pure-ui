@@ -1,12 +1,12 @@
-import SlIcon from './icon.component.js';
+import PIcon from './icon.component.js';
 
 export * from './icon.component.js';
-export default SlIcon;
+export default PIcon;
 
-SlIcon.define('sl-icon');
+PIcon.define('p-icon');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-icon': SlIcon;
+    'p-icon': PIcon;
   }
 }

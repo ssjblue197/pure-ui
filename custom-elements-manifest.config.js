@@ -57,7 +57,7 @@ export default {
             }
 
             const tagNameWithoutPrefix = path.basename(importPath, '.component.ts');
-            const tagName = 'sl-' + tagNameWithoutPrefix;
+            const tagName = 'p-' + tagNameWithoutPrefix;
 
             classDoc.tagNameWithoutPrefix = tagNameWithoutPrefix;
             classDoc.tagName = tagName;
@@ -204,7 +204,7 @@ export default {
       referencesTemplate: (_, tag) => [
         {
           name: 'Documentation',
-          url: `https://shoelace.style/components/${tag.replace('sl-', '')}`
+          url: `https://shoelace.style/components/${tag.replace('p-', '')}`
         }
       ]
     }),
@@ -216,7 +216,7 @@ export default {
       referencesTemplate: (_, tag) => {
         return {
           name: 'Documentation',
-          url: `https://shoelace.style/components/${tag.replace('sl-', '')}`
+          url: `https://shoelace.style/components/${tag.replace('p-', '')}`
         };
       }
     }),
@@ -224,7 +224,7 @@ export default {
     customElementVuejsPlugin({
       outdir: './dist/types/vue',
       fileName: 'index.d.ts',
-      componentTypePath: (_, tag) => `../../components/${tag.replace('sl-', '')}/${tag.replace('sl-', '')}.component.js`
+      componentTypePath: (_, tag) => `../../components/${tag.replace('p-', '')}/${tag.replace('p-', '')}.component.js`
     })
   ]
 };

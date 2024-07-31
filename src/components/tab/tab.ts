@@ -1,12 +1,12 @@
-import SlTab from './tab.component.js';
+import PTab from './tab.component.js';
 
 export * from './tab.component.js';
-export default SlTab;
+export default PTab;
 
-SlTab.define('sl-tab');
+PTab.define('p-tab');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-tab': SlTab;
+    'p-tab': PTab;
   }
 }

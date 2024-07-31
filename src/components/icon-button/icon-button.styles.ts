@@ -3,7 +3,7 @@ import { css } from 'lit';
 export default css`
   :host {
     display: inline-block;
-    color: var(--sl-color-neutral-600);
+    color: var(--p-color-neutral-600);
   }
 
   .icon-button {
@@ -12,22 +12,22 @@ export default css`
     align-items: center;
     background: none;
     border: none;
-    border-radius: var(--sl-border-radius-medium);
+    border-radius: var(--p-border-radius-medium);
     font-size: inherit;
     color: inherit;
-    padding: var(--sl-spacing-x-small);
+    padding: var(--p-spacing-x-small);
     cursor: pointer;
-    transition: var(--sl-transition-x-fast) color;
+    transition: var(--p-transition-x-fast) color;
     -webkit-appearance: none;
   }
 
   .icon-button:hover:not(.icon-button--disabled),
   .icon-button:focus-visible:not(.icon-button--disabled) {
-    color: var(--sl-color-primary-600);
+    color: var(--p-color-primary-600);
   }
 
   .icon-button:active:not(.icon-button--disabled) {
-    color: var(--sl-color-primary-700);
+    color: var(--p-color-primary-700);
   }
 
   .icon-button:focus {
@@ -40,8 +40,8 @@ export default css`
   }
 
   .icon-button:focus-visible {
-    outline: var(--sl-focus-ring);
-    outline-offset: var(--sl-focus-ring-offset);
+    outline: var(--p-focus-ring);
+    outline-offset: var(--p-focus-ring-offset);
   }
 
   .icon-button__icon {

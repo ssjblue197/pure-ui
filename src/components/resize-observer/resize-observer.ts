@@ -1,12 +1,12 @@
-import SlResizeObserver from './resize-observer.component.js';
+import PResizeObserver from './resize-observer.component.js';
 
 export * from './resize-observer.component.js';
-export default SlResizeObserver;
+export default PResizeObserver;
 
-SlResizeObserver.define('sl-resize-observer');
+PResizeObserver.define('p-resize-observer');
 
 declare global {
   interface HTMLElementTagNameMap {
-    'sl-resize-observer': SlResizeObserver;
+    'p-resize-observer': PResizeObserver;
   }
 }
