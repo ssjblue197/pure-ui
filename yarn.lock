@@ -8442,9 +8442,9 @@ puppeteer-core@^22.0.0:
     ws "^8.18.0"
 
 pure-animations@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/pure-animations/-/pure-animations-1.0.0.tgz#b6c8f2b1db898c6d1811f8f409b219022aebd7ce"
-  integrity sha512-ESOGh4ZJl/+rf14ACTxJZzNQ2oDYRGug0UsOMsXX94frv5dRADbaIPumuzbG9tJpZi9Ell5XMBIkyjHLQ+O08Q==
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/pure-animations/-/pure-animations-1.0.1.tgz#b0121a0d7b0d5e4a75c300fc963f585d55f93fc3"
+  integrity sha512-NPKCgZZ1+mAWeo5QwS06vW3kFgheTZq1v8gbdH6gcZy1IKZPMJ82i1yp4+dNLuCBiAOLwG0mWEf+QHhu5f2pUA==
 
 pure-localize@^1.0.0:
   version "1.0.0"
