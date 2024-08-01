@@ -18,7 +18,7 @@ const translation: Translation = {
   loading: "Loading",
   nextMonth: "Next month",
   nextSlide: "Next slide",
-  numOptionsSelected: (num) => {
+  numOptionsSelected: num => {
     if (num === 0) return "No options selected";
     if (num === 1) return "1 option selected";
     return `${num} options selected`;
@@ -32,7 +32,7 @@ const translation: Translation = {
   scrollToStart: "Scroll to start",
   selectAColorFromTheScreen: "Select a color from the screen",
   showPassword: "Show password",
-  slideNum: (slide) => `Slide ${slide}`,
+  slideNum: slide => `Slide ${slide}`,
   toggleColorFormat: "Toggle color format",
 };
 

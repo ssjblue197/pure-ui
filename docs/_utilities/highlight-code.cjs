@@ -14,9 +14,7 @@ function highlight(code, language) {
     PrismLoader(alias);
 
     if (!Prism.languages[alias]) {
-      throw new Error(
-        `Unsupported language for code highlighting: "${language}"`,
-      );
+      throw new Error(`Unsupported language for code highlighting: "${language}"`);
     }
   }
 
@@ -37,9 +35,9 @@ function highlight(code, language) {
  * appropriate DOM manipulations.
  */
 module.exports = function (doc) {
-  doc.querySelectorAll("pre > code[class]").forEach((code) => {
+  doc.querySelectorAll("pre > code[class]").forEach(code => {
     // Look for class="language-*" and split colons into separate classes
-    code.classList.forEach((className) => {
+    code.classList.forEach(className => {
       if (className.startsWith("language-")) {
         //
         // We use certain suffixes to indicate code previews, expanded states, etc. The class might look something like

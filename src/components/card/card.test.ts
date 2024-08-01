@@ -8,9 +8,7 @@ describe("<p-card>", () => {
   describe("when provided no parameters", () => {
     before(async () => {
       el = await fixture<PCard>(html`
-        <p-card
-          >This is just a basic card. No image, no header, and no footer. Just your content.</p-card
-        >
+        <p-card>This is just a basic card. No image, no header, and no footer. Just your content.</p-card>
       `);
     });
 
@@ -19,9 +17,7 @@ describe("<p-card>", () => {
     });
 
     it("should render the child content provided.", () => {
-      expect(el.innerText).to.eq(
-        "This is just a basic card. No image, no header, and no footer. Just your content.",
-      );
+      expect(el.innerText).to.eq("This is just a basic card. No image, no header, and no footer. Just your content.");
     });
 
     it("should contain the class card.", () => {
@@ -45,9 +41,7 @@ describe("<p-card>", () => {
     });
 
     it("should render the child content provided.", () => {
-      expect(el.innerText).to.contain(
-        "This card has a header. You can put all sorts of things in it!",
-      );
+      expect(el.innerText).to.contain("This card has a header. You can put all sorts of things in it!");
     });
 
     it("render the header content provided.", () => {
@@ -56,8 +50,7 @@ describe("<p-card>", () => {
     });
 
     it('accept "header" as an assigned child in the shadow root.', () => {
-      const slot =
-        el.shadowRoot!.querySelector<HTMLSlotElement>("slot[name=header]")!;
+      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>("slot[name=header]")!;
       const childNodes = slot.assignedNodes({ flatten: true });
 
       expect(childNodes.length).to.eq(1);
@@ -85,9 +78,7 @@ describe("<p-card>", () => {
     });
 
     it("should render the child content provided.", () => {
-      expect(el.innerText).to.contain(
-        "This card has a footer. You can put all sorts of things in it!",
-      );
+      expect(el.innerText).to.contain("This card has a footer. You can put all sorts of things in it!");
     });
 
     it("render the footer content provided.", () => {
@@ -96,8 +87,7 @@ describe("<p-card>", () => {
     });
 
     it('accept "footer" as an assigned child in the shadow root.', () => {
-      const slot =
-        el.shadowRoot!.querySelector<HTMLSlotElement>("slot[name=footer]")!;
+      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>("slot[name=footer]")!;
       const childNodes = slot.assignedNodes({ flatten: true });
 
       expect(childNodes.length).to.eq(1);
@@ -133,8 +123,7 @@ describe("<p-card>", () => {
     });
 
     it('accept "image" as an assigned child in the shadow root.', () => {
-      const slot =
-        el.shadowRoot!.querySelector<HTMLSlotElement>("slot[name=image]")!;
+      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>("slot[name=image]")!;
       const childNodes = slot.assignedNodes({ flatten: true });
 
       expect(childNodes.length).to.eq(1);

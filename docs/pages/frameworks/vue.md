@@ -119,12 +119,7 @@ Slots in Pure UI/web components are functionally the same as basic slots in Vue.
 Here is an example:
 
 ```html
-<p-drawer
-  label="Drawer"
-  placement="start"
-  class="drawer-placement-start"
-  :open="drawerIsOpen"
->
+<p-drawer label="Drawer" placement="start" class="drawer-placement-start" :open="drawerIsOpen">
   This drawer slides in from the start.
   <div slot="footer">
     <p-button variant="primary" @click=" drawerIsOpen = false">Close</p-button>

@@ -91,9 +91,7 @@ describe("<p-split-panel>", () => {
       const startPanelWidth = getPanelWidth(splitPanel, "start-panel");
       const endPanelWidth = getPanelWidth(splitPanel, "end-panel");
 
-      expect(startPanelWidth * 3).to.be.equal(
-        endPanelWidth - DIVIDER_WIDTH_IN_PX,
-      );
+      expect(startPanelWidth * 3).to.be.equal(endPanelWidth - DIVIDER_WIDTH_IN_PX);
     });
 
     it("updates the position in pixels to the correct result", async () => {
@@ -108,9 +106,7 @@ describe("<p-split-panel>", () => {
 
       const startPanelWidth = getPanelWidth(splitPanel, "start-panel");
 
-      expect(startPanelWidth).to.be.equal(
-        splitPanel.positionInPixels - DIVIDER_WIDTH_IN_PX / 2,
-      );
+      expect(startPanelWidth).to.be.equal(splitPanel.positionInPixels - DIVIDER_WIDTH_IN_PX / 2);
     });
 
     it("emits the p-reposition	event on position change", async () => {
@@ -208,9 +204,7 @@ describe("<p-split-panel>", () => {
       const startPanelHeight = getPanelHeight(splitPanel, "start-panel");
       const endPanelHeight = getPanelHeight(splitPanel, "end-panel");
 
-      expect(startPanelHeight * 3).to.be.equal(
-        endPanelHeight - DIVIDER_WIDTH_IN_PX,
-      );
+      expect(startPanelHeight * 3).to.be.equal(endPanelHeight - DIVIDER_WIDTH_IN_PX);
     });
 
     it("updates the position in pixels to the correct result", async () => {
@@ -225,9 +219,7 @@ describe("<p-split-panel>", () => {
 
       const startPanelHeight = getPanelHeight(splitPanel, "start-panel");
 
-      expect(startPanelHeight).to.be.equal(
-        splitPanel.positionInPixels - DIVIDER_WIDTH_IN_PX / 2,
-      );
+      expect(startPanelHeight).to.be.equal(splitPanel.positionInPixels - DIVIDER_WIDTH_IN_PX / 2);
     });
 
     it("emits the p-reposition	event on position change ", async () => {

@@ -19,9 +19,7 @@ describe("<p-format-date>", () => {
     });
 
     it("default properties", async () => {
-      const el = await fixture<PFormatDate>(html`
-        <p-format-date></p-format-date>
-      `);
+      const el = await fixture<PFormatDate>(html` <p-format-date></p-format-date> `);
       expect(el.date).to.deep.equal(new Date());
 
       expect(el.lang).to.be.undefined;
@@ -52,13 +50,10 @@ describe("<p-format-date>", () => {
       { lang: "pt", result: `01/01/${new Date().getFullYear()}` },
       { lang: "ru", result: `01.01.${new Date().getFullYear()}` },
     ];
-    results.forEach((setup) => {
+    results.forEach(setup => {
       it(`date has correct language format: ${setup.lang}`, async () => {
         const el = await fixture<PFormatDate>(html`
-          <p-format-date
-            .date="${new Date(new Date().getFullYear(), 0, 1)}"
-            lang="${setup.lang}"
-          ></p-format-date>
+          <p-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" lang="${setup.lang}"></p-format-date>
         `);
         expect(el.shadowRoot?.textContent?.trim()).to.equal(setup.result);
       });
@@ -70,10 +65,7 @@ describe("<p-format-date>", () => {
     weekdays.forEach((weekdayFormat: "narrow" | "short" | "long") => {
       it(`date has correct weekday format: ${weekdayFormat}`, async () => {
         const el = await fixture<PFormatDate>(html`
-          <p-format-date
-            .date="${new Date(new Date().getFullYear(), 0, 1)}"
-            weekday="${weekdayFormat}"
-          ></p-format-date>
+          <p-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" weekday="${weekdayFormat}"></p-format-date>
         `);
 
         const expected = new Intl.DateTimeFormat("en-US", {
@@ -89,10 +81,7 @@ describe("<p-format-date>", () => {
     eras.forEach((eraFormat: "narrow" | "short" | "long") => {
       it(`date has correct era format: ${eraFormat}`, async () => {
         const el = await fixture<PFormatDate>(html`
-          <p-format-date
-            .date="${new Date(new Date().getFullYear(), 0, 1)}"
-            era="${eraFormat}"
-          ></p-format-date>
+          <p-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" era="${eraFormat}"></p-format-date>
         `);
 
         const expected = new Intl.DateTimeFormat("en-US", {
@@ -108,10 +97,7 @@ describe("<p-format-date>", () => {
     yearFormats.forEach((yearFormat: "numeric" | "2-digit") => {
       it(`date has correct year format: ${yearFormat}`, async () => {
         const el = await fixture<PFormatDate>(html`
-          <p-format-date
-            .date="${new Date(new Date().getFullYear(), 0, 1)}"
-            year="${yearFormat}"
-          ></p-format-date>
+          <p-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" year="${yearFormat}"></p-format-date>
         `);
 
         const expected = new Intl.DateTimeFormat("en-US", {
@@ -124,23 +110,18 @@ describe("<p-format-date>", () => {
 
   describe("month property", () => {
     const monthFormats = ["numeric", "2-digit", "narrow", "short", "long"];
-    monthFormats.forEach(
-      (monthFormat: "numeric" | "2-digit" | "narrow" | "short" | "long") => {
-        it(`date has correct month format: ${monthFormat}`, async () => {
-          const el = await fixture<PFormatDate>(html`
-            <p-format-date
-              .date="${new Date(new Date().getFullYear(), 0, 1)}"
-              month="${monthFormat}"
-            ></p-format-date>
-          `);
+    monthFormats.forEach((monthFormat: "numeric" | "2-digit" | "narrow" | "short" | "long") => {
+      it(`date has correct month format: ${monthFormat}`, async () => {
+        const el = await fixture<PFormatDate>(html`
+          <p-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" month="${monthFormat}"></p-format-date>
+        `);
 
-          const expected = new Intl.DateTimeFormat("en-US", {
-            month: monthFormat,
-          }).format(new Date(new Date().getFullYear(), 0, 1));
-          expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
-        });
-      },
-    );
+        const expected = new Intl.DateTimeFormat("en-US", {
+          month: monthFormat,
+        }).format(new Date(new Date().getFullYear(), 0, 1));
+        expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
+      });
+    });
   });
 
   describe("day property", () => {
@@ -148,10 +129,7 @@ describe("<p-format-date>", () => {
     dayFormats.forEach((dayFormat: "numeric" | "2-digit") => {
       it(`date has correct day format: ${dayFormat}`, async () => {
         const el = await fixture<PFormatDate>(html`
-          <p-format-date
-            .date="${new Date(new Date().getFullYear(), 0, 1)}"
-            day="${dayFormat}"
-          ></p-format-date>
+          <p-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" day="${dayFormat}"></p-format-date>
         `);
 
         const expected = new Intl.DateTimeFormat("en-US", {
@@ -167,10 +145,7 @@ describe("<p-format-date>", () => {
     hourFormats.forEach((hourFormat: "numeric" | "2-digit") => {
       it(`date has correct hour format: ${hourFormat}`, async () => {
         const el = await fixture<PFormatDate>(html`
-          <p-format-date
-            .date="${new Date(new Date().getFullYear(), 0, 1)}"
-            hour="${hourFormat}"
-          ></p-format-date>
+          <p-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" hour="${hourFormat}"></p-format-date>
         `);
 
         const expected = new Intl.DateTimeFormat("en-US", {
@@ -186,10 +161,7 @@ describe("<p-format-date>", () => {
     minuteFormats.forEach((minuteFormat: "numeric" | "2-digit") => {
       it(`date has correct minute format: ${minuteFormat}`, async () => {
         const el = await fixture<PFormatDate>(html`
-          <p-format-date
-            .date="${new Date(new Date().getFullYear(), 0, 1)}"
-            minute="${minuteFormat}"
-          ></p-format-date>
+          <p-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" minute="${minuteFormat}"></p-format-date>
         `);
 
         const expected = new Intl.DateTimeFormat("en-US", {
@@ -205,10 +177,7 @@ describe("<p-format-date>", () => {
     secondFormats.forEach((secondFormat: "numeric" | "2-digit") => {
       it(`date has correct second format: ${secondFormat}`, async () => {
         const el = await fixture<PFormatDate>(html`
-          <p-format-date
-            .date="${new Date(new Date().getFullYear(), 0, 1)}"
-            second="${secondFormat}"
-          ></p-format-date>
+          <p-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" second="${secondFormat}"></p-format-date>
         `);
 
         const expected = new Intl.DateTimeFormat("en-US", {
@@ -239,18 +208,11 @@ describe("<p-format-date>", () => {
   });
 
   describe("timeZone property", () => {
-    const timeZones = [
-      "America/New_York",
-      "America/Los_Angeles",
-      "Europe/Zurich",
-    ];
-    timeZones.forEach((timeZone) => {
+    const timeZones = ["America/New_York", "America/Los_Angeles", "Europe/Zurich"];
+    timeZones.forEach(timeZone => {
       it(`date has correct timeZoneName format: ${timeZone}`, async () => {
         const el = await fixture<PFormatDate>(html`
-          <p-format-date
-            .date="${new Date(new Date().getFullYear(), 0, 1)}"
-            time-zone="${timeZone}"
-          ></p-format-date>
+          <p-format-date .date="${new Date(new Date().getFullYear(), 0, 1)}" time-zone="${timeZone}"></p-format-date>
         `);
 
         const expected = new Intl.DateTimeFormat("en-US", {
@@ -263,7 +225,7 @@ describe("<p-format-date>", () => {
 
   describe("hourFormat property", () => {
     const hourFormatValues = ["auto", "12", "24"];
-    hourFormatValues.forEach((hourFormatValue) => {
+    hourFormatValues.forEach(hourFormatValue => {
       it(`date has correct hourFormat format: ${hourFormatValue}`, async () => {
         const el = await fixture<PFormatDate>(html`
           <p-format-date
@@ -273,8 +235,7 @@ describe("<p-format-date>", () => {
         `);
 
         const expected = new Intl.DateTimeFormat("en-US", {
-          hour12:
-            hourFormatValue === "auto" ? undefined : hourFormatValue === "12",
+          hour12: hourFormatValue === "auto" ? undefined : hourFormatValue === "12",
         }).format(new Date(new Date().getFullYear(), 0, 1));
         expect(el.shadowRoot?.textContent?.trim()).to.equal(expected);
       });

@@ -54,9 +54,7 @@ export default {
         switch (node.kind) {
           case ts.SyntaxKind.ClassDeclaration: {
             const className = node.name.getText();
-            const classDoc = moduleDoc?.declarations?.find(
-              (declaration) => declaration.name === className,
-            );
+            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
 
             const importPath = moduleDoc.path;
 
@@ -65,10 +63,7 @@ export default {
               return;
             }
 
-            const tagNameWithoutPrefix = path.basename(
-              importPath,
-              ".component.ts",
-            );
+            const tagNameWithoutPrefix = path.basename(importPath, ".component.ts");
             const tagName = "p-" + tagNameWithoutPrefix;
 
             classDoc.tagNameWithoutPrefix = tagNameWithoutPrefix;
@@ -88,21 +83,12 @@ export default {
         switch (node.kind) {
           case ts.SyntaxKind.ClassDeclaration: {
             const className = node.name.getText();
-            const classDoc = moduleDoc?.declarations?.find(
-              (declaration) => declaration.name === className,
-            );
-            const customTags = [
-              "animation",
-              "dependency",
-              "documentation",
-              "since",
-              "status",
-              "title",
-            ];
+            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
+            const customTags = ["animation", "dependency", "documentation", "since", "status", "title"];
             let customComments = "/**";
 
-            node.jsDoc?.forEach((jsDoc) => {
-              jsDoc?.tags?.forEach((tag) => {
+            node.jsDoc?.forEach(jsDoc => {
+              jsDoc?.tags?.forEach(tag => {
                 const tagName = tag.tagName.getText();
 
                 if (customTags.includes(tagName)) {
@@ -112,12 +98,10 @@ export default {
             });
 
             // This is what allows us to map JSDOC comments to ReactWrappers.
-            classDoc["jsDoc"] = node.jsDoc
-              ?.map((jsDoc) => jsDoc.getFullText())
-              .join("\n");
+            classDoc["jsDoc"] = node.jsDoc?.map(jsDoc => jsDoc.getFullText()).join("\n");
 
             const parsed = parse(`${customComments}\n */`);
-            parsed[0].tags?.forEach((t) => {
+            parsed[0].tags?.forEach(t => {
               switch (t.tag) {
                 // Animations
                 case "animation":
@@ -170,12 +154,10 @@ export default {
         switch (node.kind) {
           case ts.SyntaxKind.ClassDeclaration: {
             const className = node.name.getText();
-            const classDoc = moduleDoc?.declarations?.find(
-              (declaration) => declaration.name === className,
-            );
+            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
 
             if (classDoc?.events) {
-              classDoc.events.forEach((event) => {
+              classDoc.events.forEach(event => {
                 event.reactName = `on${pascalCase(event.name)}`;
                 event.eventName = `${pascalCase(event.name)}Event`;
               });
@@ -188,7 +170,7 @@ export default {
     {
       name: "pure-ui-translate-module-paths",
       packageLinkPhase({ customElementsManifest }) {
-        customElementsManifest?.modules?.forEach((mod) => {
+        customElementsManifest?.modules?.forEach(mod => {
           //
           // CEM paths look like this:
           //
@@ -213,10 +195,7 @@ export default {
             if (dec.kind === "class") {
               for (const member of dec.members ?? []) {
                 if (member.inheritedFrom) {
-                  member.inheritedFrom.module = replace(
-                    member.inheritedFrom.module,
-                    terms,
-                  );
+                  member.inheritedFrom.module = replace(member.inheritedFrom.module, terms);
                 }
               }
             }
@@ -252,8 +231,7 @@ export default {
     customElementVuejsPlugin({
       outdir: "./dist/types/vue",
       fileName: "index.d.ts",
-      componentTypePath: (_, tag) =>
-        `../../components/${tag.replace("p-", "")}/${tag.replace("p-", "")}.component.js`,
+      componentTypePath: (_, tag) => `../../components/${tag.replace("p-", "")}/${tag.replace("p-", "")}.component.js`,
     }),
   ],
 };

@@ -86,19 +86,14 @@ export default class PTabGroup extends PureElement {
       this.updateScrollControls();
     });
 
-    this.mutationObserver = new MutationObserver((mutations) => {
+    this.mutationObserver = new MutationObserver(mutations => {
       // Update aria labels when the DOM changes
-      if (
-        mutations.some(
-          (m) =>
-            !["aria-labelledby", "aria-controls"].includes(m.attributeName!),
-        )
-      ) {
+      if (mutations.some(m => !["aria-labelledby", "aria-controls"].includes(m.attributeName!))) {
         setTimeout(() => this.setAriaLabels());
       }
 
       // Sync tabs when disabled states change
-      if (mutations.some((m) => m.attributeName === "disabled")) {
+      if (mutations.some(m => m.attributeName === "disabled")) {
         this.syncTabsAndPanels();
       }
     });
@@ -116,17 +111,15 @@ export default class PTabGroup extends PureElement {
       // Wait for tabs and tab panels to be registered
       whenAllDefined.then(() => {
         // Set initial tab state when the tabs become visible
-        const intersectionObserver = new IntersectionObserver(
-          (entries, observer) => {
-            if (entries[0].intersectionRatio > 0) {
-              this.setAriaLabels();
-              this.setActiveTab(this.getActiveTab() ?? this.tabs[0], {
-                emitEvents: false,
-              });
-              observer.unobserve(entries[0].target);
-            }
-          },
-        );
+        const intersectionObserver = new IntersectionObserver((entries, observer) => {
+          if (entries[0].intersectionRatio > 0) {
+            this.setAriaLabels();
+            this.setActiveTab(this.getActiveTab() ?? this.tabs[0], {
+              emitEvents: false,
+            });
+            observer.unobserve(entries[0].target);
+          }
+        });
         intersectionObserver.observe(this.tabGroup);
       });
     });
@@ -139,20 +132,17 @@ export default class PTabGroup extends PureElement {
   }
 
   private getAllTabs() {
-    const slot =
-      this.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="nav"]')!;
+    const slot = this.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="nav"]')!;
 
     return slot.assignedElements() as PTab[];
   }
 
   private getAllPanels() {
-    return [...this.body.assignedElements()].filter(
-      (el) => el.tagName.toLowerCase() === "p-tab-panel",
-    ) as [PTabPanel];
+    return [...this.body.assignedElements()].filter(el => el.tagName.toLowerCase() === "p-tab-panel") as [PTabPanel];
   }
 
   private getActiveTab() {
-    return this.tabs.find((el) => el.active);
+    return this.tabs.find(el => el.active);
   }
 
   private handleClick(event: MouseEvent) {
@@ -189,17 +179,8 @@ export default class PTabGroup extends PureElement {
     }
 
     // Move focus left or right
-    if (
-      [
-        "ArrowLeft",
-        "ArrowRight",
-        "ArrowUp",
-        "ArrowDown",
-        "Home",
-        "End",
-      ].includes(event.key)
-    ) {
-      const activeEl = this.tabs.find((t) => t.matches(":focus"));
+    if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) {
+      const activeEl = this.tabs.find(t => t.matches(":focus"));
       const isRtl = this.matches(":dir(rtl)");
       let nextTab: null | PTab = null;
 
@@ -209,19 +190,16 @@ export default class PTabGroup extends PureElement {
         } else if (event.key === "End") {
           nextTab = this.focusableTabs[this.focusableTabs.length - 1];
         } else if (
-          (["top", "bottom"].includes(this.placement) &&
-            event.key === (isRtl ? "ArrowRight" : "ArrowLeft")) ||
+          (["top", "bottom"].includes(this.placement) && event.key === (isRtl ? "ArrowRight" : "ArrowLeft")) ||
           (["start", "end"].includes(this.placement) && event.key === "ArrowUp")
         ) {
-          const currentIndex = this.tabs.findIndex((el) => el === activeEl);
+          const currentIndex = this.tabs.findIndex(el => el === activeEl);
           nextTab = this.findNextFocusableTab(currentIndex, "backward");
         } else if (
-          (["top", "bottom"].includes(this.placement) &&
-            event.key === (isRtl ? "ArrowLeft" : "ArrowRight")) ||
-          (["start", "end"].includes(this.placement) &&
-            event.key === "ArrowDown")
+          (["top", "bottom"].includes(this.placement) && event.key === (isRtl ? "ArrowLeft" : "ArrowRight")) ||
+          (["start", "end"].includes(this.placement) && event.key === "ArrowDown")
         ) {
-          const currentIndex = this.tabs.findIndex((el) => el === activeEl);
+          const currentIndex = this.tabs.findIndex(el => el === activeEl);
           nextTab = this.findNextFocusableTab(currentIndex, "forward");
         }
 
@@ -235,7 +213,7 @@ export default class PTabGroup extends PureElement {
         if (this.activation === "auto") {
           this.setActiveTab(nextTab, { scrollBehavior: "smooth" });
         } else {
-          this.tabs.forEach((tabEl) => {
+          this.tabs.forEach(tabEl => {
             tabEl.tabIndex = tabEl === nextTab ? 0 : -1;
           });
         }
@@ -269,10 +247,7 @@ export default class PTabGroup extends PureElement {
     });
   }
 
-  private setActiveTab(
-    tab: PTab,
-    options?: { emitEvents?: boolean; scrollBehavior?: "auto" | "smooth" },
-  ) {
+  private setActiveTab(tab: PTab, options?: { emitEvents?: boolean; scrollBehavior?: "auto" | "smooth" }) {
     options = {
       emitEvents: true,
       scrollBehavior: "auto",
@@ -284,22 +259,15 @@ export default class PTabGroup extends PureElement {
       this.activeTab = tab;
 
       // Sync active tab and panel
-      this.tabs.forEach((el) => {
+      this.tabs.forEach(el => {
         el.active = el === this.activeTab;
         el.tabIndex = el === this.activeTab ? 0 : -1;
       });
-      this.panels.forEach(
-        (el) => (el.active = el.name === this.activeTab?.panel),
-      );
+      this.panels.forEach(el => (el.active = el.name === this.activeTab?.panel));
       this.syncIndicator();
 
       if (["top", "bottom"].includes(this.placement)) {
-        scrollIntoView(
-          this.activeTab,
-          this.nav,
-          "horizontal",
-          options.scrollBehavior,
-        );
+        scrollIntoView(this.activeTab, this.nav, "horizontal", options.scrollBehavior);
       }
 
       // Emit events
@@ -315,8 +283,8 @@ export default class PTabGroup extends PureElement {
 
   private setAriaLabels() {
     // Link each tab with its corresponding panel
-    this.tabs.forEach((tab) => {
-      const panel = this.panels.find((el) => el.name === tab.panel);
+    this.tabs.forEach(tab => {
+      const panel = this.panels.find(el => el.name === tab.panel);
       if (panel) {
         tab.setAttribute("aria-controls", panel.getAttribute("id")!);
         panel.setAttribute("aria-labelledby", tab.getAttribute("id")!);
@@ -352,9 +320,7 @@ export default class PTabGroup extends PureElement {
       case "bottom":
         this.indicator.style.width = `${width}px`;
         this.indicator.style.height = "auto";
-        this.indicator.style.translate = isRtl
-          ? `${-1 * offset.left}px`
-          : `${offset.left}px`;
+        this.indicator.style.translate = isRtl ? `${-1 * offset.left}px` : `${offset.left}px`;
         break;
 
       case "start":
@@ -369,7 +335,7 @@ export default class PTabGroup extends PureElement {
   // This stores tabs and panels so we can refer to a cache instead of calling querySelectorAll() multiple times.
   private syncTabsAndPanels() {
     this.tabs = this.getAllTabs();
-    this.focusableTabs = this.tabs.filter((el) => !el.disabled);
+    this.focusableTabs = this.tabs.filter(el => !el.disabled);
 
     this.panels = this.getAllPanels();
     this.syncIndicator();
@@ -378,10 +344,7 @@ export default class PTabGroup extends PureElement {
     this.updateComplete.then(() => this.updateScrollControls());
   }
 
-  private findNextFocusableTab(
-    currentIndex: number,
-    direction: "forward" | "backward",
-  ) {
+  private findNextFocusableTab(currentIndex: number, direction: "forward" | "backward") {
     let nextTab = null;
     const iterator = direction === "forward" ? 1 : -1;
     let nextIndex = currentIndex + iterator;
@@ -420,8 +383,7 @@ export default class PTabGroup extends PureElement {
       //
       // See https://github.com/ssjblue197/pure-ui/issues/1839
       this.hasScrollControls =
-        ["top", "bottom"].includes(this.placement) &&
-        this.nav.scrollWidth > this.nav.clientWidth + 1;
+        ["top", "bottom"].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth + 1;
     }
   }
 
@@ -439,7 +401,7 @@ export default class PTabGroup extends PureElement {
 
   /** Shows the specified tab panel. */
   show(panel: string) {
-    const tab = this.tabs.find((el) => el.panel === panel);
+    const tab = this.tabs.find(el => el.panel === panel);
 
     if (tab) {
       this.setActiveTab(tab, { scrollBehavior: "smooth" });
@@ -481,10 +443,7 @@ export default class PTabGroup extends PureElement {
 
           <div class="tab-group__nav">
             <div part="tabs" class="tab-group__tabs" role="tablist">
-              <div
-                part="active-tab-indicator"
-                class="tab-group__indicator"
-              ></div>
+              <div part="active-tab-indicator" class="tab-group__indicator"></div>
               <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
             </div>
           </div>
@@ -504,11 +463,7 @@ export default class PTabGroup extends PureElement {
             : ""}
         </div>
 
-        <slot
-          part="body"
-          class="tab-group__body"
-          @slotchange=${this.syncTabsAndPanels}
-        ></slot>
+        <slot part="body" class="tab-group__body" @slotchange=${this.syncTabsAndPanels}></slot>
       </div>
     `;
   }

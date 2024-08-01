@@ -17,7 +17,7 @@ const translation: Translation = {
   hidePassword: "Skrýt heslo",
   loading: "Nahrává se",
   nextSlide: "Další slide",
-  numOptionsSelected: (num) => {
+  numOptionsSelected: num => {
     if (num === 0) return "Nejsou vybrány žádné možnosti";
     if (num === 1) return "Je vybrána jedna možnost";
     return `Počet vybraných možností: ${num}`;
@@ -30,7 +30,7 @@ const translation: Translation = {
   scrollToStart: "Scrollovat na začátek",
   selectAColorFromTheScreen: "Vybrat barvu z obrazovky",
   showPassword: "Zobrazit heslo",
-  slideNum: (slide) => `Slide ${slide}`,
+  slideNum: slide => `Slide ${slide}`,
   toggleColorFormat: "Přepnout formát barvy",
 };
 

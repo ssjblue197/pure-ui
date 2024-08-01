@@ -85,25 +85,18 @@ export default css`
     border-color: var(--p-color-neutral-400);
   }
 
-  .switch:not(.switch--checked):not(.switch--disabled)
-    .switch__control:hover
-    .switch__thumb {
+  .switch:not(.switch--checked):not(.switch--disabled) .switch__control:hover .switch__thumb {
     background-color: var(--p-color-neutral-0);
     border-color: var(--p-color-neutral-400);
   }
 
   /* Focus */
-  .switch:not(.switch--checked):not(.switch--disabled)
-    .switch__input:focus-visible
-    ~ .switch__control {
+  .switch:not(.switch--checked):not(.switch--disabled) .switch__input:focus-visible ~ .switch__control {
     background-color: var(--p-color-neutral-400);
     border-color: var(--p-color-neutral-400);
   }
 
-  .switch:not(.switch--checked):not(.switch--disabled)
-    .switch__input:focus-visible
-    ~ .switch__control
-    .switch__thumb {
+  .switch:not(.switch--checked):not(.switch--disabled) .switch__input:focus-visible ~ .switch__control .switch__thumb {
     background-color: var(--p-color-neutral-0);
     border-color: var(--p-color-primary-600);
     outline: var(--p-focus-ring);
@@ -128,25 +121,18 @@ export default css`
     border-color: var(--p-color-primary-600);
   }
 
-  .switch.switch--checked:not(.switch--disabled)
-    .switch__control:hover
-    .switch__thumb {
+  .switch.switch--checked:not(.switch--disabled) .switch__control:hover .switch__thumb {
     background-color: var(--p-color-neutral-0);
     border-color: var(--p-color-primary-600);
   }
 
   /* Checked + focus */
-  .switch.switch--checked:not(.switch--disabled)
-    .switch__input:focus-visible
-    ~ .switch__control {
+  .switch.switch--checked:not(.switch--disabled) .switch__input:focus-visible ~ .switch__control {
     background-color: var(--p-color-primary-600);
     border-color: var(--p-color-primary-600);
   }
 
-  .switch.switch--checked:not(.switch--disabled)
-    .switch__input:focus-visible
-    ~ .switch__control
-    .switch__thumb {
+  .switch.switch--checked:not(.switch--disabled) .switch__input:focus-visible ~ .switch__control .switch__thumb {
     background-color: var(--p-color-neutral-0);
     border-color: var(--p-color-primary-600);
     outline: var(--p-focus-ring);
@@ -174,9 +160,7 @@ export default css`
   }
 
   @media (forced-colors: active) {
-    .switch.switch--checked:not(.switch--disabled)
-      .switch__control:hover
-      .switch__thumb,
+    .switch.switch--checked:not(.switch--disabled) .switch__control:hover .switch__thumb,
     .switch--checked .switch__control .switch__thumb {
       background-color: ButtonText;
     }

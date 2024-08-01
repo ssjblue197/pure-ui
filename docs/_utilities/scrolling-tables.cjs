@@ -10,7 +10,7 @@ module.exports = function (doc, options) {
     ...options,
   };
 
-  tables.forEach((table) => {
+  tables.forEach(table => {
     const div = doc.createElement("div");
     div.classList.add(options.className);
     table.insertAdjacentElement("beforebegin", div);

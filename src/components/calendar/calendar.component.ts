@@ -1,10 +1,5 @@
 import { classMap } from "lit/directives/class-map.js";
-import {
-  generateCalendarGrid,
-  getAllDayNames,
-  getMonthName,
-  isSameDay,
-} from "../../internal/calendar.js";
+import { generateCalendarGrid, getAllDayNames, getMonthName, isSameDay } from "../../internal/calendar.js";
 import { HasSlotController } from "../../internal/slot.js";
 import { html } from "lit";
 import { LocalizeController } from "../../utilities/localize.js";
@@ -53,33 +48,19 @@ export default class PCalendar extends PureElement {
   static styles: CSSResultGroup = styles;
 
   private readonly localize = new LocalizeController(this);
-  private readonly hasSlotController = new HasSlotController(
-    this,
-    "prefix",
-    "suffix",
-  );
+  private readonly hasSlotController = new HasSlotController(this, "prefix", "suffix");
 
   /** The month to render, 1-12/ */
-  @property({ type: Number, reflect: true }) month: number =
-    new Date().getMonth() + 1;
+  @property({ type: Number, reflect: true }) month: number = new Date().getMonth() + 1;
 
   /** The year to render. */
-  @property({ type: Number, reflect: true }) year: number =
-    new Date().getFullYear();
+  @property({ type: Number, reflect: true }) year: number = new Date().getFullYear();
 
   /** Determines how day labels are shown, e.g. "M", "Mon", or "Monday". */
-  @property({ attribute: "day-labels" }) dayLabels:
-    | "narrow"
-    | "short"
-    | "long" = "short";
+  @property({ attribute: "day-labels" }) dayLabels: "narrow" | "short" | "long" = "short";
 
   /** Determines how month labels are shown, e.g. "J", "Jan", or "January". */
-  @property({ attribute: "month-labels" }) monthLabels:
-    | "numeric"
-    | "2-digit"
-    | "long"
-    | "short"
-    | "narrow" = "long";
+  @property({ attribute: "month-labels" }) monthLabels: "numeric" | "2-digit" | "long" | "short" | "narrow" = "long";
 
   /** When true, dates from the previous and next month will also be shown to fill out the grid. */
   @property({ attribute: "show-adjacent-dates", type: Boolean })
@@ -150,9 +131,7 @@ export default class PCalendar extends PureElement {
           ></p-icon-button>
 
           <span class="calendar__label">
-            <span class="calendar__month-label"
-              >${getMonthName(month, lang, this.monthLabels)}</span
-            >
+            <span class="calendar__month-label">${getMonthName(month, lang, this.monthLabels)}</span>
             <span class="calendar__year-label">${month.getFullYear()}</span>
           </span>
 
@@ -164,7 +143,7 @@ export default class PCalendar extends PureElement {
         </header>
 
         <div class="calendar__days">
-          ${[0, 1, 2, 3, 4, 5, 6].map((day) => {
+          ${[0, 1, 2, 3, 4, 5, 6].map(day => {
             return html`
               <span
                 part=${partMap({
@@ -182,21 +161,14 @@ export default class PCalendar extends PureElement {
           ${dayGrid.map((day, index) => {
             if (day.isCurrentMonth || this.showAdjacentDates) {
               const isSelected = Array.isArray(this.selectedDates)
-                ? this.selectedDates.some((d) => isSameDay(d, day.date))
+                ? this.selectedDates.some(d => isSameDay(d, day.date))
                 : false;
               const previousDay = index > 0 ? dayGrid[index - 1] : null;
-              const nextDay =
-                index < dayGrid.length - 1 ? dayGrid[index + 1] : null;
+              const nextDay = index < dayGrid.length - 1 ? dayGrid[index + 1] : null;
               const isSelectionStart =
-                isSelected && previousDay
-                  ? !this.selectedDates.some((d) =>
-                      isSameDay(d, previousDay.date),
-                    )
-                  : false;
+                isSelected && previousDay ? !this.selectedDates.some(d => isSameDay(d, previousDay.date)) : false;
               const isSelectionEnd =
-                isSelected && nextDay
-                  ? !this.selectedDates.some((d) => isSameDay(d, nextDay.date))
-                  : false;
+                isSelected && nextDay ? !this.selectedDates.some(d => isSameDay(d, nextDay.date)) : false;
 
               return html`
                 <button
@@ -220,9 +192,7 @@ export default class PCalendar extends PureElement {
               `;
             }
 
-            return html`
-              <div class="calendar__day calendar__day--empty"></div>
-            `;
+            return html` <div class="calendar__day calendar__day--empty"></div> `;
           })}
         </div>
 

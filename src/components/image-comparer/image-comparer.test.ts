@@ -12,18 +12,12 @@ describe("<p-image-comparer>", () => {
       </p-image-comparer>
     `);
 
-    const afterPart =
-      el.shadowRoot!.querySelector<HTMLElement>('[part~="after"]')!;
-    const iconContainer = el.shadowRoot!.querySelector<HTMLSlotElement>(
-      'slot[name="handle"]',
-    )!;
-    const handle =
-      el.shadowRoot!.querySelector<HTMLElement>('[part~="handle"]')!;
+    const afterPart = el.shadowRoot!.querySelector<HTMLElement>('[part~="after"]')!;
+    const iconContainer = el.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="handle"]')!;
+    const handle = el.shadowRoot!.querySelector<HTMLElement>('[part~="handle"]')!;
 
     expect(el.position).to.equal(50);
-    expect(afterPart.getAttribute("style")).to.equal(
-      "clip-path:inset(0 50% 0 0);",
-    );
+    expect(afterPart.getAttribute("style")).to.equal("clip-path:inset(0 50% 0 0);");
     expect(iconContainer.assignedElements().length).to.equal(0);
     expect(handle.getAttribute("role")).to.equal("scrollbar");
     expect(handle.getAttribute("aria-valuenow")).to.equal("50");
@@ -234,8 +228,7 @@ describe("<p-image-comparer>", () => {
         <div slot="after" style="width: 50px"></div>
       </p-image-comparer>
     `);
-    const handle =
-      el.shadowRoot!.querySelector<HTMLElement>('[part~="handle"]')!;
+    const handle = el.shadowRoot!.querySelector<HTMLElement>('[part~="handle"]')!;
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const rect = base.getBoundingClientRect();
     const offsetX = rect.left + window.scrollX;

@@ -44,8 +44,7 @@ export default css`
     box-shadow: 0 0 0 var(--p-focus-ring-width) var(--p-input-focus-ring-color);
   }
 
-  .textarea--standard.textarea--focused:not(.textarea--disabled)
-    .textarea__control {
+  .textarea--standard.textarea--focused:not(.textarea--disabled) .textarea__control {
     color: var(--p-input-color-focus);
   }
 

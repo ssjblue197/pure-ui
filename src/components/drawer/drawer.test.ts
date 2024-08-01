@@ -8,9 +8,7 @@ import type PDrawer from "./drawer.js";
 describe("<p-drawer>", () => {
   it("should be visible with the open attribute", async () => {
     const el = await fixture<PDrawer>(html`
-      <p-drawer open
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer
-      >
+      <p-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer>
     `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
@@ -19,9 +17,7 @@ describe("<p-drawer>", () => {
 
   it("should not be visible without the open attribute", async () => {
     const el = await fixture<PDrawer>(html`
-      <p-drawer
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer
-      >
+      <p-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer>
     `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
@@ -30,9 +26,7 @@ describe("<p-drawer>", () => {
 
   it("should emit p-show and p-after-show when calling show()", async () => {
     const el = await fixture<PDrawer>(html`
-      <p-drawer
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer
-      >
+      <p-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer>
     `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const showHandler = sinon.spy();
@@ -52,9 +46,7 @@ describe("<p-drawer>", () => {
 
   it("should emit p-hide and p-after-hide when calling hide()", async () => {
     const el = await fixture<PDrawer>(html`
-      <p-drawer open
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer
-      >
+      <p-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer>
     `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const hideHandler = sinon.spy();
@@ -74,9 +66,7 @@ describe("<p-drawer>", () => {
 
   it("should emit p-show and p-after-show when setting open = true", async () => {
     const el = await fixture<PDrawer>(html`
-      <p-drawer
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer
-      >
+      <p-drawer>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer>
     `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const showHandler = sinon.spy();
@@ -96,9 +86,7 @@ describe("<p-drawer>", () => {
 
   it("should emit p-hide and p-after-hide when setting open = false", async () => {
     const el = await fixture<PDrawer>(html`
-      <p-drawer open
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer
-      >
+      <p-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer>
     `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const hideHandler = sinon.spy();
@@ -118,14 +106,11 @@ describe("<p-drawer>", () => {
 
   it("should not close when p-request-close is prevented", async () => {
     const el = await fixture<PDrawer>(html`
-      <p-drawer open
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer
-      >
+      <p-drawer open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-drawer>
     `);
-    const overlay =
-      el.shadowRoot!.querySelector<HTMLElement>('[part~="overlay"]')!;
+    const overlay = el.shadowRoot!.querySelector<HTMLElement>('[part~="overlay"]')!;
 
-    el.addEventListener("p-request-close", (event) => {
+    el.addEventListener("p-request-close", event => {
       event.preventDefault();
     });
     overlay.click();

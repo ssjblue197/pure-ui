@@ -28,14 +28,9 @@ export default class PFormatBytes extends PureElement {
     const bitPrefixes = ["", "kilo", "mega", "giga", "tera"]; // petabit isn't a supported unit
     const bytePrefixes = ["", "kilo", "mega", "giga", "tera", "peta"];
     const prefix = this.unit === "bit" ? bitPrefixes : bytePrefixes;
-    const index = Math.max(
-      0,
-      Math.min(Math.floor(Math.log10(this.value) / 3), prefix.length - 1),
-    );
+    const index = Math.max(0, Math.min(Math.floor(Math.log10(this.value) / 3), prefix.length - 1));
     const unit = prefix[index] + this.unit;
-    const valueToFormat = parseFloat(
-      (this.value / Math.pow(1000, index)).toPrecision(3),
-    );
+    const valueToFormat = parseFloat((this.value / Math.pow(1000, index)).toPrecision(3));
 
     return this.localize.number(valueToFormat, {
       style: "unit",

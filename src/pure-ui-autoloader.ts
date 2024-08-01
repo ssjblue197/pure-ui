@@ -1,6 +1,6 @@
 import { getBasePath } from "./utilities/base-path.js";
 
-const observer = new MutationObserver((mutations) => {
+const observer = new MutationObserver(mutations => {
   for (const { addedNodes } of mutations) {
     for (const node of addedNodes) {
       if (node.nodeType === Node.ELEMENT_NODE) {
@@ -17,8 +17,8 @@ export async function discover(root: Element | ShadowRoot) {
   const rootTagName = root instanceof Element ? root.tagName.toLowerCase() : "";
   const rootIsPureElement = rootTagName?.startsWith("p-");
   const tags = [...root.querySelectorAll(":not(:defined)")]
-    .map((el) => el.tagName.toLowerCase())
-    .filter((tag) => tag.startsWith("p-"));
+    .map(el => el.tagName.toLowerCase())
+    .filter(tag => tag.startsWith("p-"));
 
   // If the root element is an undefined Pure UI component, add it to the list
   if (rootIsPureElement && !customElements.get(rootTagName)) {
@@ -28,7 +28,7 @@ export async function discover(root: Element | ShadowRoot) {
   // Make the list unique
   const tagsToRegister = [...new Set(tags)];
 
-  await Promise.allSettled(tagsToRegister.map((tagName) => register(tagName)));
+  await Promise.allSettled(tagsToRegister.map(tagName => register(tagName)));
 }
 
 /**
@@ -41,17 +41,11 @@ function register(tagName: string): Promise<void> {
   }
 
   const tagWithoutPrefix = tagName.replace(/^p-/i, "");
-  const path = getBasePath(
-    `components/${tagWithoutPrefix}/${tagWithoutPrefix}.js`,
-  );
+  const path = getBasePath(`components/${tagWithoutPrefix}/${tagWithoutPrefix}.js`);
 
   // Register it
   return new Promise((resolve, reject) => {
-    import(path)
-      .then(() => resolve())
-      .catch(() =>
-        reject(new Error(`Unable to autoload <${tagName}> from ${path}`)),
-      );
+    import(path).then(() => resolve()).catch(() => reject(new Error(`Unable to autoload <${tagName}> from ${path}`)));
   });
 }
 

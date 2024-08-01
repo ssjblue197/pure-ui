@@ -17,7 +17,7 @@ const translation: Translation = {
   hidePassword: "Skrij geslo",
   loading: "Nalaganje",
   nextSlide: "Naslednji diapozitiv",
-  numOptionsSelected: (num) => {
+  numOptionsSelected: num => {
     if (num === 0) return "Nobena možnost ni izbrana";
     if (num === 1) return "1 možnost izbrana";
     if (num === 2) return "2 možnosti izbrani";
@@ -32,7 +32,7 @@ const translation: Translation = {
   scrollToStart: "Pomakni se na začetek",
   selectAColorFromTheScreen: "Izberite barvo z zaslona",
   showPassword: "Prikaži geslo",
-  slideNum: (slide) => `Diapozitiv ${slide}`,
+  slideNum: slide => `Diapozitiv ${slide}`,
   toggleColorFormat: "Preklopi format barve",
 };
 

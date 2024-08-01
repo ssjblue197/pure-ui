@@ -48,7 +48,7 @@ As a result, you should almost always listen for custom events instead. For exam
 
 <script>
   const checkbox = document.querySelector("p-checkbox");
-  checkbox.addEventListener("p-change", (event) => {
+  checkbox.addEventListener("p-change", event => {
     console.log(event.target.checked ? "checked" : "not checked");
   });
 </script>

@@ -1,18 +1,6 @@
 import "../../../dist/pure-ui.js";
-import {
-  aTimeout,
-  expect,
-  fixture,
-  html,
-  nextFrame,
-  oneEvent,
-  waitUntil,
-} from "@open-wc/testing";
-import {
-  clickOnElement,
-  dragElement,
-  moveMouseOnElement,
-} from "../../internal/test.js";
+import { aTimeout, expect, fixture, html, nextFrame, oneEvent, waitUntil } from "@open-wc/testing";
+import { clickOnElement, dragElement, moveMouseOnElement } from "../../internal/test.js";
 import { map } from "lit/directives/map.js";
 import { range } from "lit/directives/range.js";
 import { resetMouse } from "@web/test-runner-commands";
@@ -25,18 +13,13 @@ describe("<p-carousel>", () => {
   const ioCallbacks = new Map<IntersectionObserver, SinonStub>();
   const intersectionObserverCallbacks = () => {
     const callbacks = [...ioCallbacks.values()];
-    return waitUntil(() => callbacks.every((callback) => callback.called));
+    return waitUntil(() => callbacks.every(callback => callback.called));
   };
   const OriginalIntersectionObserver = globalThis.IntersectionObserver;
 
   beforeEach(() => {
-    globalThis.IntersectionObserver = class IntersectionObserverMock extends (
-      OriginalIntersectionObserver
-    ) {
-      constructor(
-        callback: IntersectionObserverCallback,
-        options?: IntersectionObserverInit,
-      ) {
+    globalThis.IntersectionObserver = class IntersectionObserverMock extends OriginalIntersectionObserver {
+      constructor(callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
         const stubCallback = sandbox.stub().callsFake(callback);
 
         super(stubCallback, options);
@@ -185,9 +168,7 @@ describe("<p-carousel>", () => {
 
         // Act
         await el.updateComplete;
-        const clones = [...el.children].filter((child) =>
-          child.hasAttribute("data-clone"),
-        );
+        const clones = [...el.children].filter(child => child.hasAttribute("data-clone"));
 
         // Assert
         expect(clones).to.have.lengthOf(4);
@@ -208,8 +189,7 @@ describe("<p-carousel>", () => {
 
       // Assert
       expect(el).to.exist;
-      expect(el.shadowRoot!.querySelector(".carousel__navigation")).not.to
-        .exist;
+      expect(el.shadowRoot!.querySelector(".carousel__navigation")).not.to.exist;
       expect(el.shadowRoot!.querySelector(".carousel__pagination")).to.exist;
     });
 
@@ -227,9 +207,7 @@ describe("<p-carousel>", () => {
         await el.updateComplete;
 
         // Act
-        const paginationItem = el.shadowRoot!.querySelectorAll(
-          ".carousel__pagination-item",
-        )[2] as HTMLElement;
+        const paginationItem = el.shadowRoot!.querySelectorAll(".carousel__pagination-item")[2] as HTMLElement;
         await clickOnElement(paginationItem);
 
         expect(el.goToSlide).to.have.been.calledWith(2);
@@ -251,8 +229,7 @@ describe("<p-carousel>", () => {
       // Assert
       expect(el).to.exist;
       expect(el.shadowRoot!.querySelector(".carousel__navigation")).to.exist;
-      expect(el.shadowRoot!.querySelector(".carousel__pagination")).not.to
-        .exist;
+      expect(el.shadowRoot!.querySelector(".carousel__pagination")).not.to.exist;
     });
   });
 
@@ -271,9 +248,7 @@ describe("<p-carousel>", () => {
       await el.updateComplete;
 
       // Assert
-      expect(
-        el.scrollContainer.style.getPropertyValue("--slides-per-page").trim(),
-      ).to.be.equal("2");
+      expect(el.scrollContainer.style.getPropertyValue("--slides-per-page").trim()).to.be.equal("2");
     });
 
     [
@@ -283,41 +258,28 @@ describe("<p-carousel>", () => {
       [7, 2, 1, true, 7],
       [5, 3, 3, true, 2],
       [10, 2, 2, true, 5],
-    ].forEach(
-      ([slides, slidesPerPage, slidesPerMove, loop, expected]: [
-        number,
-        number,
-        number,
-        boolean,
-        number,
-      ]) => {
-        it(`should display ${expected} pages for ${slides} slides grouped by ${slidesPerPage} and scrolled by ${slidesPerMove}${
-          loop ? " (loop)" : ""
-        }`, async () => {
-          // Arrange
-          const el = await fixture<PCarousel>(html`
-            <p-carousel
-              pagination
-              navigation
-              slides-per-page="${slidesPerPage}"
-              slides-per-move="${slidesPerMove}"
-              ?loop=${loop}
-            >
-              ${map(
-                range(slides),
-                (i) => html`<p-carousel-item>${i}</p-carousel-item>`,
-              )}
-            </p-carousel>
-          `);
+    ].forEach(([slides, slidesPerPage, slidesPerMove, loop, expected]: [number, number, number, boolean, number]) => {
+      it(`should display ${expected} pages for ${slides} slides grouped by ${slidesPerPage} and scrolled by ${slidesPerMove}${
+        loop ? " (loop)" : ""
+      }`, async () => {
+        // Arrange
+        const el = await fixture<PCarousel>(html`
+          <p-carousel
+            pagination
+            navigation
+            slides-per-page="${slidesPerPage}"
+            slides-per-move="${slidesPerMove}"
+            ?loop=${loop}
+          >
+            ${map(range(slides), i => html`<p-carousel-item>${i}</p-carousel-item>`)}
+          </p-carousel>
+        `);
 
-          // Assert
-          const paginationItems = el.shadowRoot!.querySelectorAll(
-            ".carousel__pagination-item",
-          );
-          expect(paginationItems.length).to.equal(expected);
-        });
-      },
-    );
+        // Assert
+        const paginationItems = el.shadowRoot!.querySelectorAll(".carousel__pagination-item");
+        expect(paginationItems.length).to.equal(expected);
+      });
+    });
   });
 
   describe("when `slides-per-move` attribute is provided", () => {
@@ -325,10 +287,7 @@ describe("<p-carousel>", () => {
       // Arrange
       const expectedSnapGranularity = 2;
       const el = await fixture<PCarousel>(html`
-        <p-carousel
-          slides-per-page="${expectedSnapGranularity}"
-          slides-per-move="${expectedSnapGranularity}"
-        >
+        <p-carousel slides-per-page="${expectedSnapGranularity}" slides-per-move="${expectedSnapGranularity}">
           <p-carousel-item>Node 1</p-carousel-item>
           <p-carousel-item>Node 2</p-carousel-item>
           <p-carousel-item>Node 3</p-carousel-item>
@@ -344,13 +303,9 @@ describe("<p-carousel>", () => {
         const child = el.children[i] as HTMLElement;
 
         if (i % expectedSnapGranularity === 0) {
-          expect(child.style.getPropertyValue("scroll-snap-align")).to.be.equal(
-            "",
-          );
+          expect(child.style.getPropertyValue("scroll-snap-align")).to.be.equal("");
         } else {
-          expect(child.style.getPropertyValue("scroll-snap-align")).to.be.equal(
-            "none",
-          );
+          expect(child.style.getPropertyValue("scroll-snap-align")).to.be.equal("none");
         }
       }
     });
@@ -368,9 +323,7 @@ describe("<p-carousel>", () => {
         </p-carousel>
       `);
       const expectedSlides = el.querySelectorAll(".expected");
-      const nextButton: HTMLElement = el.shadowRoot!.querySelector(
-        ".carousel__navigation-button--next",
-      )!;
+      const nextButton: HTMLElement = el.shadowRoot!.querySelector(".carousel__navigation-button--next")!;
 
       // Act
       await clickOnElement(nextButton);
@@ -399,9 +352,7 @@ describe("<p-carousel>", () => {
         </p-carousel>
       `);
       const expectedSlides = el.querySelectorAll(".expected");
-      const nextButton: HTMLElement = el.shadowRoot!.querySelector(
-        ".carousel__navigation-button--next",
-      )!;
+      const nextButton: HTMLElement = el.shadowRoot!.querySelector(".carousel__navigation-button--next")!;
 
       // Act
       await clickOnElement(nextButton);
@@ -465,12 +416,8 @@ describe("<p-carousel>", () => {
         await el.updateComplete;
 
         // Assert
-        expect(el.scrollContainer.scrollWidth).to.be.equal(
-          el.scrollContainer.clientWidth,
-        );
-        expect(el.scrollContainer.scrollHeight).to.be.greaterThan(
-          el.scrollContainer.clientHeight,
-        );
+        expect(el.scrollContainer.scrollWidth).to.be.equal(el.scrollContainer.clientWidth);
+        expect(el.scrollContainer.scrollHeight).to.be.greaterThan(el.scrollContainer.clientHeight);
       });
     });
 
@@ -488,12 +435,8 @@ describe("<p-carousel>", () => {
         await el.updateComplete;
 
         // Assert
-        expect(el.scrollContainer.scrollWidth).to.be.greaterThan(
-          el.scrollContainer.clientWidth,
-        );
-        expect(el.scrollContainer.scrollHeight).to.be.equal(
-          el.scrollContainer.clientHeight,
-        );
+        expect(el.scrollContainer.scrollWidth).to.be.greaterThan(el.scrollContainer.clientWidth);
+        expect(el.scrollContainer.scrollHeight).to.be.equal(el.scrollContainer.clientHeight);
       });
     });
   });
@@ -556,9 +499,7 @@ describe("<p-carousel>", () => {
             <p-carousel-item>Node 3</p-carousel-item>
           </p-carousel>
         `);
-        const nextButton: HTMLElement = el.shadowRoot!.querySelector(
-          ".carousel__navigation-button--next",
-        )!;
+        const nextButton: HTMLElement = el.shadowRoot!.querySelector(".carousel__navigation-button--next")!;
         sandbox.stub(el, "next");
 
         await el.updateComplete;
@@ -581,9 +522,7 @@ describe("<p-carousel>", () => {
               <p-carousel-item>Node 3</p-carousel-item>
             </p-carousel>
           `);
-          const nextButton: HTMLElement = el.shadowRoot!.querySelector(
-            ".carousel__navigation-button--next",
-          )!;
+          const nextButton: HTMLElement = el.shadowRoot!.querySelector(".carousel__navigation-button--next")!;
           sandbox.stub(el, "next");
 
           el.goToSlide(2, "auto");
@@ -610,9 +549,7 @@ describe("<p-carousel>", () => {
                 <p-carousel-item>Node 3</p-carousel-item>
               </p-carousel>
             `);
-            const nextButton: HTMLElement = el.shadowRoot!.querySelector(
-              ".carousel__navigation-button--next",
-            )!;
+            const nextButton: HTMLElement = el.shadowRoot!.querySelector(".carousel__navigation-button--next")!;
 
             el.goToSlide(2, "auto");
             await oneEvent(el.scrollContainer, "scrollend");
@@ -653,9 +590,7 @@ describe("<p-carousel>", () => {
         await oneEvent(el.scrollContainer, "scrollend");
         await el.updateComplete;
 
-        const previousButton: HTMLElement = el.shadowRoot!.querySelector(
-          ".carousel__navigation-button--previous",
-        )!;
+        const previousButton: HTMLElement = el.shadowRoot!.querySelector(".carousel__navigation-button--previous")!;
         sandbox.stub(el, "previous");
 
         await el.updateComplete;
@@ -679,9 +614,7 @@ describe("<p-carousel>", () => {
             </p-carousel>
           `);
 
-          const previousButton: HTMLElement = el.shadowRoot!.querySelector(
-            ".carousel__navigation-button--previous",
-          )!;
+          const previousButton: HTMLElement = el.shadowRoot!.querySelector(".carousel__navigation-button--previous")!;
           sandbox.stub(el, "previous");
           await el.updateComplete;
 
@@ -705,9 +638,7 @@ describe("<p-carousel>", () => {
               </p-carousel>
             `);
 
-            const previousButton: HTMLElement = el.shadowRoot!.querySelector(
-              ".carousel__navigation-button--previous",
-            )!;
+            const previousButton: HTMLElement = el.shadowRoot!.querySelector(".carousel__navigation-button--previous")!;
             await el.updateComplete;
 
             // Act
@@ -741,9 +672,7 @@ describe("<p-carousel>", () => {
           </p-carousel>
         `);
         sandbox.spy(el, "goToSlide");
-        const expectedCarouselItem: HTMLElement = el.querySelector(
-          "p-carousel-item:nth-child(2)",
-        )!;
+        const expectedCarouselItem: HTMLElement = el.querySelector("p-carousel-item:nth-child(2)")!;
 
         // Act
         el.next();
@@ -770,9 +699,7 @@ describe("<p-carousel>", () => {
             <p-carousel-item>Node 3</p-carousel-item>
           </p-carousel>
         `);
-        const expectedCarouselItem: HTMLElement = el.querySelector(
-          "p-carousel-item:nth-child(1)",
-        )!;
+        const expectedCarouselItem: HTMLElement = el.querySelector("p-carousel-item:nth-child(1)")!;
 
         el.goToSlide(1);
 
@@ -840,25 +767,15 @@ describe("<p-carousel>", () => {
       expect(el.scrollContainer).to.have.attribute("aria-atomic", "true");
 
       expect(pagination).to.have.attribute("role", "tablist");
-      expect(pagination).to.have.attribute(
-        "aria-controls",
-        el.scrollContainer.id,
-      );
-      for (const paginationItem of pagination.querySelectorAll(
-        ".carousel__pagination-item",
-      )) {
+      expect(pagination).to.have.attribute("aria-controls", el.scrollContainer.id);
+      for (const paginationItem of pagination.querySelectorAll(".carousel__pagination-item")) {
         expect(paginationItem).to.have.attribute("role", "tab");
         expect(paginationItem).to.have.attribute("aria-selected");
         expect(paginationItem).to.have.attribute("aria-label");
       }
 
-      for (const navigationItem of navigation.querySelectorAll(
-        ".carousel__navigation-item",
-      )) {
-        expect(navigationItem).to.have.attribute(
-          "aria-controls",
-          el.scrollContainer.id,
-        );
+      for (const navigationItem of navigation.querySelectorAll(".carousel__navigation-item")) {
+        expect(navigationItem).to.have.attribute("aria-controls", el.scrollContainer.id);
         expect(navigationItem).to.have.attribute("aria-disabled");
         expect(navigationItem).to.have.attribute("aria-label");
       }

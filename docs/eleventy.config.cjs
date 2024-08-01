@@ -4,10 +4,7 @@ const path = require("path");
 const lunr = require("lunr");
 const { capitalCase } = require("change-case");
 const { JSDOM } = require("jsdom");
-const {
-  customElementsManifest,
-  getAllComponents,
-} = require("./_utilities/cem.cjs");
+const { customElementsManifest, getAllComponents } = require("./_utilities/cem.cjs");
 const pureUIMarkdown = require("./_utilities/markdown.cjs");
 const activeLinks = require("./_utilities/active-links.cjs");
 const anchorHeadings = require("./_utilities/anchor-headings.cjs");
@@ -60,30 +57,20 @@ module.exports = function (eleventyConfig) {
   //
 
   // Generates a URL relative to the site's root
-  eleventyConfig.addNunjucksGlobal(
-    "rootUrl",
-    (value = "", absolute = false) => {
-      value = path.join("/", value);
-      return absolute
-        ? new URL(value, eleventyConfig.globalData.baseUrl).toString()
-        : value;
-    },
-  );
+  eleventyConfig.addNunjucksGlobal("rootUrl", (value = "", absolute = false) => {
+    value = path.join("/", value);
+    return absolute ? new URL(value, eleventyConfig.globalData.baseUrl).toString() : value;
+  });
 
   // Generates a URL relative to the site's asset directory
-  eleventyConfig.addNunjucksGlobal(
-    "assetUrl",
-    (value = "", absolute = false) => {
-      value = path.join(`/${assetsDir}`, value);
-      return absolute
-        ? new URL(value, eleventyConfig.globalData.baseUrl).toString()
-        : value;
-    },
-  );
+  eleventyConfig.addNunjucksGlobal("assetUrl", (value = "", absolute = false) => {
+    value = path.join(`/${assetsDir}`, value);
+    return absolute ? new URL(value, eleventyConfig.globalData.baseUrl).toString() : value;
+  });
 
   // Fetches a specific component's metadata
-  eleventyConfig.addNunjucksGlobal("getComponent", (tagName) => {
-    const component = allComponents.find((c) => c.tagName === tagName);
+  eleventyConfig.addNunjucksGlobal("getComponent", tagName => {
+    const component = allComponents.find(c => c.tagName === tagName);
     if (!component) {
       throw new Error(
         `Unable to find a component called "${tagName}". Make sure the file name is the same as the component's tag ` +
@@ -101,29 +88,27 @@ module.exports = function (eleventyConfig) {
   //
   // Filters
   //
-  eleventyConfig.addFilter("markdown", (content) => {
+  eleventyConfig.addFilter("markdown", content => {
     return pureUIMarkdown.render(content);
   });
 
-  eleventyConfig.addFilter("markdownInline", (content) => {
+  eleventyConfig.addFilter("markdownInline", content => {
     return pureUIMarkdown.renderInline(content);
   });
 
   // Trims whitespace and pipes from the start and end of a string. Useful for CEM types, which can be pipe-delimited.
   // With Prettier 3, this means a leading pipe will exist if the line wraps.
-  eleventyConfig.addFilter("trimPipes", (content) => {
-    return typeof content === "string"
-      ? content.replace(/^(\s|\|)/g, "").replace(/(\s|\|)$/g, "")
-      : content;
+  eleventyConfig.addFilter("trimPipes", content => {
+    return typeof content === "string" ? content.replace(/^(\s|\|)/g, "").replace(/(\s|\|)$/g, "") : content;
   });
 
-  eleventyConfig.addFilter("classNameToComponentName", (className) => {
+  eleventyConfig.addFilter("classNameToComponentName", className => {
     let name = capitalCase(className.replace(/^Sl/, ""));
     if (name === "Qr Code") name = "QR Code"; // manual override
     return name;
   });
 
-  eleventyConfig.addFilter("removeSlPrefix", (tagName) => {
+  eleventyConfig.addFilter("removeSlPrefix", tagName => {
     return tagName.replace(/^p-/, "");
   });
 
@@ -184,17 +169,9 @@ module.exports = function (eleventyConfig) {
     }
 
     const map = {};
-    const searchIndexFilename = path.join(
-      eleventyConfig.dir.output,
-      assetsDir,
-      "search.json",
-    );
+    const searchIndexFilename = path.join(eleventyConfig.dir.output, assetsDir, "search.json");
     const lunrInput = path.resolve("../node_modules/lunr/lunr.min.js");
-    const lunrOutput = path.join(
-      eleventyConfig.dir.output,
-      assetsDir,
-      "scripts/lunr.js",
-    );
+    const lunrOutput = path.join(eleventyConfig.dir.output, assetsDir, "scripts/lunr.js");
     const searchIndex = lunr(function () {
       // The search index uses these field names extensively, so shortening them can save some serious bytes. The
       // initial index file went from 468 KB => 401 KB by using single-character names!
@@ -205,10 +182,7 @@ module.exports = function (eleventyConfig) {
 
       results.forEach((result, index) => {
         const url = path
-          .join(
-            "/",
-            path.relative(eleventyConfig.dir.output, result.outputPath),
-          )
+          .join("/", path.relative(eleventyConfig.dir.output, result.outputPath))
           .replace(/\\/g, "/") // convert backslashes to forward slashes
           .replace(/\/index.html$/, "/"); // convert trailing /index.html to /
         const doc = new JSDOM(result.content, {
@@ -219,20 +193,15 @@ module.exports = function (eleventyConfig) {
         const content = doc.querySelector("#content");
 
         // Get title and headings
-        const title = (
-          doc.querySelector("title")?.textContent ||
-          path.basename(result.outputPath)
-        ).trim();
+        const title = (doc.querySelector("title")?.textContent || path.basename(result.outputPath)).trim();
         const headings = [...content.querySelectorAll("h1, h2, h3, h4")]
-          .map((heading) => heading.textContent)
+          .map(heading => heading.textContent)
           .join(" ")
           .replace(/\s+/g, " ")
           .trim();
 
         // Remove code blocks and whitespace from content
-        [...content.querySelectorAll("code[class|=language]")].forEach((code) =>
-          code.remove(),
-        );
+        [...content.querySelectorAll("code[class|=language]")].forEach(code => code.remove());
         const textContent = content.textContent.replace(/\s+/g, " ").trim();
 
         // Update the index and map
@@ -244,11 +213,7 @@ module.exports = function (eleventyConfig) {
     // Copy the Lunr search client and write the index
     fs.mkdirSync(path.dirname(lunrOutput), { recursive: true });
     fs.copyFileSync(lunrInput, lunrOutput);
-    fs.writeFileSync(
-      searchIndexFilename,
-      JSON.stringify({ searchIndex, map }),
-      "utf-8",
-    );
+    fs.writeFileSync(searchIndexFilename, JSON.stringify({ searchIndex, map }), "utf-8");
 
     hasBuiltSearchIndex = true;
   });

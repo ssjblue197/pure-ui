@@ -42,9 +42,7 @@ describe("<p-badge>", () => {
 
     it("should append the pill class to the classlist to render a pill", () => {
       const part = el.shadowRoot!.querySelector('[part~="base"]')!;
-      expect(part.classList.value.trim()).to.eq(
-        "badge badge--primary badge--pill",
-      );
+      expect(part.classList.value.trim()).to.eq("badge badge--primary badge--pill");
     });
   });
 
@@ -59,18 +57,14 @@ describe("<p-badge>", () => {
 
     it("should append the pulse class to the classlist to render a pulse", () => {
       const part = el.shadowRoot!.querySelector('[part~="base"]')!;
-      expect(part.classList.value.trim()).to.eq(
-        "badge badge--primary badge--pulse",
-      );
+      expect(part.classList.value.trim()).to.eq("badge badge--primary badge--pulse");
     });
   });
 
-  ["primary", "success", "neutral", "warning", "danger"].forEach((variant) => {
+  ["primary", "success", "neutral", "warning", "danger"].forEach(variant => {
     describe(`when passed a variant attribute ${variant}`, () => {
       before(async () => {
-        el = await fixture<PBadge>(
-          html`<p-badge variant="${variant}">Badge</p-badge>`,
-        );
+        el = await fixture<PBadge>(html`<p-badge variant="${variant}">Badge</p-badge>`);
       });
 
       it("should pass accessibility tests", async () => {

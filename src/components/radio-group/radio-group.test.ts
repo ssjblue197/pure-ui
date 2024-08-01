@@ -1,12 +1,5 @@
 import "../../../dist/pure-ui.js";
-import {
-  aTimeout,
-  expect,
-  fixture,
-  html,
-  oneEvent,
-  waitUntil,
-} from "@open-wc/testing";
+import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from "@open-wc/testing";
 import { clickOnElement } from "../../internal/test.js";
 import { runFormControlBaseTests } from "../../internal/test/form-control-base-tests.js";
 import { sendKeys } from "@web/test-runner-commands";
@@ -172,9 +165,7 @@ describe("<p-radio-group>", () => {
       `);
       const button = form.querySelector("p-button")!;
       const radioGroup = form.querySelector<PRadioGroup>("p-radio-group")!;
-      const submitHandler = sinon.spy((event: SubmitEvent) =>
-        event.preventDefault(),
-      );
+      const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
 
       // Submitting the form after setting custom validity should not trigger the handler
       radioGroup.setCustomValidity("Invalid selection");
@@ -369,12 +360,8 @@ describe("when the value changes", () => {
       </p-radio-group>
     `);
 
-    radioGroup.addEventListener("p-change", () =>
-      expect.fail("p-change should not be emitted"),
-    );
-    radioGroup.addEventListener("p-input", () =>
-      expect.fail("p-input should not be emitted"),
-    );
+    radioGroup.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+    radioGroup.addEventListener("p-input", () => expect.fail("p-input should not be emitted"));
     radioGroup.value = "2";
     await radioGroup.updateComplete;
   });
@@ -390,8 +377,7 @@ describe("when the value changes", () => {
     `);
 
     const formControl = radioGroup.shadowRoot!.querySelector(".form-control")!;
-    const visuallyHidden =
-      radioGroup.shadowRoot!.querySelector(".visually-hidden")!;
+    const visuallyHidden = radioGroup.shadowRoot!.querySelector(".visually-hidden")!;
 
     expect(getComputedStyle(formControl).position).to.equal("relative");
     expect(getComputedStyle(visuallyHidden).position).to.equal("absolute");

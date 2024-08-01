@@ -36,11 +36,7 @@ export default css`
   .color-picker__grid {
     position: relative;
     height: var(--grid-height);
-    background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 1) 100%
-      ),
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%),
       linear-gradient(to right, #fff 0%, rgba(255, 255, 255, 0) 100%);
     border-top-left-radius: var(--p-border-radius-medium);
     border-top-right-radius: var(--p-border-radius-medium);
@@ -190,8 +186,7 @@ export default css`
 
   .color-picker__user-input {
     display: flex;
-    padding: 0 var(--p-spacing-small) var(--p-spacing-small)
-      var(--p-spacing-small);
+    padding: 0 var(--p-spacing-small) var(--p-spacing-small) var(--p-spacing-small);
   }
 
   .color-picker__user-input p-input {
@@ -243,11 +238,7 @@ export default css`
   }
 
   .color-picker__transparent-bg {
-    background-image: linear-gradient(
-        45deg,
-        var(--p-color-neutral-300) 25%,
-        transparent 25%
-      ),
+    background-image: linear-gradient(45deg, var(--p-color-neutral-300) 25%, transparent 25%),
       linear-gradient(45deg, transparent 75%, var(--p-color-neutral-300) 75%),
       linear-gradient(45deg, transparent 75%, var(--p-color-neutral-300) 75%),
       linear-gradient(45deg, var(--p-color-neutral-300) 25%, transparent 25%);
@@ -335,9 +326,7 @@ export default css`
     outline: none;
   }
 
-  .color-dropdown__trigger:focus-visible:not(
-      .color-dropdown__trigger--disabled
-    ) {
+  .color-dropdown__trigger:focus-visible:not(.color-dropdown__trigger--disabled) {
     outline: var(--p-focus-ring);
     outline-offset: var(--p-focus-ring-offset);
   }

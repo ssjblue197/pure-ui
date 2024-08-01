@@ -17,7 +17,7 @@ const translation: Translation = {
   hidePassword: "Скрыть пароль",
   loading: "Загрузка",
   nextSlide: "Следующий слайд",
-  numOptionsSelected: (num) => {
+  numOptionsSelected: num => {
     if (num === 0) return "выбрано 0 вариантов";
     if (num === 1) return "Выбран 1 вариант";
     return `выбрано ${num} варианта`;
@@ -30,7 +30,7 @@ const translation: Translation = {
   scrollToStart: "Пролистать к началу",
   selectAColorFromTheScreen: "Выберите цвет на экране",
   showPassword: "Показать пароль",
-  slideNum: (slide) => `Слайд ${slide}`,
+  slideNum: slide => `Слайд ${slide}`,
   toggleColorFormat: "Переключить цветовую модель",
 };
 

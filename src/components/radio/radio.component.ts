@@ -105,19 +105,9 @@ export default class PRadio extends PureElement {
           "radio--large": this.size === "large",
         })}
       >
-        <span
-          part="${`control${this.checked ? " control--checked" : ""}`}"
-          class="radio__control"
-        >
+        <span part="${`control${this.checked ? " control--checked" : ""}`}" class="radio__control">
           ${this.checked
-            ? html`
-                <p-icon
-                  part="checked-icon"
-                  class="radio__checked-icon"
-                  library="system"
-                  name="radio"
-                ></p-icon>
-              `
+            ? html` <p-icon part="checked-icon" class="radio__checked-icon" library="system" name="radio"></p-icon> `
             : ""}
         </span>
 

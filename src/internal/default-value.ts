@@ -30,17 +30,12 @@ export const defaultValue =
       value,
     ) {
       const options = ctor.getPropertyOptions(propertyName);
-      const attributeName =
-        typeof options.attribute === "string"
-          ? options.attribute
-          : propertyName;
+      const attributeName = typeof options.attribute === "string" ? options.attribute : propertyName;
 
       if (name === attributeName) {
         const converter = options.converter || defaultConverter;
         const fromAttribute =
-          typeof converter === "function"
-            ? converter
-            : converter?.fromAttribute ?? defaultConverter.fromAttribute;
+          typeof converter === "function" ? converter : converter?.fromAttribute ?? defaultConverter.fromAttribute;
 
         const newValue: unknown = fromAttribute!(value, options.type);
 

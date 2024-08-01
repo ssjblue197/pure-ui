@@ -7,19 +7,14 @@ import type SlButton from "../components/button/button.js";
 // elements connect and disconnect to/from the DOM, their containing form is used as the key and the form control is
 // added and removed from the form's set, respectively.
 //
-export const formCollections: WeakMap<
-  HTMLFormElement,
-  Set<ShoelaceFormControl>
-> = new WeakMap();
+export const formCollections: WeakMap<HTMLFormElement, Set<ShoelaceFormControl>> = new WeakMap();
 
 //
 // We store a WeakMap of reportValidity() overloads so we can override it when form controls connect to the DOM and
 // restore the original behavior when they disconnect.
 //
-const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> =
-  new WeakMap();
-const checkValidityOverloads: WeakMap<HTMLFormElement, () => boolean> =
-  new WeakMap();
+const reportValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
+const checkValidityOverloads: WeakMap<HTMLFormElement, () => boolean> = new WeakMap();
 
 //
 // We store a Set of controls that users have interacted with. This allows us to determine the interaction state
@@ -68,22 +63,16 @@ export class FormControlController implements ReactiveController {
   form?: HTMLFormElement | null;
   options: FormControlControllerOptions;
 
-  constructor(
-    host: ReactiveControllerHost & ShoelaceFormControl,
-    options?: Partial<FormControlControllerOptions>,
-  ) {
+  constructor(host: ReactiveControllerHost & ShoelaceFormControl, options?: Partial<FormControlControllerOptions>) {
     (this.host = host).addController(this);
     this.options = {
-      form: (input) => {
+      form: input => {
         // If there's a form attribute, use it to find the target form by id
         // Controls may not always reflect the 'form' property. For example, `<p-button>` doesn't reflect.
         const formId = input.form;
 
         if (formId) {
-          const root = input.getRootNode() as
-            | Document
-            | ShadowRoot
-            | HTMLElement;
+          const root = input.getRootNode() as Document | ShadowRoot | HTMLElement;
           const form = root.querySelector(`#${formId}`);
 
           if (form) {
@@ -93,18 +82,12 @@ export class FormControlController implements ReactiveController {
 
         return input.closest("form");
       },
-      name: (input) => input.name,
-      value: (input) => input.value,
-      defaultValue: (input) => input.defaultValue,
-      disabled: (input) => input.disabled ?? false,
-      reportValidity: (input) =>
-        typeof input.reportValidity === "function"
-          ? input.reportValidity()
-          : true,
-      checkValidity: (input) =>
-        typeof input.checkValidity === "function"
-          ? input.checkValidity()
-          : true,
+      name: input => input.name,
+      value: input => input.value,
+      defaultValue: input => input.defaultValue,
+      disabled: input => input.disabled ?? false,
+      reportValidity: input => (typeof input.reportValidity === "function" ? input.reportValidity() : true),
+      checkValidity: input => (typeof input.checkValidity === "function" ? input.checkValidity() : true),
       setValue: (input, value: string) => (input.value = value),
       assumeInteractionOn: ["p-input"],
       ...options,
@@ -120,7 +103,7 @@ export class FormControlController implements ReactiveController {
 
     // Listen for interactions
     interactions.set(this.host, []);
-    this.options.assumeInteractionOn.forEach((event) => {
+    this.options.assumeInteractionOn.forEach(event => {
       this.host.addEventListener(event, this.handleInteraction);
     });
   }
@@ -130,7 +113,7 @@ export class FormControlController implements ReactiveController {
 
     // Clean up interactions
     interactions.delete(this.host);
-    this.options.assumeInteractionOn.forEach((event) => {
+    this.options.assumeInteractionOn.forEach(event => {
       this.host.removeEventListener(event, this.handleInteraction);
     });
   }
@@ -162,10 +145,7 @@ export class FormControlController implements ReactiveController {
       if (formCollections.has(this.form)) {
         formCollections.get(this.form)!.add(this.host);
       } else {
-        formCollections.set(
-          this.form,
-          new Set<ShoelaceFormControl>([this.host]),
-        );
+        formCollections.set(this.form, new Set<ShoelaceFormControl>([this.host]));
       }
 
       this.form.addEventListener("formdata", this.handleFormData);
@@ -245,17 +225,11 @@ export class FormControlController implements ReactiveController {
       typeof value !== "undefined"
     ) {
       if (Array.isArray(value)) {
-        (value as unknown[]).forEach((val) => {
-          event.formData.append(
-            name,
-            (val as string | number | boolean).toString(),
-          );
+        (value as unknown[]).forEach(val => {
+          event.formData.append(name, (val as string | number | boolean).toString());
         });
       } else {
-        event.formData.append(
-          name,
-          (value as string | number | boolean).toString(),
-        );
+        event.formData.append(name, (value as string | number | boolean).toString());
       }
     }
   };
@@ -266,17 +240,12 @@ export class FormControlController implements ReactiveController {
 
     // Update the interacted state for all controls when the form is submitted
     if (this.form && !this.form.noValidate) {
-      formCollections.get(this.form)?.forEach((control) => {
+      formCollections.get(this.form)?.forEach(control => {
         this.setUserInteracted(control, true);
       });
     }
 
-    if (
-      this.form &&
-      !this.form.noValidate &&
-      !disabled &&
-      !reportValidity(this.host)
-    ) {
+    if (this.form && !this.form.noValidate && !disabled && !reportValidity(this.host)) {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
@@ -369,10 +338,7 @@ export class FormControlController implements ReactiveController {
     el.requestUpdate();
   }
 
-  private doAction(
-    type: "submit" | "reset",
-    submitter?: HTMLInputElement | SlButton,
-  ) {
+  private doAction(type: "submit" | "reset", submitter?: HTMLInputElement | SlButton) {
     if (this.form) {
       const button = document.createElement("button");
       button.type = type;
@@ -388,13 +354,7 @@ export class FormControlController implements ReactiveController {
         button.name = submitter.name;
         button.value = submitter.value;
 
-        [
-          "formaction",
-          "formenctype",
-          "formmethod",
-          "formnovalidate",
-          "formtarget",
-        ].forEach((attr) => {
+        ["formaction", "formenctype", "formmethod", "formnovalidate", "formtarget"].forEach(attr => {
           if (submitter.hasAttribute(attr)) {
             button.setAttribute(attr, submitter.getAttribute(attr)!);
           }
@@ -464,15 +424,12 @@ export class FormControlController implements ReactiveController {
    * event will be cancelled before being dispatched.
    */
   emitInvalidEvent(originalInvalidEvent?: Event) {
-    const slInvalidEvent = new CustomEvent<Record<PropertyKey, never>>(
-      "p-invalid",
-      {
-        bubbles: false,
-        composed: false,
-        cancelable: true,
-        detail: {},
-      },
-    );
+    const slInvalidEvent = new CustomEvent<Record<PropertyKey, never>>("p-invalid", {
+      bubbles: false,
+      composed: false,
+      cancelable: true,
+      detail: {},
+    });
 
     if (!originalInvalidEvent) {
       slInvalidEvent.preventDefault();

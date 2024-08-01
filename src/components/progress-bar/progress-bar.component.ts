@@ -50,21 +50,13 @@ export default class PProgressBar extends PureElement {
         })}
         role="progressbar"
         title=${ifDefined(this.title)}
-        aria-label=${this.label.length > 0
-          ? this.label
-          : this.localize.term("progress")}
+        aria-label=${this.label.length > 0 ? this.label : this.localize.term("progress")}
         aria-valuemin="0"
         aria-valuemax="100"
         aria-valuenow=${this.indeterminate ? 0 : this.value}
       >
-        <div
-          part="indicator"
-          class="progress-bar__indicator"
-          style=${styleMap({ width: `${this.value}%` })}
-        >
-          ${!this.indeterminate
-            ? html` <slot part="label" class="progress-bar__label"></slot> `
-            : ""}
+        <div part="indicator" class="progress-bar__indicator" style=${styleMap({ width: `${this.value}%` })}>
+          ${!this.indeterminate ? html` <slot part="label" class="progress-bar__label"></slot> ` : ""}
         </div>
       </div>
     `;

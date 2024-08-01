@@ -45,10 +45,7 @@ export default css`
     aspect-ratio: calc(var(--aspect-ratio) * var(--slides-per-page));
     border-radius: var(--p-border-radius-small);
 
-    --slide-size: calc(
-      (100% - (var(--slides-per-page) - 1) * var(--slide-gap)) /
-        var(--slides-per-page)
-    );
+    --slide-size: calc((100% - (var(--slides-per-page) - 1) * var(--slide-gap)) / var(--slides-per-page));
   }
 
   @media (prefers-reduced-motion) {

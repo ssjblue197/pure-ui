@@ -4,40 +4,27 @@ import { property } from "lit/decorators.js";
 // Match event type name strings that are registered on GlobalEventHandlersEventMap...
 type EventTypeRequiresDetail<T> = T extends keyof GlobalEventHandlersEventMap
   ? // ...where the event detail is an object...
-    GlobalEventHandlersEventMap[T] extends CustomEvent<
-      Record<PropertyKey, unknown>
-    >
+    GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, unknown>>
     ? // ...that is non-empty...
-      GlobalEventHandlersEventMap[T] extends CustomEvent<
-        Record<PropertyKey, never>
-      >
+      GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, never>>
       ? never
       : // ...and has at least one non-optional property
-        Partial<
-            GlobalEventHandlersEventMap[T]["detail"]
-          > extends GlobalEventHandlersEventMap[T]["detail"]
+        Partial<GlobalEventHandlersEventMap[T]["detail"]> extends GlobalEventHandlersEventMap[T]["detail"]
         ? never
         : T
     : never
   : never;
 
 // The inverse of the above (match any type that doesn't match EventTypeRequiresDetail)
-type EventTypeDoesNotRequireDetail<T> =
-  T extends keyof GlobalEventHandlersEventMap
-    ? GlobalEventHandlersEventMap[T] extends CustomEvent<
-        Record<PropertyKey, unknown>
-      >
-      ? GlobalEventHandlersEventMap[T] extends CustomEvent<
-          Record<PropertyKey, never>
-        >
+type EventTypeDoesNotRequireDetail<T> = T extends keyof GlobalEventHandlersEventMap
+  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, unknown>>
+    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, never>>
+      ? T
+      : Partial<GlobalEventHandlersEventMap[T]["detail"]> extends GlobalEventHandlersEventMap[T]["detail"]
         ? T
-        : Partial<
-              GlobalEventHandlersEventMap[T]["detail"]
-            > extends GlobalEventHandlersEventMap[T]["detail"]
-          ? T
-          : never
-      : T
-    : T;
+        : never
+    : T
+  : T;
 
 // `keyof EventTypesWithRequiredDetail` lists all registered event types that require detail
 type EventTypesWithRequiredDetail = {
@@ -56,21 +43,12 @@ type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
 // just CustomEventInit when appropriate (validate the type of the event detail, and require it to be provided if the
 // event requires it)
 type SlEventInit<T> = T extends keyof GlobalEventHandlersEventMap
-  ? GlobalEventHandlersEventMap[T] extends CustomEvent<
-      Record<PropertyKey, unknown>
-    >
-    ? GlobalEventHandlersEventMap[T] extends CustomEvent<
-        Record<PropertyKey, never>
-      >
+  ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, unknown>>
+    ? GlobalEventHandlersEventMap[T] extends CustomEvent<Record<PropertyKey, never>>
       ? CustomEventInit<GlobalEventHandlersEventMap[T]["detail"]>
-      : Partial<
-            GlobalEventHandlersEventMap[T]["detail"]
-          > extends GlobalEventHandlersEventMap[T]["detail"]
+      : Partial<GlobalEventHandlersEventMap[T]["detail"]> extends GlobalEventHandlersEventMap[T]["detail"]
         ? CustomEventInit<GlobalEventHandlersEventMap[T]["detail"]>
-        : WithRequired<
-            CustomEventInit<GlobalEventHandlersEventMap[T]["detail"]>,
-            "detail"
-          >
+        : WithRequired<CustomEventInit<GlobalEventHandlersEventMap[T]["detail"]>, "detail">
     : CustomEventInit
   : CustomEventInit;
 
@@ -82,9 +60,7 @@ type GetCustomEventType<T> = T extends keyof GlobalEventHandlersEventMap
   : CustomEvent<unknown>;
 
 // `keyof ValidEventTypeMap` is equivalent to `keyof GlobalEventHandlersEventMap` but gives a nicer error message
-type ValidEventTypeMap =
-  | EventTypesWithRequiredDetail
-  | EventTypesWithoutRequiredDetail;
+type ValidEventTypeMap = EventTypesWithRequiredDetail | EventTypesWithoutRequiredDetail;
 
 export default class PureElement extends LitElement {
   // Make localization attributes reactive
@@ -122,14 +98,8 @@ export default class PureElement extends LitElement {
   static version = __SHOELACE_VERSION__;
   /* eslint-enable */
 
-  static define(
-    name: string,
-    elementConstructor = this,
-    options: ElementDefinitionOptions = {},
-  ) {
-    const currentlyRegisteredConstructor = customElements.get(name) as
-      | CustomElementConstructor
-      | typeof PureElement;
+  static define(name: string, elementConstructor = this, options: ElementDefinitionOptions = {}) {
+    const currentlyRegisteredConstructor = customElements.get(name) as CustomElementConstructor | typeof PureElement;
 
     if (!currentlyRegisteredConstructor) {
       // We try to register as the actual class first. If for some reason that fails, we fall back to anonymous classes.
@@ -139,11 +109,7 @@ export default class PureElement extends LitElement {
       try {
         customElements.define(name, elementConstructor, options);
       } catch (_err) {
-        customElements.define(
-          name,
-          class extends elementConstructor {},
-          options,
-        );
+        customElements.define(name, class extends elementConstructor {}, options);
       }
       return;
     }
@@ -155,10 +121,7 @@ export default class PureElement extends LitElement {
       newVersion = " v" + elementConstructor.version;
     }
 
-    if (
-      "version" in currentlyRegisteredConstructor &&
-      currentlyRegisteredConstructor.version
-    ) {
+    if ("version" in currentlyRegisteredConstructor && currentlyRegisteredConstructor.version) {
       existingVersion = " v" + currentlyRegisteredConstructor.version;
     }
 
@@ -177,9 +140,7 @@ export default class PureElement extends LitElement {
 
   constructor() {
     super();
-    Object.entries(
-      (this.constructor as typeof PureElement).dependencies,
-    ).forEach(([name, component]) => {
+    Object.entries((this.constructor as typeof PureElement).dependencies).forEach(([name, component]) => {
       (this.constructor as typeof PureElement).define(name, component);
     });
   }

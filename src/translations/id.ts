@@ -17,7 +17,7 @@ const translation: Translation = {
   hidePassword: "Sembunyikan sandi",
   loading: "Memuat",
   nextSlide: "Slide berikutnya",
-  numOptionsSelected: (num) => {
+  numOptionsSelected: num => {
     if (num === 0) return "Tidak ada opsi yang dipilih";
     if (num === 1) return "1 opsi yang dipilih";
     return `${num} opsi yang dipilih`;
@@ -30,7 +30,7 @@ const translation: Translation = {
   scrollToStart: "Gulir ke awal",
   selectAColorFromTheScreen: "Pilih warna dari layar",
   showPassword: "Tampilkan sandi",
-  slideNum: (slide) => `Slide ${slide}`,
+  slideNum: slide => `Slide ${slide}`,
   toggleColorFormat: "Beralih format warna",
 };
 

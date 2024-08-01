@@ -77,9 +77,7 @@ export default class PSplitPanel extends PureElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.resizeObserver = new ResizeObserver((entries) =>
-      this.handleResize(entries),
-    );
+    this.resizeObserver = new ResizeObserver(entries => this.handleResize(entries));
     this.updateComplete.then(() => this.resizeObserver.observe(this));
 
     this.detectSize();
@@ -129,7 +127,7 @@ export default class PSplitPanel extends PureElement {
         if (this.snap) {
           const snaps = this.snap.split(" ");
 
-          snaps.forEach((value) => {
+          snaps.forEach(value => {
             let snapPoint: number;
 
             if (value.endsWith("%")) {
@@ -151,11 +149,7 @@ export default class PSplitPanel extends PureElement {
           });
         }
 
-        this.position = clamp(
-          this.pixelsToPercentage(newPositionInPixels),
-          0,
-          100,
-        );
+        this.position = clamp(this.pixelsToPercentage(newPositionInPixels), 0, 100);
       },
       initialEvent: event,
     });
@@ -166,33 +160,17 @@ export default class PSplitPanel extends PureElement {
       return;
     }
 
-    if (
-      [
-        "ArrowLeft",
-        "ArrowRight",
-        "ArrowUp",
-        "ArrowDown",
-        "Home",
-        "End",
-      ].includes(event.key)
-    ) {
+    if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) {
       let newPosition = this.position;
-      const incr =
-        (event.shiftKey ? 10 : 1) * (this.primary === "end" ? -1 : 1);
+      const incr = (event.shiftKey ? 10 : 1) * (this.primary === "end" ? -1 : 1);
 
       event.preventDefault();
 
-      if (
-        (event.key === "ArrowLeft" && !this.vertical) ||
-        (event.key === "ArrowUp" && this.vertical)
-      ) {
+      if ((event.key === "ArrowLeft" && !this.vertical) || (event.key === "ArrowUp" && this.vertical)) {
         newPosition -= incr;
       }
 
-      if (
-        (event.key === "ArrowRight" && !this.vertical) ||
-        (event.key === "ArrowDown" && this.vertical)
-      ) {
+      if ((event.key === "ArrowRight" && !this.vertical) || (event.key === "ArrowDown" && this.vertical)) {
         newPosition += incr;
       }
 
@@ -215,9 +193,7 @@ export default class PSplitPanel extends PureElement {
     // There's some weird logic that gets `this.cachedPositionInPixels = NaN` or `this.position === Infinity` when
     // a split-panel goes from `display: none;` to showing.
     if (isNaN(this.cachedPositionInPixels) || this.position === Infinity) {
-      this.cachedPositionInPixels = Number(
-        this.getAttribute("position-in-pixels"),
-      );
+      this.cachedPositionInPixels = Number(this.getAttribute("position-in-pixels"));
       this.positionInPixels = Number(this.getAttribute("position-in-pixels"));
       this.position = this.pixelsToPercentage(this.positionInPixels);
     }
@@ -246,12 +222,8 @@ export default class PSplitPanel extends PureElement {
   }
 
   render() {
-    const gridTemplate = this.vertical
-      ? "gridTemplateRows"
-      : "gridTemplateColumns";
-    const gridTemplateAlt = this.vertical
-      ? "gridTemplateColumns"
-      : "gridTemplateRows";
+    const gridTemplate = this.vertical ? "gridTemplateRows" : "gridTemplateColumns";
+    const gridTemplateAlt = this.vertical ? "gridTemplateColumns" : "gridTemplateRows";
     const isRtl = this.matches(":dir(rtl)");
     const primary = `
       clamp(
@@ -268,19 +240,15 @@ export default class PSplitPanel extends PureElement {
 
     if (this.primary === "end") {
       if (isRtl && !this.vertical) {
-        this.style[gridTemplate] =
-          `${primary} var(--divider-width) ${secondary}`;
+        this.style[gridTemplate] = `${primary} var(--divider-width) ${secondary}`;
       } else {
-        this.style[gridTemplate] =
-          `${secondary} var(--divider-width) ${primary}`;
+        this.style[gridTemplate] = `${secondary} var(--divider-width) ${primary}`;
       }
     } else {
       if (isRtl && !this.vertical) {
-        this.style[gridTemplate] =
-          `${secondary} var(--divider-width) ${primary}`;
+        this.style[gridTemplate] = `${secondary} var(--divider-width) ${primary}`;
       } else {
-        this.style[gridTemplate] =
-          `${primary} var(--divider-width) ${secondary}`;
+        this.style[gridTemplate] = `${primary} var(--divider-width) ${secondary}`;
       }
     }
 

@@ -10,9 +10,7 @@ describe("<p-copy-button>", () => {
 
   describe("when provided no parameters", () => {
     before(async () => {
-      el = await fixture(
-        html`<p-copy-button value="something"></p-copy-button> `,
-      );
+      el = await fixture(html`<p-copy-button value="something"></p-copy-button> `);
     });
 
     it("should pass accessibility tests", async () => {

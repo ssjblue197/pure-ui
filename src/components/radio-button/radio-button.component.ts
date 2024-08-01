@@ -32,12 +32,7 @@ import type { CSSResultGroup } from "lit";
 export default class PRadioButton extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
-  private readonly hasSlotController = new HasSlotController(
-    this,
-    "[default]",
-    "prefix",
-    "suffix",
-  );
+  private readonly hasSlotController = new HasSlotController(this, "[default]", "prefix", "suffix");
 
   @query(".button") input: HTMLInputElement;
   @query(".hidden-input") hiddenInput: HTMLInputElement;

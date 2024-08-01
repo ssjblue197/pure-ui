@@ -17,7 +17,7 @@ const translation: Translation = {
   hidePassword: "اخفاء كلمة المرور",
   loading: "جاري التحميل",
   nextSlide: "الشريحة التالية",
-  numOptionsSelected: (num) => {
+  numOptionsSelected: num => {
     if (num === 0) return "لم يتم تحديد أي خيارات";
     if (num === 1) return "تم تحديد خيار واحد";
     if (num === 2) return "تم تحديد خياران";
@@ -32,7 +32,7 @@ const translation: Translation = {
   scrollToStart: "الانتقال الى البداية",
   selectAColorFromTheScreen: "اختر لون من الشاشة",
   showPassword: "عرض كلمة المرور",
-  slideNum: (slide) => `شريحة ${slide}`,
+  slideNum: slide => `شريحة ${slide}`,
   toggleColorFormat: "تغيير صيغة عرض  اللون",
 };
 

@@ -54,9 +54,7 @@ describe("<p-option>", () => {
   });
 
   it("should escape HTML when calling getTextLabel()", async () => {
-    const el = await fixture<POption>(html`
-      <p-option><strong>Option</strong></p-option>
-    `);
+    const el = await fixture<POption>(html` <p-option><strong>Option</strong></p-option> `);
     expect(el.getTextLabel()).to.equal("Option");
   });
 });

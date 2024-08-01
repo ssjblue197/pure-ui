@@ -18,6 +18,6 @@ smartquotes.replacements.push([/([0-9]\s?)-(\s?[0-9])/g, "$1\u2013$2"]); // numb
  */
 module.exports = function (doc, selector = "body") {
   const elements = [...doc.querySelectorAll(selector)];
-  elements.forEach((el) => smartquotes.element(el));
+  elements.forEach(el => smartquotes.element(el));
   return doc;
 };

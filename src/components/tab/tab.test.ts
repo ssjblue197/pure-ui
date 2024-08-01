@@ -97,9 +97,7 @@ describe("<p-tab>", () => {
         <p-tab-group>
           <p-tab slot="nav" panel="general" closable>General</p-tab>
           <p-tab slot="nav" panel="custom" closable>Custom</p-tab>
-          <p-tab-panel name="general"
-            >This is the general tab panel.</p-tab-panel
-          >
+          <p-tab-panel name="general">This is the general tab panel.</p-tab-panel>
           <p-tab-panel name="custom">This is the custom tab panel.</p-tab-panel>
         </p-tab-group>
       `);

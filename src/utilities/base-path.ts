@@ -22,22 +22,15 @@ export function setBasePath(path: string) {
  */
 export function getBasePath(subpath = "") {
   if (!basePath) {
-    const scripts = [
-      ...document.getElementsByTagName("script"),
-    ] as HTMLScriptElement[];
-    const configScript = scripts.find((script) =>
-      script.hasAttribute("data-pure-ui"),
-    );
+    const scripts = [...document.getElementsByTagName("script")] as HTMLScriptElement[];
+    const configScript = scripts.find(script => script.hasAttribute("data-pure-ui"));
 
     if (configScript) {
       // Use the data-pure-ui attribute
       setBasePath(configScript.getAttribute("data-pure-ui")!);
     } else {
-      const fallbackScript = scripts.find((s) => {
-        return (
-          /pure-ui(\.min)?\.js($|\?)/.test(s.src) ||
-          /pure-ui-autoloader(\.min)?\.js($|\?)/.test(s.src)
-        );
+      const fallbackScript = scripts.find(s => {
+        return /pure-ui(\.min)?\.js($|\?)/.test(s.src) || /pure-ui-autoloader(\.min)?\.js($|\?)/.test(s.src);
       });
       let path = "";
 
@@ -50,8 +43,5 @@ export function getBasePath(subpath = "") {
   }
 
   // Return the base path without a trailing slash. If one exists, append the subpath separated by a slash.
-  return (
-    basePath.replace(/\/$/, "") +
-    (subpath ? `/${subpath.replace(/^\//, "")}` : ``)
-  );
+  return basePath.replace(/\/$/, "") + (subpath ? `/${subpath.replace(/^\//, "")}` : ``);
 }

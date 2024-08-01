@@ -1,13 +1,6 @@
-import {
-  animateTo,
-  shimKeyframesHeightAuto,
-  stopAnimations,
-} from "../../internal/animate.js";
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../internal/animate.js";
 import { classMap } from "lit/directives/class-map.js";
-import {
-  getAnimation,
-  setDefaultAnimation,
-} from "../../utilities/animation-registry.js";
+import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
 import { html } from "lit";
 import { live } from "lit/directives/live.js";
 import { LocalizeController } from "../../utilities/localize.js";
@@ -151,13 +144,8 @@ export default class PTreeItem extends PureElement {
     this.isLeaf = !this.lazy && this.getChildrenItems().length === 0;
   }
 
-  protected willUpdate(
-    changedProperties: PropertyValueMap<PTreeItem> | Map<PropertyKey, unknown>,
-  ) {
-    if (
-      changedProperties.has("selected") &&
-      !changedProperties.has("indeterminate")
-    ) {
+  protected willUpdate(changedProperties: PropertyValueMap<PTreeItem> | Map<PropertyKey, unknown>) {
+    if (changedProperties.has("selected") && !changedProperties.has("indeterminate")) {
       this.indeterminate = false;
     }
   }
@@ -230,13 +218,10 @@ export default class PTreeItem extends PureElement {
   }
 
   /** Gets all the nested tree items in this node. */
-  getChildrenItems({
-    includeDisabled = true,
-  }: { includeDisabled?: boolean } = {}): PTreeItem[] {
+  getChildrenItems({ includeDisabled = true }: { includeDisabled?: boolean } = {}): PTreeItem[] {
     return this.childrenSlot
       ? ([...this.childrenSlot.assignedElements({ flatten: true })].filter(
-          (item: PTreeItem) =>
-            PTreeItem.isTreeItem(item) && (includeDisabled || !item.disabled),
+          (item: PTreeItem) => PTreeItem.isTreeItem(item) && (includeDisabled || !item.disabled),
         ) as PTreeItem[])
       : [];
   }
@@ -278,26 +263,12 @@ export default class PTreeItem extends PureElement {
             })}
             aria-hidden="true"
           >
-            ${when(
-              this.loading,
-              () => html`
-                <p-spinner
-                  part="spinner"
-                  exportparts="base:spinner__base"
-                ></p-spinner>
-              `,
-            )}
+            ${when(this.loading, () => html` <p-spinner part="spinner" exportparts="base:spinner__base"></p-spinner> `)}
             <slot class="tree-item__expand-icon-slot" name="expand-icon">
-              <p-icon
-                library="system"
-                name=${isRtl ? "chevron-left" : "chevron-right"}
-              ></p-icon>
+              <p-icon library="system" name=${isRtl ? "chevron-left" : "chevron-right"}></p-icon>
             </slot>
             <slot class="tree-item__expand-icon-slot" name="collapse-icon">
-              <p-icon
-                library="system"
-                name=${isRtl ? "chevron-left" : "chevron-right"}
-              ></p-icon>
+              <p-icon library="system" name=${isRtl ? "chevron-left" : "chevron-right"}></p-icon>
             </slot>
           </div>
 
@@ -328,10 +299,7 @@ export default class PTreeItem extends PureElement {
         </div>
 
         <div class="tree-item__children" part="children" role="group">
-          <slot
-            name="children"
-            @slotchange="${this.handleChildrenSlotChange}"
-          ></slot>
+          <slot name="children" @slotchange="${this.handleChildrenSlotChange}"></slot>
         </div>
       </div>
     `;

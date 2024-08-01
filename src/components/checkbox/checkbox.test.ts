@@ -1,12 +1,5 @@
 import "../../../dist/pure-ui.js";
-import {
-  aTimeout,
-  expect,
-  fixture,
-  html,
-  oneEvent,
-  waitUntil,
-} from "@open-wc/testing";
+import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from "@open-wc/testing";
 import { clickOnElement } from "../../internal/test.js";
 import { runFormControlBaseTests } from "../../internal/test/form-control-base-tests.js";
 import { sendKeys } from "@web/test-runner-commands";
@@ -15,9 +8,7 @@ import type PCheckbox from "./checkbox.js";
 
 describe("<p-checkbox>", () => {
   it("should pass accessibility tests", async () => {
-    const el = await fixture<PCheckbox>(html`
-      <p-checkbox>Checkbox</p-checkbox>
-    `);
+    const el = await fixture<PCheckbox>(html` <p-checkbox>Checkbox</p-checkbox> `);
     await expect(el).to.be.accessible();
   });
 
@@ -36,18 +27,14 @@ describe("<p-checkbox>", () => {
   });
 
   it("should have title if title attribute is set", async () => {
-    const el = await fixture<PCheckbox>(html`
-      <p-checkbox title="Test"></p-checkbox>
-    `);
+    const el = await fixture<PCheckbox>(html` <p-checkbox title="Test"></p-checkbox> `);
     const input = el.shadowRoot!.querySelector("input")!;
 
     expect(input.title).to.equal("Test");
   });
 
   it("should be disabled with the disabled attribute", async () => {
-    const el = await fixture<PCheckbox>(html`
-      <p-checkbox disabled></p-checkbox>
-    `);
+    const el = await fixture<PCheckbox>(html` <p-checkbox disabled></p-checkbox> `);
     const checkbox = el.shadowRoot!.querySelector("input")!;
 
     expect(checkbox.disabled).to.be.true;
@@ -102,12 +89,8 @@ describe("<p-checkbox>", () => {
   it("should not emit p-change or p-input when checked programmatically", async () => {
     const el = await fixture<PCheckbox>(html` <p-checkbox></p-checkbox> `);
 
-    el.addEventListener("p-change", () =>
-      expect.fail("p-change should not be emitted"),
-    );
-    el.addEventListener("p-input", () =>
-      expect.fail("p-input should not be emitted"),
-    );
+    el.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+    el.addEventListener("p-input", () => expect.fail("p-input should not be emitted"));
     el.checked = true;
     await el.updateComplete;
     el.checked = false;
@@ -175,9 +158,7 @@ describe("<p-checkbox>", () => {
     });
 
     it("should be invalid when setCustomValidity() is called with a non-empty value", async () => {
-      const checkbox = await fixture<HTMLFormElement>(html`
-        <p-checkbox></p-checkbox>
-      `);
+      const checkbox = await fixture<HTMLFormElement>(html` <p-checkbox></p-checkbox> `);
 
       // Submitting the form after setting custom validity should not trigger the handler
       checkbox.setCustomValidity("Invalid selection");
@@ -198,16 +179,12 @@ describe("<p-checkbox>", () => {
     });
 
     it("should be invalid when required and unchecked", async () => {
-      const checkbox = await fixture<HTMLFormElement>(html`
-        <p-checkbox required></p-checkbox>
-      `);
+      const checkbox = await fixture<HTMLFormElement>(html` <p-checkbox required></p-checkbox> `);
       expect(checkbox.checkValidity()).to.be.false;
     });
 
     it("should be valid when required and checked", async () => {
-      const checkbox = await fixture<HTMLFormElement>(html`
-        <p-checkbox required checked></p-checkbox>
-      `);
+      const checkbox = await fixture<HTMLFormElement>(html` <p-checkbox required checked></p-checkbox> `);
       expect(checkbox.checkValidity()).to.be.true;
     });
 
@@ -227,9 +204,7 @@ describe("<p-checkbox>", () => {
     });
 
     it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
-      const el = await fixture<HTMLFormElement>(html`
-        <form novalidate><p-checkbox required></p-checkbox></form>
-      `);
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><p-checkbox required></p-checkbox></form> `);
       const checkbox = el.querySelector<PCheckbox>("p-checkbox")!;
 
       expect(checkbox.hasAttribute("data-required")).to.be.true;
@@ -305,9 +280,7 @@ describe("<p-checkbox>", () => {
     it("should not jump the page to the bottom when focusing a checkbox at the bottom of an element with overflow: auto;", async () => {
       // https://github.com/ssjblue197/pure-ui/issues/1169
       const el = await fixture<HTMLDivElement>(html`
-        <div
-          style="display: flex; flex-direction: column; overflow: auto; max-height: 400px; gap: 8px;"
-        >
+        <div style="display: flex; flex-direction: column; overflow: auto; max-height: 400px; gap: 8px;">
           <p-checkbox>Checkbox</p-checkbox>
           <p-checkbox>Checkbox</p-checkbox>
           <p-checkbox>Checkbox</p-checkbox>
@@ -378,21 +351,15 @@ describe("<p-checkbox>", () => {
 
   describe("indeterminate", () => {
     it("should render indeterminate icon until checked", async () => {
-      const el = await fixture<PCheckbox>(
-        html`<p-checkbox indeterminate></p-checkbox>`,
-      );
-      let indeterminateIcon = el.shadowRoot!.querySelector(
-        '[part~="indeterminate-icon"]',
-      )!;
+      const el = await fixture<PCheckbox>(html`<p-checkbox indeterminate></p-checkbox>`);
+      let indeterminateIcon = el.shadowRoot!.querySelector('[part~="indeterminate-icon"]')!;
 
       expect(indeterminateIcon).not.to.be.null;
 
       el.click();
       await el.updateComplete;
 
-      indeterminateIcon = el.shadowRoot!.querySelector(
-        '[part~="indeterminate-icon"]',
-      )!;
+      indeterminateIcon = el.shadowRoot!.querySelector('[part~="indeterminate-icon"]')!;
 
       expect(indeterminateIcon).to.be.null;
     });

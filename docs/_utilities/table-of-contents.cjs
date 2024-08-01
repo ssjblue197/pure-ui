@@ -12,13 +12,13 @@ module.exports = function (doc, options) {
 
   const container = doc.querySelector(options.container);
   const within = doc.querySelector(options.within);
-  const headingSelector = options.levels.map((h) => `${h}[id]`).join(", ");
+  const headingSelector = options.levels.map(h => `${h}[id]`).join(", ");
 
   if (!container || !within) {
     return doc;
   }
 
-  within.querySelectorAll(headingSelector).forEach((heading) => {
+  within.querySelectorAll(headingSelector).forEach(heading => {
     const listItem = doc.createElement("li");
     const link = doc.createElement("a");
     const level = heading.tagName.slice(1);

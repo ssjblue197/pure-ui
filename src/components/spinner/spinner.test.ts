@@ -17,9 +17,7 @@ describe("<p-spinner>", () => {
 
     it('should use "transform: rotate(x)" instead of "rotate: x" when animating', async () => {
       const spinner = await fixture<PSpinner>(html` <p-spinner></p-spinner> `);
-      const indicator = spinner.shadowRoot!.querySelector(
-        ".spinner__indicator",
-      )!;
+      const indicator = spinner.shadowRoot!.querySelector(".spinner__indicator")!;
 
       //
       // This matrix is the computed value when using `transform: rotate(x)` on the indicator. When using `rotate: x`,
@@ -27,9 +25,7 @@ describe("<p-spinner>", () => {
       //
       // Related: https://github.com/ssjblue197/pure-ui/issues/1121
       //
-      expect(getComputedStyle(indicator).transform).to.equal(
-        "matrix(1, 0, 0, 1, 0, 0)",
-      );
+      expect(getComputedStyle(indicator).transform).to.equal("matrix(1, 0, 0, 1, 0, 0)");
     });
 
     it("should have flex:none to prevent flex re-sizing", async () => {

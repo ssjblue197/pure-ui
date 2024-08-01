@@ -155,9 +155,7 @@ describe("<p-tooltip>", () => {
       </p-tooltip>
     `);
     const tooltipBody = el.shadowRoot!.querySelector(".tooltip__body")!;
-    const userSelect =
-      getComputedStyle(tooltipBody).userSelect ||
-      getComputedStyle(tooltipBody).webkitUserSelect;
+    const userSelect = getComputedStyle(tooltipBody).userSelect || getComputedStyle(tooltipBody).webkitUserSelect;
 
     expect(userSelect).to.equal("none");
   });

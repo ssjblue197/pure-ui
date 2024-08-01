@@ -5,7 +5,7 @@ let codeBlockId = 0;
  * document will be returned with the appropriate DOM manipulations.
  */
 module.exports = function (doc) {
-  doc.querySelectorAll("pre > code").forEach((code) => {
+  doc.querySelectorAll("pre > code").forEach(code => {
     const pre = code.closest("pre");
     const button = doc.createElement("p-copy-button");
 

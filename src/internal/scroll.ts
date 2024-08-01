@@ -12,9 +12,7 @@ function getScrollbarWidth() {
  * Used in conjunction with `scrollbarWidth` to set proper body padding in case the user has padding already on the `<body>` element.
  */
 function getExistingBodyPadding() {
-  const padding = Number(
-    getComputedStyle(document.body).paddingRight.replace(/px/, ""),
-  );
+  const padding = Number(getComputedStyle(document.body).paddingRight.replace(/px/, ""));
 
   if (isNaN(padding) || !padding) {
     return 0;
@@ -36,9 +34,7 @@ export function lockBodyScrolling(lockingEl: HTMLElement) {
     /** Scrollbar width + body padding calculation can go away once Safari has scrollbar-gutter support. */
     const scrollbarWidth = getScrollbarWidth() + getExistingBodyPadding(); // must be measured before the `p-scroll-lock` class is applied
 
-    let scrollbarGutterProperty = getComputedStyle(
-      document.documentElement,
-    ).scrollbarGutter;
+    let scrollbarGutterProperty = getComputedStyle(document.documentElement).scrollbarGutter;
 
     // default is auto, unsupported browsers is "undefined"
     if (!scrollbarGutterProperty || scrollbarGutterProperty === "auto") {
@@ -50,15 +46,9 @@ export function lockBodyScrolling(lockingEl: HTMLElement) {
       // if there's no scrollbar, just set it to an empty string so whatever the user has set gets used. This is useful if the page is not overflowing and showing a scrollbar, or if the user has overflow: hidden, or any other reason a scrollbar may not be showing.
       scrollbarGutterProperty = "";
     }
-    document.documentElement.style.setProperty(
-      "--p-scroll-lock-gutter",
-      scrollbarGutterProperty,
-    );
+    document.documentElement.style.setProperty("--p-scroll-lock-gutter", scrollbarGutterProperty);
     document.documentElement.classList.add("p-scroll-lock");
-    document.documentElement.style.setProperty(
-      "--p-scroll-lock-size",
-      `${scrollbarWidth}px`,
-    );
+    document.documentElement.style.setProperty("--p-scroll-lock-size", `${scrollbarWidth}px`);
   }
 }
 

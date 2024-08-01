@@ -1,13 +1,6 @@
-import {
-  animateTo,
-  parseDuration,
-  stopAnimations,
-} from "../../internal/animate.js";
+import { animateTo, parseDuration, stopAnimations } from "../../internal/animate.js";
 import { classMap } from "lit/directives/class-map.js";
-import {
-  getAnimation,
-  setDefaultAnimation,
-} from "../../utilities/animation-registry.js";
+import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
 import { html } from "lit";
 import { LocalizeController } from "../../utilities/localize.js";
 import { property, query } from "lit/decorators.js";
@@ -163,9 +156,7 @@ export default class PTooltip extends PureElement {
 
   private handleMouseOver = () => {
     if (this.hasTrigger("hover")) {
-      const delay = parseDuration(
-        getComputedStyle(this).getPropertyValue("--show-delay"),
-      );
+      const delay = parseDuration(getComputedStyle(this).getPropertyValue("--show-delay"));
       clearTimeout(this.hoverTimeout);
       this.hoverTimeout = window.setTimeout(() => this.show(), delay);
     }
@@ -173,9 +164,7 @@ export default class PTooltip extends PureElement {
 
   private handleMouseOut = () => {
     if (this.hasTrigger("hover")) {
-      const delay = parseDuration(
-        getComputedStyle(this).getPropertyValue("--hide-delay"),
-      );
+      const delay = parseDuration(getComputedStyle(this).getPropertyValue("--hide-delay"));
       clearTimeout(this.hoverTimeout);
       this.hoverTimeout = window.setTimeout(() => this.hide(), delay);
     }
@@ -299,13 +288,7 @@ export default class PTooltip extends PureElement {
         <slot slot="anchor" aria-describedby="tooltip"></slot>
 
         ${"" /* eslint-disable-next-line lit-a11y/accessible-name */}
-        <div
-          part="body"
-          id="tooltip"
-          class="tooltip__body"
-          role="tooltip"
-          aria-live=${this.open ? "polite" : "off"}
-        >
+        <div part="body" id="tooltip" class="tooltip__body" role="tooltip" aria-live=${this.open ? "polite" : "off"}>
           <slot name="content">${this.content}</slot>
         </div>
       </p-popup>

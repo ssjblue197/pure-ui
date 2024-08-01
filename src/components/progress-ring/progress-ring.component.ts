@@ -48,9 +48,7 @@ export default class PProgressRing extends PureElement {
     // but I couldn't pinpoint it so this works around the problem.
     //
     if (changedProps.has("value")) {
-      const radius = parseFloat(
-        getComputedStyle(this.indicator).getPropertyValue("r"),
-      );
+      const radius = parseFloat(getComputedStyle(this.indicator).getPropertyValue("r"));
       const circumference = 2 * Math.PI * radius;
       const offset = circumference - (this.value / 100) * circumference;
 
@@ -64,9 +62,7 @@ export default class PProgressRing extends PureElement {
         part="base"
         class="progress-ring"
         role="progressbar"
-        aria-label=${this.label.length > 0
-          ? this.label
-          : this.localize.term("progress")}
+        aria-label=${this.label.length > 0 ? this.label : this.localize.term("progress")}
         aria-describedby="label"
         aria-valuemin="0"
         aria-valuemax="100"
@@ -75,10 +71,7 @@ export default class PProgressRing extends PureElement {
       >
         <svg class="progress-ring__image">
           <circle class="progress-ring__track"></circle>
-          <circle
-            class="progress-ring__indicator"
-            style="stroke-dashoffset: ${this.indicatorOffset}"
-          ></circle>
+          <circle class="progress-ring__indicator" style="stroke-dashoffset: ${this.indicatorOffset}"></circle>
         </svg>
 
         <slot id="label" part="label" class="progress-ring__label"></slot>

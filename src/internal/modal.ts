@@ -27,7 +27,7 @@ export default class Modal {
 
   /** Deactivates focus trapping. */
   deactivate() {
-    activeModals = activeModals.filter((modal) => modal !== this.element);
+    activeModals = activeModals.filter(modal => modal !== this.element);
     this.currentFocus = null;
     document.removeEventListener("focusin", this.handleFocusIn);
     document.removeEventListener("keydown", this.handleKeyDown);
@@ -73,9 +73,7 @@ export default class Modal {
 
   private possiblyHasTabbableChildren(element: HTMLElement) {
     return (
-      this.elementsWithTabbableControls.includes(
-        element.tagName.toLowerCase(),
-      ) || element.hasAttribute("controls")
+      this.elementsWithTabbableControls.includes(element.tagName.toLowerCase()) || element.hasAttribute("controls")
       // Should we add a data-attribute for people to set just in case they have an element where we don't know if it has possibly tabbable elements?
     );
   }
@@ -90,10 +88,7 @@ export default class Modal {
     const currentActiveElement = getDeepestActiveElement();
     this.previousFocus = currentActiveElement as HTMLElement | null;
 
-    if (
-      this.previousFocus &&
-      this.possiblyHasTabbableChildren(this.previousFocus)
-    ) {
+    if (this.previousFocus && this.possiblyHasTabbableChildren(this.previousFocus)) {
       return;
     }
 
@@ -105,9 +100,7 @@ export default class Modal {
 
     const tabbableElements = getTabbableElements(this.element);
 
-    let currentFocusIndex = tabbableElements.findIndex(
-      (el) => el === currentActiveElement,
-    );
+    let currentFocusIndex = tabbableElements.findIndex(el => el === currentActiveElement);
 
     this.previousFocus = this.currentFocus;
 
@@ -124,16 +117,12 @@ export default class Modal {
       }
 
       this.previousFocus = this.currentFocus;
-      const nextFocus =
-        /** @type {HTMLElement} */ tabbableElements[currentFocusIndex];
+      const nextFocus = /** @type {HTMLElement} */ tabbableElements[currentFocusIndex];
 
       // This is a special case. We need to make sure we're not calling .focus() if we're already focused on an element
       // that possibly has "controls"
       if (this.tabDirection === "backward") {
-        if (
-          this.previousFocus &&
-          this.possiblyHasTabbableChildren(this.previousFocus)
-        ) {
+        if (this.previousFocus && this.possiblyHasTabbableChildren(this.previousFocus)) {
           return;
         }
       }
@@ -148,10 +137,7 @@ export default class Modal {
 
       // Check to make sure focus actually changed. It may not always be the next focus, we just don't want it to be the previousFocus.
       const allActiveElements = [...activeElements()];
-      if (
-        allActiveElements.includes(this.currentFocus) ||
-        !allActiveElements.includes(this.previousFocus!)
-      ) {
+      if (allActiveElements.includes(this.currentFocus) || !allActiveElements.includes(this.previousFocus!)) {
         break;
       }
     }

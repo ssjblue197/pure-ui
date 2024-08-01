@@ -347,9 +347,7 @@ export default css`
     height: auto;
     min-height: var(--p-input-height-small);
     font-size: var(--p-button-font-size-small);
-    line-height: calc(
-      var(--p-input-height-small) - var(--p-input-border-width) * 2
-    );
+    line-height: calc(var(--p-input-height-small) - var(--p-input-border-width) * 2);
     border-radius: var(--p-input-border-radius-small);
   }
 
@@ -357,9 +355,7 @@ export default css`
     height: auto;
     min-height: var(--p-input-height-medium);
     font-size: var(--p-button-font-size-medium);
-    line-height: calc(
-      var(--p-input-height-medium) - var(--p-input-border-width) * 2
-    );
+    line-height: calc(var(--p-input-height-medium) - var(--p-input-border-width) * 2);
     border-radius: var(--p-input-border-radius-medium);
   }
 
@@ -367,9 +363,7 @@ export default css`
     height: auto;
     min-height: var(--p-input-height-large);
     font-size: var(--p-button-font-size-large);
-    line-height: calc(
-      var(--p-input-height-large) - var(--p-input-border-width) * 2
-    );
+    line-height: calc(var(--p-input-height-large) - var(--p-input-border-width) * 2);
     border-radius: var(--p-input-border-radius-large);
   }
 
@@ -552,12 +546,7 @@ export default css`
    * buttons and we style them here instead.
    */
 
-  :host(
-      [data-p-button-group__button--first]:not(
-          [data-p-button-group__button--last]
-        )
-    )
-    .button {
+  :host([data-p-button-group__button--first]:not([data-p-button-group__button--last])) .button {
     border-start-end-radius: 0;
     border-end-end-radius: 0;
   }
@@ -566,20 +555,13 @@ export default css`
     border-radius: 0;
   }
 
-  :host(
-      [data-p-button-group__button--last]:not(
-          [data-p-button-group__button--first]
-        )
-    )
-    .button {
+  :host([data-p-button-group__button--last]:not([data-p-button-group__button--first])) .button {
     border-start-start-radius: 0;
     border-end-start-radius: 0;
   }
 
   /* All except the first */
-  :host(
-      [data-p-button-group__button]:not([data-p-button-group__button--first])
-    ) {
+  :host([data-p-button-group__button]:not([data-p-button-group__button--first])) {
     margin-inline-start: calc(-1 * var(--p-input-border-width));
   }
 

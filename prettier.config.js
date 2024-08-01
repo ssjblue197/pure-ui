@@ -1,6 +1,6 @@
 /** @type {import("prettier").Config} */
 const config = {
-  arrowParens: "always",
+  arrowParens: "avoid",
   bracketSameLine: false,
   bracketSpacing: true,
   semi: true,
@@ -14,7 +14,7 @@ const config = {
   vueIndentScriptAndStyle: false,
   proseWrap: "preserve",
   insertPragma: false,
-  printWidth: 80,
+  printWidth: 120,
   requirePragma: false,
   tabWidth: 2,
   useTabs: false,

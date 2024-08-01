@@ -14,9 +14,7 @@ import path from "path";
 const { outdir } = commandLineArgs({ name: "outdir", type: String });
 const iconDir = path.join(outdir, "/assets/icons");
 
-const iconPackageData = JSON.parse(
-  await fs.readFile("./node_modules/bootstrap-icons/package.json", "utf8"),
-);
+const iconPackageData = JSON.parse(await fs.readFile("./node_modules/bootstrap-icons/package.json", "utf8"));
 
 const version = iconPackageData.version;
 const srcPath = `./.cache/icons/icons-${version}`;
@@ -43,7 +41,7 @@ await Promise.all([
 // Generate metadata
 const files = await globby(`${srcPath}/docs/content/icons/**/*.md`);
 const metadata = await Promise.all(
-  files.map(async (file) => {
+  files.map(async file => {
     const name = path.basename(file, path.extname(file));
     const data = fm(await fs.readFile(file, "utf8")).attributes;
 
@@ -56,8 +54,4 @@ const metadata = await Promise.all(
   }),
 );
 
-await fs.writeFile(
-  path.join(iconDir, "icons.json"),
-  JSON.stringify(metadata, null, 2),
-  "utf8",
-);
+await fs.writeFile(path.join(iconDir, "icons.json"), JSON.stringify(metadata, null, 2), "utf8");

@@ -16,10 +16,7 @@ export class SubmenuController implements ReactiveController {
   private readonly hasSlotController: HasSlotController;
   private readonly submenuOpenDelay = 100;
 
-  constructor(
-    host: ReactiveControllerHost & PMenuItem,
-    hasSlotController: HasSlotController,
-  ) {
+  constructor(host: ReactiveControllerHost & PMenuItem, hasSlotController: HasSlotController) {
     (this.host = host).addController(this);
     this.hasSlotController = hasSlotController;
   }
@@ -57,14 +54,8 @@ export class SubmenuController implements ReactiveController {
     // connected, so manage its listeners separately.
     if (!this.isPopupConnected) {
       if (this.popupRef.value) {
-        this.popupRef.value.addEventListener(
-          "mouseover",
-          this.handlePopupMouseover,
-        );
-        this.popupRef.value.addEventListener(
-          "p-reposition",
-          this.handlePopupReposition,
-        );
+        this.popupRef.value.addEventListener("mouseover", this.handlePopupMouseover);
+        this.popupRef.value.addEventListener("p-reposition", this.handlePopupReposition);
         this.isPopupConnected = true;
       }
     }
@@ -81,14 +72,8 @@ export class SubmenuController implements ReactiveController {
     }
     if (this.isPopupConnected) {
       if (this.popupRef.value) {
-        this.popupRef.value.removeEventListener(
-          "mouseover",
-          this.handlePopupMouseover,
-        );
-        this.popupRef.value.removeEventListener(
-          "p-reposition",
-          this.handlePopupReposition,
-        );
+        this.popupRef.value.removeEventListener("mouseover", this.handlePopupMouseover);
+        this.popupRef.value.removeEventListener("p-reposition", this.handlePopupReposition);
         this.isPopupConnected = false;
       }
     }
@@ -96,14 +81,8 @@ export class SubmenuController implements ReactiveController {
 
   // Set the safe triangle cursor position
   private handleMouseMove = (event: MouseEvent) => {
-    this.host.style.setProperty(
-      "--safe-triangle-cursor-x",
-      `${event.clientX}px`,
-    );
-    this.host.style.setProperty(
-      "--safe-triangle-cursor-y",
-      `${event.clientY}px`,
-    );
+    this.host.style.setProperty("--safe-triangle-cursor-x", `${event.clientX}px`);
+    this.host.style.setProperty("--safe-triangle-cursor-y", `${event.clientY}px`);
   };
 
   private handleMouseOver = () => {
@@ -114,15 +93,11 @@ export class SubmenuController implements ReactiveController {
 
   private handleSubmenuEntry(event: KeyboardEvent) {
     // Pass focus to the first menu-item in the submenu.
-    const submenuSlot: HTMLSlotElement | null =
-      this.host.renderRoot.querySelector("slot[name='submenu']");
+    const submenuSlot: HTMLSlotElement | null = this.host.renderRoot.querySelector("slot[name='submenu']");
 
     // Missing slot
     if (!submenuSlot) {
-      console.error(
-        "Cannot activate a submenu if no corresponding menuitem can be found.",
-        this,
-      );
+      console.error("Cannot activate a submenu if no corresponding menuitem can be found.", this);
       return;
     }
 
@@ -197,8 +172,7 @@ export class SubmenuController implements ReactiveController {
       event.stopPropagation();
     } else if (
       event.target instanceof Element &&
-      (event.target.tagName === "p-menu-item" ||
-        event.target.role?.startsWith("menuitem"))
+      (event.target.tagName === "p-menu-item" || event.target.role?.startsWith("menuitem"))
     ) {
       this.disableSubmenu();
     }
@@ -206,11 +180,7 @@ export class SubmenuController implements ReactiveController {
 
   // Close this submenu on focus outside of the parent or any descendants.
   private handleFocusOut = (event: FocusEvent) => {
-    if (
-      event.relatedTarget &&
-      event.relatedTarget instanceof Element &&
-      this.host.contains(event.relatedTarget)
-    ) {
+    if (event.relatedTarget && event.relatedTarget instanceof Element && this.host.contains(event.relatedTarget)) {
       return;
     }
     this.disableSubmenu();
@@ -223,11 +193,8 @@ export class SubmenuController implements ReactiveController {
 
   // Set the safe triangle values for the submenu when the position changes
   private handlePopupReposition = () => {
-    const submenuSlot: HTMLSlotElement | null =
-      this.host.renderRoot.querySelector("slot[name='submenu']");
-    const menu = submenuSlot
-      ?.assignedElements({ flatten: true })
-      .filter((el) => el.localName === "p-menu")[0];
+    const submenuSlot: HTMLSlotElement | null = this.host.renderRoot.querySelector("slot[name='submenu']");
+    const menu = submenuSlot?.assignedElements({ flatten: true }).filter(el => el.localName === "p-menu")[0];
     const isRtl = this.host.matches(":dir(rtl)");
     if (!menu) {
       return;
@@ -235,19 +202,10 @@ export class SubmenuController implements ReactiveController {
 
     const { left, top, width, height } = menu.getBoundingClientRect();
 
-    this.host.style.setProperty(
-      "--safe-triangle-submenu-start-x",
-      `${isRtl ? left + width : left}px`,
-    );
+    this.host.style.setProperty("--safe-triangle-submenu-start-x", `${isRtl ? left + width : left}px`);
     this.host.style.setProperty("--safe-triangle-submenu-start-y", `${top}px`);
-    this.host.style.setProperty(
-      "--safe-triangle-submenu-end-x",
-      `${isRtl ? left + width : left}px`,
-    );
-    this.host.style.setProperty(
-      "--safe-triangle-submenu-end-y",
-      `${top + height}px`,
-    );
+    this.host.style.setProperty("--safe-triangle-submenu-end-x", `${isRtl ? left + width : left}px`);
+    this.host.style.setProperty("--safe-triangle-submenu-end-y", `${top + height}px`);
   };
 
   private setSubmenuState(state: boolean) {
@@ -283,17 +241,12 @@ export class SubmenuController implements ReactiveController {
     if (!this.host.parentElement?.computedStyleMap) {
       return;
     }
-    const styleMap: StylePropertyMapReadOnly =
-      this.host.parentElement.computedStyleMap();
+    const styleMap: StylePropertyMapReadOnly = this.host.parentElement.computedStyleMap();
     const attrs: string[] = ["padding-top", "border-top-width", "margin-top"];
 
     const skidding = attrs.reduce((accumulator, attr) => {
-      const styleValue: CSSStyleValue =
-        styleMap.get(attr) ?? new CSSUnitValue(0, "px");
-      const unitValue =
-        styleValue instanceof CSSUnitValue
-          ? styleValue
-          : new CSSUnitValue(0, "px");
+      const styleValue: CSSStyleValue = styleMap.get(attr) ?? new CSSUnitValue(0, "px");
+      const unitValue = styleValue instanceof CSSUnitValue ? styleValue : new CSSUnitValue(0, "px");
       const pxValue = unitValue.to("px");
       return accumulator - pxValue.value;
     }, 0);

@@ -39,18 +39,13 @@ import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
  * @cssproperty --height - The height of the switch.
  * @cssproperty --thumb-size - The size of the thumb.
  */
-export default class PSwitch
-  extends PureElement
-  implements ShoelaceFormControl
-{
+export default class PSwitch extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
 
   private readonly formControlController = new FormControlController(this, {
-    value: (control: PSwitch) =>
-      control.checked ? control.value || "on" : undefined,
+    value: (control: PSwitch) => (control.checked ? control.value || "on" : undefined),
     defaultValue: (control: PSwitch) => control.defaultChecked,
-    setValue: (control: PSwitch, checked: boolean) =>
-      (control.checked = checked),
+    setValue: (control: PSwitch, checked: boolean) => (control.checked = checked),
   });
   private readonly hasSlotController = new HasSlotController(this, "help-text");
 
@@ -221,10 +216,7 @@ export default class PSwitch
           <input
             class="switch__input"
             type="checkbox"
-            title=${
-              this
-                .title /* An empty title prevents browser validation tooltips from appearing on hover */
-            }
+            title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
             name=${this.name}
             value=${ifDefined(this.value)}
             .checked=${live(this.checked)}

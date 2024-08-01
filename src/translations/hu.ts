@@ -17,7 +17,7 @@ const translation: Translation = {
   hidePassword: "Jelszó elrejtése",
   loading: "Betöltés",
   nextSlide: "Következő dia",
-  numOptionsSelected: (num) => {
+  numOptionsSelected: num => {
     if (num === 0) return "Nincsenek kiválasztva opciók";
     if (num === 1) return "1 lehetőség kiválasztva";
     return `${num} lehetőség kiválasztva`;
@@ -30,7 +30,7 @@ const translation: Translation = {
   scrollToStart: "Görgessen az elejére",
   selectAColorFromTheScreen: "Szín választása a képernyőről",
   showPassword: "Jelszó megjelenítése",
-  slideNum: (slide) => `${slide}. dia`,
+  slideNum: slide => `${slide}. dia`,
   toggleColorFormat: "Színformátum változtatása",
 };
 

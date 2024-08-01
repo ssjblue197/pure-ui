@@ -49,11 +49,7 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
 
   private readonly formControlController = new FormControlController(this);
-  private readonly hasSlotController = new HasSlotController(
-    this,
-    "help-text",
-    "label",
-  );
+  private readonly hasSlotController = new HasSlotController(this, "help-text", "label");
   private readonly localize = new LocalizeController(this);
   private resizeObserver: ResizeObserver;
 
@@ -95,8 +91,7 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
    * A function used to format the tooltip's value. The range's value is passed as the first and only argument. The
    * function should return a string to display in the tooltip.
    */
-  @property({ attribute: false }) tooltipFormatter: (value: number) => string =
-    (value: number) => value.toString();
+  @property({ attribute: false }) tooltipFormatter: (value: number) => string = (value: number) => value.toString();
 
   /**
    * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
@@ -179,9 +174,7 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
     if (this.output !== null) {
       const inputWidth = this.input.offsetWidth;
       const tooltipWidth = this.output.offsetWidth;
-      const thumbSize = getComputedStyle(this.input).getPropertyValue(
-        "--thumb-size",
-      );
+      const thumbSize = getComputedStyle(this.input).getPropertyValue("--thumb-size");
       const isRtl = this.matches(":dir(rtl)");
       const percentAsWidth = inputWidth * percent;
 
@@ -218,10 +211,7 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
 
   @watch("hasTooltip", { waitUntilFirstUpdate: true })
   syncRange() {
-    const percent = Math.max(
-      0,
-      (this.value - this.min) / (this.max - this.min),
-    );
+    const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
 
     this.syncProgress(percent);
 
@@ -330,10 +320,7 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
               part="input"
               id="input"
               class="range__control"
-              title=${
-                this
-                  .title /* An empty title prevents browser validation tooltips from appearing on hover */
-              }
+              title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
               type="range"
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}
@@ -351,9 +338,7 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
             ${this.tooltip !== "none" && !this.disabled
               ? html`
                   <output part="tooltip" class="range__tooltip">
-                    ${typeof this.tooltipFormatter === "function"
-                      ? this.tooltipFormatter(this.value)
-                      : this.value}
+                    ${typeof this.tooltipFormatter === "function" ? this.tooltipFormatter(this.value) : this.value}
                   </output>
                 `
               : ""}

@@ -29,11 +29,7 @@ import type { CSSResultGroup } from "lit";
 export default class PBreadcrumbItem extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
-  private readonly hasSlotController = new HasSlotController(
-    this,
-    "prefix",
-    "suffix",
-  );
+  private readonly hasSlotController = new HasSlotController(this, "prefix", "suffix");
 
   /**
    * Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered
@@ -76,11 +72,7 @@ export default class PBreadcrumbItem extends PureElement {
               </a>
             `
           : html`
-              <button
-                part="label"
-                type="button"
-                class="breadcrumb-item__label breadcrumb-item__label--button"
-              >
+              <button part="label" type="button" class="breadcrumb-item__label breadcrumb-item__label--button">
                 <slot></slot>
               </button>
             `}
@@ -89,11 +81,7 @@ export default class PBreadcrumbItem extends PureElement {
           <slot name="suffix"></slot>
         </span>
 
-        <span
-          part="separator"
-          class="breadcrumb-item__separator"
-          aria-hidden="true"
-        >
+        <span part="separator" class="breadcrumb-item__separator" aria-hidden="true">
           <slot name="separator"></slot>
         </span>
       </div>

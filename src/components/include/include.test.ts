@@ -39,9 +39,7 @@ describe("<p-include>", () => {
       status: 200,
       text: () => delayResolve('"id": 1'),
     });
-    const el = await fixture<PInclude>(html`
-      <p-include src="/found"></p-include>
-    `);
+    const el = await fixture<PInclude>(html` <p-include src="/found"></p-include> `);
     const loadHandler = sinon.spy();
 
     el.addEventListener("p-load", loadHandler);
@@ -58,9 +56,7 @@ describe("<p-include>", () => {
       status: 404,
       text: () => delayResolve("{}"),
     });
-    const el = await fixture<PInclude>(html`
-      <p-include src="/not-found"></p-include>
-    `);
+    const el = await fixture<PInclude>(html` <p-include src="/not-found"></p-include> `);
     const loadHandler = sinon.spy();
 
     el.addEventListener("p-error", loadHandler);

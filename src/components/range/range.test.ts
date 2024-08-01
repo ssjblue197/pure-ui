@@ -39,8 +39,7 @@ describe("<p-range>", () => {
 
   it("should be disabled with the disabled attribute", async () => {
     const el = await fixture<PRange>(html` <p-range disabled></p-range> `);
-    const input =
-      el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
+    const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
 
     expect(input.disabled).to.be.true;
   });
@@ -96,43 +95,27 @@ describe("<p-range>", () => {
     it("should not emit p-change or p-input when changing the value programmatically", async () => {
       const el = await fixture<PRange>(html` <p-range value="0"></p-range> `);
 
-      el.addEventListener("p-change", () =>
-        expect.fail("p-change should not be emitted"),
-      );
-      el.addEventListener("p-input", () =>
-        expect.fail("p-input should not be emitted"),
-      );
+      el.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+      el.addEventListener("p-input", () => expect.fail("p-input should not be emitted"));
       el.value = 50;
 
       await el.updateComplete;
     });
 
     it("should not emit p-change or p-input when stepUp() is called programmatically", async () => {
-      const el = await fixture<PRange>(html`
-        <p-range step="2" value="2"></p-range>
-      `);
+      const el = await fixture<PRange>(html` <p-range step="2" value="2"></p-range> `);
 
-      el.addEventListener("p-change", () =>
-        expect.fail("p-change should not be emitted"),
-      );
-      el.addEventListener("p-input", () =>
-        expect.fail("p-input should not be emitted"),
-      );
+      el.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+      el.addEventListener("p-input", () => expect.fail("p-input should not be emitted"));
       el.stepUp();
       await el.updateComplete;
     });
 
     it("should not emit p-change or p-input when stepDown() is called programmatically", async () => {
-      const el = await fixture<PRange>(html`
-        <p-range step="2" value="2"></p-range>
-      `);
+      const el = await fixture<PRange>(html` <p-range step="2" value="2"></p-range> `);
 
-      el.addEventListener("p-change", () =>
-        expect.fail("p-change should not be emitted"),
-      );
-      el.addEventListener("p-input", () =>
-        expect.fail("p-input should not be emitted"),
-      );
+      el.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+      el.addEventListener("p-input", () => expect.fail("p-input should not be emitted"));
       el.stepDown();
       await el.updateComplete;
     });
@@ -140,9 +123,7 @@ describe("<p-range>", () => {
 
   describe("step", () => {
     it("should increment by step when stepUp() is called", async () => {
-      const el = await fixture<PRange>(html`
-        <p-range step="2" value="2"></p-range>
-      `);
+      const el = await fixture<PRange>(html` <p-range step="2" value="2"></p-range> `);
 
       el.stepUp();
       await el.updateComplete;
@@ -150,9 +131,7 @@ describe("<p-range>", () => {
     });
 
     it("should decrement by step when stepDown() is called", async () => {
-      const el = await fixture<PRange>(html`
-        <p-range step="2" value="2"></p-range>
-      `);
+      const el = await fixture<PRange>(html` <p-range step="2" value="2"></p-range> `);
 
       el.stepDown();
       await el.updateComplete;
@@ -162,17 +141,13 @@ describe("<p-range>", () => {
 
   describe("when submitting a form", () => {
     it("should serialize its name and value with FormData", async () => {
-      const form = await fixture<HTMLFormElement>(html`
-        <form><p-range name="a" value="1"></p-range></form>
-      `);
+      const form = await fixture<HTMLFormElement>(html` <form><p-range name="a" value="1"></p-range></form> `);
       const formData = new FormData(form);
       expect(formData.get("a")).to.equal("1");
     });
 
     it("should serialize its name and value with JSON", async () => {
-      const form = await fixture<HTMLFormElement>(html`
-        <form><p-range name="a" value="1"></p-range></form>
-      `);
+      const form = await fixture<HTMLFormElement>(html` <form><p-range name="a" value="1"></p-range></form> `);
       const json = serialize(form);
       expect(json.a).to.equal("1");
     });
@@ -199,9 +174,7 @@ describe("<p-range>", () => {
     });
 
     it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
-      const el = await fixture<HTMLFormElement>(html`
-        <form novalidate><p-range></p-range></form>
-      `);
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><p-range></p-range></form> `);
       const range = el.querySelector<PRange>("p-range")!;
 
       range.setCustomValidity("Invalid value");

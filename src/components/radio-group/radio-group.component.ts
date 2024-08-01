@@ -43,19 +43,12 @@ import type PRadioButton from "../radio-button/radio-button.js";
  * @csspart button-group - The button group that wraps radio buttons.
  * @csspart button-group__base - The button group's `base` part.
  */
-export default class PRadioGroup
-  extends PureElement
-  implements ShoelaceFormControl
-{
+export default class PRadioGroup extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
   static dependencies = { "p-button-group": PButtonGroup };
 
   protected readonly formControlController = new FormControlController(this);
-  private readonly hasSlotController = new HasSlotController(
-    this,
-    "help-text",
-    "label",
-  );
+  private readonly hasSlotController = new HasSlotController(this, "help-text", "label");
   private customValidityMessage = "";
   private validationTimeout: number;
 
@@ -132,17 +125,11 @@ export default class PRadioGroup
   }
 
   private getAllRadios() {
-    return [
-      ...this.querySelectorAll<PRadio | PRadioButton>(
-        "p-radio, p-radio-button",
-      ),
-    ];
+    return [...this.querySelectorAll<PRadio | PRadioButton>("p-radio, p-radio-button")];
   }
 
   private handleRadioClick(event: MouseEvent) {
-    const target = (event.target as HTMLElement).closest<PRadio | PRadioButton>(
-      "p-radio, p-radio-button",
-    )!;
+    const target = (event.target as HTMLElement).closest<PRadio | PRadioButton>("p-radio, p-radio-button")!;
     const radios = this.getAllRadios();
     const oldValue = this.value;
 
@@ -151,7 +138,7 @@ export default class PRadioGroup
     }
 
     this.value = target.value;
-    radios.forEach((radio) => (radio.checked = radio === target));
+    radios.forEach(radio => (radio.checked = radio === target));
 
     if (this.value !== oldValue) {
       this.emit("p-change");
@@ -160,22 +147,13 @@ export default class PRadioGroup
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    if (
-      !["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(
-        event.key,
-      )
-    ) {
+    if (!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(event.key)) {
       return;
     }
 
-    const radios = this.getAllRadios().filter((radio) => !radio.disabled);
-    const checkedRadio = radios.find((radio) => radio.checked) ?? radios[0];
-    const incr =
-      event.key === " "
-        ? 0
-        : ["ArrowUp", "ArrowLeft"].includes(event.key)
-          ? -1
-          : 1;
+    const radios = this.getAllRadios().filter(radio => !radio.disabled);
+    const checkedRadio = radios.find(radio => radio.checked) ?? radios[0];
+    const incr = event.key === " " ? 0 : ["ArrowUp", "ArrowLeft"].includes(event.key) ? -1 : 1;
     const oldValue = this.value;
     let index = radios.indexOf(checkedRadio) + incr;
 
@@ -187,7 +165,7 @@ export default class PRadioGroup
       index = 0;
     }
 
-    this.getAllRadios().forEach((radio) => {
+    this.getAllRadios().forEach(radio => {
       radio.checked = false;
 
       if (!this.hasButtonGroup) {
@@ -215,7 +193,7 @@ export default class PRadioGroup
 
   private handleLabelClick() {
     const radios = this.getAllRadios();
-    const checked = radios.find((radio) => radio.checked);
+    const checked = radios.find(radio => radio.checked);
     const radioToFocus = checked || radios[0];
 
     // Move focus to the checked radio (or the first one if none are checked) when clicking the label
@@ -234,18 +212,16 @@ export default class PRadioGroup
 
     await Promise.all(
       // Sync the checked state and size
-      radios.map(async (radio) => {
+      radios.map(async radio => {
         await radio.updateComplete;
         radio.checked = radio.value === this.value;
         radio.size = this.size;
       }),
     );
 
-    this.hasButtonGroup = radios.some(
-      (radio) => radio.tagName.toLowerCase() === "p-radio-button",
-    );
+    this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === "p-radio-button");
 
-    if (radios.length > 0 && !radios.some((radio) => radio.checked)) {
+    if (radios.length > 0 && !radios.some(radio => radio.checked)) {
       if (this.hasButtonGroup) {
         const buttonRadio = radios[0].shadowRoot?.querySelector("button");
 
@@ -282,15 +258,13 @@ export default class PRadioGroup
       this.syncRadioElements();
     } else {
       // Rerun this handler when <p-radio> or <p-radio-button> is registered
-      customElements
-        .whenDefined("p-radio-button")
-        .then(() => this.syncRadios());
+      customElements.whenDefined("p-radio-button").then(() => this.syncRadios());
     }
   }
 
   private updateCheckedRadio() {
     const radios = this.getAllRadios();
-    radios.forEach((radio) => (radio.checked = radio.value === this.value));
+    radios.forEach(radio => (radio.checked = radio.value === this.value));
     this.formControlController.setValidity(this.validity.valid);
   }
 
@@ -328,10 +302,7 @@ export default class PRadioGroup
   reportValidity(): boolean {
     const isValid = this.validity.valid;
 
-    this.errorMessage =
-      this.customValidityMessage || isValid
-        ? ""
-        : this.validationInput.validationMessage;
+    this.errorMessage = this.customValidityMessage || isValid ? "" : this.validationInput.validationMessage;
     this.formControlController.setValidity(isValid);
     this.validationInput.hidden = true;
     clearTimeout(this.validationTimeout);
@@ -340,10 +311,7 @@ export default class PRadioGroup
       // Show the browser's constraint validation message
       this.validationInput.hidden = false;
       this.validationInput.reportValidity();
-      this.validationTimeout = setTimeout(
-        () => (this.validationInput.hidden = true),
-        10000,
-      ) as unknown as number;
+      this.validationTimeout = setTimeout(() => (this.validationInput.hidden = true), 10000) as unknown as number;
     }
 
     return isValid;
@@ -363,11 +331,7 @@ export default class PRadioGroup
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const defaultSlot = html`
-      <slot
-        @slotchange=${this.syncRadios}
-        @click=${this.handleRadioClick}
-        @keydown=${this.handleKeyDown}
-      ></slot>
+      <slot @slotchange=${this.syncRadios} @click=${this.handleRadioClick} @keydown=${this.handleKeyDown}></slot>
     `;
 
     return html`
@@ -399,9 +363,7 @@ export default class PRadioGroup
 
         <div part="form-control-input" class="form-control-input">
           <div class="visually-hidden">
-            <div id="error-message" aria-live="assertive">
-              ${this.errorMessage}
-            </div>
+            <div id="error-message" aria-live="assertive">${this.errorMessage}</div>
             <label class="radio-group__validation">
               <input
                 type="text"
@@ -416,11 +378,7 @@ export default class PRadioGroup
 
           ${this.hasButtonGroup
             ? html`
-                <p-button-group
-                  part="button-group"
-                  exportparts="base:button-group__base"
-                  role="presentation"
-                >
+                <p-button-group part="button-group" exportparts="base:button-group__base" role="presentation">
                   ${defaultSlot}
                 </p-button-group>
               `

@@ -1,12 +1,5 @@
 // eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
-import {
-  elementUpdated,
-  expect,
-  fixture,
-  html,
-  oneEvent,
-  waitUntil,
-} from "@open-wc/testing";
+import { elementUpdated, expect, fixture, html, oneEvent, waitUntil } from "@open-wc/testing";
 import { getFormControls, serialize } from "../../../dist/pure-ui.js";
 import { runFormControlBaseTests } from "../../internal/test/form-control-base-tests.js";
 import { sendKeys } from "@web/test-runner-commands"; // must come from the same module
@@ -59,16 +52,14 @@ describe("<p-input>", () => {
 
   it("should have title if title attribute is set", async () => {
     const el = await fixture<PInput>(html` <p-input title="Test"></p-input> `);
-    const input =
-      el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
+    const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
 
     expect(input.title).to.equal("Test");
   });
 
   it("should be disabled with the disabled attribute", async () => {
     const el = await fixture<PInput>(html` <p-input disabled></p-input> `);
-    const input =
-      el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
+    const input = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="input"]')!;
 
     expect(input.disabled).to.be.true;
   });
@@ -83,9 +74,7 @@ describe("<p-input>", () => {
 
       // Test before we render in the dom
       expect(el.value).to.equal(today.toISOString().split("T")[0]);
-      expect(el.valueAsDate.toISOString().split("T")[0]).to.equal(
-        today.toISOString().split("T")[0],
-      );
+      expect(el.valueAsDate.toISOString().split("T")[0]).to.equal(today.toISOString().split("T")[0]);
 
       document.body.appendChild(el);
 
@@ -105,9 +94,7 @@ describe("<p-input>", () => {
       await elementUpdated(el);
 
       expect(el.value).to.equal(today.toISOString().split("T")[0]);
-      expect(el.valueAsDate.toISOString().split("T")[0]).to.equal(
-        today.toISOString().split("T")[0],
-      );
+      expect(el.valueAsDate.toISOString().split("T")[0]).to.equal(today.toISOString().split("T")[0]);
 
       el.remove();
     });
@@ -170,18 +157,14 @@ describe("<p-input>", () => {
     });
 
     it("should be invalid when required and disabled is removed", async () => {
-      const el = await fixture<PInput>(html`
-        <p-input disabled required></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input disabled required></p-input> `);
       el.disabled = false;
       await el.updateComplete;
       expect(el.checkValidity()).to.be.false;
     });
 
     it('should receive the correct validation attributes ("states") when valid', async () => {
-      const el = await fixture<PInput>(html`
-        <p-input required value="a"></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input required value="a"></p-input> `);
 
       expect(el.checkValidity()).to.be.true;
       expect(el.hasAttribute("data-required")).to.be.true;
@@ -226,9 +209,7 @@ describe("<p-input>", () => {
     });
 
     it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
-      const el = await fixture<HTMLFormElement>(html`
-        <form novalidate><p-input required></p-input></form>
-      `);
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><p-input required></p-input></form> `);
       const input = el.querySelector<PInput>("p-input")!;
 
       expect(input.hasAttribute("data-required")).to.be.true;
@@ -242,29 +223,21 @@ describe("<p-input>", () => {
 
   describe("when submitting a form", () => {
     it("should serialize its name and value with FormData", async () => {
-      const form = await fixture<HTMLFormElement>(html`
-        <form><p-input name="a" value="1"></p-input></form>
-      `);
+      const form = await fixture<HTMLFormElement>(html` <form><p-input name="a" value="1"></p-input></form> `);
       const formData = new FormData(form);
       expect(formData.get("a")).to.equal("1");
     });
 
     it("should serialize its name and value with JSON", async () => {
-      const form = await fixture<HTMLFormElement>(html`
-        <form><p-input name="a" value="1"></p-input></form>
-      `);
+      const form = await fixture<HTMLFormElement>(html` <form><p-input name="a" value="1"></p-input></form> `);
       const json = serialize(form) as { a: "1" };
       expect(json.a).to.equal("1");
     });
 
     it("should submit the form when pressing enter in a form without a submit button", async () => {
-      const form = await fixture<HTMLFormElement>(html`
-        <form><p-input></p-input></form>
-      `);
+      const form = await fixture<HTMLFormElement>(html` <form><p-input></p-input></form> `);
       const input = form.querySelector("p-input")!;
-      const submitHandler = sinon.spy((event: SubmitEvent) =>
-        event.preventDefault(),
-      );
+      const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
 
       form.addEventListener("submit", submitHandler);
       input.focus();
@@ -275,13 +248,9 @@ describe("<p-input>", () => {
     });
 
     it("should prevent submission when pressing enter in an input and canceling the keydown event", async () => {
-      const form = await fixture<HTMLFormElement>(html`
-        <form><p-input></p-input></form>
-      `);
+      const form = await fixture<HTMLFormElement>(html` <form><p-input></p-input></form> `);
       const input = form.querySelector("p-input")!;
-      const submitHandler = sinon.spy((event: SubmitEvent) =>
-        event.preventDefault(),
-      );
+      const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
       const keydownHandler = sinon.spy((event: KeyboardEvent) => {
         if (event.key === "Enter") {
           event.preventDefault();
@@ -421,28 +390,18 @@ describe("<p-input>", () => {
     it("should not emit p-change or p-input when the value is set programmatically", async () => {
       const el = await fixture<PInput>(html` <p-input></p-input> `);
 
-      el.addEventListener("p-change", () =>
-        expect.fail("p-change should not be emitted"),
-      );
-      el.addEventListener("p-input", () =>
-        expect.fail("p-input should not be emitted"),
-      );
+      el.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+      el.addEventListener("p-input", () => expect.fail("p-input should not be emitted"));
       el.value = "abc";
 
       await el.updateComplete;
     });
 
     it("should not emit p-change or p-input when calling setRangeText()", async () => {
-      const el = await fixture<PInput>(html`
-        <p-input value="hi there"></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input value="hi there"></p-input> `);
 
-      el.addEventListener("p-change", () =>
-        expect.fail("p-change should not be emitted"),
-      );
-      el.addEventListener("p-input", () =>
-        expect.fail("p-input should not be emitted"),
-      );
+      el.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+      el.addEventListener("p-input", () => expect.fail("p-input should not be emitted"));
       el.focus();
       el.setSelectionRange(0, 2);
       el.setRangeText("hello");
@@ -453,23 +412,17 @@ describe("<p-input>", () => {
 
   describe('when type="number"', () => {
     it("should be valid when the value is within the boundary of a step", async () => {
-      const el = await fixture<PInput>(html`
-        <p-input type="number" step=".5" value="1.5"></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input type="number" step=".5" value="1.5"></p-input> `);
       expect(el.checkValidity()).to.be.true;
     });
 
     it("should be invalid when the value is not within the boundary of a step", async () => {
-      const el = await fixture<PInput>(html`
-        <p-input type="number" step=".5" value="1.25"></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input type="number" step=".5" value="1.25"></p-input> `);
       expect(el.checkValidity()).to.be.false;
     });
 
     it("should update validity when step changes", async () => {
-      const el = await fixture<PInput>(html`
-        <p-input type="number" step=".5" value="1.5"></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input type="number" step=".5" value="1.5"></p-input> `);
       expect(el.checkValidity()).to.be.true;
 
       el.step = 1;
@@ -478,9 +431,7 @@ describe("<p-input>", () => {
     });
 
     it("should increment by step when stepUp() is called", async () => {
-      const el = await fixture<PInput>(html`
-        <p-input type="number" step="2" value="2"></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input type="number" step="2" value="2"></p-input> `);
 
       el.stepUp();
       await el.updateComplete;
@@ -488,9 +439,7 @@ describe("<p-input>", () => {
     });
 
     it("should decrement by step when stepDown() is called", async () => {
-      const el = await fixture<PInput>(html`
-        <p-input type="number" step="2" value="2"></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input type="number" step="2" value="2"></p-input> `);
 
       el.stepDown();
       await el.updateComplete;
@@ -498,32 +447,20 @@ describe("<p-input>", () => {
     });
 
     it("should not emit p-input or p-change when stepUp() is called programmatically", async () => {
-      const el = await fixture<PInput>(html`
-        <p-input type="number" step="2" value="2"></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input type="number" step="2" value="2"></p-input> `);
 
-      el.addEventListener("p-change", () =>
-        expect.fail("p-change should not be emitted"),
-      );
-      el.addEventListener("p-input", () =>
-        expect.fail("p-input should not be emitted"),
-      );
+      el.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+      el.addEventListener("p-input", () => expect.fail("p-input should not be emitted"));
       el.stepUp();
 
       await el.updateComplete;
     });
 
     it("should not emit p-input and p-change when stepDown() is called programmatically", async () => {
-      const el = await fixture<PInput>(html`
-        <p-input type="number" step="2" value="2"></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input type="number" step="2" value="2"></p-input> `);
 
-      el.addEventListener("p-change", () =>
-        expect.fail("p-change should not be emitted"),
-      );
-      el.addEventListener("p-input", () =>
-        expect.fail("p-input should not be emitted"),
-      );
+      el.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+      el.addEventListener("p-input", () => expect.fail("p-input should not be emitted"));
       el.stepDown();
 
       await el.updateComplete;
@@ -539,18 +476,14 @@ describe("<p-input>", () => {
     });
 
     it('should enable spellcheck when set to "true"', async () => {
-      const el = await fixture<PInput>(html`
-        <p-input spellcheck="true"></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input spellcheck="true"></p-input> `);
       const input = el.shadowRoot!.querySelector<HTMLInputElement>("input")!;
       expect(input.getAttribute("spellcheck")).to.equal("true");
       expect(input.spellcheck).to.be.true;
     });
 
     it('should disable spellcheck when set to "false"', async () => {
-      const el = await fixture<PInput>(html`
-        <p-input spellcheck="false"></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input spellcheck="false"></p-input> `);
       const input = el.shadowRoot!.querySelector<HTMLInputElement>("input")!;
       expect(input.getAttribute("spellcheck")).to.equal("false");
       expect(input.spellcheck).to.be.false;
@@ -608,17 +541,13 @@ describe("<p-input>", () => {
 
       const formControls = getFormControls(form); // eslint-disable-line
       expect(formControls.length).to.equal(10); // eslint-disable-line
-      expect(
-        formControls.map((fc: HTMLInputElement) => fc.value).join(""),
-      ).to.equal("12345678910"); // eslint-disable-line
+      expect(formControls.map((fc: HTMLInputElement) => fc.value).join("")).to.equal("12345678910"); // eslint-disable-line
     });
   });
 
   describe("when using the setRangeText() function", () => {
     it("should set replacement text in the correct location", async () => {
-      const el = await fixture<PInput>(html`
-        <p-input value="test"></p-input>
-      `);
+      const el = await fixture<PInput>(html` <p-input value="test"></p-input> `);
 
       el.focus();
       el.setSelectionRange(1, 3);

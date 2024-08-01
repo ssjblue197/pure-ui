@@ -26,7 +26,7 @@ let counter = 0;
 function stubCustomElements() {
   const map = new Map<string, CustomElementConstructor>();
 
-  Sinon.stub(window.customElements, "get").callsFake((str) => {
+  Sinon.stub(window.customElements, "get").callsFake(str => {
     return map.get(str);
   });
 
@@ -125,28 +125,25 @@ before(async () => {
 
   const tagNames: string[] = [];
 
-  const relevantMetadata: { tagName: string; path: string }[] =
-    getAllComponents(metadata).map(
-      (component: { tagName: string; path: string }) => {
-        const { tagName, path } = component;
-        tagNames.push(tagName);
+  const relevantMetadata: { tagName: string; path: string }[] = getAllComponents(metadata).map(
+    (component: { tagName: string; path: string }) => {
+      const { tagName, path } = component;
+      tagNames.push(tagName);
 
-        return { tagName, path };
-      },
-    );
+      return { tagName, path };
+    },
+  );
 
   relevantMetadata.forEach(({ tagName, path }) => {
     it(`Should not register any components: ${tagName}`, async () => {
       await import("../../dist/" + path);
 
       // Need to make sure we remove the current tag from the tagNames and *then* see whats been registered.
-      const registeredTags = tagNames.filter(
-        (tag) => tag !== tagName && Boolean(window.customElements.get(tag)),
-      );
+      const registeredTags = tagNames.filter(tag => tag !== tagName && Boolean(window.customElements.get(tag)));
 
       const errorMessage =
         `Expected ${path} to not register any tags, but it registered the following tags: ` +
-        registeredTags.map((tag) => tag).join(", ");
+        registeredTags.map(tag => tag).join(", ");
       expect(registeredTags.length).to.equal(0, errorMessage);
     });
   });

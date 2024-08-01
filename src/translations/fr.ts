@@ -17,7 +17,7 @@ const translation: Translation = {
   hidePassword: "Masquer le mot de passe",
   loading: "Chargement",
   nextSlide: "Diapositive suivante",
-  numOptionsSelected: (num) => {
+  numOptionsSelected: num => {
     if (num === 0) return "Aucune option sélectionnée";
     if (num === 1) return "1 option sélectionnée";
     return `${num} options sélectionnées`;
@@ -30,7 +30,7 @@ const translation: Translation = {
   scrollToStart: `Faire défiler jusqu'au début`,
   selectAColorFromTheScreen: `Sélectionnez une couleur à l'écran`,
   showPassword: "Montrer le mot de passe",
-  slideNum: (slide) => `Diapositive ${slide}`,
+  slideNum: slide => `Diapositive ${slide}`,
   toggleColorFormat: "Changer le format de couleur",
 };
 

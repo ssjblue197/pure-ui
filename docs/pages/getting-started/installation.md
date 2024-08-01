@@ -121,10 +121,7 @@ Most of the magic behind assets is handled internally by Pure UI, but if you nee
 
 ```html
 <script type="module">
-  import {
-    getBasePath,
-    setBasePath,
-  } from "pure-uikit/%NPMDIR%/utilities/base-path.js";
+  import { getBasePath, setBasePath } from "pure-uikit/%NPMDIR%/utilities/base-path.js";
 
   setBasePath("/path/to/assets");
 

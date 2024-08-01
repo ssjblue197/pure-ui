@@ -33,12 +33,7 @@ describe("<p-radio-button>", () => {
     const radio2 = radioGroup.querySelector<PRadioButton>("#radio-2")!;
     const radio3 = radioGroup.querySelector<PRadioButton>("#radio-3")!;
 
-    await Promise.all([
-      radioGroup.updateComplete,
-      radio1.updateComplete,
-      radio2.updateComplete,
-      radio3.updateComplete,
-    ]);
+    await Promise.all([radioGroup.updateComplete, radio1.updateComplete, radio2.updateComplete, radio3.updateComplete]);
 
     expect(radio1).to.have.attribute("data-p-button-group__button");
     expect(radio1).to.have.attribute("data-p-button-group__button--first");

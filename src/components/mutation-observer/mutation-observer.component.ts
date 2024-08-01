@@ -32,8 +32,7 @@ export default class PMutationObserver extends PureElement {
   attrOldValue = false;
 
   /** Watches for changes to the character data contained within the node. */
-  @property({ attribute: "char-data", type: Boolean, reflect: true }) charData =
-    false;
+  @property({ attribute: "char-data", type: Boolean, reflect: true }) charData = false;
 
   /** Indicates whether or not the previous value of the node's text should be recorded. */
   @property({ attribute: "char-data-old-value", type: Boolean, reflect: true })
@@ -68,10 +67,8 @@ export default class PMutationObserver extends PureElement {
   };
 
   private startObserver() {
-    const observeAttributes =
-      typeof this.attr === "string" && this.attr.length > 0;
-    const attributeFilter =
-      observeAttributes && this.attr !== "*" ? this.attr.split(" ") : undefined;
+    const observeAttributes = typeof this.attr === "string" && this.attr.length > 0;
+    const attributeFilter = observeAttributes && this.attr !== "*" ? this.attr.split(" ") : undefined;
 
     try {
       this.mutationObserver.observe(this, {

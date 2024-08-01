@@ -106,12 +106,8 @@ export default class PAnimatedImage extends PureElement {
               />
 
               <div part="control-box" class="animated-image__control-box">
-                <slot name="play-icon"
-                  ><p-icon name="play-fill" library="system"></p-icon
-                ></slot>
-                <slot name="pause-icon"
-                  ><p-icon name="pause-fill" library="system"></p-icon
-                ></slot>
+                <slot name="play-icon"><p-icon name="play-fill" library="system"></p-icon></slot>
+                <slot name="pause-icon"><p-icon name="pause-fill" library="system"></p-icon></slot>
               </div>
             `
           : ""}

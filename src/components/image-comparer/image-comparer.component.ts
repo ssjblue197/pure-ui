@@ -51,7 +51,7 @@ export default class PImageComparer extends PureElement {
     event.preventDefault();
 
     drag(this.base, {
-      onMove: (x) => {
+      onMove: x => {
         this.position = parseFloat(clamp((x / width) * 100, 0, 100).toFixed(2));
         if (isRtl) this.position = 100 - this.position;
       },
@@ -69,16 +69,10 @@ export default class PImageComparer extends PureElement {
 
       event.preventDefault();
 
-      if (
-        (isLtr && event.key === "ArrowLeft") ||
-        (isRtl && event.key === "ArrowRight")
-      ) {
+      if ((isLtr && event.key === "ArrowLeft") || (isRtl && event.key === "ArrowRight")) {
         newPosition -= incr;
       }
-      if (
-        (isLtr && event.key === "ArrowRight") ||
-        (isRtl && event.key === "ArrowLeft")
-      ) {
+      if ((isLtr && event.key === "ArrowRight") || (isRtl && event.key === "ArrowLeft")) {
         newPosition += incr;
       }
       if (event.key === "Home") {
@@ -120,9 +114,7 @@ export default class PImageComparer extends PureElement {
             part="after"
             class="image-comparer__after"
             style=${styleMap({
-              clipPath: isRtl
-                ? `inset(0 0 0 ${100 - this.position}%)`
-                : `inset(0 ${100 - this.position}% 0 0)`,
+              clipPath: isRtl ? `inset(0 0 0 ${100 - this.position}%)` : `inset(0 ${100 - this.position}% 0 0)`,
             })}
           >
             <slot name="after"></slot>

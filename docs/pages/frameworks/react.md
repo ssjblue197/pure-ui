@@ -80,9 +80,7 @@ import PInput from "pure-uikit/%NPMDIR%/react/input";
 function MyComponent() {
   const [value, setValue] = useState("");
 
-  return (
-    <PInput value={value} onPInput={(event) => setValue(event.target.value)} />
-  );
+  return <PInput value={value} onPInput={event => setValue(event.target.value)} />;
 }
 
 export default MyComponent;
@@ -98,12 +96,7 @@ import type PInputElement from "pure-uikit/%NPMDIR%/components/input/input";
 function MyComponent() {
   const [value, setValue] = useState("");
 
-  return (
-    <PInput
-      value={value}
-      onPInput={(event) => setValue((event.target as PInputElement).value)}
-    />
-  );
+  return <PInput value={value} onPInput={event => setValue((event.target as PInputElement).value)} />;
 }
 
 export default MyComponent;
@@ -122,12 +115,7 @@ function MyComponent() {
     setValue(event.detail);
   }, []);
 
-  return (
-    <PInput
-      value={value}
-      onPInput={(event) => setValue((event.target as PInputElement).value)}
-    />
-  );
+  return <PInput value={value} onPInput={event => setValue((event.target as PInputElement).value)} />;
 }
 
 export default MyComponent;
@@ -162,7 +150,7 @@ In `src/setupTests.js`, add the following.
 ```js
 Object.defineProperty(window, "matchMedia", {
   writable: true,
-  value: jest.fn().mockImplementation((query) => ({
+  value: jest.fn().mockImplementation(query => ({
     matches: false,
     media: query,
     onchange: null,

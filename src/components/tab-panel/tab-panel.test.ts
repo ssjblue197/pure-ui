@@ -4,16 +4,12 @@ import type PTabPanel from "./tab-panel.js";
 
 describe("<p-tab-panel>", () => {
   it("passes accessibility test", async () => {
-    const el = await fixture<PTabPanel>(html`
-      <p-tab-panel>Test</p-tab-panel>
-    `);
+    const el = await fixture<PTabPanel>(html` <p-tab-panel>Test</p-tab-panel> `);
     await expect(el).to.be.accessible();
   });
 
   it("default properties", async () => {
-    const el = await fixture<PTabPanel>(html`
-      <p-tab-panel>Test</p-tab-panel>
-    `);
+    const el = await fixture<PTabPanel>(html` <p-tab-panel>Test</p-tab-panel> `);
 
     expect(el.id).to.equal("p-tab-panel-2");
     expect(el.name).to.equal("");
@@ -23,9 +19,7 @@ describe("<p-tab-panel>", () => {
   });
 
   it("properties should reflect", async () => {
-    const el = await fixture<PTabPanel>(html`
-      <p-tab-panel>Test</p-tab-panel>
-    `);
+    const el = await fixture<PTabPanel>(html` <p-tab-panel>Test</p-tab-panel> `);
 
     el.name = "test";
     el.active = true;
@@ -35,9 +29,7 @@ describe("<p-tab-panel>", () => {
   });
 
   it("changing active should always update aria-hidden role", async () => {
-    const el = await fixture<PTabPanel>(html`
-      <p-tab-panel>Test</p-tab-panel>
-    `);
+    const el = await fixture<PTabPanel>(html` <p-tab-panel>Test</p-tab-panel> `);
 
     el.active = true;
     await aTimeout(100);
@@ -45,9 +37,7 @@ describe("<p-tab-panel>", () => {
   });
 
   it("passed id should be used", async () => {
-    const el = await fixture<PTabPanel>(html`
-      <p-tab-panel id="test-id">Test</p-tab-panel>
-    `);
+    const el = await fixture<PTabPanel>(html` <p-tab-panel id="test-id">Test</p-tab-panel> `);
 
     expect(el.id).to.equal("test-id");
   });

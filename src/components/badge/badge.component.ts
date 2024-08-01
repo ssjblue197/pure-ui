@@ -20,12 +20,7 @@ export default class PBadge extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   /** The badge's theme variant. */
-  @property({ reflect: true }) variant:
-    | "primary"
-    | "success"
-    | "neutral"
-    | "warning"
-    | "danger" = "primary";
+  @property({ reflect: true }) variant: "primary" | "success" | "neutral" | "warning" | "danger" = "primary";
 
   /** Draws a pill-style badge with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;

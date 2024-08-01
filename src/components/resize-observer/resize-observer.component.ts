@@ -27,11 +27,9 @@ export default class PResizeObserver extends PureElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.resizeObserver = new ResizeObserver(
-      (entries: ResizeObserverEntry[]) => {
-        this.emit("p-resize", { detail: { entries } });
-      },
-    );
+    this.resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
+      this.emit("p-resize", { detail: { entries } });
+    });
 
     if (!this.disabled) {
       this.startObserver();
@@ -58,11 +56,11 @@ export default class PResizeObserver extends PureElement {
       }) as HTMLElement[];
 
       // Unwatch previous elements
-      this.observedElements.forEach((el) => this.resizeObserver.unobserve(el));
+      this.observedElements.forEach(el => this.resizeObserver.unobserve(el));
       this.observedElements = [];
 
       // Watch new elements
-      elements.forEach((el) => {
+      elements.forEach(el => {
         this.resizeObserver.observe(el);
         this.observedElements.push(el);
       });

@@ -7,9 +7,7 @@ import type PRating from "./rating.js";
 
 describe("<p-rating>", () => {
   it("should pass accessibility tests", async () => {
-    const el = await fixture<PRating>(html`
-      <p-rating label="Test"></p-rating>
-    `);
+    const el = await fixture<PRating>(html` <p-rating label="Test"></p-rating> `);
     await expect(el).to.be.accessible();
 
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
@@ -25,9 +23,7 @@ describe("<p-rating>", () => {
   });
 
   it("should be readonly with the readonly attribute", async () => {
-    const el = await fixture<PRating>(html`
-      <p-rating label="Test" readonly></p-rating>
-    `);
+    const el = await fixture<PRating>(html` <p-rating label="Test" readonly></p-rating> `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute("aria-readonly")).to.equal("true");
@@ -35,9 +31,7 @@ describe("<p-rating>", () => {
   });
 
   it("should be disabled with the disabled attribute", async () => {
-    const el = await fixture<PRating>(html`
-      <p-rating label="Test" disabled></p-rating>
-    `);
+    const el = await fixture<PRating>(html` <p-rating label="Test" disabled></p-rating> `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute("aria-disabled")).to.equal("true");
@@ -45,18 +39,14 @@ describe("<p-rating>", () => {
   });
 
   it("should set max value by attribute", async () => {
-    const el = await fixture<PRating>(html`
-      <p-rating label="Test" max="12"></p-rating>
-    `);
+    const el = await fixture<PRating>(html` <p-rating label="Test" max="12"></p-rating> `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute("aria-valuemax")).to.equal("12");
   });
 
   it("should set selected value by attribute", async () => {
-    const el = await fixture<PRating>(html`
-      <p-rating label="Test" value="3"></p-rating>
-    `);
+    const el = await fixture<PRating>(html` <p-rating label="Test" value="3"></p-rating> `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     expect(base.getAttribute("aria-valuenow")).to.equal("3");
@@ -64,9 +54,7 @@ describe("<p-rating>", () => {
 
   it("should emit p-change when clicked", async () => {
     const el = await fixture<PRating>(html` <p-rating></p-rating> `);
-    const lastSymbol = el.shadowRoot!.querySelector<HTMLSpanElement>(
-      ".rating__symbol:last-child",
-    )!;
+    const lastSymbol = el.shadowRoot!.querySelector<HTMLSpanElement>(".rating__symbol:last-child")!;
     const changeHandler = sinon.spy();
 
     el.addEventListener("p-change", changeHandler);
@@ -93,12 +81,8 @@ describe("<p-rating>", () => {
   });
 
   it("should not emit p-change when disabled", async () => {
-    const el = await fixture<PRating>(html`
-      <p-rating value="5" disabled></p-rating>
-    `);
-    const lastSymbol = el.shadowRoot!.querySelector<HTMLSpanElement>(
-      ".rating__symbol:last-child",
-    )!;
+    const el = await fixture<PRating>(html` <p-rating value="5" disabled></p-rating> `);
+    const lastSymbol = el.shadowRoot!.querySelector<HTMLSpanElement>(".rating__symbol:last-child")!;
     const changeHandler = sinon.spy();
 
     el.addEventListener("p-change", changeHandler);
@@ -111,21 +95,15 @@ describe("<p-rating>", () => {
   });
 
   it("should not emit p-change when the value is changed programmatically", async () => {
-    const el = await fixture<PRating>(html`
-      <p-rating label="Test" value="1"></p-rating>
-    `);
-    el.addEventListener("p-change", () =>
-      expect.fail("p-change incorrectly emitted"),
-    );
+    const el = await fixture<PRating>(html` <p-rating label="Test" value="1"></p-rating> `);
+    el.addEventListener("p-change", () => expect.fail("p-change incorrectly emitted"));
     el.value = 5;
     await el.updateComplete;
   });
 
   describe("focus", () => {
     it("should focus inner div", async () => {
-      const el = await fixture<PRating>(html`
-        <p-rating label="Test"></p-rating>
-      `);
+      const el = await fixture<PRating>(html` <p-rating label="Test"></p-rating> `);
 
       const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
@@ -138,9 +116,7 @@ describe("<p-rating>", () => {
 
   describe("blur", () => {
     it("should blur inner div", async () => {
-      const el = await fixture<PRating>(html`
-        <p-rating label="Test"></p-rating>
-      `);
+      const el = await fixture<PRating>(html` <p-rating label="Test"></p-rating> `);
 
       el.focus();
       await el.updateComplete;

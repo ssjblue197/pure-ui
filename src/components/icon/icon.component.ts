@@ -1,9 +1,4 @@
-import {
-  getIconLibrary,
-  type IconLibrary,
-  unwatchIcon,
-  watchIcon,
-} from "./library.js";
+import { getIconLibrary, type IconLibrary, unwatchIcon, watchIcon } from "./library.js";
 import { html } from "lit";
 import { isTemplateResult } from "lit/directive-helpers.js";
 import { property, state } from "lit/decorators.js";
@@ -15,11 +10,7 @@ import type { CSSResultGroup, HTMLTemplateResult } from "lit";
 
 const CACHEABLE_ERROR = Symbol();
 const RETRYABLE_ERROR = Symbol();
-type SVGResult =
-  | HTMLTemplateResult
-  | SVGSVGElement
-  | typeof RETRYABLE_ERROR
-  | typeof CACHEABLE_ERROR;
+type SVGResult = HTMLTemplateResult | SVGSVGElement | typeof RETRYABLE_ERROR | typeof CACHEABLE_ERROR;
 
 let parser: DOMParser;
 const iconCache = new Map<string, Promise<SVGResult>>();
@@ -47,10 +38,7 @@ export default class PIcon extends PureElement {
   private initialRender = false;
 
   /** Given a URL, this function returns the resulting SVG element or an appropriate error symbol. */
-  private async resolveIcon(
-    url: string,
-    library?: IconLibrary,
-  ): Promise<SVGResult> {
+  private async resolveIcon(url: string, library?: IconLibrary): Promise<SVGResult> {
     let fileData: Response;
 
     if (library?.spriteSheet) {
@@ -73,8 +61,7 @@ export default class PIcon extends PureElement {
 
     try {
       fileData = await fetch(url, { mode: "cors" });
-      if (!fileData.ok)
-        return fileData.status === 410 ? CACHEABLE_ERROR : RETRYABLE_ERROR;
+      if (!fileData.ok) return fileData.status === 410 ? CACHEABLE_ERROR : RETRYABLE_ERROR;
     } catch {
       return RETRYABLE_ERROR;
     }

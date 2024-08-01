@@ -117,9 +117,7 @@ export default class PAnimation extends PureElement {
 
   private async createAnimation() {
     const easing = animations.easings[this.easing] ?? this.easing;
-    const keyframes =
-      this.keyframes ??
-      (animations as unknown as Partial<Record<string, Keyframe[]>>)[this.name];
+    const keyframes = this.keyframes ?? (animations as unknown as Partial<Record<string, Keyframe[]>>)[this.name];
     const slot = await this.defaultPot;
     const element = slot.assignedElements()[0] as HTMLElement | undefined;
 

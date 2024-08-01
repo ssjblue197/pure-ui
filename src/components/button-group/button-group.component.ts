@@ -49,32 +49,18 @@ export default class PButtonGroup extends PureElement {
   }
 
   private handleSlotChange() {
-    const slottedElements = [
-      ...this.defaultSlot.assignedElements({ flatten: true }),
-    ] as HTMLElement[];
+    const slottedElements = [...this.defaultSlot.assignedElements({ flatten: true })] as HTMLElement[];
 
-    slottedElements.forEach((el) => {
+    slottedElements.forEach(el => {
       const index = slottedElements.indexOf(el);
       const button = findButton(el);
 
       if (button) {
         button.toggleAttribute("data-p-button-group__button", true);
-        button.toggleAttribute(
-          "data-p-button-group__button--first",
-          index === 0,
-        );
-        button.toggleAttribute(
-          "data-p-button-group__button--inner",
-          index > 0 && index < slottedElements.length - 1,
-        );
-        button.toggleAttribute(
-          "data-p-button-group__button--last",
-          index === slottedElements.length - 1,
-        );
-        button.toggleAttribute(
-          "data-p-button-group__button--radio",
-          button.tagName.toLowerCase() === "p-radio-button",
-        );
+        button.toggleAttribute("data-p-button-group__button--first", index === 0);
+        button.toggleAttribute("data-p-button-group__button--inner", index > 0 && index < slottedElements.length - 1);
+        button.toggleAttribute("data-p-button-group__button--last", index === slottedElements.length - 1);
+        button.toggleAttribute("data-p-button-group__button--radio", button.tagName.toLowerCase() === "p-radio-button");
       }
     });
   }

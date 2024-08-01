@@ -1,17 +1,11 @@
 import { animateTo, stopAnimations } from "../../internal/animate.js";
 import { classMap } from "lit/directives/class-map.js";
-import {
-  getAnimation,
-  setDefaultAnimation,
-} from "../../utilities/animation-registry.js";
+import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
 import { HasSlotController } from "../../internal/slot.js";
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { LocalizeController } from "../../utilities/localize.js";
-import {
-  lockBodyScrolling,
-  unlockBodyScrolling,
-} from "../../internal/scroll.js";
+import { lockBodyScrolling, unlockBodyScrolling } from "../../internal/scroll.js";
 import { property, query } from "lit/decorators.js";
 import { uppercaseFirstLetter } from "../../internal/string.js";
 import { waitForEvent } from "../../internal/event.js";
@@ -107,8 +101,7 @@ export default class PDrawer extends PureElement {
   @property({ reflect: true }) label = "";
 
   /** The direction from which the drawer will open. */
-  @property({ reflect: true }) placement: "top" | "end" | "bottom" | "start" =
-    "end";
+  @property({ reflect: true }) placement: "top" | "end" | "bottom" | "start" = "end";
 
   /**
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
@@ -120,8 +113,7 @@ export default class PDrawer extends PureElement {
    * Removes the header. This will also remove the default close button, so please ensure you provide an easy,
    * accessible way for users to dismiss the drawer.
    */
-  @property({ attribute: "no-header", type: Boolean, reflect: true }) noHeader =
-    false;
+  @property({ attribute: "no-header", type: Boolean, reflect: true }) noHeader = false;
 
   firstUpdated() {
     this.drawer.hidden = !this.open;
@@ -213,10 +205,7 @@ export default class PDrawer extends PureElement {
         autoFocusTarget.removeAttribute("autofocus");
       }
 
-      await Promise.all([
-        stopAnimations(this.drawer),
-        stopAnimations(this.overlay),
-      ]);
+      await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
       this.drawer.hidden = false;
 
       // Set initial focus
@@ -242,23 +231,15 @@ export default class PDrawer extends PureElement {
         }
       });
 
-      const panelAnimation = getAnimation(
-        this,
-        `drawer.show${uppercaseFirstLetter(this.placement)}`,
-        {
-          dir: this.localize.dir(),
-        },
-      );
+      const panelAnimation = getAnimation(this, `drawer.show${uppercaseFirstLetter(this.placement)}`, {
+        dir: this.localize.dir(),
+      });
       const overlayAnimation = getAnimation(this, "drawer.overlay.show", {
         dir: this.localize.dir(),
       });
       await Promise.all([
         animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
-        animateTo(
-          this.overlay,
-          overlayAnimation.keyframes,
-          overlayAnimation.options,
-        ),
+        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options),
       ]);
 
       this.emit("p-after-show");
@@ -272,17 +253,10 @@ export default class PDrawer extends PureElement {
         unlockBodyScrolling(this);
       }
 
-      await Promise.all([
-        stopAnimations(this.drawer),
-        stopAnimations(this.overlay),
-      ]);
-      const panelAnimation = getAnimation(
-        this,
-        `drawer.hide${uppercaseFirstLetter(this.placement)}`,
-        {
-          dir: this.localize.dir(),
-        },
-      );
+      await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
+      const panelAnimation = getAnimation(this, `drawer.hide${uppercaseFirstLetter(this.placement)}`, {
+        dir: this.localize.dir(),
+      });
       const overlayAnimation = getAnimation(this, "drawer.overlay.hide", {
         dir: this.localize.dir(),
       });
@@ -291,18 +265,10 @@ export default class PDrawer extends PureElement {
       // hide each one individually when the animation finishes, otherwise the first one that finishes will reappear
       // unexpectedly. We'll unhide them after all animations have completed.
       await Promise.all([
-        animateTo(
-          this.overlay,
-          overlayAnimation.keyframes,
-          overlayAnimation.options,
-        ).then(() => {
+        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options).then(() => {
           this.overlay.hidden = true;
         }),
-        animateTo(
-          this.panel,
-          panelAnimation.keyframes,
-          panelAnimation.options,
-        ).then(() => {
+        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options).then(() => {
           this.panel.hidden = true;
         }),
       ]);
@@ -373,12 +339,7 @@ export default class PDrawer extends PureElement {
           "drawer--has-footer": this.hasSlotController.test("footer"),
         })}
       >
-        <div
-          part="overlay"
-          class="drawer__overlay"
-          @click=${() => this.requestClose("overlay")}
-          tabindex="-1"
-        ></div>
+        <div part="overlay" class="drawer__overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
 
         <div
           part="panel"
@@ -395,11 +356,7 @@ export default class PDrawer extends PureElement {
                 <header part="header" class="drawer__header">
                   <h2 part="title" class="drawer__title" id="title">
                     <!-- If there's no label, use an invisible character to prevent the header from collapsing -->
-                    <slot name="label">
-                      ${this.label.length > 0
-                        ? this.label
-                        : String.fromCharCode(65279)}
-                    </slot>
+                    <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
                   </h2>
                   <div part="header-actions" class="drawer__header-actions">
                     <slot name="header-actions"></slot>

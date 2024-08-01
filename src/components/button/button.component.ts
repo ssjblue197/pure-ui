@@ -1,8 +1,5 @@
 import { classMap } from "lit/directives/class-map.js";
-import {
-  FormControlController,
-  validValidityState,
-} from "../../internal/form.js";
+import { FormControlController, validValidityState } from "../../internal/form.js";
 import { HasSlotController } from "../../internal/slot.js";
 import { html, literal } from "lit/static-html.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -41,10 +38,7 @@ import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
  * @csspart caret - The button's caret icon, an `<p-icon>` element.
  * @csspart spinner - The spinner that shows when the button is in the loading state.
  */
-export default class PButton
-  extends PureElement
-  implements ShoelaceFormControl
-{
+export default class PButton extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
     "p-icon": PIcon,
@@ -55,12 +49,7 @@ export default class PButton
     assumeInteractionOn: ["click"],
   });
 
-  private readonly hasSlotController = new HasSlotController(
-    this,
-    "[default]",
-    "prefix",
-    "suffix",
-  );
+  private readonly hasSlotController = new HasSlotController(this, "[default]", "prefix", "suffix");
   private readonly localize = new LocalizeController(this);
 
   @query(".button") button: HTMLButtonElement | HTMLLinkElement;
@@ -70,14 +59,8 @@ export default class PButton
   @property() title = ""; // make reactive to pass through
 
   /** The button's theme variant. */
-  @property({ reflect: true }) variant:
-    | "default"
-    | "primary"
-    | "success"
-    | "neutral"
-    | "warning"
-    | "danger"
-    | "text" = "default";
+  @property({ reflect: true }) variant: "default" | "primary" | "success" | "neutral" | "warning" | "danger" | "text" =
+    "default";
 
   /** The button's size. */
   @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
@@ -149,10 +132,7 @@ export default class PButton
 
   /** Used to override the form owner's `enctype` attribute.  */
   @property({ attribute: "formenctype" })
-  formEnctype:
-    | "application/x-www-form-urlencoded"
-    | "multipart/form-data"
-    | "text/plain";
+  formEnctype: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain";
 
   /** Used to override the form owner's `method` attribute.  */
   @property({ attribute: "formmethod" }) formMethod: "post" | "get";
@@ -162,12 +142,7 @@ export default class PButton
   formNoValidate: boolean;
 
   /** Used to override the form owner's `target` attribute. */
-  @property({ attribute: "formtarget" }) formTarget:
-    | "_self"
-    | "_blank"
-    | "_parent"
-    | "_top"
-    | string;
+  @property({ attribute: "formtarget" }) formTarget: "_self" | "_blank" | "_parent" | "_top" | string;
 
   /** Gets the validity state object */
   get validity() {

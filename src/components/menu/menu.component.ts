@@ -34,15 +34,11 @@ export default class PMenu extends PureElement {
     const menuItemTypes = ["menuitem", "menuitemcheckbox"];
 
     const composedPath = event.composedPath();
-    const target = composedPath.find((el: Element) =>
-      menuItemTypes.includes(el?.getAttribute?.("role") || ""),
-    );
+    const target = composedPath.find((el: Element) => menuItemTypes.includes(el?.getAttribute?.("role") || ""));
 
     if (!target) return;
 
-    const closestMenu = composedPath.find(
-      (el: Element) => el?.getAttribute?.("role") === "menu",
-    );
+    const closestMenu = composedPath.find((el: Element) => el?.getAttribute?.("role") === "menu");
     const clickHasSubmenu = closestMenu !== this;
 
     // Make sure we're the menu thats supposed to be handling the click event.
@@ -122,22 +118,18 @@ export default class PMenu extends PureElement {
   private isMenuItem(item: HTMLElement) {
     return (
       item.tagName.toLowerCase() === "p-menu-item" ||
-      ["menuitem", "menuitemcheckbox", "menuitemradio"].includes(
-        item.getAttribute("role") ?? "",
-      )
+      ["menuitem", "menuitemcheckbox", "menuitemradio"].includes(item.getAttribute("role") ?? "")
     );
   }
 
   /** @internal Gets all slotted menu items, ignoring dividers, headers, and other elements. */
   getAllItems() {
-    return [...this.defaultSlot.assignedElements({ flatten: true })].filter(
-      (el: HTMLElement) => {
-        if (el.inert || !this.isMenuItem(el)) {
-          return false;
-        }
-        return true;
-      },
-    ) as PMenuItem[];
+    return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
+      if (el.inert || !this.isMenuItem(el)) {
+        return false;
+      }
+      return true;
+    }) as PMenuItem[];
   }
 
   /**
@@ -145,7 +137,7 @@ export default class PMenu extends PureElement {
    * The menu item may or may not have focus, but for keyboard interaction purposes it's considered the "active" item.
    */
   getCurrentItem() {
-    return this.getAllItems().find((i) => i.getAttribute("tabindex") === "0");
+    return this.getAllItems().find(i => i.getAttribute("tabindex") === "0");
   }
 
   /**
@@ -156,7 +148,7 @@ export default class PMenu extends PureElement {
     const items = this.getAllItems();
 
     // Update tab indexes
-    items.forEach((i) => {
+    items.forEach(i => {
       i.setAttribute("tabindex", i === item ? "0" : "-1");
     });
   }

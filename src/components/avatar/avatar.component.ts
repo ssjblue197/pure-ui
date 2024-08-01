@@ -49,8 +49,7 @@ export default class PAvatar extends PureElement {
   @property() loading: "eager" | "lazy" = "eager";
 
   /** The shape of the avatar. */
-  @property({ reflect: true }) shape: "circle" | "square" | "rounded" =
-    "circle";
+  @property({ reflect: true }) shape: "circle" | "square" | "rounded" = "circle";
 
   @watch("image")
   handleImageChange() {
@@ -78,9 +77,7 @@ export default class PAvatar extends PureElement {
     let avatarWithoutImage = html``;
 
     if (this.initials) {
-      avatarWithoutImage = html`<div part="initials" class="avatar__initials">
-        ${this.initials}
-      </div>`;
+      avatarWithoutImage = html`<div part="initials" class="avatar__initials">${this.initials}</div>`;
     } else {
       avatarWithoutImage = html`
         <div part="icon" class="avatar__icon" aria-hidden="true">

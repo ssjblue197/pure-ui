@@ -26,9 +26,7 @@ function isVisible(el: HTMLElement): boolean {
   // Fallback "polyfill" for "checkVisibility"
   const computedStyle = getCachedComputedStyle(el);
 
-  return (
-    computedStyle.visibility !== "hidden" && computedStyle.display !== "none"
-  );
+  return computedStyle.visibility !== "hidden" && computedStyle.display !== "none";
 }
 
 // While this behavior isn't standard in Safari / Chrome yet, I think it's the most reasonable
@@ -86,11 +84,7 @@ function isTabbable(el: HTMLElement) {
   }
 
   // Radios without a checked attribute are not tabbable
-  if (
-    tag === "input" &&
-    el.getAttribute("type") === "radio" &&
-    !el.hasAttribute("checked")
-  ) {
+  if (tag === "input" && el.getAttribute("type") === "radio" && !el.hasAttribute("checked")) {
     return false;
   }
 
@@ -109,10 +103,7 @@ function isTabbable(el: HTMLElement) {
   }
 
   // Elements with a contenteditable attribute are tabbable
-  if (
-    el.hasAttribute("contenteditable") &&
-    el.getAttribute("contenteditable") !== "false"
-  ) {
+  if (el.hasAttribute("contenteditable") && el.getAttribute("contenteditable") !== "false") {
     return true;
   }
 
@@ -156,14 +147,8 @@ export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
  * However, there is an edge case when, if the `root` is wrapped by another shadow DOM, it won't grab the children.
  * This fixes that fun edge case.
  */
-function getSlottedChildrenOutsideRootElement(
-  slotElement: HTMLSlotElement,
-  root: HTMLElement | ShadowRoot,
-) {
-  return (
-    (slotElement.getRootNode({ composed: true }) as ShadowRoot | null)?.host !==
-    root
-  );
+function getSlottedChildrenOutsideRootElement(slotElement: HTMLSlotElement, root: HTMLElement | ShadowRoot) {
+  return (slotElement.getRootNode({ composed: true }) as ShadowRoot | null)?.host !== root;
 }
 
 export function getTabbableElements(root: HTMLElement | ShadowRoot) {
@@ -186,15 +171,10 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
         tabbableElements.push(el);
       }
 
-      if (
-        el instanceof HTMLSlotElement &&
-        getSlottedChildrenOutsideRootElement(el, root)
-      ) {
-        el.assignedElements({ flatten: true }).forEach(
-          (assignedEl: HTMLElement) => {
-            walk(assignedEl);
-          },
-        );
+      if (el instanceof HTMLSlotElement && getSlottedChildrenOutsideRootElement(el, root)) {
+        el.assignedElements({ flatten: true }).forEach((assignedEl: HTMLElement) => {
+          walk(assignedEl);
+        });
       }
 
       if (el.shadowRoot !== null && el.shadowRoot.mode === "open") {

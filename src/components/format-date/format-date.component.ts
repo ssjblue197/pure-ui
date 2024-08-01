@@ -50,13 +50,11 @@ export default class PFormatDate extends PureElement {
   @property({ attribute: "time-zone" }) timeZone: string;
 
   /** The format for displaying the hour. */
-  @property({ attribute: "hour-format" }) hourFormat: "auto" | "12" | "24" =
-    "auto";
+  @property({ attribute: "hour-format" }) hourFormat: "auto" | "12" | "24" = "auto";
 
   render() {
     const date = new Date(this.date);
-    const hour12 =
-      this.hourFormat === "auto" ? undefined : this.hourFormat === "12";
+    const hour12 = this.hourFormat === "auto" ? undefined : this.hourFormat === "12";
 
     // Check for an invalid date
     if (isNaN(date.getMilliseconds())) {

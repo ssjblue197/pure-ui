@@ -40,11 +40,7 @@ export default class PQrCode extends PureElement {
   @property({ type: Number }) radius = 0;
 
   /** The level of error correction to use. [Learn more](https://www.qrcode.com/en/about/error_correction.html) */
-  @property({ attribute: "error-correction" }) errorCorrection:
-    | "L"
-    | "M"
-    | "Q"
-    | "H" = "H";
+  @property({ attribute: "error-correction" }) errorCorrection: "L" | "M" | "Q" | "H" = "H";
 
   firstUpdated() {
     this.generate();

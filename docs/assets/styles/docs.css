@@ -525,19 +525,11 @@ pre .token.italic {
 }
 
 .copy-code-button::part(button):hover {
-  background-color: color-mix(
-    in oklch,
-    var(--p-color-neutral-50),
-    var(--p-color-neutral-1000) 3%
-  );
+  background-color: color-mix(in oklch, var(--p-color-neutral-50), var(--p-color-neutral-1000) 3%);
 }
 
 .copy-code-button::part(button):active {
-  background-color: color-mix(
-    in oklch,
-    var(--p-color-neutral-50),
-    var(--p-color-neutral-1000) 6%
-  );
+  background-color: color-mix(in oklch, var(--p-color-neutral-50), var(--p-color-neutral-1000) 6%);
 }
 
 pre .copy-code-button {
@@ -652,8 +644,7 @@ pre:hover .copy-code-button,
     float: none;
     width: calc(100% + (var(--docs-content-padding) * 2));
     max-width: none;
-    margin: var(--docs-content-vertical-spacing)
-      calc(-1 * var(--docs-content-padding));
+    margin: var(--docs-content-vertical-spacing) calc(-1 * var(--docs-content-padding));
   }
 }
 
@@ -698,9 +689,7 @@ pre:hover .copy-code-button,
 }
 
 .content details + details {
-  margin-top: calc(
-    -1 * var(--docs-content-vertical-spacing) + (2 * var(--docs-border-width))
-  );
+  margin-top: calc(-1 * var(--docs-content-vertical-spacing) + (2 * var(--docs-border-width)));
 }
 
 /* Sidebar */
@@ -858,13 +847,8 @@ main {
 
 .content--with-toc {
   /* There's a 2rem gap, so we need to remove it from the column */
-  grid-template-columns: calc(75% - 2rem) min(
-      25%,
-      var(--docs-content-toc-max-width)
-    );
-  max-width: calc(
-    var(--docs-content-max-width) + var(--docs-content-toc-max-width)
-  );
+  grid-template-columns: calc(75% - 2rem) min(25%, var(--docs-content-toc-max-width));
+  max-width: calc(var(--docs-content-max-width) + var(--docs-content-toc-max-width));
 }
 
 .content__body {
@@ -967,11 +951,7 @@ main {
     bottom: 1rem; /* don't cover the scrollbar */
     right: 0;
     width: 2rem;
-    background: linear-gradient(
-      90deg,
-      rgba(0 0 0 / 0) 0%,
-      var(--p-color-neutral-0) 100%
-    );
+    background: linear-gradient(90deg, rgba(0 0 0 / 0) 0%, var(--p-color-neutral-0) 100%);
   }
 
   .content__toc li {

@@ -1,12 +1,5 @@
 import "../../../dist/pure-ui.js";
-import {
-  aTimeout,
-  elementUpdated,
-  expect,
-  fixture,
-  oneEvent,
-  waitUntil,
-} from "@open-wc/testing";
+import { aTimeout, elementUpdated, expect, fixture, oneEvent, waitUntil } from "@open-wc/testing";
 import { clickOnElement } from "../../internal/test.js";
 import { html } from "lit";
 import { isElementVisibleFromOverflow } from "../../internal/test/element-visible-overflow.js";
@@ -24,12 +17,9 @@ interface ClientRectangles {
   navigation?: DOMRect;
 }
 
-const waitForScrollButtonsToBeRendered = async (
-  tabGroup: PTabGroup,
-): Promise<void> => {
+const waitForScrollButtonsToBeRendered = async (tabGroup: PTabGroup): Promise<void> => {
   await waitUntil(() => {
-    const scrollButtons =
-      tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
+    const scrollButtons = tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
     return scrollButtons?.length === 2;
   });
 };
@@ -47,49 +37,30 @@ const getClientRectangles = (tabGroup: PTabGroup): ClientRectangles => {
   return {};
 };
 
-const expectHeaderToBeVisible = (
-  container: HTMLElement,
-  dataTestId: string,
-): void => {
+const expectHeaderToBeVisible = (container: HTMLElement, dataTestId: string): void => {
   const generalHeader = queryByTestId<PTab>(container, dataTestId);
   expect(generalHeader).not.to.be.null;
   expect(generalHeader).to.be.visible;
 };
 
-const expectOnlyOneTabPanelToBeActive = async (
-  container: HTMLElement,
-  dataTestIdOfActiveTab: string,
-) => {
+const expectOnlyOneTabPanelToBeActive = async (container: HTMLElement, dataTestIdOfActiveTab: string) => {
   await waitUntil(() => {
     const tabPanels = Array.from(container.getElementsByTagName("p-tab-panel"));
-    const activeTabPanels = tabPanels.filter((element: PTabPanel) =>
-      element.hasAttribute("active"),
-    );
+    const activeTabPanels = tabPanels.filter((element: PTabPanel) => element.hasAttribute("active"));
     return activeTabPanels.length === 1;
   });
   const tabPanels = Array.from(container.getElementsByTagName("p-tab-panel"));
-  const activeTabPanels = tabPanels.filter((element: PTabPanel) =>
-    element.hasAttribute("active"),
-  );
+  const activeTabPanels = tabPanels.filter((element: PTabPanel) => element.hasAttribute("active"));
   expect(activeTabPanels).to.have.lengthOf(1);
-  expect(activeTabPanels[0]).to.have.attribute(
-    "data-testid",
-    dataTestIdOfActiveTab,
-  );
+  expect(activeTabPanels[0]).to.have.attribute("data-testid", dataTestIdOfActiveTab);
 };
 
-const expectPromiseToHaveName = async (
-  showEventPromise: Promise<PTabShowEvent>,
-  expectedName: string,
-) => {
+const expectPromiseToHaveName = async (showEventPromise: Promise<PTabShowEvent>, expectedName: string) => {
   const showEvent = await showEventPromise;
   expect(showEvent.detail.name).to.equal(expectedName);
 };
 
-const waitForHeaderToBeActive = async (
-  container: HTMLElement,
-  headerTestId: string,
-): Promise<PTab> => {
+const waitForHeaderToBeActive = async (container: HTMLElement, headerTestId: string): Promise<PTab> => {
   const generalHeader = queryByTestId<PTab>(container, headerTestId);
   await waitUntil(() => {
     return generalHeader?.hasAttribute("active");
@@ -127,16 +98,8 @@ describe("<p-tab-group>", () => {
   it("displays all tabs", async () => {
     const tabGroup = await fixture<PTabGroup>(html`
       <p-tab-group>
-        <p-tab slot="nav" panel="general" data-testid="general-tab-header"
-          >General</p-tab
-        >
-        <p-tab
-          slot="nav"
-          panel="disabled"
-          disabled
-          data-testid="disabled-tab-header"
-          >Disabled</p-tab
-        >
+        <p-tab slot="nav" panel="general" data-testid="general-tab-header">General</p-tab>
+        <p-tab slot="nav" panel="disabled" disabled data-testid="disabled-tab-header">Disabled</p-tab>
         <p-tab-panel name="general">This is the general tab panel.</p-tab-panel>
         <p-tab-panel name="disabled">This is a disabled tab panel.</p-tab-panel>
       </p-tab-group>
@@ -151,9 +114,7 @@ describe("<p-tab-group>", () => {
       <p-tab-group>
         <p-tab slot="nav" panel="general">General</p-tab>
         <p-tab slot="nav" panel="custom">Custom</p-tab>
-        <p-tab-panel name="general" data-testid="general-tab-content"
-          >This is the general tab panel.</p-tab-panel
-        >
+        <p-tab-panel name="general" data-testid="general-tab-content">This is the general tab panel.</p-tab-panel>
         <p-tab-panel name="custom">This is the custom tab panel.</p-tab-panel>
       </p-tab-group>
     `);
@@ -166,27 +127,21 @@ describe("<p-tab-group>", () => {
       const tabGroup = await fixture<PTabGroup>(html`
         <p-tab-group>
           <p-tab slot="nav" panel="general">General</p-tab>
-          <p-tab-panel name="general"
-            >This is the general tab panel.</p-tab-panel
-          >
+          <p-tab-panel name="general">This is the general tab panel.</p-tab-panel>
         </p-tab-group>
       `);
 
       await aTimeout(0);
 
       const clientRectangles = getClientRectangles(tabGroup);
-      expect(clientRectangles.body?.top).to.be.greaterThanOrEqual(
-        clientRectangles.navigation?.bottom || -Infinity,
-      );
+      expect(clientRectangles.body?.top).to.be.greaterThanOrEqual(clientRectangles.navigation?.bottom || -Infinity);
     });
 
     it("shows the header below the tabs by setting placement to bottom", async () => {
       const tabGroup = await fixture<PTabGroup>(html`
         <p-tab-group>
           <p-tab slot="nav" panel="general">General</p-tab>
-          <p-tab-panel name="general"
-            >This is the general tab panel.</p-tab-panel
-          >
+          <p-tab-panel name="general">This is the general tab panel.</p-tab-panel>
         </p-tab-group>
       `);
       tabGroup.placement = "bottom";
@@ -194,18 +149,14 @@ describe("<p-tab-group>", () => {
       await aTimeout(0);
 
       const clientRectangles = getClientRectangles(tabGroup);
-      expect(clientRectangles.body?.bottom).to.be.lessThanOrEqual(
-        clientRectangles.navigation?.top || +Infinity,
-      );
+      expect(clientRectangles.body?.bottom).to.be.lessThanOrEqual(clientRectangles.navigation?.top || +Infinity);
     });
 
     it("shows the header left of the tabs by setting placement to start", async () => {
       const tabGroup = await fixture<PTabGroup>(html`
         <p-tab-group>
           <p-tab slot="nav" panel="general">General</p-tab>
-          <p-tab-panel name="general"
-            >This is the general tab panel.</p-tab-panel
-          >
+          <p-tab-panel name="general">This is the general tab panel.</p-tab-panel>
         </p-tab-group>
       `);
       tabGroup.placement = "start";
@@ -213,18 +164,14 @@ describe("<p-tab-group>", () => {
       await aTimeout(0);
 
       const clientRectangles = getClientRectangles(tabGroup);
-      expect(clientRectangles.body?.left).to.be.greaterThanOrEqual(
-        clientRectangles.navigation?.right || -Infinity,
-      );
+      expect(clientRectangles.body?.left).to.be.greaterThanOrEqual(clientRectangles.navigation?.right || -Infinity);
     });
 
     it("shows the header right of the tabs by setting placement to end", async () => {
       const tabGroup = await fixture<PTabGroup>(html`
         <p-tab-group>
           <p-tab slot="nav" panel="general">General</p-tab>
-          <p-tab-panel name="general"
-            >This is the general tab panel.</p-tab-panel
-          >
+          <p-tab-panel name="general">This is the general tab panel.</p-tab-panel>
         </p-tab-group>
       `);
       tabGroup.placement = "end";
@@ -232,9 +179,7 @@ describe("<p-tab-group>", () => {
       await aTimeout(0);
 
       const clientRectangles = getClientRectangles(tabGroup);
-      expect(clientRectangles.body?.right).to.be.lessThanOrEqual(
-        clientRectangles.navigation?.left || -Infinity,
-      );
+      expect(clientRectangles.body?.right).to.be.lessThanOrEqual(clientRectangles.navigation?.left || -Infinity);
     });
   });
 
@@ -262,10 +207,7 @@ describe("<p-tab-group>", () => {
         colno?: number | undefined,
         error?: Error | undefined,
       ) => {
-        if (
-          (event as string).includes("ResizeObserver") ||
-          event === "Script error."
-        ) {
+        if ((event as string).includes("ResizeObserver") || event === "Script error.") {
           return true;
         } else if (errorHandler) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -277,99 +219,74 @@ describe("<p-tab-group>", () => {
     });
 
     it("shows scroll buttons on too many tabs", async () => {
-      const tabGroup = await fixture<PTabGroup>(
-        html`<p-tab-group> ${generateTabs(30)} </p-tab-group>`,
-      );
+      const tabGroup = await fixture<PTabGroup>(html`<p-tab-group> ${generateTabs(30)} </p-tab-group>`);
 
       await waitForScrollButtonsToBeRendered(tabGroup);
 
-      const scrollButtons =
-        tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
-      expect(
-        scrollButtons,
-        "Both scroll buttons should be shown",
-      ).to.have.length(2);
+      const scrollButtons = tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
+      expect(scrollButtons, "Both scroll buttons should be shown").to.have.length(2);
 
       tabGroup.disconnectedCallback();
     });
 
     it("does not show scroll buttons on too many tabs if deactivated", async () => {
-      const tabGroup = await fixture<PTabGroup>(
-        html`<p-tab-group> ${generateTabs(30)} </p-tab-group>`,
-      );
+      const tabGroup = await fixture<PTabGroup>(html`<p-tab-group> ${generateTabs(30)} </p-tab-group>`);
       tabGroup.noScrollControls = true;
 
       await aTimeout(0);
 
-      const scrollButtons =
-        tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
+      const scrollButtons = tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
       expect(scrollButtons).to.have.length(0);
     });
 
     it("does not show scroll buttons if all tabs fit on the screen", async () => {
-      const tabGroup = await fixture<PTabGroup>(
-        html`<p-tab-group> ${generateTabs(2)} </p-tab-group>`,
-      );
+      const tabGroup = await fixture<PTabGroup>(html`<p-tab-group> ${generateTabs(2)} </p-tab-group>`);
 
       await aTimeout(0);
 
-      const scrollButtons =
-        tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
+      const scrollButtons = tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
       expect(scrollButtons).to.have.length(0);
     });
 
     // TODO - this fails sporadically, likely due to a timing issue. It tests fine manually.
     it.skip("does not show scroll buttons if placement is start", async () => {
-      const tabGroup = await fixture<PTabGroup>(
-        html`<p-tab-group> ${generateTabs(50)} </p-tab-group>`,
-      );
+      const tabGroup = await fixture<PTabGroup>(html`<p-tab-group> ${generateTabs(50)} </p-tab-group>`);
       tabGroup.placement = "start";
 
       await aTimeout(0);
 
-      const scrollButtons =
-        tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
+      const scrollButtons = tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
       expect(scrollButtons).to.have.length(0);
     });
 
     // TODO - this fails sporadically, likely due to a timing issue. It tests fine manually.
     it.skip("does not show scroll buttons if placement is end", async () => {
-      const tabGroup = await fixture<PTabGroup>(
-        html`<p-tab-group> ${generateTabs(50)} </p-tab-group>`,
-      );
+      const tabGroup = await fixture<PTabGroup>(html`<p-tab-group> ${generateTabs(50)} </p-tab-group>`);
       tabGroup.placement = "end";
 
       await aTimeout(0);
 
-      const scrollButtons =
-        tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
+      const scrollButtons = tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
       expect(scrollButtons).to.have.length(0);
     });
 
     // TODO - this fails sporadically, likely due to a timing issue. It tests fine manually.
     it.skip("does scroll on scroll button click", async () => {
       const numberOfElements = 15;
-      const tabGroup = await fixture<PTabGroup>(
-        html`<p-tab-group> ${generateTabs(numberOfElements)} </p-tab-group>`,
-      );
+      const tabGroup = await fixture<PTabGroup>(html`<p-tab-group> ${generateTabs(numberOfElements)} </p-tab-group>`);
 
       await waitForScrollButtonsToBeRendered(tabGroup);
-      const scrollButtons =
-        tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
+      const scrollButtons = tabGroup.shadowRoot?.querySelectorAll("p-icon-button");
       expect(scrollButtons).to.have.length(2);
 
       const firstTab = tabGroup.querySelector('[panel="tab-0"]');
       expect(firstTab).not.to.be.null;
-      const lastTab = tabGroup.querySelector(
-        `[panel="tab-${numberOfElements - 1}"]`,
-      );
+      const lastTab = tabGroup.querySelector(`[panel="tab-${numberOfElements - 1}"]`);
       expect(lastTab).not.to.be.null;
       expect(isElementVisibleFromOverflow(tabGroup, firstTab!)).to.be.true;
       expect(isElementVisibleFromOverflow(tabGroup, lastTab!)).to.be.false;
 
-      const scrollToRightButton = tabGroup.shadowRoot?.querySelector(
-        'p-icon-button[part*="scroll-button--end"]',
-      );
+      const scrollToRightButton = tabGroup.shadowRoot?.querySelector('p-icon-button[part*="scroll-button--end"]');
       expect(scrollToRightButton).not.to.be.null;
       await clickOnElement(scrollToRightButton!);
 
@@ -383,23 +300,14 @@ describe("<p-tab-group>", () => {
   });
 
   describe("tab selection", () => {
-    const expectCustomTabToBeActiveAfter = async (
-      tabGroup: PTabGroup,
-      action: () => Promise<void>,
-    ): Promise<void> => {
-      const generalHeader = await waitForHeaderToBeActive(
-        tabGroup,
-        "general-header",
-      );
+    const expectCustomTabToBeActiveAfter = async (tabGroup: PTabGroup, action: () => Promise<void>): Promise<void> => {
+      const generalHeader = await waitForHeaderToBeActive(tabGroup, "general-header");
       generalHeader.focus();
 
       const customHeader = queryByTestId<PTab>(tabGroup, "custom-header");
       expect(customHeader).not.to.have.attribute("active");
 
-      const showEventPromise = oneEvent(
-        tabGroup,
-        "p-tab-show",
-      ) as Promise<PTabShowEvent>;
+      const showEventPromise = oneEvent(tabGroup, "p-tab-show") as Promise<PTabShowEvent>;
       await action();
 
       expect(customHeader).to.have.attribute("active");
@@ -411,10 +319,7 @@ describe("<p-tab-group>", () => {
       tabGroup: PTabGroup,
       action: () => Promise<void>,
     ): Promise<void> => {
-      const generalHeader = await waitForHeaderToBeActive(
-        tabGroup,
-        "general-header",
-      );
+      const generalHeader = await waitForHeaderToBeActive(tabGroup, "general-header");
       generalHeader.focus();
 
       let showEventFired = false;
@@ -432,130 +337,76 @@ describe("<p-tab-group>", () => {
     it("selects a tab by clicking on it", async () => {
       const tabGroup = await fixture<PTabGroup>(html`
         <p-tab-group>
-          <p-tab slot="nav" panel="general" data-testid="general-header"
-            >General</p-tab
-          >
-          <p-tab slot="nav" panel="custom" data-testid="custom-header"
-            >Custom</p-tab
-          >
-          <p-tab-panel name="general"
-            >This is the general tab panel.</p-tab-panel
-          >
-          <p-tab-panel name="custom" data-testid="custom-tab-content"
-            >This is the custom tab panel.</p-tab-panel
-          >
+          <p-tab slot="nav" panel="general" data-testid="general-header">General</p-tab>
+          <p-tab slot="nav" panel="custom" data-testid="custom-header">Custom</p-tab>
+          <p-tab-panel name="general">This is the general tab panel.</p-tab-panel>
+          <p-tab-panel name="custom" data-testid="custom-tab-content">This is the custom tab panel.</p-tab-panel>
         </p-tab-group>
       `);
 
       const customHeader = queryByTestId<PTab>(tabGroup, "custom-header");
-      return expectCustomTabToBeActiveAfter(tabGroup, () =>
-        clickOnElement(customHeader!),
-      );
+      return expectCustomTabToBeActiveAfter(tabGroup, () => clickOnElement(customHeader!));
     });
 
     it("does not change if the active tab is reselected", async () => {
       const tabGroup = await fixture<PTabGroup>(html`
         <p-tab-group>
-          <p-tab slot="nav" panel="general" data-testid="general-header"
-            >General</p-tab
-          >
+          <p-tab slot="nav" panel="general" data-testid="general-header">General</p-tab>
           <p-tab slot="nav" panel="custom">Custom</p-tab>
-          <p-tab-panel name="general" data-testid="general-tab-content"
-            >This is the general tab panel.</p-tab-panel
-          >
+          <p-tab-panel name="general" data-testid="general-tab-content">This is the general tab panel.</p-tab-panel>
           <p-tab-panel name="custom">This is the custom tab panel.</p-tab-panel>
         </p-tab-group>
       `);
 
       const generalHeader = queryByTestId(tabGroup, "general-header");
-      return expectGeneralTabToBeStillActiveAfter(tabGroup, () =>
-        clickOnElement(generalHeader!),
-      );
+      return expectGeneralTabToBeStillActiveAfter(tabGroup, () => clickOnElement(generalHeader!));
     });
 
     it("does not change if a disabled tab is clicked", async () => {
       const tabGroup = await fixture<PTabGroup>(html`
         <p-tab-group>
-          <p-tab slot="nav" panel="general" data-testid="general-header"
-            >General</p-tab
-          >
-          <p-tab
-            slot="nav"
-            panel="disabled"
-            data-testid="disabled-header"
-            disabled
-            >disabled</p-tab
-          >
-          <p-tab-panel name="general" data-testid="general-tab-content"
-            >This is the general tab panel.</p-tab-panel
-          >
-          <p-tab-panel name="disabled"
-            >This is the disabled tab panel.</p-tab-panel
-          >
+          <p-tab slot="nav" panel="general" data-testid="general-header">General</p-tab>
+          <p-tab slot="nav" panel="disabled" data-testid="disabled-header" disabled>disabled</p-tab>
+          <p-tab-panel name="general" data-testid="general-tab-content">This is the general tab panel.</p-tab-panel>
+          <p-tab-panel name="disabled">This is the disabled tab panel.</p-tab-panel>
         </p-tab-group>
       `);
 
       const disabledHeader = queryByTestId(tabGroup, "disabled-header");
-      return expectGeneralTabToBeStillActiveAfter(tabGroup, () =>
-        clickOnElement(disabledHeader!),
-      );
+      return expectGeneralTabToBeStillActiveAfter(tabGroup, () => clickOnElement(disabledHeader!));
     });
 
     it("selects a tab by using the arrow keys", async () => {
       const tabGroup = await fixture<PTabGroup>(html`
         <p-tab-group>
-          <p-tab slot="nav" panel="general" data-testid="general-header"
-            >General</p-tab
-          >
-          <p-tab slot="nav" panel="custom" data-testid="custom-header"
-            >Custom</p-tab
-          >
-          <p-tab-panel name="general"
-            >This is the general tab panel.</p-tab-panel
-          >
-          <p-tab-panel name="custom" data-testid="custom-tab-content"
-            >This is the custom tab panel.</p-tab-panel
-          >
+          <p-tab slot="nav" panel="general" data-testid="general-header">General</p-tab>
+          <p-tab slot="nav" panel="custom" data-testid="custom-header">Custom</p-tab>
+          <p-tab-panel name="general">This is the general tab panel.</p-tab-panel>
+          <p-tab-panel name="custom" data-testid="custom-tab-content">This is the custom tab panel.</p-tab-panel>
         </p-tab-group>
       `);
 
-      return expectCustomTabToBeActiveAfter(tabGroup, () =>
-        sendKeys({ press: "ArrowRight" }),
-      );
+      return expectCustomTabToBeActiveAfter(tabGroup, () => sendKeys({ press: "ArrowRight" }));
     });
 
     it("selects a tab by using the arrow keys and enter if activation is set to manual", async () => {
       const tabGroup = await fixture<PTabGroup>(html`
         <p-tab-group>
-          <p-tab slot="nav" panel="general" data-testid="general-header"
-            >General</p-tab
-          >
-          <p-tab slot="nav" panel="custom" data-testid="custom-header"
-            >Custom</p-tab
-          >
-          <p-tab-panel name="general"
-            >This is the general tab panel.</p-tab-panel
-          >
-          <p-tab-panel name="custom" data-testid="custom-tab-content"
-            >This is the custom tab panel.</p-tab-panel
-          >
+          <p-tab slot="nav" panel="general" data-testid="general-header">General</p-tab>
+          <p-tab slot="nav" panel="custom" data-testid="custom-header">Custom</p-tab>
+          <p-tab-panel name="general">This is the general tab panel.</p-tab-panel>
+          <p-tab-panel name="custom" data-testid="custom-tab-content">This is the custom tab panel.</p-tab-panel>
         </p-tab-group>
       `);
       tabGroup.activation = "manual";
 
-      const generalHeader = await waitForHeaderToBeActive(
-        tabGroup,
-        "general-header",
-      );
+      const generalHeader = await waitForHeaderToBeActive(tabGroup, "general-header");
       generalHeader.focus();
 
       const customHeader = queryByTestId<PTab>(tabGroup, "custom-header");
       expect(customHeader).not.to.have.attribute("active");
 
-      const showEventPromise = oneEvent(
-        tabGroup,
-        "p-tab-show",
-      ) as Promise<PTabShowEvent>;
+      const showEventPromise = oneEvent(tabGroup, "p-tab-show") as Promise<PTabShowEvent>;
       await sendKeys({ press: "ArrowRight" });
       await aTimeout(0);
       expect(generalHeader).to.have.attribute("active");
@@ -570,39 +421,23 @@ describe("<p-tab-group>", () => {
     it("does not allow selection of disabled tabs with arrow keys", async () => {
       const tabGroup = await fixture<PTabGroup>(html`
         <p-tab-group>
-          <p-tab slot="nav" panel="general" data-testid="general-header"
-            >General</p-tab
-          >
+          <p-tab slot="nav" panel="general" data-testid="general-header">General</p-tab>
           <p-tab slot="nav" panel="disabled" disabled>Disabled</p-tab>
-          <p-tab-panel name="general" data-testid="general-tab-content"
-            >This is the general tab panel.</p-tab-panel
-          >
-          <p-tab-panel name="disabled"
-            >This is the custom tab panel.</p-tab-panel
-          >
+          <p-tab-panel name="general" data-testid="general-tab-content">This is the general tab panel.</p-tab-panel>
+          <p-tab-panel name="disabled">This is the custom tab panel.</p-tab-panel>
         </p-tab-group>
       `);
 
-      return expectGeneralTabToBeStillActiveAfter(tabGroup, () =>
-        sendKeys({ press: "ArrowRight" }),
-      );
+      return expectGeneralTabToBeStillActiveAfter(tabGroup, () => sendKeys({ press: "ArrowRight" }));
     });
 
     it("selects a tab by using the show function", async () => {
       const tabGroup = await fixture<PTabGroup>(html`
         <p-tab-group>
-          <p-tab slot="nav" panel="general" data-testid="general-header"
-            >General</p-tab
-          >
-          <p-tab slot="nav" panel="custom" data-testid="custom-header"
-            >Custom</p-tab
-          >
-          <p-tab-panel name="general"
-            >This is the general tab panel.</p-tab-panel
-          >
-          <p-tab-panel name="custom" data-testid="custom-tab-content"
-            >This is the custom tab panel.</p-tab-panel
-          >
+          <p-tab slot="nav" panel="general" data-testid="general-header">General</p-tab>
+          <p-tab slot="nav" panel="custom" data-testid="custom-header">Custom</p-tab>
+          <p-tab-panel name="general">This is the general tab panel.</p-tab-panel>
+          <p-tab-panel name="custom" data-testid="custom-tab-content">This is the custom tab panel.</p-tab-panel>
         </p-tab-group>
       `);
 

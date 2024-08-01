@@ -11,10 +11,7 @@ Components can be localized by importing the appropriate translation file and se
 ```html
 <html lang="es">
   <head>
-    <script
-      type="module"
-      src="/path/to/pure-ui/dist/translations/es.js"
-    ></script>
+    <script type="module" src="/path/to/pure-ui/dist/translations/es.js"></script>
   </head>
 
   <body>

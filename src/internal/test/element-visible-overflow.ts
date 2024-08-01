@@ -8,10 +8,7 @@
  * @param {HTMLElement} innerElement - the child element
  * @returns {Boolean} whether the two elements overlap
  */
-export const isElementVisibleFromOverflow = (
-  outerElement: Element,
-  innerElement: Element,
-): boolean => {
+export const isElementVisibleFromOverflow = (outerElement: Element, innerElement: Element): boolean => {
   const outerRect = outerElement.getBoundingClientRect();
   const innerRect = innerElement.getBoundingClientRect();
   return (

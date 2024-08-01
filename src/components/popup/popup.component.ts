@@ -1,13 +1,4 @@
-import {
-  arrow,
-  autoUpdate,
-  computePosition,
-  flip,
-  offset,
-  platform,
-  shift,
-  size,
-} from "@floating-ui/dom";
+import { arrow, autoUpdate, computePosition, flip, offset, platform, shift, size } from "@floating-ui/dom";
 import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit";
 import { offsetParent } from "composed-offset-position";
@@ -125,11 +116,7 @@ export default class PPopup extends PureElement {
    * anchor as possible, considering available space and `arrow-padding`. A value of `start`, `end`, or `center` will
    * align the arrow to the start, end, or center of the popover instead.
    */
-  @property({ attribute: "arrow-placement" }) arrowPlacement:
-    | "start"
-    | "end"
-    | "center"
-    | "anchor" = "anchor";
+  @property({ attribute: "arrow-placement" }) arrowPlacement: "start" | "end" | "center" | "anchor" = "anchor";
 
   /**
    * The amount of padding between the arrow and the edges of the popup. If the popup has a border-radius, for example,
@@ -154,8 +141,8 @@ export default class PPopup extends PureElement {
       fromAttribute: (value: string) => {
         return value
           .split(" ")
-          .map((p) => p.trim())
-          .filter((p) => p !== "");
+          .map(p => p.trim())
+          .filter(p => p !== "");
       },
       toAttribute: (value: []) => {
         return value.join(" ");
@@ -169,9 +156,7 @@ export default class PPopup extends PureElement {
    * the popup should be positioned using the best available fit based on available space or as it was initially
    * preferred.
    */
-  @property({ attribute: "flip-fallback-strategy" }) flipFallbackStrategy:
-    | "best-fit"
-    | "initial" = "best-fit";
+  @property({ attribute: "flip-fallback-strategy" }) flipFallbackStrategy: "best-fit" | "initial" = "best-fit";
 
   /**
    * The flip boundary describes clipping element(s) that overflow will be checked relative to when flipping. By
@@ -197,10 +182,7 @@ export default class PPopup extends PureElement {
   @property({ attribute: "shift-padding", type: Number }) shiftPadding = 0;
 
   /** When set, this will cause the popup to automatically resize itself to prevent it from overflowing. */
-  @property({ attribute: "auto-size" }) autoSize:
-    | "horizontal"
-    | "vertical"
-    | "both";
+  @property({ attribute: "auto-size" }) autoSize: "horizontal" | "vertical" | "both";
 
   /** Syncs the popup's width or height to that of the anchor element. */
   @property() sync: "width" | "height" | "both";
@@ -213,8 +195,7 @@ export default class PPopup extends PureElement {
   @property({ type: Object }) autoSizeBoundary: Element | Element[];
 
   /** The amount of padding, in pixels, to exceed before the auto-size behavior will occur. */
-  @property({ attribute: "auto-size-padding", type: Number }) autoSizePadding =
-    0;
+  @property({ attribute: "auto-size-padding", type: Number }) autoSizePadding = 0;
 
   /**
    * When a gap exists between the anchor and the popup element, this option will add a "hover bridge" that fills the
@@ -268,10 +249,7 @@ export default class PPopup extends PureElement {
       // Locate the anchor by id
       const root = this.getRootNode() as Document | ShadowRoot;
       this.anchorEl = root.getElementById(this.anchor);
-    } else if (
-      this.anchor instanceof Element ||
-      isVirtualElement(this.anchor)
-    ) {
+    } else if (this.anchor instanceof Element || isVirtualElement(this.anchor)) {
       // Use the anchor's reference
       this.anchorEl = this.anchor;
     } else {
@@ -305,7 +283,7 @@ export default class PPopup extends PureElement {
   }
 
   private async stop(): Promise<void> {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       if (this.cleanup) {
         this.cleanup();
         this.cleanup = undefined;
@@ -341,12 +319,8 @@ export default class PPopup extends PureElement {
           apply: ({ rects }) => {
             const syncWidth = this.sync === "width" || this.sync === "both";
             const syncHeight = this.sync === "height" || this.sync === "both";
-            this.popup.style.width = syncWidth
-              ? `${rects.reference.width}px`
-              : "";
-            this.popup.style.height = syncHeight
-              ? `${rects.reference.height}px`
-              : "";
+            this.popup.style.width = syncWidth ? `${rects.reference.width}px` : "";
+            this.popup.style.height = syncHeight ? `${rects.reference.height}px` : "";
           },
         }),
       );
@@ -363,10 +337,7 @@ export default class PPopup extends PureElement {
           boundary: this.flipBoundary,
           // @ts-expect-error - We're converting a string attribute to an array here
           fallbackPlacements: this.flipFallbackPlacements,
-          fallbackStrategy:
-            this.flipFallbackStrategy === "best-fit"
-              ? "bestFit"
-              : "initialPlacement",
+          fallbackStrategy: this.flipFallbackStrategy === "best-fit" ? "bestFit" : "initialPlacement",
           padding: this.flipPadding,
         }),
       );
@@ -390,19 +361,13 @@ export default class PPopup extends PureElement {
           padding: this.autoSizePadding,
           apply: ({ availableWidth, availableHeight }) => {
             if (this.autoSize === "vertical" || this.autoSize === "both") {
-              this.style.setProperty(
-                "--auto-size-available-height",
-                `${availableHeight}px`,
-              );
+              this.style.setProperty("--auto-size-available-height", `${availableHeight}px`);
             } else {
               this.style.removeProperty("--auto-size-available-height");
             }
 
             if (this.autoSize === "horizontal" || this.autoSize === "both") {
-              this.style.setProperty(
-                "--auto-size-available-width",
-                `${availableWidth}px`,
-              );
+              this.style.setProperty("--auto-size-available-width", `${availableWidth}px`);
             } else {
               this.style.removeProperty("--auto-size-available-width");
             }
@@ -475,38 +440,20 @@ export default class PPopup extends PureElement {
 
         if (this.arrowPlacement === "start") {
           // Start
-          const value =
-            typeof arrowX === "number"
-              ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))`
-              : "";
-          top =
-            typeof arrowY === "number"
-              ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))`
-              : "";
+          const value = typeof arrowX === "number" ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : "";
+          top = typeof arrowY === "number" ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : "";
           right = isRtl ? value : "";
           left = isRtl ? "" : value;
         } else if (this.arrowPlacement === "end") {
           // End
-          const value =
-            typeof arrowX === "number"
-              ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))`
-              : "";
+          const value = typeof arrowX === "number" ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : "";
           right = isRtl ? "" : value;
           left = isRtl ? value : "";
-          bottom =
-            typeof arrowY === "number"
-              ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))`
-              : "";
+          bottom = typeof arrowY === "number" ? `calc(${this.arrowPadding}px - var(--arrow-padding-offset))` : "";
         } else if (this.arrowPlacement === "center") {
           // Center
-          left =
-            typeof arrowX === "number"
-              ? `calc(50% - var(--arrow-size-diagonal))`
-              : "";
-          top =
-            typeof arrowY === "number"
-              ? `calc(50% - var(--arrow-size-diagonal))`
-              : "";
+          left = typeof arrowX === "number" ? `calc(50% - var(--arrow-size-diagonal))` : "";
+          top = typeof arrowY === "number" ? `calc(50% - var(--arrow-size-diagonal))` : "";
         } else {
           // Anchor (default)
           left = typeof arrowX === "number" ? `${arrowX}px` : "";
@@ -533,8 +480,7 @@ export default class PPopup extends PureElement {
     if (this.hoverBridge && this.anchorEl) {
       const anchorRect = this.anchorEl.getBoundingClientRect();
       const popupRect = this.popup.getBoundingClientRect();
-      const isVertical =
-        this.placement.includes("top") || this.placement.includes("bottom");
+      const isVertical = this.placement.includes("top") || this.placement.includes("bottom");
       let topLeftX = 0;
       let topLeftY = 0;
       let topRightX = 0;
@@ -598,22 +544,10 @@ export default class PPopup extends PureElement {
       this.style.setProperty("--hover-bridge-top-left-y", `${topLeftY}px`);
       this.style.setProperty("--hover-bridge-top-right-x", `${topRightX}px`);
       this.style.setProperty("--hover-bridge-top-right-y", `${topRightY}px`);
-      this.style.setProperty(
-        "--hover-bridge-bottom-left-x",
-        `${bottomLeftX}px`,
-      );
-      this.style.setProperty(
-        "--hover-bridge-bottom-left-y",
-        `${bottomLeftY}px`,
-      );
-      this.style.setProperty(
-        "--hover-bridge-bottom-right-x",
-        `${bottomRightX}px`,
-      );
-      this.style.setProperty(
-        "--hover-bridge-bottom-right-y",
-        `${bottomRightY}px`,
-      );
+      this.style.setProperty("--hover-bridge-bottom-left-x", `${bottomLeftX}px`);
+      this.style.setProperty("--hover-bridge-bottom-left-y", `${bottomLeftY}px`);
+      this.style.setProperty("--hover-bridge-bottom-right-x", `${bottomRightX}px`);
+      this.style.setProperty("--hover-bridge-bottom-right-y", `${bottomRightY}px`);
     }
   };
 
@@ -639,13 +573,7 @@ export default class PPopup extends PureElement {
         })}
       >
         <slot></slot>
-        ${this.arrow
-          ? html`<div
-              part="arrow"
-              class="popup__arrow"
-              role="presentation"
-            ></div>`
-          : ""}
+        ${this.arrow ? html`<div part="arrow" class="popup__arrow" role="presentation"></div>` : ""}
       </div>
     `;
   }

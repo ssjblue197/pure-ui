@@ -2,10 +2,7 @@ import { animateTo, stopAnimations } from "../../internal/animate.js";
 import { classMap } from "lit/directives/class-map.js";
 import { defaultValue } from "../../internal/default-value.js";
 import { FormControlController } from "../../internal/form.js";
-import {
-  getAnimation,
-  setDefaultAnimation,
-} from "../../utilities/animation-registry.js";
+import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
 import { HasSlotController } from "../../internal/slot.js";
 import { html } from "lit";
 import { LocalizeController } from "../../utilities/localize.js";
@@ -73,10 +70,7 @@ import type POption from "../option/option.component.js";
  * @csspart clear-button - The clear button.
  * @csspart expand-icon - The container that wraps the expand icon.
  */
-export default class PSelect
-  extends PureElement
-  implements ShoelaceFormControl
-{
+export default class PSelect extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
   static dependencies = {
     "p-icon": PIcon,
@@ -87,11 +81,7 @@ export default class PSelect
   private readonly formControlController = new FormControlController(this, {
     assumeInteractionOn: ["p-blur", "p-input"],
   });
-  private readonly hasSlotController = new HasSlotController(
-    this,
-    "help-text",
-    "label",
-  );
+  private readonly hasSlotController = new HasSlotController(this, "help-text", "label");
   private readonly localize = new LocalizeController(this);
   private typeToSelectString = "";
   private typeToSelectTimeout: number;
@@ -194,10 +184,7 @@ export default class PSelect
    * is the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at
    * the specified value.
    */
-  @property() getTag: (
-    option: POption,
-    index: number,
-  ) => TemplateResult | string | HTMLElement = (option) => {
+  @property() getTag: (option: POption, index: number) => TemplateResult | string | HTMLElement = option => {
     return html`
       <p-tag
         part="tag"
@@ -210,8 +197,7 @@ export default class PSelect
         ?pill=${this.pill}
         size=${this.size}
         removable
-        @p-remove=${(event: PRemoveEvent) =>
-          this.handleTagRemove(event, option)}
+        @p-remove=${(event: PRemoveEvent) => this.handleTagRemove(event, option)}
       >
         ${option.getTextLabel()}
       </p-tag>
@@ -247,10 +233,7 @@ export default class PSelect
 
     // If the component is rendered in a shadow root, we need to attach the focusin listener there too
     if (this.getRootNode() !== document) {
-      this.getRootNode().addEventListener(
-        "focusin",
-        this.handleDocumentFocusIn,
-      );
+      this.getRootNode().addEventListener("focusin", this.handleDocumentFocusIn);
     }
 
     if ("CloseWatcher" in window) {
@@ -271,10 +254,7 @@ export default class PSelect
     document.removeEventListener("mousedown", this.handleDocumentMouseDown);
 
     if (this.getRootNode() !== document) {
-      this.getRootNode().removeEventListener(
-        "focusin",
-        this.handleDocumentFocusIn,
-      );
+      this.getRootNode().removeEventListener("focusin", this.handleDocumentFocusIn);
     }
 
     this.closeWatcher?.destroy();
@@ -319,10 +299,7 @@ export default class PSelect
 
     // Handle enter and space. When pressing space, we allow for type to select behaviors so if there's anything in the
     // buffer we _don't_ close it.
-    if (
-      event.key === "Enter" ||
-      (event.key === " " && this.typeToSelectString === "")
-    ) {
+    if (event.key === "Enter" || (event.key === " " && this.typeToSelectString === "")) {
       event.preventDefault();
       event.stopImmediatePropagation();
 
@@ -412,10 +389,7 @@ export default class PSelect
       event.preventDefault();
 
       clearTimeout(this.typeToSelectTimeout);
-      this.typeToSelectTimeout = window.setTimeout(
-        () => (this.typeToSelectString = ""),
-        1000,
-      );
+      this.typeToSelectTimeout = window.setTimeout(() => (this.typeToSelectString = ""), 1000);
 
       if (event.key === "Backspace") {
         this.typeToSelectString = this.typeToSelectString.slice(0, -1);
@@ -448,10 +422,7 @@ export default class PSelect
 
   private handleComboboxMouseDown(event: MouseEvent) {
     const path = event.composedPath();
-    const isIconButton = path.some(
-      (el) =>
-        el instanceof Element && el.tagName.toLowerCase() === "p-icon-button",
-    );
+    const isIconButton = path.some(el => el instanceof Element && el.tagName.toLowerCase() === "p-icon-button");
 
     // Ignore disabled controls and clicks on tags (remove buttons)
     if (this.disabled || isIconButton) {
@@ -507,9 +478,7 @@ export default class PSelect
       }
 
       // Set focus after updating so the value is announced by screen readers
-      this.updateComplete.then(() =>
-        this.displayInput.focus({ preventScroll: true }),
-      );
+      this.updateComplete.then(() => this.displayInput.focus({ preventScroll: true }));
 
       if (this.value !== oldValue) {
         // Emit after updating
@@ -533,17 +502,13 @@ export default class PSelect
 
     // Check for duplicate values in menu items
     if (customElements.get("p-option")) {
-      allOptions.forEach((option) => values.push(option.value));
+      allOptions.forEach(option => values.push(option.value));
 
       // Select only the options that match the new value
-      this.setSelectedOptions(
-        allOptions.filter((el) => value.includes(el.value)),
-      );
+      this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
     } else {
       // Rerun this handler when <p-option> is registered
-      customElements
-        .whenDefined("p-option")
-        .then(() => this.handleDefaultSlotChange());
+      customElements.whenDefined("p-option").then(() => this.handleDefaultSlotChange());
     }
   }
 
@@ -577,7 +542,7 @@ export default class PSelect
     const allOptions = this.getAllOptions();
 
     // Clear selection
-    allOptions.forEach((el) => {
+    allOptions.forEach(el => {
       el.current = false;
       el.tabIndex = -1;
     });
@@ -597,11 +562,11 @@ export default class PSelect
     const newSelectedOptions = Array.isArray(option) ? option : [option];
 
     // Clear existing selection
-    allOptions.forEach((el) => (el.selected = false));
+    allOptions.forEach(el => (el.selected = false));
 
     // Set the new selection
     if (newSelectedOptions.length) {
-      newSelectedOptions.forEach((el) => (el.selected = true));
+      newSelectedOptions.forEach(el => (el.selected = true));
     }
 
     // Update selection, value, and display label
@@ -623,20 +588,17 @@ export default class PSelect
   // value, and the display value
   private selectionChanged() {
     // Update selected options cache
-    this.selectedOptions = this.getAllOptions().filter((el) => el.selected);
+    this.selectedOptions = this.getAllOptions().filter(el => el.selected);
 
     // Update the value and display label
     if (this.multiple) {
-      this.value = this.selectedOptions.map((el) => el.value);
+      this.value = this.selectedOptions.map(el => el.value);
 
       if (this.placeholder && this.value.length === 0) {
         // When no items are selected, keep the value empty so the placeholder shows
         this.displayLabel = "";
       } else {
-        this.displayLabel = this.localize.term(
-          "numOptionsSelected",
-          this.selectedOptions.length,
-        );
+        this.displayLabel = this.localize.term("numOptionsSelected", this.selectedOptions.length);
       }
     } else {
       this.value = this.selectedOptions[0]?.value ?? "";
@@ -653,16 +615,12 @@ export default class PSelect
       if (index < this.maxOptionsVisible || this.maxOptionsVisible <= 0) {
         const tag = this.getTag(option, index);
         // Wrap so we can handle the remove
-        return html`<div
-          @p-remove=${(e: PRemoveEvent) => this.handleTagRemove(e, option)}
-        >
+        return html`<div @p-remove=${(e: PRemoveEvent) => this.handleTagRemove(e, option)}>
           ${typeof tag === "string" ? unsafeHTML(tag) : tag}
         </div>`;
       } else if (index === this.maxOptionsVisible) {
         // Hit tag limit
-        return html`<p-tag size=${this.size}
-          >+${this.selectedOptions.length - index}</p-tag
-        >`;
+        return html`<p-tag size=${this.size}>+${this.selectedOptions.length - index}</p-tag>`;
       }
       return html``;
     });
@@ -688,9 +646,7 @@ export default class PSelect
     const value = Array.isArray(this.value) ? this.value : [this.value];
 
     // Select only the options that match the new value
-    this.setSelectedOptions(
-      allOptions.filter((el) => value.includes(el.value)),
-    );
+    this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
   }
 
   @watch("open", { waitUntilFirstUpdate: true })
@@ -798,8 +754,7 @@ export default class PSelect
     const hasHelpTextSlot = this.hasSlotController.test("help-text");
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
-    const hasClearIcon =
-      this.clearable && !this.disabled && this.value.length > 0;
+    const hasClearIcon = this.clearable && !this.disabled && this.value.length > 0;
     const isPlaceholderVisible = this.placeholder && this.value.length === 0;
 
     return html`
@@ -882,18 +837,14 @@ export default class PSelect
                 @blur=${this.handleBlur}
               />
 
-              ${this.multiple
-                ? html`<div part="tags" class="select__tags">${this.tags}</div>`
-                : ""}
+              ${this.multiple ? html`<div part="tags" class="select__tags">${this.tags}</div>` : ""}
 
               <input
                 class="select__value-input"
                 type="text"
                 ?disabled=${this.disabled}
                 ?required=${this.required}
-                .value=${Array.isArray(this.value)
-                  ? this.value.join(", ")
-                  : this.value}
+                .value=${Array.isArray(this.value) ? this.value.join(", ") : this.value}
                 tabindex="-1"
                 aria-hidden="true"
                 @focus=${() => this.focus()}
@@ -920,11 +871,7 @@ export default class PSelect
 
               <slot name="suffix" part="suffix" class="select__suffix"></slot>
 
-              <slot
-                name="expand-icon"
-                part="expand-icon"
-                class="select__expand-icon"
-              >
+              <slot name="expand-icon" part="expand-icon" class="select__expand-icon">
                 <p-icon library="system" name="chevron-down"></p-icon>
               </slot>
             </div>

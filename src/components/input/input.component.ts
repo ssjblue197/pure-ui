@@ -57,11 +57,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
   private readonly formControlController = new FormControlController(this, {
     assumeInteractionOn: ["p-blur", "p-input"],
   });
-  private readonly hasSlotController = new HasSlotController(
-    this,
-    "help-text",
-    "label",
-  );
+  private readonly hasSlotController = new HasSlotController(this, "help-text", "label");
   private readonly localize = new LocalizeController(this);
 
   @query(".input__control") input: HTMLInputElement;
@@ -129,16 +125,13 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
   @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Adds a button to toggle the password's visibility. Only applies to password types. */
-  @property({ attribute: "password-toggle", type: Boolean }) passwordToggle =
-    false;
+  @property({ attribute: "password-toggle", type: Boolean }) passwordToggle = false;
 
   /** Determines whether or not the password is currently visible. Only applies to password input types. */
-  @property({ attribute: "password-visible", type: Boolean }) passwordVisible =
-    false;
+  @property({ attribute: "password-visible", type: Boolean }) passwordVisible = false;
 
   /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
-  @property({ attribute: "no-spin-buttons", type: Boolean }) noSpinButtons =
-    false;
+  @property({ attribute: "no-spin-buttons", type: Boolean }) noSpinButtons = false;
 
   /**
    * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
@@ -172,13 +165,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
   @property() step: number | "any";
 
   /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
-  @property() autocapitalize:
-    | "off"
-    | "none"
-    | "on"
-    | "sentences"
-    | "words"
-    | "characters";
+  @property() autocapitalize: "off" | "none" | "on" | "sentences" | "words" | "characters";
 
   /** Indicates whether the browser's autocorrect feature is on or off. */
   @property() autocorrect: "off" | "on";
@@ -193,22 +180,15 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
   @property({ type: Boolean }) autofocus: boolean;
 
   /** Used to customize the label or icon of the Enter key on virtual keyboards. */
-  @property() enterkeyhint:
-    | "enter"
-    | "done"
-    | "go"
-    | "next"
-    | "previous"
-    | "search"
-    | "send";
+  @property() enterkeyhint: "enter" | "done" | "go" | "next" | "previous" | "search" | "send";
 
   /** Enables spell checking on the input. */
   @property({
     type: Boolean,
     converter: {
       // Allow "true|false" attribute values but keep the property boolean
-      fromAttribute: (value) => (!value || value === "false" ? false : true),
-      toAttribute: (value) => (value ? "true" : "false"),
+      fromAttribute: value => (!value || value === "false" ? false : true),
+      toAttribute: value => (value ? "true" : "false"),
     },
   })
   spellcheck = true;
@@ -217,15 +197,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
    * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
    * keyboard on supportive devices.
    */
-  @property() inputmode:
-    | "none"
-    | "text"
-    | "decimal"
-    | "numeric"
-    | "tel"
-    | "search"
-    | "email"
-    | "url";
+  @property() inputmode: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
 
   //
   // NOTE: We use an in-memory input for these getters/setters instead of the one in the template because the properties
@@ -312,8 +284,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    const hasModifier =
-      event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
 
     // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
     // submitting to allow users to cancel the keydown event if they need to
@@ -377,11 +348,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
     selectionEnd: number,
     selectionDirection: "forward" | "backward" | "none" = "none",
   ) {
-    this.input.setSelectionRange(
-      selectionStart,
-      selectionEnd,
-      selectionDirection,
-    );
+    this.input.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
   }
 
   /** Replaces a range of text with a new string. */
@@ -394,12 +361,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
     const selectionStart = start ?? this.input.selectionStart!;
     const selectionEnd = end ?? this.input.selectionEnd!;
 
-    this.input.setRangeText(
-      replacement,
-      selectionStart,
-      selectionEnd,
-      selectMode,
-    );
+    this.input.setRangeText(replacement, selectionStart, selectionEnd, selectMode);
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
@@ -456,8 +418,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const hasClearIcon = this.clearable && !this.disabled && !this.readonly;
-    const isClearIconVisible =
-      hasClearIcon && (typeof this.value === "number" || this.value.length > 0);
+    const isClearIconVisible = hasClearIcon && (typeof this.value === "number" || this.value.length > 0);
 
     return html`
       <div
@@ -509,13 +470,8 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
               part="input"
               id="input"
               class="input__control"
-              type=${this.type === "password" && this.passwordVisible
-                ? "text"
-                : this.type}
-              title=${
-                this
-                  .title /* An empty title prevents browser validation tooltips from appearing on hover */
-              }
+              type=${this.type === "password" && this.passwordVisible ? "text" : this.type}
+              title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}
               ?readonly=${this.readonly}
@@ -566,9 +522,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
                     part="password-toggle-button"
                     class="input__password-toggle"
                     type="button"
-                    aria-label=${this.localize.term(
-                      this.passwordVisible ? "hidePassword" : "showPassword",
-                    )}
+                    aria-label=${this.localize.term(this.passwordVisible ? "hidePassword" : "showPassword")}
                     @click=${this.handlePasswordToggle}
                     tabindex="-1"
                   >

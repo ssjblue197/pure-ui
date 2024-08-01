@@ -7,9 +7,7 @@ describe("<p-progress-bar>", () => {
 
   describe("when provided just a value parameter", () => {
     before(async () => {
-      el = await fixture<PProgressBar>(
-        html`<p-progress-bar value="25"></p-progress-bar>`,
-      );
+      el = await fixture<PProgressBar>(html`<p-progress-bar value="25"></p-progress-bar>`);
     });
 
     it("should pass accessibility tests", async () => {
@@ -22,12 +20,7 @@ describe("<p-progress-bar>", () => {
     let indicator: HTMLDivElement;
 
     before(async () => {
-      el = await fixture<PProgressBar>(
-        html`<p-progress-bar
-          title="Titled Progress Ring"
-          value="25"
-        ></p-progress-bar>`,
-      );
+      el = await fixture<PProgressBar>(html`<p-progress-bar title="Titled Progress Ring" value="25"></p-progress-bar>`);
       base = el.shadowRoot!.querySelector('[part~="base"]')!;
       indicator = el.shadowRoot!.querySelector('[part~="indicator"]')!;
     });
@@ -50,10 +43,7 @@ describe("<p-progress-bar>", () => {
 
     before(async () => {
       el = await fixture<PProgressBar>(
-        html`<p-progress-bar
-          title="Titled Progress Ring"
-          indeterminate
-        ></p-progress-bar>`,
+        html`<p-progress-bar title="Titled Progress Ring" indeterminate></p-progress-bar>`,
       );
       base = el.shadowRoot!.querySelector('[part~="base"]')!;
     });
@@ -63,19 +53,14 @@ describe("<p-progress-bar>", () => {
     });
 
     it('should append a progress-bar--indeterminate class to the "base" part.', () => {
-      expect(base.classList.value.trim()).to.eq(
-        "progress-bar progress-bar--indeterminate",
-      );
+      expect(base.classList.value.trim()).to.eq("progress-bar progress-bar--indeterminate");
     });
   });
 
   describe("when provided a ariaLabel, and value parameter", () => {
     before(async () => {
       el = await fixture<PProgressBar>(
-        html`<p-progress-bar
-          ariaLabel="Labelled Progress Ring"
-          value="25"
-        ></p-progress-bar>`,
+        html`<p-progress-bar ariaLabel="Labelled Progress Ring" value="25"></p-progress-bar>`,
       );
     });
 

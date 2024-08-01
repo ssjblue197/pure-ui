@@ -28,9 +28,6 @@ export default class PDivider extends PureElement {
 
   @watch("vertical")
   handleVerticalChange() {
-    this.setAttribute(
-      "aria-orientation",
-      this.vertical ? "vertical" : "horizontal",
-    );
+    this.setAttribute("aria-orientation", this.vertical ? "vertical" : "horizontal");
   }
 }

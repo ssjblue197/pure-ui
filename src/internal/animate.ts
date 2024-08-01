@@ -1,12 +1,8 @@
 /**
  * Animates an element using keyframes. Returns a promise that resolves after the animation completes or gets canceled.
  */
-export function animateTo(
-  el: HTMLElement,
-  keyframes: Keyframe[],
-  options?: KeyframeAnimationOptions,
-) {
-  return new Promise((resolve) => {
+export function animateTo(el: HTMLElement, keyframes: Keyframe[], options?: KeyframeAnimationOptions) {
+  return new Promise(resolve => {
     if (options?.duration === Infinity) {
       throw new Error("Promise-based animations must be finite.");
     }
@@ -47,8 +43,8 @@ export function prefersReducedMotion() {
  */
 export function stopAnimations(el: HTMLElement) {
   return Promise.all(
-    el.getAnimations().map((animation) => {
-      return new Promise((resolve) => {
+    el.getAnimations().map(animation => {
+      return new Promise(resolve => {
         animation.cancel();
         requestAnimationFrame(resolve);
       });
@@ -60,13 +56,9 @@ export function stopAnimations(el: HTMLElement) {
  * We can't animate `height: auto`, but we can calculate the height and shim keyframes by replacing it with the
  * element's scrollHeight before the animation.
  */
-export function shimKeyframesHeightAuto(
-  keyframes: Keyframe[],
-  calculatedHeight: number,
-) {
-  return keyframes.map((keyframe) => ({
+export function shimKeyframesHeightAuto(keyframes: Keyframe[], calculatedHeight: number) {
+  return keyframes.map(keyframe => ({
     ...keyframe,
-    height:
-      keyframe.height === "auto" ? `${calculatedHeight}px` : keyframe.height,
+    height: keyframe.height === "auto" ? `${calculatedHeight}px` : keyframe.height,
   }));
 }

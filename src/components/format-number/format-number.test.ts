@@ -5,9 +5,7 @@ import type PFormatNumber from "./format-number.js";
 describe("<p-format-number>", () => {
   describe("defaults ", () => {
     it("default properties", async () => {
-      const el = await fixture<PFormatNumber>(html`
-        <p-format-number></p-format-number>
-      `);
+      const el = await fixture<PFormatNumber>(html` <p-format-number></p-format-number> `);
       expect(el.value).to.equal(0);
 
       expect(el.lang).to.be.undefined;
@@ -24,24 +22,22 @@ describe("<p-format-number>", () => {
   });
 
   describe("lang property", () => {
-    ["de", "de-CH", "fr", "es", "he", "ja", "nl", "pl", "pt", "ru"].forEach(
-      (lang) => {
-        it(`number has correct language format: ${lang}`, async () => {
-          const el = await fixture<PFormatNumber>(html`
-            <p-format-number value="1000" lang="${lang}"></p-format-number>
-          `);
-          const expected = new Intl.NumberFormat(lang, {
-            style: "decimal",
-            useGrouping: true,
-          }).format(1000);
-          expect(el.shadowRoot?.textContent).to.equal(expected);
-        });
-      },
-    );
+    ["de", "de-CH", "fr", "es", "he", "ja", "nl", "pl", "pt", "ru"].forEach(lang => {
+      it(`number has correct language format: ${lang}`, async () => {
+        const el = await fixture<PFormatNumber>(html`
+          <p-format-number value="1000" lang="${lang}"></p-format-number>
+        `);
+        const expected = new Intl.NumberFormat(lang, {
+          style: "decimal",
+          useGrouping: true,
+        }).format(1000);
+        expect(el.shadowRoot?.textContent).to.equal(expected);
+      });
+    });
   });
 
   describe("type property", () => {
-    ["currency", "decimal", "percent"].forEach((type) => {
+    ["currency", "decimal", "percent"].forEach(type => {
       it(`number has correct type format: ${type}`, async () => {
         const el = await fixture<PFormatNumber>(html`
           <p-format-number value="1000" type="${type}"></p-format-number>
@@ -57,9 +53,7 @@ describe("<p-format-number>", () => {
 
   describe("noGrouping property", () => {
     it(`number has correct grouping format: no grouping`, async () => {
-      const el = await fixture<PFormatNumber>(html`
-        <p-format-number value="1000" no-grouping></p-format-number>
-      `);
+      const el = await fixture<PFormatNumber>(html` <p-format-number value="1000" no-grouping></p-format-number> `);
       const expected = new Intl.NumberFormat("en-US", {
         useGrouping: false,
       }).format(1000);
@@ -67,9 +61,7 @@ describe("<p-format-number>", () => {
     });
 
     it(`number has correct grouping format: grouping`, async () => {
-      const el = await fixture<PFormatNumber>(html`
-        <p-format-number value="1000"></p-format-number>
-      `);
+      const el = await fixture<PFormatNumber>(html` <p-format-number value="1000"></p-format-number> `);
       const expected = new Intl.NumberFormat("en-US", {
         useGrouping: true,
       }).format(1000);
@@ -78,13 +70,10 @@ describe("<p-format-number>", () => {
   });
 
   describe("currency property", () => {
-    ["USD", "CAD", "AUD", "UAH"].forEach((currency) => {
+    ["USD", "CAD", "AUD", "UAH"].forEach(currency => {
       it(`number has correct type format: ${currency}`, async () => {
         const el = await fixture<PFormatNumber>(html`
-          <p-format-number
-            value="1000"
-            currency="${currency}"
-          ></p-format-number>
+          <p-format-number value="1000" currency="${currency}"></p-format-number>
         `);
         const expected = new Intl.NumberFormat("en-US", {
           style: "decimal",
@@ -96,13 +85,10 @@ describe("<p-format-number>", () => {
   });
 
   describe("currencyDisplay property", () => {
-    ["symbol", "narrowSymbol", "code", "name"].forEach((currencyDisplay) => {
+    ["symbol", "narrowSymbol", "code", "name"].forEach(currencyDisplay => {
       it(`number has correct type format: ${currencyDisplay}`, async () => {
         const el = await fixture<PFormatNumber>(html`
-          <p-format-number
-            value="1000"
-            currency-display="${currencyDisplay}"
-          ></p-format-number>
+          <p-format-number value="1000" currency-display="${currencyDisplay}"></p-format-number>
         `);
         const expected = new Intl.NumberFormat("en-US", {
           style: "decimal",
@@ -114,13 +100,10 @@ describe("<p-format-number>", () => {
   });
 
   describe("minimumIntegerDigits property", () => {
-    [4, 5, 6].forEach((minDigits) => {
+    [4, 5, 6].forEach(minDigits => {
       it(`number has correct type format: ${minDigits}`, async () => {
         const el = await fixture<PFormatNumber>(html`
-          <p-format-number
-            value="1000"
-            minimum-integer-digits="${minDigits}"
-          ></p-format-number>
+          <p-format-number value="1000" minimum-integer-digits="${minDigits}"></p-format-number>
         `);
         const expected = new Intl.NumberFormat("en-US", {
           style: "decimal",
@@ -133,13 +116,10 @@ describe("<p-format-number>", () => {
   });
 
   describe("minimumFractionDigits property", () => {
-    [4, 5, 6].forEach((minFractionDigits) => {
+    [4, 5, 6].forEach(minFractionDigits => {
       it(`number has correct type format: ${minFractionDigits}`, async () => {
         const el = await fixture<PFormatNumber>(html`
-          <p-format-number
-            value="1000"
-            minimum-fraction-digits="${minFractionDigits}"
-          ></p-format-number>
+          <p-format-number value="1000" minimum-fraction-digits="${minFractionDigits}"></p-format-number>
         `);
         const expected = new Intl.NumberFormat("en-US", {
           style: "decimal",
@@ -152,13 +132,10 @@ describe("<p-format-number>", () => {
   });
 
   describe("maximumFractionDigits property", () => {
-    [4, 5, 6].forEach((maxFractionDigits) => {
+    [4, 5, 6].forEach(maxFractionDigits => {
       it(`number has correct type format: ${maxFractionDigits}`, async () => {
         const el = await fixture<PFormatNumber>(html`
-          <p-format-number
-            value="1000"
-            maximum-fraction-digits="${maxFractionDigits}"
-          ></p-format-number>
+          <p-format-number value="1000" maximum-fraction-digits="${maxFractionDigits}"></p-format-number>
         `);
         const expected = new Intl.NumberFormat("en-US", {
           style: "decimal",
@@ -171,13 +148,10 @@ describe("<p-format-number>", () => {
   });
 
   describe("minimumSignificantDigits property", () => {
-    [4, 5, 6].forEach((minSignificantDigits) => {
+    [4, 5, 6].forEach(minSignificantDigits => {
       it(`number has correct type format: ${minSignificantDigits}`, async () => {
         const el = await fixture<PFormatNumber>(html`
-          <p-format-number
-            value="1000"
-            minimum-significant-digits="${minSignificantDigits}"
-          ></p-format-number>
+          <p-format-number value="1000" minimum-significant-digits="${minSignificantDigits}"></p-format-number>
         `);
         const expected = new Intl.NumberFormat("en-US", {
           style: "decimal",
@@ -190,13 +164,10 @@ describe("<p-format-number>", () => {
   });
 
   describe("maximumSignificantDigits property", () => {
-    [4, 5, 6].forEach((maxSignificantDigits) => {
+    [4, 5, 6].forEach(maxSignificantDigits => {
       it(`number has correct type format: ${maxSignificantDigits}`, async () => {
         const el = await fixture<PFormatNumber>(html`
-          <p-format-number
-            value="1000"
-            maximum-significant-digits="${maxSignificantDigits}"
-          ></p-format-number>
+          <p-format-number value="1000" maximum-significant-digits="${maxSignificantDigits}"></p-format-number>
         `);
         const expected = new Intl.NumberFormat("en-US", {
           style: "decimal",

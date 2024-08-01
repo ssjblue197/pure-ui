@@ -207,8 +207,8 @@ Here's an example that registers an icon library located in the `/assets/icons` 
   import { registerIconLibrary } from "/dist/utilities/icon-library.js";
 
   registerIconLibrary("my-icons", {
-    resolver: (name) => `/assets/icons/${name}.svg`,
-    mutator: (svg) => svg.setAttribute("fill", "currentColor"),
+    resolver: name => `/assets/icons/${name}.svg`,
+    mutator: svg => svg.setAttribute("fill", "currentColor"),
   });
 </script>
 ```
@@ -629,8 +629,7 @@ This example will load the same set of icons from the jsDelivr CDN instead of yo
   import { registerIconLibrary } from "/dist/utilities/icon-library.js";
 
   registerIconLibrary("default", {
-    resolver: (name) =>
-      `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.0.0/icons/${name}.svg`,
+    resolver: name => `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.0.0/icons/${name}.svg`,
   });
 </script>
 ```
@@ -677,7 +676,7 @@ If you want to change the icons Pure UI uses internally, you can register an ico
   import { registerIconLibrary } from "/dist/utilities/icon-library.js";
 
   registerIconLibrary("system", {
-    resolver: (name) => `/path/to/custom/icons/${name}.svg`,
+    resolver: name => `/path/to/custom/icons/${name}.svg`,
   });
 </script>
 ```

@@ -17,7 +17,7 @@ const translation: Translation = {
   hidePassword: "隐藏密码",
   loading: "加载中",
   nextSlide: "下一张幻灯片",
-  numOptionsSelected: (num) => {
+  numOptionsSelected: num => {
     if (num === 0) return "未选择任何项目";
     if (num === 1) return "已选择 1 个项目";
     return `${num} 选择项目`;
@@ -30,7 +30,7 @@ const translation: Translation = {
   scrollToStart: "滚动至页首",
   selectAColorFromTheScreen: "从屏幕中选择一种颜色",
   showPassword: "显示密码",
-  slideNum: (slide) => `幻灯片 ${slide}`,
+  slideNum: slide => `幻灯片 ${slide}`,
   toggleColorFormat: "切换颜色模式",
 };
 

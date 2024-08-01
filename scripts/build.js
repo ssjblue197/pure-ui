@@ -24,9 +24,7 @@ let childProcess;
 let buildResults;
 
 const bundleDirectories = [cdndir, outdir];
-let packageData = JSON.parse(
-  readFileSync(path.join(process.cwd(), "package.json"), "utf-8"),
-);
+let packageData = JSON.parse(readFileSync(path.join(process.cwd(), "package.json"), "utf-8"));
 const pureUIVersion = JSON.stringify(packageData.version.toString());
 
 //
@@ -53,25 +51,25 @@ async function buildTheDocs(watch = false) {
       shell: true, // for Windows
     });
 
-    child.stdout.on("data", (data) => {
+    child.stdout.on("data", data => {
       if (data.includes(afterSignal)) return; // don't log the signal
       output.push(data.toString());
     });
 
-    child.stderr.on("data", (data) => {
+    child.stderr.on("data", data => {
       output.push(data.toString());
     });
 
     if (watch) {
       // The process doesn't terminate in watch mode so, before resolving, we listen for a known signal in stdout that
       // tells us when the first build completes.
-      child.stdout.on("data", (data) => {
+      child.stdout.on("data", data => {
         if (data.includes(afterSignal)) {
           resolve({ child, output });
         }
       });
 
-      child.stderr.on("data", (data) => {
+      child.stderr.on("data", data => {
         if (data.includes(errorSignal)) {
           // This closes the dev server, not sure if thats what we want?
           reject(output);
@@ -145,18 +143,12 @@ async function buildTheSource() {
 
   if (serve) {
     // Use the context API to allow incremental dev builds
-    const contexts = await Promise.all([
-      esbuild.context(cdnConfig),
-      esbuild.context(npmConfig),
-    ]);
-    await Promise.all(contexts.map((context) => context.rebuild()));
+    const contexts = await Promise.all([esbuild.context(cdnConfig), esbuild.context(npmConfig)]);
+    await Promise.all(contexts.map(context => context.rebuild()));
     return contexts;
   } else {
     // Use the standard API for production builds
-    return await Promise.all([
-      esbuild.build(cdnConfig),
-      esbuild.build(npmConfig),
-    ]);
+    return await Promise.all([esbuild.build(cdnConfig), esbuild.build(npmConfig)]);
   }
 }
 
@@ -164,7 +156,7 @@ async function buildTheSource() {
 // Called on SIGINT or SIGTERM to cleanup the build and child processes.
 //
 function handleCleanup() {
-  buildResults.forEach((result) => result.dispose());
+  buildResults.forEach(result => result.dispose());
 
   if (childProcess) {
     childProcess.kill("SIGINT");
@@ -194,16 +186,13 @@ async function nextTask(label, action) {
 }
 
 await nextTask("Cleaning up the previous build", async () => {
-  await Promise.all([
-    deleteAsync(sitedir),
-    ...bundleDirectories.map((dir) => deleteAsync(dir)),
-  ]);
+  await Promise.all([deleteAsync(sitedir), ...bundleDirectories.map(dir => deleteAsync(dir))]);
   await fs.mkdir(outdir, { recursive: true });
 });
 
 await nextTask("Generating component metadata", () => {
   return Promise.all(
-    bundleDirectories.map((dir) => {
+    bundleDirectories.map(dir => {
       return execPromise(`node scripts/make-metadata.js --outdir "${dir}"`, {
         stdio: "inherit",
       });
@@ -230,10 +219,7 @@ await nextTask("Packaging up icons", () => {
 });
 
 await nextTask("Running the TypeScript compiler", () => {
-  return execPromise(
-    `tsc --project ./tsconfig.prod.json --outdir "${outdir}"`,
-    { stdio: "inherit" },
-  );
+  return execPromise(`tsc --project ./tsconfig.prod.json --outdir "${outdir}"`, { stdio: "inherit" });
 });
 
 // Copy the above steps to the CDN directory directly so we don't need to twice the work for nothing.
@@ -298,13 +284,13 @@ if (serve) {
     }
 
     // Log output that comes later on
-    result.child.stdout.on("data", (data) => {
+    result.child.stdout.on("data", data => {
       console.log(data.toString());
     });
   });
 
   // Rebuild and reload when source files change
-  bs.watch("src/**/!(*.test).*").on("change", async (filename) => {
+  bs.watch("src/**/!(*.test).*").on("change", async filename => {
     console.log("[build] File changed: ", filename);
 
     try {
@@ -312,13 +298,13 @@ if (serve) {
       const isStylesheet = /(\.css|\.styles\.ts)$/.test(filename);
 
       // Rebuild the source
-      const rebuildResults = buildResults.map((result) => result.rebuild());
+      const rebuildResults = buildResults.map(result => result.rebuild());
       await Promise.all(rebuildResults);
 
       // Rebuild stylesheets when a theme file changes
       if (isTheme) {
         await Promise.all(
-          bundleDirectories.map((dir) => {
+          bundleDirectories.map(dir => {
             execPromise(`node scripts/make-themes.js --outdir "${dir}"`, {
               stdio: "inherit",
             });
@@ -329,11 +315,8 @@ if (serve) {
       // Rebuild metadata (but not when styles are changed)
       if (!isStylesheet) {
         await Promise.all(
-          bundleDirectories.map((dir) => {
-            return execPromise(
-              `node scripts/make-metadata.js --outdir "${dir}"`,
-              { stdio: "inherit" },
-            );
+          bundleDirectories.map(dir => {
+            return execPromise(`node scripts/make-metadata.js --outdir "${dir}"`, { stdio: "inherit" });
           }),
         );
       }
@@ -345,7 +328,7 @@ if (serve) {
   });
 
   // Reload without rebuilding when the docs change
-  bs.watch([`${sitedir}/**/*.*`]).on("change", (filename) => {
+  bs.watch([`${sitedir}/**/*.*`]).on("change", filename => {
     bs.reload();
   });
 }

@@ -92,10 +92,8 @@ export default css`
     left: 0;
     clip-path: polygon(
       var(--safe-triangle-cursor-x, 0) var(--safe-triangle-cursor-y, 0),
-      var(--safe-triangle-submenu-start-x, 0)
-        var(--safe-triangle-submenu-start-y, 0),
-      var(--safe-triangle-submenu-end-x, 0)
-        var(--safe-triangle-submenu-end-y, 0)
+      var(--safe-triangle-submenu-start-x, 0) var(--safe-triangle-submenu-start-y, 0),
+      var(--safe-triangle-submenu-end-x, 0) var(--safe-triangle-submenu-end-y, 0)
     );
   }
 

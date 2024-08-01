@@ -18,7 +18,7 @@ module.exports = function (doc, options) {
   const within = doc.querySelector(options.within);
 
   if (within) {
-    within.querySelectorAll("a").forEach((link) => {
+    within.querySelectorAll("a").forEach(link => {
       if (isExternalLink(link) && !options.ignore(link)) {
         link.classList.add(options.className);
 

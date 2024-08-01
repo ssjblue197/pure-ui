@@ -1,12 +1,5 @@
 import "../../../dist/pure-ui.js";
-import {
-  aTimeout,
-  expect,
-  fixture,
-  html,
-  oneEvent,
-  waitUntil,
-} from "@open-wc/testing";
+import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from "@open-wc/testing";
 import { clickOnElement } from "../../internal/test.js";
 import { runFormControlBaseTests } from "../../internal/test/form-control-base-tests.js";
 import { sendKeys } from "@web/test-runner-commands";
@@ -62,9 +55,7 @@ describe("<p-select>", () => {
         <p-option value="option-3">Option 3</p-option>
       </p-select>
     `);
-    const displayInput = el.shadowRoot!.querySelector<HTMLInputElement>(
-      '[part~="display-input"]',
-    )!;
+    const displayInput = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="display-input"]')!;
 
     expect(getComputedStyle(displayInput).opacity).to.not.equal("0");
     expect(displayInput.placeholder).to.equal("Select one");
@@ -78,9 +69,7 @@ describe("<p-select>", () => {
         <p-option value="option-3">Option 3</p-option>
       </p-select>
     `);
-    const displayInput = el.shadowRoot!.querySelector<HTMLInputElement>(
-      '[part~="display-input"]',
-    )!;
+    const displayInput = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="display-input"]')!;
 
     expect(getComputedStyle(displayInput).opacity).to.not.equal("0");
     expect(displayInput.placeholder).to.equal("Select a few");
@@ -185,12 +174,8 @@ describe("<p-select>", () => {
         </p-select>
       `);
 
-      el.addEventListener("p-change", () =>
-        expect.fail("p-change should not be emitted"),
-      );
-      el.addEventListener("p-input", () =>
-        expect.fail("p-input should not be emitted"),
-      );
+      el.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+      el.addEventListener("p-input", () => expect.fail("p-input should not be emitted"));
       el.value = "option-2";
 
       await el.updateComplete;
@@ -207,9 +192,7 @@ describe("<p-select>", () => {
       const option2 = el.querySelectorAll("p-option")[1];
       const handler = sinon.spy((event: CustomEvent) => {
         if (el.validationMessage) {
-          expect.fail(
-            `Validation message should be empty when ${event.type} is emitted and a value is set`,
-          );
+          expect.fail(`Validation message should be empty when ${event.type} is emitted and a value is set`);
         }
       });
 
@@ -233,9 +216,7 @@ describe("<p-select>", () => {
         <p-option value="option-3">Option 3</p-option>
       </p-select>
     `);
-    const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>(
-      ".select__display-input",
-    )!;
+    const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>(".select__display-input")!;
 
     el.focus();
     await sendKeys({ press: "r" });
@@ -252,9 +233,7 @@ describe("<p-select>", () => {
         <p-option value="option-3">Option 3</p-option>
       </p-select>
     `);
-    const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>(
-      ".select__display-input",
-    )!;
+    const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>(".select__display-input")!;
 
     el.focus();
     await sendKeys({ down: "Control" });
@@ -441,9 +420,7 @@ describe("<p-select>", () => {
         </form>
       `);
       const json = serialize(form);
-      expect(JSON.stringify(json)).to.equal(
-        JSON.stringify({ a: ["option-2", "option-3"] }),
-      );
+      expect(JSON.stringify(json)).to.equal(JSON.stringify({ a: ["option-2", "option-3"] }));
     });
 
     it("should be present in form data when using the form attribute and located outside of a <form>", async () => {
@@ -500,9 +477,7 @@ describe("<p-select>", () => {
         <p-option value="option-3">Option 3</p-option>
       </p-select>
     `);
-    const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>(
-      ".select__display-input",
-    )!;
+    const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>(".select__display-input")!;
     const option = el.querySelector("p-option")!;
 
     expect(displayInput.value).to.equal("Option 1");
@@ -567,9 +542,7 @@ describe("<p-select>", () => {
     const changeHandler = sinon.spy();
     const inputHandler = sinon.spy();
     const tag = el.shadowRoot!.querySelector('[part~="tag"]')!;
-    const removeButton = tag.shadowRoot!.querySelector(
-      '[part~="remove-button"]',
-    )!;
+    const removeButton = tag.shadowRoot!.querySelector('[part~="remove-button"]')!;
 
     el.addEventListener("p-change", changeHandler);
     el.addEventListener("p-input", inputHandler);

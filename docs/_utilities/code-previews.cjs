@@ -1,11 +1,7 @@
 let count = 1;
 
 function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+  return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
 /**
@@ -22,15 +18,12 @@ module.exports = function (doc, options) {
     return doc;
   }
 
-  within.querySelectorAll('[class*=":preview"]').forEach((code) => {
+  within.querySelectorAll('[class*=":preview"]').forEach(code => {
     const pre = code.closest("pre");
     if (!pre) {
       return;
     }
-    const adjacentPre =
-      pre.nextElementSibling?.tagName.toLowerCase() === "pre"
-        ? pre.nextElementSibling
-        : null;
+    const adjacentPre = pre.nextElementSibling?.tagName.toLowerCase() === "pre" ? pre.nextElementSibling : null;
     const reactCode = adjacentPre?.querySelector('code[class$="react"]');
     const sourceGroupId = `code-preview-source-group-${count}`;
     const isExpanded = code.getAttribute("class").includes(":expanded");
@@ -131,7 +124,7 @@ module.exports = function (doc, options) {
   });
 
   // Wrap code preview scripts in anonymous functions so they don't run in the global scope
-  doc.querySelectorAll(".code-preview__preview script").forEach((script) => {
+  doc.querySelectorAll(".code-preview__preview script").forEach(script => {
     if (script.type === "module") {
       // Modules are already scoped
       script.textContent = script.innerHTML;

@@ -8,9 +8,7 @@ import type PTextarea from "./textarea.js";
 
 describe("<p-textarea>", () => {
   it("should pass accessibility tests", async () => {
-    const el = await fixture<PTextarea>(html`
-      <p-textarea label="Name"></p-textarea>
-    `);
+    const el = await fixture<PTextarea>(html` <p-textarea label="Name"></p-textarea> `);
     await expect(el).to.be.accessible();
   });
 
@@ -43,28 +41,21 @@ describe("<p-textarea>", () => {
   });
 
   it("should have title if title attribute is set", async () => {
-    const el = await fixture<PTextarea>(html`
-      <p-textarea title="Test"></p-textarea>
-    `);
+    const el = await fixture<PTextarea>(html` <p-textarea title="Test"></p-textarea> `);
     const textarea = el.shadowRoot!.querySelector("textarea")!;
 
     expect(textarea.title).to.equal("Test");
   });
 
   it("should be disabled with the disabled attribute", async () => {
-    const el = await fixture<PTextarea>(html`
-      <p-textarea disabled></p-textarea>
-    `);
-    const textarea =
-      el.shadowRoot!.querySelector<HTMLTextAreaElement>('[part~="textarea"]')!;
+    const el = await fixture<PTextarea>(html` <p-textarea disabled></p-textarea> `);
+    const textarea = el.shadowRoot!.querySelector<HTMLTextAreaElement>('[part~="textarea"]')!;
 
     expect(textarea.disabled).to.be.true;
   });
 
   it("should focus the textarea when clicking on the label", async () => {
-    const el = await fixture<PTextarea>(html`
-      <p-textarea label="Name"></p-textarea>
-    `);
+    const el = await fixture<PTextarea>(html` <p-textarea label="Name"></p-textarea> `);
     const label = el.shadowRoot!.querySelector('[part~="form-control-label"]')!;
     const submitHandler = sinon.spy();
 
@@ -95,28 +86,18 @@ describe("<p-textarea>", () => {
     it("should not emit p-change or p-input when the value is set programmatically", async () => {
       const el = await fixture<PTextarea>(html` <p-textarea></p-textarea> `);
 
-      el.addEventListener("p-change", () =>
-        expect.fail("p-change should not be emitted"),
-      );
-      el.addEventListener("p-input", () =>
-        expect.fail("p-input should not be emitted"),
-      );
+      el.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+      el.addEventListener("p-input", () => expect.fail("p-input should not be emitted"));
       el.value = "abc";
 
       await el.updateComplete;
     });
 
     it("should not emit p-change or p-input when calling setRangeText()", async () => {
-      const el = await fixture<PTextarea>(html`
-        <p-textarea value="hi there"></p-textarea>
-      `);
+      const el = await fixture<PTextarea>(html` <p-textarea value="hi there"></p-textarea> `);
 
-      el.addEventListener("p-change", () =>
-        expect.fail("p-change should not be emitted"),
-      );
-      el.addEventListener("p-input", () =>
-        expect.fail("p-input should not be emitted"),
-      );
+      el.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+      el.addEventListener("p-input", () => expect.fail("p-input should not be emitted"));
       el.focus();
       el.setSelectionRange(0, 2);
       el.setRangeText("hello");
@@ -133,17 +114,13 @@ describe("<p-textarea>", () => {
     });
 
     it("should be invalid when required and empty", async () => {
-      const el = await fixture<PTextarea>(html`
-        <p-textarea required></p-textarea>
-      `);
+      const el = await fixture<PTextarea>(html` <p-textarea required></p-textarea> `);
 
       expect(el.checkValidity()).to.be.false;
     });
 
     it("should be invalid when required and after removing disabled ", async () => {
-      const el = await fixture<PTextarea>(html`
-        <p-textarea disabled required></p-textarea>
-      `);
+      const el = await fixture<PTextarea>(html` <p-textarea disabled required></p-textarea> `);
 
       el.disabled = false;
       await el.updateComplete;
@@ -152,18 +129,14 @@ describe("<p-textarea>", () => {
     });
 
     it("should be invalid when required and disabled is removed", async () => {
-      const el = await fixture<PTextarea>(html`
-        <p-textarea disabled required></p-textarea>
-      `);
+      const el = await fixture<PTextarea>(html` <p-textarea disabled required></p-textarea> `);
       el.disabled = false;
       await el.updateComplete;
       expect(el.checkValidity()).to.be.false;
     });
 
     it('should receive the correct validation attributes ("states") when valid', async () => {
-      const el = await fixture<PTextarea>(html`
-        <p-textarea required value="a"></p-textarea>
-      `);
+      const el = await fixture<PTextarea>(html` <p-textarea required value="a"></p-textarea> `);
 
       expect(el.checkValidity()).to.be.true;
       expect(el.hasAttribute("data-required")).to.be.true;
@@ -185,9 +158,7 @@ describe("<p-textarea>", () => {
     });
 
     it('should receive the correct validation attributes ("states") when invalid', async () => {
-      const el = await fixture<PTextarea>(html`
-        <p-textarea required></p-textarea>
-      `);
+      const el = await fixture<PTextarea>(html` <p-textarea required></p-textarea> `);
 
       expect(el.hasAttribute("data-required")).to.be.true;
       expect(el.hasAttribute("data-optional")).to.be.false;
@@ -208,9 +179,7 @@ describe("<p-textarea>", () => {
     });
 
     it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
-      const el = await fixture<HTMLFormElement>(html`
-        <form novalidate><p-textarea required></p-textarea></form>
-      `);
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><p-textarea required></p-textarea></form> `);
       const textarea = el.querySelector<PTextarea>("p-textarea")!;
 
       expect(textarea.hasAttribute("data-required")).to.be.true;
@@ -224,25 +193,19 @@ describe("<p-textarea>", () => {
 
   describe("when submitting a form", () => {
     it("should serialize its name and value with FormData", async () => {
-      const form = await fixture<HTMLFormElement>(html`
-        <form><p-textarea name="a" value="1"></p-textarea></form>
-      `);
+      const form = await fixture<HTMLFormElement>(html` <form><p-textarea name="a" value="1"></p-textarea></form> `);
       const formData = new FormData(form);
       expect(formData.get("a")).to.equal("1");
     });
 
     it("should serialize its name and value with JSON", async () => {
-      const form = await fixture<HTMLFormElement>(html`
-        <form><p-textarea name="a" value="1"></p-textarea></form>
-      `);
+      const form = await fixture<HTMLFormElement>(html` <form><p-textarea name="a" value="1"></p-textarea></form> `);
       const json = serialize(form);
       expect(json.a).to.equal("1");
     });
 
     it("should be invalid when setCustomValidity() is called with a non-empty value", async () => {
-      const textarea = await fixture<HTMLFormElement>(html`
-        <p-textarea></p-textarea>
-      `);
+      const textarea = await fixture<HTMLFormElement>(html` <p-textarea></p-textarea> `);
 
       textarea.setCustomValidity("Invalid selection");
       await textarea.updateComplete;
@@ -312,28 +275,21 @@ describe("<p-textarea>", () => {
   describe("when using spellcheck", () => {
     it("should enable spellcheck when no attribute is present", async () => {
       const el = await fixture<PTextarea>(html` <p-textarea></p-textarea> `);
-      const textarea =
-        el.shadowRoot!.querySelector<HTMLTextAreaElement>("textarea")!;
+      const textarea = el.shadowRoot!.querySelector<HTMLTextAreaElement>("textarea")!;
       expect(textarea.getAttribute("spellcheck")).to.equal("true");
       expect(textarea.spellcheck).to.be.true;
     });
 
     it('should enable spellcheck when set to "true"', async () => {
-      const el = await fixture<PTextarea>(html`
-        <p-textarea spellcheck="true"></p-textarea>
-      `);
-      const textarea =
-        el.shadowRoot!.querySelector<HTMLTextAreaElement>("textarea")!;
+      const el = await fixture<PTextarea>(html` <p-textarea spellcheck="true"></p-textarea> `);
+      const textarea = el.shadowRoot!.querySelector<HTMLTextAreaElement>("textarea")!;
       expect(textarea.getAttribute("spellcheck")).to.equal("true");
       expect(textarea.spellcheck).to.be.true;
     });
 
     it('should disable spellcheck when set to "false"', async () => {
-      const el = await fixture<PTextarea>(html`
-        <p-textarea spellcheck="false"></p-textarea>
-      `);
-      const textarea =
-        el.shadowRoot!.querySelector<HTMLTextAreaElement>("textarea")!;
+      const el = await fixture<PTextarea>(html` <p-textarea spellcheck="false"></p-textarea> `);
+      const textarea = el.shadowRoot!.querySelector<HTMLTextAreaElement>("textarea")!;
       expect(textarea.getAttribute("spellcheck")).to.equal("false");
       expect(textarea.spellcheck).to.be.false;
     });
@@ -341,9 +297,7 @@ describe("<p-textarea>", () => {
 
   describe("when using the setRangeText() function", () => {
     it("should set replacement text in the correct location", async () => {
-      const el = await fixture<PTextarea>(html`
-        <p-textarea value="test"></p-textarea>
-      `);
+      const el = await fixture<PTextarea>(html` <p-textarea value="test"></p-textarea> `);
 
       el.focus();
       el.setSelectionRange(1, 3);

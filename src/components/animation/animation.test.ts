@@ -4,23 +4,16 @@ import { html } from "lit";
 import type PAnimation from "./animation.js";
 
 describe("<p-animation>", () => {
-  const boxToAnimate = html`<div
-    style="width: 10px; height: 10px;"
-    data-testid="animated-box"
-  ></div>`;
+  const boxToAnimate = html`<div style="width: 10px; height: 10px;" data-testid="animated-box"></div>`;
 
   it("renders", async () => {
-    const animationContainer = await fixture<PAnimation>(
-      html`<p-animation>${boxToAnimate}</p-animation>`,
-    );
+    const animationContainer = await fixture<PAnimation>(html`<p-animation>${boxToAnimate}</p-animation>`);
 
     expect(animationContainer).to.exist;
   });
 
   it("is accessible", async () => {
-    const animationContainer = await fixture<PAnimation>(
-      html`<p-animation>${boxToAnimate}</p-animation>`,
-    );
+    const animationContainer = await fixture<PAnimation>(html`<p-animation>${boxToAnimate}</p-animation>`);
 
     await expect(animationContainer).to.be.accessible();
   });
@@ -28,9 +21,7 @@ describe("<p-animation>", () => {
   describe("animation start", () => {
     it("does not start the animation by default", async () => {
       const animationContainer = await fixture<PAnimation>(
-        html`<p-animation name="bounce" easing="ease-in-out" duration="10"
-          >${boxToAnimate}</p-animation
-        >`,
+        html`<p-animation name="bounce" easing="ease-in-out" duration="10">${boxToAnimate}</p-animation>`,
       );
       await aTimeout(0);
 
@@ -39,9 +30,7 @@ describe("<p-animation>", () => {
 
     it("emits the correct event on animation start", async () => {
       const animationContainer = await fixture<PAnimation>(
-        html`<p-animation name="bounce" easing="ease-in-out" duration="10"
-          >${boxToAnimate}</p-animation
-        >`,
+        html`<p-animation name="bounce" easing="ease-in-out" duration="10">${boxToAnimate}</p-animation>`,
       );
 
       const startPromise = oneEvent(animationContainer, "p-start");
@@ -52,9 +41,7 @@ describe("<p-animation>", () => {
 
   it("emits the correct event on animation end", async () => {
     const animationContainer = await fixture<PAnimation>(
-      html`<p-animation name="bounce" easing="ease-in-out" duration="1"
-        >${boxToAnimate}</p-animation
-      >`,
+      html`<p-animation name="bounce" easing="ease-in-out" duration="1">${boxToAnimate}</p-animation>`,
     );
 
     const endPromise = oneEvent(animationContainer, "p-finish");
@@ -65,9 +52,7 @@ describe("<p-animation>", () => {
 
   it("can be finished by hand", async () => {
     const animationContainer = await fixture<PAnimation>(
-      html`<p-animation name="bounce" easing="ease-in-out" duration="1000"
-        >${boxToAnimate}</p-animation
-      >`,
+      html`<p-animation name="bounce" easing="ease-in-out" duration="1000">${boxToAnimate}</p-animation>`,
     );
 
     const endPromise = oneEvent(animationContainer, "p-finish");
@@ -82,14 +67,10 @@ describe("<p-animation>", () => {
 
   it("can be cancelled", async () => {
     const animationContainer = await fixture<PAnimation>(
-      html`<p-animation name="bounce" easing="ease-in-out" duration="1"
-        >${boxToAnimate}</p-animation
-      >`,
+      html`<p-animation name="bounce" easing="ease-in-out" duration="1">${boxToAnimate}</p-animation>`,
     );
     let animationHasFinished = false;
-    oneEvent(animationContainer, "p-finish").then(
-      () => (animationHasFinished = true),
-    );
+    oneEvent(animationContainer, "p-finish").then(() => (animationHasFinished = true));
     const cancelPromise = oneEvent(animationContainer, "p-cancel");
     animationContainer.play = true;
 

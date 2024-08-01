@@ -1,12 +1,5 @@
 import "../../../dist/pure-ui.js";
-import {
-  aTimeout,
-  expect,
-  fixture,
-  html,
-  triggerBlurFor,
-  triggerFocusFor,
-} from "@open-wc/testing";
+import { aTimeout, expect, fixture, html, triggerBlurFor, triggerFocusFor } from "@open-wc/testing";
 import { clickOnElement } from "../../internal/test.js";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
@@ -59,10 +52,7 @@ describe("<p-tree>", () => {
 
     // Assert
     expect(focusableItems).to.have.lengthOf(4);
-    expect(focusableItems).not.to.include.all.members([
-      childNode,
-      ...childNode.children,
-    ]);
+    expect(focusableItems).not.to.include.all.members([childNode, ...childNode.children]);
     expect(focusableItems).not.to.include.all.members([...parentNode.children]);
   });
 
@@ -87,7 +77,7 @@ describe("<p-tree>", () => {
       const treeItems = [...el.querySelectorAll("p-tree-item")];
 
       // Assert
-      treeItems.forEach((treeItem) => {
+      treeItems.forEach(treeItem => {
         expect(treeItem.querySelector('div[slot="expand-icon"]')).to.be.ok;
         expect(treeItem.querySelector('div[slot="collapse-icon"]')).to.be.ok;
       });
@@ -441,9 +431,7 @@ describe("<p-tree>", () => {
         const node = el.children[2] as PTreeItem;
         await node.updateComplete;
 
-        const expandButton: HTMLElement = node.shadowRoot!.querySelector(
-          ".tree-item__expand-button",
-        )!;
+        const expandButton: HTMLElement = node.shadowRoot!.querySelector(".tree-item__expand-button")!;
 
         // Act
         await clickOnElement(expandButton);
@@ -547,7 +535,7 @@ describe("<p-tree>", () => {
           // Assert
           expect(parentNode).to.have.attribute("selected");
           expect(parentNode.indeterminate).to.be.false;
-          parentNode.getChildrenItems().forEach((child) => {
+          parentNode.getChildrenItems().forEach(child => {
             expect(child).to.have.attribute("selected");
           });
         });
@@ -697,15 +685,13 @@ describe("<p-tree>", () => {
               </p-tree-item>
             </p-tree>
           `);
-          const treeItems = Array.from<PTreeItem>(
-            tree.querySelectorAll("p-tree-item"),
-          );
+          const treeItems = Array.from<PTreeItem>(tree.querySelectorAll("p-tree-item"));
 
           // Act
           await tree.updateComplete;
 
           // Assert
-          treeItems.forEach((treeItem) => {
+          treeItems.forEach(treeItem => {
             expect(treeItem).to.have.attribute("selected");
           });
         });
@@ -728,15 +714,13 @@ describe("<p-tree>", () => {
                 </p-tree-item>
               </p-tree>
             `);
-            const treeItems = Array.from<PTreeItem>(
-              tree.querySelectorAll("p-tree-item"),
-            );
+            const treeItems = Array.from<PTreeItem>(tree.querySelectorAll("p-tree-item"));
 
             // Act
             await tree.updateComplete;
 
             // Assert
-            treeItems.forEach((treeItem) => {
+            treeItems.forEach(treeItem => {
               expect(treeItem).to.have.attribute("selected");
             });
             expect(treeItems[0].indeterminate).to.be.false;
@@ -759,9 +743,7 @@ describe("<p-tree>", () => {
                 </p-tree-item>
               </p-tree>
             `);
-            const treeItems = Array.from<PTreeItem>(
-              tree.querySelectorAll("p-tree-item"),
-            );
+            const treeItems = Array.from<PTreeItem>(tree.querySelectorAll("p-tree-item"));
 
             // Act
             await tree.updateComplete;

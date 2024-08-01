@@ -31,12 +31,7 @@ import type { CSSResultGroup } from "lit";
 export default class PCard extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
-  private readonly hasSlotController = new HasSlotController(
-    this,
-    "footer",
-    "header",
-    "image",
-  );
+  private readonly hasSlotController = new HasSlotController(this, "footer", "header", "image");
 
   render() {
     return html`

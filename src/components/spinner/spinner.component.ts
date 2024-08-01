@@ -25,12 +25,7 @@ export default class PSpinner extends PureElement {
 
   render() {
     return html`
-      <svg
-        part="base"
-        class="spinner"
-        role="progressbar"
-        aria-label=${this.localize.term("loading")}
-      >
+      <svg part="base" class="spinner" role="progressbar" aria-label=${this.localize.term("loading")}>
         <circle class="spinner__track"></circle>
         <circle class="spinner__indicator"></circle>
       </svg>

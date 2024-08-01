@@ -1,8 +1,5 @@
 import { classMap } from "lit/directives/class-map.js";
-import {
-  getAnimation,
-  setDefaultAnimation,
-} from "../../utilities/animation-registry.js";
+import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
 import { html } from "lit";
 import { LocalizeController } from "../../utilities/localize.js";
 import { property, query, state } from "lit/decorators.js";
@@ -85,15 +82,10 @@ export default class PCopyButton extends PureElement {
   @property({ attribute: "error-label" }) errorLabel = "";
 
   /** The length of time to show feedback before restoring the default trigger. */
-  @property({ attribute: "feedback-duration", type: Number }) feedbackDuration =
-    1000;
+  @property({ attribute: "feedback-duration", type: Number }) feedbackDuration = 1000;
 
   /** The preferred placement of the tooltip. */
-  @property({ attribute: "tooltip-placement" }) tooltipPlacement:
-    | "top"
-    | "right"
-    | "bottom"
-    | "left" = "top";
+  @property({ attribute: "tooltip-placement" }) tooltipPlacement: "top" | "right" | "bottom" | "left" = "top";
 
   /**
    * Enable this option to prevent the tooltip from being clipped when the component is placed inside a container with
@@ -181,25 +173,19 @@ export default class PCopyButton extends PureElement {
     this.tooltip.content = status === "success" ? successLabel : errorLabel;
 
     // Show the feedback icon
-    await this.copyIcon.animate(hideAnimation.keyframes, hideAnimation.options)
-      .finished;
+    await this.copyIcon.animate(hideAnimation.keyframes, hideAnimation.options).finished;
     this.copyIcon.hidden = true;
     this.status = status;
     iconToShow.hidden = false;
-    await iconToShow.animate(showAnimation.keyframes, showAnimation.options)
-      .finished;
+    await iconToShow.animate(showAnimation.keyframes, showAnimation.options).finished;
 
     // After a brief delay, restore the original state
     setTimeout(async () => {
-      await iconToShow.animate(hideAnimation.keyframes, hideAnimation.options)
-        .finished;
+      await iconToShow.animate(hideAnimation.keyframes, hideAnimation.options).finished;
       iconToShow.hidden = true;
       this.status = "rest";
       this.copyIcon.hidden = false;
-      await this.copyIcon.animate(
-        showAnimation.keyframes,
-        showAnimation.options,
-      ).finished;
+      await this.copyIcon.animate(showAnimation.keyframes, showAnimation.options).finished;
 
       this.tooltip.content = copyLabel;
       this.isCopying = false;

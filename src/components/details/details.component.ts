@@ -1,13 +1,6 @@
-import {
-  animateTo,
-  shimKeyframesHeightAuto,
-  stopAnimations,
-} from "../../internal/animate.js";
+import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../internal/animate.js";
 import { classMap } from "lit/directives/class-map.js";
-import {
-  getAnimation,
-  setDefaultAnimation,
-} from "../../utilities/animation-registry.js";
+import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
 import { html } from "lit";
 import { LocalizeController } from "../../utilities/localize.js";
 import { property, query } from "lit/decorators.js";
@@ -80,7 +73,7 @@ export default class PDetails extends PureElement {
       this.details.open = true;
     }
 
-    this.detailsObserver = new MutationObserver((changes) => {
+    this.detailsObserver = new MutationObserver(changes => {
       for (const change of changes) {
         if (change.type === "attributes" && change.attributeName === "open") {
           if (this.details.open) {
@@ -151,11 +144,7 @@ export default class PDetails extends PureElement {
       const { keyframes, options } = getAnimation(this, "details.show", {
         dir: this.localize.dir(),
       });
-      await animateTo(
-        this.body,
-        shimKeyframesHeightAuto(keyframes, this.body.scrollHeight),
-        options,
-      );
+      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
       this.body.style.height = "auto";
 
       this.emit("p-after-show");
@@ -173,11 +162,7 @@ export default class PDetails extends PureElement {
       const { keyframes, options } = getAnimation(this, "details.hide", {
         dir: this.localize.dir(),
       });
-      await animateTo(
-        this.body,
-        shimKeyframesHeightAuto(keyframes, this.body.scrollHeight),
-        options,
-      );
+      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
       this.body.style.height = "auto";
 
       this.details.open = false;
@@ -230,22 +215,14 @@ export default class PDetails extends PureElement {
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}
         >
-          <slot name="summary" part="summary" class="details__summary"
-            >${this.summary}</slot
-          >
+          <slot name="summary" part="summary" class="details__summary">${this.summary}</slot>
 
           <span part="summary-icon" class="details__summary-icon">
             <slot name="expand-icon">
-              <p-icon
-                library="system"
-                name=${isRtl ? "chevron-left" : "chevron-right"}
-              ></p-icon>
+              <p-icon library="system" name=${isRtl ? "chevron-left" : "chevron-right"}></p-icon>
             </slot>
             <slot name="collapse-icon">
-              <p-icon
-                library="system"
-                name=${isRtl ? "chevron-left" : "chevron-right"}
-              ></p-icon>
+              <p-icon library="system" name=${isRtl ? "chevron-left" : "chevron-right"}></p-icon>
             </slot>
           </span>
         </summary>

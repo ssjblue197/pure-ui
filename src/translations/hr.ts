@@ -17,7 +17,7 @@ const translation: Translation = {
   hidePassword: "Sakrij lozinku",
   loading: "Učitavanje",
   nextSlide: "Sljedeći slajd",
-  numOptionsSelected: (num) => {
+  numOptionsSelected: num => {
     if (num === 0) return "Nije odabrana nijedna opcija";
     if (num === 1) return "1 opcija je odabrana";
     return `${num} odabranih opcija`;
@@ -30,7 +30,7 @@ const translation: Translation = {
   scrollToStart: "Skrolaj na početak",
   selectAColorFromTheScreen: "Odaberi boju sa ekrana",
   showPassword: "Pokaži lozinku",
-  slideNum: (slide) => `Slajd ${slide}`,
+  slideNum: slide => `Slajd ${slide}`,
   toggleColorFormat: "Zamijeni format boje",
 };
 

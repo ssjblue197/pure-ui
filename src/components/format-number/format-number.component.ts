@@ -24,11 +24,7 @@ export default class PFormatNumber extends PureElement {
   @property() currency = "USD";
 
   /** How to display the currency. */
-  @property({ attribute: "currency-display" }) currencyDisplay:
-    | "symbol"
-    | "narrowSymbol"
-    | "code"
-    | "name" = "symbol";
+  @property({ attribute: "currency-display" }) currencyDisplay: "symbol" | "narrowSymbol" | "code" | "name" = "symbol";
 
   /** The minimum number of integer digits to use. Possible values are 1-21. */
   @property({ attribute: "minimum-integer-digits", type: Number })

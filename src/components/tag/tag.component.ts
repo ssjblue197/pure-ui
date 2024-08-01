@@ -32,13 +32,7 @@ export default class PTag extends PureElement {
   private readonly localize = new LocalizeController(this);
 
   /** The tag's theme variant. */
-  @property({ reflect: true }) variant:
-    | "primary"
-    | "success"
-    | "neutral"
-    | "warning"
-    | "danger"
-    | "text" = "neutral";
+  @property({ reflect: true }) variant: "primary" | "success" | "neutral" | "warning" | "danger" | "text" = "neutral";
 
   /** The tag's size. */
   @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";

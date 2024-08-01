@@ -18,7 +18,7 @@ module.exports = function (doc, options) {
     return doc;
   }
 
-  within.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((heading) => {
+  within.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(heading => {
     const hasAnchor = heading.querySelector("a");
     const anchor = doc.createElement("a");
     let id = heading.textContent ?? "";
@@ -50,10 +50,7 @@ module.exports = function (doc, options) {
 
     heading.setAttribute("id", id);
     anchor.setAttribute("href", `#${encodeURIComponent(id)}`);
-    anchor.setAttribute(
-      "aria-label",
-      `Direct link to "${heading.textContent}"`,
-    );
+    anchor.setAttribute("aria-label", `Direct link to "${heading.textContent}"`);
 
     if (options.className) {
       heading.classList.add(options.className);

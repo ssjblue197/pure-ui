@@ -22,7 +22,7 @@ markdown.use(markdownItMark);
 markdown.use(markdownItReplaceIt);
 
 // Callouts
-["tip", "warning", "danger"].forEach((type) => {
+["tip", "warning", "danger"].forEach(type => {
   markdown.use(markdownItContainer, type, {
     render: function (tokens, idx) {
       if (tokens[idx].nesting === 1) {
@@ -45,7 +45,7 @@ markdown.use(markdownItContainer, "aside", {
 
 // Details
 markdown.use(markdownItContainer, "details", {
-  validate: (params) => params.trim().match(/^details\s+(.*)$/),
+  validate: params => params.trim().match(/^details\s+(.*)$/),
   render: (tokens, idx) => {
     const m = tokens[idx].info.trim().match(/^details\s+(.*)$/);
     if (tokens[idx].nesting === 1) {

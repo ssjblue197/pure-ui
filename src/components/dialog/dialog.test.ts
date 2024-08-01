@@ -1,12 +1,6 @@
 import "../../../dist/pure-ui.js";
 // cspell:dictionaries lorem-ipsum
-import {
-  aTimeout,
-  elementUpdated,
-  expect,
-  fixture,
-  waitUntil,
-} from "@open-wc/testing";
+import { aTimeout, elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
 import { html, LitElement } from "lit";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
@@ -15,9 +9,7 @@ import type PDialog from "./dialog.js";
 describe("<p-dialog>", () => {
   it("should be visible with the open attribute", async () => {
     const el = await fixture<PDialog>(html`
-      <p-dialog open
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog
-      >
+      <p-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog>
     `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
@@ -26,9 +18,7 @@ describe("<p-dialog>", () => {
 
   it("should not be visible without the open attribute", async () => {
     const el = await fixture<PDialog>(html`
-      <p-dialog
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog
-      >
+      <p-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog>
     `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
@@ -37,9 +27,7 @@ describe("<p-dialog>", () => {
 
   it("should emit p-show and p-after-show when calling show()", async () => {
     const el = await fixture<PDialog>(html`
-      <p-dialog
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog
-      >
+      <p-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog>
     `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const showHandler = sinon.spy();
@@ -59,9 +47,7 @@ describe("<p-dialog>", () => {
 
   it("should emit p-hide and p-after-hide when calling hide()", async () => {
     const el = await fixture<PDialog>(html`
-      <p-dialog open
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog
-      >
+      <p-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog>
     `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const hideHandler = sinon.spy();
@@ -81,9 +67,7 @@ describe("<p-dialog>", () => {
 
   it("should emit p-show and p-after-show when setting open = true", async () => {
     const el = await fixture<PDialog>(html`
-      <p-dialog
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog
-      >
+      <p-dialog>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog>
     `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const showHandler = sinon.spy();
@@ -103,9 +87,7 @@ describe("<p-dialog>", () => {
 
   it("should emit p-hide and p-after-hide when setting open = false", async () => {
     const el = await fixture<PDialog>(html`
-      <p-dialog open
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog
-      >
+      <p-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog>
     `);
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const hideHandler = sinon.spy();
@@ -125,14 +107,11 @@ describe("<p-dialog>", () => {
 
   it("should not close when p-request-close is prevented", async () => {
     const el = await fixture<PDialog>(html`
-      <p-dialog open
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog
-      >
+      <p-dialog open>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p-dialog>
     `);
-    const overlay =
-      el.shadowRoot!.querySelector<HTMLElement>('[part~="overlay"]')!;
+    const overlay = el.shadowRoot!.querySelector<HTMLElement>('[part~="overlay"]')!;
 
-    el.addEventListener("p-request-close", (event) => {
+    el.addEventListener("p-request-close", event => {
       event.preventDefault();
     });
     overlay.click();
@@ -205,8 +184,8 @@ describe("<p-dialog>", () => {
         <a-container></a-container>
 
         <p>
-          Open the dialog, then use <kbd>Tab</kbd> to cycle through the inputs.
-          Focus should be trapped, but it reaches things outside the dialog.
+          Open the dialog, then use <kbd>Tab</kbd> to cycle through the inputs. Focus should be trapped, but it reaches
+          things outside the dialog.
         </p>
       </div>
     `);

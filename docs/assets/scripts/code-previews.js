@@ -29,9 +29,7 @@
       newScript.type = "module";
       newScript.textContent = script.innerHTML;
     } else {
-      newScript.appendChild(
-        document.createTextNode(`(() => { ${script.innerHTML} })();`),
-      );
+      newScript.appendChild(document.createTextNode(`(() => { ${script.innerHTML} })();`));
     }
 
     script.parentNode.replaceChild(newScript, script);
@@ -47,35 +45,26 @@
 
     // Set the flavor class on the body
     document.documentElement.classList.toggle("flavor-html", flavor === "html");
-    document.documentElement.classList.toggle(
-      "flavor-react",
-      flavor === "react",
-    );
+    document.documentElement.classList.toggle("flavor-react", flavor === "react");
   }
 
   function syncFlavor() {
     setFlavor(getFlavor());
 
-    document
-      .querySelectorAll(".code-preview__button--html")
-      .forEach((preview) => {
-        if (flavor === "html") {
-          preview.classList.add("code-preview__button--selected");
-        }
-      });
+    document.querySelectorAll(".code-preview__button--html").forEach(preview => {
+      if (flavor === "html") {
+        preview.classList.add("code-preview__button--selected");
+      }
+    });
 
-    document
-      .querySelectorAll(".code-preview__button--react")
-      .forEach((preview) => {
-        if (flavor === "react") {
-          preview.classList.add("code-preview__button--selected");
-        }
-      });
+    document.querySelectorAll(".code-preview__button--react").forEach(preview => {
+      if (flavor === "react") {
+        preview.classList.add("code-preview__button--selected");
+      }
+    });
   }
 
-  const pureUIVersion = document.documentElement.getAttribute(
-    "data-pure-ui-version",
-  );
+  const pureUIVersion = document.documentElement.getAttribute("data-pure-ui-version");
   const reactVersion = "^18";
   const cdndir = "cdn";
   const npmdir = "dist";
@@ -84,9 +73,7 @@
 
   // We need the version to open
   if (!pureUIVersion) {
-    throw new Error(
-      "The data-pure-ui-version attribute is missing from <html>.",
-    );
+    throw new Error("The data-pure-ui-version attribute is missing from <html>.");
   }
 
   // Sync flavor UI on page load
@@ -104,13 +91,8 @@
 
     if (!resizer || !preview) return;
 
-    let startX = event.changedTouches
-      ? event.changedTouches[0].pageX
-      : event.clientX;
-    let startWidth = parseInt(
-      document.defaultView.getComputedStyle(preview).width,
-      10,
-    );
+    let startX = event.changedTouches ? event.changedTouches[0].pageX : event.clientX;
+    let startWidth = parseInt(document.defaultView.getComputedStyle(preview).width, 10);
 
     event.preventDefault();
     preview.classList.add("code-preview__preview--dragging");
@@ -120,10 +102,7 @@
     document.documentElement.addEventListener("touchend", dragStop);
 
     function dragMove(event) {
-      const width =
-        startWidth +
-        (event.changedTouches ? event.changedTouches[0].pageX : event.pageX) -
-        startX;
+      const width = startWidth + (event.changedTouches ? event.changedTouches[0].pageX : event.pageX) - startX;
       preview.style.width = `${width}px`;
     }
 
@@ -139,7 +118,7 @@
   //
   // Toggle source mode
   //
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", event => {
     const button = event.target.closest(".code-preview__button");
     const codeBlock = button?.closest(".code-preview");
 
@@ -159,7 +138,7 @@
     }
 
     // Update flavor buttons
-    [...document.querySelectorAll(".code-preview")].forEach((cb) => {
+    [...document.querySelectorAll(".code-preview")].forEach(cb => {
       cb.querySelector(".code-preview__button--html")?.classList.toggle(
         "code-preview__button--selected",
         flavor === "html",
@@ -173,33 +152,22 @@
 
   function toggleSource(codeBlock, force) {
     codeBlock.classList.toggle("code-preview--expanded", force);
-    event.target.setAttribute(
-      "aria-expanded",
-      codeBlock.classList.contains("code-preview--expanded"),
-    );
+    event.target.setAttribute("aria-expanded", codeBlock.classList.contains("code-preview--expanded"));
   }
 
   //
   // Open in CodePen
   //
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", event => {
     const button = event.target.closest("button");
 
     if (button?.classList.contains("code-preview__button--codepen")) {
       const codeBlock = button.closest(".code-preview");
-      const htmlExample = codeBlock.querySelector(
-        ".code-preview__source--html > pre > code",
-      )?.textContent;
-      const reactExample = codeBlock.querySelector(
-        ".code-preview__source--react > pre > code",
-      )?.textContent;
+      const htmlExample = codeBlock.querySelector(".code-preview__source--html > pre > code")?.textContent;
+      const reactExample = codeBlock.querySelector(".code-preview__source--react > pre > code")?.textContent;
       const isReact = flavor === "react" && typeof reactExample === "string";
-      const theme = document.documentElement.classList.contains("p-theme-dark")
-        ? "dark"
-        : "light";
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
+      const theme = document.documentElement.classList.contains("p-theme-dark") ? "dark" : "light";
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       const isDark = theme === "dark" || (theme === "auto" && prefersDark);
       const editors = isReact ? "0010" : "1000";
       let htmlTemplate = "";

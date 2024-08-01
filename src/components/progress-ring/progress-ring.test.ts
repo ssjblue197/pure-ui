@@ -7,9 +7,7 @@ describe("<p-progress-ring>", () => {
 
   describe("when provided just a value parameter", () => {
     before(async () => {
-      el = await fixture<PProgressRing>(
-        html`<p-progress-ring value="25"></p-progress-ring>`,
-      );
+      el = await fixture<PProgressRing>(html`<p-progress-ring value="25"></p-progress-ring>`);
     });
 
     it("should pass accessibility tests", async () => {
@@ -22,10 +20,7 @@ describe("<p-progress-ring>", () => {
 
     before(async () => {
       el = await fixture<PProgressRing>(
-        html`<p-progress-ring
-          title="Titled Progress Ring"
-          value="25"
-        ></p-progress-ring>`,
+        html`<p-progress-ring title="Titled Progress Ring" value="25"></p-progress-ring>`,
       );
       base = el.shadowRoot!.querySelector('[part~="base"]')!;
     });
@@ -46,10 +41,7 @@ describe("<p-progress-ring>", () => {
   describe("when provided a ariaLabel, and value parameter", () => {
     before(async () => {
       el = await fixture<PProgressRing>(
-        html`<p-progress-ring
-          ariaLabel="Labelled Progress Ring"
-          value="25"
-        ></p-progress-ring>`,
+        html`<p-progress-ring ariaLabel="Labelled Progress Ring" value="25"></p-progress-ring>`,
       );
     });
 
@@ -62,10 +54,7 @@ describe("<p-progress-ring>", () => {
     before(async () => {
       el = await fixture<PProgressRing>(html`
         <label id="labelledby">Progress Ring Label</label>
-        <p-progress-ring
-          ariaLabelledBy="labelledby"
-          value="25"
-        ></p-progress-ring>
+        <p-progress-ring ariaLabelledBy="labelledby" value="25"></p-progress-ring>
       `);
     });
 

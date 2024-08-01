@@ -5,9 +5,7 @@ import type PFormatBytes from "./format-bytes.js";
 describe("<p-format-bytes>", () => {
   describe("defaults ", () => {
     it("default properties", async () => {
-      const el = await fixture<PFormatBytes>(html`
-        <p-format-bytes></p-format-bytes>
-      `);
+      const el = await fixture<PFormatBytes>(html` <p-format-bytes></p-format-bytes> `);
 
       expect(el.value).to.equal(0);
       expect(el.unit).to.equal("byte");
@@ -44,11 +42,9 @@ describe("<p-format-bytes>", () => {
       },
     ];
 
-    results.forEach((expected) => {
+    results.forEach(expected => {
       it("bytes : display formats", async () => {
-        const el = await fixture<PFormatBytes>(html`
-          <p-format-bytes></p-format-bytes>
-        `);
+        const el = await fixture<PFormatBytes>(html` <p-format-bytes></p-format-bytes> `);
         // short
         el.value = expected.value;
         await elementUpdated(el);
@@ -97,11 +93,9 @@ describe("<p-format-bytes>", () => {
       },
     ];
 
-    results.forEach((expected) => {
+    results.forEach(expected => {
       it("bits : display formats", async () => {
-        const el = await fixture<PFormatBytes>(html`
-          <p-format-bytes unit="bit"></p-format-bytes>
-        `);
+        const el = await fixture<PFormatBytes>(html` <p-format-bytes unit="bit"></p-format-bytes> `);
         // short
         el.value = expected.value;
         await elementUpdated(el);

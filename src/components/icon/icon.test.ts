@@ -1,11 +1,4 @@
-import {
-  aTimeout,
-  elementUpdated,
-  expect,
-  fixture,
-  html,
-  oneEvent,
-} from "@open-wc/testing";
+import { aTimeout, elementUpdated, expect, fixture, html, oneEvent } from "@open-wc/testing";
 import { registerIconLibrary } from "../../../dist/pure-ui.js";
 import type { PErrorEvent } from "../../events/p-error.js";
 import type { PLoadEvent } from "../../events/p-load.js";
@@ -54,9 +47,7 @@ describe("<p-icon>", () => {
     });
 
     it("renders pre-loaded system icons and emits p-load event", async () => {
-      const el = await fixture<PIcon>(html`
-        <p-icon library="system"></p-icon>
-      `);
+      const el = await fixture<PIcon>(html` <p-icon library="system"></p-icon> `);
       const listener = oneEvent(el, "p-load") as Promise<PLoadEvent>;
 
       el.name = "check";
@@ -68,16 +59,12 @@ describe("<p-icon>", () => {
     });
 
     it("the icon is accessible", async () => {
-      const el = await fixture<PIcon>(html`
-        <p-icon library="system" name="check"></p-icon>
-      `);
+      const el = await fixture<PIcon>(html` <p-icon library="system" name="check"></p-icon> `);
       await expect(el).to.be.accessible();
     });
 
     it("the icon has the correct default aria attributes", async () => {
-      const el = await fixture<PIcon>(html`
-        <p-icon library="system" name="check"></p-icon>
-      `);
+      const el = await fixture<PIcon>(html` <p-icon library="system" name="check"></p-icon> `);
 
       expect(el.getAttribute("role")).to.be.null;
       expect(el.getAttribute("aria-label")).to.be.null;
@@ -88,9 +75,7 @@ describe("<p-icon>", () => {
   describe("when a label is provided", () => {
     it("the icon has the correct default aria attributes", async () => {
       const fakeLabel = "a label";
-      const el = await fixture<PIcon>(html`
-        <p-icon label="${fakeLabel}" library="system" name="check"></p-icon>
-      `);
+      const el = await fixture<PIcon>(html` <p-icon label="${fakeLabel}" library="system" name="check"></p-icon> `);
 
       expect(el.getAttribute("role")).to.equal("img");
       expect(el.getAttribute("aria-label")).to.equal(fakeLabel);
@@ -110,19 +95,14 @@ describe("<p-icon>", () => {
       await elementUpdated(el);
 
       expect(el.shadowRoot?.querySelector("svg")).to.exist;
-      expect(el.shadowRoot?.querySelector("svg")?.part.contains("svg")).to.be
-        .true;
-      expect(el.shadowRoot?.querySelector("svg")?.getAttribute("id")).to.equal(
-        fakeId,
-      );
+      expect(el.shadowRoot?.querySelector("svg")?.part.contains("svg")).to.be.true;
+      expect(el.shadowRoot?.querySelector("svg")?.getAttribute("id")).to.equal(fakeId);
     });
   });
 
   describe("new library", () => {
     it("renders icons from the new library and emits p-load event", async () => {
-      const el = await fixture<PIcon>(html`
-        <p-icon library="test-library"></p-icon>
-      `);
+      const el = await fixture<PIcon>(html` <p-icon library="test-library"></p-icon> `);
       const listener = oneEvent(el, "p-load") as Promise<PLoadEvent>;
 
       el.name = "test-icon1";
@@ -134,9 +114,7 @@ describe("<p-icon>", () => {
     });
 
     it("runs mutator from new library", async () => {
-      const el = await fixture<PIcon>(html`
-        <p-icon library="test-library" name="test-icon1"></p-icon>
-      `);
+      const el = await fixture<PIcon>(html` <p-icon library="test-library" name="test-icon1"></p-icon> `);
       await elementUpdated(el);
 
       const svg = el.shadowRoot?.querySelector("svg");
@@ -147,17 +125,13 @@ describe("<p-icon>", () => {
   describe("negative cases", () => {
     // using new library so we can test for malformed icons when registered
     it("svg not rendered with an icon that doesn't exist in the library", async () => {
-      const el = await fixture<PIcon>(html`
-        <p-icon library="test-library" name="does-not-exist"></p-icon>
-      `);
+      const el = await fixture<PIcon>(html` <p-icon library="test-library" name="does-not-exist"></p-icon> `);
 
       expect(el.shadowRoot?.querySelector("svg")).to.be.null;
     });
 
     it("emits p-error when the file cant be retrieved", async () => {
-      const el = await fixture<PIcon>(html`
-        <p-icon library="test-library"></p-icon>
-      `);
+      const el = await fixture<PIcon>(html` <p-icon library="test-library"></p-icon> `);
       const listener = oneEvent(el, "p-error") as Promise<PErrorEvent>;
 
       el.name = "bad-request";
@@ -169,9 +143,7 @@ describe("<p-icon>", () => {
     });
 
     it("emits p-error when there isn't an svg element in the registered icon", async () => {
-      const el = await fixture<PIcon>(html`
-        <p-icon library="test-library"></p-icon>
-      `);
+      const el = await fixture<PIcon>(html` <p-icon library="test-library"></p-icon> `);
       const listener = oneEvent(el, "p-error") as Promise<PErrorEvent>;
 
       el.name = "bad-icon";
@@ -188,21 +160,17 @@ describe("<p-icon>", () => {
     /* eslint-disable */
     it("Should properly grab an SVG and render it from bootstrap icons", async () => {
       registerIconLibrary("sprite", {
-        resolver: (name) => `/docs/assets/images/sprite.svg#${name}`,
-        mutator: (svg) => svg.setAttribute("fill", "currentColor"),
+        resolver: name => `/docs/assets/images/sprite.svg#${name}`,
+        mutator: svg => svg.setAttribute("fill", "currentColor"),
         spriteSheet: true,
       });
 
-      const el = await fixture<PIcon>(
-        html`<p-icon name="arrow-left" library="sprite"></p-icon>`,
-      );
+      const el = await fixture<PIcon>(html`<p-icon name="arrow-left" library="sprite"></p-icon>`);
 
       await elementUpdated(el);
 
       const svg = el.shadowRoot?.querySelector("svg[part='svg']");
-      const use = svg?.querySelector(
-        `use[href='/docs/assets/images/sprite.svg#arrow-left']`,
-      );
+      const use = svg?.querySelector(`use[href='/docs/assets/images/sprite.svg#arrow-left']`);
 
       expect(svg).to.be.instanceof(SVGElement);
       expect(use).to.be.instanceof(SVGUseElement);
@@ -219,14 +187,12 @@ describe("<p-icon>", () => {
 
     it("Should render nothing if the sprite hash is wrong", async () => {
       registerIconLibrary("sprite", {
-        resolver: (name) => `/docs/assets/images/sprite.svg#${name}`,
-        mutator: (svg) => svg.setAttribute("fill", "currentColor"),
+        resolver: name => `/docs/assets/images/sprite.svg#${name}`,
+        mutator: svg => svg.setAttribute("fill", "currentColor"),
         spriteSheet: true,
       });
 
-      const el = await fixture<PIcon>(
-        html`<p-icon name="non-existent" library="sprite"></p-icon>`,
-      );
+      const el = await fixture<PIcon>(html`<p-icon name="non-existent" library="sprite"></p-icon>`);
 
       await elementUpdated(el);
 
@@ -257,9 +223,7 @@ describe("<p-icon>", () => {
         spriteSheet: true,
       });
 
-      const el = await fixture<PIcon>(
-        html`<p-icon name="bad-icon" library="sprite"></p-icon>`,
-      );
+      const el = await fixture<PIcon>(html`<p-icon name="bad-icon" library="sprite"></p-icon>`);
       const listener = oneEvent(el, "p-error") as Promise<PErrorEvent>;
 
       el.name = "bad-icon";

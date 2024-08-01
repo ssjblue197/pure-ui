@@ -1,9 +1,6 @@
 import { animateTo, stopAnimations } from "../../internal/animate.js";
 import { classMap } from "lit/directives/class-map.js";
-import {
-  getAnimation,
-  setDefaultAnimation,
-} from "../../utilities/animation-registry.js";
+import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
 import { getTabbableBoundary } from "../../internal/tabbable.js";
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -111,8 +108,7 @@ export default class PDropdown extends PureElement {
   /**
    * Syncs the popup width or height to that of the trigger element.
    */
-  @property({ reflect: true }) sync: "width" | "height" | "both" | undefined =
-    undefined;
+  @property({ reflect: true }) sync: "width" | "height" | "both" | undefined = undefined;
 
   connectedCallback() {
     super.connectedCallback();
@@ -139,18 +135,16 @@ export default class PDropdown extends PureElement {
   }
 
   focusOnTrigger() {
-    const trigger = this.trigger.assignedElements({ flatten: true })[0] as
-      | HTMLElement
-      | undefined;
+    const trigger = this.trigger.assignedElements({ flatten: true })[0] as HTMLElement | undefined;
     if (typeof trigger?.focus === "function") {
       trigger.focus();
     }
   }
 
   getMenu() {
-    return this.panel
-      .assignedElements({ flatten: true })
-      .find((el) => el.tagName.toLowerCase() === "p-menu") as PMenu | undefined;
+    return this.panel.assignedElements({ flatten: true }).find(el => el.tagName.toLowerCase() === "p-menu") as
+      | PMenu
+      | undefined;
   }
 
   private handleKeyDown = (event: KeyboardEvent) => {
@@ -175,10 +169,7 @@ export default class PDropdown extends PureElement {
     // Handle tabbing
     if (event.key === "Tab") {
       // Tabbing within an open menu should close the dropdown and refocus the trigger
-      if (
-        this.open &&
-        document.activeElement?.tagName.toLowerCase() === "p-menu-item"
-      ) {
+      if (this.open && document.activeElement?.tagName.toLowerCase() === "p-menu-item") {
         event.preventDefault();
         this.hide();
         this.focusOnTrigger();
@@ -197,9 +188,7 @@ export default class PDropdown extends PureElement {
 
         if (
           !this.containingElement ||
-          activeElement?.closest(
-            this.containingElement.tagName.toLowerCase(),
-          ) !== this.containingElement
+          activeElement?.closest(this.containingElement.tagName.toLowerCase()) !== this.containingElement
         ) {
           this.hide();
         }
@@ -307,9 +296,7 @@ export default class PDropdown extends PureElement {
     const assignedElements = this.trigger.assignedElements({
       flatten: true,
     }) as HTMLElement[];
-    const accessibleTrigger = assignedElements.find(
-      (el) => getTabbableBoundary(el).start,
-    );
+    const accessibleTrigger = assignedElements.find(el => getTabbableBoundary(el).start);
     let target: HTMLElement;
 
     if (accessibleTrigger) {
@@ -454,10 +441,7 @@ export default class PDropdown extends PureElement {
           @slotchange=${this.handleTriggerSlotChange}
         ></slot>
 
-        <div
-          aria-hidden=${this.open ? "false" : "true"}
-          aria-labelledby="dropdown"
-        >
+        <div aria-hidden=${this.open ? "false" : "true"} aria-labelledby="dropdown">
           <slot part="panel" class="dropdown__panel"></slot>
         </div>
       </p-popup>

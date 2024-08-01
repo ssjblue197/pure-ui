@@ -1,17 +1,11 @@
 import { animateTo, stopAnimations } from "../../internal/animate.js";
 import { classMap } from "lit/directives/class-map.js";
-import {
-  getAnimation,
-  setDefaultAnimation,
-} from "../../utilities/animation-registry.js";
+import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
 import { HasSlotController } from "../../internal/slot.js";
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { LocalizeController } from "../../utilities/localize.js";
-import {
-  lockBodyScrolling,
-  unlockBodyScrolling,
-} from "../../internal/scroll.js";
+import { lockBodyScrolling, unlockBodyScrolling } from "../../internal/scroll.js";
 import { property, query } from "lit/decorators.js";
 import { waitForEvent } from "../../internal/event.js";
 import { watch } from "../../internal/watch.js";
@@ -104,8 +98,7 @@ export default class PDialog extends PureElement {
    * Disables the header. This will also remove the default close button, so please ensure you provide an easy,
    * accessible way for users to dismiss the dialog.
    */
-  @property({ attribute: "no-header", type: Boolean, reflect: true }) noHeader =
-    false;
+  @property({ attribute: "no-header", type: Boolean, reflect: true }) noHeader = false;
 
   firstUpdated() {
     this.dialog.hidden = !this.open;
@@ -185,10 +178,7 @@ export default class PDialog extends PureElement {
         autoFocusTarget.removeAttribute("autofocus");
       }
 
-      await Promise.all([
-        stopAnimations(this.dialog),
-        stopAnimations(this.overlay),
-      ]);
+      await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
       this.dialog.hidden = false;
 
       // Set initial focus
@@ -222,11 +212,7 @@ export default class PDialog extends PureElement {
       });
       await Promise.all([
         animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
-        animateTo(
-          this.overlay,
-          overlayAnimation.keyframes,
-          overlayAnimation.options,
-        ),
+        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options),
       ]);
 
       this.emit("p-after-show");
@@ -236,10 +222,7 @@ export default class PDialog extends PureElement {
       this.removeOpenListeners();
       this.modal.deactivate();
 
-      await Promise.all([
-        stopAnimations(this.dialog),
-        stopAnimations(this.overlay),
-      ]);
+      await Promise.all([stopAnimations(this.dialog), stopAnimations(this.overlay)]);
       const panelAnimation = getAnimation(this, "dialog.hide", {
         dir: this.localize.dir(),
       });
@@ -251,18 +234,10 @@ export default class PDialog extends PureElement {
       // hide each one individually when the animation finishes, otherwise the first one that finishes will reappear
       // unexpectedly. We'll unhide them after all animations have completed.
       await Promise.all([
-        animateTo(
-          this.overlay,
-          overlayAnimation.keyframes,
-          overlayAnimation.options,
-        ).then(() => {
+        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options).then(() => {
           this.overlay.hidden = true;
         }),
-        animateTo(
-          this.panel,
-          panelAnimation.keyframes,
-          panelAnimation.options,
-        ).then(() => {
+        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options).then(() => {
           this.panel.hidden = true;
         }),
       ]);
@@ -315,12 +290,7 @@ export default class PDialog extends PureElement {
           "dialog--has-footer": this.hasSlotController.test("footer"),
         })}
       >
-        <div
-          part="overlay"
-          class="dialog__overlay"
-          @click=${() => this.requestClose("overlay")}
-          tabindex="-1"
-        ></div>
+        <div part="overlay" class="dialog__overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
 
         <div
           part="panel"
@@ -336,11 +306,7 @@ export default class PDialog extends PureElement {
             ? html`
                 <header part="header" class="dialog__header">
                   <h2 part="title" class="dialog__title" id="title">
-                    <slot name="label">
-                      ${this.label.length > 0
-                        ? this.label
-                        : String.fromCharCode(65279)}
-                    </slot>
+                    <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
                   </h2>
                   <div part="header-actions" class="dialog__header-actions">
                     <slot name="header-actions"></slot>

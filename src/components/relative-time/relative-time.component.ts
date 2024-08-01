@@ -67,20 +67,14 @@ export default class PRelativeTime extends PureElement {
     }
 
     const diff = then.getTime() - now.getTime();
-    const { unit, value } = availableUnits.find(
-      (singleUnit) => Math.abs(diff) < singleUnit.max,
-    )!;
+    const { unit, value } = availableUnits.find(singleUnit => Math.abs(diff) < singleUnit.max)!;
 
     this.isoTime = then.toISOString();
 
-    this.relativeTime = this.localize.relativeTime(
-      Math.round(diff / value),
-      unit,
-      {
-        numeric: this.numeric,
-        style: this.format,
-      },
-    );
+    this.relativeTime = this.localize.relativeTime(Math.round(diff / value), unit, {
+      numeric: this.numeric,
+      style: this.format,
+    });
 
     // If sync is enabled, update as time passes
     clearTimeout(this.updateTimeout);
@@ -102,17 +96,10 @@ export default class PRelativeTime extends PureElement {
         nextInterval = getTimeUntilNextUnit("day"); // next day
       }
 
-      this.updateTimeout = window.setTimeout(
-        () => this.requestUpdate(),
-        nextInterval,
-      );
+      this.updateTimeout = window.setTimeout(() => this.requestUpdate(), nextInterval);
     }
 
-    return html`
-      <time datetime=${this.isoTime} title=${this.relativeTime}
-        >${this.relativeTime}</time
-      >
-    `;
+    return html` <time datetime=${this.isoTime} title=${this.relativeTime}>${this.relativeTime}</time> `;
   }
 }
 

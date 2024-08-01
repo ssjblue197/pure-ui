@@ -13,10 +13,8 @@ function syncCheckboxes(changedTreeItem: PTreeItem, initialSync = false) {
     const children = treeItem.getChildrenItems({ includeDisabled: false });
 
     if (children.length) {
-      const allChecked = children.every((item) => item.selected);
-      const allUnchecked = children.every(
-        (item) => !item.selected && !item.indeterminate,
-      );
+      const allChecked = children.every(item => item.selected);
+      const allUnchecked = children.every(item => !item.selected && !item.indeterminate);
 
       treeItem.selected = allChecked;
       treeItem.indeterminate = !allChecked && !allUnchecked;
@@ -119,16 +117,13 @@ export default class PTree extends PureElement {
 
   // Generates a clone of the expand icon element to use for each tree item
   private getExpandButtonIcon(status: "expand" | "collapse") {
-    const slot =
-      status === "expand" ? this.expandedIconSlot : this.collapsedIconSlot;
+    const slot = status === "expand" ? this.expandedIconSlot : this.collapsedIconSlot;
     const icon = slot.assignedElements({ flatten: true })[0] as HTMLElement;
 
     // Clone it, remove ids, and slot it
     if (icon) {
       const clone = icon.cloneNode(true) as HTMLElement;
-      [clone, ...clone.querySelectorAll("[id]")].forEach((el) =>
-        el.removeAttribute("id"),
-      );
+      [clone, ...clone.querySelectorAll("[id]")].forEach(el => el.removeAttribute("id"));
       clone.setAttribute("data-default", "");
       clone.slot = `${status}-icon`;
 
@@ -143,7 +138,7 @@ export default class PTree extends PureElement {
     item.selectable = this.selection === "multiple";
 
     ["expand", "collapse"]
-      .filter((status) => !!this.querySelector(`[slot="${status}-icon"]`))
+      .filter(status => !!this.querySelector(`[slot="${status}-icon"]`))
       .forEach((status: "expand" | "collapse") => {
         const existingIcon = item.querySelector(`[slot="${status}-icon"]`);
 
@@ -165,12 +160,8 @@ export default class PTree extends PureElement {
 
   private handleTreeChanged = (mutations: MutationRecord[]) => {
     for (const mutation of mutations) {
-      const addedNodes: PTreeItem[] = [...mutation.addedNodes].filter(
-        PTreeItem.isTreeItem,
-      ) as PTreeItem[];
-      const removedNodes = [...mutation.removedNodes].filter(
-        PTreeItem.isTreeItem,
-      ) as PTreeItem[];
+      const addedNodes: PTreeItem[] = [...mutation.addedNodes].filter(PTreeItem.isTreeItem) as PTreeItem[];
+      const removedNodes = [...mutation.removedNodes].filter(PTreeItem.isTreeItem) as PTreeItem[];
 
       addedNodes.forEach(this.initTreeItem);
 
@@ -202,10 +193,10 @@ export default class PTree extends PureElement {
 
     if (
       previousSelection.length !== nextSelection.length ||
-      nextSelection.some((item) => !previousSelection.includes(item))
+      nextSelection.some(item => !previousSelection.includes(item))
     ) {
       // Wait for the tree items' DOM to update before emitting
-      Promise.all(nextSelection.map((el) => el.updateComplete)).then(() => {
+      Promise.all(nextSelection.map(el => el.updateComplete)).then(() => {
         this.emit("p-selection-change", {
           detail: { selection: nextSelection },
         });
@@ -223,30 +214,13 @@ export default class PTree extends PureElement {
 
   private handleKeyDown(event: KeyboardEvent) {
     // Ignore key presses we aren't interested in
-    if (
-      ![
-        "ArrowDown",
-        "ArrowUp",
-        "ArrowRight",
-        "ArrowLeft",
-        "Home",
-        "End",
-        "Enter",
-        " ",
-      ].includes(event.key)
-    ) {
+    if (!["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", "Home", "End", "Enter", " "].includes(event.key)) {
       return;
     }
 
     // Ignore key presses when focus is inside a text field. This prevents the component from hijacking nested form
     // controls that exist inside tree items.
-    if (
-      event
-        .composedPath()
-        .some((el: HTMLElement) =>
-          ["input", "textarea"].includes(el?.tagName?.toLowerCase()),
-        )
-    ) {
+    if (event.composedPath().some((el: HTMLElement) => ["input", "textarea"].includes(el?.tagName?.toLowerCase()))) {
       return;
     }
 
@@ -256,7 +230,7 @@ export default class PTree extends PureElement {
 
     if (items.length > 0) {
       event.preventDefault();
-      const activeItemIndex = items.findIndex((item) => item.matches(":focus"));
+      const activeItemIndex = items.findIndex(item => item.matches(":focus"));
       const activeItem: PTreeItem | undefined = items[activeItemIndex];
 
       const focusItemAt = (index: number) => {
@@ -273,40 +247,24 @@ export default class PTree extends PureElement {
       } else if (event.key === "ArrowUp") {
         // Moves focus to the next node that is focusable without opening or closing a node.
         focusItemAt(activeItemIndex - 1);
-      } else if (
-        (isLtr && event.key === "ArrowRight") ||
-        (isRtl && event.key === "ArrowLeft")
-      ) {
+      } else if ((isLtr && event.key === "ArrowRight") || (isRtl && event.key === "ArrowLeft")) {
         //
         // When focus is on a closed node, opens the node; focus does not move.
         // When focus is on a open node, moves focus to the first child node.
         // When focus is on an end node (a tree item with no children), does nothing.
         //
-        if (
-          !activeItem ||
-          activeItem.disabled ||
-          activeItem.expanded ||
-          (activeItem.isLeaf && !activeItem.lazy)
-        ) {
+        if (!activeItem || activeItem.disabled || activeItem.expanded || (activeItem.isLeaf && !activeItem.lazy)) {
           focusItemAt(activeItemIndex + 1);
         } else {
           toggleExpand(true);
         }
-      } else if (
-        (isLtr && event.key === "ArrowLeft") ||
-        (isRtl && event.key === "ArrowRight")
-      ) {
+      } else if ((isLtr && event.key === "ArrowLeft") || (isRtl && event.key === "ArrowRight")) {
         //
         // When focus is on an open node, closes the node.
         // When focus is on a child node that is also either an end node or a closed node, moves focus to its parent node.
         // When focus is on a closed `tree`, does nothing.
         //
-        if (
-          !activeItem ||
-          activeItem.disabled ||
-          activeItem.isLeaf ||
-          !activeItem.expanded
-        ) {
+        if (!activeItem || activeItem.disabled || activeItem.isLeaf || !activeItem.expanded) {
           focusItemAt(activeItemIndex - 1);
         } else {
           toggleExpand(false);
@@ -331,9 +289,7 @@ export default class PTree extends PureElement {
     const treeItem = target.closest("p-tree-item")!;
     const isExpandButton = event
       .composedPath()
-      .some((el: HTMLElement) =>
-        el?.classList?.contains("tree-item__expand-button"),
-      );
+      .some((el: HTMLElement) => el?.classList?.contains("tree-item__expand-button"));
 
     //
     // Don't Do anything if there's no tree item, if it's disabled, or if the click doesn't match the initial target
@@ -397,10 +353,7 @@ export default class PTree extends PureElement {
     const isSelectionMultiple = this.selection === "multiple";
     const items = this.getAllTreeItems();
 
-    this.setAttribute(
-      "aria-multiselectable",
-      isSelectionMultiple ? "true" : "false",
-    );
+    this.setAttribute("aria-multiselectable", isSelectionMultiple ? "true" : "false");
 
     for (const item of items) {
       item.selectable = isSelectionMultiple;
@@ -409,8 +362,8 @@ export default class PTree extends PureElement {
     if (isSelectionMultiple) {
       await this.updateComplete;
 
-      [...this.querySelectorAll(":scope > p-tree-item")].forEach(
-        (treeItem: PTreeItem) => syncCheckboxes(treeItem, true),
+      [...this.querySelectorAll(":scope > p-tree-item")].forEach((treeItem: PTreeItem) =>
+        syncCheckboxes(treeItem, true),
       );
     }
   }
@@ -428,17 +381,13 @@ export default class PTree extends PureElement {
     const items = this.getAllTreeItems();
     const collapsedItems = new Set();
 
-    return items.filter((item) => {
+    return items.filter(item => {
       // Exclude disabled elements
       if (item.disabled) return false;
 
       // Exclude those whose parent is collapsed or loading
-      const parent: PTreeItem | null | undefined =
-        item.parentElement?.closest("[role=treeitem]");
-      if (
-        parent &&
-        (!parent.expanded || parent.loading || collapsedItems.has(parent))
-      ) {
+      const parent: PTreeItem | null | undefined = item.parentElement?.closest("[role=treeitem]");
+      if (parent && (!parent.expanded || parent.loading || collapsedItems.has(parent))) {
         collapsedItems.add(item);
       }
 
@@ -457,9 +406,7 @@ export default class PTree extends PureElement {
       >
         <slot @slotchange=${this.handleSlotChange}></slot>
         <span hidden aria-hidden="true"><slot name="expand-icon"></slot></span>
-        <span hidden aria-hidden="true"
-          ><slot name="collapse-icon"></slot
-        ></span>
+        <span hidden aria-hidden="true"><slot name="collapse-icon"></slot></span>
       </div>
     `;
   }

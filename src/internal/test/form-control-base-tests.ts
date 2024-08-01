@@ -4,9 +4,7 @@ import type { ShoelaceFormControl } from "../pure-ui-element.js";
 type CreateControlFn = () => Promise<ShoelaceFormControl>;
 
 /** Runs a set of generic tests for Pure UI form controls */
-export function runFormControlBaseTests<
-  T extends ShoelaceFormControl = ShoelaceFormControl,
->(
+export function runFormControlBaseTests<T extends ShoelaceFormControl = ShoelaceFormControl>(
   tagNameOrConfig:
     | string
     | {
@@ -57,37 +55,27 @@ function runAllValidityTests(
   describe(`Form validity base test for ${displayName}`, async () => {
     it("should have a property `validity` of type `object`", async () => {
       const control = await createControl();
-      expect(control).satisfy(
-        () => control.validity !== null && typeof control.validity === "object",
-      );
+      expect(control).satisfy(() => control.validity !== null && typeof control.validity === "object");
     });
 
     it("should have a property `validationMessage` of type `string`", async () => {
       const control = await createControl();
-      expect(control).satisfy(
-        () => typeof control.validationMessage === "string",
-      );
+      expect(control).satisfy(() => typeof control.validationMessage === "string");
     });
 
     it("should implement method `checkValidity`", async () => {
       const control = await createControl();
-      expect(control).satisfies(
-        () => typeof control.checkValidity === "function",
-      );
+      expect(control).satisfies(() => typeof control.checkValidity === "function");
     });
 
     it("should implement method `setCustomValidity`", async () => {
       const control = await createControl();
-      expect(control).satisfies(
-        () => typeof control.setCustomValidity === "function",
-      );
+      expect(control).satisfies(() => typeof control.setCustomValidity === "function");
     });
 
     it("should implement method `reportValidity`", async () => {
       const control = await createControl();
-      expect(control).satisfies(
-        () => typeof control.reportValidity === "function",
-      );
+      expect(control).satisfies(() => typeof control.reportValidity === "function");
     });
 
     it("should be valid initially", async () => {
@@ -107,17 +95,13 @@ function runAllValidityTests(
 
     it("should not emit an `p-invalid` event when `.checkValidity()` is called while valid", async () => {
       const control = await createControl();
-      const emittedEvents = checkEventEmissions(control, "p-invalid", () =>
-        control.checkValidity(),
-      );
+      const emittedEvents = checkEventEmissions(control, "p-invalid", () => control.checkValidity());
       expect(emittedEvents.length).to.equal(0);
     });
 
     it("should not emit an `p-invalid` event when `.reportValidity()` is called while valid", async () => {
       const control = await createControl();
-      const emittedEvents = checkEventEmissions(control, "p-invalid", () =>
-        control.reportValidity(),
-      );
+      const emittedEvents = checkEventEmissions(control, "p-invalid", () => control.reportValidity());
       expect(emittedEvents.length).to.equal(0);
     });
 
@@ -129,9 +113,7 @@ function runAllValidityTests(
         control.setCustomValidity("error");
         control.disabled = true;
         await control.updateComplete;
-        const emittedEvents = checkEventEmissions(control, "p-invalid", () =>
-          control.checkValidity(),
-        );
+        const emittedEvents = checkEventEmissions(control, "p-invalid", () => control.checkValidity());
         expect(emittedEvents.length).to.equal(0);
       });
 
@@ -140,9 +122,7 @@ function runAllValidityTests(
         control.setCustomValidity("error");
         control.disabled = true;
         await control.updateComplete;
-        const emittedEvents = checkEventEmissions(control, "p-invalid", () =>
-          control.reportValidity(),
-        );
+        const emittedEvents = checkEventEmissions(control, "p-invalid", () => control.reportValidity());
         expect(emittedEvents.length).to.equal(0);
       });
 
@@ -209,9 +189,7 @@ function runSpecialTests_slButtonOfTypeButton(createControl: CreateControlFn) {
     control.setCustomValidity("error");
     control.disabled = false;
     await control.updateComplete;
-    const emittedEvents = checkEventEmissions(control, "p-invalid", () =>
-      control.checkValidity(),
-    );
+    const emittedEvents = checkEventEmissions(control, "p-invalid", () => control.checkValidity());
     expect(emittedEvents.length).to.equal(0);
   });
 
@@ -220,9 +198,7 @@ function runSpecialTests_slButtonOfTypeButton(createControl: CreateControlFn) {
     control.setCustomValidity("error");
     control.disabled = false;
     await control.updateComplete;
-    const emittedEvents = checkEventEmissions(control, "p-invalid", () =>
-      control.reportValidity(),
-    );
+    const emittedEvents = checkEventEmissions(control, "p-invalid", () => control.reportValidity());
 
     expect(emittedEvents.length).to.equal(0);
   });
@@ -248,9 +224,7 @@ function runSpecialTests_slButtonWithHref(createControl: CreateControlFn) {
     const control = await createControl();
     control.setCustomValidity("error");
     await control.updateComplete;
-    const emittedEvents = checkEventEmissions(control, "p-invalid", () =>
-      control.checkValidity(),
-    );
+    const emittedEvents = checkEventEmissions(control, "p-invalid", () => control.checkValidity());
     expect(emittedEvents.length).to.equal(0);
   });
 
@@ -258,9 +232,7 @@ function runSpecialTests_slButtonWithHref(createControl: CreateControlFn) {
     const control = await createControl();
     control.setCustomValidity("error");
     await control.updateComplete;
-    const emittedEvents = checkEventEmissions(control, "p-invalid", () =>
-      control.reportValidity(),
-    );
+    const emittedEvents = checkEventEmissions(control, "p-invalid", () => control.reportValidity());
     expect(emittedEvents.length).to.equal(0);
   });
 }
@@ -292,9 +264,7 @@ function runSpecialTests_standard(createControl: CreateControlFn) {
     control.setCustomValidity("error");
     control.disabled = false;
     await control.updateComplete;
-    const emittedEvents = checkEventEmissions(control, "p-invalid", () =>
-      control.checkValidity(),
-    );
+    const emittedEvents = checkEventEmissions(control, "p-invalid", () => control.checkValidity());
     expect(emittedEvents.length).to.equal(1);
   });
 
@@ -303,9 +273,7 @@ function runSpecialTests_standard(createControl: CreateControlFn) {
     control.setCustomValidity("error");
     control.disabled = false;
     await control.updateComplete;
-    const emittedEvents = checkEventEmissions(control, "p-invalid", () =>
-      control.reportValidity(),
-    );
+    const emittedEvents = checkEventEmissions(control, "p-invalid", () => control.reportValidity());
     expect(emittedEvents.length).to.equal(1);
   });
 }
@@ -315,19 +283,13 @@ function runSpecialTests_standard(createControl: CreateControlFn) {
 //
 
 // Creates a testable Pure UI form control instance
-async function createFormControl<
-  T extends ShoelaceFormControl = ShoelaceFormControl,
->(tagName: string): Promise<T> {
+async function createFormControl<T extends ShoelaceFormControl = ShoelaceFormControl>(tagName: string): Promise<T> {
   return await fixture<T>(`<${tagName}></${tagName}>`);
 }
 
 // Runs an action while listening for emitted events of a given type. Returns an array of all events of the given type
 // that have been been emitted while the action was running.
-function checkEventEmissions(
-  control: ShoelaceFormControl,
-  eventType: string,
-  action: () => void,
-): Event[] {
+function checkEventEmissions(control: ShoelaceFormControl, eventType: string, action: () => void): Event[] {
   const emittedEvents: Event[] = [];
 
   const eventHandler = (event: Event) => {

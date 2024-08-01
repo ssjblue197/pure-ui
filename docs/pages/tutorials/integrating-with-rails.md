@@ -73,10 +73,7 @@ environment.plugins.append(
   new CopyPlugin({
     patterns: [
       {
-        from: path.resolve(
-          __dirname,
-          "../../node_modules/pure-uikit/dist/assets",
-        ),
+        from: path.resolve(__dirname, "../../node_modules/pure-uikit/dist/assets"),
         to: path.resolve(__dirname, "../../public/packs/js/assets"),
       },
     ],
@@ -96,9 +93,8 @@ The final step is to add the corresponding `pack_tags` to the page. You should h
   <head>
     <!-- ... -->
 
-    <%= stylesheet_pack_tag 'application', media: 'all',
-    'data-turbolinks-track': 'reload' %> <%= javascript_pack_tag 'application',
-    'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %> <%= javascript_pack_tag
+    'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
     <%= yield %>

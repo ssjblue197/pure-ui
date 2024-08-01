@@ -26,13 +26,10 @@ describe("<p-avatar>", () => {
   });
 
   describe("when provided an image and label parameter", () => {
-    const image =
-      "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+    const image = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
     const label = "Small transparent square";
     before(async () => {
-      el = await fixture<PAvatar>(
-        html`<p-avatar image="${image}" label="${label}"></p-avatar>`,
-      );
+      el = await fixture<PAvatar>(html`<p-avatar image="${image}" label="${label}"></p-avatar>`);
     });
 
     it("should pass accessibility tests", async () => {
@@ -62,9 +59,7 @@ describe("<p-avatar>", () => {
   describe("when provided initials parameter", () => {
     const initials = "P";
     before(async () => {
-      el = await fixture<PAvatar>(
-        html`<p-avatar initials="${initials}" label="Avatar"></p-avatar>`,
-      );
+      el = await fixture<PAvatar>(html`<p-avatar initials="${initials}" label="Avatar"></p-avatar>`);
     });
 
     it("should pass accessibility tests", async () => {
@@ -72,8 +67,7 @@ describe("<p-avatar>", () => {
     });
 
     it('renders "initials" part, with initials as the text node', async () => {
-      const part =
-        el.shadowRoot!.querySelector<HTMLElement>('[part~="initials"]')!;
+      const part = el.shadowRoot!.querySelector<HTMLElement>('[part~="initials"]')!;
       console.log(part.innerText);
 
       await expect(String(part.innerText).trim()).to.eq(initials);
@@ -82,17 +76,10 @@ describe("<p-avatar>", () => {
 
   describe("when image is present, the initials or icon part should not render", () => {
     const initials = "P";
-    const image =
-      "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+    const image = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
     const label = "Small transparent square";
     before(async () => {
-      el = await fixture<PAvatar>(
-        html`<p-avatar
-          image="${image}"
-          label="${label}"
-          initials="${initials}"
-        ></p-avatar>`,
-      );
+      el = await fixture<PAvatar>(html`<p-avatar image="${image}" label="${label}" initials="${initials}"></p-avatar>`);
     });
 
     it("should pass accessibility tests", async () => {
@@ -113,26 +100,22 @@ describe("<p-avatar>", () => {
     });
 
     it("should not render the initials part", () => {
-      const part =
-        el.shadowRoot!.querySelector<HTMLElement>('[part~="initials"]')!;
+      const part = el.shadowRoot!.querySelector<HTMLElement>('[part~="initials"]')!;
 
       expect(part).to.not.exist;
     });
 
     it("should not render the icon part", () => {
-      const slot =
-        el.shadowRoot!.querySelector<HTMLSlotElement>("slot[name=icon]")!;
+      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>("slot[name=icon]")!;
 
       expect(slot).to.not.exist;
     });
   });
 
-  ["square", "rounded", "circle"].forEach((shape) => {
+  ["square", "rounded", "circle"].forEach(shape => {
     describe(`when passed a shape attribute ${shape}`, () => {
       before(async () => {
-        el = await fixture<PAvatar>(
-          html`<p-avatar shape="${shape}" label="Shaped avatar"></p-avatar>`,
-        );
+        el = await fixture<PAvatar>(html`<p-avatar shape="${shape}" label="Shaped avatar"></p-avatar>`);
       });
 
       it("should pass accessibility tests", async () => {
@@ -150,11 +133,7 @@ describe("<p-avatar>", () => {
 
   describe('when passed a <span>, on slot "icon"', () => {
     before(async () => {
-      el = await fixture<PAvatar>(
-        html`<p-avatar label="Avatar"
-          ><span slot="icon">random content</span></p-avatar
-        >`,
-      );
+      el = await fixture<PAvatar>(html`<p-avatar label="Avatar"><span slot="icon">random content</span></p-avatar>`);
     });
 
     it("should pass accessibility tests", async () => {
@@ -162,8 +141,7 @@ describe("<p-avatar>", () => {
     });
 
     it("should accept as an assigned child in the shadow root", () => {
-      const slot =
-        el.shadowRoot!.querySelector<HTMLSlotElement>("slot[name=icon]")!;
+      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>("slot[name=icon]")!;
       const childNodes = slot.assignedNodes({ flatten: true }) as HTMLElement[];
 
       expect(childNodes.length).to.eq(1);
@@ -195,8 +173,7 @@ describe("<p-avatar>", () => {
     await aTimeout(0);
     await waitUntil(() => el.shadowRoot!.querySelector("img") === null);
 
-    el.image =
-      "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+    el.image = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
     await el.updateComplete;
 
     expect(el.shadowRoot?.querySelector("img")).to.exist;

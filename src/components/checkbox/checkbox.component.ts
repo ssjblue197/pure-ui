@@ -41,19 +41,14 @@ import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
  * @csspart label - The container that wraps the checkbox's label.
  * @csspart form-control-help-text - The help text's wrapper.
  */
-export default class PCheckbox
-  extends PureElement
-  implements ShoelaceFormControl
-{
+export default class PCheckbox extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
   static dependencies = { "p-icon": PIcon };
 
   private readonly formControlController = new FormControlController(this, {
-    value: (control: PCheckbox) =>
-      control.checked ? control.value || "on" : undefined,
+    value: (control: PCheckbox) => (control.checked ? control.value || "on" : undefined),
     defaultValue: (control: PCheckbox) => control.defaultChecked,
-    setValue: (control: PCheckbox, checked: boolean) =>
-      (control.checked = checked),
+    setValue: (control: PCheckbox, checked: boolean) => (control.checked = checked),
   });
   private readonly hasSlotController = new HasSlotController(this, "help-text");
 
@@ -226,10 +221,7 @@ export default class PCheckbox
           <input
             class="checkbox__input"
             type="checkbox"
-            title=${
-              this
-                .title /* An empty title prevents browser validation tooltips from appearing on hover */
-            }
+            title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
             name=${this.name}
             value=${ifDefined(this.value)}
             .indeterminate=${live(this.indeterminate)}
@@ -246,20 +238,14 @@ export default class PCheckbox
           />
 
           <span
-            part="control${this.checked ? " control--checked" : ""}${this
-              .indeterminate
+            part="control${this.checked ? " control--checked" : ""}${this.indeterminate
               ? " control--indeterminate"
               : ""}"
             class="checkbox__control"
           >
             ${this.checked
               ? html`
-                  <p-icon
-                    part="checked-icon"
-                    class="checkbox__checked-icon"
-                    library="system"
-                    name="check"
-                  ></p-icon>
+                  <p-icon part="checked-icon" class="checkbox__checked-icon" library="system" name="check"></p-icon>
                 `
               : ""}
             ${!this.checked && this.indeterminate

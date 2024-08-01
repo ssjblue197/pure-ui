@@ -1,9 +1,6 @@
 import { animateTo, stopAnimations } from "../../internal/animate.js";
 import { classMap } from "lit/directives/class-map.js";
-import {
-  getAnimation,
-  setDefaultAnimation,
-} from "../../utilities/animation-registry.js";
+import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
 import { HasSlotController } from "../../internal/slot.js";
 import { html } from "lit";
 import { LocalizeController } from "../../utilities/localize.js";
@@ -50,11 +47,7 @@ export default class PAlert extends PureElement {
   static dependencies = { "p-icon-button": PIconButton };
 
   private autoHideTimeout: number;
-  private readonly hasSlotController = new HasSlotController(
-    this,
-    "icon",
-    "suffix",
-  );
+  private readonly hasSlotController = new HasSlotController(this, "icon", "suffix");
   private readonly localize = new LocalizeController(this);
 
   @query('[part~="base"]') base: HTMLElement;
@@ -69,12 +62,7 @@ export default class PAlert extends PureElement {
   @property({ type: Boolean, reflect: true }) closable = false;
 
   /** The alert's theme variant. */
-  @property({ reflect: true }) variant:
-    | "primary"
-    | "success"
-    | "neutral"
-    | "warning"
-    | "danger" = "primary";
+  @property({ reflect: true }) variant: "primary" | "success" | "neutral" | "warning" | "danger" = "primary";
 
   /**
    * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with
@@ -90,10 +78,7 @@ export default class PAlert extends PureElement {
   private restartAutoHide() {
     clearTimeout(this.autoHideTimeout);
     if (this.open && this.duration < Infinity) {
-      this.autoHideTimeout = window.setTimeout(
-        () => this.hide(),
-        this.duration,
-      );
+      this.autoHideTimeout = window.setTimeout(() => this.hide(), this.duration);
     }
   }
 
@@ -171,7 +156,7 @@ export default class PAlert extends PureElement {
    * calling this method again. The returned promise will resolve after the alert is hidden.
    */
   async toast() {
-    return new Promise<void>((resolve) => {
+    return new Promise<void>(resolve => {
       if (toastStack.parentElement === null) {
         document.body.append(toastStack);
       }

@@ -9,17 +9,13 @@ import type PDetails from "./details.js";
 describe("<p-details>", () => {
   describe("accessibility", () => {
     it("should be accessible when closed", async () => {
-      const details = await fixture<PDetails>(
-        html`<p-details summary="Test"> Test text </p-details>`,
-      );
+      const details = await fixture<PDetails>(html`<p-details summary="Test"> Test text </p-details>`);
 
       await expect(details).to.be.accessible();
     });
 
     it("should be accessible when open", async () => {
-      const details = await fixture<PDetails>(
-        html`<p-details open summary="Test">Test text</p-details>`,
-      );
+      const details = await fixture<PDetails>(html`<p-details open summary="Test">Test text</p-details>`);
 
       await expect(details).to.be.accessible();
     });
@@ -28,10 +24,9 @@ describe("<p-details>", () => {
   it("should be visible with the open attribute", async () => {
     const el = await fixture<PDetails>(html`
       <p-details open>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
       </p-details>
     `);
     const body = el.shadowRoot!.querySelector<HTMLElement>(".details__body")!;
@@ -42,10 +37,9 @@ describe("<p-details>", () => {
   it("should not be visible without the open attribute", async () => {
     const el = await fixture<PDetails>(html`
       <p-details summary="click me">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
       </p-details>
     `);
     const body = el.shadowRoot!.querySelector<HTMLElement>(".details__body")!;
@@ -55,10 +49,9 @@ describe("<p-details>", () => {
   it("should emit p-show and p-after-show when calling show()", async () => {
     const el = await fixture<PDetails>(html`
       <p-details>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
       </p-details>
     `);
     const showHandler = sinon.spy();
@@ -78,10 +71,9 @@ describe("<p-details>", () => {
   it("should emit p-hide and p-after-hide when calling hide()", async () => {
     const el = await fixture<PDetails>(html`
       <p-details open>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
       </p-details>
     `);
     const hideHandler = sinon.spy();
@@ -101,10 +93,9 @@ describe("<p-details>", () => {
   it("should emit p-show and p-after-show when setting open = true", async () => {
     const el = await fixture<PDetails>(html`
       <p-details>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
       </p-details>
     `);
     const body = el.shadowRoot!.querySelector<HTMLElement>(".details__body")!;
@@ -126,10 +117,9 @@ describe("<p-details>", () => {
   it("should emit p-hide and p-after-hide when setting open = false", async () => {
     const el = await fixture<PDetails>(html`
       <p-details open>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
       </p-details>
     `);
     const hideHandler = sinon.spy();
@@ -149,15 +139,12 @@ describe("<p-details>", () => {
   it("should not open when preventing p-show", async () => {
     const el = await fixture<PDetails>(html`
       <p-details>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
       </p-details>
     `);
-    const showHandler = sinon.spy((event: PShowEvent) =>
-      event.preventDefault(),
-    );
+    const showHandler = sinon.spy((event: PShowEvent) => event.preventDefault());
 
     el.addEventListener("p-show", showHandler);
     el.open = true;
@@ -171,15 +158,12 @@ describe("<p-details>", () => {
   it("should not close when preventing p-hide", async () => {
     const el = await fixture<PDetails>(html`
       <p-details open>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
       </p-details>
     `);
-    const hideHandler = sinon.spy((event: PHideEvent) =>
-      event.preventDefault(),
-    );
+    const hideHandler = sinon.spy((event: PHideEvent) => event.preventDefault());
 
     el.addEventListener("p-hide", hideHandler);
     el.open = false;

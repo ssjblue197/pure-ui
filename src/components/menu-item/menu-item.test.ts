@@ -36,9 +36,7 @@ describe("<p-menu-item>", () => {
   });
 
   it("should have the correct default properties", async () => {
-    const el = await fixture<PMenuItem>(html`
-      <p-menu-item>Test</p-menu-item>
-    `);
+    const el = await fixture<PMenuItem>(html` <p-menu-item>Test</p-menu-item> `);
 
     expect(el.value).to.equal("");
     expect(el.disabled).to.be.false;
@@ -47,32 +45,24 @@ describe("<p-menu-item>", () => {
   });
 
   it("should render the correct aria attributes when disabled", async () => {
-    const el = await fixture<PMenuItem>(html`
-      <p-menu-item disabled>Test</p-menu-item>
-    `);
+    const el = await fixture<PMenuItem>(html` <p-menu-item disabled>Test</p-menu-item> `);
     expect(el.getAttribute("aria-disabled")).to.equal("true");
   });
 
   describe("when loading", () => {
     it("should have a spinner present", async () => {
-      const el = await fixture<PMenuItem>(html`
-        <p-menu-item loading>Menu Item Label</p-menu-item>
-      `);
+      const el = await fixture<PMenuItem>(html` <p-menu-item loading>Menu Item Label</p-menu-item> `);
       expect(el.shadowRoot!.querySelector("p-spinner")).to.exist;
     });
   });
 
   it("should return a text label when calling getTextLabel()", async () => {
-    const el = await fixture<PMenuItem>(html`
-      <p-menu-item>Test</p-menu-item>
-    `);
+    const el = await fixture<PMenuItem>(html` <p-menu-item>Test</p-menu-item> `);
     expect(el.getTextLabel()).to.equal("Test");
   });
 
   it("should emit the slotchange event when the label changes", async () => {
-    const el = await fixture<PMenuItem>(html`
-      <p-menu-item>Text</p-menu-item>
-    `);
+    const el = await fixture<PMenuItem>(html` <p-menu-item>Text</p-menu-item> `);
     const slotChangeHandler = sinon.spy();
 
     el.addEventListener("slotchange", slotChangeHandler);
@@ -109,9 +99,7 @@ describe("<p-menu-item>", () => {
 
     const menuItem: HTMLElement = menu.querySelector("p-menu-item")!;
     expect(menuItem.shadowRoot!.querySelector("p-popup")).to.be.null;
-    const submenuSlot: HTMLElement = menuItem.shadowRoot!.querySelector(
-      'slot[name="submenu"]',
-    )!;
+    const submenuSlot: HTMLElement = menuItem.shadowRoot!.querySelector('slot[name="submenu"]')!;
     expect(submenuSlot.hidden).to.be.true;
   });
 
@@ -129,9 +117,7 @@ describe("<p-menu-item>", () => {
 
     const menuItem = menu.querySelector("p-menu-item")!;
     expect(menuItem.shadowRoot!.querySelector("p-popup")).to.be.not.null;
-    const submenuSlot: HTMLElement = menuItem.shadowRoot!.querySelector(
-      'slot[name="submenu"]',
-    )!;
+    const submenuSlot: HTMLElement = menuItem.shadowRoot!.querySelector('slot[name="submenu"]')!;
     expect(submenuSlot.hidden).to.be.false;
   });
 

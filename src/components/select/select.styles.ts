@@ -176,8 +176,7 @@ export default css`
     margin-inline-end: var(--p-input-spacing-small);
   }
 
-  .select--small.select--multiple:not(.select--placeholder-visible)
-    .select__combobox {
+  .select--small.select--multiple:not(.select--placeholder-visible) .select__combobox {
     padding-block: 2px;
     padding-inline-start: 0;
   }
@@ -202,8 +201,7 @@ export default css`
     margin-inline-end: var(--p-input-spacing-medium);
   }
 
-  .select--medium.select--multiple:not(.select--placeholder-visible)
-    .select__combobox {
+  .select--medium.select--multiple:not(.select--placeholder-visible) .select__combobox {
     padding-inline-start: 0;
     padding-block: 3px;
   }
@@ -228,8 +226,7 @@ export default css`
     margin-inline-end: var(--p-input-spacing-large);
   }
 
-  .select--large.select--multiple:not(.select--placeholder-visible)
-    .select__combobox {
+  .select--large.select--multiple:not(.select--placeholder-visible) .select__combobox {
     padding-inline-start: 0;
     padding-block: 4px;
   }

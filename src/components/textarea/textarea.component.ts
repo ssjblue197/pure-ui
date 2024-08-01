@@ -36,20 +36,13 @@ import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
  * @csspart base - The component's base wrapper.
  * @csspart textarea - The internal `<textarea>` control.
  */
-export default class PTextarea
-  extends PureElement
-  implements ShoelaceFormControl
-{
+export default class PTextarea extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
 
   private readonly formControlController = new FormControlController(this, {
     assumeInteractionOn: ["p-blur", "p-input"],
   });
-  private readonly hasSlotController = new HasSlotController(
-    this,
-    "help-text",
-    "label",
-  );
+  private readonly hasSlotController = new HasSlotController(this, "help-text", "label");
   private resizeObserver: ResizeObserver;
 
   @query(".textarea__control") input: HTMLTextAreaElement;
@@ -107,13 +100,7 @@ export default class PTextarea
   @property({ type: Number }) maxlength: number;
 
   /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
-  @property() autocapitalize:
-    | "off"
-    | "none"
-    | "on"
-    | "sentences"
-    | "words"
-    | "characters";
+  @property() autocapitalize: "off" | "none" | "on" | "sentences" | "words" | "characters";
 
   /** Indicates whether the browser's autocorrect feature is on or off. */
   @property() autocorrect: string;
@@ -128,22 +115,15 @@ export default class PTextarea
   @property({ type: Boolean }) autofocus: boolean;
 
   /** Used to customize the label or icon of the Enter key on virtual keyboards. */
-  @property() enterkeyhint:
-    | "enter"
-    | "done"
-    | "go"
-    | "next"
-    | "previous"
-    | "search"
-    | "send";
+  @property() enterkeyhint: "enter" | "done" | "go" | "next" | "previous" | "search" | "send";
 
   /** Enables spell checking on the textarea. */
   @property({
     type: Boolean,
     converter: {
       // Allow "true|false" attribute values but keep the property boolean
-      fromAttribute: (value) => (!value || value === "false" ? false : true),
-      toAttribute: (value) => (value ? "true" : "false"),
+      fromAttribute: value => (!value || value === "false" ? false : true),
+      toAttribute: value => (value ? "true" : "false"),
     },
   })
   spellcheck = true;
@@ -152,15 +132,7 @@ export default class PTextarea
    * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
    * keyboard on supportive devices.
    */
-  @property() inputmode:
-    | "none"
-    | "text"
-    | "decimal"
-    | "numeric"
-    | "tel"
-    | "search"
-    | "email"
-    | "url";
+  @property() inputmode: "none" | "text" | "decimal" | "numeric" | "tel" | "search" | "email" | "url";
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue = "";
@@ -265,14 +237,10 @@ export default class PTextarea
   }
 
   /** Gets or sets the textarea's scroll position. */
-  scrollPosition(position?: {
-    top?: number;
-    left?: number;
-  }): { top: number; left: number } | undefined {
+  scrollPosition(position?: { top?: number; left?: number }): { top: number; left: number } | undefined {
     if (position) {
       if (typeof position.top === "number") this.input.scrollTop = position.top;
-      if (typeof position.left === "number")
-        this.input.scrollLeft = position.left;
+      if (typeof position.left === "number") this.input.scrollLeft = position.left;
       return undefined;
     }
 
@@ -288,11 +256,7 @@ export default class PTextarea
     selectionEnd: number,
     selectionDirection: "forward" | "backward" | "none" = "none",
   ) {
-    this.input.setSelectionRange(
-      selectionStart,
-      selectionEnd,
-      selectionDirection,
-    );
+    this.input.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
   }
 
   /** Replaces a range of text with a new string. */
@@ -305,12 +269,7 @@ export default class PTextarea
     const selectionStart = start ?? this.input.selectionStart;
     const selectionEnd = end ?? this.input.selectionEnd;
 
-    this.input.setRangeText(
-      replacement,
-      selectionStart,
-      selectionEnd,
-      selectMode,
-    );
+    this.input.setRangeText(replacement, selectionStart, selectionEnd, selectMode);
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
@@ -388,10 +347,7 @@ export default class PTextarea
               part="textarea"
               id="input"
               class="textarea__control"
-              title=${
-                this
-                  .title /* An empty title prevents browser validation tooltips from appearing on hover */
-              }
+              title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
               name=${ifDefined(this.name)}
               .value=${live(this.value)}
               ?disabled=${this.disabled}

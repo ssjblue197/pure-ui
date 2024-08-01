@@ -28,7 +28,7 @@
   }
 
   // Toggle the menu
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", event => {
     const menuToggle = event.target.closest("#menu-toggle");
     if (!menuToggle) return;
     toggleSidebar();
@@ -37,14 +37,14 @@
   // Update the sidebar's inert state when the window resizes and when the sidebar transitions
   window.addEventListener("resize", () => toggleSidebar(false));
 
-  document.addEventListener("transitionend", (event) => {
+  document.addEventListener("transitionend", event => {
     const sidebar = event.target.closest("#sidebar");
     if (!sidebar) return;
     updateInert();
   });
 
   // Close when a menu item is selected on mobile
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", event => {
     const sidebar = event.target.closest("#sidebar");
     const link = event.target.closest("a");
     if (!sidebar || !link) return;
@@ -55,7 +55,7 @@
   });
 
   // Close when open and escape is pressed
-  document.addEventListener("keydown", (event) => {
+  document.addEventListener("keydown", event => {
     if (event.key === "Escape" && isSidebarOpen()) {
       event.stopImmediatePropagation();
       toggleSidebar();
@@ -63,7 +63,7 @@
   });
 
   // Close when clicking outside of the sidebar
-  document.addEventListener("mousedown", (event) => {
+  document.addEventListener("mousedown", event => {
     if (isSidebarOpen() & !event.target?.closest("#sidebar, #menu-toggle")) {
       event.stopImmediatePropagation();
       toggleSidebar();
@@ -102,41 +102,33 @@
   function updateSelection() {
     const menu = document.querySelector("#theme-selector p-menu");
     if (!menu) return;
-    [...menu.querySelectorAll("p-menu-item")].map(
-      (item) => (item.checked = item.getAttribute("value") === theme),
-    );
+    [...menu.querySelectorAll("p-menu-item")].map(item => (item.checked = item.getAttribute("value") === theme));
   }
 
   let theme = getTheme();
 
   // Selection is not preserved when changing page, so update when opening dropdown
-  document.addEventListener("p-show", (event) => {
+  document.addEventListener("p-show", event => {
     const themeSelector = event.target.closest("#theme-selector");
     if (!themeSelector) return;
     updateSelection();
   });
 
   // Listen for selections
-  document.addEventListener("p-select", (event) => {
+  document.addEventListener("p-select", event => {
     const menu = event.target.closest("#theme-selector p-menu");
     if (!menu) return;
     setTheme(event.detail.item.value);
   });
 
   // Update the theme when the preference changes
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", () => setTheme(theme));
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => setTheme(theme));
 
   // Toggle with backslash
-  document.addEventListener("keydown", (event) => {
+  document.addEventListener("keydown", event => {
     if (
       event.key === "\\" &&
-      !event
-        .composedPath()
-        .some((el) =>
-          ["input", "textarea"].includes(el?.tagName?.toLowerCase()),
-        )
+      !event.composedPath().some(el => ["input", "textarea"].includes(el?.tagName?.toLowerCase()))
     ) {
       event.preventDefault();
       setTheme(isDark() ? "light" : "dark");
@@ -155,7 +147,7 @@
 
   window.addEventListener("beforeprint", () => {
     detailsOpenOnPrint.clear();
-    document.querySelectorAll("details").forEach((details) => {
+    document.querySelectorAll("details").forEach(details => {
       if (details.open) {
         detailsOpenOnPrint.add(details);
       }
@@ -164,7 +156,7 @@
   });
 
   window.addEventListener("afterprint", () => {
-    document.querySelectorAll("details").forEach((details) => {
+    document.querySelectorAll("details").forEach(details => {
       details.open = detailsOpenOnPrint.has(details);
     });
     detailsOpenOnPrint.clear();
@@ -175,17 +167,12 @@
 // Smooth links
 //
 (() => {
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", event => {
     const link = event.target.closest("a");
     const id = (link?.hash ?? "").substr(1);
-    const isFragment =
-      link?.hasAttribute("href") && link?.getAttribute("href").startsWith("#");
+    const isFragment = link?.hasAttribute("href") && link?.getAttribute("href").startsWith("#");
 
-    if (
-      !link ||
-      !isFragment ||
-      link.getAttribute("data-smooth-link") === "false"
-    ) {
+    if (!link || !isFragment || link.getAttribute("data-smooth-link") === "false") {
       return;
     }
 
@@ -223,7 +210,7 @@
   let debounce;
 
   function handleIntersect(entries) {
-    entries.forEach((entry) => {
+    entries.forEach(entry => {
       // Remember which targets are visible
       if (entry.isIntersecting) {
         visibleTargets.add(entry.target);
@@ -238,11 +225,11 @@
   function updateActiveLinks() {
     const links = getLinks();
     // Find the first visible target and activate the respective link
-    links.find((link) => {
+    links.find(link => {
       const target = linkTargets.get(link);
 
       if (target && visibleTargets.has(target)) {
-        links.forEach((el) => el.classList.toggle("active", el === link));
+        links.forEach(el => el.classList.toggle("active", el === link));
         return true;
       }
 
@@ -252,11 +239,9 @@
 
   // Observe link targets
   function observeLinks() {
-    getLinks().forEach((link) => {
+    getLinks().forEach(link => {
       const hash = link.hash.slice(1);
-      const target = hash
-        ? document.querySelector(`.content__body #${hash}`)
-        : null;
+      const target = hash ? document.querySelector(`.content__body #${hash}`) : null;
 
       if (target) {
         linkTargets.set(link, target);

@@ -66,8 +66,7 @@ export default class PRating extends PureElement {
    * The function should return a string containing trusted HTML of the symbol to render at the specified value. Works
    * well with `<p-icon>` elements.
    */
-  @property() getSymbol: (value: number) => string = () =>
-    '<p-icon name="star-fill" library="system"></p-icon>';
+  @property() getSymbol: (value: number) => string = () => '<p-icon name="star-fill" library="system"></p-icon>';
 
   private getValueFromMousePosition(event: MouseEvent) {
     return this.getValueFromXCoordinate(event.clientX);
@@ -81,14 +80,8 @@ export default class PRating extends PureElement {
     const isRtl = this.matches(":dir(rtl)");
     const { left, right, width } = this.rating.getBoundingClientRect();
     const value = isRtl
-      ? this.roundToPrecision(
-          ((right - coordinate) / width) * this.max,
-          this.precision,
-        )
-      : this.roundToPrecision(
-          ((coordinate - left) / width) * this.max,
-          this.precision,
-        );
+      ? this.roundToPrecision(((right - coordinate) / width) * this.max, this.precision)
+      : this.roundToPrecision(((coordinate - left) / width) * this.max, this.precision);
 
     return clamp(value, 0, this.max);
   }
@@ -120,21 +113,13 @@ export default class PRating extends PureElement {
       return;
     }
 
-    if (
-      event.key === "ArrowDown" ||
-      (isLtr && event.key === "ArrowLeft") ||
-      (isRtl && event.key === "ArrowRight")
-    ) {
+    if (event.key === "ArrowDown" || (isLtr && event.key === "ArrowLeft") || (isRtl && event.key === "ArrowRight")) {
       const decrement = event.shiftKey ? 1 : this.precision;
       this.value = Math.max(0, this.value - decrement);
       event.preventDefault();
     }
 
-    if (
-      event.key === "ArrowUp" ||
-      (isLtr && event.key === "ArrowRight") ||
-      (isRtl && event.key === "ArrowLeft")
-    ) {
+    if (event.key === "ArrowUp" || (isLtr && event.key === "ArrowRight") || (isRtl && event.key === "ArrowLeft")) {
       const increment = event.shiftKey ? 1 : this.precision;
       this.value = Math.min(this.max, this.value + increment);
       event.preventDefault();
@@ -263,7 +248,7 @@ export default class PRating extends PureElement {
         @touchmove=${this.handleTouchMove}
       >
         <span class="rating__symbols">
-          ${counter.map((index) => {
+          ${counter.map(index => {
             if (displayValue > index && displayValue < index + 1) {
               // Users can click the current value to clear the rating. When this happens, we set this.isHovering to
               // false to prevent the hover state from confusing them as they move the mouse out of the control. This
@@ -273,8 +258,7 @@ export default class PRating extends PureElement {
                   class=${classMap({
                     rating__symbol: true,
                     "rating__partial-symbol-container": true,
-                    "rating__symbol--hover":
-                      this.isHovering && Math.ceil(displayValue) === index + 1,
+                    "rating__symbol--hover": this.isHovering && Math.ceil(displayValue) === index + 1,
                   })}
                   role="presentation"
                 >
@@ -305,8 +289,7 @@ export default class PRating extends PureElement {
               <span
                 class=${classMap({
                   rating__symbol: true,
-                  "rating__symbol--hover":
-                    this.isHovering && Math.ceil(displayValue) === index + 1,
+                  "rating__symbol--hover": this.isHovering && Math.ceil(displayValue) === index + 1,
                   "rating__symbol--active": displayValue >= index + 1,
                 })}
                 role="presentation"

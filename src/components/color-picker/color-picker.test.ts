@@ -10,27 +10,18 @@ import type PColorPicker from "./color-picker.js";
 describe("<p-color-picker>", () => {
   describe("when the value changes", () => {
     it("should not emit p-change or p-input when the value is changed programmatically", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker></p-color-picker>
-      `);
+      const el = await fixture<PColorPicker>(html` <p-color-picker></p-color-picker> `);
       const color = "rgb(255, 204, 0)";
 
-      el.addEventListener("p-change", () =>
-        expect.fail("p-change should not be emitted"),
-      );
-      el.addEventListener("p-input", () =>
-        expect.fail("p-change should not be emitted"),
-      );
+      el.addEventListener("p-change", () => expect.fail("p-change should not be emitted"));
+      el.addEventListener("p-input", () => expect.fail("p-change should not be emitted"));
       el.value = color;
       await el.updateComplete;
     });
 
     it("should emit p-change and p-input when the color grid selector is moved", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker></p-color-picker>
-      `);
-      const trigger =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+      const el = await fixture<PColorPicker>(html` <p-color-picker></p-color-picker> `);
+      const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
       const grid = el.shadowRoot!.querySelector<HTMLElement>('[part~="grid"]')!;
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
@@ -59,14 +50,9 @@ describe("<p-color-picker>", () => {
     });
 
     it("should emit p-change and p-input when the hue slider is moved", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker></p-color-picker>
-      `);
-      const trigger =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
-      const slider = el.shadowRoot!.querySelector<HTMLElement>(
-        '[part~="hue-slider"]',
-      )!;
+      const el = await fixture<PColorPicker>(html` <p-color-picker></p-color-picker> `);
+      const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+      const slider = el.shadowRoot!.querySelector<HTMLElement>('[part~="hue-slider"]')!;
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
@@ -95,14 +81,9 @@ describe("<p-color-picker>", () => {
     });
 
     it("should emit p-change and p-input when the opacity slider is moved", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker opacity></p-color-picker>
-      `);
-      const trigger =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
-      const slider = el.shadowRoot!.querySelector<HTMLElement>(
-        '[part~="opacity-slider"]',
-      )!;
+      const el = await fixture<PColorPicker>(html` <p-color-picker opacity></p-color-picker> `);
+      const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+      const slider = el.shadowRoot!.querySelector<HTMLElement>('[part~="opacity-slider"]')!;
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
@@ -130,14 +111,9 @@ describe("<p-color-picker>", () => {
     });
 
     it("should emit p-change and p-input when toggling the format", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker value="#fff"></p-color-picker>
-      `);
-      const trigger =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
-      const formatButton = el.shadowRoot!.querySelector<HTMLElement>(
-        '[part~="format-button"]',
-      )!;
+      const el = await fixture<PColorPicker>(html` <p-color-picker value="#fff"></p-color-picker> `);
+      const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+      const formatButton = el.shadowRoot!.querySelector<HTMLElement>('[part~="format-button"]')!;
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
@@ -158,53 +134,31 @@ describe("<p-color-picker>", () => {
       const el = await fixture<PColorPicker>(html`
         <p-color-picker swatches="red; #008000; rgb(0,0,255);"></p-color-picker>
       `);
-      const swatches = [
-        ...el.shadowRoot!.querySelectorAll('[part~="swatch"] > div'),
-      ];
+      const swatches = [...el.shadowRoot!.querySelectorAll('[part~="swatch"] > div')];
 
       expect(swatches.length).to.equal(3);
-      expect(getComputedStyle(swatches[0]).backgroundColor).to.equal(
-        "rgb(255, 0, 0)",
-      );
-      expect(getComputedStyle(swatches[1]).backgroundColor).to.equal(
-        "rgb(0, 128, 0)",
-      );
-      expect(getComputedStyle(swatches[2]).backgroundColor).to.equal(
-        "rgb(0, 0, 255)",
-      );
+      expect(getComputedStyle(swatches[0]).backgroundColor).to.equal("rgb(255, 0, 0)");
+      expect(getComputedStyle(swatches[1]).backgroundColor).to.equal("rgb(0, 128, 0)");
+      expect(getComputedStyle(swatches[2]).backgroundColor).to.equal("rgb(0, 0, 255)");
     });
 
     it("should render the correct swatches when passing an array of color values", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker></p-color-picker>
-      `);
+      const el = await fixture<PColorPicker>(html` <p-color-picker></p-color-picker> `);
       el.swatches = ["red", "#008000", "rgb(0,0,255)"];
       await el.updateComplete;
 
-      const swatches = [
-        ...el.shadowRoot!.querySelectorAll('[part~="swatch"] > div'),
-      ];
+      const swatches = [...el.shadowRoot!.querySelectorAll('[part~="swatch"] > div')];
 
       expect(swatches.length).to.equal(3);
-      expect(getComputedStyle(swatches[0]).backgroundColor).to.equal(
-        "rgb(255, 0, 0)",
-      );
-      expect(getComputedStyle(swatches[1]).backgroundColor).to.equal(
-        "rgb(0, 128, 0)",
-      );
-      expect(getComputedStyle(swatches[2]).backgroundColor).to.equal(
-        "rgb(0, 0, 255)",
-      );
+      expect(getComputedStyle(swatches[0]).backgroundColor).to.equal("rgb(255, 0, 0)");
+      expect(getComputedStyle(swatches[1]).backgroundColor).to.equal("rgb(0, 128, 0)");
+      expect(getComputedStyle(swatches[2]).backgroundColor).to.equal("rgb(0, 0, 255)");
     });
 
     it("should emit p-change and p-input when clicking on a swatch", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker swatches="red; green; blue;"></p-color-picker>
-      `);
-      const trigger =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
-      const swatch =
-        el.shadowRoot!.querySelector<HTMLElement>('[part~="swatch"]')!;
+      const el = await fixture<PColorPicker>(html` <p-color-picker swatches="red; green; blue;"></p-color-picker> `);
+      const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+      const swatch = el.shadowRoot!.querySelector<HTMLElement>('[part~="swatch"]')!;
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
@@ -221,14 +175,9 @@ describe("<p-color-picker>", () => {
     });
 
     it("should emit p-change and p-input when selecting a color with the keyboard", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker></p-color-picker>
-      `);
-      const trigger =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
-      const gridHandle = el.shadowRoot!.querySelector<HTMLElement>(
-        '[part~="grid-handle"]',
-      )!;
+      const el = await fixture<PColorPicker>(html` <p-color-picker></p-color-picker> `);
+      const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+      const gridHandle = el.shadowRoot!.querySelector<HTMLElement>('[part~="grid-handle"]')!;
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
@@ -246,14 +195,9 @@ describe("<p-color-picker>", () => {
     });
 
     it("should emit p-change and p-input when selecting a color with the keyboard", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker></p-color-picker>
-      `);
-      const trigger =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
-      const handle = el.shadowRoot!.querySelector<HTMLElement>(
-        '[part~="grid-handle"]',
-      )!;
+      const el = await fixture<PColorPicker>(html` <p-color-picker></p-color-picker> `);
+      const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+      const handle = el.shadowRoot!.querySelector<HTMLElement>('[part~="grid-handle"]')!;
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
@@ -271,14 +215,9 @@ describe("<p-color-picker>", () => {
     });
 
     it("should emit p-change and p-input when selecting hue with the keyboard", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker></p-color-picker>
-      `);
-      const trigger =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
-      const handle = el.shadowRoot!.querySelector<HTMLElement>(
-        '[part~="hue-slider"] > span',
-      )!;
+      const el = await fixture<PColorPicker>(html` <p-color-picker></p-color-picker> `);
+      const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+      const handle = el.shadowRoot!.querySelector<HTMLElement>('[part~="hue-slider"] > span')!;
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
@@ -296,14 +235,9 @@ describe("<p-color-picker>", () => {
     });
 
     it("should emit p-change and p-input when selecting opacity with the keyboard", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker opacity></p-color-picker>
-      `);
-      const trigger =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
-      const handle = el.shadowRoot!.querySelector<HTMLElement>(
-        '[part~="opacity-slider"] > span',
-      )!;
+      const el = await fixture<PColorPicker>(html` <p-color-picker opacity></p-color-picker> `);
+      const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+      const handle = el.shadowRoot!.querySelector<HTMLElement>('[part~="opacity-slider"] > span')!;
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
@@ -321,13 +255,9 @@ describe("<p-color-picker>", () => {
     });
 
     it("should emit p-change and p-input when entering a value in the color input and pressing enter", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker opacity></p-color-picker>
-      `);
-      const trigger =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
-      const input =
-        el.shadowRoot!.querySelector<HTMLElement>('[part~="input"]')!;
+      const el = await fixture<PColorPicker>(html` <p-color-picker opacity></p-color-picker> `);
+      const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+      const input = el.shadowRoot!.querySelector<HTMLElement>('[part~="input"]')!;
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
@@ -347,13 +277,9 @@ describe("<p-color-picker>", () => {
     });
 
     it("should emit p-change and p-input when entering a value in the color input and blurring the field", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker opacity></p-color-picker>
-      `);
-      const trigger =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
-      const input =
-        el.shadowRoot!.querySelector<HTMLElement>('[part~="input"]')!;
+      const el = await fixture<PColorPicker>(html` <p-color-picker opacity></p-color-picker> `);
+      const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+      const input = el.shadowRoot!.querySelector<HTMLElement>('[part~="input"]')!;
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
@@ -373,11 +299,8 @@ describe("<p-color-picker>", () => {
     });
 
     it("should render the correct format when selecting a swatch of a different format", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker format="rgb"></p-color-picker>
-      `);
-      const trigger =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+      const el = await fixture<PColorPicker>(html` <p-color-picker format="rgb"></p-color-picker> `);
+      const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
       const changeHandler = sinon.spy();
       const inputHandler = sinon.spy();
 
@@ -386,8 +309,7 @@ describe("<p-color-picker>", () => {
 
       el.swatches = ["#fff"];
       await el.updateComplete;
-      const swatch =
-        el.shadowRoot!.querySelector<HTMLElement>('[part~="swatch"]')!;
+      const swatch = el.shadowRoot!.querySelector<HTMLElement>('[part~="swatch"]')!;
 
       await clickOnElement(trigger); // open the dropdown
       await aTimeout(200); // wait for the dropdown to open
@@ -401,55 +323,38 @@ describe("<p-color-picker>", () => {
   });
 
   it("should render in a dropdown", async () => {
-    const el = await fixture<PColorPicker>(html`
-      <p-color-picker></p-color-picker>
-    `);
+    const el = await fixture<PColorPicker>(html` <p-color-picker></p-color-picker> `);
     const dropdown = el.shadowRoot!.querySelector("p-dropdown");
 
     expect(dropdown).to.exist;
   });
 
   it("should not render in a dropdown when inline is enabled", async () => {
-    const el = await fixture<PColorPicker>(html`
-      <p-color-picker inline></p-color-picker>
-    `);
+    const el = await fixture<PColorPicker>(html` <p-color-picker inline></p-color-picker> `);
     const dropdown = el.shadowRoot!.querySelector("p-dropdown");
 
     expect(dropdown).to.not.exist;
   });
 
   it("should show opacity slider when opacity is enabled", async () => {
-    const el = await fixture<PColorPicker>(html`
-      <p-color-picker opacity></p-color-picker>
-    `);
-    const opacitySlider = el.shadowRoot!.querySelector(
-      '[part*="opacity-slider"]',
-    )!;
+    const el = await fixture<PColorPicker>(html` <p-color-picker opacity></p-color-picker> `);
+    const opacitySlider = el.shadowRoot!.querySelector('[part*="opacity-slider"]')!;
 
     expect(opacitySlider).to.exist;
   });
 
   it("should display a color when an initial value is provided", async () => {
-    const el = await fixture<PColorPicker>(html`
-      <p-color-picker value="#000"></p-color-picker>
-    `);
-    const trigger =
-      el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]');
+    const el = await fixture<PColorPicker>(html` <p-color-picker value="#000"></p-color-picker> `);
+    const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]');
 
     expect(trigger?.style.color).to.equal("rgb(0, 0, 0)");
   });
 
   it("should display a color with opacity when an initial value with opacity is provided", async () => {
-    const el = await fixture<PColorPicker>(html`
-      <p-color-picker opacity value="#ff000050"></p-color-picker>
-    `);
-    const trigger =
-      el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
-    const previewButton =
-      el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="preview"]');
-    const previewColor = getComputedStyle(previewButton!).getPropertyValue(
-      "--preview-color",
-    );
+    const el = await fixture<PColorPicker>(html` <p-color-picker opacity value="#ff000050"></p-color-picker> `);
+    const trigger = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
+    const previewButton = el.shadowRoot!.querySelector<HTMLButtonElement>('[part~="preview"]');
+    const previewColor = getComputedStyle(previewButton!).getPropertyValue("--preview-color");
 
     expect(trigger.style.color).to.equal("rgba(255, 0, 0, 0.314)");
     expect(previewColor).to.equal("#ff000050");
@@ -463,10 +368,7 @@ describe("<p-color-picker>", () => {
       </div>
     `);
     const colorPicker = el.querySelector("p-color-picker")!;
-    const trigger =
-      colorPicker.shadowRoot!.querySelector<HTMLButtonElement>(
-        '[part~="trigger"]',
-      )!;
+    const trigger = colorPicker.shadowRoot!.querySelector<HTMLButtonElement>('[part~="trigger"]')!;
     const button = el.querySelector("button")!;
     const focusHandler = sinon.spy();
     const blurHandler = sinon.spy();
@@ -508,9 +410,7 @@ describe("<p-color-picker>", () => {
   });
 
   it("should focus and blur when calling focus() and blur() and rendered as a dropdown", async () => {
-    const colorPicker = await fixture<PColorPicker>(html`
-      <p-color-picker></p-color-picker>
-    `);
+    const colorPicker = await fixture<PColorPicker>(html` <p-color-picker></p-color-picker> `);
     const focusHandler = sinon.spy();
     const blurHandler = sinon.spy();
 
@@ -533,9 +433,7 @@ describe("<p-color-picker>", () => {
   });
 
   it("should focus and blur when calling focus() and blur() and rendered inline", async () => {
-    const colorPicker = await fixture<PColorPicker>(html`
-      <p-color-picker inline></p-color-picker>
-    `);
+    const colorPicker = await fixture<PColorPicker>(html` <p-color-picker inline></p-color-picker> `);
     const focusHandler = sinon.spy();
     const blurHandler = sinon.spy();
 
@@ -626,32 +524,24 @@ describe("<p-color-picker>", () => {
 
   describe("when using constraint validation", () => {
     it("should be valid by default", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker></p-color-picker>
-      `);
+      const el = await fixture<PColorPicker>(html` <p-color-picker></p-color-picker> `);
       expect(el.checkValidity()).to.be.true;
     });
 
     it("should be invalid when required and empty", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker required></p-color-picker>
-      `);
+      const el = await fixture<PColorPicker>(html` <p-color-picker required></p-color-picker> `);
       expect(el.checkValidity()).to.be.false;
     });
 
     it("should be invalid when required and disabled is removed", async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker disabled required></p-color-picker>
-      `);
+      const el = await fixture<PColorPicker>(html` <p-color-picker disabled required></p-color-picker> `);
       el.disabled = false;
       await el.updateComplete;
       expect(el.checkValidity()).to.be.false;
     });
 
     it('should receive the correct validation attributes ("states") when valid', async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker required value="#fff"></p-color-picker>
-      `);
+      const el = await fixture<PColorPicker>(html` <p-color-picker required value="#fff"></p-color-picker> `);
       const trigger = el.shadowRoot!.querySelector('[part~="trigger"]')!;
       const grid = el.shadowRoot!.querySelector('[part~="grid"]')!;
 
@@ -674,9 +564,7 @@ describe("<p-color-picker>", () => {
     });
 
     it('should receive the correct validation attributes ("states") when invalid', async () => {
-      const el = await fixture<PColorPicker>(html`
-        <p-color-picker required></p-color-picker>
-      `);
+      const el = await fixture<PColorPicker>(html` <p-color-picker required></p-color-picker> `);
       const trigger = el.shadowRoot!.querySelector('[part~="trigger"]')!;
       const grid = el.shadowRoot!.querySelector('[part~="grid"]')!;
 

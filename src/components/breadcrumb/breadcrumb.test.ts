@@ -53,9 +53,7 @@ describe("<p-breadcrumb>", () => {
     });
 
     it('should accept "separator" as an assigned child in the shadow root', () => {
-      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>(
-        "slot[name=separator]",
-      )!;
+      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>("slot[name=separator]")!;
       const childNodes = slot.assignedNodes({ flatten: true });
 
       expect(childNodes.length).to.eq(1);

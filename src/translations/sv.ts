@@ -17,7 +17,7 @@ const translation: Translation = {
   hidePassword: "Dölj lösenord",
   loading: "Läser in",
   nextSlide: "Nästa bild",
-  numOptionsSelected: (num) => {
+  numOptionsSelected: num => {
     if (num === 0) return "Inga alternativ har valts";
     if (num === 1) return "1 alternativ valt";
     return `${num} alternativ valda`;
@@ -30,7 +30,7 @@ const translation: Translation = {
   scrollToStart: "Skrolla till början",
   selectAColorFromTheScreen: "Välj en färg från skärmen",
   showPassword: "Visa lösenord",
-  slideNum: (slide) => `Bild ${slide}`,
+  slideNum: slide => `Bild ${slide}`,
   toggleColorFormat: "Växla färgformat",
 };
 

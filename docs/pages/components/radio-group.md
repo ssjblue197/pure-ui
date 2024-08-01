@@ -110,12 +110,7 @@ const App = () => (
 The size of [Radios](/components/radio) and [Radio Buttons](/components/radio-buttons) will be determined by the Radio Group's `size` attribute.
 
 ```html preview
-<p-radio-group
-  label="Select an option"
-  size="medium"
-  value="medium"
-  class="radio-group-size"
->
+<p-radio-group label="Select an option" size="medium" value="medium" class="radio-group-size">
   <p-radio value="small">Small</p-radio>
   <p-radio value="medium">Medium</p-radio>
   <p-radio value="large">Large</p-radio>
@@ -145,7 +140,7 @@ const App = () => {
         size={size}
         value={size}
         class="radio-group-size"
-        onPChange={(event) => setSize(event.target.value)}
+        onPChange={event => setSize(event.target.value)}
       >
         <PRadio value="small">Small</PRadio>
         <PRadio value="medium">Medium</PRadio>

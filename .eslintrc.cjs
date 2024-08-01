@@ -104,10 +104,7 @@ module.exports = {
       },
     },
     {
-      extends: [
-        "plugin:chai-expect/recommended",
-        "plugin:chai-friendly/recommended",
-      ],
+      extends: ["plugin:chai-expect/recommended", "plugin:chai-friendly/recommended"],
       files: ["*.test.ts"],
       rules: {
         "@typescript-eslint/no-unsafe-call": "off",

@@ -81,9 +81,7 @@ export default css`
   .tag--small {
     font-size: var(--p-button-font-size-small);
     height: calc(var(--p-input-height-small) * 0.8);
-    line-height: calc(
-      var(--p-input-height-small) - var(--p-input-border-width) * 2
-    );
+    line-height: calc(var(--p-input-height-small) - var(--p-input-border-width) * 2);
     border-radius: var(--p-input-border-radius-small);
     padding: 0 var(--p-spacing-x-small);
   }
@@ -91,9 +89,7 @@ export default css`
   .tag--medium {
     font-size: var(--p-button-font-size-medium);
     height: calc(var(--p-input-height-medium) * 0.8);
-    line-height: calc(
-      var(--p-input-height-medium) - var(--p-input-border-width) * 2
-    );
+    line-height: calc(var(--p-input-height-medium) - var(--p-input-border-width) * 2);
     border-radius: var(--p-input-border-radius-medium);
     padding: 0 var(--p-spacing-small);
   }
@@ -101,9 +97,7 @@ export default css`
   .tag--large {
     font-size: var(--p-button-font-size-large);
     height: calc(var(--p-input-height-large) * 0.8);
-    line-height: calc(
-      var(--p-input-height-large) - var(--p-input-border-width) * 2
-    );
+    line-height: calc(var(--p-input-height-large) - var(--p-input-border-width) * 2);
     border-radius: var(--p-input-border-radius-large);
     padding: 0 var(--p-spacing-medium);
   }

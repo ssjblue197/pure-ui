@@ -15,10 +15,7 @@ async function holdShiftKey(callback: () => Promise<void>) {
 }
 
 const tabKey =
-  navigator.userAgent.includes("Safari") &&
-  !navigator.userAgent.includes("HeadlessChrome")
-    ? "Alt+Tab"
-    : "Tab";
+  navigator.userAgent.includes("Safari") && !navigator.userAgent.includes("HeadlessChrome") ? "Alt+Tab" : "Tab";
 
 // Simple helper to turn the activeElements generator into an array
 function activeElementsArray() {
@@ -69,8 +66,7 @@ it("Should allow tabbing to slotted elements", async () => {
 
   const drawer = el.shadowRoot?.querySelector("p-drawer");
 
-  if (drawer === null || drawer === undefined)
-    throw Error("Could not find drawer inside of the test element");
+  if (drawer === null || drawer === undefined) throw Error("Could not find drawer inside of the test element");
 
   await drawer.show();
 
@@ -78,14 +74,12 @@ it("Should allow tabbing to slotted elements", async () => {
 
   const focusZero = drawer.shadowRoot?.querySelector("[role='dialog']");
 
-  if (focusZero === null || focusZero === undefined)
-    throw Error("Could not find dialog panel inside <p-drawer>");
+  if (focusZero === null || focusZero === undefined) throw Error("Could not find dialog panel inside <p-drawer>");
 
   const focusOne = el.querySelector("#focus-1");
   const focusTwo = drawer.shadowRoot?.querySelector("[part~='close-button']");
 
-  if (focusTwo === null || focusTwo === undefined)
-    throw Error("Could not find close button inside <p-drawer>");
+  if (focusTwo === null || focusTwo === undefined) throw Error("Could not find close button inside <p-drawer>");
 
   const focusThree = el.querySelector("#focus-3");
   const focusFour = el.querySelector("#focus-4");
@@ -193,27 +187,16 @@ it("Should respect nested modal instances", async () => {
   /* eslint-disable */
   await fixture(html`
     <div>
-      <p-button
-        id="open-dialog-1"
-        @click=${() => dialogOne().show()}
-      ></p-button>
+      <p-button id="open-dialog-1" @click=${() => dialogOne().show()}></p-button>
       <p-dialog id="dialog-1" label="Dialog 1">
-        <p-button @click=${() => dialogTwo().show()} id="open-dialog-2"
-          >Open Dialog 2</p-button
-        >
+        <p-button @click=${() => dialogTwo().show()} id="open-dialog-2">Open Dialog 2</p-button>
         <p-button slot="footer" variant="primary">Close</p-button>
       </p-dialog>
 
       <p-dialog id="dialog-2" label="Dialog 2">
-        <p-input
-          id="focus-1"
-          autofocus=""
-          placeholder="I will have focus when the dialog is opened"
-        ></p-input>
+        <p-input id="focus-1" autofocus="" placeholder="I will have focus when the dialog is opened"></p-input>
         <p-input id="focus-2" placeholder="Second input"></p-input>
-        <p-button slot="footer" variant="primary" class="close-2"
-          >Close</p-button
-        >
+        <p-button slot="footer" variant="primary" class="close-2">Close</p-button>
       </p-dialog>
     </div>
   `);

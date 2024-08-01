@@ -104,10 +104,7 @@ export default class POption extends PureElement {
     }
 
     if (this.value.includes(" ")) {
-      console.error(
-        `Option values cannot include a space. All spaces have been replaced with underscores.`,
-        this,
-      );
+      console.error(`Option values cannot include a space. All spaces have been replaced with underscores.`, this);
       this.value = this.value.replace(/ /g, "_");
     }
   }
@@ -117,7 +114,7 @@ export default class POption extends PureElement {
     const nodes = this.childNodes;
     let label = "";
 
-    [...nodes].forEach((node) => {
+    [...nodes].forEach(node => {
       if (node.nodeType === Node.ELEMENT_NODE) {
         if (!(node as HTMLElement).hasAttribute("slot")) {
           label += (node as HTMLElement).textContent;
@@ -146,19 +143,9 @@ export default class POption extends PureElement {
         @mouseenter=${this.handleMouseEnter}
         @mouseleave=${this.handleMouseLeave}
       >
-        <p-icon
-          part="checked-icon"
-          class="option__check"
-          name="check"
-          library="system"
-          aria-hidden="true"
-        ></p-icon>
+        <p-icon part="checked-icon" class="option__check" name="check" library="system" aria-hidden="true"></p-icon>
         <slot part="prefix" name="prefix" class="option__prefix"></slot>
-        <slot
-          part="label"
-          class="option__label"
-          @slotchange=${this.handleDefaultSlotChange}
-        ></slot>
+        <slot part="label" class="option__label" @slotchange=${this.handleDefaultSlotChange}></slot>
         <slot part="suffix" name="suffix" class="option__suffix"></slot>
       </div>
     `;

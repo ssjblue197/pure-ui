@@ -45,9 +45,7 @@ export default class PBreadcrumb extends PureElement {
 
     // Clone it, remove ids, and slot it
     const clone = separator.cloneNode(true) as HTMLElement;
-    [clone, ...clone.querySelectorAll("[id]")].forEach((el) =>
-      el.removeAttribute("id"),
-    );
+    [clone, ...clone.querySelectorAll("[id]")].forEach(el => el.removeAttribute("id"));
     clone.setAttribute("data-default", "");
     clone.slot = "separator";
 
@@ -55,10 +53,8 @@ export default class PBreadcrumb extends PureElement {
   }
 
   private handleSlotChange() {
-    const items = [
-      ...this.defaultSlot.assignedElements({ flatten: true }),
-    ].filter(
-      (item) => item.tagName.toLowerCase() === "p-breadcrumb-item",
+    const items = [...this.defaultSlot.assignedElements({ flatten: true })].filter(
+      item => item.tagName.toLowerCase() === "p-breadcrumb-item",
     ) as PBreadcrumbItem[];
 
     items.forEach((item, index) => {
@@ -99,12 +95,7 @@ export default class PBreadcrumb extends PureElement {
 
       <span hidden aria-hidden="true">
         <slot name="separator">
-          <p-icon
-            name=${this.localize.dir() === "rtl"
-              ? "chevron-left"
-              : "chevron-right"}
-            library="system"
-          ></p-icon>
+          <p-icon name=${this.localize.dir() === "rtl" ? "chevron-left" : "chevron-right"} library="system"></p-icon>
         </slot>
       </span>
     `;

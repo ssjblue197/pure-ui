@@ -10,9 +10,7 @@ export default css`
      * 0.7071 is derived from sin(45), which is the diagonal size of the arrow's container after rotating.
      */
     --arrow-size-diagonal: calc(var(--arrow-size) * 0.7071);
-    --arrow-padding-offset: calc(
-      var(--arrow-size-diagonal) - var(--arrow-size)
-    );
+    --arrow-padding-offset: calc(var(--arrow-size-diagonal) - var(--arrow-size));
 
     display: contents;
   }
@@ -56,8 +54,7 @@ export default css`
     clip-path: polygon(
       var(--hover-bridge-top-left-x, 0) var(--hover-bridge-top-left-y, 0),
       var(--hover-bridge-top-right-x, 0) var(--hover-bridge-top-right-y, 0),
-      var(--hover-bridge-bottom-right-x, 0)
-        var(--hover-bridge-bottom-right-y, 0),
+      var(--hover-bridge-bottom-right-x, 0) var(--hover-bridge-bottom-right-y, 0),
       var(--hover-bridge-bottom-left-x, 0) var(--hover-bridge-bottom-left-y, 0)
     );
   }

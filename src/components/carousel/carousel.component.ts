@@ -64,8 +64,7 @@ export default class PCarousel extends PureElement {
   @property({ type: Boolean, reflect: true }) autoplay = false;
 
   /** Specifies the amount of time, in milliseconds, between each automatic scroll.  */
-  @property({ type: Number, attribute: "autoplay-interval" }) autoplayInterval =
-    3000;
+  @property({ type: Number, attribute: "autoplay-interval" }) autoplayInterval = 3000;
 
   /** Specifies how many slides should be shown at a given time.  */
   @property({ type: Number, attribute: "slides-per-page" }) slidesPerPage = 1;
@@ -117,14 +116,9 @@ export default class PCarousel extends PureElement {
     });
   }
 
-  protected willUpdate(
-    changedProperties: PropertyValueMap<PCarousel> | Map<PropertyKey, unknown>,
-  ): void {
+  protected willUpdate(changedProperties: PropertyValueMap<PCarousel> | Map<PropertyKey, unknown>): void {
     // Ensure the slidesPerMove is never higher than the slidesPerPage
-    if (
-      changedProperties.has("slidesPerMove") ||
-      changedProperties.has("slidesPerPage")
-    ) {
+    if (changedProperties.has("slidesPerMove") || changedProperties.has("slidesPerPage")) {
       this.slidesPerMove = Math.min(this.slidesPerMove, this.slidesPerPage);
     }
   }
@@ -133,9 +127,7 @@ export default class PCarousel extends PureElement {
     const slidesCount = this.getSlides().length;
     const { slidesPerPage, slidesPerMove, loop } = this;
 
-    const pages = loop
-      ? slidesCount / slidesPerMove
-      : (slidesCount - slidesPerPage) / slidesPerMove + 1;
+    const pages = loop ? slidesCount / slidesPerMove : (slidesCount - slidesPerPage) / slidesPerMove + 1;
 
     return Math.ceil(pages);
   }
@@ -153,39 +145,21 @@ export default class PCarousel extends PureElement {
   }
 
   /** @internal Gets all carousel items. */
-  private getSlides({
-    excludeClones = true,
-  }: { excludeClones?: boolean } = {}) {
+  private getSlides({ excludeClones = true }: { excludeClones?: boolean } = {}) {
     return [...this.children].filter(
-      (el: HTMLElement) =>
-        this.isCarouselItem(el) &&
-        (!excludeClones || !el.hasAttribute("data-clone")),
+      (el: HTMLElement) => this.isCarouselItem(el) && (!excludeClones || !el.hasAttribute("data-clone")),
     ) as PCarouselItem[];
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    if (
-      [
-        "ArrowLeft",
-        "ArrowRight",
-        "ArrowUp",
-        "ArrowDown",
-        "Home",
-        "End",
-      ].includes(event.key)
-    ) {
+    if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) {
       const target = event.target as HTMLElement;
       const isRtl = this.matches(":dir(rtl)");
-      const isFocusInPagination =
-        target.closest('[part~="pagination-item"]') !== null;
+      const isFocusInPagination = target.closest('[part~="pagination-item"]') !== null;
       const isNext =
-        event.key === "ArrowDown" ||
-        (!isRtl && event.key === "ArrowRight") ||
-        (isRtl && event.key === "ArrowLeft");
+        event.key === "ArrowDown" || (!isRtl && event.key === "ArrowRight") || (isRtl && event.key === "ArrowLeft");
       const isPrevious =
-        event.key === "ArrowUp" ||
-        (!isRtl && event.key === "ArrowLeft") ||
-        (isRtl && event.key === "ArrowRight");
+        event.key === "ArrowUp" || (!isRtl && event.key === "ArrowLeft") || (isRtl && event.key === "ArrowRight");
 
       event.preventDefault();
 
@@ -207,10 +181,9 @@ export default class PCarousel extends PureElement {
 
       if (isFocusInPagination) {
         this.updateComplete.then(() => {
-          const activePaginationItem =
-            this.shadowRoot?.querySelector<HTMLButtonElement>(
-              '[part~="pagination-item--active"]',
-            );
+          const activePaginationItem = this.shadowRoot?.querySelector<HTMLButtonElement>(
+            '[part~="pagination-item--active"]',
+          );
 
           if (activePaginationItem) {
             activePaginationItem.focus();
@@ -306,29 +279,21 @@ export default class PCarousel extends PureElement {
   /** @internal Synchronizes the slides with the IntersectionObserver API. */
   private synchronizeSlides() {
     const io = new IntersectionObserver(
-      (entries) => {
+      entries => {
         io.disconnect();
 
         for (const entry of entries) {
           const slide = entry.target;
           slide.toggleAttribute("inert", !entry.isIntersecting);
           slide.classList.toggle("--in-view", entry.isIntersecting);
-          slide.setAttribute(
-            "aria-hidden",
-            entry.isIntersecting ? "false" : "true",
-          );
+          slide.setAttribute("aria-hidden", entry.isIntersecting ? "false" : "true");
         }
 
-        const firstIntersecting = entries.find((entry) => entry.isIntersecting);
+        const firstIntersecting = entries.find(entry => entry.isIntersecting);
 
         if (firstIntersecting) {
-          if (
-            this.loop &&
-            firstIntersecting.target.hasAttribute("data-clone")
-          ) {
-            const clonePosition = Number(
-              firstIntersecting.target.getAttribute("data-clone"),
-            );
+          if (this.loop && firstIntersecting.target.hasAttribute("data-clone")) {
+            const clonePosition = Number(firstIntersecting.target.getAttribute("data-clone"));
 
             // Scrolls to the original slide without animating, so the user won't notice that the position has changed
             this.goToSlide(clonePosition, "instant");
@@ -336,12 +301,9 @@ export default class PCarousel extends PureElement {
             const slides = this.getSlides();
 
             // Update the current index based on the first visible slide
-            const slideIndex = slides.indexOf(
-              firstIntersecting.target as PCarouselItem,
-            );
+            const slideIndex = slides.indexOf(firstIntersecting.target as PCarouselItem);
             // Set the index to the first "snappable" slide
-            this.activeSlide =
-              Math.ceil(slideIndex / this.slidesPerMove) * this.slidesPerMove;
+            this.activeSlide = Math.ceil(slideIndex / this.slidesPerMove) * this.slidesPerMove;
           }
         }
       },
@@ -351,7 +313,7 @@ export default class PCarousel extends PureElement {
       },
     );
 
-    this.getSlides({ excludeClones: false }).forEach((slide) => {
+    this.getSlides({ excludeClones: false }).forEach(slide => {
       io.observe(slide);
     });
   }
@@ -365,17 +327,13 @@ export default class PCarousel extends PureElement {
   }
 
   private isCarouselItem(node: Node): node is PCarouselItem {
-    return (
-      node instanceof Element &&
-      node.tagName.toLowerCase() === "p-carousel-item"
-    );
+    return node instanceof Element && node.tagName.toLowerCase() === "p-carousel-item";
   }
 
   private handleSlotChange = (mutations: MutationRecord[]) => {
-    const needsInitialization = mutations.some((mutation) =>
+    const needsInitialization = mutations.some(mutation =>
       [...mutation.addedNodes, ...mutation.removedNodes].some(
-        (el: HTMLElement) =>
-          this.isCarouselItem(el) && !el.hasAttribute("data-clone"),
+        (el: HTMLElement) => this.isCarouselItem(el) && !el.hasAttribute("data-clone"),
       ),
     );
 
@@ -394,10 +352,7 @@ export default class PCarousel extends PureElement {
     this.getSlides({ excludeClones: false }).forEach((slide, index) => {
       slide.classList.remove("--in-view");
       slide.classList.remove("--is-active");
-      slide.setAttribute(
-        "aria-label",
-        this.localize.term("slideNum", index + 1),
-      );
+      slide.setAttribute("aria-label", this.localize.term("slideNum", index + 1));
 
       if (slide.hasAttribute("data-clone")) {
         slide.remove();
@@ -514,27 +469,18 @@ export default class PCarousel extends PureElement {
     }
 
     // Sets the next index without taking into account clones, if any.
-    const newActiveSlide = loop
-      ? (index + slides.length) % slides.length
-      : clamp(index, 0, slides.length - 1);
+    const newActiveSlide = loop ? (index + slides.length) % slides.length : clamp(index, 0, slides.length - 1);
     this.activeSlide = newActiveSlide;
 
     // Get the index of the next slide. For looping carousel it adds `slidesPerPage`
     // to normalize the starting index in order to ignore the first nth clones.
-    const nextSlideIndex = clamp(
-      index + (loop ? slidesPerPage : 0),
-      0,
-      slidesWithClones.length - 1,
-    );
+    const nextSlideIndex = clamp(index + (loop ? slidesPerPage : 0), 0, slidesWithClones.length - 1);
     const nextSlide = slidesWithClones[nextSlideIndex];
 
     this.scrollToSlide(nextSlide, prefersReducedMotion() ? "auto" : behavior);
   }
 
-  private scrollToSlide(
-    slide: HTMLElement,
-    behavior: ScrollBehavior = "smooth",
-  ) {
+  private scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = "smooth") {
     const scrollContainer = this.scrollContainer;
     const scrollContainerRect = scrollContainer.getBoundingClientRect();
     const nextSlideRect = slide.getBoundingClientRect();
@@ -596,10 +542,7 @@ export default class PCarousel extends PureElement {
                   @click=${prevEnabled ? () => this.previous() : null}
                 >
                   <slot name="previous-icon">
-                    <p-icon
-                      library="system"
-                      name="${isLtr ? "chevron-left" : "chevron-right"}"
-                    ></p-icon>
+                    <p-icon library="system" name="${isLtr ? "chevron-left" : "chevron-right"}"></p-icon>
                   </slot>
                 </button>
 
@@ -616,10 +559,7 @@ export default class PCarousel extends PureElement {
                   @click=${nextEnabled ? () => this.next() : null}
                 >
                   <slot name="next-icon">
-                    <p-icon
-                      library="system"
-                      name="${isLtr ? "chevron-right" : "chevron-left"}"
-                    ></p-icon>
+                    <p-icon library="system" name="${isLtr ? "chevron-right" : "chevron-left"}"></p-icon>
                   </slot>
                 </button>
               </div>
@@ -627,30 +567,19 @@ export default class PCarousel extends PureElement {
           : ""}
         ${this.pagination
           ? html`
-              <div
-                part="pagination"
-                role="tablist"
-                class="carousel__pagination"
-                aria-controls="scroll-container"
-              >
-                ${map(range(pagesCount), (index) => {
+              <div part="pagination" role="tablist" class="carousel__pagination" aria-controls="scroll-container">
+                ${map(range(pagesCount), index => {
                   const isActive = index === currentPage;
                   return html`
                     <button
-                      part="pagination-item ${isActive
-                        ? "pagination-item--active"
-                        : ""}"
+                      part="pagination-item ${isActive ? "pagination-item--active" : ""}"
                       class="${classMap({
                         "carousel__pagination-item": true,
                         "carousel__pagination-item--active": isActive,
                       })}"
                       role="tab"
                       aria-selected="${isActive ? "true" : "false"}"
-                      aria-label="${this.localize.term(
-                        "goToSlide",
-                        index + 1,
-                        pagesCount,
-                      )}"
+                      aria-label="${this.localize.term("goToSlide", index + 1, pagesCount)}"
                       tabindex=${isActive ? "0" : "-1"}
                       @click=${() => this.goToSlide(index * slidesPerMove)}
                       @keydown=${this.handleKeyDown}

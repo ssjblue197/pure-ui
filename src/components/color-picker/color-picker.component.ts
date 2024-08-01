@@ -90,10 +90,7 @@ declare const EyeDropper: EyeDropperConstructor;
  * @cssproperty --slider-handle-size - The diameter of the slider's handle.
  * @cssproperty --swatch-size - The size of each predefined color swatch.
  */
-export default class PColorPicker
-  extends PureElement
-  implements ShoelaceFormControl
-{
+export default class PColorPicker extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   static dependencies = {
@@ -153,8 +150,7 @@ export default class PColorPicker
   @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
 
   /** Removes the button that lets users toggle between format.   */
-  @property({ attribute: "no-format-toggle", type: Boolean }) noFormatToggle =
-    false;
+  @property({ attribute: "no-format-toggle", type: Boolean }) noFormatToggle = false;
 
   /** The name of the form control, submitted as a name/value pair with form data. */
   @property() name = "";
@@ -221,9 +217,7 @@ export default class PColorPicker
     // Show copied animation
     this.previewButton.classList.add("color-picker__preview-color--copied");
     this.previewButton.addEventListener("animationend", () => {
-      this.previewButton.classList.remove(
-        "color-picker__preview-color--copied",
-      );
+      this.previewButton.classList.remove("color-picker__preview-color--copied");
     });
   }
 
@@ -247,12 +241,8 @@ export default class PColorPicker
   }
 
   private handleAlphaDrag(event: PointerEvent) {
-    const container = this.shadowRoot!.querySelector<HTMLElement>(
-      ".color-picker__slider.color-picker__alpha",
-    )!;
-    const handle = container.querySelector<HTMLElement>(
-      ".color-picker__slider-handle",
-    )!;
+    const container = this.shadowRoot!.querySelector<HTMLElement>(".color-picker__slider.color-picker__alpha")!;
+    const handle = container.querySelector<HTMLElement>(".color-picker__slider-handle")!;
     const { width } = container.getBoundingClientRect();
     let initialValue = this.value;
     let currentValue = this.value;
@@ -261,7 +251,7 @@ export default class PColorPicker
     event.preventDefault();
 
     drag(container, {
-      onMove: (x) => {
+      onMove: x => {
         this.alpha = clamp((x / width) * 100, 0, 100);
         this.syncValues();
 
@@ -281,12 +271,8 @@ export default class PColorPicker
   }
 
   private handleHueDrag(event: PointerEvent) {
-    const container = this.shadowRoot!.querySelector<HTMLElement>(
-      ".color-picker__slider.color-picker__hue",
-    )!;
-    const handle = container.querySelector<HTMLElement>(
-      ".color-picker__slider-handle",
-    )!;
+    const container = this.shadowRoot!.querySelector<HTMLElement>(".color-picker__slider.color-picker__hue")!;
+    const handle = container.querySelector<HTMLElement>(".color-picker__slider-handle")!;
     const { width } = container.getBoundingClientRect();
     let initialValue = this.value;
     let currentValue = this.value;
@@ -295,7 +281,7 @@ export default class PColorPicker
     event.preventDefault();
 
     drag(container, {
-      onMove: (x) => {
+      onMove: x => {
         this.hue = clamp((x / width) * 360, 0, 360);
         this.syncValues();
 
@@ -315,12 +301,8 @@ export default class PColorPicker
   }
 
   private handleGridDrag(event: PointerEvent) {
-    const grid = this.shadowRoot!.querySelector<HTMLElement>(
-      ".color-picker__grid",
-    )!;
-    const handle = grid.querySelector<HTMLElement>(
-      ".color-picker__grid-handle",
-    )!;
+    const grid = this.shadowRoot!.querySelector<HTMLElement>(".color-picker__grid")!;
+    const handle = grid.querySelector<HTMLElement>(".color-picker__grid-handle")!;
     const { width, height } = grid.getBoundingClientRect();
     let initialValue = this.value;
     let currentValue = this.value;
@@ -545,9 +527,7 @@ export default class PColorPicker
         h: hsl.h,
         s: hsl.s,
         l: hsl.l,
-        string: this.setLetterCase(
-          `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`,
-        ),
+        string: this.setLetterCase(`hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`),
       },
       hsla: {
         h: hsl.h,
@@ -562,9 +542,7 @@ export default class PColorPicker
         h: hsv.h,
         s: hsv.s,
         v: hsv.v,
-        string: this.setLetterCase(
-          `hsv(${Math.round(hsv.h)}, ${Math.round(hsv.s)}%, ${Math.round(hsv.v)}%)`,
-        ),
+        string: this.setLetterCase(`hsv(${Math.round(hsv.h)}, ${Math.round(hsv.s)}%, ${Math.round(hsv.v)}%)`),
       },
       hsva: {
         h: hsv.h,
@@ -579,9 +557,7 @@ export default class PColorPicker
         r: rgb.r,
         g: rgb.g,
         b: rgb.b,
-        string: this.setLetterCase(
-          `rgb(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)})`,
-        ),
+        string: this.setLetterCase(`rgb(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)})`),
       },
       rgba: {
         r: rgb.r,
@@ -632,17 +608,11 @@ export default class PColorPicker
 
     // Update the value
     if (this.format === "hsl") {
-      this.inputValue = this.opacity
-        ? currentColor.hsla.string
-        : currentColor.hsl.string;
+      this.inputValue = this.opacity ? currentColor.hsla.string : currentColor.hsl.string;
     } else if (this.format === "rgb") {
-      this.inputValue = this.opacity
-        ? currentColor.rgba.string
-        : currentColor.rgb.string;
+      this.inputValue = this.opacity ? currentColor.rgba.string : currentColor.rgb.string;
     } else if (this.format === "hsv") {
-      this.inputValue = this.opacity
-        ? currentColor.hsva.string
-        : currentColor.hsv.string;
+      this.inputValue = this.opacity ? currentColor.hsva.string : currentColor.hsv.string;
     } else {
       this.inputValue = this.opacity ? currentColor.hexa : currentColor.hex;
     }
@@ -669,7 +639,7 @@ export default class PColorPicker
 
     eyeDropper
       .open()
-      .then((colorSelectionResult) => {
+      .then(colorSelectionResult => {
         const oldValue = this.value;
 
         this.setColor(colorSelectionResult.sRGBHex);
@@ -698,15 +668,8 @@ export default class PColorPicker
   }
 
   /** Generates a hex string from HSV values. Hue must be 0-360. All other arguments must be 0-100. */
-  private getHexString(
-    hue: number,
-    saturation: number,
-    brightness: number,
-    alpha = 100,
-  ) {
-    const color = new TinyColor(
-      `hsva(${hue}, ${saturation}%, ${brightness}%, ${alpha / 100})`,
-    );
+  private getHexString(hue: number, saturation: number, brightness: number, alpha = 100) {
+    const color = new TinyColor(`hsva(${hue}, ${saturation}%, ${brightness}%, ${alpha / 100})`);
     if (!color.isValid) {
       return "";
     }
@@ -783,17 +746,7 @@ export default class PColorPicker
   }
 
   /** Returns the current value as a string in the specified format. */
-  getFormattedValue(
-    format:
-      | "hex"
-      | "hexa"
-      | "rgb"
-      | "rgba"
-      | "hsl"
-      | "hsla"
-      | "hsv"
-      | "hsva" = "hex",
-  ) {
+  getFormattedValue(format: "hex" | "hexa" | "rgb" | "rgba" | "hsl" | "hsla" | "hsv" | "hsva" = "hex") {
     const currentColor = this.parseColor(
       `hsva(${this.hue}, ${this.saturation}%, ${this.brightness}%, ${this.alpha / 100})`,
     );
@@ -865,7 +818,7 @@ export default class PColorPicker
     const gridHandleY = 100 - this.brightness;
     const swatches = Array.isArray(this.swatches)
       ? this.swatches // allow arrays for legacy purposes
-      : this.swatches.split(";").filter((color) => color.trim() !== "");
+      : this.swatches.split(";").filter(color => color.trim() !== "");
 
     const colorPicker = html`
       <div
@@ -906,12 +859,7 @@ export default class PColorPicker
             style=${styleMap({
               top: `${gridHandleY}%`,
               left: `${gridHandleX}%`,
-              backgroundColor: this.getHexString(
-                this.hue,
-                this.saturation,
-                this.brightness,
-                this.alpha,
-              ),
+              backgroundColor: this.getHexString(this.hue, this.saturation, this.brightness, this.alpha),
             })}
             role="application"
             aria-label="HSV"
@@ -989,12 +937,7 @@ export default class PColorPicker
             class="color-picker__preview color-picker__transparent-bg"
             aria-label=${this.localize.term("copy")}
             style=${styleMap({
-              "--preview-color": this.getHexString(
-                this.hue,
-                this.saturation,
-                this.brightness,
-                this.alpha,
-              ),
+              "--preview-color": this.getHexString(this.hue, this.saturation, this.brightness, this.alpha),
             })}
             @click=${this.handleCopy}
           ></button>
@@ -1071,15 +1014,12 @@ export default class PColorPicker
         ${swatches.length > 0
           ? html`
               <div part="swatches" class="color-picker__swatches">
-                ${swatches.map((swatch) => {
+                ${swatches.map(swatch => {
                   const parsedColor = this.parseColor(swatch);
 
                   // If we can't parse it, skip it
                   if (!parsedColor) {
-                    console.error(
-                      `Unable to parse swatch color: "${swatch}"`,
-                      this,
-                    );
+                    console.error(`Unable to parse swatch color: "${swatch}"`, this);
                     return "";
                   }
 
@@ -1092,9 +1032,7 @@ export default class PColorPicker
                       aria-label=${swatch}
                       @click=${() => this.selectSwatch(swatch)}
                       @keydown=${(event: KeyboardEvent) =>
-                        !this.disabled &&
-                        event.key === "Enter" &&
-                        this.setColor(parsedColor.hexa)}
+                        !this.disabled && event.key === "Enter" && this.setColor(parsedColor.hexa)}
                     >
                       <div
                         class="color-picker__swatch-color"
@@ -1138,12 +1076,7 @@ export default class PColorPicker
             "color-picker__transparent-bg": true,
           })}
           style=${styleMap({
-            color: this.getHexString(
-              this.hue,
-              this.saturation,
-              this.brightness,
-              this.alpha,
-            ),
+            color: this.getHexString(this.hue, this.saturation, this.brightness, this.alpha),
           })}
           type="button"
         >

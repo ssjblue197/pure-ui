@@ -67,10 +67,7 @@ export default class PMenuItem extends PureElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   private readonly hasSlotController = new HasSlotController(this, "submenu");
-  private submenuController: SubmenuController = new SubmenuController(
-    this,
-    this.hasSlotController,
-  );
+  private submenuController: SubmenuController = new SubmenuController(this, this.hasSlotController);
 
   connectedCallback() {
     super.connectedCallback();
@@ -122,10 +119,7 @@ export default class PMenuItem extends PureElement {
     // For proper accessibility, users have to use type="checkbox" to use the checked attribute
     if (this.checked && this.type !== "checkbox") {
       this.checked = false;
-      console.error(
-        'The checked attribute can only be used on menu items with type="checkbox"',
-        this,
-      );
+      console.error('The checked attribute can only be used on menu items with type="checkbox"', this);
       return;
     }
 
@@ -188,31 +182,16 @@ export default class PMenuItem extends PureElement {
 
         <slot name="prefix" part="prefix" class="menu-item__prefix"></slot>
 
-        <slot
-          part="label"
-          class="menu-item__label"
-          @slotchange=${this.handleDefaultSlotChange}
-        ></slot>
+        <slot part="label" class="menu-item__label" @slotchange=${this.handleDefaultSlotChange}></slot>
 
         <slot name="suffix" part="suffix" class="menu-item__suffix"></slot>
 
         <span part="submenu-icon" class="menu-item__chevron">
-          <p-icon
-            name=${isRtl ? "chevron-left" : "chevron-right"}
-            library="system"
-            aria-hidden="true"
-          ></p-icon>
+          <p-icon name=${isRtl ? "chevron-left" : "chevron-right"} library="system" aria-hidden="true"></p-icon>
         </span>
 
         ${this.submenuController.renderSubmenu()}
-        ${this.loading
-          ? html`
-              <p-spinner
-                part="spinner"
-                exportparts="base:spinner__base"
-              ></p-spinner>
-            `
-          : ""}
+        ${this.loading ? html` <p-spinner part="spinner" exportparts="base:spinner__base"></p-spinner> ` : ""}
       </div>
     `;
   }

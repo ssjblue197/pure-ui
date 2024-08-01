@@ -38,20 +38,12 @@ describe("<p-button-group>", () => {
       `);
 
       const allButtons = group.querySelectorAll("p-button");
-      const hasGroupAttrib = Array.from(allButtons).every((button) =>
-        button.hasAttribute("data-p-button-group__button"),
-      );
+      const hasGroupAttrib = Array.from(allButtons).every(button => button.hasAttribute("data-p-button-group__button"));
       expect(hasGroupAttrib).to.be.true;
 
-      expect(allButtons[0]).to.have.attribute(
-        "data-p-button-group__button--first",
-      );
-      expect(allButtons[1]).to.have.attribute(
-        "data-p-button-group__button--inner",
-      );
-      expect(allButtons[2]).to.have.attribute(
-        "data-p-button-group__button--last",
-      );
+      expect(allButtons[0]).to.have.attribute("data-p-button-group__button--first");
+      expect(allButtons[1]).to.have.attribute("data-p-button-group__button--inner");
+      expect(allButtons[2]).to.have.attribute("data-p-button-group__button--last");
     });
   });
 
@@ -69,17 +61,11 @@ describe("<p-button-group>", () => {
       allButtons[0].dispatchEvent(new FocusEvent("focusin", { bubbles: true }));
 
       await elementUpdated(allButtons[0]);
-      expect(allButtons[0]).to.have.attribute(
-        "data-p-button-group__button--focus",
-      );
+      expect(allButtons[0]).to.have.attribute("data-p-button-group__button--focus");
 
-      allButtons[0].dispatchEvent(
-        new FocusEvent("focusout", { bubbles: true }),
-      );
+      allButtons[0].dispatchEvent(new FocusEvent("focusout", { bubbles: true }));
       await elementUpdated(allButtons[0]);
-      expect(allButtons[0]).to.not.have.attribute(
-        "data-p-button-group__button--focus",
-      );
+      expect(allButtons[0]).to.not.have.attribute("data-p-button-group__button--focus");
     });
   });
 
@@ -95,22 +81,14 @@ describe("<p-button-group>", () => {
 
       const allButtons = group.querySelectorAll("p-button");
 
-      allButtons[0].dispatchEvent(
-        new MouseEvent("mouseover", { bubbles: true }),
-      );
+      allButtons[0].dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
       await elementUpdated(allButtons[0]);
-      expect(allButtons[0]).to.have.attribute(
-        "data-p-button-group__button--hover",
-      );
+      expect(allButtons[0]).to.have.attribute("data-p-button-group__button--hover");
 
-      allButtons[0].dispatchEvent(
-        new MouseEvent("mouseout", { bubbles: true }),
-      );
+      allButtons[0].dispatchEvent(new MouseEvent("mouseout", { bubbles: true }));
       await elementUpdated(allButtons[0]);
       console.log(allButtons[0]);
-      expect(allButtons[0]).to.not.have.attribute(
-        "data-p-button-group__button--hover",
-      );
+      expect(allButtons[0]).to.not.have.attribute("data-p-button-group__button--hover");
     });
   });
 });

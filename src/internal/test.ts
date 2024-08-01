@@ -1,11 +1,6 @@
 import { sendMouse } from "@web/test-runner-commands";
 
-function determineMousePosition(
-  el: Element,
-  position: string,
-  offsetX: number,
-  offsetY: number,
-) {
+function determineMousePosition(el: Element, position: string, offsetX: number, offsetY: number) {
   const { x, y, width, height } = el.getBoundingClientRect();
   const centerX = Math.floor(x + window.scrollX + width / 2);
   const centerY = Math.floor(y + window.scrollY + height / 2);
@@ -50,12 +45,7 @@ export async function clickOnElement(
   /** The vertical offset to apply to the position when clicking */
   offsetY = 0,
 ) {
-  const { clickX, clickY } = determineMousePosition(
-    el,
-    position,
-    offsetX,
-    offsetY,
-  );
+  const { clickX, clickY } = determineMousePosition(el, position, offsetX, offsetY);
 
   await sendMouse({ type: "click", position: [clickX, clickY] });
 }
@@ -71,12 +61,7 @@ export async function moveMouseOnElement(
   /** The vertical offset to apply to the position when clicking */
   offsetY = 0,
 ) {
-  const { clickX, clickY } = determineMousePosition(
-    el,
-    position,
-    offsetX,
-    offsetY,
-  );
+  const { clickX, clickY } = determineMousePosition(el, position, offsetX, offsetY);
 
   await sendMouse({ type: "move", position: [clickX, clickY] });
 }
@@ -99,12 +84,7 @@ export async function dragElement(
 
   await callbacks.afterMouseDown?.();
 
-  const { clickX, clickY } = determineMousePosition(
-    el,
-    "center",
-    deltaX,
-    deltaY,
-  );
+  const { clickX, clickY } = determineMousePosition(el, "center", deltaX, deltaY);
   await sendMouse({ type: "move", position: [clickX, clickY] });
 
   await callbacks.afterMouseMove?.();

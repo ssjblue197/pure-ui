@@ -138,8 +138,7 @@ export default css`
     top: var(--indent-guide-offset);
     bottom: var(--indent-guide-offset);
     left: calc(1em - (var(--indent-guide-width) / 2) - 1px);
-    border-inline-end: var(--indent-guide-width) var(--indent-guide-style)
-      var(--indent-guide-color);
+    border-inline-end: var(--indent-guide-width) var(--indent-guide-style) var(--indent-guide-color);
     z-index: 1;
   }
 

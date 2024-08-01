@@ -21,19 +21,16 @@ export function watchIcon(icon: PIcon) {
 
 /** Removes an icon from the list of watched icons. */
 export function unwatchIcon(icon: PIcon) {
-  watchedIcons = watchedIcons.filter((el) => el !== icon);
+  watchedIcons = watchedIcons.filter(el => el !== icon);
 }
 
 /** Returns a library from the registry. */
 export function getIconLibrary(name?: string) {
-  return registry.find((lib) => lib.name === name);
+  return registry.find(lib => lib.name === name);
 }
 
 /** Adds an icon library to the registry, or overrides an existing one. */
-export function registerIconLibrary(
-  name: string,
-  options: Omit<IconLibrary, "name">,
-) {
+export function registerIconLibrary(name: string, options: Omit<IconLibrary, "name">) {
   unregisterIconLibrary(name);
   registry.push({
     name,
@@ -43,7 +40,7 @@ export function registerIconLibrary(
   });
 
   // Redraw watched icons
-  watchedIcons.forEach((icon) => {
+  watchedIcons.forEach(icon => {
     if (icon.library === name) {
       icon.setIcon();
     }
@@ -52,5 +49,5 @@ export function registerIconLibrary(
 
 /** Removes an icon library from the registry. */
 export function unregisterIconLibrary(name: string) {
-  registry = registry.filter((lib) => lib.name !== name);
+  registry = registry.filter(lib => lib.name !== name);
 }

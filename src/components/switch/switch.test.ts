@@ -1,12 +1,5 @@
 import "../../../dist/pure-ui.js";
-import {
-  aTimeout,
-  expect,
-  fixture,
-  html,
-  oneEvent,
-  waitUntil,
-} from "@open-wc/testing";
+import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from "@open-wc/testing";
 import { runFormControlBaseTests } from "../../internal/test/form-control-base-tests.js";
 import { sendKeys } from "@web/test-runner-commands";
 import sinon from "sinon";
@@ -32,9 +25,7 @@ describe("<p-switch>", () => {
   });
 
   it("should have title if title attribute is set", async () => {
-    const el = await fixture<PSwitch>(html`
-      <p-switch title="Test"></p-switch>
-    `);
+    const el = await fixture<PSwitch>(html` <p-switch title="Test"></p-switch> `);
     const input = el.shadowRoot!.querySelector("input")!;
 
     expect(input.title).to.equal("Test");
@@ -117,12 +108,8 @@ describe("<p-switch>", () => {
 
   it("should not emit p-change or p-input when checked is set by JavaScript", async () => {
     const el = await fixture<PSwitch>(html` <p-switch></p-switch> `);
-    el.addEventListener("p-change", () =>
-      expect.fail("p-change incorrectly emitted"),
-    );
-    el.addEventListener("p-input", () =>
-      expect.fail("p-change incorrectly emitted"),
-    );
+    el.addEventListener("p-change", () => expect.fail("p-change incorrectly emitted"));
+    el.addEventListener("p-input", () => expect.fail("p-change incorrectly emitted"));
     el.checked = true;
     await el.updateComplete;
     el.checked = false;
@@ -198,9 +185,7 @@ describe("<p-switch>", () => {
       `);
       const button = form.querySelector("p-button")!;
       const slSwitch = form.querySelector("p-switch")!;
-      const submitHandler = sinon.spy((event: SubmitEvent) =>
-        event.preventDefault(),
-      );
+      const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
 
       // Submitting the form after setting custom validity should not trigger the handler
       slSwitch.setCustomValidity("Invalid selection");
@@ -212,16 +197,12 @@ describe("<p-switch>", () => {
     });
 
     it("should be invalid when required and unchecked", async () => {
-      const slSwitch = await fixture<HTMLFormElement>(html`
-        <p-switch required></p-switch>
-      `);
+      const slSwitch = await fixture<HTMLFormElement>(html` <p-switch required></p-switch> `);
       expect(slSwitch.checkValidity()).to.be.false;
     });
 
     it("should be valid when required and checked", async () => {
-      const slSwitch = await fixture<HTMLFormElement>(html`
-        <p-switch required checked></p-switch>
-      `);
+      const slSwitch = await fixture<HTMLFormElement>(html` <p-switch required checked></p-switch> `);
       expect(slSwitch.checkValidity()).to.be.true;
     });
 
@@ -241,9 +222,7 @@ describe("<p-switch>", () => {
     });
 
     it('should receive validation attributes ("states") even when novalidate is used on the parent form', async () => {
-      const el = await fixture<HTMLFormElement>(html`
-        <form novalidate><p-switch required></p-switch></form>
-      `);
+      const el = await fixture<HTMLFormElement>(html` <form novalidate><p-switch required></p-switch></form> `);
       const slSwitch = el.querySelector<PSwitch>("p-switch")!;
 
       expect(slSwitch.hasAttribute("data-required")).to.be.true;
@@ -288,9 +267,7 @@ describe("<p-switch>", () => {
   it("should not jump the page to the bottom when focusing a switch at the bottom of an element with overflow: auto;", async () => {
     // https://github.com/ssjblue197/pure-ui/issues/1169
     const el = await fixture<HTMLDivElement>(html`
-      <div
-        style="display: flex; flex-direction: column; overflow: auto; max-height: 400px;"
-      >
+      <div style="display: flex; flex-direction: column; overflow: auto; max-height: 400px;">
         <p-switch>Switch</p-switch>
         <p-switch>Switch</p-switch>
         <p-switch>Switch</p-switch>

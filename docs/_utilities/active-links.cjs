@@ -25,10 +25,8 @@ module.exports = function (doc, options) {
     return doc;
   }
 
-  within.querySelectorAll("a").forEach((link) => {
-    if (
-      normalizePathname(options.pathname) === normalizePathname(link.pathname)
-    ) {
+  within.querySelectorAll("a").forEach(link => {
+    if (normalizePathname(options.pathname) === normalizePathname(link.pathname)) {
       link.classList.add(options.className);
     }
   });

@@ -112,8 +112,7 @@ export default css`
   .input__control:-webkit-autofill:hover,
   .input__control:-webkit-autofill:focus,
   .input__control:-webkit-autofill:active {
-    box-shadow: 0 0 0 var(--p-input-height-large)
-      var(--p-input-background-color-hover) inset !important;
+    box-shadow: 0 0 0 var(--p-input-height-large) var(--p-input-background-color-hover) inset !important;
     -webkit-text-fill-color: var(--p-color-primary-500);
     caret-color: var(--p-input-color);
   }
@@ -122,8 +121,7 @@ export default css`
   .input--filled .input__control:-webkit-autofill:hover,
   .input--filled .input__control:-webkit-autofill:focus,
   .input--filled .input__control:-webkit-autofill:active {
-    box-shadow: 0 0 0 var(--p-input-height-large)
-      var(--p-input-filled-background-color) inset !important;
+    box-shadow: 0 0 0 var(--p-input-height-large) var(--p-input-filled-background-color) inset !important;
   }
 
   .input__control::placeholder {
@@ -188,9 +186,7 @@ export default css`
   }
 
   .input--medium .input__control {
-    height: calc(
-      var(--p-input-height-medium) - var(--p-input-border-width) * 2
-    );
+    height: calc(var(--p-input-height-medium) - var(--p-input-border-width) * 2);
     padding: 0 var(--p-input-spacing-medium);
   }
 

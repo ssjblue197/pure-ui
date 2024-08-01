@@ -33,13 +33,13 @@ If the request fails, the `p-error` event will be emitted. In this case, `event.
 <script>
   const include = document.querySelector("p-include");
 
-  include.addEventListener("p-load", (event) => {
+  include.addEventListener("p-load", event => {
     if (event.eventPhase === Event.AT_TARGET) {
       console.log("Success");
     }
   });
 
-  include.addEventListener("p-error", (event) => {
+  include.addEventListener("p-error", event => {
     if (event.eventPhase === Event.AT_TARGET) {
       console.log("Error", event.detail.status);
     }

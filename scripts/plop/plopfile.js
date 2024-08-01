@@ -1,7 +1,7 @@
 export default function (plop) {
-  plop.setHelper("tagWithoutPrefix", (tag) => tag.replace(/^p-/, ""));
+  plop.setHelper("tagWithoutPrefix", tag => tag.replace(/^p-/, ""));
 
-  plop.setHelper("tagToTitle", (tag) => {
+  plop.setHelper("tagToTitle", tag => {
     const withoutPrefix = plop.getHelper("tagWithoutPrefix");
     const titleCase = plop.getHelper("titleCase");
     return titleCase(withoutPrefix(tag).replace(/-/g, " "));
@@ -14,7 +14,7 @@ export default function (plop) {
         type: "input",
         name: "tag",
         message: "Tag name? (e.g. p-button)",
-        validate: (value) => {
+        validate: value => {
           // Start with p- and include only a-z + dashes
           if (!/^p-[a-z-+]+/.test(value)) {
             return false;

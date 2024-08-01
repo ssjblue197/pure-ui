@@ -17,7 +17,7 @@ const translation: Translation = {
   hidePassword: "Şifreyi sakla",
   loading: "Yükleme",
   nextSlide: "Sonraki slayt",
-  numOptionsSelected: (num) => {
+  numOptionsSelected: num => {
     if (num === 0) return "Hiçbir seçenek seçilmedi";
     if (num === 1) return "1 seçenek seçildi";
     return `${num} seçenek seçildi`;
@@ -30,7 +30,7 @@ const translation: Translation = {
   scrollToStart: "Başa kay",
   selectAColorFromTheScreen: "Ekrandan bir renk seçin",
   showPassword: "Şifreyi göster",
-  slideNum: (slide) => `Slayt ${slide}`,
+  slideNum: slide => `Slayt ${slide}`,
   toggleColorFormat: "Renk biçimini değiştir",
 };
 
