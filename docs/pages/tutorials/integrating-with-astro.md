@@ -121,9 +121,7 @@ export default defineConfig({
         // Copy only on first build. We dont want to trigger additional server reloads.
         copyOnce: true,
         hook: 'buildStart',
-        targets: [
-          { src: 'node_modules/@pure-ui/core/dist/assets/*', dest: 'public/pure-ui-assets/assets/' }
-        ]
+        targets: [{ src: 'node_modules/@pure-ui/core/dist/assets/*', dest: 'public/pure-ui-assets/assets/' }]
       })
     ]
   }
