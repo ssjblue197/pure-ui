@@ -8,7 +8,7 @@
   --docs-sidebar-transition-speed: 250ms;
   --docs-content-toc-max-width: 260px;
   --docs-content-padding: 2rem;
-  --docs-content-vertical-spacing: 2rem;
+  --docs-content-vertical-spacing: 0rem;
   --docs-search-overlay-background: rgb(0 0 0 / 0.2);
   --docs-skip-to-main-width: 200px;
 }
@@ -869,7 +869,7 @@ main {
 
 .content__toc ul {
   position: sticky;
-  top: 5rem;
+  top: 2rem;
   max-height: calc(100vh - 6rem);
   font-size: var(--p-font-size-small);
   line-height: 1.33;
@@ -1470,7 +1470,7 @@ body[data-page^="/tokens/"] .table-wrapper td:first-child code {
 }
 
 main {
-  margin-top: 70px;
+  margin-top: 60px;
 }
 
 @media screen and (max-width: 1650px) {
@@ -1482,7 +1482,7 @@ main {
   }
 
   main {
-    margin-top: 140px;
+    margin-top: 20px;
   }
 }
 
@@ -1502,6 +1502,6 @@ main {
   }
 
   main {
-    margin-top: 150px;
+    margin-top: 40px;
   }
 }

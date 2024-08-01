@@ -55,10 +55,6 @@
     <script src="{{ assetUrl('scripts/search.js') }}" defer></script>
   </head>
   <body>
-    <a id="skip-to-main" class="visually-hidden" href="#main-content" data-smooth-link="false">
-      Skip to main content
-    </a>
-
     {# Menu toggle #}
     <button id="menu-toggle" type="button" aria-label="Menu">
       <svg width="148" height="148" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
@@ -112,7 +108,6 @@
 
     {# Content #}
     <main>
-      <a id="main-content"></a>
       <article id="content" class="content{% if toc %} content--with-toc{% endif %}">
         {% if toc %}
           <div class="content__toc">
