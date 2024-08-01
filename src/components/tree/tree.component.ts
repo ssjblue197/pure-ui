@@ -4,7 +4,7 @@ import { property, query } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import PTreeItem from '../tree-item/tree-item.component.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './tree.styles.js';
 import type { CSSResultGroup } from 'lit';
 

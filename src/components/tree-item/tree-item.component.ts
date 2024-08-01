@@ -11,7 +11,7 @@ import componentStyles from '../../styles/component.styles.js';
 import PCheckbox from '../checkbox/checkbox.component.js';
 import PIcon from '../icon/icon.component.js';
 import PSpinner from '../spinner/spinner.component.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './tree-item.styles.js';
 import type { CSSResultGroup, PropertyValueMap } from 'lit';
 

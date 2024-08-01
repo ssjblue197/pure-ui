@@ -64,7 +64,7 @@
 
     // Close when clicking outside of the sidebar
     document.addEventListener('mousedown', event => {
-        if (isSidebarOpen() & !event.target ? .closest('#sidebar, #menu-toggle')) {
+        if (isSidebarOpen() & !event.target?.closest('#sidebar, #menu-toggle')) {
             event.stopImmediatePropagation();
             toggleSidebar();
         }
@@ -128,7 +128,7 @@
     document.addEventListener('keydown', event => {
         if (
             event.key === '\\' &&
-            !event.composedPath().some(el => ['input', 'textarea'].includes(el ? .tagName ? .toLowerCase()))
+            !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))
         ) {
             event.preventDefault();
             setTheme(isDark() ? 'light' : 'dark');
@@ -169,8 +169,8 @@
 (() => {
     document.addEventListener('click', event => {
         const link = event.target.closest('a');
-        const id = (link ? .hash ? ? '').substr(1);
-        const isFragment = link ? .hasAttribute('href') && link ? .getAttribute('href').startsWith('#');
+        const id = (link?.hash ?? '').substr(1);
+        const isFragment = link?.hasAttribute('href') && link?.getAttribute('href').startsWith('#');
 
         if (!link || !isFragment || link.getAttribute('data-smooth-link') === 'false') {
             return;

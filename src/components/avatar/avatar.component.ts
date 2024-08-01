@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import PIcon from '../icon/icon.component.js';
 import styles from './avatar.styles.js';
 import type { CSSResultGroup } from 'lit';

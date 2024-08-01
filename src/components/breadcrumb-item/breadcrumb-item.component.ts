@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators.js';
 import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './breadcrumb-item.styles.js';
 import type { CSSResultGroup } from 'lit';
 

@@ -16,13 +16,13 @@ import PButtonGroup from '../button-group/button-group.component.js';
 import PDropdown from '../dropdown/dropdown.component.js';
 import PIcon from '../icon/icon.component.js';
 import PInput from '../input/input.component.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import PVisuallyHidden from '../visually-hidden/visually-hidden.component.js';
 import styles from './color-picker.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { PChangeEvent } from '../../events/p-change.js';
 import type { PInputEvent } from '../../events/p-input.js';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
+import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
 
 const hasEyeDropper = 'EyeDropper' in window;
 

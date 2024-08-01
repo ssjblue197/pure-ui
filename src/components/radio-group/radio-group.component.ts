@@ -12,10 +12,10 @@ import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import formControlStyles from '../../styles/form-control.styles.js';
 import PButtonGroup from '../button-group/button-group.component.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './radio-group.styles.js';
 import type { CSSResultGroup } from 'lit';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
+import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
 import type PRadio from '../radio/radio.js';
 import type PRadioButton from '../radio-button/radio-button.js';
 

@@ -3,7 +3,7 @@ import { property } from 'lit/decorators.js';
 import { requestInclude } from './request.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './include.styles.js';
 import type { CSSResultGroup } from 'lit';
 

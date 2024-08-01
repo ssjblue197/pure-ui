@@ -1,6 +1,6 @@
 import { LocalizeController } from '../../utilities/localize.js';
 import { property } from 'lit/decorators.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 
 /**
  * @summary Formats a number as a human readable bytes value.

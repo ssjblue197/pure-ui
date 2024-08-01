@@ -22,7 +22,7 @@ function noDash(string) {
 
 function replace(string, terms) {
     terms.forEach(({ from, to }) => {
-        string = string ? .replace(from, to);
+        string = string?.replace(from, to);
     });
 
     return string;
@@ -48,7 +48,7 @@ export default {
                     case ts.SyntaxKind.ClassDeclaration:
                         {
                             const className = node.name.getText();
-                            const classDoc = moduleDoc ? .declarations ? .find(declaration => declaration.name === className);
+                            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
 
                             const importPath = moduleDoc.path;
 
@@ -78,12 +78,12 @@ export default {
                     case ts.SyntaxKind.ClassDeclaration:
                         {
                             const className = node.name.getText();
-                            const classDoc = moduleDoc ? .declarations ? .find(declaration => declaration.name === className);
+                            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
                             const customTags = ['animation', 'dependency', 'documentation', 'since', 'status', 'title'];
                             let customComments = '/**';
 
-                            node.jsDoc ? .forEach(jsDoc => {
-                                jsDoc ? .tags ? .forEach(tag => {
+                            node.jsDoc?.forEach(jsDoc => {
+                                jsDoc?.tags?.forEach(tag => {
                                     const tagName = tag.tagName.getText();
 
                                     if (customTags.includes(tagName)) {
@@ -93,10 +93,10 @@ export default {
                             });
 
                             // This is what allows us to map JSDOC comments to ReactWrappers.
-                            classDoc['jsDoc'] = node.jsDoc ? .map(jsDoc => jsDoc.getFullText()).join('\n');
+                            classDoc['jsDoc'] = node.jsDoc?.map(jsDoc => jsDoc.getFullText()).join('\n');
 
                             const parsed = parse(`${customComments}\n */`);
-                            parsed[0].tags ? .forEach(t => {
+                            parsed[0].tags?.forEach(t => {
                                 switch (t.tag) {
                                     // Animations
                                     case 'animation':
@@ -150,9 +150,9 @@ export default {
                     case ts.SyntaxKind.ClassDeclaration:
                         {
                             const className = node.name.getText();
-                            const classDoc = moduleDoc ? .declarations ? .find(declaration => declaration.name === className);
+                            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
 
-                            if (classDoc ? .events) {
+                            if (classDoc?.events) {
                                 classDoc.events.forEach(event => {
                                     event.reactName = `on${pascalCase(event.name)}`;
                                     event.eventName = `${pascalCase(event.name)}Event`;
@@ -166,7 +166,7 @@ export default {
         {
             name: 'shoelace-translate-module-paths',
             packageLinkPhase({ customElementsManifest }) {
-                customElementsManifest ? .modules ? .forEach(mod => {
+                customElementsManifest?.modules?.forEach(mod => {
                     //
                     // CEM paths look like this:
                     //
@@ -183,13 +183,13 @@ export default {
 
                     mod.path = replace(mod.path, terms);
 
-                    for (const ex of mod.exports ? ? []) {
+                    for (const ex of mod.exports ?? []) {
                         ex.declaration.module = replace(ex.declaration.module, terms);
                     }
 
-                    for (const dec of mod.declarations ? ? []) {
+                    for (const dec of mod.declarations ?? []) {
                         if (dec.kind === 'class') {
-                            for (const member of dec.members ? ? []) {
+                            for (const member of dec.members ?? []) {
                                 if (member.inheritedFrom) {
                                     member.inheritedFrom.module = replace(member.inheritedFrom.module, terms);
                                 }

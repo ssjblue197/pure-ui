@@ -1,5 +1,5 @@
 import { expect, fixture } from '@open-wc/testing';
-import type { ShoelaceFormControl } from '../shoelace-element.js';
+import type { ShoelaceFormControl } from '../pure-ui-element.js';
 
 type CreateControlFn = () => Promise<ShoelaceFormControl>;
 

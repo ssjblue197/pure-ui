@@ -6,7 +6,7 @@ import { scrollIntoView } from '../../internal/scroll.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import PIconButton from '../icon-button/icon-button.component.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './tab-group.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type PTab from '../tab/tab.js';

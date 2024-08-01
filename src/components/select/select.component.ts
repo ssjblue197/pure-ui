@@ -16,11 +16,11 @@ import formControlStyles from '../../styles/form-control.styles.js';
 import PIcon from '../icon/icon.component.js';
 import PPopup from '../popup/popup.component.js';
 import PTag from '../tag/tag.component.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './select.styles.js';
 import type { CSSResultGroup, TemplateResult } from 'lit';
 import type { PRemoveEvent } from '../../events/p-remove.js';
-import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
+import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
 import type POption from '../option/option.component.js';
 
 /**

@@ -4,7 +4,7 @@ import { html } from 'lit';
 import { offsetParent } from 'composed-offset-position';
 import { property, query } from 'lit/decorators.js';
 import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './popup.styles.js';
 import type { CSSResultGroup } from 'lit';
 

@@ -6,7 +6,7 @@ import { LocalizeController } from '../../utilities/localize.js';
 import { partMap } from '../../internal/part-map.js';
 import { property } from 'lit/decorators.js';
 import { watch } from '../../internal/watch.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './calendar.styles.js';
 import type { CSSResultGroup, TemplateResult } from 'lit';
 

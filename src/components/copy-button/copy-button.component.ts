@@ -6,7 +6,7 @@ import { property, query, state } from 'lit/decorators.js';
 import componentStyles from '../../styles/component.styles.js';
 import PIcon from '../icon/icon.component.js';
 import PTooltip from '../tooltip/tooltip.component.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './copy-button.styles.js';
 import type { CSSResultGroup } from 'lit';
 

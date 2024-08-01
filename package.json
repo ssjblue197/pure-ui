@@ -1,9 +1,9 @@
 {
-    "name": "@shoelace-style/shoelace",
+    "name": "@pure-ui/core",
     "description": "A forward-thinking library of web components.",
-    "version": "2.16.0",
-    "homepage": "https://github.com/shoelace-style/shoelace",
-    "author": "Cory LaViska",
+    "version": "1.0.0",
+    "homepage": "https://github.com/ssjblue197/pure-ui",
+    "author": "Mr.P",
     "license": "MIT",
     "customElements": "dist/custom-elements.json",
     "web-types": "./dist/web-types.json",
@@ -36,14 +36,14 @@
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/shoelace-style/shoelace.git"
+        "url": "git+https://github.com/ssjblue197/pure-ui/.git"
     },
     "bugs": {
-        "url": "https://github.com/shoelace-style/shoelace/issues"
+        "url": "https://github.com/ssjblue197/pure-ui//issues"
     },
     "funding": {
         "type": "individual",
-        "url": "https://github.com/sponsors/claviska"
+        "url": "https://github.com/sponsors/ssjblue197"
     },
     "scripts": {
         "start": "node scripts/build.js --serve",

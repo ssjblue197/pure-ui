@@ -10,7 +10,7 @@ import { waitForEvent } from '../../internal/event.js';
 import { watch } from '../../internal/watch.js';
 import componentStyles from '../../styles/component.styles.js';
 import PPopup from '../popup/popup.component.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './dropdown.styles.js';
 import type { CSSResultGroup } from 'lit';
 import type { PSelectEvent } from '../../events/p-select.js';

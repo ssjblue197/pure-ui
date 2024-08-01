@@ -2,7 +2,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { HasSlotController } from '../../internal/slot.js';
 import { html } from 'lit';
 import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './card.styles.js';
 import type { CSSResultGroup } from 'lit';
 

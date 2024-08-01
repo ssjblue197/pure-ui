@@ -11,8 +11,8 @@
     function getAdjacentExample(name, pre) {
         let currentPre = pre.nextElementSibling;
 
-        while (currentPre ? .tagName.toLowerCase() === 'pre') {
-            if (currentPre ? .getAttribute('data-lang').split(' ').includes(name)) {
+        while (currentPre?.tagName.toLowerCase() === 'pre') {
+            if (currentPre?.getAttribute('data-lang').split(' ').includes(name)) {
                 return currentPre;
             }
 
@@ -120,17 +120,17 @@
     //
     document.addEventListener('click', event => {
         const button = event.target.closest('.code-preview__button');
-        const codeBlock = button ? .closest('.code-preview');
+        const codeBlock = button?.closest('.code-preview');
 
-        if (button ? .classList.contains('code-preview__button--html')) {
+        if (button?.classList.contains('code-preview__button--html')) {
             // Show HTML
             setFlavor('html');
             toggleSource(codeBlock, true);
-        } else if (button ? .classList.contains('code-preview__button--react')) {
+        } else if (button?.classList.contains('code-preview__button--react')) {
             // Show React
             setFlavor('react');
             toggleSource(codeBlock, true);
-        } else if (button ? .classList.contains('code-preview__toggle')) {
+        } else if (button?.classList.contains('code-preview__toggle')) {
             // Toggle source
             toggleSource(codeBlock);
         } else {
@@ -139,11 +139,11 @@
 
         // Update flavor buttons
         [...document.querySelectorAll('.code-preview')].forEach(cb => {
-            cb.querySelector('.code-preview__button--html') ? .classList.toggle(
+            cb.querySelector('.code-preview__button--html')?.classList.toggle(
                 'code-preview__button--selected',
                 flavor === 'html'
             );
-            cb.querySelector('.code-preview__button--react') ? .classList.toggle(
+            cb.querySelector('.code-preview__button--react')?.classList.toggle(
                 'code-preview__button--selected',
                 flavor === 'react'
             );
@@ -161,10 +161,10 @@
     document.addEventListener('click', event => {
         const button = event.target.closest('button');
 
-        if (button ? .classList.contains('code-preview__button--codepen')) {
+        if (button?.classList.contains('code-preview__button--codepen')) {
             const codeBlock = button.closest('.code-preview');
-            const htmlExample = codeBlock.querySelector('.code-preview__source--html > pre > code') ? .textContent;
-            const reactExample = codeBlock.querySelector('.code-preview__source--react > pre > code') ? .textContent;
+            const htmlExample = codeBlock.querySelector('.code-preview__source--html > pre > code')?.textContent;
+            const reactExample = codeBlock.querySelector('.code-preview__source--react > pre > code')?.textContent;
             const isReact = flavor === 'react' && typeof reactExample === 'string';
             const theme = document.documentElement.classList.contains('p-theme-dark') ? 'dark' : 'light';
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;

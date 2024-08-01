@@ -5,7 +5,7 @@ import { LocalizeController } from '../../utilities/localize.js';
 import { property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/shoelace-element.js';
+import PureElement from '../../internal/pure-ui-element.js';
 import styles from './progress-bar.styles.js';
 import type { CSSResultGroup } from 'lit';
 

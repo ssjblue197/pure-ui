@@ -1,5 +1,5 @@
 import type { ReactiveController, ReactiveControllerHost } from 'lit';
-import type { ShoelaceFormControl } from '../internal/shoelace-element.js';
+import type { ShoelaceFormControl } from './pure-ui-element.js';
 import type SlButton from '../components/button/button.js';
 
 //
