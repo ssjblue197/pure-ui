@@ -81,10 +81,7 @@ function MyComponent() {
   const [value, setValue] = useState("");
 
   return (
-    <PInput
-      value={value}
-      onPInput={(event) => setValue(event.target.value)}
-    />
+    <PInput value={value} onPInput={(event) => setValue(event.target.value)} />
   );
 }
 
