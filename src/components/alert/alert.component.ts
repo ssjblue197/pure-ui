@@ -17,7 +17,7 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'p-
 
 /**
  * @summary Alerts are used to display important messages inline or as toast notifications.
- * @documentation https://shoelace.style/components/alert
+ * @documentation https://pureui.xyz/components/alert
  * @status stable
  * @since 2.0
  *

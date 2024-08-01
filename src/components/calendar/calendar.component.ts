@@ -17,7 +17,7 @@ export interface RenderDayOptions {
 
 /**
  * @summary A calendar prototype for Shoelace.
- * @documentation https://shoelace.style/components/calendar
+ * @documentation https://pureui.xyz/components/calendar
  *
  * @since 2.0
  * @status experimental

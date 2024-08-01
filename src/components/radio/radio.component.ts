@@ -10,7 +10,7 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Radios allow the user to select a single option from a group.
- * @documentation https://shoelace.style/components/radio
+ * @documentation https://pureui.xyz/components/radio
  * @status stable
  * @since 2.0
  *

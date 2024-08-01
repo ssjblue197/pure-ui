@@ -10,7 +10,7 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Avatars are used to represent a person or object.
- * @documentation https://shoelace.style/components/avatar
+ * @documentation https://pureui.xyz/components/avatar
  * @status stable
  * @since 2.0
  *

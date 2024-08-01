@@ -20,7 +20,7 @@ import type PMenu from '../menu/menu.js';
 
 /**
  * @summary Dropdowns expose additional content that "drops down" in a panel.
- * @documentation https://shoelace.style/components/dropdown
+ * @documentation https://pureui.xyz/components/dropdown
  * @status stable
  * @since 2.0
  *

@@ -4,7 +4,7 @@ import PureElement from '../../internal/shoelace-element.js';
 
 /**
  * @summary Formats a number using the specified locale and options.
- * @documentation https://shoelace.style/components/format-number
+ * @documentation https://pureui.xyz/components/format-number
  * @status stable
  * @since 2.0
  */

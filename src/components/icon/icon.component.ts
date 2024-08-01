@@ -22,7 +22,7 @@ interface IconSource {
 
 /**
  * @summary Icons are symbols that can be used to represent various options within an application.
- * @documentation https://shoelace.style/components/icon
+ * @documentation https://pureui.xyz/components/icon
  * @status stable
  * @since 2.0
  *

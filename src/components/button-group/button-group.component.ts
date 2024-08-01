@@ -7,7 +7,7 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Button groups can be used to group related buttons into sections.
- * @documentation https://shoelace.style/components/button-group
+ * @documentation https://pureui.xyz/components/button-group
  * @status stable
  * @since 2.0
  *

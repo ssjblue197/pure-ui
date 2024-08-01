@@ -8,7 +8,7 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Skeletons are used to provide a visual representation of where content will eventually be drawn.
- * @documentation https://shoelace.style/components/skeleton
+ * @documentation https://pureui.xyz/components/skeleton
  * @status stable
  * @since 2.0
  *

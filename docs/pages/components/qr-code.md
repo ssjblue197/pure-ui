@@ -9,7 +9,7 @@ QR codes are useful for providing small pieces of information to users who can q
 
 ```html:preview
 <div class="qr-overview">
-  <p-qr-code value="https://shoelace.style/" label="Scan this code to visit Pure UI on the web!"></p-qr-code>
+  <p-qr-code value="https://pureui.xyz/" label="Scan this code to visit Pure UI on the web!"></p-qr-code>
   <br />
 
   <p-input maxlength="255" clearable label="Value"></p-input>
@@ -53,7 +53,7 @@ const css = `
 `;
 
 const App = () => {
-  const [value, setValue] = useState('https://shoelace.style/');
+  const [value, setValue] = useState('https://pureui.xyz/');
 
   return (
     <>
@@ -77,13 +77,13 @@ const App = () => {
 Use the `fill` and `background` attributes to modify the QR code's colors. You should always ensure good contrast for optimal compatibility with QR code scanners.
 
 ```html:preview
-<p-qr-code value="https://shoelace.style/" fill="deeppink" background="white"></p-qr-code>
+<p-qr-code value="https://pureui.xyz/" fill="deeppink" background="white"></p-qr-code>
 ```
 
 ```jsx:react
 import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
 
-const App = () => <PQrCode value="https://shoelace.style/" fill="deeppink" background="white" />;
+const App = () => <PQrCode value="https://pureui.xyz/" fill="deeppink" background="white" />;
 ```
 
 ### Size
@@ -91,13 +91,13 @@ const App = () => <PQrCode value="https://shoelace.style/" fill="deeppink" backg
 Use the `size` attribute to change the size of the QR code.
 
 ```html:preview
-<p-qr-code value="https://shoelace.style/" size="64"></p-qr-code>
+<p-qr-code value="https://pureui.xyz/" size="64"></p-qr-code>
 ```
 
 ```jsx:react
 import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
 
-const App = () => <PQrCode value="https://shoelace.style/" size="64" />;
+const App = () => <PQrCode value="https://pureui.xyz/" size="64" />;
 ```
 
 ### Radius
@@ -105,13 +105,13 @@ const App = () => <PQrCode value="https://shoelace.style/" size="64" />;
 Create a rounded effect with the `radius` attribute.
 
 ```html:preview
-<p-qr-code value="https://shoelace.style/" radius="0.5"></p-qr-code>
+<p-qr-code value="https://pureui.xyz/" radius="0.5"></p-qr-code>
 ```
 
 ```jsx:react
 import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
 
-const App = () => <PQrCode value="https://shoelace.style/" radius="0.5" />;
+const App = () => <PQrCode value="https://pureui.xyz/" radius="0.5" />;
 ```
 
 ### Error Correction
@@ -120,10 +120,10 @@ QR codes can be rendered with various levels of [error correction](https://www.q
 
 ```html:preview
 <div class="qr-error-correction">
-  <p-qr-code value="https://shoelace.style/" error-correction="L"></p-qr-code>
-  <p-qr-code value="https://shoelace.style/" error-correction="M"></p-qr-code>
-  <p-qr-code value="https://shoelace.style/" error-correction="Q"></p-qr-code>
-  <p-qr-code value="https://shoelace.style/" error-correction="H"></p-qr-code>
+  <p-qr-code value="https://pureui.xyz/" error-correction="L"></p-qr-code>
+  <p-qr-code value="https://pureui.xyz/" error-correction="M"></p-qr-code>
+  <p-qr-code value="https://pureui.xyz/" error-correction="Q"></p-qr-code>
+  <p-qr-code value="https://pureui.xyz/" error-correction="H"></p-qr-code>
 </div>
 
 <style>
@@ -150,10 +150,10 @@ const App = () => {
   return (
     <>
       <div className="qr-error-correction">
-        <PQrCode value="https://shoelace.style/" error-correction="L" />
-        <PQrCode value="https://shoelace.style/" error-correction="M" />
-        <PQrCode value="https://shoelace.style/" error-correction="Q" />
-        <PQrCode value="https://shoelace.style/" error-correction="H" />
+        <PQrCode value="https://pureui.xyz/" error-correction="L" />
+        <PQrCode value="https://pureui.xyz/" error-correction="M" />
+        <PQrCode value="https://pureui.xyz/" error-correction="Q" />
+        <PQrCode value="https://pureui.xyz/" error-correction="H" />
       </div>
 
       <style>{css}</style>

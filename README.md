@@ -12,7 +12,7 @@ Designed in New Hampshire by [Mr.P](https://www.facebook.com/ssjblue197).
 
 ---
 
-<!-- Documentation: [Pure UI.style](https://Pure UI.style) -->
+<!-- Documentation: [Pure UI](https://pureui.xyz) -->
 
 Source: [https://github.com/ssjblue197/pure-ui](https://github.com/ssjblue197/pure-ui)
 

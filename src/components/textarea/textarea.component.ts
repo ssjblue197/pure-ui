@@ -16,7 +16,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
 
 /**
  * @summary Textareas collect data from the user and allow multiple lines of text.
- * @documentation https://shoelace.style/components/textarea
+ * @documentation https://pureui.xyz/components/textarea
  * @status stable
  * @since 2.0
  *

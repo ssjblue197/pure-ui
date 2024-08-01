@@ -11,7 +11,7 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Radios buttons allow the user to select a single option from a group using a button-like control.
- * @documentation https://shoelace.style/components/radio-button
+ * @documentation https://pureui.xyz/components/radio-button
  * @status stable
  * @since 2.0
  *

@@ -2,4 +2,4 @@
 
 Before contributing, please review the contributions guidelines at:
 
-[shoelace.style/resources/contributing](https://shoelace.style/resources/contributing)
+[pureui.xyz/resources/contributing](https://pureui.xyz/resources/contributing)

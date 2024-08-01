@@ -5,7 +5,7 @@ import PureElement from '../../internal/shoelace-element.js';
 
 /**
  * @summary Formats a date/time using the specified locale and options.
- * @documentation https://shoelace.style/components/format-date
+ * @documentation https://pureui.xyz/components/format-date
  * @status stable
  * @since 2.0
  */

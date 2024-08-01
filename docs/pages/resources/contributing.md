@@ -77,9 +77,9 @@ The author reserves the right to reject any PR that's outside the scope of the p
 
 ### Branches
 
-`current` - This branch reflects the latest release and powers [shoelace.style](https://shoelace.style/).
+`current` - This branch reflects the latest release and powers [pureui.xyz](https://pureui.xyz/).
 
-`next` - This is the branch you should submit pull requests against. It reflects what's coming in the _next_ release, which can be previewed at [next.shoelace.style](https://next.shoelace.style/).
+`next` - This is the branch you should submit pull requests against. It reflects what's coming in the _next_ release, which can be previewed at [next.pureui.xyz](https://next.pureui.xyz/).
 
 ## Developing
 

@@ -177,7 +177,7 @@ const App = () => <PIcon name="star-fill" label="Add to favorites" />;
 Custom icons can be loaded individually with the `src` attribute. Only SVGs on a local or CORS-enabled endpoint are supported. If you're using more than one custom icon, it might make sense to register a [custom icon library](#icon-libraries).
 
 ```html:preview
-<p-icon src="https://shoelace.style/assets/images/shoe.svg" style="font-size: 8rem;"></p-icon>
+<p-icon src="https://pureui.xyz/assets/images/shoe.svg" style="font-size: 8rem;"></p-icon>
 ```
 
 {% raw %}
@@ -185,7 +185,7 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
 ```jsx:react
 import PIcon from '@shoelace-style/shoelace/dist/react/icon';
 
-const App = () => <PIcon src="https://shoelace.style/assets/images/shoe.svg" style={{ fontSize: '8rem' }}></PIcon>;
+const App = () => <PIcon src="https://pureui.xyz/assets/images/shoe.svg" style={{ fontSize: '8rem' }}></PIcon>;
 ```
 
 {% endraw %}

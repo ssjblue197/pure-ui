@@ -262,7 +262,7 @@
         const el = document.querySelector('.sidebar-version');
         if (!el) return;
 
-        if (location.hostname === 'next.shoelace.style') el.textContent = 'Next';
+        if (location.hostname === 'next.pureui.xyz') el.textContent = 'Next';
         if (location.hostname === 'localhost') el.textContent = 'Development';
     }
 

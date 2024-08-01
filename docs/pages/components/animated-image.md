@@ -7,7 +7,7 @@ layout: component
 
 ```html:preview
 <p-animated-image
-  src="https://shoelace.style/assets/images/walk.gif"
+  src="https://pureui.xyz/assets/images/walk.gif"
   alt="Animation of untied shoes walking on pavement"
 ></p-animated-image>
 ```
@@ -17,7 +17,7 @@ import PAnimatedImage from '@shoelace-style/shoelace/dist/react/animated-image';
 
 const App = () => (
   <PAnimatedImage
-    src="https://shoelace.style/assets/images/walk.gif"
+    src="https://pureui.xyz/assets/images/walk.gif"
     alt="Animation of untied shoes walking on pavement"
   />
 );
@@ -35,7 +35,7 @@ Both GIF and WEBP images are supported.
 
 ```html:preview
 <p-animated-image
-  src="https://shoelace.style/assets/images/tie.webp"
+  src="https://pureui.xyz/assets/images/tie.webp"
   alt="Animation of a shoe being tied"
 ></p-animated-image>
 ```
@@ -44,7 +44,7 @@ Both GIF and WEBP images are supported.
 import PAnimatedImage from '@shoelace-style/shoelace/dist/react/animated-image';
 
 const App = () => (
-  <PAnimatedImage src="https://shoelace.style/assets/images/tie.webp" alt="Animation of a shoe being tied" />
+  <PAnimatedImage src="https://pureui.xyz/assets/images/tie.webp" alt="Animation of a shoe being tied" />
 );
 ```
 
@@ -54,7 +54,7 @@ To set a custom size, apply a width and/or height to the host element.
 
 ```html:preview
 <p-animated-image
-  src="https://shoelace.style/assets/images/walk.gif"
+  src="https://pureui.xyz/assets/images/walk.gif"
   alt="Animation of untied shoes walking on pavement"
   style="width: 150px; height: 200px;"
 >
@@ -68,7 +68,7 @@ import PAnimatedImage from '@shoelace-style/shoelace/dist/react/animated-image';
 
 const App = () => (
   <PAnimatedImage
-    src="https://shoelace.style/assets/images/walk.gif"
+    src="https://pureui.xyz/assets/images/walk.gif"
     alt="Animation of untied shoes walking on pavement"
     style={{ width: '150px', height: '200px' }}
   />
@@ -83,7 +83,7 @@ You can change the appearance and location of the control box by targeting the `
 
 ```html:preview
 <p-animated-image
-  src="https://shoelace.style/assets/images/walk.gif"
+  src="https://pureui.xyz/assets/images/walk.gif"
   alt="Animation of untied shoes walking on pavement"
   class="animated-image-custom-control-box"
 ></p-animated-image>
@@ -120,7 +120,7 @@ const App = () => (
   <>
     <PAnimatedImage
       className="animated-image-custom-control-box"
-      src="https://shoelace.style/assets/images/walk.gif"
+      src="https://pureui.xyz/assets/images/walk.gif"
       alt="Animation of untied shoes walking on pavement"
     />
 

@@ -12,7 +12,7 @@ import type { CSSResultGroup } from 'lit';
 
 /**
  * @summary Split panels display two adjacent panels, allowing the user to reposition them.
- * @documentation https://shoelace.style/components/split-panel
+ * @documentation https://pureui.xyz/components/split-panel
  * @status stable
  * @since 2.0
  *

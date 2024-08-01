@@ -16,7 +16,7 @@ import type { ShoelaceFormControl } from '../../internal/shoelace-element.js';
 
 /**
  * @summary Switches allow the user to toggle an option on or off.
- * @documentation https://shoelace.style/components/switch
+ * @documentation https://pureui.xyz/components/switch
  * @status stable
  * @since 2.0
  *
