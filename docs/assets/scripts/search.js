@@ -231,7 +231,7 @@
                     nextEl = items[items.length - 1];
                     break;
                 case 'Enter':
-                    currentEl ? .querySelector('a') ? .click();
+                    currentEl?.querySelector('a')?.click();
                     break;
             }
 
@@ -280,8 +280,8 @@
                 const page = map[match.ref];
                 const li = document.createElement('li');
                 const a = document.createElement('a');
-                const displayTitle = page.title ? ? '';
-                const displayDescription = page.description ? ? '';
+                const displayTitle = page.title ?? '';
+                const displayDescription = page.description ?? '';
                 const displayUrl = page.url.replace(/^\//, '').replace(/\/$/, '');
                 let icon = 'file-text';
 
@@ -347,7 +347,7 @@
     document.addEventListener('keydown', event => {
         if (!isShowing &&
             (event.key === '/' || (event.key === 'k' && (event.metaKey || event.ctrlKey))) &&
-            !event.composedPath().some(el => ['input', 'textarea'].includes(el ? .tagName ? .toLowerCase()))
+            !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))
         ) {
             event.preventDefault();
             show();
