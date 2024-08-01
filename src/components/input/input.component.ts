@@ -1,20 +1,20 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { defaultValue } from '../../internal/default-value.js';
-import { FormControlController } from '../../internal/form.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { live } from 'lit/directives/live.js';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property, query, state } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import formControlStyles from '../../styles/form-control.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './input.styles.js';
-import type { CSSResultGroup } from 'lit';
-import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
+import { classMap } from "lit/directives/class-map.js";
+import { defaultValue } from "../../internal/default-value.js";
+import { FormControlController } from "../../internal/form.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { live } from "lit/directives/live.js";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query, state } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import formControlStyles from "../../styles/form-control.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./input.styles.js";
+import type { CSSResultGroup } from "lit";
+import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Inputs collect data from the user.
@@ -52,49 +52,57 @@ import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
  */
 export default class PInput extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
-  static dependencies = { 'p-icon': PIcon };
+  static dependencies = { "p-icon": PIcon };
 
   private readonly formControlController = new FormControlController(this, {
-    assumeInteractionOn: ['p-blur', 'p-input']
+    assumeInteractionOn: ["p-blur", "p-input"],
   });
-  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private readonly hasSlotController = new HasSlotController(
+    this,
+    "help-text",
+    "label",
+  );
   private readonly localize = new LocalizeController(this);
 
-  @query('.input__control') input: HTMLInputElement;
+  @query(".input__control") input: HTMLInputElement;
 
   @state() private hasFocus = false;
-  @property() title = ''; // make reactive to pass through
+  @property() title = ""; // make reactive to pass through
 
-  private __numberInput = Object.assign(document.createElement('input'), { type: 'number' });
-  private __dateInput = Object.assign(document.createElement('input'), { type: 'date' });
+  private __numberInput = Object.assign(document.createElement("input"), {
+    type: "number",
+  });
+  private __dateInput = Object.assign(document.createElement("input"), {
+    type: "date",
+  });
 
   /**
    * The type of input. Works the same as a native `<input>` element, but only a subset of types are supported. Defaults
    * to `text`.
    */
   @property({ reflect: true }) type:
-    | 'date'
-    | 'datetime-local'
-    | 'email'
-    | 'number'
-    | 'password'
-    | 'search'
-    | 'tel'
-    | 'text'
-    | 'time'
-    | 'url' = 'text';
+    | "date"
+    | "datetime-local"
+    | "email"
+    | "number"
+    | "password"
+    | "search"
+    | "tel"
+    | "text"
+    | "time"
+    | "url" = "text";
 
   /** The name of the input, submitted as a name/value pair with form data. */
-  @property() name = '';
+  @property() name = "";
 
   /** The current value of the input, submitted as a name/value pair with form data. */
-  @property() value = '';
+  @property() value = "";
 
   /** The default value of the form control. Primarily used for resetting the form control. */
-  @defaultValue() defaultValue = '';
+  @defaultValue() defaultValue = "";
 
   /** The input's size. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
 
   /** Draws a filled input. */
   @property({ type: Boolean, reflect: true }) filled = false;
@@ -103,10 +111,10 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
   @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The input's label. If you need to display HTML, use the `label` slot instead. */
-  @property() label = '';
+  @property() label = "";
 
   /** The input's help text. If you need to display HTML, use the `help-text` slot instead. */
-  @property({ attribute: 'help-text' }) helpText = '';
+  @property({ attribute: "help-text" }) helpText = "";
 
   /** Adds a clear button when the input is not empty. */
   @property({ type: Boolean }) clearable = false;
@@ -115,26 +123,29 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Placeholder text to show as a hint when the input is empty. */
-  @property() placeholder = '';
+  @property() placeholder = "";
 
   /** Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
 
   /** Adds a button to toggle the password's visibility. Only applies to password types. */
-  @property({ attribute: 'password-toggle', type: Boolean }) passwordToggle = false;
+  @property({ attribute: "password-toggle", type: Boolean }) passwordToggle =
+    false;
 
   /** Determines whether or not the password is currently visible. Only applies to password input types. */
-  @property({ attribute: 'password-visible', type: Boolean }) passwordVisible = false;
+  @property({ attribute: "password-visible", type: Boolean }) passwordVisible =
+    false;
 
   /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
-  @property({ attribute: 'no-spin-buttons', type: Boolean }) noSpinButtons = false;
+  @property({ attribute: "no-spin-buttons", type: Boolean }) noSpinButtons =
+    false;
 
   /**
    * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
    * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
    * the same document or shadow root for this to work.
    */
-  @property({ reflect: true }) form = '';
+  @property({ reflect: true }) form = "";
 
   /** Makes the input a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -158,13 +169,19 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
    * implied, allowing any numeric value. Only applies to date and number input types.
    */
-  @property() step: number | 'any';
+  @property() step: number | "any";
 
   /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
-  @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
+  @property() autocapitalize:
+    | "off"
+    | "none"
+    | "on"
+    | "sentences"
+    | "words"
+    | "characters";
 
   /** Indicates whether the browser's autocorrect feature is on or off. */
-  @property() autocorrect: 'off' | 'on';
+  @property() autocorrect: "off" | "on";
 
   /**
    * Specifies what permission the browser has to provide assistance in filling out form field values. Refer to
@@ -176,16 +193,23 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
   @property({ type: Boolean }) autofocus: boolean;
 
   /** Used to customize the label or icon of the Enter key on virtual keyboards. */
-  @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+  @property() enterkeyhint:
+    | "enter"
+    | "done"
+    | "go"
+    | "next"
+    | "previous"
+    | "search"
+    | "send";
 
   /** Enables spell checking on the input. */
   @property({
     type: Boolean,
     converter: {
       // Allow "true|false" attribute values but keep the property boolean
-      fromAttribute: value => (!value || value === 'false' ? false : true),
-      toAttribute: value => (value ? 'true' : 'false')
-    }
+      fromAttribute: (value) => (!value || value === "false" ? false : true),
+      toAttribute: (value) => (value ? "true" : "false"),
+    },
   })
   spellcheck = true;
 
@@ -193,7 +217,15 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
    * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
    * keyboard on supportive devices.
    */
-  @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+  @property() inputmode:
+    | "none"
+    | "text"
+    | "decimal"
+    | "numeric"
+    | "tel"
+    | "search"
+    | "email"
+    | "url";
 
   //
   // NOTE: We use an in-memory input for these getters/setters instead of the one in the template because the properties
@@ -242,22 +274,22 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
 
   private handleBlur() {
     this.hasFocus = false;
-    this.emit('p-blur');
+    this.emit("p-blur");
   }
 
   private handleChange() {
     this.value = this.input.value;
-    this.emit('p-change');
+    this.emit("p-change");
   }
 
   private handleClearClick(event: MouseEvent) {
     event.preventDefault();
 
-    if (this.value !== '') {
-      this.value = '';
-      this.emit('p-clear');
-      this.emit('p-input');
-      this.emit('p-change');
+    if (this.value !== "") {
+      this.value = "";
+      this.emit("p-clear");
+      this.emit("p-input");
+      this.emit("p-change");
     }
 
     this.input.focus();
@@ -265,13 +297,13 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
 
   private handleFocus() {
     this.hasFocus = true;
-    this.emit('p-focus');
+    this.emit("p-focus");
   }
 
   private handleInput() {
     this.value = this.input.value;
     this.formControlController.updateValidity();
-    this.emit('p-input');
+    this.emit("p-input");
   }
 
   private handleInvalid(event: Event) {
@@ -280,11 +312,12 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+    const hasModifier =
+      event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
 
     // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
     // submitting to allow users to cancel the keydown event if they need to
-    if (event.key === 'Enter' && !hasModifier) {
+    if (event.key === "Enter" && !hasModifier) {
       setTimeout(() => {
         //
         // When using an Input Method Editor (IME), pressing enter will cause the form to submit unexpectedly. One way
@@ -303,13 +336,13 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
     this.passwordVisible = !this.passwordVisible;
   }
 
-  @watch('disabled', { waitUntilFirstUpdate: true })
+  @watch("disabled", { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid
     this.formControlController.setValidity(this.disabled);
   }
 
-  @watch('step', { waitUntilFirstUpdate: true })
+  @watch("step", { waitUntilFirstUpdate: true })
   handleStepChange() {
     // If step changes, the value may become invalid so we need to recheck after the update. We set the new step
     // imperatively so we don't have to wait for the next render to report the updated validity.
@@ -317,7 +350,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
     this.formControlController.updateValidity();
   }
 
-  @watch('value', { waitUntilFirstUpdate: true })
+  @watch("value", { waitUntilFirstUpdate: true })
   async handleValueChange() {
     await this.updateComplete;
     this.formControlController.updateValidity();
@@ -342,9 +375,13 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
   setSelectionRange(
     selectionStart: number,
     selectionEnd: number,
-    selectionDirection: 'forward' | 'backward' | 'none' = 'none'
+    selectionDirection: "forward" | "backward" | "none" = "none",
   ) {
-    this.input.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
+    this.input.setSelectionRange(
+      selectionStart,
+      selectionEnd,
+      selectionDirection,
+    );
   }
 
   /** Replaces a range of text with a new string. */
@@ -352,12 +389,17 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
     replacement: string,
     start?: number,
     end?: number,
-    selectMode: 'select' | 'start' | 'end' | 'preserve' = 'preserve'
+    selectMode: "select" | "start" | "end" | "preserve" = "preserve",
   ) {
     const selectionStart = start ?? this.input.selectionStart!;
     const selectionEnd = end ?? this.input.selectionEnd!;
 
-    this.input.setRangeText(replacement, selectionStart, selectionEnd, selectMode);
+    this.input.setRangeText(
+      replacement,
+      selectionStart,
+      selectionEnd,
+      selectMode,
+    );
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
@@ -366,7 +408,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
 
   /** Displays the browser picker for an input element (only works if the browser supports it for the input type). */
   showPicker() {
-    if ('showPicker' in HTMLInputElement.prototype) {
+    if ("showPicker" in HTMLInputElement.prototype) {
       this.input.showPicker();
     }
   }
@@ -409,30 +451,31 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
   }
 
   render() {
-    const hasLabelSlot = this.hasSlotController.test('label');
-    const hasHelpTextSlot = this.hasSlotController.test('help-text');
+    const hasLabelSlot = this.hasSlotController.test("label");
+    const hasHelpTextSlot = this.hasSlotController.test("help-text");
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const hasClearIcon = this.clearable && !this.disabled && !this.readonly;
-    const isClearIconVisible = hasClearIcon && (typeof this.value === 'number' || this.value.length > 0);
+    const isClearIconVisible =
+      hasClearIcon && (typeof this.value === "number" || this.value.length > 0);
 
     return html`
       <div
         part="form-control"
         class=${classMap({
-          'form-control': true,
-          'form-control--small': this.size === 'small',
-          'form-control--medium': this.size === 'medium',
-          'form-control--large': this.size === 'large',
-          'form-control--has-label': hasLabel,
-          'form-control--has-help-text': hasHelpText
+          "form-control": true,
+          "form-control--small": this.size === "small",
+          "form-control--medium": this.size === "medium",
+          "form-control--large": this.size === "large",
+          "form-control--has-label": hasLabel,
+          "form-control--has-help-text": hasHelpText,
         })}
       >
         <label
           part="form-control-label"
           class="form-control__label"
           for="input"
-          aria-hidden=${hasLabel ? 'false' : 'true'}
+          aria-hidden=${hasLabel ? "false" : "true"}
         >
           <slot name="label">${this.label}</slot>
         </label>
@@ -444,18 +487,18 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
               input: true,
 
               // Sizes
-              'input--small': this.size === 'small',
-              'input--medium': this.size === 'medium',
-              'input--large': this.size === 'large',
+              "input--small": this.size === "small",
+              "input--medium": this.size === "medium",
+              "input--large": this.size === "large",
 
               // States
-              'input--pill': this.pill,
-              'input--standard': !this.filled,
-              'input--filled': this.filled,
-              'input--disabled': this.disabled,
-              'input--focused': this.hasFocus,
-              'input--empty': !this.value,
-              'input--no-spin-buttons': this.noSpinButtons
+              "input--pill": this.pill,
+              "input--standard": !this.filled,
+              "input--filled": this.filled,
+              "input--disabled": this.disabled,
+              "input--focused": this.hasFocus,
+              "input--empty": !this.value,
+              "input--no-spin-buttons": this.noSpinButtons,
             })}
           >
             <span part="prefix" class="input__prefix">
@@ -466,8 +509,13 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
               part="input"
               id="input"
               class="input__control"
-              type=${this.type === 'password' && this.passwordVisible ? 'text' : this.type}
-              title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
+              type=${this.type === "password" && this.passwordVisible
+                ? "text"
+                : this.type}
+              title=${
+                this
+                  .title /* An empty title prevents browser validation tooltips from appearing on hover */
+              }
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}
               ?readonly=${this.readonly}
@@ -502,7 +550,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
                     part="clear-button"
                     class="input__clear"
                     type="button"
-                    aria-label=${this.localize.term('clearEntry')}
+                    aria-label=${this.localize.term("clearEntry")}
                     @click=${this.handleClearClick}
                     tabindex="-1"
                   >
@@ -511,14 +559,16 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
                     </slot>
                   </button>
                 `
-              : ''}
+              : ""}
             ${this.passwordToggle && !this.disabled
               ? html`
                   <button
                     part="password-toggle-button"
                     class="input__password-toggle"
                     type="button"
-                    aria-label=${this.localize.term(this.passwordVisible ? 'hidePassword' : 'showPassword')}
+                    aria-label=${this.localize.term(
+                      this.passwordVisible ? "hidePassword" : "showPassword",
+                    )}
                     @click=${this.handlePasswordToggle}
                     tabindex="-1"
                   >
@@ -535,7 +585,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
                         `}
                   </button>
                 `
-              : ''}
+              : ""}
 
             <span part="suffix" class="input__suffix">
               <slot name="suffix"></slot>
@@ -547,7 +597,7 @@ export default class PInput extends PureElement implements ShoelaceFormControl {
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
-          aria-hidden=${hasHelpText ? 'false' : 'true'}
+          aria-hidden=${hasHelpText ? "false" : "true"}
         >
           <slot name="help-text">${this.helpText}</slot>
         </div>

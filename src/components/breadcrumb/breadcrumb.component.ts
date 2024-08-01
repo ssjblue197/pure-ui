@@ -1,12 +1,12 @@
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property, query } from 'lit/decorators.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './breadcrumb.styles.js';
-import type { CSSResultGroup } from 'lit';
-import type PBreadcrumbItem from '../breadcrumb-item/breadcrumb-item.js';
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query } from "lit/decorators.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./breadcrumb.styles.js";
+import type { CSSResultGroup } from "lit";
+import type PBreadcrumbItem from "../breadcrumb-item/breadcrumb-item.js";
 
 /**
  * @summary Breadcrumbs provide a group of links so users can easily navigate a website's hierarchy.
@@ -23,36 +23,42 @@ import type PBreadcrumbItem from '../breadcrumb-item/breadcrumb-item.js';
  */
 export default class PBreadcrumb extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'p-icon': PIcon };
+  static dependencies = { "p-icon": PIcon };
 
   private readonly localize = new LocalizeController(this);
   private separatorDir = this.localize.dir();
 
-  @query('slot') defaultSlot: HTMLSlotElement;
+  @query("slot") defaultSlot: HTMLSlotElement;
   @query('slot[name="separator"]') separatorSlot: HTMLSlotElement;
 
   /**
    * The label to use for the breadcrumb control. This will not be shown on the screen, but it will be announced by
    * screen readers and other assistive devices to provide more context for users.
    */
-  @property() label = '';
+  @property() label = "";
 
   // Generates a clone of the separator element to use for each breadcrumb item
   private getSeparator() {
-    const separator = this.separatorSlot.assignedElements({ flatten: true })[0] as HTMLElement;
+    const separator = this.separatorSlot.assignedElements({
+      flatten: true,
+    })[0] as HTMLElement;
 
     // Clone it, remove ids, and slot it
     const clone = separator.cloneNode(true) as HTMLElement;
-    [clone, ...clone.querySelectorAll('[id]')].forEach(el => el.removeAttribute('id'));
-    clone.setAttribute('data-default', '');
-    clone.slot = 'separator';
+    [clone, ...clone.querySelectorAll("[id]")].forEach((el) =>
+      el.removeAttribute("id"),
+    );
+    clone.setAttribute("data-default", "");
+    clone.slot = "separator";
 
     return clone;
   }
 
   private handleSlotChange() {
-    const items = [...this.defaultSlot.assignedElements({ flatten: true })].filter(
-      item => item.tagName.toLowerCase() === 'p-breadcrumb-item'
+    const items = [
+      ...this.defaultSlot.assignedElements({ flatten: true }),
+    ].filter(
+      (item) => item.tagName.toLowerCase() === "p-breadcrumb-item",
     ) as PBreadcrumbItem[];
 
     items.forEach((item, index) => {
@@ -61,7 +67,7 @@ export default class PBreadcrumb extends PureElement {
       if (separator === null) {
         // No separator exists, add one
         item.append(this.getSeparator());
-      } else if (separator.hasAttribute('data-default')) {
+      } else if (separator.hasAttribute("data-default")) {
         // A default separator exists, replace it
         separator.replaceWith(this.getSeparator());
       } else {
@@ -70,9 +76,9 @@ export default class PBreadcrumb extends PureElement {
 
       // The last breadcrumb item is the "current page"
       if (index === items.length - 1) {
-        item.setAttribute('aria-current', 'page');
+        item.setAttribute("aria-current", "page");
       } else {
-        item.removeAttribute('aria-current');
+        item.removeAttribute("aria-current");
       }
     });
   }
@@ -93,7 +99,12 @@ export default class PBreadcrumb extends PureElement {
 
       <span hidden aria-hidden="true">
         <slot name="separator">
-          <p-icon name=${this.localize.dir() === 'rtl' ? 'chevron-left' : 'chevron-right'} library="system"></p-icon>
+          <p-icon
+            name=${this.localize.dir() === "rtl"
+              ? "chevron-left"
+              : "chevron-right"}
+            library="system"
+          ></p-icon>
         </slot>
       </span>
     `;

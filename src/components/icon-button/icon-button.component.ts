@@ -1,12 +1,12 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { html, literal } from 'lit/static-html.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { property, query, state } from 'lit/decorators.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './icon-button.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import { html, literal } from "lit/static-html.js";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { property, query, state } from "lit/decorators.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./icon-button.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Icons buttons are simple, icon-only buttons that can be used for actions and in toolbars.
@@ -23,9 +23,9 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class PIconButton extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'p-icon': PIcon };
+  static dependencies = { "p-icon": PIcon };
 
-  @query('.icon-button') button: HTMLButtonElement | HTMLLinkElement;
+  @query(".icon-button") button: HTMLButtonElement | HTMLLinkElement;
 
   @state() private hasFocus = false;
 
@@ -45,7 +45,7 @@ export default class PIconButton extends PureElement {
   @property() href?: string;
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
-  @property() target?: '_blank' | '_parent' | '_self' | '_top';
+  @property() target?: "_blank" | "_parent" | "_self" | "_top";
 
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
   @property() download?: string;
@@ -54,19 +54,19 @@ export default class PIconButton extends PureElement {
    * A description that gets read by assistive devices. For optimal accessibility, you should always include a label
    * that describes what the icon button does.
    */
-  @property() label = '';
+  @property() label = "";
 
   /** Disables the button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   private handleBlur() {
     this.hasFocus = false;
-    this.emit('p-blur');
+    this.emit("p-blur");
   }
 
   private handleFocus() {
     this.hasFocus = true;
-    this.emit('p-focus');
+    this.emit("p-focus");
   }
 
   private handleClick(event: MouseEvent) {
@@ -100,20 +100,20 @@ export default class PIconButton extends PureElement {
       <${tag}
         part="base"
         class=${classMap({
-          'icon-button': true,
-          'icon-button--disabled': !isLink && this.disabled,
-          'icon-button--focused': this.hasFocus
+          "icon-button": true,
+          "icon-button--disabled": !isLink && this.disabled,
+          "icon-button--focused": this.hasFocus,
         })}
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
-        type=${ifDefined(isLink ? undefined : 'button')}
+        type=${ifDefined(isLink ? undefined : "button")}
         href=${ifDefined(isLink ? this.href : undefined)}
         target=${ifDefined(isLink ? this.target : undefined)}
         download=${ifDefined(isLink ? this.download : undefined)}
-        rel=${ifDefined(isLink && this.target ? 'noreferrer noopener' : undefined)}
-        role=${ifDefined(isLink ? undefined : 'button')}
-        aria-disabled=${this.disabled ? 'true' : 'false'}
+        rel=${ifDefined(isLink && this.target ? "noreferrer noopener" : undefined)}
+        role=${ifDefined(isLink ? undefined : "button")}
+        aria-disabled=${this.disabled ? "true" : "false"}
         aria-label="${this.label}"
-        tabindex=${this.disabled ? '-1' : '0'}
+        tabindex=${this.disabled ? "-1" : "0"}
         @blur=${this.handleBlur}
         @focus=${this.handleFocus}
         @click=${this.handleClick}

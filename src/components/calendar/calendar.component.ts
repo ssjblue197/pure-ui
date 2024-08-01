@@ -1,14 +1,19 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { generateCalendarGrid, getAllDayNames, getMonthName, isSameDay } from '../../internal/calendar.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { partMap } from '../../internal/part-map.js';
-import { property } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './calendar.styles.js';
-import type { CSSResultGroup, TemplateResult } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import {
+  generateCalendarGrid,
+  getAllDayNames,
+  getMonthName,
+  isSameDay,
+} from "../../internal/calendar.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { partMap } from "../../internal/part-map.js";
+import { property } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./calendar.styles.js";
+import type { CSSResultGroup, TemplateResult } from "lit";
 
 export interface RenderDayOptions {
   disabled?: boolean;
@@ -48,22 +53,37 @@ export default class PCalendar extends PureElement {
   static styles: CSSResultGroup = styles;
 
   private readonly localize = new LocalizeController(this);
-  private readonly hasSlotController = new HasSlotController(this, 'prefix', 'suffix');
+  private readonly hasSlotController = new HasSlotController(
+    this,
+    "prefix",
+    "suffix",
+  );
 
   /** The month to render, 1-12/ */
-  @property({ type: Number, reflect: true }) month: number = new Date().getMonth() + 1;
+  @property({ type: Number, reflect: true }) month: number =
+    new Date().getMonth() + 1;
 
   /** The year to render. */
-  @property({ type: Number, reflect: true }) year: number = new Date().getFullYear();
+  @property({ type: Number, reflect: true }) year: number =
+    new Date().getFullYear();
 
   /** Determines how day labels are shown, e.g. "M", "Mon", or "Monday". */
-  @property({ attribute: 'day-labels' }) dayLabels: 'narrow' | 'short' | 'long' = 'short';
+  @property({ attribute: "day-labels" }) dayLabels:
+    | "narrow"
+    | "short"
+    | "long" = "short";
 
   /** Determines how month labels are shown, e.g. "J", "Jan", or "January". */
-  @property({ attribute: 'month-labels' }) monthLabels: 'numeric' | '2-digit' | 'long' | 'short' | 'narrow' = 'long';
+  @property({ attribute: "month-labels" }) monthLabels:
+    | "numeric"
+    | "2-digit"
+    | "long"
+    | "short"
+    | "narrow" = "long";
 
   /** When true, dates from the previous and next month will also be shown to fill out the grid. */
-  @property({ attribute: 'show-adjacent-dates', type: Boolean }) showAdjacentDates = false;
+  @property({ attribute: "show-adjacent-dates", type: Boolean })
+  showAdjacentDates = false;
 
   /** Draws the target dates as a selection in the calendar. */
   @property({ type: Array }) selectedDates: Date[] = [];
@@ -94,10 +114,10 @@ export default class PCalendar extends PureElement {
     }
   }
 
-  @watch('month')
-  @watch('year')
+  @watch("month")
+  @watch("year")
   handleMonthChange() {
-    this.emit('p-change');
+    this.emit("p-change");
   }
 
   render() {
@@ -118,38 +138,40 @@ export default class PCalendar extends PureElement {
       <div
         class=${classMap({
           calendar: true,
-          'calendar--has-footer': this.hasSlotController.test('footer'),
-          'calendar--show-adjacent-dates': this.showAdjacentDates
+          "calendar--has-footer": this.hasSlotController.test("footer"),
+          "calendar--show-adjacent-dates": this.showAdjacentDates,
         })}
       >
         <header class="calendar__header">
           <p-icon-button
             name="chevron-left"
-            label=${this.localize.term('previousMonth')}
+            label=${this.localize.term("previousMonth")}
             @click=${this.goToPreviousMonth}
           ></p-icon-button>
 
           <span class="calendar__label">
-            <span class="calendar__month-label">${getMonthName(month, lang, this.monthLabels)}</span>
+            <span class="calendar__month-label"
+              >${getMonthName(month, lang, this.monthLabels)}</span
+            >
             <span class="calendar__year-label">${month.getFullYear()}</span>
           </span>
 
           <p-icon-button
             name="chevron-right"
-            label=${this.localize.term('nextMonth')}
+            label=${this.localize.term("nextMonth")}
             @click=${this.goToNextMonth}
           ></p-icon-button>
         </header>
 
         <div class="calendar__days">
-          ${[0, 1, 2, 3, 4, 5, 6].map(day => {
+          ${[0, 1, 2, 3, 4, 5, 6].map((day) => {
             return html`
               <span
                 part=${partMap({
                   day: true,
-                  'day-label': true,
-                  'day-weekday': day > 0 && day < 6,
-                  'day-weekend': day === 0 || day === 6
+                  "day-label": true,
+                  "day-weekday": day > 0 && day < 6,
+                  "day-weekend": day === 0 || day === 6,
                 })}
                 class="calendar__day"
               >
@@ -160,29 +182,36 @@ export default class PCalendar extends PureElement {
           ${dayGrid.map((day, index) => {
             if (day.isCurrentMonth || this.showAdjacentDates) {
               const isSelected = Array.isArray(this.selectedDates)
-                ? this.selectedDates.some(d => isSameDay(d, day.date))
+                ? this.selectedDates.some((d) => isSameDay(d, day.date))
                 : false;
               const previousDay = index > 0 ? dayGrid[index - 1] : null;
-              const nextDay = index < dayGrid.length - 1 ? dayGrid[index + 1] : null;
+              const nextDay =
+                index < dayGrid.length - 1 ? dayGrid[index + 1] : null;
               const isSelectionStart =
-                isSelected && previousDay ? !this.selectedDates.some(d => isSameDay(d, previousDay.date)) : false;
+                isSelected && previousDay
+                  ? !this.selectedDates.some((d) =>
+                      isSameDay(d, previousDay.date),
+                    )
+                  : false;
               const isSelectionEnd =
-                isSelected && nextDay ? !this.selectedDates.some(d => isSameDay(d, nextDay.date)) : false;
+                isSelected && nextDay
+                  ? !this.selectedDates.some((d) => isSameDay(d, nextDay.date))
+                  : false;
 
               return html`
                 <button
                   type="button"
                   part=${partMap({
                     day: true,
-                    'day-current-month': day.isCurrentMonth,
-                    'day-previous-month': day.isPreviousMonth,
-                    'day-next-month': day.isNextMonth,
-                    'day-today': day.isToday,
-                    'day-weekday': day.isWeekday,
-                    'day-weekend': day.isWeekend,
-                    'day-selected': isSelected,
-                    'day-selection-start': isSelectionStart,
-                    'day-selection-end': isSelectionEnd
+                    "day-current-month": day.isCurrentMonth,
+                    "day-previous-month": day.isPreviousMonth,
+                    "day-next-month": day.isNextMonth,
+                    "day-today": day.isToday,
+                    "day-weekday": day.isWeekday,
+                    "day-weekend": day.isWeekend,
+                    "day-selected": isSelected,
+                    "day-selection-start": isSelectionStart,
+                    "day-selection-end": isSelectionEnd,
                   })}
                   class="calendar__day"
                 >
@@ -191,7 +220,9 @@ export default class PCalendar extends PureElement {
               `;
             }
 
-            return html` <div class="calendar__day calendar__day--empty"></div> `;
+            return html`
+              <div class="calendar__day calendar__day--empty"></div>
+            `;
           })}
         </div>
 

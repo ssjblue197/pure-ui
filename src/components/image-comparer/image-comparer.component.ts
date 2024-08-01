@@ -1,15 +1,15 @@
-import { clamp } from '../../internal/math.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { drag } from '../../internal/drag.js';
-import { html } from 'lit';
-import { property, query } from 'lit/decorators.js';
-import { styleMap } from 'lit/directives/style-map.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './image-comparer.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { clamp } from "../../internal/math.js";
+import { classMap } from "lit/directives/class-map.js";
+import { drag } from "../../internal/drag.js";
+import { html } from "lit";
+import { property, query } from "lit/decorators.js";
+import { styleMap } from "lit/directives/style-map.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./image-comparer.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Compare visual differences between similar photos with a sliding panel.
@@ -36,49 +36,55 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class PImageComparer extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static scopedElement = { 'p-icon': PIcon };
+  static scopedElement = { "p-icon": PIcon };
 
-  @query('.image-comparer') base: HTMLElement;
-  @query('.image-comparer__handle') handle: HTMLElement;
+  @query(".image-comparer") base: HTMLElement;
+  @query(".image-comparer__handle") handle: HTMLElement;
 
   /** The position of the divider as a percentage. */
   @property({ type: Number, reflect: true }) position = 50;
 
   private handleDrag(event: PointerEvent) {
     const { width } = this.base.getBoundingClientRect();
-    const isRtl = this.matches(':dir(rtl)');
+    const isRtl = this.matches(":dir(rtl)");
 
     event.preventDefault();
 
     drag(this.base, {
-      onMove: x => {
+      onMove: (x) => {
         this.position = parseFloat(clamp((x / width) * 100, 0, 100).toFixed(2));
         if (isRtl) this.position = 100 - this.position;
       },
-      initialEvent: event
+      initialEvent: event,
     });
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    const isLtr = this.matches(':dir(ltr)');
-    const isRtl = this.matches(':dir(rtl)');
+    const isLtr = this.matches(":dir(ltr)");
+    const isRtl = this.matches(":dir(rtl)");
 
-    if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+    if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
       const incr = event.shiftKey ? 10 : 1;
       let newPosition = this.position;
 
       event.preventDefault();
 
-      if ((isLtr && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight')) {
+      if (
+        (isLtr && event.key === "ArrowLeft") ||
+        (isRtl && event.key === "ArrowRight")
+      ) {
         newPosition -= incr;
       }
-      if ((isLtr && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft')) {
+      if (
+        (isLtr && event.key === "ArrowRight") ||
+        (isRtl && event.key === "ArrowLeft")
+      ) {
         newPosition += incr;
       }
-      if (event.key === 'Home') {
+      if (event.key === "Home") {
         newPosition = 0;
       }
-      if (event.key === 'End') {
+      if (event.key === "End") {
         newPosition = 100;
       }
       newPosition = clamp(newPosition, 0, 100);
@@ -87,21 +93,21 @@ export default class PImageComparer extends PureElement {
     }
   }
 
-  @watch('position', { waitUntilFirstUpdate: true })
+  @watch("position", { waitUntilFirstUpdate: true })
   handlePositionChange() {
-    this.emit('p-change');
+    this.emit("p-change");
   }
 
   render() {
-    const isRtl = this.matches(':dir(rtl)');
+    const isRtl = this.matches(":dir(rtl)");
 
     return html`
       <div
         part="base"
         id="image-comparer"
         class=${classMap({
-          'image-comparer': true,
-          'image-comparer--rtl': isRtl
+          "image-comparer": true,
+          "image-comparer--rtl": isRtl,
         })}
         @keydown=${this.handleKeyDown}
       >
@@ -114,7 +120,9 @@ export default class PImageComparer extends PureElement {
             part="after"
             class="image-comparer__after"
             style=${styleMap({
-              clipPath: isRtl ? `inset(0 0 0 ${100 - this.position}%)` : `inset(0 ${100 - this.position}% 0 0)`
+              clipPath: isRtl
+                ? `inset(0 0 0 ${100 - this.position}%)`
+                : `inset(0 ${100 - this.position}% 0 0)`,
             })}
           >
             <slot name="after"></slot>
@@ -125,7 +133,7 @@ export default class PImageComparer extends PureElement {
           part="divider"
           class="image-comparer__divider"
           style=${styleMap({
-            left: isRtl ? `${100 - this.position}%` : `${this.position}%`
+            left: isRtl ? `${100 - this.position}%` : `${this.position}%`,
           })}
           @mousedown=${this.handleDrag}
           @touchstart=${this.handleDrag}

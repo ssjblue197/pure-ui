@@ -1,9 +1,9 @@
-import { createRef, ref, type Ref } from 'lit/directives/ref.js';
-import { type HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import type { ReactiveController, ReactiveControllerHost } from 'lit';
-import type PMenuItem from './menu-item.js';
-import type PPopup from '../popup/popup.js';
+import { createRef, ref, type Ref } from "lit/directives/ref.js";
+import { type HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import type { ReactiveController, ReactiveControllerHost } from "lit";
+import type PMenuItem from "./menu-item.js";
+import type PPopup from "../popup/popup.js";
 
 /** A reactive controller to manage the registration of event listeners for submenus. */
 export class SubmenuController implements ReactiveController {
@@ -16,13 +16,16 @@ export class SubmenuController implements ReactiveController {
   private readonly hasSlotController: HasSlotController;
   private readonly submenuOpenDelay = 100;
 
-  constructor(host: ReactiveControllerHost & PMenuItem, hasSlotController: HasSlotController) {
+  constructor(
+    host: ReactiveControllerHost & PMenuItem,
+    hasSlotController: HasSlotController,
+  ) {
     (this.host = host).addController(this);
     this.hasSlotController = hasSlotController;
   }
 
   hostConnected() {
-    if (this.hasSlotController.test('submenu') && !this.host.disabled) {
+    if (this.hasSlotController.test("submenu") && !this.host.disabled) {
       this.addListeners();
     }
   }
@@ -32,7 +35,7 @@ export class SubmenuController implements ReactiveController {
   }
 
   hostUpdated() {
-    if (this.hasSlotController.test('submenu') && !this.host.disabled) {
+    if (this.hasSlotController.test("submenu") && !this.host.disabled) {
       this.addListeners();
       this.updateSkidding();
     } else {
@@ -42,11 +45,11 @@ export class SubmenuController implements ReactiveController {
 
   private addListeners() {
     if (!this.isConnected) {
-      this.host.addEventListener('mousemove', this.handleMouseMove);
-      this.host.addEventListener('mouseover', this.handleMouseOver);
-      this.host.addEventListener('keydown', this.handleKeyDown);
-      this.host.addEventListener('click', this.handleClick);
-      this.host.addEventListener('focusout', this.handleFocusOut);
+      this.host.addEventListener("mousemove", this.handleMouseMove);
+      this.host.addEventListener("mouseover", this.handleMouseOver);
+      this.host.addEventListener("keydown", this.handleKeyDown);
+      this.host.addEventListener("click", this.handleClick);
+      this.host.addEventListener("focusout", this.handleFocusOut);
       this.isConnected = true;
     }
 
@@ -54,8 +57,14 @@ export class SubmenuController implements ReactiveController {
     // connected, so manage its listeners separately.
     if (!this.isPopupConnected) {
       if (this.popupRef.value) {
-        this.popupRef.value.addEventListener('mouseover', this.handlePopupMouseover);
-        this.popupRef.value.addEventListener('p-reposition', this.handlePopupReposition);
+        this.popupRef.value.addEventListener(
+          "mouseover",
+          this.handlePopupMouseover,
+        );
+        this.popupRef.value.addEventListener(
+          "p-reposition",
+          this.handlePopupReposition,
+        );
         this.isPopupConnected = true;
       }
     }
@@ -63,17 +72,23 @@ export class SubmenuController implements ReactiveController {
 
   private removeListeners() {
     if (this.isConnected) {
-      this.host.removeEventListener('mousemove', this.handleMouseMove);
-      this.host.removeEventListener('mouseover', this.handleMouseOver);
-      this.host.removeEventListener('keydown', this.handleKeyDown);
-      this.host.removeEventListener('click', this.handleClick);
-      this.host.removeEventListener('focusout', this.handleFocusOut);
+      this.host.removeEventListener("mousemove", this.handleMouseMove);
+      this.host.removeEventListener("mouseover", this.handleMouseOver);
+      this.host.removeEventListener("keydown", this.handleKeyDown);
+      this.host.removeEventListener("click", this.handleClick);
+      this.host.removeEventListener("focusout", this.handleFocusOut);
       this.isConnected = false;
     }
     if (this.isPopupConnected) {
       if (this.popupRef.value) {
-        this.popupRef.value.removeEventListener('mouseover', this.handlePopupMouseover);
-        this.popupRef.value.removeEventListener('p-reposition', this.handlePopupReposition);
+        this.popupRef.value.removeEventListener(
+          "mouseover",
+          this.handlePopupMouseover,
+        );
+        this.popupRef.value.removeEventListener(
+          "p-reposition",
+          this.handlePopupReposition,
+        );
         this.isPopupConnected = false;
       }
     }
@@ -81,23 +96,33 @@ export class SubmenuController implements ReactiveController {
 
   // Set the safe triangle cursor position
   private handleMouseMove = (event: MouseEvent) => {
-    this.host.style.setProperty('--safe-triangle-cursor-x', `${event.clientX}px`);
-    this.host.style.setProperty('--safe-triangle-cursor-y', `${event.clientY}px`);
+    this.host.style.setProperty(
+      "--safe-triangle-cursor-x",
+      `${event.clientX}px`,
+    );
+    this.host.style.setProperty(
+      "--safe-triangle-cursor-y",
+      `${event.clientY}px`,
+    );
   };
 
   private handleMouseOver = () => {
-    if (this.hasSlotController.test('submenu')) {
+    if (this.hasSlotController.test("submenu")) {
       this.enableSubmenu();
     }
   };
 
   private handleSubmenuEntry(event: KeyboardEvent) {
     // Pass focus to the first menu-item in the submenu.
-    const submenuSlot: HTMLSlotElement | null = this.host.renderRoot.querySelector("slot[name='submenu']");
+    const submenuSlot: HTMLSlotElement | null =
+      this.host.renderRoot.querySelector("slot[name='submenu']");
 
     // Missing slot
     if (!submenuSlot) {
-      console.error('Cannot activate a submenu if no corresponding menuitem can be found.', this);
+      console.error(
+        "Cannot activate a submenu if no corresponding menuitem can be found.",
+        this,
+      );
       return;
     }
 
@@ -114,9 +139,9 @@ export class SubmenuController implements ReactiveController {
       return;
     }
 
-    menuItems[0].setAttribute('tabindex', '0');
+    menuItems[0].setAttribute("tabindex", "0");
     for (let i = 1; i !== menuItems.length; ++i) {
-      menuItems[i].setAttribute('tabindex', '-1');
+      menuItems[i].setAttribute("tabindex", "-1");
     }
 
     // Open the submenu (if not open), and set focus to first menuitem.
@@ -142,11 +167,11 @@ export class SubmenuController implements ReactiveController {
   // Focus on the first menu-item of a submenu.
   private handleKeyDown = (event: KeyboardEvent) => {
     switch (event.key) {
-      case 'Escape':
-      case 'Tab':
+      case "Escape":
+      case "Tab":
         this.disableSubmenu();
         break;
-      case 'ArrowLeft':
+      case "ArrowLeft":
         // Either focus is currently on the host element or a child
         if (event.target !== this.host) {
           event.preventDefault();
@@ -155,9 +180,9 @@ export class SubmenuController implements ReactiveController {
           this.disableSubmenu();
         }
         break;
-      case 'ArrowRight':
-      case 'Enter':
-      case ' ':
+      case "ArrowRight":
+      case "Enter":
+      case " ":
         this.handleSubmenuEntry(event);
         break;
       default:
@@ -172,7 +197,8 @@ export class SubmenuController implements ReactiveController {
       event.stopPropagation();
     } else if (
       event.target instanceof Element &&
-      (event.target.tagName === 'p-menu-item' || event.target.role?.startsWith('menuitem'))
+      (event.target.tagName === "p-menu-item" ||
+        event.target.role?.startsWith("menuitem"))
     ) {
       this.disableSubmenu();
     }
@@ -180,7 +206,11 @@ export class SubmenuController implements ReactiveController {
 
   // Close this submenu on focus outside of the parent or any descendants.
   private handleFocusOut = (event: FocusEvent) => {
-    if (event.relatedTarget && event.relatedTarget instanceof Element && this.host.contains(event.relatedTarget)) {
+    if (
+      event.relatedTarget &&
+      event.relatedTarget instanceof Element &&
+      this.host.contains(event.relatedTarget)
+    ) {
       return;
     }
     this.disableSubmenu();
@@ -193,19 +223,31 @@ export class SubmenuController implements ReactiveController {
 
   // Set the safe triangle values for the submenu when the position changes
   private handlePopupReposition = () => {
-    const submenuSlot: HTMLSlotElement | null = this.host.renderRoot.querySelector("slot[name='submenu']");
-    const menu = submenuSlot?.assignedElements({ flatten: true }).filter(el => el.localName === 'p-menu')[0];
-    const isRtl = this.host.matches(':dir(rtl)');
+    const submenuSlot: HTMLSlotElement | null =
+      this.host.renderRoot.querySelector("slot[name='submenu']");
+    const menu = submenuSlot
+      ?.assignedElements({ flatten: true })
+      .filter((el) => el.localName === "p-menu")[0];
+    const isRtl = this.host.matches(":dir(rtl)");
     if (!menu) {
       return;
     }
 
     const { left, top, width, height } = menu.getBoundingClientRect();
 
-    this.host.style.setProperty('--safe-triangle-submenu-start-x', `${isRtl ? left + width : left}px`);
-    this.host.style.setProperty('--safe-triangle-submenu-start-y', `${top}px`);
-    this.host.style.setProperty('--safe-triangle-submenu-end-x', `${isRtl ? left + width : left}px`);
-    this.host.style.setProperty('--safe-triangle-submenu-end-y', `${top + height}px`);
+    this.host.style.setProperty(
+      "--safe-triangle-submenu-start-x",
+      `${isRtl ? left + width : left}px`,
+    );
+    this.host.style.setProperty("--safe-triangle-submenu-start-y", `${top}px`);
+    this.host.style.setProperty(
+      "--safe-triangle-submenu-end-x",
+      `${isRtl ? left + width : left}px`,
+    );
+    this.host.style.setProperty(
+      "--safe-triangle-submenu-end-y",
+      `${top + height}px`,
+    );
   };
 
   private setSubmenuState(state: boolean) {
@@ -241,13 +283,18 @@ export class SubmenuController implements ReactiveController {
     if (!this.host.parentElement?.computedStyleMap) {
       return;
     }
-    const styleMap: StylePropertyMapReadOnly = this.host.parentElement.computedStyleMap();
-    const attrs: string[] = ['padding-top', 'border-top-width', 'margin-top'];
+    const styleMap: StylePropertyMapReadOnly =
+      this.host.parentElement.computedStyleMap();
+    const attrs: string[] = ["padding-top", "border-top-width", "margin-top"];
 
     const skidding = attrs.reduce((accumulator, attr) => {
-      const styleValue: CSSStyleValue = styleMap.get(attr) ?? new CSSUnitValue(0, 'px');
-      const unitValue = styleValue instanceof CSSUnitValue ? styleValue : new CSSUnitValue(0, 'px');
-      const pxValue = unitValue.to('px');
+      const styleValue: CSSStyleValue =
+        styleMap.get(attr) ?? new CSSUnitValue(0, "px");
+      const unitValue =
+        styleValue instanceof CSSUnitValue
+          ? styleValue
+          : new CSSUnitValue(0, "px");
+      const pxValue = unitValue.to("px");
       return accumulator - pxValue.value;
     }, 0);
 
@@ -259,7 +306,7 @@ export class SubmenuController implements ReactiveController {
   }
 
   renderSubmenu() {
-    const isRtl = this.host.matches(':dir(rtl)');
+    const isRtl = this.host.matches(":dir(rtl)");
 
     // Always render the slot, but conditionally render the outer <p-popup>
     if (!this.isConnected) {
@@ -269,7 +316,7 @@ export class SubmenuController implements ReactiveController {
     return html`
       <p-popup
         ${ref(this.popupRef)}
-        placement=${isRtl ? 'left-start' : 'right-start'}
+        placement=${isRtl ? "left-start" : "right-start"}
         anchor="anchor"
         flip
         flip-fallback-strategy="best-fit"

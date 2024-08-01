@@ -25,7 +25,7 @@ This integration has been tested with the following:
 To get started using Pure UI with Rails, the following packages must be installed.
 
 ```bash
-yarn add @pure-ui/core copy-webpack-plugin
+yarn add pure-uikit copy-webpack-plugin
 ```
 
 ### Importing the Default Theme
@@ -33,8 +33,8 @@ yarn add @pure-ui/core copy-webpack-plugin
 The next step is to import Pure UI's default theme (stylesheet) in `app/javascript/stylesheets/application.scss`.
 
 ```css
-@import '@pure-ui/core/dist/themes/light';
-@import '@pure-ui/core/dist/themes/dark'; // Optional dark theme
+@import 'pure-uikit/dist/themes/light';
+@import 'pure-uikit/dist/themes/dark'; // Optional dark theme
 ```
 
 Fore more details about themes, please refer to [Theme Basics](/getting-started/themes#theme-basics).
@@ -45,7 +45,7 @@ After importing the theme, you'll need to import the JavaScript files for Pure U
 
 ```js
 import '../stylesheets/application.scss'
-import { setBasePath, SlAlert, SlAnimation, SlButton, ... } from '@pure-ui/core'
+import { setBasePath, SlAlert, SlAnimation, SlButton, ... } from 'pure-uikit'
 
 // ...
 
@@ -61,23 +61,26 @@ setBasePath(rootUrl + '/packs/js/')
 Next we need to add Pure UI's assets to the final build output. To do this, modify `config/webpack/environment.js` to look like this.
 
 ```js
-const { environment } = require('@rails/webpacker');
+const { environment } = require("@rails/webpacker");
 
 // Pure UI config
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
+const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
 
 // Add pure-ui assets to webpack's build process
 environment.plugins.append(
-  'CopyPlugin',
+  "CopyPlugin",
   new CopyPlugin({
     patterns: [
       {
-        from: path.resolve(__dirname, '../../node_modules/@pure-ui/core/dist/assets'),
-        to: path.resolve(__dirname, '../../public/packs/js/assets')
-      }
-    ]
-  })
+        from: path.resolve(
+          __dirname,
+          "../../node_modules/pure-uikit/dist/assets",
+        ),
+        to: path.resolve(__dirname, "../../public/packs/js/assets"),
+      },
+    ],
+  }),
 );
 
 module.exports = environment;
@@ -93,8 +96,9 @@ The final step is to add the corresponding `pack_tags` to the page. You should h
   <head>
     <!-- ... -->
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %> <%= javascript_pack_tag
-    'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all',
+    'data-turbolinks-track': 'reload' %> <%= javascript_pack_tag 'application',
+    'data-turbolinks-track': 'reload' %>
   </head>
   <body>
     <%= yield %>

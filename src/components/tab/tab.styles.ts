@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   :host {
@@ -37,7 +37,9 @@ export default css`
 
   :host(:focus-visible) {
     outline: var(--p-focus-ring);
-    outline-offset: calc(-1 * var(--p-focus-ring-width) - var(--p-focus-ring-offset));
+    outline-offset: calc(
+      -1 * var(--p-focus-ring-width) - var(--p-focus-ring-offset)
+    );
   }
 
   .tab.tab--active:not(.tab--disabled) {

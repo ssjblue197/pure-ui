@@ -1,4 +1,4 @@
-import type { ReactiveController, ReactiveElement } from 'lit';
+import type { ReactiveController, ReactiveElement } from "lit";
 
 /**
  * A controller that repeatedly calls the specified callback with the provided interval time.
@@ -21,23 +21,23 @@ export class AutoplayController implements ReactiveController {
   }
 
   hostConnected(): void {
-    this.host.addEventListener('mouseenter', this.pause);
-    this.host.addEventListener('mouseleave', this.resume);
-    this.host.addEventListener('focusin', this.pause);
-    this.host.addEventListener('focusout', this.resume);
-    this.host.addEventListener('touchstart', this.pause, { passive: true });
-    this.host.addEventListener('touchend', this.resume);
+    this.host.addEventListener("mouseenter", this.pause);
+    this.host.addEventListener("mouseleave", this.resume);
+    this.host.addEventListener("focusin", this.pause);
+    this.host.addEventListener("focusout", this.resume);
+    this.host.addEventListener("touchstart", this.pause, { passive: true });
+    this.host.addEventListener("touchend", this.resume);
   }
 
   hostDisconnected(): void {
     this.stop();
 
-    this.host.removeEventListener('mouseenter', this.pause);
-    this.host.removeEventListener('mouseleave', this.resume);
-    this.host.removeEventListener('focusin', this.pause);
-    this.host.removeEventListener('focusout', this.resume);
-    this.host.removeEventListener('touchstart', this.pause);
-    this.host.removeEventListener('touchend', this.resume);
+    this.host.removeEventListener("mouseenter", this.pause);
+    this.host.removeEventListener("mouseleave", this.resume);
+    this.host.removeEventListener("focusin", this.pause);
+    this.host.removeEventListener("focusout", this.resume);
+    this.host.removeEventListener("touchstart", this.pause);
+    this.host.removeEventListener("touchend", this.resume);
   }
 
   start(interval: number) {

@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   :host {
@@ -30,10 +30,12 @@ export default css`
     background-image: linear-gradient(
       to right,
       var(--track-color-inactive) 0%,
-      var(--track-color-inactive) min(var(--percent), var(--track-active-offset)),
+      var(--track-color-inactive)
+        min(var(--percent), var(--track-active-offset)),
       var(--track-color-active) min(var(--percent), var(--track-active-offset)),
       var(--track-color-active) max(var(--percent), var(--track-active-offset)),
-      var(--track-color-inactive) max(var(--percent), var(--track-active-offset)),
+      var(--track-color-inactive)
+        max(var(--percent), var(--track-active-offset)),
       var(--track-color-inactive) 100%
     );
   }
@@ -42,10 +44,12 @@ export default css`
     background-image: linear-gradient(
       to left,
       var(--track-color-inactive) 0%,
-      var(--track-color-inactive) min(var(--percent), var(--track-active-offset)),
+      var(--track-color-inactive)
+        min(var(--percent), var(--track-active-offset)),
       var(--track-color-active) min(var(--percent), var(--track-active-offset)),
       var(--track-color-active) max(var(--percent), var(--track-active-offset)),
-      var(--track-color-inactive) max(var(--percent), var(--track-active-offset)),
+      var(--track-color-inactive)
+        max(var(--percent), var(--track-active-offset)),
       var(--track-color-inactive) 100%
     );
   }
@@ -172,7 +176,7 @@ export default css`
   }
 
   .range__tooltip:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 0;
     height: 0;
@@ -190,7 +194,8 @@ export default css`
   }
 
   .range--tooltip-top .range__tooltip:after {
-    border-top: var(--p-tooltip-arrow-size) solid var(--p-tooltip-background-color);
+    border-top: var(--p-tooltip-arrow-size) solid
+      var(--p-tooltip-background-color);
     border-left: var(--p-tooltip-arrow-size) solid transparent;
     border-right: var(--p-tooltip-arrow-size) solid transparent;
     top: 100%;
@@ -202,7 +207,8 @@ export default css`
   }
 
   .range--tooltip-bottom .range__tooltip:after {
-    border-bottom: var(--p-tooltip-arrow-size) solid var(--p-tooltip-background-color);
+    border-bottom: var(--p-tooltip-arrow-size) solid
+      var(--p-tooltip-background-color);
     border-left: var(--p-tooltip-arrow-size) solid transparent;
     border-right: var(--p-tooltip-arrow-size) solid transparent;
     bottom: 100%;

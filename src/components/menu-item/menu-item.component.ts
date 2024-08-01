@@ -1,16 +1,16 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { getTextContent, HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { property, query } from 'lit/decorators.js';
-import { SubmenuController } from './submenu-controller.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PPopup from '../popup/popup.component.js';
-import PSpinner from '../spinner/spinner.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './menu-item.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import { getTextContent, HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { property, query } from "lit/decorators.js";
+import { SubmenuController } from "./submenu-controller.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PPopup from "../popup/popup.component.js";
+import PSpinner from "../spinner/spinner.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./menu-item.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Menu items provide options for the user to pick from in a menu.
@@ -41,24 +41,24 @@ import type { CSSResultGroup } from 'lit';
 export default class PMenuItem extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
-    'p-icon': PIcon,
-    'p-popup': PPopup,
-    'p-spinner': PSpinner
+    "p-icon": PIcon,
+    "p-popup": PPopup,
+    "p-spinner": PSpinner,
   };
 
   private cachedTextLabel: string;
 
-  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
-  @query('.menu-item') menuItem: HTMLElement;
+  @query("slot:not([name])") defaultSlot: HTMLSlotElement;
+  @query(".menu-item") menuItem: HTMLElement;
 
   /** The type of menu item to render. To use `checked`, this value must be set to `checkbox`. */
-  @property() type: 'normal' | 'checkbox' = 'normal';
+  @property() type: "normal" | "checkbox" = "normal";
 
   /** Draws the item in a checked state. */
   @property({ type: Boolean, reflect: true }) checked = false;
 
   /** A unique value to store in the menu item. This can be used as a way to identify menu items when selected. */
-  @property() value = '';
+  @property() value = "";
 
   /** Draws the menu item in a loading state. */
   @property({ type: Boolean, reflect: true }) loading = false;
@@ -66,26 +66,29 @@ export default class PMenuItem extends PureElement {
   /** Draws the menu item in a disabled state, preventing selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  private readonly hasSlotController = new HasSlotController(this, 'submenu');
-  private submenuController: SubmenuController = new SubmenuController(this, this.hasSlotController);
+  private readonly hasSlotController = new HasSlotController(this, "submenu");
+  private submenuController: SubmenuController = new SubmenuController(
+    this,
+    this.hasSlotController,
+  );
 
   connectedCallback() {
     super.connectedCallback();
-    this.addEventListener('click', this.handleHostClick);
-    this.addEventListener('mouseover', this.handleMouseOver);
+    this.addEventListener("click", this.handleHostClick);
+    this.addEventListener("mouseover", this.handleMouseOver);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.removeEventListener('click', this.handleHostClick);
-    this.removeEventListener('mouseover', this.handleMouseOver);
+    this.removeEventListener("click", this.handleHostClick);
+    this.removeEventListener("mouseover", this.handleMouseOver);
   }
 
   private handleDefaultSlotChange() {
     const textLabel = this.getTextLabel();
 
     // Ignore the first time the label is set
-    if (typeof this.cachedTextLabel === 'undefined') {
+    if (typeof this.cachedTextLabel === "undefined") {
       this.cachedTextLabel = textLabel;
       return;
     }
@@ -93,7 +96,11 @@ export default class PMenuItem extends PureElement {
     // When the label changes, emit a slotchange event so parent controls see it
     if (textLabel !== this.cachedTextLabel) {
       this.cachedTextLabel = textLabel;
-      this.emit('slotchange', { bubbles: true, composed: false, cancelable: false });
+      this.emit("slotchange", {
+        bubbles: true,
+        composed: false,
+        cancelable: false,
+      });
     }
   }
 
@@ -110,36 +117,39 @@ export default class PMenuItem extends PureElement {
     event.stopPropagation();
   };
 
-  @watch('checked')
+  @watch("checked")
   handleCheckedChange() {
     // For proper accessibility, users have to use type="checkbox" to use the checked attribute
-    if (this.checked && this.type !== 'checkbox') {
+    if (this.checked && this.type !== "checkbox") {
       this.checked = false;
-      console.error('The checked attribute can only be used on menu items with type="checkbox"', this);
+      console.error(
+        'The checked attribute can only be used on menu items with type="checkbox"',
+        this,
+      );
       return;
     }
 
     // Only checkbox types can receive the aria-checked attribute
-    if (this.type === 'checkbox') {
-      this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    if (this.type === "checkbox") {
+      this.setAttribute("aria-checked", this.checked ? "true" : "false");
     } else {
-      this.removeAttribute('aria-checked');
+      this.removeAttribute("aria-checked");
     }
   }
 
-  @watch('disabled')
+  @watch("disabled")
   handleDisabledChange() {
-    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+    this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
   }
 
-  @watch('type')
+  @watch("type")
   handleTypeChange() {
-    if (this.type === 'checkbox') {
-      this.setAttribute('role', 'menuitemcheckbox');
-      this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    if (this.type === "checkbox") {
+      this.setAttribute("role", "menuitemcheckbox");
+      this.setAttribute("aria-checked", this.checked ? "true" : "false");
     } else {
-      this.setAttribute('role', 'menuitem');
-      this.removeAttribute('aria-checked');
+      this.setAttribute("role", "menuitem");
+      this.removeAttribute("aria-checked");
     }
   }
 
@@ -149,11 +159,11 @@ export default class PMenuItem extends PureElement {
   }
 
   isSubmenu() {
-    return this.hasSlotController.test('submenu');
+    return this.hasSlotController.test("submenu");
   }
 
   render() {
-    const isRtl = this.matches(':dir(rtl)');
+    const isRtl = this.matches(":dir(rtl)");
     const isSubmenuExpanded = this.submenuController.isExpanded();
 
     return html`
@@ -161,13 +171,13 @@ export default class PMenuItem extends PureElement {
         id="anchor"
         part="base"
         class=${classMap({
-          'menu-item': true,
-          'menu-item--rtl': isRtl,
-          'menu-item--checked': this.checked,
-          'menu-item--disabled': this.disabled,
-          'menu-item--loading': this.loading,
-          'menu-item--has-submenu': this.isSubmenu(),
-          'menu-item--submenu-expanded': isSubmenuExpanded
+          "menu-item": true,
+          "menu-item--rtl": isRtl,
+          "menu-item--checked": this.checked,
+          "menu-item--disabled": this.disabled,
+          "menu-item--loading": this.loading,
+          "menu-item--has-submenu": this.isSubmenu(),
+          "menu-item--submenu-expanded": isSubmenuExpanded,
         })}
         ?aria-haspopup="${this.isSubmenu()}"
         ?aria-expanded="${isSubmenuExpanded ? true : false}"
@@ -178,16 +188,31 @@ export default class PMenuItem extends PureElement {
 
         <slot name="prefix" part="prefix" class="menu-item__prefix"></slot>
 
-        <slot part="label" class="menu-item__label" @slotchange=${this.handleDefaultSlotChange}></slot>
+        <slot
+          part="label"
+          class="menu-item__label"
+          @slotchange=${this.handleDefaultSlotChange}
+        ></slot>
 
         <slot name="suffix" part="suffix" class="menu-item__suffix"></slot>
 
         <span part="submenu-icon" class="menu-item__chevron">
-          <p-icon name=${isRtl ? 'chevron-left' : 'chevron-right'} library="system" aria-hidden="true"></p-icon>
+          <p-icon
+            name=${isRtl ? "chevron-left" : "chevron-right"}
+            library="system"
+            aria-hidden="true"
+          ></p-icon>
         </span>
 
         ${this.submenuController.renderSubmenu()}
-        ${this.loading ? html` <p-spinner part="spinner" exportparts="base:spinner__base"></p-spinner> ` : ''}
+        ${this.loading
+          ? html`
+              <p-spinner
+                part="spinner"
+                exportparts="base:spinner__base"
+              ></p-spinner>
+            `
+          : ""}
       </div>
     `;
   }

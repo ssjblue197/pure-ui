@@ -13,7 +13,7 @@ Localization is handled by the browser's [`Intl.RelativeTimeFormat` API](https:/
 ```
 
 ```jsx:react
-import PRelativeTime from '@pure-ui/core/dist/react/relative-time';
+import PRelativeTime from 'pure-uikit/dist/react/relative-time';
 
 const App = () => <PRelativeTime date="2020-07-15T09:17:00-04:00" />;
 ```
@@ -44,7 +44,7 @@ Use the `sync` attribute to update the displayed value automatically as time pas
 ```
 
 ```jsx:react
-import PRelativeTime from '@pure-ui/core/dist/react/relative-time';
+import PRelativeTime from 'pure-uikit/dist/react/relative-time';
 
 const date = new Date(new Date().getTime() - 60000);
 
@@ -62,7 +62,7 @@ You can change how the time is displayed using the `format` attribute. Note that
 ```
 
 ```jsx:react
-import PRelativeTime from '@pure-ui/core/dist/react/relative-time';
+import PRelativeTime from 'pure-uikit/dist/react/relative-time';
 
 const App = () => (
   <>
@@ -88,7 +88,7 @@ Russian: <p-relative-time date="2020-07-15T09:17:00-04:00" lang="ru"></p-relativ
 ```
 
 ```jsx:react
-import PRelativeTime from '@pure-ui/core/dist/react/relative-time';
+import PRelativeTime from 'pure-uikit/dist/react/relative-time';
 
 const App = () => (
   <>

@@ -1,12 +1,12 @@
-import PDialog from './dialog.component.js';
+import PDialog from "./dialog.component.js";
 
-export * from './dialog.component.js';
+export * from "./dialog.component.js";
 export default PDialog;
 
-PDialog.define('p-dialog');
+PDialog.define("p-dialog");
 
 declare global {
   interface HTMLElementTagNameMap {
-    'p-dialog': PDialog;
+    "p-dialog": PDialog;
   }
 }

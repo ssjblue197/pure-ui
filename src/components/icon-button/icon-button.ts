@@ -1,12 +1,12 @@
-import PIconButton from './icon-button.component.js';
+import PIconButton from "./icon-button.component.js";
 
-export * from './icon-button.component.js';
+export * from "./icon-button.component.js";
 export default PIconButton;
 
-PIconButton.define('p-icon-button');
+PIconButton.define("p-icon-button");
 
 declare global {
   interface HTMLElementTagNameMap {
-    'p-icon-button': PIconButton;
+    "p-icon-button": PIconButton;
   }
 }

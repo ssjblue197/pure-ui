@@ -1,11 +1,11 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { html } from 'lit';
-import { property } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './tab-panel.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import { html } from "lit";
+import { property } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./tab-panel.styles.js";
+import type { CSSResultGroup } from "lit";
 
 let id = 0;
 
@@ -28,7 +28,7 @@ export default class PTabPanel extends PureElement {
   private readonly componentId = `p-tab-panel-${this.attrId}`;
 
   /** The tab panel's name. */
-  @property({ reflect: true }) name = '';
+  @property({ reflect: true }) name = "";
 
   /** When true, the tab panel will be shown. */
   @property({ type: Boolean, reflect: true }) active = false;
@@ -36,12 +36,12 @@ export default class PTabPanel extends PureElement {
   connectedCallback() {
     super.connectedCallback();
     this.id = this.id.length > 0 ? this.id : this.componentId;
-    this.setAttribute('role', 'tabpanel');
+    this.setAttribute("role", "tabpanel");
   }
 
-  @watch('active')
+  @watch("active")
   handleActiveChange() {
-    this.setAttribute('aria-hidden', this.active ? 'false' : 'true');
+    this.setAttribute("aria-hidden", this.active ? "false" : "true");
   }
 
   render() {
@@ -49,8 +49,8 @@ export default class PTabPanel extends PureElement {
       <slot
         part="base"
         class=${classMap({
-          'tab-panel': true,
-          'tab-panel--active': this.active
+          "tab-panel": true,
+          "tab-panel--active": this.active,
         })}
       ></slot>
     `;

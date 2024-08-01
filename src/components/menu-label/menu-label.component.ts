@@ -1,8 +1,8 @@
-import { html } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './menu-label.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { html } from "lit";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./menu-label.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Menu labels are used to describe a group of menu items.
@@ -24,6 +24,6 @@ export default class PMenuLabel extends PureElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'p-menu-label': PMenuLabel;
+    "p-menu-label": PMenuLabel;
   }
 }

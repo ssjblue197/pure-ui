@@ -41,8 +41,8 @@ layout: component
 ```
 
 ```jsx:react
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
 
 const App = () => (
   <PCarousel pagination>

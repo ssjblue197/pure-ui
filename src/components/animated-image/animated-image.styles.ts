@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   :host {
@@ -16,7 +16,7 @@ export default css`
     height: 100%;
   }
 
-  img[aria-hidden='true'] {
+  img[aria-hidden="true"] {
     display: none;
   }
 
@@ -47,8 +47,8 @@ export default css`
     opacity: 0;
   }
 
-  :host([play]) slot[name='play-icon'],
-  :host(:not([play])) slot[name='pause-icon'] {
+  :host([play]) slot[name="play-icon"],
+  :host(:not([play])) slot[name="pause-icon"] {
     display: none;
   }
 `;

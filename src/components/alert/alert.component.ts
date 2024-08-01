@@ -1,19 +1,24 @@
-import { animateTo, stopAnimations } from '../../internal/animate.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property, query } from 'lit/decorators.js';
-import { waitForEvent } from '../../internal/event.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIconButton from '../icon-button/icon-button.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './alert.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { animateTo, stopAnimations } from "../../internal/animate.js";
+import { classMap } from "lit/directives/class-map.js";
+import {
+  getAnimation,
+  setDefaultAnimation,
+} from "../../utilities/animation-registry.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query } from "lit/decorators.js";
+import { waitForEvent } from "../../internal/event.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIconButton from "../icon-button/icon-button.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./alert.styles.js";
+import type { CSSResultGroup } from "lit";
 
-const toastStack = Object.assign(document.createElement('div'), { className: 'p-toast-stack' });
+const toastStack = Object.assign(document.createElement("div"), {
+  className: "p-toast-stack",
+});
 
 /**
  * @summary Alerts are used to display important messages inline or as toast notifications.
@@ -42,10 +47,14 @@ const toastStack = Object.assign(document.createElement('div'), { className: 'p-
  */
 export default class PAlert extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'p-icon-button': PIconButton };
+  static dependencies = { "p-icon-button": PIconButton };
 
   private autoHideTimeout: number;
-  private readonly hasSlotController = new HasSlotController(this, 'icon', 'suffix');
+  private readonly hasSlotController = new HasSlotController(
+    this,
+    "icon",
+    "suffix",
+  );
   private readonly localize = new LocalizeController(this);
 
   @query('[part~="base"]') base: HTMLElement;
@@ -60,7 +69,12 @@ export default class PAlert extends PureElement {
   @property({ type: Boolean, reflect: true }) closable = false;
 
   /** The alert's theme variant. */
-  @property({ reflect: true }) variant: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' = 'primary';
+  @property({ reflect: true }) variant:
+    | "primary"
+    | "success"
+    | "neutral"
+    | "warning"
+    | "danger" = "primary";
 
   /**
    * The length of time, in milliseconds, the alert will show before closing itself. If the user interacts with
@@ -76,7 +90,10 @@ export default class PAlert extends PureElement {
   private restartAutoHide() {
     clearTimeout(this.autoHideTimeout);
     if (this.open && this.duration < Infinity) {
-      this.autoHideTimeout = window.setTimeout(() => this.hide(), this.duration);
+      this.autoHideTimeout = window.setTimeout(
+        () => this.hide(),
+        this.duration,
+      );
     }
   }
 
@@ -88,11 +105,11 @@ export default class PAlert extends PureElement {
     this.restartAutoHide();
   }
 
-  @watch('open', { waitUntilFirstUpdate: true })
+  @watch("open", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open) {
       // Show
-      this.emit('p-show');
+      this.emit("p-show");
 
       if (this.duration < Infinity) {
         this.restartAutoHide();
@@ -100,26 +117,30 @@ export default class PAlert extends PureElement {
 
       await stopAnimations(this.base);
       this.base.hidden = false;
-      const { keyframes, options } = getAnimation(this, 'alert.show', { dir: this.localize.dir() });
+      const { keyframes, options } = getAnimation(this, "alert.show", {
+        dir: this.localize.dir(),
+      });
       await animateTo(this.base, keyframes, options);
 
-      this.emit('p-after-show');
+      this.emit("p-after-show");
     } else {
       // Hide
-      this.emit('p-hide');
+      this.emit("p-hide");
 
       clearTimeout(this.autoHideTimeout);
 
       await stopAnimations(this.base);
-      const { keyframes, options } = getAnimation(this, 'alert.hide', { dir: this.localize.dir() });
+      const { keyframes, options } = getAnimation(this, "alert.hide", {
+        dir: this.localize.dir(),
+      });
       await animateTo(this.base, keyframes, options);
       this.base.hidden = true;
 
-      this.emit('p-after-hide');
+      this.emit("p-after-hide");
     }
   }
 
-  @watch('duration')
+  @watch("duration")
   handleDurationChange() {
     this.restartAutoHide();
   }
@@ -131,7 +152,7 @@ export default class PAlert extends PureElement {
     }
 
     this.open = true;
-    return waitForEvent(this, 'p-after-show');
+    return waitForEvent(this, "p-after-show");
   }
 
   /** Hides the alert */
@@ -141,7 +162,7 @@ export default class PAlert extends PureElement {
     }
 
     this.open = false;
-    return waitForEvent(this, 'p-after-hide');
+    return waitForEvent(this, "p-after-hide");
   }
 
   /**
@@ -150,7 +171,7 @@ export default class PAlert extends PureElement {
    * calling this method again. The returned promise will resolve after the alert is hidden.
    */
   async toast() {
-    return new Promise<void>(resolve => {
+    return new Promise<void>((resolve) => {
       if (toastStack.parentElement === null) {
         document.body.append(toastStack);
       }
@@ -165,17 +186,17 @@ export default class PAlert extends PureElement {
       });
 
       this.addEventListener(
-        'p-after-hide',
+        "p-after-hide",
         () => {
           toastStack.removeChild(this);
           resolve();
 
           // Remove the toast stack from the DOM when there are no more alerts
-          if (toastStack.querySelector('p-alert') === null) {
+          if (toastStack.querySelector("p-alert") === null) {
             toastStack.remove();
           }
         },
-        { once: true }
+        { once: true },
       );
     });
   }
@@ -186,17 +207,17 @@ export default class PAlert extends PureElement {
         part="base"
         class=${classMap({
           alert: true,
-          'alert--open': this.open,
-          'alert--closable': this.closable,
-          'alert--has-icon': this.hasSlotController.test('icon'),
-          'alert--primary': this.variant === 'primary',
-          'alert--success': this.variant === 'success',
-          'alert--neutral': this.variant === 'neutral',
-          'alert--warning': this.variant === 'warning',
-          'alert--danger': this.variant === 'danger'
+          "alert--open": this.open,
+          "alert--closable": this.closable,
+          "alert--has-icon": this.hasSlotController.test("icon"),
+          "alert--primary": this.variant === "primary",
+          "alert--success": this.variant === "success",
+          "alert--neutral": this.variant === "neutral",
+          "alert--warning": this.variant === "warning",
+          "alert--danger": this.variant === "danger",
         })}
         role="alert"
-        aria-hidden=${this.open ? 'false' : 'true'}
+        aria-hidden=${this.open ? "false" : "true"}
         @mousemove=${this.handleMouseMove}
       >
         <div part="icon" class="alert__icon">
@@ -215,28 +236,28 @@ export default class PAlert extends PureElement {
                 class="alert__close-button"
                 name="x-lg"
                 library="system"
-                label=${this.localize.term('close')}
+                label=${this.localize.term("close")}
                 @click=${this.handleCloseClick}
               ></p-icon-button>
             `
-          : ''}
+          : ""}
       </div>
     `;
   }
 }
 
-setDefaultAnimation('alert.show', {
+setDefaultAnimation("alert.show", {
   keyframes: [
     { opacity: 0, scale: 0.8 },
-    { opacity: 1, scale: 1 }
+    { opacity: 1, scale: 1 },
   ],
-  options: { duration: 250, easing: 'ease' }
+  options: { duration: 250, easing: "ease" },
 });
 
-setDefaultAnimation('alert.hide', {
+setDefaultAnimation("alert.hide", {
   keyframes: [
     { opacity: 1, scale: 1 },
-    { opacity: 0, scale: 0.8 }
+    { opacity: 0, scale: 0.8 },
   ],
-  options: { duration: 250, easing: 'ease' }
+  options: { duration: 250, easing: "ease" },
 });

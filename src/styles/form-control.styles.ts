@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   .form-control .form-control__label {
@@ -53,7 +53,8 @@ export default css`
     font-size: var(--p-input-help-text-font-size-large);
   }
 
-  .form-control--has-help-text.form-control--radio-group .form-control__help-text {
+  .form-control--has-help-text.form-control--radio-group
+    .form-control__help-text {
     margin-top: var(--p-spacing-2x-small);
   }
 `;

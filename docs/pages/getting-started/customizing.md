@@ -119,17 +119,17 @@ To customize a default animation, use the `setDefaultAnimation()` method. The fu
 This example will make all dialogs use a custom show animation.
 
 ```js
-import { setDefaultAnimation } from '@pure-ui/core/dist/utilities/animation-registry.js';
+import { setDefaultAnimation } from "pure-uikit/dist/utilities/animation-registry.js";
 
 // Change the default animation for all dialogs
-setDefaultAnimation('dialog.show', {
+setDefaultAnimation("dialog.show", {
   keyframes: [
-    { transform: 'rotate(-10deg) scale(0.5)', opacity: '0' },
-    { transform: 'rotate(0deg) scale(1)', opacity: '1' }
+    { transform: "rotate(-10deg) scale(0.5)", opacity: "0" },
+    { transform: "rotate(0deg) scale(1)", opacity: "1" },
   ],
   options: {
-    duration: 500
-  }
+    duration: 500,
+  },
 });
 ```
 
@@ -142,19 +142,19 @@ If you only want to target a single component, use the `setAnimation()` method i
 In this example, only the target dialog will use a custom show animation.
 
 ```js
-import { setAnimation } from '@pure-ui/core/dist/utilities/animation-registry.js';
+import { setAnimation } from "pure-uikit/dist/utilities/animation-registry.js";
 
 // Change the animation for a single dialog
-const dialog = document.querySelector('#my-dialog');
+const dialog = document.querySelector("#my-dialog");
 
-setAnimation(dialog, 'dialog.show', {
+setAnimation(dialog, "dialog.show", {
   keyframes: [
-    { transform: 'rotate(-10deg) scale(0.5)', opacity: '0' },
-    { transform: 'rotate(0deg) scale(1)', opacity: '1' }
+    { transform: "rotate(-10deg) scale(0.5)", opacity: "0" },
+    { transform: "rotate(0deg) scale(1)", opacity: "1" },
   ],
   options: {
-    duration: 500
-  }
+    duration: 500,
+  },
 });
 ```
 

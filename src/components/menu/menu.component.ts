@@ -1,10 +1,10 @@
-import { html } from 'lit';
-import { query } from 'lit/decorators.js';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './menu.styles.js';
-import type { CSSResultGroup } from 'lit';
-import type PMenuItem from '../menu-item/menu-item.component.js';
+import { html } from "lit";
+import { query } from "lit/decorators.js";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./menu.styles.js";
+import type { CSSResultGroup } from "lit";
+import type PMenuItem from "../menu-item/menu-item.component.js";
 
 export interface MenuSelectEventDetail {
   item: PMenuItem;
@@ -23,22 +23,26 @@ export interface MenuSelectEventDetail {
 export default class PMenu extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
-  @query('slot') defaultSlot: HTMLSlotElement;
+  @query("slot") defaultSlot: HTMLSlotElement;
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('role', 'menu');
+    this.setAttribute("role", "menu");
   }
 
   private handleClick(event: MouseEvent) {
-    const menuItemTypes = ['menuitem', 'menuitemcheckbox'];
+    const menuItemTypes = ["menuitem", "menuitemcheckbox"];
 
     const composedPath = event.composedPath();
-    const target = composedPath.find((el: Element) => menuItemTypes.includes(el?.getAttribute?.('role') || ''));
+    const target = composedPath.find((el: Element) =>
+      menuItemTypes.includes(el?.getAttribute?.("role") || ""),
+    );
 
     if (!target) return;
 
-    const closestMenu = composedPath.find((el: Element) => el?.getAttribute?.('role') === 'menu');
+    const closestMenu = composedPath.find(
+      (el: Element) => el?.getAttribute?.("role") === "menu",
+    );
     const clickHasSubmenu = closestMenu !== this;
 
     // Make sure we're the menu thats supposed to be handling the click event.
@@ -47,16 +51,16 @@ export default class PMenu extends PureElement {
     // This isn't true. But we use it for TypeScript checks below.
     const item = target as PMenuItem;
 
-    if (item.type === 'checkbox') {
+    if (item.type === "checkbox") {
       item.checked = !item.checked;
     }
 
-    this.emit('p-select', { detail: { item } });
+    this.emit("p-select", { detail: { item } });
   }
 
   private handleKeyDown(event: KeyboardEvent) {
     // Make a selection when pressing enter or space
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (event.key === "Enter" || event.key === " ") {
       const item = this.getCurrentItem();
       event.preventDefault();
       event.stopPropagation();
@@ -66,7 +70,7 @@ export default class PMenu extends PureElement {
     }
 
     // Move the selection when pressing down or up
-    else if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+    else if (["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
       const items = this.getAllItems();
       const activeItem = this.getCurrentItem();
       let index = activeItem ? items.indexOf(activeItem) : 0;
@@ -75,13 +79,13 @@ export default class PMenu extends PureElement {
         event.preventDefault();
         event.stopPropagation();
 
-        if (event.key === 'ArrowDown') {
+        if (event.key === "ArrowDown") {
           index++;
-        } else if (event.key === 'ArrowUp') {
+        } else if (event.key === "ArrowUp") {
           index--;
-        } else if (event.key === 'Home') {
+        } else if (event.key === "Home") {
           index = 0;
-        } else if (event.key === 'End') {
+        } else if (event.key === "End") {
           index = items.length - 1;
         }
 
@@ -117,19 +121,23 @@ export default class PMenu extends PureElement {
 
   private isMenuItem(item: HTMLElement) {
     return (
-      item.tagName.toLowerCase() === 'p-menu-item' ||
-      ['menuitem', 'menuitemcheckbox', 'menuitemradio'].includes(item.getAttribute('role') ?? '')
+      item.tagName.toLowerCase() === "p-menu-item" ||
+      ["menuitem", "menuitemcheckbox", "menuitemradio"].includes(
+        item.getAttribute("role") ?? "",
+      )
     );
   }
 
   /** @internal Gets all slotted menu items, ignoring dividers, headers, and other elements. */
   getAllItems() {
-    return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el: HTMLElement) => {
-      if (el.inert || !this.isMenuItem(el)) {
-        return false;
-      }
-      return true;
-    }) as PMenuItem[];
+    return [...this.defaultSlot.assignedElements({ flatten: true })].filter(
+      (el: HTMLElement) => {
+        if (el.inert || !this.isMenuItem(el)) {
+          return false;
+        }
+        return true;
+      },
+    ) as PMenuItem[];
   }
 
   /**
@@ -137,7 +145,7 @@ export default class PMenu extends PureElement {
    * The menu item may or may not have focus, but for keyboard interaction purposes it's considered the "active" item.
    */
   getCurrentItem() {
-    return this.getAllItems().find(i => i.getAttribute('tabindex') === '0');
+    return this.getAllItems().find((i) => i.getAttribute("tabindex") === "0");
   }
 
   /**
@@ -148,8 +156,8 @@ export default class PMenu extends PureElement {
     const items = this.getAllItems();
 
     // Update tab indexes
-    items.forEach(i => {
-      i.setAttribute('tabindex', i === item ? '0' : '-1');
+    items.forEach((i) => {
+      i.setAttribute("tabindex", i === item ? "0" : "-1");
     });
   }
 

@@ -20,7 +20,7 @@
 
 /* Block the preview while dragging to prevent iframes from intercepting drag events */
 .code-preview__preview--dragging:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -164,10 +164,10 @@
 }
 
 /* We can apply data-flavor="html|react" to any element on the page to toggle it when the flavor changes */
-.flavor-html [data-flavor]:not([data-flavor='html']) {
+.flavor-html [data-flavor]:not([data-flavor="html"]) {
   display: none;
 }
 
-.flavor-react [data-flavor]:not([data-flavor='react']) {
+.flavor-react [data-flavor]:not([data-flavor="react"]) {
   display: none;
 }

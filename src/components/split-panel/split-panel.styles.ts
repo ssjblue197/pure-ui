@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   :host {
@@ -46,7 +46,7 @@ export default css`
 
   :host(:not([vertical])) .divider::after {
     display: flex;
-    content: '';
+    content: "";
     position: absolute;
     height: 100%;
     left: calc(var(--divider-hit-area) / -2 + var(--divider-width) / 2);
@@ -63,7 +63,7 @@ export default css`
   }
 
   :host([vertical]) .divider::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     top: calc(var(--divider-hit-area) / -2 + var(--divider-width) / 2);

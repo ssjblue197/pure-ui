@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   :host {
@@ -76,8 +76,8 @@ export default css`
     rotate: -90deg;
   }
 
-  .tree-item--expanded slot[name='expand-icon'],
-  .tree-item:not(.tree-item--expanded) slot[name='collapse-icon'] {
+  .tree-item--expanded slot[name="expand-icon"],
+  .tree-item:not(.tree-item--expanded) slot[name="collapse-icon"] {
     display: none;
   }
 
@@ -107,12 +107,12 @@ export default css`
     z-index: 2;
   }
 
-  :host(:not([aria-disabled='true'])) .tree-item--selected .tree-item__item {
+  :host(:not([aria-disabled="true"])) .tree-item--selected .tree-item__item {
     background-color: var(--p-color-neutral-100);
     border-inline-start-color: var(--p-color-primary-600);
   }
 
-  :host(:not([aria-disabled='true'])) .tree-item__expand-button {
+  :host(:not([aria-disabled="true"])) .tree-item__expand-button {
     color: var(--p-color-neutral-600);
   }
 
@@ -133,12 +133,13 @@ export default css`
   }
 
   .tree-item__children::before {
-    content: '';
+    content: "";
     position: absolute;
     top: var(--indent-guide-offset);
     bottom: var(--indent-guide-offset);
     left: calc(1em - (var(--indent-guide-width) / 2) - 1px);
-    border-inline-end: var(--indent-guide-width) var(--indent-guide-style) var(--indent-guide-color);
+    border-inline-end: var(--indent-guide-width) var(--indent-guide-style)
+      var(--indent-guide-color);
     z-index: 1;
   }
 
@@ -148,7 +149,7 @@ export default css`
   }
 
   @media (forced-colors: active) {
-    :host(:not([aria-disabled='true'])) .tree-item--selected .tree-item__item {
+    :host(:not([aria-disabled="true"])) .tree-item--selected .tree-item__item {
       outline: dashed 1px SelectedItem;
     }
   }

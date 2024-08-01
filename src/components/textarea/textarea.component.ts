@@ -1,18 +1,18 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { defaultValue } from '../../internal/default-value.js';
-import { FormControlController } from '../../internal/form.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { live } from 'lit/directives/live.js';
-import { property, query, state } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import formControlStyles from '../../styles/form-control.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './textarea.styles.js';
-import type { CSSResultGroup } from 'lit';
-import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
+import { classMap } from "lit/directives/class-map.js";
+import { defaultValue } from "../../internal/default-value.js";
+import { FormControlController } from "../../internal/form.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { live } from "lit/directives/live.js";
+import { property, query, state } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import formControlStyles from "../../styles/form-control.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./textarea.styles.js";
+import type { CSSResultGroup } from "lit";
+import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Textareas collect data from the user and allow multiple lines of text.
@@ -36,46 +36,53 @@ import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
  * @csspart base - The component's base wrapper.
  * @csspart textarea - The internal `<textarea>` control.
  */
-export default class PTextarea extends PureElement implements ShoelaceFormControl {
+export default class PTextarea
+  extends PureElement
+  implements ShoelaceFormControl
+{
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
 
   private readonly formControlController = new FormControlController(this, {
-    assumeInteractionOn: ['p-blur', 'p-input']
+    assumeInteractionOn: ["p-blur", "p-input"],
   });
-  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private readonly hasSlotController = new HasSlotController(
+    this,
+    "help-text",
+    "label",
+  );
   private resizeObserver: ResizeObserver;
 
-  @query('.textarea__control') input: HTMLTextAreaElement;
+  @query(".textarea__control") input: HTMLTextAreaElement;
 
   @state() private hasFocus = false;
-  @property() title = ''; // make reactive to pass through
+  @property() title = ""; // make reactive to pass through
 
   /** The name of the textarea, submitted as a name/value pair with form data. */
-  @property() name = '';
+  @property() name = "";
 
   /** The current value of the textarea, submitted as a name/value pair with form data. */
-  @property() value = '';
+  @property() value = "";
 
   /** The textarea's size. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
 
   /** Draws a filled textarea. */
   @property({ type: Boolean, reflect: true }) filled = false;
 
   /** The textarea's label. If you need to display HTML, use the `label` slot instead. */
-  @property() label = '';
+  @property() label = "";
 
   /** The textarea's help text. If you need to display HTML, use the `help-text` slot instead. */
-  @property({ attribute: 'help-text' }) helpText = '';
+  @property({ attribute: "help-text" }) helpText = "";
 
   /** Placeholder text to show as a hint when the input is empty. */
-  @property() placeholder = '';
+  @property() placeholder = "";
 
   /** The number of rows to display by default. */
   @property({ type: Number }) rows = 4;
 
   /** Controls how the textarea can be resized. */
-  @property() resize: 'none' | 'vertical' | 'auto' = 'vertical';
+  @property() resize: "none" | "vertical" | "auto" = "vertical";
 
   /** Disables the textarea. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -88,7 +95,7 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
    * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
    * the same document or shadow root for this to work.
    */
-  @property({ reflect: true }) form = '';
+  @property({ reflect: true }) form = "";
 
   /** Makes the textarea a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -100,7 +107,13 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
   @property({ type: Number }) maxlength: number;
 
   /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
-  @property() autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
+  @property() autocapitalize:
+    | "off"
+    | "none"
+    | "on"
+    | "sentences"
+    | "words"
+    | "characters";
 
   /** Indicates whether the browser's autocorrect feature is on or off. */
   @property() autocorrect: string;
@@ -115,16 +128,23 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
   @property({ type: Boolean }) autofocus: boolean;
 
   /** Used to customize the label or icon of the Enter key on virtual keyboards. */
-  @property() enterkeyhint: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+  @property() enterkeyhint:
+    | "enter"
+    | "done"
+    | "go"
+    | "next"
+    | "previous"
+    | "search"
+    | "send";
 
   /** Enables spell checking on the textarea. */
   @property({
     type: Boolean,
     converter: {
       // Allow "true|false" attribute values but keep the property boolean
-      fromAttribute: value => (!value || value === 'false' ? false : true),
-      toAttribute: value => (value ? 'true' : 'false')
-    }
+      fromAttribute: (value) => (!value || value === "false" ? false : true),
+      toAttribute: (value) => (value ? "true" : "false"),
+    },
   })
   spellcheck = true;
 
@@ -132,10 +152,18 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
    * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
    * keyboard on supportive devices.
    */
-  @property() inputmode: 'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+  @property() inputmode:
+    | "none"
+    | "text"
+    | "decimal"
+    | "numeric"
+    | "tel"
+    | "search"
+    | "email"
+    | "url";
 
   /** The default value of the form control. Primarily used for resetting the form control. */
-  @defaultValue() defaultValue = '';
+  @defaultValue() defaultValue = "";
 
   /** Gets the validity state object */
   get validity() {
@@ -170,23 +198,23 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
 
   private handleBlur() {
     this.hasFocus = false;
-    this.emit('p-blur');
+    this.emit("p-blur");
   }
 
   private handleChange() {
     this.value = this.input.value;
     this.setTextareaHeight();
-    this.emit('p-change');
+    this.emit("p-change");
   }
 
   private handleFocus() {
     this.hasFocus = true;
-    this.emit('p-focus');
+    this.emit("p-focus");
   }
 
   private handleInput() {
     this.value = this.input.value;
-    this.emit('p-input');
+    this.emit("p-input");
   }
 
   private handleInvalid(event: Event) {
@@ -195,26 +223,26 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
   }
 
   private setTextareaHeight() {
-    if (this.resize === 'auto') {
-      this.input.style.height = 'auto';
+    if (this.resize === "auto") {
+      this.input.style.height = "auto";
       this.input.style.height = `${this.input.scrollHeight}px`;
     } else {
       (this.input.style.height as string | undefined) = undefined;
     }
   }
 
-  @watch('disabled', { waitUntilFirstUpdate: true })
+  @watch("disabled", { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid
     this.formControlController.setValidity(this.disabled);
   }
 
-  @watch('rows', { waitUntilFirstUpdate: true })
+  @watch("rows", { waitUntilFirstUpdate: true })
   handleRowsChange() {
     this.setTextareaHeight();
   }
 
-  @watch('value', { waitUntilFirstUpdate: true })
+  @watch("value", { waitUntilFirstUpdate: true })
   async handleValueChange() {
     await this.updateComplete;
     this.formControlController.updateValidity();
@@ -237,16 +265,20 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
   }
 
   /** Gets or sets the textarea's scroll position. */
-  scrollPosition(position?: { top?: number; left?: number }): { top: number; left: number } | undefined {
+  scrollPosition(position?: {
+    top?: number;
+    left?: number;
+  }): { top: number; left: number } | undefined {
     if (position) {
-      if (typeof position.top === 'number') this.input.scrollTop = position.top;
-      if (typeof position.left === 'number') this.input.scrollLeft = position.left;
+      if (typeof position.top === "number") this.input.scrollTop = position.top;
+      if (typeof position.left === "number")
+        this.input.scrollLeft = position.left;
       return undefined;
     }
 
     return {
       top: this.input.scrollTop,
-      left: this.input.scrollTop
+      left: this.input.scrollTop,
     };
   }
 
@@ -254,9 +286,13 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
   setSelectionRange(
     selectionStart: number,
     selectionEnd: number,
-    selectionDirection: 'forward' | 'backward' | 'none' = 'none'
+    selectionDirection: "forward" | "backward" | "none" = "none",
   ) {
-    this.input.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
+    this.input.setSelectionRange(
+      selectionStart,
+      selectionEnd,
+      selectionDirection,
+    );
   }
 
   /** Replaces a range of text with a new string. */
@@ -264,12 +300,17 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
     replacement: string,
     start?: number,
     end?: number,
-    selectMode: 'select' | 'start' | 'end' | 'preserve' = 'preserve'
+    selectMode: "select" | "start" | "end" | "preserve" = "preserve",
   ) {
     const selectionStart = start ?? this.input.selectionStart;
     const selectionEnd = end ?? this.input.selectionEnd;
 
-    this.input.setRangeText(replacement, selectionStart, selectionEnd, selectMode);
+    this.input.setRangeText(
+      replacement,
+      selectionStart,
+      selectionEnd,
+      selectMode,
+    );
 
     if (this.value !== this.input.value) {
       this.value = this.input.value;
@@ -299,8 +340,8 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
   }
 
   render() {
-    const hasLabelSlot = this.hasSlotController.test('label');
-    const hasHelpTextSlot = this.hasSlotController.test('help-text');
+    const hasLabelSlot = this.hasSlotController.test("label");
+    const hasHelpTextSlot = this.hasSlotController.test("help-text");
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
 
@@ -308,19 +349,19 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
       <div
         part="form-control"
         class=${classMap({
-          'form-control': true,
-          'form-control--small': this.size === 'small',
-          'form-control--medium': this.size === 'medium',
-          'form-control--large': this.size === 'large',
-          'form-control--has-label': hasLabel,
-          'form-control--has-help-text': hasHelpText
+          "form-control": true,
+          "form-control--small": this.size === "small",
+          "form-control--medium": this.size === "medium",
+          "form-control--large": this.size === "large",
+          "form-control--has-label": hasLabel,
+          "form-control--has-help-text": hasHelpText,
         })}
       >
         <label
           part="form-control-label"
           class="form-control__label"
           for="input"
-          aria-hidden=${hasLabel ? 'false' : 'true'}
+          aria-hidden=${hasLabel ? "false" : "true"}
         >
           <slot name="label">${this.label}</slot>
         </label>
@@ -330,24 +371,27 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
             part="base"
             class=${classMap({
               textarea: true,
-              'textarea--small': this.size === 'small',
-              'textarea--medium': this.size === 'medium',
-              'textarea--large': this.size === 'large',
-              'textarea--standard': !this.filled,
-              'textarea--filled': this.filled,
-              'textarea--disabled': this.disabled,
-              'textarea--focused': this.hasFocus,
-              'textarea--empty': !this.value,
-              'textarea--resize-none': this.resize === 'none',
-              'textarea--resize-vertical': this.resize === 'vertical',
-              'textarea--resize-auto': this.resize === 'auto'
+              "textarea--small": this.size === "small",
+              "textarea--medium": this.size === "medium",
+              "textarea--large": this.size === "large",
+              "textarea--standard": !this.filled,
+              "textarea--filled": this.filled,
+              "textarea--disabled": this.disabled,
+              "textarea--focused": this.hasFocus,
+              "textarea--empty": !this.value,
+              "textarea--resize-none": this.resize === "none",
+              "textarea--resize-vertical": this.resize === "vertical",
+              "textarea--resize-auto": this.resize === "auto",
             })}
           >
             <textarea
               part="textarea"
               id="input"
               class="textarea__control"
-              title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
+              title=${
+                this
+                  .title /* An empty title prevents browser validation tooltips from appearing on hover */
+              }
               name=${ifDefined(this.name)}
               .value=${live(this.value)}
               ?disabled=${this.disabled}
@@ -377,7 +421,7 @@ export default class PTextarea extends PureElement implements ShoelaceFormContro
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
-          aria-hidden=${hasHelpText ? 'false' : 'true'}
+          aria-hidden=${hasHelpText ? "false" : "true"}
         >
           <slot name="help-text">${this.helpText}</slot>
         </div>

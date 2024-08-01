@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   :host {
@@ -14,8 +14,8 @@ export default css`
     grid-template-columns: min-content 1fr min-content;
     grid-template-rows: 1fr min-content;
     grid-template-areas:
-      '. slides .'
-      '. pagination .';
+      ". slides ."
+      ". pagination .";
     gap: var(--p-spacing-medium);
     align-items: center;
     min-height: 100%;
@@ -45,7 +45,10 @@ export default css`
     aspect-ratio: calc(var(--aspect-ratio) * var(--slides-per-page));
     border-radius: var(--p-border-radius-small);
 
-    --slide-size: calc((100% - (var(--slides-per-page) - 1) * var(--slide-gap)) / var(--slides-per-page));
+    --slide-size: calc(
+      (100% - (var(--slides-per-page) - 1) * var(--slide-gap)) /
+        var(--slides-per-page)
+    );
   }
 
   @media (prefers-reduced-motion) {

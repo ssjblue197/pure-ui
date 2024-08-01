@@ -1,9 +1,9 @@
-import '../../../dist/pure-ui.js';
-import { dragElement } from '../../internal/test.js';
-import { expect, fixture, html, oneEvent } from '@open-wc/testing';
-import { queryByTestId } from '../../internal/test/data-testid-helpers.js';
-import { resetMouse } from '@web/test-runner-commands';
-import type PSplitPanel from './split-panel.js';
+import "../../../dist/pure-ui.js";
+import { dragElement } from "../../internal/test.js";
+import { expect, fixture, html, oneEvent } from "@open-wc/testing";
+import { queryByTestId } from "../../internal/test/data-testid-helpers.js";
+import { resetMouse } from "@web/test-runner-commands";
+import type PSplitPanel from "./split-panel.js";
 
 const DIVIDER_WIDTH_IN_PX = 4;
 
@@ -31,103 +31,107 @@ const getDivider = (splitPanel: PSplitPanel): Element => {
   return divider!;
 };
 
-describe('<p-split-panel>', () => {
+describe("<p-split-panel>", () => {
   afterEach(async () => {
     await resetMouse();
   });
 
-  it('should render a component', async () => {
+  it("should render a component", async () => {
     const splitPanel = await fixture(html` <p-split-panel></p-split-panel> `);
 
     expect(splitPanel).to.exist;
   });
 
-  it('should be accessible', async () => {
+  it("should be accessible", async () => {
     const splitPanel = await fixture(
       html`<p-split-panel>
         <div slot="start">Start</div>
         <div slot="end">End</div>
-      </p-split-panel>`
+      </p-split-panel>`,
     );
 
     await expect(splitPanel).to.be.accessible();
   });
 
-  it('should show both panels', async () => {
+  it("should show both panels", async () => {
     const splitPanel = await fixture(
       html`<p-split-panel>
         <div slot="start">Start</div>
         <div slot="end">End</div>
-      </p-split-panel>`
+      </p-split-panel>`,
     );
 
-    expect(splitPanel).to.contain.text('Start');
-    expect(splitPanel).to.contain.text('End');
+    expect(splitPanel).to.contain.text("Start");
+    expect(splitPanel).to.contain.text("End");
   });
 
-  describe('panel sizing horizontal', () => {
-    it('has two evenly sized panels by default', async () => {
+  describe("panel sizing horizontal", () => {
+    it("has two evenly sized panels by default", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel>
           <div slot="start" data-testid="start-panel">Start</div>
           <div slot="end" data-testid="end-panel">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
-      const startPanelWidth = getPanelWidth(splitPanel, 'start-panel');
-      const endPanelWidth = getPanelWidth(splitPanel, 'end-panel');
+      const startPanelWidth = getPanelWidth(splitPanel, "start-panel");
+      const endPanelWidth = getPanelWidth(splitPanel, "end-panel");
 
       expect(startPanelWidth).to.be.equal(endPanelWidth);
     });
 
-    it('changes the sizing of the panels based on the position attribute', async () => {
+    it("changes the sizing of the panels based on the position attribute", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel position="25">
           <div slot="start" data-testid="start-panel">Start</div>
           <div slot="end" data-testid="end-panel">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
-      const startPanelWidth = getPanelWidth(splitPanel, 'start-panel');
-      const endPanelWidth = getPanelWidth(splitPanel, 'end-panel');
+      const startPanelWidth = getPanelWidth(splitPanel, "start-panel");
+      const endPanelWidth = getPanelWidth(splitPanel, "end-panel");
 
-      expect(startPanelWidth * 3).to.be.equal(endPanelWidth - DIVIDER_WIDTH_IN_PX);
+      expect(startPanelWidth * 3).to.be.equal(
+        endPanelWidth - DIVIDER_WIDTH_IN_PX,
+      );
     });
 
-    it('updates the position in pixels to the correct result', async () => {
+    it("updates the position in pixels to the correct result", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel position="25">
           <div slot="start" data-testid="start-panel">Start</div>
           <div slot="end" data-testid="end-panel">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
       splitPanel.position = 10;
 
-      const startPanelWidth = getPanelWidth(splitPanel, 'start-panel');
+      const startPanelWidth = getPanelWidth(splitPanel, "start-panel");
 
-      expect(startPanelWidth).to.be.equal(splitPanel.positionInPixels - DIVIDER_WIDTH_IN_PX / 2);
+      expect(startPanelWidth).to.be.equal(
+        splitPanel.positionInPixels - DIVIDER_WIDTH_IN_PX / 2,
+      );
     });
 
-    it('emits the p-reposition	event on position change', async () => {
+    it("emits the p-reposition	event on position change", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel>
           <div slot="start">Start</div>
           <div slot="end">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
-      const repositionPromise = oneEvent(splitPanel, 'p-reposition');
+      const repositionPromise = oneEvent(splitPanel, "p-reposition");
       splitPanel.position = 10;
       return repositionPromise;
     });
 
-    it('can be resized using the mouse', async () => {
+    it("can be resized using the mouse", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel>
           <div slot="start">Start</div>
           <div slot="end">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
       const positionInPixels = splitPanel.positionInPixels;
@@ -140,12 +144,12 @@ describe('<p-split-panel>', () => {
       expect(positionInPixelsAfterDrag).to.be.equal(positionInPixels - 30);
     });
 
-    it('cannot be resized if disabled', async () => {
+    it("cannot be resized if disabled", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel disabled>
           <div slot="start">Start</div>
           <div slot="end">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
       const positionInPixels = splitPanel.positionInPixels;
@@ -158,12 +162,12 @@ describe('<p-split-panel>', () => {
       expect(positionInPixelsAfterDrag).to.be.equal(positionInPixels);
     });
 
-    it('snaps to predefined positions', async () => {
+    it("snaps to predefined positions", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel>
           <div slot="start">Start</div>
           <div slot="end">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
       const positionInPixels = splitPanel.positionInPixels;
@@ -178,69 +182,73 @@ describe('<p-split-panel>', () => {
     });
   });
 
-  describe('panel sizing vertical', () => {
-    it('has two evenly sized panels by default', async () => {
+  describe("panel sizing vertical", () => {
+    it("has two evenly sized panels by default", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel vertical style="height: 400px;">
           <div slot="start" data-testid="start-panel">Start</div>
           <div slot="end" data-testid="end-panel">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
-      const startPanelHeight = getPanelHeight(splitPanel, 'start-panel');
-      const endPanelHeight = getPanelHeight(splitPanel, 'end-panel');
+      const startPanelHeight = getPanelHeight(splitPanel, "start-panel");
+      const endPanelHeight = getPanelHeight(splitPanel, "end-panel");
 
       expect(startPanelHeight).to.be.equal(endPanelHeight);
     });
 
-    it('changes the sizing of the panels based on the position attribute', async () => {
+    it("changes the sizing of the panels based on the position attribute", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel position="25" vertical style="height: 400px;">
           <div slot="start" data-testid="start-panel">Start</div>
           <div slot="end" data-testid="end-panel">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
-      const startPanelHeight = getPanelHeight(splitPanel, 'start-panel');
-      const endPanelHeight = getPanelHeight(splitPanel, 'end-panel');
+      const startPanelHeight = getPanelHeight(splitPanel, "start-panel");
+      const endPanelHeight = getPanelHeight(splitPanel, "end-panel");
 
-      expect(startPanelHeight * 3).to.be.equal(endPanelHeight - DIVIDER_WIDTH_IN_PX);
+      expect(startPanelHeight * 3).to.be.equal(
+        endPanelHeight - DIVIDER_WIDTH_IN_PX,
+      );
     });
 
-    it('updates the position in pixels to the correct result', async () => {
+    it("updates the position in pixels to the correct result", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel position="25" vertical style="height: 400px;">
           <div slot="start" data-testid="start-panel">Start</div>
           <div slot="end" data-testid="end-panel">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
       splitPanel.position = 10;
 
-      const startPanelHeight = getPanelHeight(splitPanel, 'start-panel');
+      const startPanelHeight = getPanelHeight(splitPanel, "start-panel");
 
-      expect(startPanelHeight).to.be.equal(splitPanel.positionInPixels - DIVIDER_WIDTH_IN_PX / 2);
+      expect(startPanelHeight).to.be.equal(
+        splitPanel.positionInPixels - DIVIDER_WIDTH_IN_PX / 2,
+      );
     });
 
-    it('emits the p-reposition	event on position change ', async () => {
+    it("emits the p-reposition	event on position change ", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel vertical style="height: 400px;">
           <div slot="start">Start</div>
           <div slot="end">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
-      const repositionPromise = oneEvent(splitPanel, 'p-reposition');
+      const repositionPromise = oneEvent(splitPanel, "p-reposition");
       splitPanel.position = 10;
       return repositionPromise;
     });
 
-    it('can be resized using the mouse ', async () => {
+    it("can be resized using the mouse ", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel vertical style="height: 400px;">
           <div slot="start">Start</div>
           <div slot="end">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
       const positionInPixels = splitPanel.positionInPixels;
@@ -253,12 +261,12 @@ describe('<p-split-panel>', () => {
       expect(positionInPixelsAfterDrag).to.be.equal(positionInPixels - 30);
     });
 
-    it('cannot be resized if disabled', async () => {
+    it("cannot be resized if disabled", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel disabled vertical style="height: 400px;">
           <div slot="start">Start</div>
           <div slot="end">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
       const positionInPixels = splitPanel.positionInPixels;
@@ -271,12 +279,12 @@ describe('<p-split-panel>', () => {
       expect(positionInPixelsAfterDrag).to.be.equal(positionInPixels);
     });
 
-    it('snaps to predefined positions', async () => {
+    it("snaps to predefined positions", async () => {
       const splitPanel = await fixture<PSplitPanel>(
         html`<p-split-panel vertical style="height: 400px;">
           <div slot="start">Start</div>
           <div slot="end">End</div>
-        </p-split-panel>`
+        </p-split-panel>`,
       );
 
       const positionInPixels = splitPanel.positionInPixels;

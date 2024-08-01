@@ -41,7 +41,7 @@ After you've created your app, the first step to using Pure UI is modifying your
 To get started using Pure UI with NextJS, the following packages must be installed.
 
 ```bash
-npm install @pure-ui/core copy-webpack-plugin
+npm install pure-uikit copy-webpack-plugin
 ```
 
 Pure UI for obvious reasons, and the `copy-webpack-plugin` will be used later for adding our icons to our `public/` folder.
@@ -59,35 +59,35 @@ In order to add Pure UI's assets to the final build output, we need to modify `n
 ```javascript
 // next.config.js
 
-import { dirname, resolve } from 'path';
-import { fileURLToPath } from 'url';
-import CopyPlugin from 'copy-webpack-plugin';
+import { dirname, resolve } from "path";
+import { fileURLToPath } from "url";
+import CopyPlugin from "copy-webpack-plugin";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { esmExternals: 'loose' },
+  experimental: { esmExternals: "loose" },
   webpack: (config, options) => {
     config.plugins.push(
       new CopyPlugin({
         patterns: [
           {
-            from: resolve(__dirname, 'node_modules/@pure-ui/core/dist/assets/'),
-            to: resolve(__dirname, 'public/pure-ui-assets/assets/')
-          }
-        ]
-      })
+            from: resolve(__dirname, "node_modules/pure-uikit/dist/assets/"),
+            to: resolve(__dirname, "public/pure-ui-assets/assets/"),
+          },
+        ],
+      }),
     );
     return config;
-  }
+  },
 };
 
 export default nextConfig;
 ```
 
 :::tip
-This will copy the files from `node_modules/@pure-ui/core/dist/assets` into your `public/pure-ui-assets` folder on every development serve or build. You may want to avoid committing these into your repo. To do so, simply add `public/pure-ui-assets` into your `.gitignore` folder
+This will copy the files from `node_modules/pure-uikit/dist/assets` into your `public/pure-ui-assets` folder on every development serve or build. You may want to avoid committing these into your repo. To do so, simply add `public/pure-ui-assets` into your `.gitignore` folder
 :::
 
 ### Importing the Pure UI's CSS (default theme)
@@ -96,10 +96,10 @@ Once we've got our webpack config / next config setup, lets modify our `app/layo
 
 ```javascript
 // app/layout.tsx
-import './globals.css';
-import '@pure-ui/core/dist/themes/light.css';
+import "./globals.css";
+import "pure-uikit/dist/themes/light.css";
 // We can also import the dark theme here as well.
-// import "@pure-ui/core/dist/themes/dark.css";
+// import "pure-uikit/dist/themes/dark.css";
 ```
 
 ### Writing a "setup" component
@@ -112,7 +112,7 @@ To do so, create a file called `app/pure-ui-setup.tsx`
 'use client';
 // ^ Make sure to have 'use client'; because `setBasePath()` requires access to `document`.
 
-import { setBasePath } from "@pure-ui/core/dist/utilities/base-path.js"
+import { setBasePath } from "pure-uikit/dist/utilities/base-path.js"
 
 export default function Pure UISetup({
   children,
@@ -136,7 +136,7 @@ Our `layout.tsx` Should now look something like this:
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-+ import "@pure-ui/core/dist/themes/light.css";
++ import "pure-uikit/dist/themes/light.css";
 
 + import Pure UISetup from "./pure-ui-setup";
 
@@ -178,8 +178,8 @@ import React from "react";
 import dynamic from "next/dynamic";
 
 const SlButton = dynamic(
-  // Notice how we use the full path to the component. If you only do `import("@pure-ui/core/dist/react")` you will load the entire component library and not get tree shaking.
-  () => import("@pure-ui/core/dist/react/button/index.js"),
+  // Notice how we use the full path to the component. If you only do `import("pure-uikit/dist/react")` you will load the entire component library and not get tree shaking.
+  () => import("pure-uikit/dist/react/button/index.js"),
   {
     loading: () => <p>Loading...</p>,
     ssr: false,
@@ -187,7 +187,7 @@ const SlButton = dynamic(
 );
 
 const SlIcon = dynamic(
-  () => import("@pure-ui/core/dist/react/icon/index.js"),
+  () => import("pure-uikit/dist/react/icon/index.js"),
   {
     loading: () => <p>Loading...</p>,
     ssr: false,
@@ -217,7 +217,7 @@ If you're stuck, there's an [example repo here](https://github.com/konnorRogers/
 To get started using Pure UI with NextJS, the following packages must be installed.
 
 ```bash
-yarn add @pure-ui/core copy-webpack-plugin next-compose-plugins next-transpile-modules
+yarn add pure-uikit copy-webpack-plugin next-compose-plugins next-transpile-modules
 ```
 
 ### Enabling ESM
@@ -236,7 +236,7 @@ There's one more step to enable ESM in NextJS, but we'll tackle that in our Next
 The next step is to import Pure UI's default theme (stylesheet) in your `_app.js` file:
 
 ```css
-import '@pure-ui/core/dist/themes/light.css';
+import 'pure-uikit/dist/themes/light.css';
 ```
 
 ### Defining Custom Elements
@@ -255,14 +255,14 @@ function CustomEls({ URL }) {
       return;
     }
 
-    import('@pure-ui/core/dist/utilities/base-path').then(({ setBasePath }) => {
+    import("pure-uikit/dist/utilities/base-path").then(({ setBasePath }) => {
       setBasePath(`${URL}/static/static`);
 
       // This imports all components
-      import('@pure-ui/core/dist/react');
+      import("pure-uikit/dist/react");
       // If you're wanting to selectively import components, replace this line with your own definitions
 
-      // import("@pure-ui/core/dist/components/button/button");
+      // import("pure-uikit/dist/components/button/button");
       customEls.current = true;
     });
   }, [URL, customEls]);
@@ -287,7 +287,7 @@ While we need to use `useLayoutEffect` for the initial render, NextJS will throw
 
 ```javascript
 function MyApp({ Component, pageProps, URL }) {
-  const isBrowser = typeof window !== 'undefined';
+  const isBrowser = typeof window !== "undefined";
   return (
     <>
       {isBrowser && <CustomEls URL={URL} />}

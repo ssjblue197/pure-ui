@@ -1,12 +1,12 @@
-import PSelect from './select.component.js';
+import PSelect from "./select.component.js";
 
-export * from './select.component.js';
+export * from "./select.component.js";
 export default PSelect;
 
-PSelect.define('p-select');
+PSelect.define("p-select");
 
 declare global {
   interface HTMLElementTagNameMap {
-    'p-select': PSelect;
+    "p-select": PSelect;
   }
 }

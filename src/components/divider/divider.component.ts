@@ -1,9 +1,9 @@
-import { property } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './divider.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { property } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./divider.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Dividers are used to visually separate or group elements.
@@ -23,11 +23,14 @@ export default class PDivider extends PureElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('role', 'separator');
+    this.setAttribute("role", "separator");
   }
 
-  @watch('vertical')
+  @watch("vertical")
   handleVerticalChange() {
-    this.setAttribute('aria-orientation', this.vertical ? 'vertical' : 'horizontal');
+    this.setAttribute(
+      "aria-orientation",
+      this.vertical ? "vertical" : "horizontal",
+    );
   }
 }

@@ -9,6 +9,9 @@
  * @param {string} testId - The value of the `data-testid` attribute of the component to find.
  * @returns The found element or null if there was no such element
  */
-export const queryByTestId = <T extends Element>(container: HTMLElement, testId: string): T | null => {
+export const queryByTestId = <T extends Element>(
+  container: HTMLElement,
+  testId: string,
+): T | null => {
   return container.querySelector<T>(`[data-testid="${testId}"]`);
 };

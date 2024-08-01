@@ -1,12 +1,12 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property } from 'lit/decorators.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIconButton from '../icon-button/icon-button.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './tag.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property } from "lit/decorators.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIconButton from "../icon-button/icon-button.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./tag.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Tags are used as labels to organize things or to indicate a selection.
@@ -27,15 +27,21 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class PTag extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'p-icon-button': PIconButton };
+  static dependencies = { "p-icon-button": PIconButton };
 
   private readonly localize = new LocalizeController(this);
 
   /** The tag's theme variant. */
-  @property({ reflect: true }) variant: 'primary' | 'success' | 'neutral' | 'warning' | 'danger' | 'text' = 'neutral';
+  @property({ reflect: true }) variant:
+    | "primary"
+    | "success"
+    | "neutral"
+    | "warning"
+    | "danger"
+    | "text" = "neutral";
 
   /** The tag's size. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
 
   /** Draws a pill-style tag with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
@@ -44,7 +50,7 @@ export default class PTag extends PureElement {
   @property({ type: Boolean }) removable = false;
 
   private handleRemoveClick() {
-    this.emit('p-remove');
+    this.emit("p-remove");
   }
 
   render() {
@@ -55,21 +61,21 @@ export default class PTag extends PureElement {
           tag: true,
 
           // Types
-          'tag--primary': this.variant === 'primary',
-          'tag--success': this.variant === 'success',
-          'tag--neutral': this.variant === 'neutral',
-          'tag--warning': this.variant === 'warning',
-          'tag--danger': this.variant === 'danger',
-          'tag--text': this.variant === 'text',
+          "tag--primary": this.variant === "primary",
+          "tag--success": this.variant === "success",
+          "tag--neutral": this.variant === "neutral",
+          "tag--warning": this.variant === "warning",
+          "tag--danger": this.variant === "danger",
+          "tag--text": this.variant === "text",
 
           // Sizes
-          'tag--small': this.size === 'small',
-          'tag--medium': this.size === 'medium',
-          'tag--large': this.size === 'large',
+          "tag--small": this.size === "small",
+          "tag--medium": this.size === "medium",
+          "tag--large": this.size === "large",
 
           // Modifiers
-          'tag--pill': this.pill,
-          'tag--removable': this.removable
+          "tag--pill": this.pill,
+          "tag--removable": this.removable,
         })}
       >
         <slot part="content" class="tag__content"></slot>
@@ -81,13 +87,13 @@ export default class PTag extends PureElement {
                 exportparts="base:remove-button__base"
                 name="x-lg"
                 library="system"
-                label=${this.localize.term('remove')}
+                label=${this.localize.term("remove")}
                 class="tag__remove"
                 @click=${this.handleRemoveClick}
                 tabindex="-1"
               ></p-icon-button>
             `
-          : ''}
+          : ""}
       </span>
     `;
   }

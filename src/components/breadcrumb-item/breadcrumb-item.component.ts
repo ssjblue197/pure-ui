@@ -1,12 +1,12 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { property } from 'lit/decorators.js';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './breadcrumb-item.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { property } from "lit/decorators.js";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./breadcrumb-item.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Breadcrumb Items are used inside [breadcrumbs](/components/breadcrumb) to represent different links.
@@ -29,7 +29,11 @@ import type { CSSResultGroup } from 'lit';
 export default class PBreadcrumbItem extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
-  private readonly hasSlotController = new HasSlotController(this, 'prefix', 'suffix');
+  private readonly hasSlotController = new HasSlotController(
+    this,
+    "prefix",
+    "suffix",
+  );
 
   /**
    * Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered
@@ -38,10 +42,10 @@ export default class PBreadcrumbItem extends PureElement {
   @property() href?: string;
 
   /** Tells the browser where to open the link. Only used when `href` is set. */
-  @property() target?: '_blank' | '_parent' | '_self' | '_top';
+  @property() target?: "_blank" | "_parent" | "_self" | "_top";
 
   /** The `rel` attribute to use on the link. Only used when `href` is set. */
-  @property() rel = 'noreferrer noopener';
+  @property() rel = "noreferrer noopener";
 
   render() {
     const isLink = this.href ? true : false;
@@ -50,9 +54,9 @@ export default class PBreadcrumbItem extends PureElement {
       <div
         part="base"
         class=${classMap({
-          'breadcrumb-item': true,
-          'breadcrumb-item--has-prefix': this.hasSlotController.test('prefix'),
-          'breadcrumb-item--has-suffix': this.hasSlotController.test('suffix')
+          "breadcrumb-item": true,
+          "breadcrumb-item--has-prefix": this.hasSlotController.test("prefix"),
+          "breadcrumb-item--has-suffix": this.hasSlotController.test("suffix"),
         })}
       >
         <span part="prefix" class="breadcrumb-item__prefix">
@@ -72,7 +76,11 @@ export default class PBreadcrumbItem extends PureElement {
               </a>
             `
           : html`
-              <button part="label" type="button" class="breadcrumb-item__label breadcrumb-item__label--button">
+              <button
+                part="label"
+                type="button"
+                class="breadcrumb-item__label breadcrumb-item__label--button"
+              >
                 <slot></slot>
               </button>
             `}
@@ -81,7 +89,11 @@ export default class PBreadcrumbItem extends PureElement {
           <slot name="suffix"></slot>
         </span>
 
-        <span part="separator" class="breadcrumb-item__separator" aria-hidden="true">
+        <span
+          part="separator"
+          class="breadcrumb-item__separator"
+          aria-hidden="true"
+        >
           <slot name="separator"></slot>
         </span>
       </div>

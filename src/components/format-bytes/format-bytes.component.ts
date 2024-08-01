@@ -1,6 +1,6 @@
-import { LocalizeController } from '../../utilities/localize.js';
-import { property } from 'lit/decorators.js';
-import PureElement from '../../internal/pure-ui-element.js';
+import { LocalizeController } from "../../utilities/localize.js";
+import { property } from "lit/decorators.js";
+import PureElement from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Formats a number as a human readable bytes value.
@@ -15,27 +15,32 @@ export default class PFormatBytes extends PureElement {
   @property({ type: Number }) value = 0;
 
   /** The type of unit to display. */
-  @property() unit: 'byte' | 'bit' = 'byte';
+  @property() unit: "byte" | "bit" = "byte";
 
   /** Determines how to display the result, e.g. "100 bytes", "100 b", or "100b". */
-  @property() display: 'long' | 'short' | 'narrow' = 'short';
+  @property() display: "long" | "short" | "narrow" = "short";
 
   render() {
     if (isNaN(this.value)) {
-      return '';
+      return "";
     }
 
-    const bitPrefixes = ['', 'kilo', 'mega', 'giga', 'tera']; // petabit isn't a supported unit
-    const bytePrefixes = ['', 'kilo', 'mega', 'giga', 'tera', 'peta'];
-    const prefix = this.unit === 'bit' ? bitPrefixes : bytePrefixes;
-    const index = Math.max(0, Math.min(Math.floor(Math.log10(this.value) / 3), prefix.length - 1));
+    const bitPrefixes = ["", "kilo", "mega", "giga", "tera"]; // petabit isn't a supported unit
+    const bytePrefixes = ["", "kilo", "mega", "giga", "tera", "peta"];
+    const prefix = this.unit === "bit" ? bitPrefixes : bytePrefixes;
+    const index = Math.max(
+      0,
+      Math.min(Math.floor(Math.log10(this.value) / 3), prefix.length - 1),
+    );
     const unit = prefix[index] + this.unit;
-    const valueToFormat = parseFloat((this.value / Math.pow(1000, index)).toPrecision(3));
+    const valueToFormat = parseFloat(
+      (this.value / Math.pow(1000, index)).toPrecision(3),
+    );
 
     return this.localize.number(valueToFormat, {
-      style: 'unit',
+      style: "unit",
       unit,
-      unitDisplay: this.display
+      unitDisplay: this.display,
     });
   }
 }

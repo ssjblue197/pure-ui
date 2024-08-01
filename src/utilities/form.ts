@@ -1,4 +1,4 @@
-import { formCollections } from '../internal/form.js';
+import { formCollections } from "../internal/form.js";
 
 /**
  * Serializes a form and returns a plain object. If a form control with the same name appears more than once, the
@@ -31,15 +31,17 @@ export function serialize(form: HTMLFormElement) {
  */
 export function getFormControls(form: HTMLFormElement) {
   const rootNode = form.getRootNode() as Document | ShadowRoot;
-  const allNodes = [...rootNode.querySelectorAll('*')];
+  const allNodes = [...rootNode.querySelectorAll("*")];
   const formControls = [...form.elements];
   const collection = formCollections.get(form);
   const shoelaceFormControls = collection ? Array.from(collection) : [];
 
   // To return form controls in the right order, we sort by DOM index
-  return [...formControls, ...shoelaceFormControls].sort((a: Element, b: Element) => {
-    if (allNodes.indexOf(a) < allNodes.indexOf(b)) return -1;
-    if (allNodes.indexOf(a) > allNodes.indexOf(b)) return 1;
-    return 0;
-  });
+  return [...formControls, ...shoelaceFormControls].sort(
+    (a: Element, b: Element) => {
+      if (allNodes.indexOf(a) < allNodes.indexOf(b)) return -1;
+      if (allNodes.indexOf(a) > allNodes.indexOf(b)) return 1;
+      return 0;
+    },
+  );
 }

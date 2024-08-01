@@ -5,16 +5,16 @@ let codeBlockId = 0;
  * document will be returned with the appropriate DOM manipulations.
  */
 module.exports = function (doc) {
-  doc.querySelectorAll('pre > code').forEach(code => {
-    const pre = code.closest('pre');
-    const button = doc.createElement('p-copy-button');
+  doc.querySelectorAll("pre > code").forEach((code) => {
+    const pre = code.closest("pre");
+    const button = doc.createElement("p-copy-button");
 
     if (!code.id) {
       code.id = `code-block-${++codeBlockId}`;
     }
 
-    button.classList.add('copy-code-button');
-    button.setAttribute('from', code.id);
+    button.classList.add("copy-code-button");
+    button.setAttribute("from", code.id);
 
     pre.append(button);
   });

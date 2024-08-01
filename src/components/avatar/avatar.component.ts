@@ -1,12 +1,12 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { html } from 'lit';
-import { property, state } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './avatar.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import { html } from "lit";
+import { property, state } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./avatar.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Avatars are used to represent a person or object.
@@ -31,27 +31,28 @@ import type { CSSResultGroup } from 'lit';
 export default class PAvatar extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
-    'p-icon': PIcon
+    "p-icon": PIcon,
   };
 
   @state() private hasError = false;
 
   /** The image source to use for the avatar. */
-  @property() image = '';
+  @property() image = "";
 
   /** A label to use to describe the avatar to assistive devices. */
-  @property() label = '';
+  @property() label = "";
 
   /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
-  @property() initials = '';
+  @property() initials = "";
 
   /** Indicates how the browser should load the image. */
-  @property() loading: 'eager' | 'lazy' = 'eager';
+  @property() loading: "eager" | "lazy" = "eager";
 
   /** The shape of the avatar. */
-  @property({ reflect: true }) shape: 'circle' | 'square' | 'rounded' = 'circle';
+  @property({ reflect: true }) shape: "circle" | "square" | "rounded" =
+    "circle";
 
-  @watch('image')
+  @watch("image")
   handleImageChange() {
     // Reset the error when a new image is provided
     this.hasError = false;
@@ -59,7 +60,7 @@ export default class PAvatar extends PureElement {
 
   private handleImageLoadError() {
     this.hasError = true;
-    this.emit('p-error');
+    this.emit("p-error");
   }
 
   render() {
@@ -77,7 +78,9 @@ export default class PAvatar extends PureElement {
     let avatarWithoutImage = html``;
 
     if (this.initials) {
-      avatarWithoutImage = html`<div part="initials" class="avatar__initials">${this.initials}</div>`;
+      avatarWithoutImage = html`<div part="initials" class="avatar__initials">
+        ${this.initials}
+      </div>`;
     } else {
       avatarWithoutImage = html`
         <div part="icon" class="avatar__icon" aria-hidden="true">
@@ -93,9 +96,9 @@ export default class PAvatar extends PureElement {
         part="base"
         class=${classMap({
           avatar: true,
-          'avatar--circle': this.shape === 'circle',
-          'avatar--rounded': this.shape === 'rounded',
-          'avatar--square': this.shape === 'square'
+          "avatar--circle": this.shape === "circle",
+          "avatar--rounded": this.shape === "rounded",
+          "avatar--square": this.shape === "square",
         })}
         role="img"
         aria-label=${this.label}

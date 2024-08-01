@@ -1,10 +1,10 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './card.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./card.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Cards can be used to group related subjects in a container.
@@ -31,7 +31,12 @@ import type { CSSResultGroup } from 'lit';
 export default class PCard extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
-  private readonly hasSlotController = new HasSlotController(this, 'footer', 'header', 'image');
+  private readonly hasSlotController = new HasSlotController(
+    this,
+    "footer",
+    "header",
+    "image",
+  );
 
   render() {
     return html`
@@ -39,9 +44,9 @@ export default class PCard extends PureElement {
         part="base"
         class=${classMap({
           card: true,
-          'card--has-footer': this.hasSlotController.test('footer'),
-          'card--has-image': this.hasSlotController.test('image'),
-          'card--has-header': this.hasSlotController.test('header')
+          "card--has-footer": this.hasSlotController.test("footer"),
+          "card--has-image": this.hasSlotController.test("image"),
+          "card--has-header": this.hasSlotController.test("header"),
         })}
       >
         <slot name="image" part="image" class="card__image"></slot>

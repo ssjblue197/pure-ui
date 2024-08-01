@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   :host {
@@ -83,7 +83,7 @@ export default css`
 
   /* Safe triangle */
   .menu-item--submenu-expanded::after {
-    content: '';
+    content: "";
     position: fixed;
     z-index: calc(var(--p-z-index-dropdown) - 1);
     top: 0;
@@ -92,8 +92,10 @@ export default css`
     left: 0;
     clip-path: polygon(
       var(--safe-triangle-cursor-x, 0) var(--safe-triangle-cursor-y, 0),
-      var(--safe-triangle-submenu-start-x, 0) var(--safe-triangle-submenu-start-y, 0),
-      var(--safe-triangle-submenu-end-x, 0) var(--safe-triangle-submenu-end-y, 0)
+      var(--safe-triangle-submenu-start-x, 0)
+        var(--safe-triangle-submenu-start-y, 0),
+      var(--safe-triangle-submenu-end-x, 0)
+        var(--safe-triangle-submenu-end-y, 0)
     );
   }
 
@@ -101,7 +103,7 @@ export default css`
     outline: none;
   }
 
-  :host(:hover:not([aria-disabled='true'], :focus-visible)) .menu-item,
+  :host(:hover:not([aria-disabled="true"], :focus-visible)) .menu-item,
   .menu-item--submenu-expanded {
     background-color: var(--p-color-neutral-100);
     color: var(--p-color-neutral-1000);
@@ -141,7 +143,7 @@ export default css`
   }
 
   @media (forced-colors: active) {
-    :host(:hover:not([aria-disabled='true'])) .menu-item,
+    :host(:hover:not([aria-disabled="true"])) .menu-item,
     :host(:focus-visible) .menu-item {
       outline: dashed 1px SelectedItem;
       outline-offset: -1px;

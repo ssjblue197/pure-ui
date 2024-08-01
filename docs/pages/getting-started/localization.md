@@ -11,7 +11,10 @@ Components can be localized by importing the appropriate translation file and se
 ```html
 <html lang="es">
   <head>
-    <script type="module" src="/path/to/pure-ui/dist/translations/es.js"></script>
+    <script
+      type="module"
+      src="/path/to/pure-ui/dist/translations/es.js"
+    ></script>
   </head>
 
   <body>
@@ -28,17 +31,17 @@ Pure UI ships with a number of translations. The default is English (US), which 
 
 The location of translations depends on how you're consuming Pure UI.
 
-- If you're using the CDN, [import them from the CDN](https://www.jsdelivr.com/package/npm/@pure-ui/core?path=%CDNDIR%%2Ftranslations)
-- If you're using a bundler, import them from `@pure-ui/core/%NPMDIR%/translations/[lang].js`
+- If you're using the CDN, [import them from the CDN](https://www.jsdelivr.com/package/npm/pure-uikit?path=%CDNDIR%%2Ftranslations)
+- If you're using a bundler, import them from `pure-uikit/%NPMDIR%/translations/[lang].js`
 
 You do not need to load translations up front. You can import them dynamically even after updating the `lang` attribute. Once a translation is registered, localized components will update automatically.
 
 ```js
 // Same as setting <html lang="de">
-document.documentElement.lang = 'de';
+document.documentElement.lang = "de";
 
 // Import the translation
-import('/path/to/pure-ui/dist/translations/de.js');
+import("/path/to/pure-ui/dist/translations/de.js");
 ```
 
 ### Translation Resolution
@@ -101,8 +104,8 @@ You can provide your own translations if you have specific needs or if you don't
 Let's create a Spanish translation as an example. The following assumes you're using TypeScript, but you can also create translations with regular JavaScript.
 
 ```js
-import { registerTranslation } from '@pure-ui/core/dist/utilities/localize';
-import type { Translation } from '@pure-ui/core/dist/utilities/localize';
+import { registerTranslation } from 'pure-uikit/dist/utilities/localize';
+import type { Translation } from 'pure-uikit/dist/utilities/localize';
 
 const translation: Translation = {
   $code: 'es',

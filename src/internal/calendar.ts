@@ -9,17 +9,23 @@ export interface CalendarDay {
 }
 
 export interface CalendarGridOptions {
-  weekStartsWith: 'sunday' | 'monday';
+  weekStartsWith: "sunday" | "monday";
 }
 
 /** Generates a calendar grid. Month should be 1-12, not 0-11. */
-export function generateCalendarGrid(year: number, month: number, options?: Partial<CalendarGridOptions>) {
-  const weekStartsWith = options?.weekStartsWith || 'sunday';
+export function generateCalendarGrid(
+  year: number,
+  month: number,
+  options?: Partial<CalendarGridOptions>,
+) {
+  const weekStartsWith = options?.weekStartsWith || "sunday";
   const today = new Date();
   const dayThisMonthStartsWith = new Date(year, month - 1, 1).getDay();
   const lastDayOfMonth = new Date(year, month, 0).getDate();
   const lastDayOfPreviousMonth =
-    month === 1 ? new Date(year - 1, 1, 0).getDate() : new Date(year, month - 1, 0).getDate();
+    month === 1
+      ? new Date(year - 1, 1, 0).getDate()
+      : new Date(year, month - 1, 0).getDate();
   const dayGrid: CalendarDay[] = [];
   let day = 1;
 
@@ -27,7 +33,7 @@ export function generateCalendarGrid(year: number, month: number, options?: Part
     const date = new Date(year, month - 1, day);
     let dayOfWeek = new Date(year, month - 1, day).getDay();
 
-    if (weekStartsWith === 'sunday') {
+    if (weekStartsWith === "sunday") {
       //
       // TODO
       //
@@ -46,7 +52,7 @@ export function generateCalendarGrid(year: number, month: number, options?: Part
           isWeekend: isWeekend(dayOfLastMonth),
           isCurrentMonth: false,
           isPreviousMonth: true,
-          isNextMonth: false
+          isNextMonth: false,
         });
 
         lastMonthDay++;
@@ -60,7 +66,7 @@ export function generateCalendarGrid(year: number, month: number, options?: Part
       isWeekend: isWeekend(date),
       isCurrentMonth: true,
       isPreviousMonth: false,
-      isNextMonth: false
+      isNextMonth: false,
     });
 
     // Days in the next month
@@ -76,7 +82,7 @@ export function generateCalendarGrid(year: number, month: number, options?: Part
           isWeekend: isWeekend(dayOfNextMonth),
           isCurrentMonth: false,
           isPreviousMonth: false,
-          isNextMonth: true
+          isNextMonth: true,
         });
 
         nextMonthDay++;
@@ -90,23 +96,35 @@ export function generateCalendarGrid(year: number, month: number, options?: Part
 }
 
 /** Generates a localized array of day names. */
-export function getAllDayNames(locale = 'en', format: Intl.DateTimeFormatOptions['weekday'] = 'long') {
-  const formatter = new Intl.DateTimeFormat(locale, { weekday: format, timeZone: 'UTC' });
-  const days = [1, 2, 3, 4, 5, 6, 7].map(day => {
+export function getAllDayNames(
+  locale = "en",
+  format: Intl.DateTimeFormatOptions["weekday"] = "long",
+) {
+  const formatter = new Intl.DateTimeFormat(locale, {
+    weekday: format,
+    timeZone: "UTC",
+  });
+  const days = [1, 2, 3, 4, 5, 6, 7].map((day) => {
     const dd = day < 10 ? `0${day}` : day;
     return new Date(`2017-01-${dd}T00:00:00+00:00`);
   });
-  return days.map(date => formatter.format(date));
+  return days.map((date) => formatter.format(date));
 }
 
 /** Generates a localized array of month names. */
-export function getAllMonthNames(locale = 'en', format: Intl.DateTimeFormatOptions['month'] = 'long') {
-  const formatter = new Intl.DateTimeFormat(locale, { month: format, timeZone: 'UTC' });
-  const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => {
+export function getAllMonthNames(
+  locale = "en",
+  format: Intl.DateTimeFormatOptions["month"] = "long",
+) {
+  const formatter = new Intl.DateTimeFormat(locale, {
+    month: format,
+    timeZone: "UTC",
+  });
+  const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((month) => {
     const mm = month < 10 ? `0${month}` : month;
     return new Date(`2017-${mm}-01T00:00:00+00:00`);
   });
-  return months.map(date => formatter.format(date));
+  return months.map((date) => formatter.format(date));
 }
 
 /** Determines if two dates are the same day. */
@@ -131,11 +149,19 @@ export function isWeekday(date: Date) {
 }
 
 /** Returns a localized, human-readable day name. */
-export function getDayName(date: Date, locale = 'en', format: Intl.DateTimeFormatOptions['weekday'] = 'long') {
+export function getDayName(
+  date: Date,
+  locale = "en",
+  format: Intl.DateTimeFormatOptions["weekday"] = "long",
+) {
   return getAllDayNames(locale, format)[date.getDate() - 1];
 }
 
 /** Returns a localized, human-readable month name. */
-export function getMonthName(date: Date, locale = 'en', format: Intl.DateTimeFormatOptions['month'] = 'long') {
+export function getMonthName(
+  date: Date,
+  locale = "en",
+  format: Intl.DateTimeFormatOptions["month"] = "long",
+) {
   return getAllMonthNames(locale, format)[date.getMonth()];
 }

@@ -1,12 +1,12 @@
-const Prism = require('prismjs');
-const PrismLoader = require('prismjs/components/index.js');
+const Prism = require("prismjs");
+const PrismLoader = require("prismjs/components/index.js");
 
-PrismLoader('diff');
+PrismLoader("diff");
 PrismLoader.silent = true;
 
 /** Highlights a code string. */
 function highlight(code, language) {
-  const alias = language.replace(/^diff-/, '');
+  const alias = language.replace(/^diff-/, "");
   const isDiff = /^diff-/i.test(language);
 
   // Auto-load the target language
@@ -14,7 +14,9 @@ function highlight(code, language) {
     PrismLoader(alias);
 
     if (!Prism.languages[alias]) {
-      throw new Error(`Unsupported language for code highlighting: "${language}"`);
+      throw new Error(
+        `Unsupported language for code highlighting: "${language}"`,
+      );
     }
   }
 
@@ -35,10 +37,10 @@ function highlight(code, language) {
  * appropriate DOM manipulations.
  */
 module.exports = function (doc) {
-  doc.querySelectorAll('pre > code[class]').forEach(code => {
+  doc.querySelectorAll("pre > code[class]").forEach((code) => {
     // Look for class="language-*" and split colons into separate classes
-    code.classList.forEach(className => {
-      if (className.startsWith('language-')) {
+    code.classList.forEach((className) => {
+      if (className.startsWith("language-")) {
         //
         // We use certain suffixes to indicate code previews, expanded states, etc. The class might look something like
         // this:
@@ -48,10 +50,10 @@ module.exports = function (doc) {
         // The language will always come first, so we need to drop the "language-" prefix and everything after the first
         // color to get the highlighter language.
         //
-        const language = className.replace(/^language-/, '').split(':')[0];
+        const language = className.replace(/^language-/, "").split(":")[0];
 
         try {
-          code.innerHTML = highlight(code.textContent ?? '', language);
+          code.innerHTML = highlight(code.textContent ?? "", language);
         } catch (err) {
           // Language not found, skip it
         }

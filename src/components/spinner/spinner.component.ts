@@ -1,9 +1,9 @@
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './spinner.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./spinner.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Spinners are used to show the progress of an indeterminate operation.
@@ -25,7 +25,12 @@ export default class PSpinner extends PureElement {
 
   render() {
     return html`
-      <svg part="base" class="spinner" role="progressbar" aria-label=${this.localize.term('loading')}>
+      <svg
+        part="base"
+        class="spinner"
+        role="progressbar"
+        aria-label=${this.localize.term("loading")}
+      >
         <circle class="spinner__track"></circle>
         <circle class="spinner__indicator"></circle>
       </svg>

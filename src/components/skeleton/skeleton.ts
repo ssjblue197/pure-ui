@@ -1,12 +1,12 @@
-import PSkeleton from './skeleton.component.js';
+import PSkeleton from "./skeleton.component.js";
 
-export * from './skeleton.component.js';
+export * from "./skeleton.component.js";
 export default PSkeleton;
 
-PSkeleton.define('p-skeleton');
+PSkeleton.define("p-skeleton");
 
 declare global {
   interface HTMLElementTagNameMap {
-    'p-skeleton': PSkeleton;
+    "p-skeleton": PSkeleton;
   }
 }

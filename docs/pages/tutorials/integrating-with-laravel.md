@@ -27,7 +27,7 @@ Be sure to run `npm install` to install the default Laravel front-end dependenci
 ### Install the Pure UI package
 
 ```bash
-npm install @pure-ui/core
+npm install pure-uikit
 ```
 
 ### Import the Default Theme
@@ -35,7 +35,7 @@ npm install @pure-ui/core
 Import the Pure UI default theme (stylesheet) in `/resources/css/app.css`:
 
 ```css
-@import '/node_modules/@pure-ui/core/dist/themes/light.css';
+@import "/node_modules/pure-uikit/dist/themes/light.css";
 ```
 
 ### Import Your Pure UI Components
@@ -43,9 +43,9 @@ Import the Pure UI default theme (stylesheet) in `/resources/css/app.css`:
 Import each Pure UI component you plan to use in `/resources/js/bootstrap.js`. Use the full path to each component (as outlined in the [Cherry Picking instructions](https://pureui.xyz/getting-started/installation#cherry-picking)). You can find the full import statement for a component in the _Importing_ section of the component's documentation (use the _Bundler_ import). Your imports should look similar to:
 
 ```js
-import '@pure-ui/core/dist/components/button/button.js';
-import '@pure-ui/core/dist/components/icon/icon.js';
-import '@pure-ui/core/dist/components/dialog/dialog.js';
+import "pure-uikit/dist/components/button/button.js";
+import "pure-uikit/dist/components/icon/icon.js";
+import "pure-uikit/dist/components/dialog/dialog.js";
 ```
 
 ### Copy the Pure UI Static Assets (icons, images, etc.) to a Public Folder
@@ -53,7 +53,7 @@ import '@pure-ui/core/dist/components/dialog/dialog.js';
 Since Vite has no way to copy arbitrary assets into your build (like webpack), you need to manually copy the Pure UI static assets to your project's public folder. Run this command from your project's root directory to copy the Pure UI static assets to the `./public/assets` folder:
 
 ```sh
-cp -aR node_modules/@pure-ui/core/dist/assets/ ./public/assets
+cp -aR node_modules/pure-uikit/dist/assets/ ./public/assets
 ```
 
 ### Set the Base Path
@@ -61,19 +61,19 @@ cp -aR node_modules/@pure-ui/core/dist/assets/ ./public/assets
 Add the base path to your Pure UI assets (icons, images, etc.) in `/resources/js/bootstrap.js`. The path must point to the same folder where you copy assets to in the next step.
 
 ```js
-import { setBasePath } from '@pure-ui/core/dist/utilities/base-path.js';
-setBasePath('/');
+import { setBasePath } from "pure-uikit/dist/utilities/base-path.js";
+setBasePath("/");
 ```
 
 Example `/resources/js/bootstrap.js` file:
 
 ```js
-import { setBasePath } from '@pure-ui/core/dist/utilities/base-path.js';
-setBasePath('/');
+import { setBasePath } from "pure-uikit/dist/utilities/base-path.js";
+setBasePath("/");
 
-import '@pure-ui/core/dist/components/button/button.js';
-import '@pure-ui/core/dist/components/icon/icon.js';
-import '@pure-ui/core/dist/components/dialog/dialog.js';
+import "pure-uikit/dist/components/button/button.js";
+import "pure-uikit/dist/components/icon/icon.js";
+import "pure-uikit/dist/components/dialog/dialog.js";
 ```
 
 ### Verify Vite Entry Points

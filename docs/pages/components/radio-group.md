@@ -14,8 +14,8 @@ layout: component
 ```
 
 ```jsx:react
-import PRadio from '@pure-ui/core/dist/react/radio';
-import PRadioGroup from '@pure-ui/core/dist/react/radio-group';
+import PRadio from 'pure-uikit/dist/react/radio';
+import PRadioGroup from 'pure-uikit/dist/react/radio-group';
 
 const App = () => (
   <PRadioGroup label="Select an option" name="a" value="1">
@@ -41,8 +41,8 @@ Add descriptive help text to a radio group with the `help-text` attribute. For h
 ```
 
 ```jsx:react
-import PRadio from '@pure-ui/core/dist/react/radio';
-import PRadioGroup from '@pure-ui/core/dist/react/radio-group';
+import PRadio from 'pure-uikit/dist/react/radio';
+import PRadioGroup from 'pure-uikit/dist/react/radio-group';
 
 const App = () => (
   <PRadioGroup label="Select an option" help-text="Choose the most appropriate option." name="a" value="1">
@@ -66,8 +66,8 @@ const App = () => (
 ```
 
 ```jsx:react
-import PRadioButton from '@pure-ui/core/dist/react/radio-button';
-import PRadioGroup from '@pure-ui/core/dist/react/radio-group';
+import PRadioButton from 'pure-uikit/dist/react/radio-button';
+import PRadioGroup from 'pure-uikit/dist/react/radio-group';
 
 const App = () => (
   <PRadioGroup label="Select an option" name="a" value="1">
@@ -91,8 +91,8 @@ Radios and radio buttons can be disabled by adding the `disabled` attribute to t
 ```
 
 ```jsx:react
-import PRadio from '@pure-ui/core/dist/react/radio';
-import PRadioGroup from '@pure-ui/core/dist/react/radio-group';
+import PRadio from 'pure-uikit/dist/react/radio';
+import PRadioGroup from 'pure-uikit/dist/react/radio-group';
 
 const App = () => (
   <PRadioGroup label="Select an option" name="a" value="1">
@@ -110,28 +110,33 @@ const App = () => (
 The size of [Radios](/components/radio) and [Radio Buttons](/components/radio-buttons) will be determined by the Radio Group's `size` attribute.
 
 ```html preview
-<p-radio-group label="Select an option" size="medium" value="medium" class="radio-group-size">
+<p-radio-group
+  label="Select an option"
+  size="medium"
+  value="medium"
+  class="radio-group-size"
+>
   <p-radio value="small">Small</p-radio>
   <p-radio value="medium">Medium</p-radio>
   <p-radio value="large">Large</p-radio>
 </p-radio-group>
 
 <script>
-  const radioGroup = document.querySelector('.radio-group-size');
+  const radioGroup = document.querySelector(".radio-group-size");
 
-  radioGroup.addEventListener('p-change', () => {
+  radioGroup.addEventListener("p-change", () => {
     radioGroup.size = radioGroup.value;
   });
 </script>
 ```
 
 ```jsx react
-import { useState } from 'react';
-import PRadio from '@pure-ui/core/dist/react/radio';
-import PRadioGroup from '@pure-ui/core/dist/react/radio-group';
+import { useState } from "react";
+import PRadio from "pure-uikit/dist/react/radio";
+import PRadioGroup from "pure-uikit/dist/react/radio-group";
 
 const App = () => {
-  const [size, setSize] = useState('medium');
+  const [size, setSize] = useState("medium");
 
   return (
     <>
@@ -140,7 +145,7 @@ const App = () => {
         size={size}
         value={size}
         class="radio-group-size"
-        onPChange={event => setSize(event.target.value)}
+        onPChange={(event) => setSize(event.target.value)}
       >
         <PRadio value="small">Small</PRadio>
         <PRadio value="medium">Medium</PRadio>
@@ -182,10 +187,10 @@ Setting the `required` attribute to make selecting an option mandatory. If a val
 ```
 
 ```jsx:react
-import PButton from '@pure-ui/core/dist/react/button';
-import PIcon from '@pure-ui/core/dist/react/icon';
-import PRadio from '@pure-ui/core/dist/react/radio';
-import PRadioGroup from '@pure-ui/core/dist/react/radio-group';
+import PButton from 'pure-uikit/dist/react/button';
+import PIcon from 'pure-uikit/dist/react/icon';
+import PRadio from 'pure-uikit/dist/react/radio';
+import PRadioGroup from 'pure-uikit/dist/react/radio-group';
 const App = () => {
   function handleSubmit(event) {
     event.preventDefault();
@@ -255,10 +260,10 @@ Use the `setCustomValidity()` method to set a custom validation message. This wi
 
 ```jsx:react
 import { useEffect, useRef } from 'react';
-import PButton from '@pure-ui/core/dist/react/button';
-import PIcon from '@pure-ui/core/dist/react/icon';
-import PRadio from '@pure-ui/core/dist/react/radio';
-import PRadioGroup from '@pure-ui/core/dist/react/radio-group';
+import PButton from 'pure-uikit/dist/react/button';
+import PIcon from 'pure-uikit/dist/react/icon';
+import PRadio from 'pure-uikit/dist/react/radio';
+import PRadioGroup from 'pure-uikit/dist/react/radio-group';
 const App = () => {
   const radioGroup = useRef(null);
   const errorMessage = 'You must choose this option';

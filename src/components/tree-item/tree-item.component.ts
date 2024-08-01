@@ -1,19 +1,26 @@
-import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
-import { html } from 'lit';
-import { live } from 'lit/directives/live.js';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property, query, state } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import { when } from 'lit/directives/when.js';
-import componentStyles from '../../styles/component.styles.js';
-import PCheckbox from '../checkbox/checkbox.component.js';
-import PIcon from '../icon/icon.component.js';
-import PSpinner from '../spinner/spinner.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './tree-item.styles.js';
-import type { CSSResultGroup, PropertyValueMap } from 'lit';
+import {
+  animateTo,
+  shimKeyframesHeightAuto,
+  stopAnimations,
+} from "../../internal/animate.js";
+import { classMap } from "lit/directives/class-map.js";
+import {
+  getAnimation,
+  setDefaultAnimation,
+} from "../../utilities/animation-registry.js";
+import { html } from "lit";
+import { live } from "lit/directives/live.js";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query, state } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import { when } from "lit/directives/when.js";
+import componentStyles from "../../styles/component.styles.js";
+import PCheckbox from "../checkbox/checkbox.component.js";
+import PIcon from "../icon/icon.component.js";
+import PSpinner from "../spinner/spinner.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./tree-item.styles.js";
+import type { CSSResultGroup, PropertyValueMap } from "lit";
 
 /**
  * @summary A tree item serves as a hierarchical node that lives inside a [tree](/components/tree).
@@ -62,13 +69,13 @@ import type { CSSResultGroup, PropertyValueMap } from 'lit';
 export default class PTreeItem extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
-    'p-checkbox': PCheckbox,
-    'p-icon': PIcon,
-    'p-spinner': PSpinner
+    "p-checkbox": PCheckbox,
+    "p-icon": PIcon,
+    "p-spinner": PSpinner,
   };
 
   static isTreeItem(node: Node) {
-    return node instanceof Element && node.getAttribute('role') === 'treeitem';
+    return node instanceof Element && node.getAttribute("role") === "treeitem";
   }
 
   private readonly localize = new LocalizeController(this);
@@ -90,45 +97,47 @@ export default class PTreeItem extends PureElement {
   /** Enables lazy loading behavior. */
   @property({ type: Boolean, reflect: true }) lazy = false;
 
-  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
-  @query('slot[name=children]') childrenSlot: HTMLSlotElement;
-  @query('.tree-item__item') itemElement: HTMLDivElement;
-  @query('.tree-item__children') childrenContainer: HTMLDivElement;
-  @query('.tree-item__expand-button slot') expandButtonSlot: HTMLSlotElement;
+  @query("slot:not([name])") defaultSlot: HTMLSlotElement;
+  @query("slot[name=children]") childrenSlot: HTMLSlotElement;
+  @query(".tree-item__item") itemElement: HTMLDivElement;
+  @query(".tree-item__children") childrenContainer: HTMLDivElement;
+  @query(".tree-item__expand-button slot") expandButtonSlot: HTMLSlotElement;
 
   connectedCallback() {
     super.connectedCallback();
 
-    this.setAttribute('role', 'treeitem');
-    this.setAttribute('tabindex', '-1');
+    this.setAttribute("role", "treeitem");
+    this.setAttribute("tabindex", "-1");
 
     if (this.isNestedItem()) {
-      this.slot = 'children';
+      this.slot = "children";
     }
   }
 
   firstUpdated() {
     this.childrenContainer.hidden = !this.expanded;
-    this.childrenContainer.style.height = this.expanded ? 'auto' : '0';
+    this.childrenContainer.style.height = this.expanded ? "auto" : "0";
 
     this.isLeaf = !this.lazy && this.getChildrenItems().length === 0;
     this.handleExpandedChange();
   }
 
   private async animateCollapse() {
-    this.emit('p-collapse');
+    this.emit("p-collapse");
 
     await stopAnimations(this.childrenContainer);
 
-    const { keyframes, options } = getAnimation(this, 'tree-item.collapse', { dir: this.localize.dir() });
+    const { keyframes, options } = getAnimation(this, "tree-item.collapse", {
+      dir: this.localize.dir(),
+    });
     await animateTo(
       this.childrenContainer,
       shimKeyframesHeightAuto(keyframes, this.childrenContainer.scrollHeight),
-      options
+      options,
     );
     this.childrenContainer.hidden = true;
 
-    this.emit('p-after-collapse');
+    this.emit("p-after-collapse");
   }
 
   // Checks whether the item is nested into an item
@@ -142,64 +151,71 @@ export default class PTreeItem extends PureElement {
     this.isLeaf = !this.lazy && this.getChildrenItems().length === 0;
   }
 
-  protected willUpdate(changedProperties: PropertyValueMap<PTreeItem> | Map<PropertyKey, unknown>) {
-    if (changedProperties.has('selected') && !changedProperties.has('indeterminate')) {
+  protected willUpdate(
+    changedProperties: PropertyValueMap<PTreeItem> | Map<PropertyKey, unknown>,
+  ) {
+    if (
+      changedProperties.has("selected") &&
+      !changedProperties.has("indeterminate")
+    ) {
       this.indeterminate = false;
     }
   }
 
   private async animateExpand() {
-    this.emit('p-expand');
+    this.emit("p-expand");
 
     await stopAnimations(this.childrenContainer);
     this.childrenContainer.hidden = false;
 
-    const { keyframes, options } = getAnimation(this, 'tree-item.expand', { dir: this.localize.dir() });
+    const { keyframes, options } = getAnimation(this, "tree-item.expand", {
+      dir: this.localize.dir(),
+    });
     await animateTo(
       this.childrenContainer,
       shimKeyframesHeightAuto(keyframes, this.childrenContainer.scrollHeight),
-      options
+      options,
     );
-    this.childrenContainer.style.height = 'auto';
+    this.childrenContainer.style.height = "auto";
 
-    this.emit('p-after-expand');
+    this.emit("p-after-expand");
   }
 
-  @watch('loading', { waitUntilFirstUpdate: true })
+  @watch("loading", { waitUntilFirstUpdate: true })
   handleLoadingChange() {
-    this.setAttribute('aria-busy', this.loading ? 'true' : 'false');
+    this.setAttribute("aria-busy", this.loading ? "true" : "false");
 
     if (!this.loading) {
       this.animateExpand();
     }
   }
 
-  @watch('disabled')
+  @watch("disabled")
   handleDisabledChange() {
-    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+    this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
   }
 
-  @watch('selected')
+  @watch("selected")
   handleSelectedChange() {
-    this.setAttribute('aria-selected', this.selected ? 'true' : 'false');
+    this.setAttribute("aria-selected", this.selected ? "true" : "false");
   }
 
-  @watch('expanded', { waitUntilFirstUpdate: true })
+  @watch("expanded", { waitUntilFirstUpdate: true })
   handleExpandedChange() {
     if (!this.isLeaf) {
-      this.setAttribute('aria-expanded', this.expanded ? 'true' : 'false');
+      this.setAttribute("aria-expanded", this.expanded ? "true" : "false");
     } else {
-      this.removeAttribute('aria-expanded');
+      this.removeAttribute("aria-expanded");
     }
   }
 
-  @watch('expanded', { waitUntilFirstUpdate: true })
+  @watch("expanded", { waitUntilFirstUpdate: true })
   handleExpandAnimation() {
     if (this.expanded) {
       if (this.lazy) {
         this.loading = true;
 
-        this.emit('p-lazy-load');
+        this.emit("p-lazy-load");
       } else {
         this.animateExpand();
       }
@@ -208,45 +224,48 @@ export default class PTreeItem extends PureElement {
     }
   }
 
-  @watch('lazy', { waitUntilFirstUpdate: true })
+  @watch("lazy", { waitUntilFirstUpdate: true })
   handleLazyChange() {
-    this.emit('p-lazy-change');
+    this.emit("p-lazy-change");
   }
 
   /** Gets all the nested tree items in this node. */
-  getChildrenItems({ includeDisabled = true }: { includeDisabled?: boolean } = {}): PTreeItem[] {
+  getChildrenItems({
+    includeDisabled = true,
+  }: { includeDisabled?: boolean } = {}): PTreeItem[] {
     return this.childrenSlot
       ? ([...this.childrenSlot.assignedElements({ flatten: true })].filter(
-          (item: PTreeItem) => PTreeItem.isTreeItem(item) && (includeDisabled || !item.disabled)
+          (item: PTreeItem) =>
+            PTreeItem.isTreeItem(item) && (includeDisabled || !item.disabled),
         ) as PTreeItem[])
       : [];
   }
 
   render() {
-    const isRtl = this.matches(':dir(rtl)');
+    const isRtl = this.matches(":dir(rtl)");
     const showExpandButton = !this.loading && (!this.isLeaf || this.lazy);
 
     return html`
       <div
         part="base"
         class="${classMap({
-          'tree-item': true,
-          'tree-item--expanded': this.expanded,
-          'tree-item--selected': this.selected,
-          'tree-item--disabled': this.disabled,
-          'tree-item--leaf': this.isLeaf,
-          'tree-item--has-expand-button': showExpandButton,
-          'tree-item--rtl': this.localize.dir() === 'rtl'
+          "tree-item": true,
+          "tree-item--expanded": this.expanded,
+          "tree-item--selected": this.selected,
+          "tree-item--disabled": this.disabled,
+          "tree-item--leaf": this.isLeaf,
+          "tree-item--has-expand-button": showExpandButton,
+          "tree-item--rtl": this.localize.dir() === "rtl",
         })}"
       >
         <div
           class="tree-item__item"
           part="
             item
-            ${this.disabled ? 'item--disabled' : ''}
-            ${this.expanded ? 'item--expanded' : ''}
-            ${this.indeterminate ? 'item--indeterminate' : ''}
-            ${this.selected ? 'item--selected' : ''}
+            ${this.disabled ? "item--disabled" : ""}
+            ${this.expanded ? "item--expanded" : ""}
+            ${this.indeterminate ? "item--indeterminate" : ""}
+            ${this.selected ? "item--selected" : ""}
           "
         >
           <div class="tree-item__indentation" part="indentation"></div>
@@ -254,17 +273,31 @@ export default class PTreeItem extends PureElement {
           <div
             part="expand-button"
             class=${classMap({
-              'tree-item__expand-button': true,
-              'tree-item__expand-button--visible': showExpandButton
+              "tree-item__expand-button": true,
+              "tree-item__expand-button--visible": showExpandButton,
             })}
             aria-hidden="true"
           >
-            ${when(this.loading, () => html` <p-spinner part="spinner" exportparts="base:spinner__base"></p-spinner> `)}
+            ${when(
+              this.loading,
+              () => html`
+                <p-spinner
+                  part="spinner"
+                  exportparts="base:spinner__base"
+                ></p-spinner>
+              `,
+            )}
             <slot class="tree-item__expand-icon-slot" name="expand-icon">
-              <p-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></p-icon>
+              <p-icon
+                library="system"
+                name=${isRtl ? "chevron-left" : "chevron-right"}
+              ></p-icon>
             </slot>
             <slot class="tree-item__expand-icon-slot" name="collapse-icon">
-              <p-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></p-icon>
+              <p-icon
+                library="system"
+                name=${isRtl ? "chevron-left" : "chevron-right"}
+              ></p-icon>
             </slot>
           </div>
 
@@ -288,32 +321,35 @@ export default class PTreeItem extends PureElement {
                 ?indeterminate="${this.indeterminate}"
                 tabindex="-1"
               ></p-checkbox>
-            `
+            `,
           )}
 
           <slot class="tree-item__label" part="label"></slot>
         </div>
 
         <div class="tree-item__children" part="children" role="group">
-          <slot name="children" @slotchange="${this.handleChildrenSlotChange}"></slot>
+          <slot
+            name="children"
+            @slotchange="${this.handleChildrenSlotChange}"
+          ></slot>
         </div>
       </div>
     `;
   }
 }
 
-setDefaultAnimation('tree-item.expand', {
+setDefaultAnimation("tree-item.expand", {
   keyframes: [
-    { height: '0', opacity: '0', overflow: 'hidden' },
-    { height: 'auto', opacity: '1', overflow: 'hidden' }
+    { height: "0", opacity: "0", overflow: "hidden" },
+    { height: "auto", opacity: "1", overflow: "hidden" },
   ],
-  options: { duration: 250, easing: 'cubic-bezier(0.4, 0.0, 0.2, 1)' }
+  options: { duration: 250, easing: "cubic-bezier(0.4, 0.0, 0.2, 1)" },
 });
 
-setDefaultAnimation('tree-item.collapse', {
+setDefaultAnimation("tree-item.collapse", {
   keyframes: [
-    { height: 'auto', opacity: '1', overflow: 'hidden' },
-    { height: '0', opacity: '0', overflow: 'hidden' }
+    { height: "auto", opacity: "1", overflow: "hidden" },
+    { height: "0", opacity: "0", overflow: "hidden" },
   ],
-  options: { duration: 200, easing: 'cubic-bezier(0.4, 0.0, 0.2, 1)' }
+  options: { duration: 200, easing: "cubic-bezier(0.4, 0.0, 0.2, 1)" },
 });

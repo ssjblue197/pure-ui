@@ -6,14 +6,17 @@
  * @param {numeric} timeoutInMs - A timeout in ms. If the timeout has elapsed, the promise rejects
  * @returns A promise which resolves after the scrolling has stopped
  */
-export const waitForScrollingToEnd = (element: Element, timeoutInMs = 500): Promise<void> => {
+export const waitForScrollingToEnd = (
+  element: Element,
+  timeoutInMs = 500,
+): Promise<void> => {
   let lastLeft = element.scrollLeft;
   let lastTop = element.scrollTop;
   let framesWithoutChange = 0;
 
   return new Promise((resolve, reject) => {
     const timeout = window.setTimeout(() => {
-      reject(new Error('Waiting for scroll end timed out'));
+      reject(new Error("Waiting for scroll end timed out"));
     }, timeoutInMs);
 
     function checkScrollingChanged() {

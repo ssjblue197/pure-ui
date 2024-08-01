@@ -1,11 +1,11 @@
-import '../../../dist/pure-ui.js';
-import { aTimeout, expect, fixture, html, oneEvent } from '@open-wc/testing';
-import { clickOnElement, moveMouseOnElement } from '../../internal/test.js';
-import { queryByTestId } from '../../internal/test/data-testid-helpers.js';
-import { resetMouse } from '@web/test-runner-commands';
-import sinon from 'sinon';
-import type PAlert from './alert.js';
-import type PIconButton from '../icon-button/icon-button.js';
+import "../../../dist/pure-ui.js";
+import { aTimeout, expect, fixture, html, oneEvent } from "@open-wc/testing";
+import { clickOnElement, moveMouseOnElement } from "../../internal/test.js";
+import { queryByTestId } from "../../internal/test/data-testid-helpers.js";
+import { resetMouse } from "@web/test-runner-commands";
+import sinon from "sinon";
+import type PAlert from "./alert.js";
+import type PIconButton from "../icon-button/icon-button.js";
 
 const getAlertContainer = (alert: PAlert): HTMLElement => {
   return alert.shadowRoot!.querySelector<HTMLElement>('[part="base"]')!;
@@ -14,22 +14,25 @@ const getAlertContainer = (alert: PAlert): HTMLElement => {
 const expectAlertToBeVisible = (alert: PAlert): void => {
   const alertContainer = getAlertContainer(alert);
   const style = window.getComputedStyle(alertContainer);
-  expect(style.display).not.to.equal('none');
-  expect(style.visibility).not.to.equal('hidden');
-  expect(style.visibility).not.to.equal('collapse');
+  expect(style.display).not.to.equal("none");
+  expect(style.visibility).not.to.equal("hidden");
+  expect(style.visibility).not.to.equal("collapse");
 };
 
 const expectAlertToBeInvisible = (alert: PAlert): void => {
   const alertContainer = getAlertContainer(alert);
   const style = window.getComputedStyle(alertContainer);
-  expect(style.display, 'alert should be invisible').to.equal('none');
+  expect(style.display, "alert should be invisible").to.equal("none");
 };
 
-const expectHideAndAfterHideToBeEmittedInCorrectOrder = async (alert: PAlert, action: () => void | Promise<void>) => {
-  const hidePromise = oneEvent(alert, 'p-hide');
-  const afterHidePromise = oneEvent(alert, 'p-after-hide');
+const expectHideAndAfterHideToBeEmittedInCorrectOrder = async (
+  alert: PAlert,
+  action: () => void | Promise<void>,
+) => {
+  const hidePromise = oneEvent(alert, "p-hide");
+  const afterHidePromise = oneEvent(alert, "p-after-hide");
   let afterHideHappened = false;
-  oneEvent(alert, 'p-after-hide').then(() => (afterHideHappened = true));
+  oneEvent(alert, "p-after-hide").then(() => (afterHideHappened = true));
 
   action();
 
@@ -40,11 +43,14 @@ const expectHideAndAfterHideToBeEmittedInCorrectOrder = async (alert: PAlert, ac
   expectAlertToBeInvisible(alert);
 };
 
-const expectShowAndAfterShowToBeEmittedInCorrectOrder = async (alert: PAlert, action: () => void | Promise<void>) => {
-  const showPromise = oneEvent(alert, 'p-show');
-  const afterShowPromise = oneEvent(alert, 'p-after-show');
+const expectShowAndAfterShowToBeEmittedInCorrectOrder = async (
+  alert: PAlert,
+  action: () => void | Promise<void>,
+) => {
+  const showPromise = oneEvent(alert, "p-show");
+  const afterShowPromise = oneEvent(alert, "p-after-show");
   let afterShowHappened = false;
-  oneEvent(alert, 'p-after-show').then(() => (afterShowHappened = true));
+  oneEvent(alert, "p-after-show").then(() => (afterShowHappened = true));
 
   action();
 
@@ -58,7 +64,7 @@ const expectShowAndAfterShowToBeEmittedInCorrectOrder = async (alert: PAlert, ac
 const getCloseButton = (alert: PAlert): PIconButton | null | undefined =>
   alert.shadowRoot?.querySelector<PIconButton>('[part="close-button"]');
 
-describe('<p-alert>', () => {
+describe("<p-alert>", () => {
   let clock: sinon.SinonFakeTimers | null = null;
 
   afterEach(async () => {
@@ -66,55 +72,75 @@ describe('<p-alert>', () => {
     await resetMouse();
   });
 
-  it('renders', async () => {
-    const alert = await fixture<PAlert>(html`<p-alert open>I am an alert</p-alert>`);
+  it("renders", async () => {
+    const alert = await fixture<PAlert>(
+      html`<p-alert open>I am an alert</p-alert>`,
+    );
 
     expectAlertToBeVisible(alert);
   });
 
-  it('is accessible', async () => {
-    const alert = await fixture<PAlert>(html`<p-alert open>I am an alert</p-alert>`);
+  it("is accessible", async () => {
+    const alert = await fixture<PAlert>(
+      html`<p-alert open>I am an alert</p-alert>`,
+    );
 
     await expect(alert).to.be.accessible();
   });
 
-  describe('alert visibility', () => {
-    it('should be visible with the open attribute', async () => {
-      const alert = await fixture<PAlert>(html`<p-alert open>I am an alert</p-alert>`);
+  describe("alert visibility", () => {
+    it("should be visible with the open attribute", async () => {
+      const alert = await fixture<PAlert>(
+        html`<p-alert open>I am an alert</p-alert>`,
+      );
 
       expectAlertToBeVisible(alert);
     });
 
-    it('should not be visible without the open attribute', async () => {
-      const alert = await fixture<PAlert>(html` <p-alert>I am an alert</p-alert>`);
+    it("should not be visible without the open attribute", async () => {
+      const alert = await fixture<PAlert>(
+        html` <p-alert>I am an alert</p-alert>`,
+      );
 
       expectAlertToBeInvisible(alert);
     });
 
-    it('should emit p-show and p-after-show when calling show()', async () => {
-      const alert = await fixture<PAlert>(html` <p-alert>I am an alert</p-alert>`);
+    it("should emit p-show and p-after-show when calling show()", async () => {
+      const alert = await fixture<PAlert>(
+        html` <p-alert>I am an alert</p-alert>`,
+      );
 
       expectAlertToBeInvisible(alert);
 
-      await expectShowAndAfterShowToBeEmittedInCorrectOrder(alert, () => alert.show());
+      await expectShowAndAfterShowToBeEmittedInCorrectOrder(alert, () =>
+        alert.show(),
+      );
     });
 
-    it('should emit p-hide and p-after-hide when calling hide()', async () => {
-      const alert = await fixture<PAlert>(html` <p-alert open>I am an alert</p-alert>`);
+    it("should emit p-hide and p-after-hide when calling hide()", async () => {
+      const alert = await fixture<PAlert>(
+        html` <p-alert open>I am an alert</p-alert>`,
+      );
 
-      await expectHideAndAfterHideToBeEmittedInCorrectOrder(alert, () => alert.hide());
+      await expectHideAndAfterHideToBeEmittedInCorrectOrder(alert, () =>
+        alert.hide(),
+      );
     });
 
-    it('should emit p-show and p-after-show when setting open = true', async () => {
-      const alert = await fixture<PAlert>(html` <p-alert>I am an alert</p-alert> `);
+    it("should emit p-show and p-after-show when setting open = true", async () => {
+      const alert = await fixture<PAlert>(html`
+        <p-alert>I am an alert</p-alert>
+      `);
 
       await expectShowAndAfterShowToBeEmittedInCorrectOrder(alert, () => {
         alert.open = true;
       });
     });
 
-    it('should emit p-hide and p-after-hide when setting open = false', async () => {
-      const alert = await fixture<PAlert>(html` <p-alert open>I am an alert</p-alert> `);
+    it("should emit p-hide and p-after-hide when setting open = false", async () => {
+      const alert = await fixture<PAlert>(html`
+        <p-alert open>I am an alert</p-alert>
+      `);
 
       await expectHideAndAfterHideToBeEmittedInCorrectOrder(alert, () => {
         alert.open = false;
@@ -122,16 +148,21 @@ describe('<p-alert>', () => {
     });
   });
 
-  describe('close button', () => {
-    it('shows a close button if the alert has the closable attribute', () => async () => {
-      const alert = await fixture<PAlert>(html` <p-alert open closable>I am an alert</p-alert> `);
-      const closeButton = getCloseButton(alert);
+  describe("close button", () => {
+    it("shows a close button if the alert has the closable attribute", () =>
+      async () => {
+        const alert = await fixture<PAlert>(html`
+          <p-alert open closable>I am an alert</p-alert>
+        `);
+        const closeButton = getCloseButton(alert);
 
-      expect(closeButton).to.be.visible;
-    });
+        expect(closeButton).to.be.visible;
+      });
 
-    it('clicking the close button closes the alert', () => async () => {
-      const alert = await fixture<PAlert>(html` <p-alert open closable>I am an alert</p-alert> `);
+    it("clicking the close button closes the alert", () => async () => {
+      const alert = await fixture<PAlert>(html`
+        <p-alert open closable>I am an alert</p-alert>
+      `);
       const closeButton = getCloseButton(alert);
 
       await expectHideAndAfterHideToBeEmittedInCorrectOrder(alert, () => {
@@ -140,8 +171,9 @@ describe('<p-alert>', () => {
     });
   });
 
-  describe('toast', () => {
-    const getToastStack = (): HTMLDivElement | null => document.querySelector<HTMLDivElement>('.p-toast-stack');
+  describe("toast", () => {
+    const getToastStack = (): HTMLDivElement | null =>
+      document.querySelector<HTMLDivElement>(".p-toast-stack");
 
     const closeRemainingAlerts = async (): Promise<void> => {
       const toastStack = getToastStack();
@@ -156,26 +188,32 @@ describe('<p-alert>', () => {
       await closeRemainingAlerts();
     });
 
-    it('can be rendered as a toast', async () => {
-      const alert = await fixture<PAlert>(html`<p-alert>I am an alert</p-alert>`);
+    it("can be rendered as a toast", async () => {
+      const alert = await fixture<PAlert>(
+        html`<p-alert>I am an alert</p-alert>`,
+      );
 
-      expectShowAndAfterShowToBeEmittedInCorrectOrder(alert, () => alert.toast());
+      expectShowAndAfterShowToBeEmittedInCorrectOrder(alert, () =>
+        alert.toast(),
+      );
       const toastStack = getToastStack();
       expect(toastStack).to.be.visible;
       expect(toastStack?.firstChild).to.be.equal(alert);
     });
 
-    it('resolves only after being closed', async () => {
-      const alert = await fixture<PAlert>(html`<p-alert closable>I am an alert</p-alert>`);
+    it("resolves only after being closed", async () => {
+      const alert = await fixture<PAlert>(
+        html`<p-alert closable>I am an alert</p-alert>`,
+      );
 
-      const afterShowEvent = oneEvent(alert, 'p-after-show');
+      const afterShowEvent = oneEvent(alert, "p-after-show");
       let toastPromiseResolved = false;
       alert.toast().then(() => (toastPromiseResolved = true));
 
       await afterShowEvent;
       expect(toastPromiseResolved).to.be.false;
 
-      const closePromise = oneEvent(alert, 'p-after-hide');
+      const closePromise = oneEvent(alert, "p-after-hide");
       const closeButton = getCloseButton(alert);
       clickOnElement(closeButton!);
 
@@ -196,29 +234,29 @@ describe('<p-alert>', () => {
     };
 
     const openToast = async (alert: PAlert): Promise<void> => {
-      const openPromise = oneEvent(alert, 'p-after-show');
+      const openPromise = oneEvent(alert, "p-after-show");
       alert.toast();
       await openPromise;
     };
 
     const closeToast = async (alert: PAlert): Promise<void> => {
-      const closePromise = oneEvent(alert, 'p-after-hide');
+      const closePromise = oneEvent(alert, "p-after-hide");
       const closeButton = getCloseButton(alert);
       await clickOnElement(closeButton!);
       await closePromise;
       await aTimeout(0);
     };
 
-    it('deletes the toast stack after the last alert is done', async () => {
+    it("deletes the toast stack after the last alert is done", async () => {
       const container = await fixture<HTMLElement>(
         html`<div>
           <p-alert data-testid="alert1" closable>alert 1</p-alert>
           <p-alert data-testid="alert2" closable>alert 2</p-alert>
-        </div>`
+        </div>`,
       );
 
-      const alert1 = queryByTestId<PAlert>(container, 'alert1');
-      const alert2 = queryByTestId<PAlert>(container, 'alert2');
+      const alert1 = queryByTestId<PAlert>(container, "alert1");
+      const alert2 = queryByTestId<PAlert>(container, "alert2");
 
       await openToast(alert1!);
 
@@ -238,10 +276,12 @@ describe('<p-alert>', () => {
     });
   });
 
-  describe('timer controlled closing', () => {
-    it('closes after a predefined amount of time', async () => {
+  describe("timer controlled closing", () => {
+    it("closes after a predefined amount of time", async () => {
       clock = sinon.useFakeTimers();
-      const alert = await fixture<PAlert>(html` <p-alert open duration="3000">I am an alert</p-alert>`);
+      const alert = await fixture<PAlert>(
+        html` <p-alert open duration="3000">I am an alert</p-alert>`,
+      );
 
       expectAlertToBeVisible(alert);
 
@@ -254,9 +294,11 @@ describe('<p-alert>', () => {
       });
     });
 
-    it('resets the closing timer after mouse-over', async () => {
+    it("resets the closing timer after mouse-over", async () => {
       clock = sinon.useFakeTimers();
-      const alert = await fixture<PAlert>(html` <p-alert open duration="3000">I am an alert</p-alert>`);
+      const alert = await fixture<PAlert>(
+        html` <p-alert open duration="3000">I am an alert</p-alert>`,
+      );
 
       expectAlertToBeVisible(alert);
 
@@ -273,15 +315,17 @@ describe('<p-alert>', () => {
       });
     });
 
-    it('resets the closing timer after opening', async () => {
+    it("resets the closing timer after opening", async () => {
       clock = sinon.useFakeTimers();
-      const alert = await fixture<PAlert>(html` <p-alert duration="3000">I am an alert</p-alert>`);
+      const alert = await fixture<PAlert>(
+        html` <p-alert duration="3000">I am an alert</p-alert>`,
+      );
 
       expectAlertToBeInvisible(alert);
 
       clock.tick(1000);
 
-      const afterShowPromise = oneEvent(alert, 'p-after-show');
+      const afterShowPromise = oneEvent(alert, "p-after-show");
       alert.show();
       await afterShowPromise;
 
@@ -293,12 +337,14 @@ describe('<p-alert>', () => {
     });
   });
 
-  describe('alert variants', () => {
-    const variants = ['primary', 'success', 'neutral', 'warning', 'danger'];
+  describe("alert variants", () => {
+    const variants = ["primary", "success", "neutral", "warning", "danger"];
 
-    variants.forEach(variant => {
+    variants.forEach((variant) => {
       it(`adapts to the variant: ${variant}`, async () => {
-        const alert = await fixture<PAlert>(html`<p-alert variant="${variant}" open>I am an alert</p-alert>`);
+        const alert = await fixture<PAlert>(
+          html`<p-alert variant="${variant}" open>I am an alert</p-alert>`,
+        );
 
         const alertContainer = getAlertContainer(alert);
         expect(alertContainer).to.have.class(`alert--${variant}`);

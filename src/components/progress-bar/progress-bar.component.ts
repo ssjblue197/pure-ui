@@ -1,13 +1,13 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property } from 'lit/decorators.js';
-import { styleMap } from 'lit/directives/style-map.js';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './progress-bar.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property } from "lit/decorators.js";
+import { styleMap } from "lit/directives/style-map.js";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./progress-bar.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Progress bars are used to show the status of an ongoing operation.
@@ -37,26 +37,34 @@ export default class PProgressBar extends PureElement {
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   /** A custom label for assistive devices. */
-  @property() label = '';
+  @property() label = "";
 
   render() {
     return html`
       <div
         part="base"
         class=${classMap({
-          'progress-bar': true,
-          'progress-bar--indeterminate': this.indeterminate,
-          'progress-bar--rtl': this.localize.dir() === 'rtl'
+          "progress-bar": true,
+          "progress-bar--indeterminate": this.indeterminate,
+          "progress-bar--rtl": this.localize.dir() === "rtl",
         })}
         role="progressbar"
         title=${ifDefined(this.title)}
-        aria-label=${this.label.length > 0 ? this.label : this.localize.term('progress')}
+        aria-label=${this.label.length > 0
+          ? this.label
+          : this.localize.term("progress")}
         aria-valuemin="0"
         aria-valuemax="100"
         aria-valuenow=${this.indeterminate ? 0 : this.value}
       >
-        <div part="indicator" class="progress-bar__indicator" style=${styleMap({ width: `${this.value}%` })}>
-          ${!this.indeterminate ? html` <slot part="label" class="progress-bar__label"></slot> ` : ''}
+        <div
+          part="indicator"
+          class="progress-bar__indicator"
+          style=${styleMap({ width: `${this.value}%` })}
+        >
+          ${!this.indeterminate
+            ? html` <slot part="label" class="progress-bar__label"></slot> `
+            : ""}
         </div>
       </div>
     `;

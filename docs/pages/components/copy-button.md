@@ -10,7 +10,7 @@ layout: component
 ```
 
 ```jsx:react
-import { PCopyButton } from '@pure-ui/core/dist/react/copy-button';
+import { PCopyButton } from 'pure-uikit/dist/react/copy-button';
 
 const App = () => (
   <PCopyButton value="Pure UI rocks!" />
@@ -33,7 +33,7 @@ Copy Buttons display feedback in a tooltip. You can customize the labels using t
 ```
 
 ```jsx:react
-import { PCopyButton } from '@pure-ui/core/dist/react/copy-button';
+import { PCopyButton } from 'pure-uikit/dist/react/copy-button';
 
 const App = () => (
   <PCopyButton
@@ -58,8 +58,8 @@ Use the `copy-icon`, `success-icon`, and `error-icon` slots to customize the ico
 ```
 
 ```jsx:react
-import { PCopyButton } from '@pure-ui/core/dist/react/copy-button';
-import { PIcon } from '@pure-ui/core/dist/react/icon';
+import { PCopyButton } from 'pure-uikit/dist/react/copy-button';
+import { PIcon } from 'pure-uikit/dist/react/icon';
 
 const App = () => (
   <>
@@ -99,8 +99,8 @@ To copy data from an attribute, use `from="id[attr]"` where `id` is the id of th
 ```
 
 ```jsx:react
-import { PCopyButton } from '@pure-ui/core/dist/react/copy-button';
-import { PInput } from '@pure-ui/core/dist/react/input';
+import { PCopyButton } from 'pure-uikit/dist/react/copy-button';
+import { PInput } from 'pure-uikit/dist/react/input';
 
 const App = () => (
   <>
@@ -134,7 +134,7 @@ This example demonstrates what happens when a copy error occurs. You can customi
 ```
 
 ```jsx:react
-import { PCopyButton } from '@pure-ui/core/dist/react/copy-button';
+import { PCopyButton } from 'pure-uikit/dist/react/copy-button';
 
 const App = () => (
   <PCopyButton from="i-do-not-exist" />
@@ -150,7 +150,7 @@ Copy buttons can be disabled by adding the `disabled` attribute.
 ```
 
 ```jsx:react
-import { PCopyButton } from '@pure-ui/core/dist/react/copy-button';
+import { PCopyButton } from 'pure-uikit/dist/react/copy-button';
 
 const App = () => (
   <PCopyButton value="You can't copy me" disabled />
@@ -166,7 +166,7 @@ A success indicator is briefly shown after copying. You can customize the length
 ```
 
 ```jsx:react
-import { PCopyButton } from '@pure-ui/core/dist/react/copy-button';
+import { PCopyButton } from 'pure-uikit/dist/react/copy-button';
 
 const App = () => (
   <PCopyButton value="Pure UI rocks!" feedback-duration={250} />
@@ -216,7 +216,7 @@ You can customize the button to your liking with CSS.
 ```
 
 ```jsx:react
-import { PCopyButton } from '@pure-ui/core/dist/react/copy-button';
+import { PCopyButton } from 'pure-uikit/dist/react/copy-button';
 
 const css = `
   .custom-styles {

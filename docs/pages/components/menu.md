@@ -22,9 +22,9 @@ You can use [menu items](/components/menu-item), [menu labels](/components/menu-
 {% raw %}
 
 ```jsx:react
-import PDivider from '@pure-ui/core/dist/react/divider';
-import PMenu from '@pure-ui/core/dist/react/menu';
-import PMenuItem from '@pure-ui/core/dist/react/menu-item';
+import PDivider from 'pure-uikit/dist/react/divider';
+import PMenu from 'pure-uikit/dist/react/menu';
+import PMenuItem from 'pure-uikit/dist/react/menu-item';
 
 const App = () => (
   <PMenu style={{ maxWidth: '200px' }}>
@@ -63,10 +63,10 @@ Menus work really well when used inside [dropdowns](/components/dropdown).
 ```
 
 ```jsx:react
-import PButton from '@pure-ui/core/dist/react/button';
-import PDropdown from '@pure-ui/core/dist/react/dropdown';
-import PMenu from '@pure-ui/core/dist/react/menu';
-import PMenuItem from '@pure-ui/core/dist/react/menu-item';
+import PButton from 'pure-uikit/dist/react/button';
+import PDropdown from 'pure-uikit/dist/react/dropdown';
+import PMenu from 'pure-uikit/dist/react/menu';
+import PMenuItem from 'pure-uikit/dist/react/menu-item';
 
 const App = () => (
   <PDropdown>
@@ -115,9 +115,9 @@ To create a submenu, nest an `<p-menu slot="submenu">` in any [menu item](/compo
 {% raw %}
 
 ```jsx:react
-import PDivider from '@pure-ui/core/dist/react/divider';
-import PMenu from '@pure-ui/core/dist/react/menu';
-import PMenuItem from '@pure-ui/core/dist/react/menu-item';
+import PDivider from 'pure-uikit/dist/react/divider';
+import PMenu from 'pure-uikit/dist/react/menu';
+import PMenuItem from 'pure-uikit/dist/react/menu-item';
 
 const App = () => (
   <PMenu style={{ maxWidth: '200px' }}>

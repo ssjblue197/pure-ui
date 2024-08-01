@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   :host {
@@ -18,11 +18,11 @@ export default css`
     z-index: var(--p-z-index-dropdown);
   }
 
-  .select[data-current-placement^='top']::part(popup) {
+  .select[data-current-placement^="top"]::part(popup) {
     transform-origin: bottom;
   }
 
-  .select[data-current-placement^='bottom']::part(popup) {
+  .select[data-current-placement^="bottom"]::part(popup) {
     transform-origin: top;
   }
 
@@ -176,7 +176,8 @@ export default css`
     margin-inline-end: var(--p-input-spacing-small);
   }
 
-  .select--small.select--multiple:not(.select--placeholder-visible) .select__combobox {
+  .select--small.select--multiple:not(.select--placeholder-visible)
+    .select__combobox {
     padding-block: 2px;
     padding-inline-start: 0;
   }
@@ -201,7 +202,8 @@ export default css`
     margin-inline-end: var(--p-input-spacing-medium);
   }
 
-  .select--medium.select--multiple:not(.select--placeholder-visible) .select__combobox {
+  .select--medium.select--multiple:not(.select--placeholder-visible)
+    .select__combobox {
     padding-inline-start: 0;
     padding-block: 3px;
   }
@@ -226,7 +228,8 @@ export default css`
     margin-inline-end: var(--p-input-spacing-large);
   }
 
-  .select--large.select--multiple:not(.select--placeholder-visible) .select__combobox {
+  .select--large.select--multiple:not(.select--placeholder-visible)
+    .select__combobox {
     padding-inline-start: 0;
     padding-block: 4px;
   }

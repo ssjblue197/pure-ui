@@ -12,7 +12,7 @@ For a full list of icons that come bundled with Pure UI, refer to the [icon comp
 ```
 
 ```jsx:react
-import PIconButton from '@pure-ui/core/dist/react/icon-button';
+import PIconButton from 'pure-uikit/dist/react/icon-button';
 
 const App = () => <PIconButton name="gear" label="Settings" />;
 ```
@@ -32,7 +32,7 @@ Icon buttons inherit their parent element's `font-size`.
 {% raw %}
 
 ```jsx:react
-import PIconButton from '@pure-ui/core/dist/react/icon-button';
+import PIconButton from 'pure-uikit/dist/react/icon-button';
 
 const App = () => (
   <>
@@ -73,7 +73,7 @@ Icon buttons are designed to have a uniform appearance, so their color is not in
 ```
 
 ```jsx:react
-import PIconButton from '@pure-ui/core/dist/react/icon-button';
+import PIconButton from 'pure-uikit/dist/react/icon-button';
 
 const css = `
   .icon-button-color p-icon-button::part(base) {
@@ -112,7 +112,7 @@ Use the `href` attribute to convert the button to a link.
 ```
 
 ```jsx:react
-import PIconButton from '@pure-ui/core/dist/react/icon-button';
+import PIconButton from 'pure-uikit/dist/react/icon-button';
 
 const App = () => <PIconButton name="gear" label="Settings" href="https://example.com" target="_blank" />;
 ```
@@ -128,8 +128,8 @@ Wrap a tooltip around an icon button to provide contextual information to the us
 ```
 
 ```jsx:react
-import PIconButton from '@pure-ui/core/dist/react/icon-button';
-import PTooltip from '@pure-ui/core/dist/react/tooltip';
+import PIconButton from 'pure-uikit/dist/react/icon-button';
+import PTooltip from 'pure-uikit/dist/react/tooltip';
 
 const App = () => (
   <PTooltip content="Settings">
@@ -147,7 +147,7 @@ Use the `disabled` attribute to disable the icon button.
 ```
 
 ```jsx:react
-import PIconButton from '@pure-ui/core/dist/react/icon-button';
+import PIconButton from 'pure-uikit/dist/react/icon-button';
 
 const App = () => <PIconButton name="gear" label="Settings" disabled />;
 ```

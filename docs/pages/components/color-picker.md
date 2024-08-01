@@ -10,7 +10,7 @@ layout: component
 ```
 
 ```jsx:react
-import PColorPicker from '@pure-ui/core/dist/react/color-picker';
+import PColorPicker from 'pure-uikit/dist/react/color-picker';
 
 const App = () => <PColorPicker label="Select a color" />;
 ```
@@ -30,7 +30,7 @@ Use the `value` attribute to set an initial value for the color picker.
 ```
 
 ```jsx:react
-import PColorPicker from '@pure-ui/core/dist/react/color-picker';
+import PColorPicker from 'pure-uikit/dist/react/color-picker';
 
 const App = () => <PColorPicker value="#4a90e2" label="Select a color" />;
 ```
@@ -44,7 +44,7 @@ Use the `opacity` attribute to enable the opacity slider. When this is enabled, 
 ```
 
 ```jsx:react
-import PColorPicker from '@pure-ui/core/dist/react/color-picker';
+import PColorPicker from 'pure-uikit/dist/react/color-picker';
 
 const App = () => <PColorPicker opacity label="Select a color" />;
 ```
@@ -63,7 +63,7 @@ To prevent users from toggling the format themselves, add the `no-format-toggle`
 ```
 
 ```jsx:react
-import PColorPicker from '@pure-ui/core/dist/react/color-picker';
+import PColorPicker from 'pure-uikit/dist/react/color-picker';
 
 const App = () => (
   <>
@@ -90,7 +90,7 @@ Use the `swatches` attribute to add convenient presets to the color picker. Any 
 ```
 
 ```jsx:react
-import PColorPicker from '@pure-ui/core/dist/react/color-picker';
+import PColorPicker from 'pure-uikit/dist/react/color-picker';
 
 const App = () => (
   <PColorPicker
@@ -114,7 +114,7 @@ Use the `size` attribute to change the color picker's trigger size.
 ```
 
 ```jsx:react
-import PColorPicker from '@pure-ui/core/dist/react/color-picker';
+import PColorPicker from 'pure-uikit/dist/react/color-picker';
 
 const App = () => (
   <>
@@ -134,7 +134,7 @@ The color picker can be rendered inline instead of in a dropdown using the `inli
 ```
 
 ```jsx:react
-import PColorPicker from '@pure-ui/core/dist/react/color-picker';
+import PColorPicker from 'pure-uikit/dist/react/color-picker';
 
 const App = () => <PColorPicker inline label="Select a color" />;
 ```

@@ -15,7 +15,7 @@ layout: component
 ```
 
 ```jsx:react
-import PDetails from '@pure-ui/core/dist/react/details';
+import PDetails from 'pure-uikit/dist/react/details';
 
 const App = () => (
   <PDetails summary="Toggle Me">
@@ -39,7 +39,7 @@ Use the `disable` attribute to prevent the details from expanding.
 ```
 
 ```jsx:react
-import PDetails from '@pure-ui/core/dist/react/details';
+import PDetails from 'pure-uikit/dist/react/details';
 
 const App = () => (
   <PDetails summary="Disabled" disabled>
@@ -71,8 +71,8 @@ Use the `expand-icon` and `collapse-icon` slots to change the expand and collaps
 ```
 
 ```jsx:react
-import PDetails from '@pure-ui/core/dist/react/details';
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PDetails from 'pure-uikit/dist/react/details';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const css = `
   p-details.custom-icon::part(summary-icon) {

@@ -14,7 +14,7 @@
  */
 module.exports = function (rawContent, replacements) {
   let content = rawContent;
-  replacements.forEach(replacement => {
+  replacements.forEach((replacement) => {
     content = content.replaceAll(replacement.pattern, replacement.replacement);
   });
 

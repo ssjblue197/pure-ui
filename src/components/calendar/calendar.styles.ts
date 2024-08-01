@@ -1,5 +1,5 @@
-import { css } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
+import { css } from "lit";
+import componentStyles from "../../styles/component.styles.js";
 
 export default css`
   ${componentStyles}
@@ -85,35 +85,35 @@ export default css`
     z-index: 1;
   }
 
-  .calendar__day[part~='day-weekend'] {
+  .calendar__day[part~="day-weekend"] {
     color: var(--p-color-rose-600);
   }
 
-  .calendar__day[part~='day-today'] {
+  .calendar__day[part~="day-today"] {
     font-weight: var(--p-font-weight-bold);
   }
 
-  .calendar__day[part~='day-selected'] {
+  .calendar__day[part~="day-selected"] {
     background-color: var(--p-color-primary-100);
   }
 
-  .calendar__day[part~='day-selection-start'] {
+  .calendar__day[part~="day-selection-start"] {
     border-top-left-radius: var(--p-border-radius-pill);
     border-bottom-left-radius: var(--p-border-radius-pill);
   }
 
-  .calendar__day[part~='day-selection-end'] {
+  .calendar__day[part~="day-selection-end"] {
     border-top-right-radius: var(--p-border-radius-pill);
     border-bottom-right-radius: var(--p-border-radius-pill);
   }
 
-  .calendar__day .calendar__day[part~='day-previous-month'],
-  .calendar__day[part~='day-next-month'] {
+  .calendar__day .calendar__day[part~="day-previous-month"],
+  .calendar__day[part~="day-next-month"] {
     color: var(--p-color-neutral-400);
   }
 
-  .calendar__day[part~='day-previous-month'][part~='day-weekend'],
-  .calendar__day[part~='day-next-month'][part~='day-weekend'] {
+  .calendar__day[part~="day-previous-month"][part~="day-weekend"],
+  .calendar__day[part~="day-next-month"][part~="day-weekend"] {
     color: var(--p-color-rose-400);
   }
 `;

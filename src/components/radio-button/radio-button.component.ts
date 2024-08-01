@@ -1,13 +1,13 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit/static-html.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { property, query, state } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './radio-button.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit/static-html.js";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { property, query, state } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./radio-button.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Radios buttons allow the user to select a single option from a group using a button-like control.
@@ -32,10 +32,15 @@ import type { CSSResultGroup } from 'lit';
 export default class PRadioButton extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
-  private readonly hasSlotController = new HasSlotController(this, '[default]', 'prefix', 'suffix');
+  private readonly hasSlotController = new HasSlotController(
+    this,
+    "[default]",
+    "prefix",
+    "suffix",
+  );
 
-  @query('.button') input: HTMLInputElement;
-  @query('.hidden-input') hiddenInput: HTMLInputElement;
+  @query(".button") input: HTMLInputElement;
+  @query(".hidden-input") hiddenInput: HTMLInputElement;
 
   @state() protected hasFocus = false;
 
@@ -55,19 +60,19 @@ export default class PRadioButton extends PureElement {
    * The radio button's size. When used inside a radio group, the size will be determined by the radio group's size so
    * this attribute can typically be omitted.
    */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
 
   /** Draws a pill-style radio button with rounded edges. */
   @property({ type: Boolean, reflect: true }) pill = false;
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('role', 'presentation');
+    this.setAttribute("role", "presentation");
   }
 
   private handleBlur() {
     this.hasFocus = false;
-    this.emit('p-blur');
+    this.emit("p-blur");
   }
 
   private handleClick(e: MouseEvent) {
@@ -82,12 +87,12 @@ export default class PRadioButton extends PureElement {
 
   private handleFocus() {
     this.hasFocus = true;
-    this.emit('p-focus');
+    this.emit("p-focus");
   }
 
-  @watch('disabled', { waitUntilFirstUpdate: true })
+  @watch("disabled", { waitUntilFirstUpdate: true })
   handleDisabledChange() {
-    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+    this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
   }
 
   /** Sets focus on the radio button. */
@@ -104,23 +109,23 @@ export default class PRadioButton extends PureElement {
     return html`
       <div part="base" role="presentation">
         <button
-          part="${`button${this.checked ? ' button--checked' : ''}`}"
+          part="${`button${this.checked ? " button--checked" : ""}`}"
           role="radio"
           aria-checked="${this.checked}"
           class=${classMap({
             button: true,
-            'button--default': true,
-            'button--small': this.size === 'small',
-            'button--medium': this.size === 'medium',
-            'button--large': this.size === 'large',
-            'button--checked': this.checked,
-            'button--disabled': this.disabled,
-            'button--focused': this.hasFocus,
-            'button--outline': true,
-            'button--pill': this.pill,
-            'button--has-label': this.hasSlotController.test('[default]'),
-            'button--has-prefix': this.hasSlotController.test('prefix'),
-            'button--has-suffix': this.hasSlotController.test('suffix')
+            "button--default": true,
+            "button--small": this.size === "small",
+            "button--medium": this.size === "medium",
+            "button--large": this.size === "large",
+            "button--checked": this.checked,
+            "button--disabled": this.disabled,
+            "button--focused": this.hasFocus,
+            "button--outline": true,
+            "button--pill": this.pill,
+            "button--has-label": this.hasSlotController.test("[default]"),
+            "button--has-prefix": this.hasSlotController.test("prefix"),
+            "button--has-suffix": this.hasSlotController.test("suffix"),
           })}
           aria-disabled=${this.disabled}
           type="button"

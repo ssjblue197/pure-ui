@@ -17,8 +17,8 @@ layout: component
 ```
 
 ```jsx:react
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <PSelect>
@@ -51,8 +51,8 @@ Use the `label` attribute to give the select an accessible label. For labels tha
 ```
 
 ```jsx:react
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <PSelect label="Select one">
@@ -76,8 +76,8 @@ Add descriptive help text to a select with the `help-text` attribute. For help t
 ```
 
 ```jsx:react
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <PSelect label="Experience" help-text="Please tell us your skill level.">
@@ -101,8 +101,8 @@ Use the `placeholder` attribute to add a placeholder.
 ```
 
 ```jsx:react
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <PSelect placeholder="Select one">
@@ -126,8 +126,8 @@ Use the `clearable` attribute to make the control clearable. The clear button on
 ```
 
 ```jsx:react
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <PSelect placeholder="Clearable" clearable>
@@ -151,8 +151,8 @@ Add the `filled` attribute to draw a filled select.
 ```
 
 ```jsx:react
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <PSelect filled>
@@ -176,8 +176,8 @@ Use the `pill` attribute to give selects rounded edges.
 ```
 
 ```jsx:react
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <PSelect pill>
@@ -201,8 +201,8 @@ Use the `disabled` attribute to disable a select.
 ```
 
 ```jsx:react
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <PSelect placeholder="Disabled" disabled>
@@ -229,8 +229,8 @@ To allow multiple options to be selected, use the `multiple` attribute. It's a g
 ```
 
 ```jsx:react
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <PSelect label="Select a Few" value={["option-1", "option-2", "option-3"]} multiple clearable>
@@ -264,9 +264,9 @@ When using `multiple`, the `value` _attribute_ uses space-delimited values to se
 ```
 
 ```jsx:react
-import PDivider from '@pure-ui/core/dist/react/divider';
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import PDivider from 'pure-uikit/dist/react/divider';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <PSelect value={["option-1", "option-2"]} multiple clearable>
@@ -296,8 +296,8 @@ Use `<p-divider>` to group listbox items visually. You can also use `<small>` to
 ```
 
 ```jsx:react
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <PSelect>
@@ -340,8 +340,8 @@ Use the `size` attribute to change a select's size. Note that size does not appl
 ```
 
 ```jsx:react
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <>
@@ -383,8 +383,8 @@ The preferred placement of the select's listbox can be set with the `placement` 
 ```
 
 ```jsx:react
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <PSelect placement="top">
@@ -426,9 +426,9 @@ Use the `prefix` and `suffix` slots to add presentational icons and text. Avoid 
 ```
 
 ```jsx:react
-import PIcon from '@pure-ui/core/dist/react/icon';
-import POption from '@pure-ui/core/dist/react/option';
-import PSelect from '@pure-ui/core/dist/react/select';
+import PIcon from 'pure-uikit/dist/react/icon';
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
 
 const App = () => (
   <>

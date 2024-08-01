@@ -1,10 +1,10 @@
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property, query, state } from 'lit/decorators.js';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './progress-ring.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query, state } from "lit/decorators.js";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./progress-ring.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Progress rings are used to show the progress of a determinate operation in a circular fashion.
@@ -29,7 +29,7 @@ export default class PProgressRing extends PureElement {
 
   private readonly localize = new LocalizeController(this);
 
-  @query('.progress-ring__indicator') indicator: SVGCircleElement;
+  @query(".progress-ring__indicator") indicator: SVGCircleElement;
 
   @state() indicatorOffset: string;
 
@@ -37,7 +37,7 @@ export default class PProgressRing extends PureElement {
   @property({ type: Number, reflect: true }) value = 0;
 
   /** A custom label for assistive devices. */
-  @property() label = '';
+  @property() label = "";
 
   updated(changedProps: Map<string, unknown>) {
     super.updated(changedProps);
@@ -47,8 +47,10 @@ export default class PProgressRing extends PureElement {
     // change, possibly because of a mix of pixel + unit-less values in the calc() function. It seems like a Safari bug,
     // but I couldn't pinpoint it so this works around the problem.
     //
-    if (changedProps.has('value')) {
-      const radius = parseFloat(getComputedStyle(this.indicator).getPropertyValue('r'));
+    if (changedProps.has("value")) {
+      const radius = parseFloat(
+        getComputedStyle(this.indicator).getPropertyValue("r"),
+      );
       const circumference = 2 * Math.PI * radius;
       const offset = circumference - (this.value / 100) * circumference;
 
@@ -62,7 +64,9 @@ export default class PProgressRing extends PureElement {
         part="base"
         class="progress-ring"
         role="progressbar"
-        aria-label=${this.label.length > 0 ? this.label : this.localize.term('progress')}
+        aria-label=${this.label.length > 0
+          ? this.label
+          : this.localize.term("progress")}
         aria-describedby="label"
         aria-valuemin="0"
         aria-valuemax="100"
@@ -71,7 +75,10 @@ export default class PProgressRing extends PureElement {
       >
         <svg class="progress-ring__image">
           <circle class="progress-ring__track"></circle>
-          <circle class="progress-ring__indicator" style="stroke-dashoffset: ${this.indicatorOffset}"></circle>
+          <circle
+            class="progress-ring__indicator"
+            style="stroke-dashoffset: ${this.indicatorOffset}"
+          ></circle>
         </svg>
 
         <slot id="label" part="label" class="progress-ring__label"></slot>

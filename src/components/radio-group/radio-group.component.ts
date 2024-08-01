@@ -1,23 +1,23 @@
-import { classMap } from 'lit/directives/class-map.js';
+import { classMap } from "lit/directives/class-map.js";
 import {
   customErrorValidityState,
   FormControlController,
   validValidityState,
-  valueMissingValidityState
-} from '../../internal/form.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { property, query, state } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import formControlStyles from '../../styles/form-control.styles.js';
-import PButtonGroup from '../button-group/button-group.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './radio-group.styles.js';
-import type { CSSResultGroup } from 'lit';
-import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
-import type PRadio from '../radio/radio.js';
-import type PRadioButton from '../radio-button/radio-button.js';
+  valueMissingValidityState,
+} from "../../internal/form.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { property, query, state } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import formControlStyles from "../../styles/form-control.styles.js";
+import PButtonGroup from "../button-group/button-group.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./radio-group.styles.js";
+import type { CSSResultGroup } from "lit";
+import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
+import type PRadio from "../radio/radio.js";
+import type PRadioButton from "../radio-button/radio-button.js";
 
 /**
  * @summary Radio groups are used to group multiple [radios](/components/radio) or [radio buttons](/components/radio-button) so they function as a single form control.
@@ -43,46 +43,53 @@ import type PRadioButton from '../radio-button/radio-button.js';
  * @csspart button-group - The button group that wraps radio buttons.
  * @csspart button-group__base - The button group's `base` part.
  */
-export default class PRadioGroup extends PureElement implements ShoelaceFormControl {
+export default class PRadioGroup
+  extends PureElement
+  implements ShoelaceFormControl
+{
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
-  static dependencies = { 'p-button-group': PButtonGroup };
+  static dependencies = { "p-button-group": PButtonGroup };
 
   protected readonly formControlController = new FormControlController(this);
-  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
-  private customValidityMessage = '';
+  private readonly hasSlotController = new HasSlotController(
+    this,
+    "help-text",
+    "label",
+  );
+  private customValidityMessage = "";
   private validationTimeout: number;
 
-  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
-  @query('.radio-group__validation-input') validationInput: HTMLInputElement;
+  @query("slot:not([name])") defaultSlot: HTMLSlotElement;
+  @query(".radio-group__validation-input") validationInput: HTMLInputElement;
 
   @state() private hasButtonGroup = false;
-  @state() private errorMessage = '';
-  @state() defaultValue = '';
+  @state() private errorMessage = "";
+  @state() defaultValue = "";
 
   /**
    * The radio group's label. Required for proper accessibility. If you need to display HTML, use the `label` slot
    * instead.
    */
-  @property() label = '';
+  @property() label = "";
 
   /** The radio groups's help text. If you need to display HTML, use the `help-text` slot instead. */
-  @property({ attribute: 'help-text' }) helpText = '';
+  @property({ attribute: "help-text" }) helpText = "";
 
   /** The name of the radio group, submitted as a name/value pair with form data. */
-  @property() name = 'option';
+  @property() name = "option";
 
   /** The current value of the radio group, submitted as a name/value pair with form data. */
-  @property({ reflect: true }) value = '';
+  @property({ reflect: true }) value = "";
 
   /** The radio group's size. This size will be applied to all child radios and radio buttons. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
 
   /**
    * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
    * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
    * the same document or shadow root for this to work.
    */
-  @property({ reflect: true }) form = '';
+  @property({ reflect: true }) form = "";
 
   /** Ensures a child radio is checked before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -90,7 +97,7 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
   /** Gets the validity state object */
   get validity() {
     const isRequiredAndEmpty = this.required && !this.value;
-    const hasCustomValidityMessage = this.customValidityMessage !== '';
+    const hasCustomValidityMessage = this.customValidityMessage !== "";
 
     if (hasCustomValidityMessage) {
       return customErrorValidityState;
@@ -104,7 +111,7 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
   /** Gets the validation message */
   get validationMessage() {
     const isRequiredAndEmpty = this.required && !this.value;
-    const hasCustomValidityMessage = this.customValidityMessage !== '';
+    const hasCustomValidityMessage = this.customValidityMessage !== "";
 
     if (hasCustomValidityMessage) {
       return this.customValidityMessage;
@@ -112,7 +119,7 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
       return this.validationInput.validationMessage;
     }
 
-    return '';
+    return "";
   }
 
   connectedCallback() {
@@ -125,11 +132,17 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
   }
 
   private getAllRadios() {
-    return [...this.querySelectorAll<PRadio | PRadioButton>('p-radio, p-radio-button')];
+    return [
+      ...this.querySelectorAll<PRadio | PRadioButton>(
+        "p-radio, p-radio-button",
+      ),
+    ];
   }
 
   private handleRadioClick(event: MouseEvent) {
-    const target = (event.target as HTMLElement).closest<PRadio | PRadioButton>('p-radio, p-radio-button')!;
+    const target = (event.target as HTMLElement).closest<PRadio | PRadioButton>(
+      "p-radio, p-radio-button",
+    )!;
     const radios = this.getAllRadios();
     const oldValue = this.value;
 
@@ -138,22 +151,31 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
     }
 
     this.value = target.value;
-    radios.forEach(radio => (radio.checked = radio === target));
+    radios.forEach((radio) => (radio.checked = radio === target));
 
     if (this.value !== oldValue) {
-      this.emit('p-change');
-      this.emit('p-input');
+      this.emit("p-change");
+      this.emit("p-input");
     }
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key)) {
+    if (
+      !["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(
+        event.key,
+      )
+    ) {
       return;
     }
 
-    const radios = this.getAllRadios().filter(radio => !radio.disabled);
-    const checkedRadio = radios.find(radio => radio.checked) ?? radios[0];
-    const incr = event.key === ' ' ? 0 : ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
+    const radios = this.getAllRadios().filter((radio) => !radio.disabled);
+    const checkedRadio = radios.find((radio) => radio.checked) ?? radios[0];
+    const incr =
+      event.key === " "
+        ? 0
+        : ["ArrowUp", "ArrowLeft"].includes(event.key)
+          ? -1
+          : 1;
     const oldValue = this.value;
     let index = radios.indexOf(checkedRadio) + incr;
 
@@ -165,11 +187,11 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
       index = 0;
     }
 
-    this.getAllRadios().forEach(radio => {
+    this.getAllRadios().forEach((radio) => {
       radio.checked = false;
 
       if (!this.hasButtonGroup) {
-        radio.setAttribute('tabindex', '-1');
+        radio.setAttribute("tabindex", "-1");
       }
     });
 
@@ -177,15 +199,15 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
     radios[index].checked = true;
 
     if (!this.hasButtonGroup) {
-      radios[index].setAttribute('tabindex', '0');
+      radios[index].setAttribute("tabindex", "0");
       radios[index].focus();
     } else {
-      radios[index].shadowRoot!.querySelector('button')!.focus();
+      radios[index].shadowRoot!.querySelector("button")!.focus();
     }
 
     if (this.value !== oldValue) {
-      this.emit('p-change');
-      this.emit('p-input');
+      this.emit("p-change");
+      this.emit("p-input");
     }
 
     event.preventDefault();
@@ -193,7 +215,7 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
 
   private handleLabelClick() {
     const radios = this.getAllRadios();
-    const checked = radios.find(radio => radio.checked);
+    const checked = radios.find((radio) => radio.checked);
     const radioToFocus = checked || radios[0];
 
     // Move focus to the checked radio (or the first one if none are checked) when clicking the label
@@ -212,29 +234,31 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
 
     await Promise.all(
       // Sync the checked state and size
-      radios.map(async radio => {
+      radios.map(async (radio) => {
         await radio.updateComplete;
         radio.checked = radio.value === this.value;
         radio.size = this.size;
-      })
+      }),
     );
 
-    this.hasButtonGroup = radios.some(radio => radio.tagName.toLowerCase() === 'p-radio-button');
+    this.hasButtonGroup = radios.some(
+      (radio) => radio.tagName.toLowerCase() === "p-radio-button",
+    );
 
-    if (radios.length > 0 && !radios.some(radio => radio.checked)) {
+    if (radios.length > 0 && !radios.some((radio) => radio.checked)) {
       if (this.hasButtonGroup) {
-        const buttonRadio = radios[0].shadowRoot?.querySelector('button');
+        const buttonRadio = radios[0].shadowRoot?.querySelector("button");
 
         if (buttonRadio) {
-          buttonRadio.setAttribute('tabindex', '0');
+          buttonRadio.setAttribute("tabindex", "0");
         }
       } else {
-        radios[0].setAttribute('tabindex', '0');
+        radios[0].setAttribute("tabindex", "0");
       }
     }
 
     if (this.hasButtonGroup) {
-      const buttonGroup = this.shadowRoot?.querySelector('p-button-group');
+      const buttonGroup = this.shadowRoot?.querySelector("p-button-group");
 
       if (buttonGroup) {
         buttonGroup.disableRole = true;
@@ -243,37 +267,39 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
   }
 
   private syncRadios() {
-    if (customElements.get('p-radio') && customElements.get('p-radio-button')) {
+    if (customElements.get("p-radio") && customElements.get("p-radio-button")) {
       this.syncRadioElements();
       return;
     }
 
-    if (customElements.get('p-radio')) {
+    if (customElements.get("p-radio")) {
       this.syncRadioElements();
     } else {
-      customElements.whenDefined('p-radio').then(() => this.syncRadios());
+      customElements.whenDefined("p-radio").then(() => this.syncRadios());
     }
 
-    if (customElements.get('p-radio-button')) {
+    if (customElements.get("p-radio-button")) {
       this.syncRadioElements();
     } else {
       // Rerun this handler when <p-radio> or <p-radio-button> is registered
-      customElements.whenDefined('p-radio-button').then(() => this.syncRadios());
+      customElements
+        .whenDefined("p-radio-button")
+        .then(() => this.syncRadios());
     }
   }
 
   private updateCheckedRadio() {
     const radios = this.getAllRadios();
-    radios.forEach(radio => (radio.checked = radio.value === this.value));
+    radios.forEach((radio) => (radio.checked = radio.value === this.value));
     this.formControlController.setValidity(this.validity.valid);
   }
 
-  @watch('size', { waitUntilFirstUpdate: true })
+  @watch("size", { waitUntilFirstUpdate: true })
   handleSizeChange() {
     this.syncRadios();
   }
 
-  @watch('value')
+  @watch("value")
   handleValueChange() {
     if (this.hasUpdated) {
       this.updateCheckedRadio();
@@ -283,7 +309,7 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
   /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
   checkValidity() {
     const isRequiredAndEmpty = this.required && !this.value;
-    const hasCustomValidityMessage = this.customValidityMessage !== '';
+    const hasCustomValidityMessage = this.customValidityMessage !== "";
 
     if (isRequiredAndEmpty || hasCustomValidityMessage) {
       this.formControlController.emitInvalidEvent();
@@ -302,7 +328,10 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
   reportValidity(): boolean {
     const isValid = this.validity.valid;
 
-    this.errorMessage = this.customValidityMessage || isValid ? '' : this.validationInput.validationMessage;
+    this.errorMessage =
+      this.customValidityMessage || isValid
+        ? ""
+        : this.validationInput.validationMessage;
     this.formControlController.setValidity(isValid);
     this.validationInput.hidden = true;
     clearTimeout(this.validationTimeout);
@@ -311,14 +340,17 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
       // Show the browser's constraint validation message
       this.validationInput.hidden = false;
       this.validationInput.reportValidity();
-      this.validationTimeout = setTimeout(() => (this.validationInput.hidden = true), 10000) as unknown as number;
+      this.validationTimeout = setTimeout(
+        () => (this.validationInput.hidden = true),
+        10000,
+      ) as unknown as number;
     }
 
     return isValid;
   }
 
   /** Sets a custom validation message. Pass an empty string to restore validity. */
-  setCustomValidity(message = '') {
+  setCustomValidity(message = "") {
     this.customValidityMessage = message;
     this.errorMessage = message;
     this.validationInput.setCustomValidity(message);
@@ -326,25 +358,29 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
   }
 
   render() {
-    const hasLabelSlot = this.hasSlotController.test('label');
-    const hasHelpTextSlot = this.hasSlotController.test('help-text');
+    const hasLabelSlot = this.hasSlotController.test("label");
+    const hasHelpTextSlot = this.hasSlotController.test("help-text");
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const defaultSlot = html`
-      <slot @slotchange=${this.syncRadios} @click=${this.handleRadioClick} @keydown=${this.handleKeyDown}></slot>
+      <slot
+        @slotchange=${this.syncRadios}
+        @click=${this.handleRadioClick}
+        @keydown=${this.handleKeyDown}
+      ></slot>
     `;
 
     return html`
       <fieldset
         part="form-control"
         class=${classMap({
-          'form-control': true,
-          'form-control--small': this.size === 'small',
-          'form-control--medium': this.size === 'medium',
-          'form-control--large': this.size === 'large',
-          'form-control--radio-group': true,
-          'form-control--has-label': hasLabel,
-          'form-control--has-help-text': hasHelpText
+          "form-control": true,
+          "form-control--small": this.size === "small",
+          "form-control--medium": this.size === "medium",
+          "form-control--large": this.size === "large",
+          "form-control--radio-group": true,
+          "form-control--has-label": hasLabel,
+          "form-control--has-help-text": hasHelpText,
         })}
         role="radiogroup"
         aria-labelledby="label"
@@ -355,7 +391,7 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
           part="form-control-label"
           id="label"
           class="form-control__label"
-          aria-hidden=${hasLabel ? 'false' : 'true'}
+          aria-hidden=${hasLabel ? "false" : "true"}
           @click=${this.handleLabelClick}
         >
           <slot name="label">${this.label}</slot>
@@ -363,7 +399,9 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
 
         <div part="form-control-input" class="form-control-input">
           <div class="visually-hidden">
-            <div id="error-message" aria-live="assertive">${this.errorMessage}</div>
+            <div id="error-message" aria-live="assertive">
+              ${this.errorMessage}
+            </div>
             <label class="radio-group__validation">
               <input
                 type="text"
@@ -378,7 +416,11 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
 
           ${this.hasButtonGroup
             ? html`
-                <p-button-group part="button-group" exportparts="base:button-group__base" role="presentation">
+                <p-button-group
+                  part="button-group"
+                  exportparts="base:button-group__base"
+                  role="presentation"
+                >
                   ${defaultSlot}
                 </p-button-group>
               `
@@ -389,7 +431,7 @@ export default class PRadioGroup extends PureElement implements ShoelaceFormCont
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
-          aria-hidden=${hasHelpText ? 'false' : 'true'}
+          aria-hidden=${hasHelpText ? "false" : "true"}
         >
           <slot name="help-text">${this.helpText}</slot>
         </div>

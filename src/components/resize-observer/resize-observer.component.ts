@@ -1,10 +1,10 @@
-import { html } from 'lit';
-import { property } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './resize-observer.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { html } from "lit";
+import { property } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./resize-observer.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary The Resize Observer component offers a thin, declarative interface to the [`ResizeObserver API`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver).
@@ -27,9 +27,11 @@ export default class PResizeObserver extends PureElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
-      this.emit('p-resize', { detail: { entries } });
-    });
+    this.resizeObserver = new ResizeObserver(
+      (entries: ResizeObserverEntry[]) => {
+        this.emit("p-resize", { detail: { entries } });
+      },
+    );
 
     if (!this.disabled) {
       this.startObserver();
@@ -48,17 +50,19 @@ export default class PResizeObserver extends PureElement {
   }
 
   private startObserver() {
-    const slot = this.shadowRoot!.querySelector('slot');
+    const slot = this.shadowRoot!.querySelector("slot");
 
     if (slot !== null) {
-      const elements = slot.assignedElements({ flatten: true }) as HTMLElement[];
+      const elements = slot.assignedElements({
+        flatten: true,
+      }) as HTMLElement[];
 
       // Unwatch previous elements
-      this.observedElements.forEach(el => this.resizeObserver.unobserve(el));
+      this.observedElements.forEach((el) => this.resizeObserver.unobserve(el));
       this.observedElements = [];
 
       // Watch new elements
-      elements.forEach(el => {
+      elements.forEach((el) => {
         this.resizeObserver.observe(el);
         this.observedElements.push(el);
       });
@@ -69,7 +73,7 @@ export default class PResizeObserver extends PureElement {
     this.resizeObserver.disconnect();
   }
 
-  @watch('disabled', { waitUntilFirstUpdate: true })
+  @watch("disabled", { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     if (this.disabled) {
       this.stopObserver();
@@ -85,6 +89,6 @@ export default class PResizeObserver extends PureElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'p-resize-observer': PResizeObserver;
+    "p-resize-observer": PResizeObserver;
   }
 }

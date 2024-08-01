@@ -1,6 +1,6 @@
 ---
 meta:
-  title: 'Pure UI: Keep UI simplest.'
+  title: "Pure UI: Keep UI simplest."
   description: Hand-crafted custom elements for any occasion.
 toc: false
 ---
@@ -32,8 +32,8 @@ Add the following code to your page.
 
 <!-- prettier-ignore -->
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/pure-ui-autoloader.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pure-uikit@%VERSION%/%CDNDIR%/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/pure-uikit@%VERSION%/%CDNDIR%/pure-ui-autoloader.js"></script>
 ```
 
 Now you have access to all of Pure UI's components! Try adding a button:

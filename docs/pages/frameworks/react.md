@@ -13,21 +13,21 @@ Pure UI offers a React version of every component to provide an idiomatic experi
 To add Pure UI to your React app, install the package from npm.
 
 ```bash
-npm install @pure-ui/core
+npm install pure-uikit
 ```
 
 Next, [include a theme](/getting-started/themes) and set the [base path](/getting-started/installation#setting-the-base-path) for icons and other assets. In this example, we'll import the light theme and use the CDN as a base path.
 
 ```jsx
 // App.jsx
-import '@pure-ui/core/%NPMDIR%/themes/light.css';
-import { setBasePath } from '@pure-ui/core/%NPMDIR%/utilities/base-path';
+import "pure-uikit/%NPMDIR%/themes/light.css";
+import { setBasePath } from "pure-uikit/%NPMDIR%/utilities/base-path";
 
-setBasePath('https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/');
+setBasePath("https://cdn.jsdelivr.net/npm/pure-uikit@%VERSION%/%CDNDIR%/");
 ```
 
 :::tip
-If you'd rather not use the CDN for assets, you can create a [build task](https://webpack.js.org/plugins/copy-webpack-plugin/) that copies `node_modules/@pure-ui/core/%NPMDIR%/assets` into your app's `public` directory. Then you can point the base path to that folder instead.
+If you'd rather not use the CDN for assets, you can create a [build task](https://webpack.js.org/plugins/copy-webpack-plugin/) that copies `node_modules/pure-uikit/%NPMDIR%/assets` into your app's `public` directory. Then you can point the base path to that folder instead.
 :::
 
 Now you can start using components!
@@ -43,7 +43,7 @@ Preact users facing type errors using components may benefit from setting "paths
 Every Pure UI component is available to import as a React component. Note that we're importing the `<SlButton>` _React component_ instead of the `<p-button>` _custom element_ in the example below.
 
 ```jsx
-import SlButton from '@pure-ui/core/%NPMDIR%/react/button';
+import SlButton from "pure-uikit/%NPMDIR%/react/button";
 
 const MyComponent = () => <SlButton variant="primary">Click me</SlButton>;
 
@@ -55,14 +55,14 @@ export default MyComponent;
 Previously, it was recommended to import from a single entrypoint like so:
 
 ```jsx
-import { SlButton } from '@pure-ui/core/%NPMDIR%/react';
+import { SlButton } from "pure-uikit/%NPMDIR%/react";
 ```
 
 However, tree-shaking extra Pure UI components proved to be a challenge. As a result, we now recommend cherry-picking components you want to use, rather than importing from a single entrypoint.
 
 ```diff
-- import { SlButton } from '@pure-ui/core/%NPMDIR%/react';
-+ import SlButton from '@pure-ui/core/%NPMDIR%/react/button';
+- import { SlButton } from 'pure-uikit/%NPMDIR%/react';
++ import SlButton from 'pure-uikit/%NPMDIR%/react/button';
 ```
 
 You can find a copy + paste import for each component in the "importing" section of its documentation.
@@ -74,13 +74,18 @@ Many Pure UI components emit [custom events](https://developer.mozilla.org/en-US
 Here's how you can bind the input's value to a state variable.
 
 ```jsx
-import { useState } from 'react';
-import SlInput from '@pure-ui/core/%NPMDIR%/react/input';
+import { useState } from "react";
+import SlInput from "pure-uikit/%NPMDIR%/react/input";
 
 function MyComponent() {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
-  return <SlInput value={value} onSlInput={event => setValue(event.target.value)} />;
+  return (
+    <SlInput
+      value={value}
+      onSlInput={(event) => setValue(event.target.value)}
+    />
+  );
 }
 
 export default MyComponent;
@@ -89,14 +94,19 @@ export default MyComponent;
 If you're using TypeScript, it's important to note that `event.target` will be a reference to the underlying custom element. You can use `(event.target as any).value` as a quick fix, or you can strongly type the event target as shown below.
 
 ```tsx
-import { useState } from 'react';
-import SlInput from '@pure-ui/core/%NPMDIR%/react/input';
-import type SlInputElement from '@pure-ui/core/%NPMDIR%/components/input/input';
+import { useState } from "react";
+import SlInput from "pure-uikit/%NPMDIR%/react/input";
+import type SlInputElement from "pure-uikit/%NPMDIR%/components/input/input";
 
 function MyComponent() {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
-  return <SlInput value={value} onSlInput={event => setValue((event.target as SlInputElement).value)} />;
+  return (
+    <SlInput
+      value={value}
+      onSlInput={(event) => setValue((event.target as SlInputElement).value)}
+    />
+  );
 }
 
 export default MyComponent;
@@ -105,17 +115,22 @@ export default MyComponent;
 You can also import the event type for use in your callbacks, shown below.
 
 ```tsx
-import { useCallback, useState } from 'react';
-import SlInput, { type SlInputEvent } from '@pure-ui/core/%NPMDIR%/react/input';
-import type SlInputElement from '@pure-ui/core/%NPMDIR%/components/input/input';
+import { useCallback, useState } from "react";
+import SlInput, { type SlInputEvent } from "pure-uikit/%NPMDIR%/react/input";
+import type SlInputElement from "pure-uikit/%NPMDIR%/components/input/input";
 
 function MyComponent() {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const onInput = useCallback((event: SlInputEvent) => {
     setValue(event.detail);
   }, []);
 
-  return <SlInput value={value} onSlInput={event => setValue((event.target as SlInputElement).value)} />;
+  return (
+    <SlInput
+      value={value}
+      onSlInput={(event) => setValue((event.target as SlInputElement).value)}
+    />
+  );
 }
 
 export default MyComponent;
@@ -148,9 +163,9 @@ Some components use `window.matchMedia`, but this function isn't supported by JS
 In `src/setupTests.js`, add the following.
 
 ```js
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
-  value: jest.fn().mockImplementation(query => ({
+  value: jest.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
@@ -158,8 +173,8 @@ Object.defineProperty(window, 'matchMedia', {
     removeListener: jest.fn(), // deprecated
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn()
-  }))
+    dispatchEvent: jest.fn(),
+  })),
 });
 ```
 

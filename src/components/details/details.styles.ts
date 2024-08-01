@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   :host {
@@ -69,8 +69,8 @@ export default css`
     rotate: -90deg;
   }
 
-  .details--open slot[name='expand-icon'],
-  .details:not(.details--open) slot[name='collapse-icon'] {
+  .details--open slot[name="expand-icon"],
+  .details:not(.details--open) slot[name="collapse-icon"] {
     display: none;
   }
 

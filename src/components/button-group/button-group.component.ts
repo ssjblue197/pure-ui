@@ -1,9 +1,9 @@
-import { html } from 'lit';
-import { property, query, state } from 'lit/decorators.js';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './button-group.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { html } from "lit";
+import { property, query, state } from "lit/decorators.js";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./button-group.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Button groups can be used to group related buttons into sections.
@@ -18,7 +18,7 @@ import type { CSSResultGroup } from 'lit';
 export default class PButtonGroup extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
-  @query('slot') defaultSlot: HTMLSlotElement;
+  @query("slot") defaultSlot: HTMLSlotElement;
 
   @state() disableRole = false;
 
@@ -26,41 +26,55 @@ export default class PButtonGroup extends PureElement {
    * A label to use for the button group. This won't be displayed on the screen, but it will be announced by assistive
    * devices when interacting with the control and is strongly recommended.
    */
-  @property() label = '';
+  @property() label = "";
 
   private handleFocus(event: Event) {
     const button = findButton(event.target as HTMLElement);
-    button?.toggleAttribute('data-p-button-group__button--focus', true);
+    button?.toggleAttribute("data-p-button-group__button--focus", true);
   }
 
   private handleBlur(event: Event) {
     const button = findButton(event.target as HTMLElement);
-    button?.toggleAttribute('data-p-button-group__button--focus', false);
+    button?.toggleAttribute("data-p-button-group__button--focus", false);
   }
 
   private handleMouseOver(event: Event) {
     const button = findButton(event.target as HTMLElement);
-    button?.toggleAttribute('data-p-button-group__button--hover', true);
+    button?.toggleAttribute("data-p-button-group__button--hover", true);
   }
 
   private handleMouseOut(event: Event) {
     const button = findButton(event.target as HTMLElement);
-    button?.toggleAttribute('data-p-button-group__button--hover', false);
+    button?.toggleAttribute("data-p-button-group__button--hover", false);
   }
 
   private handleSlotChange() {
-    const slottedElements = [...this.defaultSlot.assignedElements({ flatten: true })] as HTMLElement[];
+    const slottedElements = [
+      ...this.defaultSlot.assignedElements({ flatten: true }),
+    ] as HTMLElement[];
 
-    slottedElements.forEach(el => {
+    slottedElements.forEach((el) => {
       const index = slottedElements.indexOf(el);
       const button = findButton(el);
 
       if (button) {
-        button.toggleAttribute('data-p-button-group__button', true);
-        button.toggleAttribute('data-p-button-group__button--first', index === 0);
-        button.toggleAttribute('data-p-button-group__button--inner', index > 0 && index < slottedElements.length - 1);
-        button.toggleAttribute('data-p-button-group__button--last', index === slottedElements.length - 1);
-        button.toggleAttribute('data-p-button-group__button--radio', button.tagName.toLowerCase() === 'p-radio-button');
+        button.toggleAttribute("data-p-button-group__button", true);
+        button.toggleAttribute(
+          "data-p-button-group__button--first",
+          index === 0,
+        );
+        button.toggleAttribute(
+          "data-p-button-group__button--inner",
+          index > 0 && index < slottedElements.length - 1,
+        );
+        button.toggleAttribute(
+          "data-p-button-group__button--last",
+          index === slottedElements.length - 1,
+        );
+        button.toggleAttribute(
+          "data-p-button-group__button--radio",
+          button.tagName.toLowerCase() === "p-radio-button",
+        );
       }
     });
   }
@@ -71,7 +85,7 @@ export default class PButtonGroup extends PureElement {
       <div
         part="base"
         class="button-group"
-        role="${this.disableRole ? 'presentation' : 'group'}"
+        role="${this.disableRole ? "presentation" : "group"}"
         aria-label=${this.label}
         @focusout=${this.handleBlur}
         @focusin=${this.handleFocus}
@@ -85,7 +99,7 @@ export default class PButtonGroup extends PureElement {
 }
 
 function findButton(el: HTMLElement) {
-  const selector = 'p-button, p-radio-button';
+  const selector = "p-button, p-radio-button";
 
   // The button could be the target element or a child of it (e.g. a dropdown or tooltip anchor)
   return el.closest(selector) ?? el.querySelector(selector);

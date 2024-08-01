@@ -13,8 +13,8 @@ layout: component
 ```
 
 ```jsx:react
-import PAlert from '@pure-ui/core/dist/react/alert';
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PAlert from 'pure-uikit/dist/react/alert';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const App = () => (
   <PAlert open>
@@ -75,8 +75,8 @@ Set the `variant` attribute to change the alert's variant.
 ```
 
 ```jsx:react
-import PAlert from '@pure-ui/core/dist/react/alert';
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PAlert from 'pure-uikit/dist/react/alert';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const App = () => (
   <>
@@ -146,8 +146,8 @@ Add the `closable` attribute to show a close button that will hide the alert.
 
 ```jsx:react
 import { useState } from 'react';
-import PAlert from '@pure-ui/core/dist/react/alert';
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PAlert from 'pure-uikit/dist/react/alert';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const App = () => {
   const [open, setOpen] = useState(true);
@@ -175,7 +175,7 @@ Icons are optional. Simply omit the `icon` slot if you don't want them.
 ```
 
 ```jsx:react
-import PAlert from '@pure-ui/core/dist/react/alert';
+import PAlert from 'pure-uikit/dist/react/alert';
 
 const App = () => (
   <PAlert variant="primary" open>
@@ -215,9 +215,9 @@ Set the `duration` attribute to automatically hide an alert after a period of ti
 
 ```jsx:react
 import { useState } from 'react';
-import PAlert from '@pure-ui/core/dist/react/alert';
-import PButton from '@pure-ui/core/dist/react/button';
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PAlert from 'pure-uikit/dist/react/alert';
+import PButton from 'pure-uikit/dist/react/button';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const css = `
   .alert-duration p-alert {
@@ -306,9 +306,9 @@ You should always use the `closable` attribute so users can dismiss the notifica
 
 ```jsx:react
 import { useRef } from 'react';
-import PAlert from '@pure-ui/core/dist/react/alert';
-import PButton from '@pure-ui/core/dist/react/button';
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PAlert from 'pure-uikit/dist/react/alert';
+import PButton from 'pure-uikit/dist/react/button';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 function showToast(alert) {
   alert.toast();

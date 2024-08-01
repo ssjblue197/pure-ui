@@ -1,8 +1,8 @@
-import { html } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './carousel-item.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { html } from "lit";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./carousel-item.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary A carousel item represent a slide within a [carousel](/components/carousel).
@@ -20,7 +20,7 @@ export default class PCarouselItem extends PureElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('role', 'group');
+    this.setAttribute("role", "group");
   }
 
   render() {

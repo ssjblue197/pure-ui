@@ -10,7 +10,7 @@ layout: component
 ```
 
 ```jsx:react
-import PDivider from '@pure-ui/core/dist/react/divider';
+import PDivider from 'pure-uikit/dist/react/divider';
 
 const App = () => <PDivider />;
 ```
@@ -28,7 +28,7 @@ Use the `--width` custom property to change the width of the divider.
 {% raw %}
 
 ```jsx:react
-import PDivider from '@pure-ui/core/dist/react/divider';
+import PDivider from 'pure-uikit/dist/react/divider';
 
 const App = () => <PDivider style={{ '--width': '4px' }} />;
 ```
@@ -46,7 +46,7 @@ Use the `--color` custom property to change the color of the divider.
 {% raw %}
 
 ```jsx:react
-import PDivider from '@pure-ui/core/dist/react/divider';
+import PDivider from 'pure-uikit/dist/react/divider';
 
 const App = () => <PDivider style={{ '--color': 'tomato' }} />;
 ```
@@ -68,7 +68,7 @@ Use the `--spacing` custom property to change the amount of space between the di
 {% raw %}
 
 ```jsx:react
-import PDivider from '@pure-ui/core/dist/react/divider';
+import PDivider from 'pure-uikit/dist/react/divider';
 
 const App = () => (
   <>
@@ -98,7 +98,7 @@ Add the `vertical` attribute to draw the divider in a vertical orientation. The 
 {% raw %}
 
 ```jsx:react
-import PDivider from '@pure-ui/core/dist/react/divider';
+import PDivider from 'pure-uikit/dist/react/divider';
 
 const App = () => (
   <div
@@ -138,9 +138,9 @@ Use dividers in [menus](/components/menu) to visually group menu items.
 {% raw %}
 
 ```jsx:react
-import PDivider from '@pure-ui/core/dist/react/divider';
-import PMenu from '@pure-ui/core/dist/react/menu';
-import PMenuItem from '@pure-ui/core/dist/react/menu-item';
+import PDivider from 'pure-uikit/dist/react/divider';
+import PMenu from 'pure-uikit/dist/react/menu';
+import PMenuItem from 'pure-uikit/dist/react/menu-item';
 
 const App = () => (
   <PMenu style={{ maxWidth: '200px' }}>

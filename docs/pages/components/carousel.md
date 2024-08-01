@@ -41,8 +41,8 @@ layout: component
 ```
 
 ```jsx:react
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
 
 const App = () => (
   <>
@@ -124,8 +124,8 @@ Use the `pagination` attribute to show the total number of slides and the curren
 ```
 
 ```jsx:react
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
 
 const App = () => (
   <PCarousel pagination>
@@ -203,8 +203,8 @@ Use the `navigation` attribute to show previous and next buttons.
 ```
 
 ```jsx:react
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
 
 const App = () => (
   <PCarousel navigation>
@@ -282,8 +282,8 @@ By default, the carousel will not advanced beyond the first and last slides. You
 ```
 
 ```jsx:react
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
 
 const App = () => (
   <PCarousel loop navigation pagination>
@@ -361,8 +361,8 @@ The carousel will automatically advance when the `autoplay` attribute is used. T
 ```
 
 ```jsx:react
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
 
 const App = () => (
   <PCarousel autoplay loop pagination>
@@ -459,10 +459,10 @@ This example is best demonstrated using a mouse. Try clicking and dragging the s
 
 ```jsx:react
 import { useState } from 'react';
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
-import PDivider from '@pure-ui/core/dist/react/divider';
-import PSwitch from '@pure-ui/core/dist/react/switch';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
+import PDivider from 'pure-uikit/dist/react/divider';
+import PSwitch from 'pure-uikit/dist/react/switch';
 
 const App = () => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -530,8 +530,8 @@ The `slides-per-page` attribute makes it possible to display multiple slides at 
 {% raw %}
 
 ```jsx:react
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
 
 const App = () => (
   <PCarousel navigation pagination slidesPerPage={2} slidesPerMove={2}>
@@ -623,8 +623,8 @@ The content of the carousel can be changed by adding or removing carousel items.
 
 ```jsx:react
 import { useState } from 'react';
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
 
 const css = `
   .dynamic-carousel {
@@ -740,8 +740,8 @@ Setting the `orientation` attribute to `vertical` will render the carousel in a 
 ```
 
 ```jsx:react
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
 
 const css = `
   .vertical {
@@ -863,11 +863,11 @@ Use the `--aspect-ratio` custom property to customize the size of the carousel's
 
 ```jsx:react
 import { useState } from 'react';
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
-import PDivider from '@pure-ui/core/dist/react/divider';
-import PSelect from '@pure-ui/core/dist/react/select';
-import POption from '@pure-ui/core/dist/react/option';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
+import PDivider from 'pure-uikit/dist/react/divider';
+import PSelect from 'pure-uikit/dist/react/select';
+import POption from 'pure-uikit/dist/react/option';
 
 const App = () => {
   const [aspectRatio, setAspectRatio] = useState('3/2');
@@ -971,10 +971,10 @@ Use the `--scroll-hint` custom property to add inline padding in horizontal caro
 
 ```jsx:react
 import { useState } from 'react';
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
-import PDivider from '@pure-ui/core/dist/react/divider';
-import PRange from '@pure-ui/core/dist/react/range';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
+import PDivider from 'pure-uikit/dist/react/divider';
+import PRange from 'pure-uikit/dist/react/range';
 
 const App = () => (
   <>
@@ -1137,10 +1137,10 @@ The carousel has a robust API that makes it possible to extend and customize. Th
 
 ```jsx:react
 import { useRef } from 'react';
-import PCarousel from '@pure-ui/core/dist/react/carousel';
-import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
-import PDivider from '@pure-ui/core/dist/react/divider';
-import PRange from '@pure-ui/core/dist/react/range';
+import PCarousel from 'pure-uikit/dist/react/carousel';
+import PCarouselItem from 'pure-uikit/dist/react/carousel-item';
+import PDivider from 'pure-uikit/dist/react/divider';
+import PRange from 'pure-uikit/dist/react/range';
 
 const css = `
   .carousel-thumbnails {

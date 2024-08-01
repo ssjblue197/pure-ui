@@ -1,23 +1,23 @@
-import * as path from 'path';
-import { customElementJetBrainsPlugin } from 'custom-element-jet-brains-integration';
-import { customElementVsCodePlugin } from 'custom-element-vs-code-integration';
-import { customElementVuejsPlugin } from 'custom-element-vuejs-integration';
-import { parse } from 'comment-parser';
-import { pascalCase } from 'pascal-case';
-import commandLineArgs from 'command-line-args';
-import fs from 'fs';
+import * as path from "path";
+import { customElementJetBrainsPlugin } from "custom-element-jet-brains-integration";
+import { customElementVsCodePlugin } from "custom-element-vs-code-integration";
+import { customElementVuejsPlugin } from "custom-element-vuejs-integration";
+import { parse } from "comment-parser";
+import { pascalCase } from "pascal-case";
+import commandLineArgs from "command-line-args";
+import fs from "fs";
 
-const packageData = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+const packageData = JSON.parse(fs.readFileSync("./package.json", "utf8"));
 const { name, description, version, author, homepage, license } = packageData;
 
 const { outdir } = commandLineArgs([
-  { name: 'litelement', type: String },
-  { name: 'analyze', defaultOption: true },
-  { name: 'outdir', type: String }
+  { name: "litelement", type: String },
+  { name: "analyze", defaultOption: true },
+  { name: "outdir", type: String },
 ]);
 
 function noDash(string) {
-  return string.replace(/^\s?-/, '').trim();
+  return string.replace(/^\s?-/, "").trim();
 }
 
 function replace(string, terms) {
@@ -29,35 +29,47 @@ function replace(string, terms) {
 }
 
 export default {
-  globs: ['src/components/**/*.component.ts'],
-  exclude: ['**/*.styles.ts', '**/*.test.ts'],
+  globs: ["src/components/**/*.component.ts"],
+  exclude: ["**/*.styles.ts", "**/*.test.ts"],
   plugins: [
     // Append package data
     {
-      name: 'pure-ui-package-data',
+      name: "pure-ui-package-data",
       packageLinkPhase({ customElementsManifest }) {
-        customElementsManifest.package = { name, description, version, author, homepage, license };
-      }
+        customElementsManifest.package = {
+          name,
+          description,
+          version,
+          author,
+          homepage,
+          license,
+        };
+      },
     },
 
     // Infer tag names because we no longer use @customElement decorators.
     {
-      name: 'pure-ui-infer-tag-names',
+      name: "pure-ui-infer-tag-names",
       analyzePhase({ ts, node, moduleDoc }) {
         switch (node.kind) {
           case ts.SyntaxKind.ClassDeclaration: {
             const className = node.name.getText();
-            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
+            const classDoc = moduleDoc?.declarations?.find(
+              (declaration) => declaration.name === className,
+            );
 
             const importPath = moduleDoc.path;
 
             // This is kind of a best guess at components. "thing.component.ts"
-            if (!importPath.endsWith('.component.ts')) {
+            if (!importPath.endsWith(".component.ts")) {
               return;
             }
 
-            const tagNameWithoutPrefix = path.basename(importPath, '.component.ts');
-            const tagName = 'p-' + tagNameWithoutPrefix;
+            const tagNameWithoutPrefix = path.basename(
+              importPath,
+              ".component.ts",
+            );
+            const tagName = "p-" + tagNameWithoutPrefix;
 
             classDoc.tagNameWithoutPrefix = tagNameWithoutPrefix;
             classDoc.tagName = tagName;
@@ -66,22 +78,31 @@ export default {
             classDoc.customElement = true;
           }
         }
-      }
+      },
     },
 
     // Parse custom jsDoc tags
     {
-      name: 'pure-ui-custom-tags',
+      name: "pure-ui-custom-tags",
       analyzePhase({ ts, node, moduleDoc }) {
         switch (node.kind) {
           case ts.SyntaxKind.ClassDeclaration: {
             const className = node.name.getText();
-            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
-            const customTags = ['animation', 'dependency', 'documentation', 'since', 'status', 'title'];
-            let customComments = '/**';
+            const classDoc = moduleDoc?.declarations?.find(
+              (declaration) => declaration.name === className,
+            );
+            const customTags = [
+              "animation",
+              "dependency",
+              "documentation",
+              "since",
+              "status",
+              "title",
+            ];
+            let customComments = "/**";
 
-            node.jsDoc?.forEach(jsDoc => {
-              jsDoc?.tags?.forEach(tag => {
+            node.jsDoc?.forEach((jsDoc) => {
+              jsDoc?.tags?.forEach((tag) => {
                 const tagName = tag.tagName.getText();
 
                 if (customTags.includes(tagName)) {
@@ -91,35 +112,37 @@ export default {
             });
 
             // This is what allows us to map JSDOC comments to ReactWrappers.
-            classDoc['jsDoc'] = node.jsDoc?.map(jsDoc => jsDoc.getFullText()).join('\n');
+            classDoc["jsDoc"] = node.jsDoc
+              ?.map((jsDoc) => jsDoc.getFullText())
+              .join("\n");
 
             const parsed = parse(`${customComments}\n */`);
-            parsed[0].tags?.forEach(t => {
+            parsed[0].tags?.forEach((t) => {
               switch (t.tag) {
                 // Animations
-                case 'animation':
-                  if (!Array.isArray(classDoc['animations'])) {
-                    classDoc['animations'] = [];
+                case "animation":
+                  if (!Array.isArray(classDoc["animations"])) {
+                    classDoc["animations"] = [];
                   }
-                  classDoc['animations'].push({
+                  classDoc["animations"].push({
                     name: t.name,
-                    description: noDash(t.description)
+                    description: noDash(t.description),
                   });
                   break;
 
                 // Dependencies
-                case 'dependency':
-                  if (!Array.isArray(classDoc['dependencies'])) {
-                    classDoc['dependencies'] = [];
+                case "dependency":
+                  if (!Array.isArray(classDoc["dependencies"])) {
+                    classDoc["dependencies"] = [];
                   }
-                  classDoc['dependencies'].push(t.name);
+                  classDoc["dependencies"].push(t.name);
                   break;
 
                 // Value-only metadata tags
-                case 'documentation':
-                case 'since':
-                case 'status':
-                case 'title':
+                case "documentation":
+                case "since":
+                case "status":
+                case "title":
                   classDoc[t.tag] = t.name;
                   break;
 
@@ -132,38 +155,40 @@ export default {
                   classDoc[t.tag].push({
                     name: t.name,
                     description: t.description,
-                    type: t.type || undefined
+                    type: t.type || undefined,
                   });
               }
             });
           }
         }
-      }
+      },
     },
 
     {
-      name: 'pure-ui-react-event-names',
+      name: "pure-ui-react-event-names",
       analyzePhase({ ts, node, moduleDoc }) {
         switch (node.kind) {
           case ts.SyntaxKind.ClassDeclaration: {
             const className = node.name.getText();
-            const classDoc = moduleDoc?.declarations?.find(declaration => declaration.name === className);
+            const classDoc = moduleDoc?.declarations?.find(
+              (declaration) => declaration.name === className,
+            );
 
             if (classDoc?.events) {
-              classDoc.events.forEach(event => {
+              classDoc.events.forEach((event) => {
                 event.reactName = `on${pascalCase(event.name)}`;
                 event.eventName = `${pascalCase(event.name)}Event`;
               });
             }
           }
         }
-      }
+      },
     },
 
     {
-      name: 'pure-ui-translate-module-paths',
+      name: "pure-ui-translate-module-paths",
       packageLinkPhase({ customElementsManifest }) {
-        customElementsManifest?.modules?.forEach(mod => {
+        customElementsManifest?.modules?.forEach((mod) => {
           //
           // CEM paths look like this:
           //
@@ -174,8 +199,8 @@ export default {
           //  components/button/button.js
           //
           const terms = [
-            { from: /^src\//, to: '' }, // Strip the src/ prefix
-            { from: /\.component.(t|j)sx?$/, to: '.js' } // Convert .ts to .js
+            { from: /^src\//, to: "" }, // Strip the src/ prefix
+            { from: /\.component.(t|j)sx?$/, to: ".js" }, // Convert .ts to .js
           ];
 
           mod.path = replace(mod.path, terms);
@@ -185,16 +210,19 @@ export default {
           }
 
           for (const dec of mod.declarations ?? []) {
-            if (dec.kind === 'class') {
+            if (dec.kind === "class") {
               for (const member of dec.members ?? []) {
                 if (member.inheritedFrom) {
-                  member.inheritedFrom.module = replace(member.inheritedFrom.module, terms);
+                  member.inheritedFrom.module = replace(
+                    member.inheritedFrom.module,
+                    terms,
+                  );
                 }
               }
             }
           }
         });
-      }
+      },
     },
 
     // Generate custom VS Code data
@@ -203,28 +231,29 @@ export default {
       cssFileName: null,
       referencesTemplate: (_, tag) => [
         {
-          name: 'Documentation',
-          url: `https://pureui.xyz/components/${tag.replace('p-', '')}`
-        }
-      ]
+          name: "Documentation",
+          url: `https://pureui.xyz/components/${tag.replace("p-", "")}`,
+        },
+      ],
     }),
 
     customElementJetBrainsPlugin({
-      outdir: './dist',
+      outdir: "./dist",
       excludeCss: true,
       packageJson: false,
       referencesTemplate: (_, tag) => {
         return {
-          name: 'Documentation',
-          url: `https://pureui.xyz/components/${tag.replace('p-', '')}`
+          name: "Documentation",
+          url: `https://pureui.xyz/components/${tag.replace("p-", "")}`,
         };
-      }
+      },
     }),
 
     customElementVuejsPlugin({
-      outdir: './dist/types/vue',
-      fileName: 'index.d.ts',
-      componentTypePath: (_, tag) => `../../components/${tag.replace('p-', '')}/${tag.replace('p-', '')}.component.js`
-    })
-  ]
+      outdir: "./dist/types/vue",
+      fileName: "index.d.ts",
+      componentTypePath: (_, tag) =>
+        `../../components/${tag.replace("p-", "")}/${tag.replace("p-", "")}.component.js`,
+    }),
+  ],
 };

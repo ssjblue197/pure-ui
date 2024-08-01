@@ -336,7 +336,7 @@ ol ol:last-child {
 }
 
 .anchor-heading a::after {
-  content: '#';
+  content: "#";
   color: var(--p-color-primary-700);
   margin-inline: 0.5rem;
   opacity: 0;
@@ -525,11 +525,19 @@ pre .token.italic {
 }
 
 .copy-code-button::part(button):hover {
-  background-color: color-mix(in oklch, var(--p-color-neutral-50), var(--p-color-neutral-1000) 3%);
+  background-color: color-mix(
+    in oklch,
+    var(--p-color-neutral-50),
+    var(--p-color-neutral-1000) 3%
+  );
 }
 
 .copy-code-button::part(button):active {
-  background-color: color-mix(in oklch, var(--p-color-neutral-50), var(--p-color-neutral-1000) 6%);
+  background-color: color-mix(
+    in oklch,
+    var(--p-color-neutral-50),
+    var(--p-color-neutral-1000) 6%
+  );
 }
 
 pre .copy-code-button {
@@ -569,7 +577,7 @@ pre:hover .copy-code-button,
 }
 
 .callout::before {
-  content: '';
+  content: "";
   position: absolute;
   top: calc(50% - 0.8rem);
   left: calc(-0.8rem - 2px);
@@ -585,7 +593,7 @@ pre:hover .copy-code-button,
 }
 
 .callout--tip::before {
-  content: 'i';
+  content: "i";
   font-style: italic;
   background-color: var(--p-color-primary-600);
 }
@@ -597,7 +605,7 @@ pre:hover .copy-code-button,
 }
 
 .callout--warning::before {
-  content: '!';
+  content: "!";
   background-color: var(--p-color-warning-600);
 }
 
@@ -608,7 +616,7 @@ pre:hover .copy-code-button,
 }
 
 .callout--danger::before {
-  content: '‼';
+  content: "‼";
   background-color: var(--p-color-danger-600);
 }
 
@@ -644,7 +652,8 @@ pre:hover .copy-code-button,
     float: none;
     width: calc(100% + (var(--docs-content-padding) * 2));
     max-width: none;
-    margin: var(--docs-content-vertical-spacing) calc(-1 * var(--docs-content-padding));
+    margin: var(--docs-content-vertical-spacing)
+      calc(-1 * var(--docs-content-padding));
   }
 }
 
@@ -689,7 +698,9 @@ pre:hover .copy-code-button,
 }
 
 .content details + details {
-  margin-top: calc(-1 * var(--docs-content-vertical-spacing) + (2 * var(--docs-border-width)));
+  margin-top: calc(
+    -1 * var(--docs-content-vertical-spacing) + (2 * var(--docs-border-width))
+  );
 }
 
 /* Sidebar */
@@ -847,8 +858,13 @@ main {
 
 .content--with-toc {
   /* There's a 2rem gap, so we need to remove it from the column */
-  grid-template-columns: calc(75% - 2rem) min(25%, var(--docs-content-toc-max-width));
-  max-width: calc(var(--docs-content-max-width) + var(--docs-content-toc-max-width));
+  grid-template-columns: calc(75% - 2rem) min(
+      25%,
+      var(--docs-content-toc-max-width)
+    );
+  max-width: calc(
+    var(--docs-content-max-width) + var(--docs-content-toc-max-width)
+  );
 }
 
 .content__body {
@@ -886,14 +902,14 @@ main {
   margin: 0;
 }
 
-.content__toc li[data-level='3'] {
+.content__toc li[data-level="3"] {
   margin-left: 1rem;
 }
 
 /* We don't use them, but just in case */
-.content__toc li[data-level='4'],
-.content__toc li[data-level='5'],
-.content__toc li[data-level='6'] {
+.content__toc li[data-level="4"],
+.content__toc li[data-level="5"],
+.content__toc li[data-level="6"] {
   margin-left: 2rem;
 }
 
@@ -945,13 +961,17 @@ main {
   }
 
   .content__toc ul::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     bottom: 1rem; /* don't cover the scrollbar */
     right: 0;
     width: 2rem;
-    background: linear-gradient(90deg, rgba(0 0 0 / 0) 0%, var(--p-color-neutral-0) 100%);
+    background: linear-gradient(
+      90deg,
+      rgba(0 0 0 / 0) 0%,
+      var(--p-color-neutral-0) 100%
+    );
   }
 
   .content__toc li {
@@ -962,7 +982,7 @@ main {
     margin-bottom: 0;
   }
 
-  .content__toc [data-level]:not([data-level='2']) {
+  .content__toc [data-level]:not([data-level="2"]) {
     display: none;
   }
 
@@ -1131,7 +1151,7 @@ html.sidebar-open #menu-toggle {
 /* Print styles */
 @media print {
   a:not(.anchor-heading)[href]::after {
-    content: ' (' attr(href) ')';
+    content: " (" attr(href) ")";
   }
 
   details,
@@ -1320,8 +1340,8 @@ html.sidebar-open #menu-toggle {
   }
 }
 
-body[data-page^='/tokens/'] .table-wrapper td:first-child,
-body[data-page^='/tokens/'] .table-wrapper td:first-child code {
+body[data-page^="/tokens/"] .table-wrapper td:first-child,
+body[data-page^="/tokens/"] .table-wrapper td:first-child code {
   white-space: nowrap;
 }
 
@@ -1341,7 +1361,7 @@ body[data-page^='/tokens/'] .table-wrapper td:first-child code {
 }
 
 .transition-demo:after {
-  content: '';
+  content: "";
   position: absolute;
   background-color: var(--p-color-primary-600);
   top: 0;

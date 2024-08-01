@@ -1,18 +1,18 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { defaultValue } from '../../internal/default-value.js';
-import { FormControlController } from '../../internal/form.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { live } from 'lit/directives/live.js';
-import { property, query, state } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import formControlStyles from '../../styles/form-control.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './switch.styles.js';
-import type { CSSResultGroup } from 'lit';
-import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
+import { classMap } from "lit/directives/class-map.js";
+import { defaultValue } from "../../internal/default-value.js";
+import { FormControlController } from "../../internal/form.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { live } from "lit/directives/live.js";
+import { property, query, state } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import formControlStyles from "../../styles/form-control.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./switch.styles.js";
+import type { CSSResultGroup } from "lit";
+import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Switches allow the user to toggle an option on or off.
@@ -39,29 +39,34 @@ import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
  * @cssproperty --height - The height of the switch.
  * @cssproperty --thumb-size - The size of the thumb.
  */
-export default class PSwitch extends PureElement implements ShoelaceFormControl {
+export default class PSwitch
+  extends PureElement
+  implements ShoelaceFormControl
+{
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
 
   private readonly formControlController = new FormControlController(this, {
-    value: (control: PSwitch) => (control.checked ? control.value || 'on' : undefined),
+    value: (control: PSwitch) =>
+      control.checked ? control.value || "on" : undefined,
     defaultValue: (control: PSwitch) => control.defaultChecked,
-    setValue: (control: PSwitch, checked: boolean) => (control.checked = checked)
+    setValue: (control: PSwitch, checked: boolean) =>
+      (control.checked = checked),
   });
-  private readonly hasSlotController = new HasSlotController(this, 'help-text');
+  private readonly hasSlotController = new HasSlotController(this, "help-text");
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
   @state() private hasFocus = false;
-  @property() title = ''; // make reactive to pass through
+  @property() title = ""; // make reactive to pass through
 
   /** The name of the switch, submitted as a name/value pair with form data. */
-  @property() name = '';
+  @property() name = "";
 
   /** The current value of the switch, submitted as a name/value pair with form data. */
   @property() value: string;
 
   /** The switch's size. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
 
   /** Disables the switch. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -70,20 +75,20 @@ export default class PSwitch extends PureElement implements ShoelaceFormControl 
   @property({ type: Boolean, reflect: true }) checked = false;
 
   /** The default value of the form control. Primarily used for resetting the form control. */
-  @defaultValue('checked') defaultChecked = false;
+  @defaultValue("checked") defaultChecked = false;
 
   /**
    * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
    * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
    * the same document or shadow root for this to work.
    */
-  @property({ reflect: true }) form = '';
+  @property({ reflect: true }) form = "";
 
   /** Makes the switch a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
   /** The switch's help text. If you need to display HTML, use the `help-text` slot instead. */
-  @property({ attribute: 'help-text' }) helpText = '';
+  @property({ attribute: "help-text" }) helpText = "";
 
   /** Gets the validity state object */
   get validity() {
@@ -101,11 +106,11 @@ export default class PSwitch extends PureElement implements ShoelaceFormControl 
 
   private handleBlur() {
     this.hasFocus = false;
-    this.emit('p-blur');
+    this.emit("p-blur");
   }
 
   private handleInput() {
-    this.emit('p-input');
+    this.emit("p-input");
   }
 
   private handleInvalid(event: Event) {
@@ -115,37 +120,37 @@ export default class PSwitch extends PureElement implements ShoelaceFormControl 
 
   private handleClick() {
     this.checked = !this.checked;
-    this.emit('p-change');
+    this.emit("p-change");
   }
 
   private handleFocus() {
     this.hasFocus = true;
-    this.emit('p-focus');
+    this.emit("p-focus");
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'ArrowLeft') {
+    if (event.key === "ArrowLeft") {
       event.preventDefault();
       this.checked = false;
-      this.emit('p-change');
-      this.emit('p-input');
+      this.emit("p-change");
+      this.emit("p-input");
     }
 
-    if (event.key === 'ArrowRight') {
+    if (event.key === "ArrowRight") {
       event.preventDefault();
       this.checked = true;
-      this.emit('p-change');
-      this.emit('p-input');
+      this.emit("p-change");
+      this.emit("p-input");
     }
   }
 
-  @watch('checked', { waitUntilFirstUpdate: true })
+  @watch("checked", { waitUntilFirstUpdate: true })
   handleCheckedChange() {
     this.input.checked = this.checked; // force a sync update
     this.formControlController.updateValidity();
   }
 
-  @watch('disabled', { waitUntilFirstUpdate: true })
+  @watch("disabled", { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid
     this.formControlController.setValidity(true);
@@ -188,42 +193,45 @@ export default class PSwitch extends PureElement implements ShoelaceFormControl 
   }
 
   render() {
-    const hasHelpTextSlot = this.hasSlotController.test('help-text');
+    const hasHelpTextSlot = this.hasSlotController.test("help-text");
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
 
     return html`
       <div
         class=${classMap({
-          'form-control': true,
-          'form-control--small': this.size === 'small',
-          'form-control--medium': this.size === 'medium',
-          'form-control--large': this.size === 'large',
-          'form-control--has-help-text': hasHelpText
+          "form-control": true,
+          "form-control--small": this.size === "small",
+          "form-control--medium": this.size === "medium",
+          "form-control--large": this.size === "large",
+          "form-control--has-help-text": hasHelpText,
         })}
       >
         <label
           part="base"
           class=${classMap({
             switch: true,
-            'switch--checked': this.checked,
-            'switch--disabled': this.disabled,
-            'switch--focused': this.hasFocus,
-            'switch--small': this.size === 'small',
-            'switch--medium': this.size === 'medium',
-            'switch--large': this.size === 'large'
+            "switch--checked": this.checked,
+            "switch--disabled": this.disabled,
+            "switch--focused": this.hasFocus,
+            "switch--small": this.size === "small",
+            "switch--medium": this.size === "medium",
+            "switch--large": this.size === "large",
           })}
         >
           <input
             class="switch__input"
             type="checkbox"
-            title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
+            title=${
+              this
+                .title /* An empty title prevents browser validation tooltips from appearing on hover */
+            }
             name=${this.name}
             value=${ifDefined(this.value)}
             .checked=${live(this.checked)}
             .disabled=${this.disabled}
             .required=${this.required}
             role="switch"
-            aria-checked=${this.checked ? 'true' : 'false'}
+            aria-checked=${this.checked ? "true" : "false"}
             aria-describedby="help-text"
             @click=${this.handleClick}
             @input=${this.handleInput}
@@ -243,7 +251,7 @@ export default class PSwitch extends PureElement implements ShoelaceFormControl 
         </label>
 
         <div
-          aria-hidden=${hasHelpText ? 'false' : 'true'}
+          aria-hidden=${hasHelpText ? "false" : "true"}
           class="form-control__help-text"
           id="help-text"
           part="form-control-help-text"
@@ -257,6 +265,6 @@ export default class PSwitch extends PureElement implements ShoelaceFormControl 
 
 declare global {
   interface HTMLElementTagNameMap {
-    'p-switch': PSwitch;
+    "p-switch": PSwitch;
   }
 }

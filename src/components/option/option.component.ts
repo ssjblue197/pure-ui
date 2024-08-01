@@ -1,13 +1,13 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property, query, state } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './option.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query, state } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./option.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Options define the selectable items within various form controls such as [select](/components/select).
@@ -29,13 +29,13 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class POption extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'p-icon': PIcon };
+  static dependencies = { "p-icon": PIcon };
 
   private cachedTextLabel: string;
   // @ts-expect-error - Controller is currently unused
   private readonly localize = new LocalizeController(this);
 
-  @query('.option__label') defaultSlot: HTMLSlotElement;
+  @query(".option__label") defaultSlot: HTMLSlotElement;
 
   @state() current = false; // the user has keyed into the option, but hasn't selected it yet (shows a highlight)
   @state() selected = false; // the option is selected and has aria-selected="true"
@@ -46,22 +46,22 @@ export default class POption extends PureElement {
    * from other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing
    * multiple values.
    */
-  @property({ reflect: true }) value = '';
+  @property({ reflect: true }) value = "";
 
   /** Draws the option in a disabled state, preventing selection. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('role', 'option');
-    this.setAttribute('aria-selected', 'false');
+    this.setAttribute("role", "option");
+    this.setAttribute("aria-selected", "false");
   }
 
   private handleDefaultSlotChange() {
     const textLabel = this.getTextLabel();
 
     // Ignore the first time the label is set
-    if (typeof this.cachedTextLabel === 'undefined') {
+    if (typeof this.cachedTextLabel === "undefined") {
       this.cachedTextLabel = textLabel;
       return;
     }
@@ -69,7 +69,11 @@ export default class POption extends PureElement {
     // When the label changes, emit a slotchange event so parent controls see it
     if (textLabel !== this.cachedTextLabel) {
       this.cachedTextLabel = textLabel;
-      this.emit('slotchange', { bubbles: true, composed: false, cancelable: false });
+      this.emit("slotchange", {
+        bubbles: true,
+        composed: false,
+        cancelable: false,
+      });
     }
   }
 
@@ -81,38 +85,41 @@ export default class POption extends PureElement {
     this.hasHover = false;
   }
 
-  @watch('disabled')
+  @watch("disabled")
   handleDisabledChange() {
-    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+    this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
   }
 
-  @watch('selected')
+  @watch("selected")
   handleSelectedChange() {
-    this.setAttribute('aria-selected', this.selected ? 'true' : 'false');
+    this.setAttribute("aria-selected", this.selected ? "true" : "false");
   }
 
-  @watch('value')
+  @watch("value")
   handleValueChange() {
     // Ensure the value is a string. This ensures the next line doesn't error and allows framework users to pass numbers
     // instead of requiring them to cast the value to a string.
-    if (typeof this.value !== 'string') {
+    if (typeof this.value !== "string") {
       this.value = String(this.value);
     }
 
-    if (this.value.includes(' ')) {
-      console.error(`Option values cannot include a space. All spaces have been replaced with underscores.`, this);
-      this.value = this.value.replace(/ /g, '_');
+    if (this.value.includes(" ")) {
+      console.error(
+        `Option values cannot include a space. All spaces have been replaced with underscores.`,
+        this,
+      );
+      this.value = this.value.replace(/ /g, "_");
     }
   }
 
   /** Returns a plain text label based on the option's content. */
   getTextLabel() {
     const nodes = this.childNodes;
-    let label = '';
+    let label = "";
 
-    [...nodes].forEach(node => {
+    [...nodes].forEach((node) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
-        if (!(node as HTMLElement).hasAttribute('slot')) {
+        if (!(node as HTMLElement).hasAttribute("slot")) {
           label += (node as HTMLElement).textContent;
         }
       }
@@ -131,17 +138,27 @@ export default class POption extends PureElement {
         part="base"
         class=${classMap({
           option: true,
-          'option--current': this.current,
-          'option--disabled': this.disabled,
-          'option--selected': this.selected,
-          'option--hover': this.hasHover
+          "option--current": this.current,
+          "option--disabled": this.disabled,
+          "option--selected": this.selected,
+          "option--hover": this.hasHover,
         })}
         @mouseenter=${this.handleMouseEnter}
         @mouseleave=${this.handleMouseLeave}
       >
-        <p-icon part="checked-icon" class="option__check" name="check" library="system" aria-hidden="true"></p-icon>
+        <p-icon
+          part="checked-icon"
+          class="option__check"
+          name="check"
+          library="system"
+          aria-hidden="true"
+        ></p-icon>
         <slot part="prefix" name="prefix" class="option__prefix"></slot>
-        <slot part="label" class="option__label" @slotchange=${this.handleDefaultSlotChange}></slot>
+        <slot
+          part="label"
+          class="option__label"
+          @slotchange=${this.handleDefaultSlotChange}
+        ></slot>
         <slot part="suffix" name="suffix" class="option__suffix"></slot>
       </div>
     `;

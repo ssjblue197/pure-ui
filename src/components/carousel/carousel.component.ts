@@ -1,22 +1,22 @@
-import '../../internal/scrollend-polyfill.js';
+import "../../internal/scrollend-polyfill.js";
 
-import { AutoplayController } from './autoplay-controller.js';
-import { clamp } from '../../internal/math.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { eventOptions, property, query, state } from 'lit/decorators.js';
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { map } from 'lit/directives/map.js';
-import { prefersReducedMotion } from '../../internal/animate.js';
-import { range } from 'lit/directives/range.js';
-import { waitForEvent } from '../../internal/event.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './carousel.styles.js';
-import type { CSSResultGroup, PropertyValueMap } from 'lit';
-import type PCarouselItem from '../carousel-item/carousel-item.component.js';
+import { AutoplayController } from "./autoplay-controller.js";
+import { clamp } from "../../internal/math.js";
+import { classMap } from "lit/directives/class-map.js";
+import { eventOptions, property, query, state } from "lit/decorators.js";
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { map } from "lit/directives/map.js";
+import { prefersReducedMotion } from "../../internal/animate.js";
+import { range } from "lit/directives/range.js";
+import { waitForEvent } from "../../internal/event.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./carousel.styles.js";
+import type { CSSResultGroup, PropertyValueMap } from "lit";
+import type PCarouselItem from "../carousel-item/carousel-item.component.js";
 
 /**
  * @summary Carousels display an arbitrary number of content slides along a horizontal or vertical axis.
@@ -49,7 +49,7 @@ import type PCarouselItem from '../carousel-item/carousel-item.component.js';
  */
 export default class PCarousel extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'p-icon': PIcon };
+  static dependencies = { "p-icon": PIcon };
 
   /** When set, allows the user to navigate the carousel in the same direction indefinitely. */
   @property({ type: Boolean, reflect: true }) loop = false;
@@ -64,25 +64,27 @@ export default class PCarousel extends PureElement {
   @property({ type: Boolean, reflect: true }) autoplay = false;
 
   /** Specifies the amount of time, in milliseconds, between each automatic scroll.  */
-  @property({ type: Number, attribute: 'autoplay-interval' }) autoplayInterval = 3000;
+  @property({ type: Number, attribute: "autoplay-interval" }) autoplayInterval =
+    3000;
 
   /** Specifies how many slides should be shown at a given time.  */
-  @property({ type: Number, attribute: 'slides-per-page' }) slidesPerPage = 1;
+  @property({ type: Number, attribute: "slides-per-page" }) slidesPerPage = 1;
 
   /**
    * Specifies the number of slides the carousel will advance when scrolling, useful when specifying a `slides-per-page`
    * greater than one. It can't be higher than `slides-per-page`.
    */
-  @property({ type: Number, attribute: 'slides-per-move' }) slidesPerMove = 1;
+  @property({ type: Number, attribute: "slides-per-move" }) slidesPerMove = 1;
 
   /** Specifies the orientation in which the carousel will lay out.  */
-  @property() orientation: 'horizontal' | 'vertical' = 'horizontal';
+  @property() orientation: "horizontal" | "vertical" = "horizontal";
 
   /** When set, it is possible to scroll through the slides by dragging them with the mouse. */
-  @property({ type: Boolean, reflect: true, attribute: 'mouse-dragging' }) mouseDragging = false;
+  @property({ type: Boolean, reflect: true, attribute: "mouse-dragging" })
+  mouseDragging = false;
 
-  @query('.carousel__slides') scrollContainer: HTMLElement;
-  @query('.carousel__pagination') paginationContainer: HTMLElement;
+  @query(".carousel__slides") scrollContainer: HTMLElement;
+  @query(".carousel__pagination") paginationContainer: HTMLElement;
 
   // The index of the active slide
   @state() activeSlide = 0;
@@ -97,8 +99,8 @@ export default class PCarousel extends PureElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.setAttribute('role', 'region');
-    this.setAttribute('aria-label', this.localize.term('carousel'));
+    this.setAttribute("role", "region");
+    this.setAttribute("aria-label", this.localize.term("carousel"));
   }
 
   disconnectedCallback(): void {
@@ -111,13 +113,18 @@ export default class PCarousel extends PureElement {
     this.mutationObserver = new MutationObserver(this.handleSlotChange);
     this.mutationObserver.observe(this, {
       childList: true,
-      subtree: true
+      subtree: true,
     });
   }
 
-  protected willUpdate(changedProperties: PropertyValueMap<PCarousel> | Map<PropertyKey, unknown>): void {
+  protected willUpdate(
+    changedProperties: PropertyValueMap<PCarousel> | Map<PropertyKey, unknown>,
+  ): void {
     // Ensure the slidesPerMove is never higher than the slidesPerPage
-    if (changedProperties.has('slidesPerMove') || changedProperties.has('slidesPerPage')) {
+    if (
+      changedProperties.has("slidesPerMove") ||
+      changedProperties.has("slidesPerPage")
+    ) {
       this.slidesPerMove = Math.min(this.slidesPerMove, this.slidesPerPage);
     }
   }
@@ -126,7 +133,9 @@ export default class PCarousel extends PureElement {
     const slidesCount = this.getSlides().length;
     const { slidesPerPage, slidesPerMove, loop } = this;
 
-    const pages = loop ? slidesCount / slidesPerMove : (slidesCount - slidesPerPage) / slidesPerMove + 1;
+    const pages = loop
+      ? slidesCount / slidesPerMove
+      : (slidesCount - slidesPerPage) / slidesPerMove + 1;
 
     return Math.ceil(pages);
   }
@@ -144,21 +153,39 @@ export default class PCarousel extends PureElement {
   }
 
   /** @internal Gets all carousel items. */
-  private getSlides({ excludeClones = true }: { excludeClones?: boolean } = {}) {
+  private getSlides({
+    excludeClones = true,
+  }: { excludeClones?: boolean } = {}) {
     return [...this.children].filter(
-      (el: HTMLElement) => this.isCarouselItem(el) && (!excludeClones || !el.hasAttribute('data-clone'))
+      (el: HTMLElement) =>
+        this.isCarouselItem(el) &&
+        (!excludeClones || !el.hasAttribute("data-clone")),
     ) as PCarouselItem[];
   }
 
   private handleKeyDown(event: KeyboardEvent) {
-    if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
+    if (
+      [
+        "ArrowLeft",
+        "ArrowRight",
+        "ArrowUp",
+        "ArrowDown",
+        "Home",
+        "End",
+      ].includes(event.key)
+    ) {
       const target = event.target as HTMLElement;
-      const isRtl = this.matches(':dir(rtl)');
-      const isFocusInPagination = target.closest('[part~="pagination-item"]') !== null;
+      const isRtl = this.matches(":dir(rtl)");
+      const isFocusInPagination =
+        target.closest('[part~="pagination-item"]') !== null;
       const isNext =
-        event.key === 'ArrowDown' || (!isRtl && event.key === 'ArrowRight') || (isRtl && event.key === 'ArrowLeft');
+        event.key === "ArrowDown" ||
+        (!isRtl && event.key === "ArrowRight") ||
+        (isRtl && event.key === "ArrowLeft");
       const isPrevious =
-        event.key === 'ArrowUp' || (!isRtl && event.key === 'ArrowLeft') || (isRtl && event.key === 'ArrowRight');
+        event.key === "ArrowUp" ||
+        (!isRtl && event.key === "ArrowLeft") ||
+        (isRtl && event.key === "ArrowRight");
 
       event.preventDefault();
 
@@ -170,19 +197,20 @@ export default class PCarousel extends PureElement {
         this.next();
       }
 
-      if (event.key === 'Home') {
+      if (event.key === "Home") {
         this.goToSlide(0);
       }
 
-      if (event.key === 'End') {
+      if (event.key === "End") {
         this.goToSlide(this.getSlides().length - 1);
       }
 
       if (isFocusInPagination) {
         this.updateComplete.then(() => {
-          const activePaginationItem = this.shadowRoot?.querySelector<HTMLButtonElement>(
-            '[part~="pagination-item--active"]'
-          );
+          const activePaginationItem =
+            this.shadowRoot?.querySelector<HTMLButtonElement>(
+              '[part~="pagination-item--active"]',
+            );
 
           if (activePaginationItem) {
             activePaginationItem.focus();
@@ -197,61 +225,73 @@ export default class PCarousel extends PureElement {
     if (canDrag) {
       event.preventDefault();
 
-      document.addEventListener('pointermove', this.handleMouseDrag, { capture: true, passive: true });
-      document.addEventListener('pointerup', this.handleMouseDragEnd, { capture: true, once: true });
+      document.addEventListener("pointermove", this.handleMouseDrag, {
+        capture: true,
+        passive: true,
+      });
+      document.addEventListener("pointerup", this.handleMouseDragEnd, {
+        capture: true,
+        once: true,
+      });
     }
   }
 
   private handleMouseDrag = (event: PointerEvent) => {
     if (!this.dragging) {
       // Start dragging if it hasn't yet
-      this.scrollContainer.style.setProperty('scroll-snap-type', 'none');
+      this.scrollContainer.style.setProperty("scroll-snap-type", "none");
       this.dragging = true;
     }
 
     this.scrollContainer.scrollBy({
       left: -event.movementX,
       top: -event.movementY,
-      behavior: 'instant'
+      behavior: "instant",
     });
   };
 
   private handleMouseDragEnd = () => {
     const scrollContainer = this.scrollContainer;
 
-    document.removeEventListener('pointermove', this.handleMouseDrag, { capture: true });
+    document.removeEventListener("pointermove", this.handleMouseDrag, {
+      capture: true,
+    });
 
     // get the current scroll position
     const startLeft = scrollContainer.scrollLeft;
     const startTop = scrollContainer.scrollTop;
 
     // remove the scroll-snap-type property so that the browser will snap the slide to the correct position
-    scrollContainer.style.removeProperty('scroll-snap-type');
+    scrollContainer.style.removeProperty("scroll-snap-type");
 
     // fix(safari): forcing a style recalculation doesn't seem to immediately update the scroll
     // position in Safari. Setting "overflow" to "hidden" should force this behavior.
-    scrollContainer.style.setProperty('overflow', 'hidden');
+    scrollContainer.style.setProperty("overflow", "hidden");
 
     // get the final scroll position to the slide snapped by the browser
     const finalLeft = scrollContainer.scrollLeft;
     const finalTop = scrollContainer.scrollTop;
 
     // restore the scroll position to the original one, so that it can be smoothly animated if needed
-    scrollContainer.style.removeProperty('overflow');
-    scrollContainer.style.setProperty('scroll-snap-type', 'none');
-    scrollContainer.scrollTo({ left: startLeft, top: startTop, behavior: 'instant' });
+    scrollContainer.style.removeProperty("overflow");
+    scrollContainer.style.setProperty("scroll-snap-type", "none");
+    scrollContainer.scrollTo({
+      left: startLeft,
+      top: startTop,
+      behavior: "instant",
+    });
 
     requestAnimationFrame(async () => {
       if (startLeft !== finalLeft || startTop !== finalTop) {
         scrollContainer.scrollTo({
           left: finalLeft,
           top: finalTop,
-          behavior: prefersReducedMotion() ? 'auto' : 'smooth'
+          behavior: prefersReducedMotion() ? "auto" : "smooth",
         });
-        await waitForEvent(scrollContainer, 'scrollend');
+        await waitForEvent(scrollContainer, "scrollend");
       }
 
-      scrollContainer.style.removeProperty('scroll-snap-type');
+      scrollContainer.style.removeProperty("scroll-snap-type");
 
       this.dragging = false;
       this.handleScrollEnd();
@@ -266,41 +306,52 @@ export default class PCarousel extends PureElement {
   /** @internal Synchronizes the slides with the IntersectionObserver API. */
   private synchronizeSlides() {
     const io = new IntersectionObserver(
-      entries => {
+      (entries) => {
         io.disconnect();
 
         for (const entry of entries) {
           const slide = entry.target;
-          slide.toggleAttribute('inert', !entry.isIntersecting);
-          slide.classList.toggle('--in-view', entry.isIntersecting);
-          slide.setAttribute('aria-hidden', entry.isIntersecting ? 'false' : 'true');
+          slide.toggleAttribute("inert", !entry.isIntersecting);
+          slide.classList.toggle("--in-view", entry.isIntersecting);
+          slide.setAttribute(
+            "aria-hidden",
+            entry.isIntersecting ? "false" : "true",
+          );
         }
 
-        const firstIntersecting = entries.find(entry => entry.isIntersecting);
+        const firstIntersecting = entries.find((entry) => entry.isIntersecting);
 
         if (firstIntersecting) {
-          if (this.loop && firstIntersecting.target.hasAttribute('data-clone')) {
-            const clonePosition = Number(firstIntersecting.target.getAttribute('data-clone'));
+          if (
+            this.loop &&
+            firstIntersecting.target.hasAttribute("data-clone")
+          ) {
+            const clonePosition = Number(
+              firstIntersecting.target.getAttribute("data-clone"),
+            );
 
             // Scrolls to the original slide without animating, so the user won't notice that the position has changed
-            this.goToSlide(clonePosition, 'instant');
+            this.goToSlide(clonePosition, "instant");
           } else {
             const slides = this.getSlides();
 
             // Update the current index based on the first visible slide
-            const slideIndex = slides.indexOf(firstIntersecting.target as PCarouselItem);
+            const slideIndex = slides.indexOf(
+              firstIntersecting.target as PCarouselItem,
+            );
             // Set the index to the first "snappable" slide
-            this.activeSlide = Math.ceil(slideIndex / this.slidesPerMove) * this.slidesPerMove;
+            this.activeSlide =
+              Math.ceil(slideIndex / this.slidesPerMove) * this.slidesPerMove;
           }
         }
       },
       {
         root: this.scrollContainer,
-        threshold: 0.6
-      }
+        threshold: 0.6,
+      },
     );
 
-    this.getSlides({ excludeClones: false }).forEach(slide => {
+    this.getSlides({ excludeClones: false }).forEach((slide) => {
       io.observe(slide);
     });
   }
@@ -314,14 +365,18 @@ export default class PCarousel extends PureElement {
   }
 
   private isCarouselItem(node: Node): node is PCarouselItem {
-    return node instanceof Element && node.tagName.toLowerCase() === 'p-carousel-item';
+    return (
+      node instanceof Element &&
+      node.tagName.toLowerCase() === "p-carousel-item"
+    );
   }
 
   private handleSlotChange = (mutations: MutationRecord[]) => {
-    const needsInitialization = mutations.some(mutation =>
+    const needsInitialization = mutations.some((mutation) =>
       [...mutation.addedNodes, ...mutation.removedNodes].some(
-        (el: HTMLElement) => this.isCarouselItem(el) && !el.hasAttribute('data-clone')
-      )
+        (el: HTMLElement) =>
+          this.isCarouselItem(el) && !el.hasAttribute("data-clone"),
+      ),
     );
 
     // Reinitialize the carousel if a carousel item has been added or removed
@@ -332,16 +387,19 @@ export default class PCarousel extends PureElement {
     this.requestUpdate();
   };
 
-  @watch('loop', { waitUntilFirstUpdate: true })
-  @watch('slidesPerPage', { waitUntilFirstUpdate: true })
+  @watch("loop", { waitUntilFirstUpdate: true })
+  @watch("slidesPerPage", { waitUntilFirstUpdate: true })
   initializeSlides() {
     // Removes all the cloned elements from the carousel
     this.getSlides({ excludeClones: false }).forEach((slide, index) => {
-      slide.classList.remove('--in-view');
-      slide.classList.remove('--is-active');
-      slide.setAttribute('aria-label', this.localize.term('slideNum', index + 1));
+      slide.classList.remove("--in-view");
+      slide.classList.remove("--is-active");
+      slide.setAttribute(
+        "aria-label",
+        this.localize.term("slideNum", index + 1),
+      );
 
-      if (slide.hasAttribute('data-clone')) {
+      if (slide.hasAttribute("data-clone")) {
         slide.remove();
       }
     });
@@ -356,7 +414,7 @@ export default class PCarousel extends PureElement {
     this.synchronizeSlides();
 
     // Because the DOM may be changed, restore the scroll position to the active slide
-    this.goToSlide(this.activeSlide, 'auto');
+    this.goToSlide(this.activeSlide, "auto");
   }
 
   private createClones() {
@@ -368,36 +426,36 @@ export default class PCarousel extends PureElement {
 
     lastSlides.reverse().forEach((slide, i) => {
       const clone = slide.cloneNode(true) as HTMLElement;
-      clone.setAttribute('data-clone', String(slides.length - i - 1));
+      clone.setAttribute("data-clone", String(slides.length - i - 1));
       this.prepend(clone);
     });
 
     firstSlides.forEach((slide, i) => {
       const clone = slide.cloneNode(true) as HTMLElement;
-      clone.setAttribute('data-clone', String(i));
+      clone.setAttribute("data-clone", String(i));
       this.append(clone);
     });
   }
 
-  @watch('activeSlide')
+  @watch("activeSlide")
   handelSlideChange() {
     const slides = this.getSlides();
     slides.forEach((slide, i) => {
-      slide.classList.toggle('--is-active', i === this.activeSlide);
+      slide.classList.toggle("--is-active", i === this.activeSlide);
     });
 
     // Do not emit an event on first render
     if (this.hasUpdated) {
-      this.emit('p-slide-change', {
+      this.emit("p-slide-change", {
         detail: {
           index: this.activeSlide,
-          slide: slides[this.activeSlide]
-        }
+          slide: slides[this.activeSlide],
+        },
       });
     }
   }
 
-  @watch('slidesPerMove')
+  @watch("slidesPerMove")
   updateSlidesSnap() {
     const slides = this.getSlides();
 
@@ -405,14 +463,14 @@ export default class PCarousel extends PureElement {
     slides.forEach((slide, i) => {
       const shouldSnap = (i + slidesPerMove) % slidesPerMove === 0;
       if (shouldSnap) {
-        slide.style.removeProperty('scroll-snap-align');
+        slide.style.removeProperty("scroll-snap-align");
       } else {
-        slide.style.setProperty('scroll-snap-align', 'none');
+        slide.style.setProperty("scroll-snap-align", "none");
       }
     });
   }
 
-  @watch('autoplay')
+  @watch("autoplay")
   handleAutoplayChange() {
     this.autoplayController.stop();
     if (this.autoplay) {
@@ -425,7 +483,7 @@ export default class PCarousel extends PureElement {
    *
    * @param behavior - The behavior used for scrolling.
    */
-  previous(behavior: ScrollBehavior = 'smooth') {
+  previous(behavior: ScrollBehavior = "smooth") {
     this.goToSlide(this.activeSlide - this.slidesPerMove, behavior);
   }
 
@@ -434,7 +492,7 @@ export default class PCarousel extends PureElement {
    *
    * @param behavior - The behavior used for scrolling.
    */
-  next(behavior: ScrollBehavior = 'smooth') {
+  next(behavior: ScrollBehavior = "smooth") {
     this.goToSlide(this.activeSlide + this.slidesPerMove, behavior);
   }
 
@@ -444,7 +502,7 @@ export default class PCarousel extends PureElement {
    * @param index - The slide index.
    * @param behavior - The behavior used for scrolling.
    */
-  goToSlide(index: number, behavior: ScrollBehavior = 'smooth') {
+  goToSlide(index: number, behavior: ScrollBehavior = "smooth") {
     const { slidesPerPage, loop } = this;
 
     const slides = this.getSlides();
@@ -456,18 +514,27 @@ export default class PCarousel extends PureElement {
     }
 
     // Sets the next index without taking into account clones, if any.
-    const newActiveSlide = loop ? (index + slides.length) % slides.length : clamp(index, 0, slides.length - 1);
+    const newActiveSlide = loop
+      ? (index + slides.length) % slides.length
+      : clamp(index, 0, slides.length - 1);
     this.activeSlide = newActiveSlide;
 
     // Get the index of the next slide. For looping carousel it adds `slidesPerPage`
     // to normalize the starting index in order to ignore the first nth clones.
-    const nextSlideIndex = clamp(index + (loop ? slidesPerPage : 0), 0, slidesWithClones.length - 1);
+    const nextSlideIndex = clamp(
+      index + (loop ? slidesPerPage : 0),
+      0,
+      slidesWithClones.length - 1,
+    );
     const nextSlide = slidesWithClones[nextSlideIndex];
 
-    this.scrollToSlide(nextSlide, prefersReducedMotion() ? 'auto' : behavior);
+    this.scrollToSlide(nextSlide, prefersReducedMotion() ? "auto" : behavior);
   }
 
-  private scrollToSlide(slide: HTMLElement, behavior: ScrollBehavior = 'smooth') {
+  private scrollToSlide(
+    slide: HTMLElement,
+    behavior: ScrollBehavior = "smooth",
+  ) {
     const scrollContainer = this.scrollContainer;
     const scrollContainerRect = scrollContainer.getBoundingClientRect();
     const nextSlideRect = slide.getBoundingClientRect();
@@ -478,7 +545,7 @@ export default class PCarousel extends PureElement {
     scrollContainer.scrollTo({
       left: nextLeft + scrollContainer.scrollLeft,
       top: nextTop + scrollContainer.scrollTop,
-      behavior
+      behavior,
     });
   }
 
@@ -488,7 +555,7 @@ export default class PCarousel extends PureElement {
     const currentPage = this.getCurrentPage();
     const prevEnabled = this.canScrollPrev();
     const nextEnabled = this.canScrollNext();
-    const isLtr = this.matches(':dir(ltr)');
+    const isLtr = this.matches(":dir(ltr)");
 
     return html`
       <div part="base" class="carousel">
@@ -497,12 +564,12 @@ export default class PCarousel extends PureElement {
           part="scroll-container"
           class="${classMap({
             carousel__slides: true,
-            'carousel__slides--horizontal': this.orientation === 'horizontal',
-            'carousel__slides--vertical': this.orientation === 'vertical',
-            'carousel__slides--dragging': this.dragging
+            "carousel__slides--horizontal": this.orientation === "horizontal",
+            "carousel__slides--vertical": this.orientation === "vertical",
+            "carousel__slides--dragging": this.dragging,
           })}"
           style="--slides-per-page: ${this.slidesPerPage};"
-          aria-busy="${scrolling ? 'true' : 'false'}"
+          aria-busy="${scrolling ? "true" : "false"}"
           aria-atomic="true"
           tabindex="0"
           @keydown=${this.handleKeyDown}
@@ -519,55 +586,72 @@ export default class PCarousel extends PureElement {
                 <button
                   part="navigation-button navigation-button--previous"
                   class="${classMap({
-                    'carousel__navigation-button': true,
-                    'carousel__navigation-button--previous': true,
-                    'carousel__navigation-button--disabled': !prevEnabled
+                    "carousel__navigation-button": true,
+                    "carousel__navigation-button--previous": true,
+                    "carousel__navigation-button--disabled": !prevEnabled,
                   })}"
-                  aria-label="${this.localize.term('previousSlide')}"
+                  aria-label="${this.localize.term("previousSlide")}"
                   aria-controls="scroll-container"
-                  aria-disabled="${prevEnabled ? 'false' : 'true'}"
+                  aria-disabled="${prevEnabled ? "false" : "true"}"
                   @click=${prevEnabled ? () => this.previous() : null}
                 >
                   <slot name="previous-icon">
-                    <p-icon library="system" name="${isLtr ? 'chevron-left' : 'chevron-right'}"></p-icon>
+                    <p-icon
+                      library="system"
+                      name="${isLtr ? "chevron-left" : "chevron-right"}"
+                    ></p-icon>
                   </slot>
                 </button>
 
                 <button
                   part="navigation-button navigation-button--next"
                   class=${classMap({
-                    'carousel__navigation-button': true,
-                    'carousel__navigation-button--next': true,
-                    'carousel__navigation-button--disabled': !nextEnabled
+                    "carousel__navigation-button": true,
+                    "carousel__navigation-button--next": true,
+                    "carousel__navigation-button--disabled": !nextEnabled,
                   })}
-                  aria-label="${this.localize.term('nextSlide')}"
+                  aria-label="${this.localize.term("nextSlide")}"
                   aria-controls="scroll-container"
-                  aria-disabled="${nextEnabled ? 'false' : 'true'}"
+                  aria-disabled="${nextEnabled ? "false" : "true"}"
                   @click=${nextEnabled ? () => this.next() : null}
                 >
                   <slot name="next-icon">
-                    <p-icon library="system" name="${isLtr ? 'chevron-right' : 'chevron-left'}"></p-icon>
+                    <p-icon
+                      library="system"
+                      name="${isLtr ? "chevron-right" : "chevron-left"}"
+                    ></p-icon>
                   </slot>
                 </button>
               </div>
             `
-          : ''}
+          : ""}
         ${this.pagination
           ? html`
-              <div part="pagination" role="tablist" class="carousel__pagination" aria-controls="scroll-container">
-                ${map(range(pagesCount), index => {
+              <div
+                part="pagination"
+                role="tablist"
+                class="carousel__pagination"
+                aria-controls="scroll-container"
+              >
+                ${map(range(pagesCount), (index) => {
                   const isActive = index === currentPage;
                   return html`
                     <button
-                      part="pagination-item ${isActive ? 'pagination-item--active' : ''}"
+                      part="pagination-item ${isActive
+                        ? "pagination-item--active"
+                        : ""}"
                       class="${classMap({
-                        'carousel__pagination-item': true,
-                        'carousel__pagination-item--active': isActive
+                        "carousel__pagination-item": true,
+                        "carousel__pagination-item--active": isActive,
                       })}"
                       role="tab"
-                      aria-selected="${isActive ? 'true' : 'false'}"
-                      aria-label="${this.localize.term('goToSlide', index + 1, pagesCount)}"
-                      tabindex=${isActive ? '0' : '-1'}
+                      aria-selected="${isActive ? "true" : "false"}"
+                      aria-label="${this.localize.term(
+                        "goToSlide",
+                        index + 1,
+                        pagesCount,
+                      )}"
+                      tabindex=${isActive ? "0" : "-1"}
                       @click=${() => this.goToSlide(index * slidesPerMove)}
                       @keydown=${this.handleKeyDown}
                     ></button>
@@ -575,7 +659,7 @@ export default class PCarousel extends PureElement {
                 })}
               </div>
             `
-          : ''}
+          : ""}
       </div>
     `;
   }

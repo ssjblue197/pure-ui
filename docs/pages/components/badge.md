@@ -10,7 +10,7 @@ layout: component
 ```
 
 ```jsx:react
-import PBadge from '@pure-ui/core/dist/react/badge';
+import PBadge from 'pure-uikit/dist/react/badge';
 
 const App = () => <PBadge>Badge</PBadge>;
 ```
@@ -30,7 +30,7 @@ Set the `variant` attribute to change the badge's variant.
 ```
 
 ```jsx:react
-import PBadge from '@pure-ui/core/dist/react/badge';
+import PBadge from 'pure-uikit/dist/react/badge';
 
 const App = () => (
   <>
@@ -56,7 +56,7 @@ Use the `pill` attribute to give badges rounded edges.
 ```
 
 ```jsx:react
-import PBadge from '@pure-ui/core/dist/react/badge';
+import PBadge from 'pure-uikit/dist/react/badge';
 
 const App = () => (
   <>
@@ -100,7 +100,7 @@ Use the `pulse` attribute to draw attention to the badge with a subtle animation
 ```
 
 ```jsx:react
-import PBadge from '@pure-ui/core/dist/react/badge';
+import PBadge from 'pure-uikit/dist/react/badge';
 
 const css = `
   .badge-pulse p-badge:not(:last-of-type) {
@@ -157,8 +157,8 @@ One of the most common use cases for badges is attaching them to buttons. To mak
 {% raw %}
 
 ```jsx:react
-import PBadge from '@pure-ui/core/dist/react/badge';
-import PButton from '@pure-ui/core/dist/react/button';
+import PBadge from 'pure-uikit/dist/react/badge';
+import PButton from 'pure-uikit/dist/react/button';
 
 const App = () => (
   <>
@@ -201,11 +201,11 @@ When including badges in menu items, use the `suffix` slot to make sure they're 
 {% raw %}
 
 ```jsx:react
-import PBadge from '@pure-ui/core/dist/react/badge';
-import PButton from '@pure-ui/core/dist/react/button';
-import PMenu from '@pure-ui/core/dist/react/menu';
-import PMenuItem from '@pure-ui/core/dist/react/menu-item';
-import PMenuLabel from '@pure-ui/core/dist/react/menu-label';
+import PBadge from 'pure-uikit/dist/react/badge';
+import PButton from 'pure-uikit/dist/react/button';
+import PMenu from 'pure-uikit/dist/react/menu';
+import PMenuItem from 'pure-uikit/dist/react/menu-item';
+import PMenuLabel from 'pure-uikit/dist/react/menu-label';
 
 const App = () => (
   <PMenu

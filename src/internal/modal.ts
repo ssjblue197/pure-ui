@@ -1,12 +1,12 @@
-import { activeElements, getDeepestActiveElement } from './active-elements.js';
-import { getTabbableElements } from './tabbable.js';
+import { activeElements, getDeepestActiveElement } from "./active-elements.js";
+import { getTabbableElements } from "./tabbable.js";
 
 let activeModals: HTMLElement[] = [];
 
 export default class Modal {
   element: HTMLElement;
   isExternalActivated: boolean;
-  tabDirection: 'forward' | 'backward' = 'forward';
+  tabDirection: "forward" | "backward" = "forward";
   currentFocus: HTMLElement | null;
   previousFocus: HTMLElement | null;
   elementsWithTabbableControls: string[];
@@ -14,24 +14,24 @@ export default class Modal {
   constructor(element: HTMLElement) {
     this.element = element;
 
-    this.elementsWithTabbableControls = ['iframe'];
+    this.elementsWithTabbableControls = ["iframe"];
   }
 
   /** Activates focus trapping. */
   activate() {
     activeModals.push(this.element);
-    document.addEventListener('focusin', this.handleFocusIn);
-    document.addEventListener('keydown', this.handleKeyDown);
-    document.addEventListener('keyup', this.handleKeyUp);
+    document.addEventListener("focusin", this.handleFocusIn);
+    document.addEventListener("keydown", this.handleKeyDown);
+    document.addEventListener("keyup", this.handleKeyUp);
   }
 
   /** Deactivates focus trapping. */
   deactivate() {
-    activeModals = activeModals.filter(modal => modal !== this.element);
+    activeModals = activeModals.filter((modal) => modal !== this.element);
     this.currentFocus = null;
-    document.removeEventListener('focusin', this.handleFocusIn);
-    document.removeEventListener('keydown', this.handleKeyDown);
-    document.removeEventListener('keyup', this.handleKeyUp);
+    document.removeEventListener("focusin", this.handleFocusIn);
+    document.removeEventListener("keydown", this.handleKeyDown);
+    document.removeEventListener("keyup", this.handleKeyUp);
   }
 
   /** Determines if this modal element is currently active or not. */
@@ -53,12 +53,12 @@ export default class Modal {
   private checkFocus() {
     if (this.isActive() && !this.isExternalActivated) {
       const tabbableElements = getTabbableElements(this.element);
-      if (!this.element.matches(':focus-within')) {
+      if (!this.element.matches(":focus-within")) {
         const start = tabbableElements[0];
         const end = tabbableElements[tabbableElements.length - 1];
-        const target = this.tabDirection === 'forward' ? start : end;
+        const target = this.tabDirection === "forward" ? start : end;
 
-        if (typeof target?.focus === 'function') {
+        if (typeof target?.focus === "function") {
           this.currentFocus = target;
           target.focus({ preventScroll: false });
         }
@@ -73,13 +73,15 @@ export default class Modal {
 
   private possiblyHasTabbableChildren(element: HTMLElement) {
     return (
-      this.elementsWithTabbableControls.includes(element.tagName.toLowerCase()) || element.hasAttribute('controls')
+      this.elementsWithTabbableControls.includes(
+        element.tagName.toLowerCase(),
+      ) || element.hasAttribute("controls")
       // Should we add a data-attribute for people to set just in case they have an element where we don't know if it has possibly tabbable elements?
     );
   }
 
   private handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key !== 'Tab' || this.isExternalActivated) return;
+    if (event.key !== "Tab" || this.isExternalActivated) return;
     if (!this.isActive()) return;
 
     // Because sometimes focus can actually be taken over from outside sources,
@@ -88,23 +90,28 @@ export default class Modal {
     const currentActiveElement = getDeepestActiveElement();
     this.previousFocus = currentActiveElement as HTMLElement | null;
 
-    if (this.previousFocus && this.possiblyHasTabbableChildren(this.previousFocus)) {
+    if (
+      this.previousFocus &&
+      this.possiblyHasTabbableChildren(this.previousFocus)
+    ) {
       return;
     }
 
     if (event.shiftKey) {
-      this.tabDirection = 'backward';
+      this.tabDirection = "backward";
     } else {
-      this.tabDirection = 'forward';
+      this.tabDirection = "forward";
     }
 
     const tabbableElements = getTabbableElements(this.element);
 
-    let currentFocusIndex = tabbableElements.findIndex(el => el === currentActiveElement);
+    let currentFocusIndex = tabbableElements.findIndex(
+      (el) => el === currentActiveElement,
+    );
 
     this.previousFocus = this.currentFocus;
 
-    const addition = this.tabDirection === 'forward' ? 1 : -1;
+    const addition = this.tabDirection === "forward" ? 1 : -1;
 
     // eslint-disable-next-line
     while (true) {
@@ -117,12 +124,16 @@ export default class Modal {
       }
 
       this.previousFocus = this.currentFocus;
-      const nextFocus = /** @type {HTMLElement} */ tabbableElements[currentFocusIndex];
+      const nextFocus =
+        /** @type {HTMLElement} */ tabbableElements[currentFocusIndex];
 
       // This is a special case. We need to make sure we're not calling .focus() if we're already focused on an element
       // that possibly has "controls"
-      if (this.tabDirection === 'backward') {
-        if (this.previousFocus && this.possiblyHasTabbableChildren(this.previousFocus)) {
+      if (this.tabDirection === "backward") {
+        if (
+          this.previousFocus &&
+          this.possiblyHasTabbableChildren(this.previousFocus)
+        ) {
           return;
         }
       }
@@ -137,7 +148,10 @@ export default class Modal {
 
       // Check to make sure focus actually changed. It may not always be the next focus, we just don't want it to be the previousFocus.
       const allActiveElements = [...activeElements()];
-      if (allActiveElements.includes(this.currentFocus) || !allActiveElements.includes(this.previousFocus!)) {
+      if (
+        allActiveElements.includes(this.currentFocus) ||
+        !allActiveElements.includes(this.previousFocus!)
+      ) {
         break;
       }
     }
@@ -146,6 +160,6 @@ export default class Modal {
   };
 
   private handleKeyUp = () => {
-    this.tabDirection = 'forward';
+    this.tabDirection = "forward";
   };
 }

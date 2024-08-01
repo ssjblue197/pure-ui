@@ -1,16 +1,23 @@
-import { animateTo, parseDuration, stopAnimations } from '../../internal/animate.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property, query } from 'lit/decorators.js';
-import { waitForEvent } from '../../internal/event.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PPopup from '../popup/popup.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './tooltip.styles.js';
-import type { CSSResultGroup } from 'lit';
+import {
+  animateTo,
+  parseDuration,
+  stopAnimations,
+} from "../../internal/animate.js";
+import { classMap } from "lit/directives/class-map.js";
+import {
+  getAnimation,
+  setDefaultAnimation,
+} from "../../utilities/animation-registry.js";
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query } from "lit/decorators.js";
+import { waitForEvent } from "../../internal/event.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PPopup from "../popup/popup.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./tooltip.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Tooltips display additional information based on a specific action.
@@ -42,36 +49,36 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class PTooltip extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'p-popup': PPopup };
+  static dependencies = { "p-popup": PPopup };
 
   private hoverTimeout: number;
   private readonly localize = new LocalizeController(this);
   private closeWatcher: CloseWatcher | null;
 
-  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
-  @query('.tooltip__body') body: HTMLElement;
-  @query('p-popup') popup: PPopup;
+  @query("slot:not([name])") defaultSlot: HTMLSlotElement;
+  @query(".tooltip__body") body: HTMLElement;
+  @query("p-popup") popup: PPopup;
 
   /** The tooltip's content. If you need to display HTML, use the `content` slot instead. */
-  @property() content = '';
+  @property() content = "";
 
   /**
    * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip
    * inside of the viewport.
    */
   @property() placement:
-    | 'top'
-    | 'top-start'
-    | 'top-end'
-    | 'right'
-    | 'right-start'
-    | 'right-end'
-    | 'bottom'
-    | 'bottom-start'
-    | 'bottom-end'
-    | 'left'
-    | 'left-start'
-    | 'left-end' = 'top';
+    | "top"
+    | "top-start"
+    | "top-end"
+    | "right"
+    | "right-start"
+    | "right-end"
+    | "bottom"
+    | "bottom-start"
+    | "bottom-end"
+    | "left"
+    | "left-start"
+    | "left-end" = "top";
 
   /** Disables the tooltip so it won't show when triggered. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -90,7 +97,7 @@ export default class PTooltip extends PureElement {
    * options can be passed by separating them with a space. When manual is used, the tooltip must be activated
    * programmatically.
    */
-  @property() trigger = 'hover focus';
+  @property() trigger = "hover focus";
 
   /**
    * Enable this option to prevent the tooltip from being clipped when the component is placed inside a container with
@@ -101,17 +108,17 @@ export default class PTooltip extends PureElement {
 
   constructor() {
     super();
-    this.addEventListener('blur', this.handleBlur, true);
-    this.addEventListener('focus', this.handleFocus, true);
-    this.addEventListener('click', this.handleClick);
-    this.addEventListener('mouseover', this.handleMouseOver);
-    this.addEventListener('mouseout', this.handleMouseOut);
+    this.addEventListener("blur", this.handleBlur, true);
+    this.addEventListener("focus", this.handleFocus, true);
+    this.addEventListener("click", this.handleClick);
+    this.addEventListener("mouseover", this.handleMouseOver);
+    this.addEventListener("mouseout", this.handleMouseOut);
   }
 
   disconnectedCallback() {
     // Cleanup this event in case the tooltip is removed while open
     this.closeWatcher?.destroy();
-    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    document.removeEventListener("keydown", this.handleDocumentKeyDown);
   }
 
   firstUpdated() {
@@ -125,13 +132,13 @@ export default class PTooltip extends PureElement {
   }
 
   private handleBlur = () => {
-    if (this.hasTrigger('focus')) {
+    if (this.hasTrigger("focus")) {
       this.hide();
     }
   };
 
   private handleClick = () => {
-    if (this.hasTrigger('click')) {
+    if (this.hasTrigger("click")) {
       if (this.open) {
         this.hide();
       } else {
@@ -141,41 +148,45 @@ export default class PTooltip extends PureElement {
   };
 
   private handleFocus = () => {
-    if (this.hasTrigger('focus')) {
+    if (this.hasTrigger("focus")) {
       this.show();
     }
   };
 
   private handleDocumentKeyDown = (event: KeyboardEvent) => {
     // Pressing escape when a tooltip is open should dismiss it
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
       event.stopPropagation();
       this.hide();
     }
   };
 
   private handleMouseOver = () => {
-    if (this.hasTrigger('hover')) {
-      const delay = parseDuration(getComputedStyle(this).getPropertyValue('--show-delay'));
+    if (this.hasTrigger("hover")) {
+      const delay = parseDuration(
+        getComputedStyle(this).getPropertyValue("--show-delay"),
+      );
       clearTimeout(this.hoverTimeout);
       this.hoverTimeout = window.setTimeout(() => this.show(), delay);
     }
   };
 
   private handleMouseOut = () => {
-    if (this.hasTrigger('hover')) {
-      const delay = parseDuration(getComputedStyle(this).getPropertyValue('--hide-delay'));
+    if (this.hasTrigger("hover")) {
+      const delay = parseDuration(
+        getComputedStyle(this).getPropertyValue("--hide-delay"),
+      );
       clearTimeout(this.hoverTimeout);
       this.hoverTimeout = window.setTimeout(() => this.hide(), delay);
     }
   };
 
   private hasTrigger(triggerType: string) {
-    const triggers = this.trigger.split(' ');
+    const triggers = this.trigger.split(" ");
     return triggers.includes(triggerType);
   }
 
-  @watch('open', { waitUntilFirstUpdate: true })
+  @watch("open", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open) {
       if (this.disabled) {
@@ -183,42 +194,46 @@ export default class PTooltip extends PureElement {
       }
 
       // Show
-      this.emit('p-show');
-      if ('CloseWatcher' in window) {
+      this.emit("p-show");
+      if ("CloseWatcher" in window) {
         this.closeWatcher?.destroy();
         this.closeWatcher = new CloseWatcher();
         this.closeWatcher.onclose = () => {
           this.hide();
         };
       } else {
-        document.addEventListener('keydown', this.handleDocumentKeyDown);
+        document.addEventListener("keydown", this.handleDocumentKeyDown);
       }
 
       await stopAnimations(this.body);
       this.body.hidden = false;
       this.popup.active = true;
-      const { keyframes, options } = getAnimation(this, 'tooltip.show', { dir: this.localize.dir() });
+      const { keyframes, options } = getAnimation(this, "tooltip.show", {
+        dir: this.localize.dir(),
+      });
       await animateTo(this.popup.popup, keyframes, options);
       this.popup.reposition();
 
-      this.emit('p-after-show');
+      this.emit("p-after-show");
     } else {
       // Hide
-      this.emit('p-hide');
+      this.emit("p-hide");
       this.closeWatcher?.destroy();
-      document.removeEventListener('keydown', this.handleDocumentKeyDown);
+      document.removeEventListener("keydown", this.handleDocumentKeyDown);
 
       await stopAnimations(this.body);
-      const { keyframes, options } = getAnimation(this, 'tooltip.hide', { dir: this.localize.dir() });
+      const { keyframes, options } = getAnimation(this, "tooltip.hide", {
+        dir: this.localize.dir(),
+      });
       await animateTo(this.popup.popup, keyframes, options);
       this.popup.active = false;
       this.body.hidden = true;
 
-      this.emit('p-after-hide');
+      this.emit("p-after-hide");
     }
   }
 
-  @watch(['content', 'distance', 'hoist', 'placement', 'skidding'])
+  @watch(["content", "distance", "hoist", "placement", "skidding"])
   async handleOptionsChange() {
     if (this.hasUpdated) {
       await this.updateComplete;
@@ -226,7 +241,7 @@ export default class PTooltip extends PureElement {
     }
   }
 
-  @watch('disabled')
+  @watch("disabled")
   handleDisabledChange() {
     if (this.disabled && this.open) {
       this.hide();
@@ -240,7 +255,7 @@ export default class PTooltip extends PureElement {
     }
 
     this.open = true;
-    return waitForEvent(this, 'p-after-show');
+    return waitForEvent(this, "p-after-show");
   }
 
   /** Hides the tooltip */
@@ -250,7 +265,7 @@ export default class PTooltip extends PureElement {
     }
 
     this.open = false;
-    return waitForEvent(this, 'p-after-hide');
+    return waitForEvent(this, "p-after-hide");
   }
 
   //
@@ -269,22 +284,28 @@ export default class PTooltip extends PureElement {
         "
         class=${classMap({
           tooltip: true,
-          'tooltip--open': this.open
+          "tooltip--open": this.open,
         })}
         placement=${this.placement}
         distance=${this.distance}
         skidding=${this.skidding}
-        strategy=${this.hoist ? 'fixed' : 'absolute'}
+        strategy=${this.hoist ? "fixed" : "absolute"}
         flip
         shift
         arrow
         hover-bridge
       >
-        ${'' /* eslint-disable-next-line lit-a11y/no-aria-slot */}
+        ${"" /* eslint-disable-next-line lit-a11y/no-aria-slot */}
         <slot slot="anchor" aria-describedby="tooltip"></slot>
 
-        ${'' /* eslint-disable-next-line lit-a11y/accessible-name */}
-        <div part="body" id="tooltip" class="tooltip__body" role="tooltip" aria-live=${this.open ? 'polite' : 'off'}>
+        ${"" /* eslint-disable-next-line lit-a11y/accessible-name */}
+        <div
+          part="body"
+          id="tooltip"
+          class="tooltip__body"
+          role="tooltip"
+          aria-live=${this.open ? "polite" : "off"}
+        >
           <slot name="content">${this.content}</slot>
         </div>
       </p-popup>
@@ -292,18 +313,18 @@ export default class PTooltip extends PureElement {
   }
 }
 
-setDefaultAnimation('tooltip.show', {
+setDefaultAnimation("tooltip.show", {
   keyframes: [
     { opacity: 0, scale: 0.8 },
-    { opacity: 1, scale: 1 }
+    { opacity: 1, scale: 1 },
   ],
-  options: { duration: 150, easing: 'ease' }
+  options: { duration: 150, easing: "ease" },
 });
 
-setDefaultAnimation('tooltip.hide', {
+setDefaultAnimation("tooltip.hide", {
   keyframes: [
     { opacity: 1, scale: 1 },
-    { opacity: 0, scale: 0.8 }
+    { opacity: 0, scale: 0.8 },
   ],
-  options: { duration: 150, easing: 'ease' }
+  options: { duration: 150, easing: "ease" },
 });

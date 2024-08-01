@@ -30,8 +30,8 @@ In rare cases, a property may require an array, an object, or a function. For ex
 <p-color-picker></p-color-picker>
 
 <script>
-  const colorPicker = document.querySelector('p-color-picker');
-  colorPicker.swatches = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+  const colorPicker = document.querySelector("p-color-picker");
+  colorPicker.swatches = ["red", "orange", "yellow", "green", "blue", "purple"];
 </script>
 ```
 
@@ -47,9 +47,9 @@ As a result, you should almost always listen for custom events instead. For exam
 <p-checkbox>Check me</p-checkbox>
 
 <script>
-  const checkbox = document.querySelector('p-checkbox');
-  checkbox.addEventListener('p-change', event => {
-    console.log(event.target.checked ? 'checked' : 'not checked');
+  const checkbox = document.querySelector("p-checkbox");
+  checkbox.addEventListener("p-change", (event) => {
+    console.log(event.target.checked ? "checked" : "not checked");
   });
 </script>
 ```
@@ -64,7 +64,7 @@ Some components have methods you can call to trigger various behaviors. For exam
 <p-input></p-input>
 
 <script>
-  const input = document.querySelector('p-input');
+  const input = document.querySelector("p-input");
   input.focus();
 </script>
 ```
@@ -148,14 +148,14 @@ A clever way to use this method is to hide the `<body>` with `opacity: 0` and ad
 
 <script type="module">
   await Promise.allSettled([
-    customElements.whenDefined('p-button'),
-    customElements.whenDefined('p-card'),
-    customElements.whenDefined('p-rating')
+    customElements.whenDefined("p-button"),
+    customElements.whenDefined("p-card"),
+    customElements.whenDefined("p-rating"),
   ]);
 
   // Button, card, and rating are registered now! Add
   // the `ready` class so the UI fades in.
-  document.body.classList.add('ready');
+  document.body.classList.add("ready");
 </script>
 ```
 
@@ -168,20 +168,20 @@ To optimize performance and reduce re-renders, Lit batches component updates. Th
 Consider this example. We're going to change the `checked` property of the checkbox and observe its corresponding `checked` attribute, which happens to reflect.
 
 ```js
-const checkbox = document.querySelector('p-checkbox');
+const checkbox = document.querySelector("p-checkbox");
 checkbox.checked = true;
 
-console.log(checkbox.hasAttribute('checked')); // false
+console.log(checkbox.hasAttribute("checked")); // false
 ```
 
 Most developers will expect this to be `true` instead of `false`, but the component hasn't had a chance to re-render yet so the attribute doesn't exist when `hasAttribute()` is called. Since changes are batched, we need to wait for the update before proceeding. This can be done using the `updateComplete` property, which is available on all Lit-based components.
 
 ```js
-const checkbox = document.querySelector('p-checkbox');
+const checkbox = document.querySelector("p-checkbox");
 checkbox.checked = true;
 
 checkbox.updateComplete.then(() => {
-  console.log(checkbox.hasAttribute('checked')); // true
+  console.log(checkbox.hasAttribute("checked")); // true
 });
 ```
 
@@ -204,7 +204,7 @@ Pure UI ships with a file called `vscode.html-custom-data.json` that can be used
 
 ```js
 {
-  "html.customData": ["./node_modules/@pure-ui/core/dist/vscode.html-custom-data.json"]
+  "html.customData": ["./node_modules/pure-uikit/dist/vscode.html-custom-data.json"]
 }
 ```
 
@@ -214,7 +214,7 @@ If `settings.json` already exists, simply add the above line to the root of the 
 
 If you are using a [JetBrains IDE](https://www.jetbrains.com/) and you are installing Pure UI from NPM, the editor will automatically detect the `web-types.json` file from the package and you should immediately see component information in your editor.
 
-If you are installing from the CDN, you can [download a local copy](https://cdn.jsdelivr.net/npm/@pure-ui/core/dist/web-types.json) and add it to the root of your project. Be sure to add a reference to the `web-types.json` file in your `package.json` in order for your editor to properly detect it.
+If you are installing from the CDN, you can [download a local copy](https://cdn.jsdelivr.net/npm/pure-uikit/dist/web-types.json) and add it to the root of your project. Be sure to add a reference to the `web-types.json` file in your `package.json` in order for your editor to properly detect it.
 
 ```json
 {

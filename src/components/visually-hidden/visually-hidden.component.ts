@@ -1,8 +1,8 @@
-import { html } from 'lit';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './visually-hidden.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { html } from "lit";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./visually-hidden.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary The visually hidden utility makes content accessible to assistive devices without displaying it on the screen.

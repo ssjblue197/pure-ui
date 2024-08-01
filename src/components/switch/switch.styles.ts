@@ -1,11 +1,11 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   :host {
     display: inline-block;
   }
 
-  :host([size='small']) {
+  :host([size="small"]) {
     --height: var(--p-toggle-size-small);
     --thumb-size: calc(var(--p-toggle-size-small) + 4px);
     --width: calc(var(--height) * 2);
@@ -13,7 +13,7 @@ export default css`
     font-size: var(--p-input-font-size-small);
   }
 
-  :host([size='medium']) {
+  :host([size="medium"]) {
     --height: var(--p-toggle-size-medium);
     --thumb-size: calc(var(--p-toggle-size-medium) + 4px);
     --width: calc(var(--height) * 2);
@@ -21,7 +21,7 @@ export default css`
     font-size: var(--p-input-font-size-medium);
   }
 
-  :host([size='large']) {
+  :host([size="large"]) {
     --height: var(--p-toggle-size-large);
     --thumb-size: calc(var(--p-toggle-size-large) + 4px);
     --width: calc(var(--height) * 2);
@@ -85,18 +85,25 @@ export default css`
     border-color: var(--p-color-neutral-400);
   }
 
-  .switch:not(.switch--checked):not(.switch--disabled) .switch__control:hover .switch__thumb {
+  .switch:not(.switch--checked):not(.switch--disabled)
+    .switch__control:hover
+    .switch__thumb {
     background-color: var(--p-color-neutral-0);
     border-color: var(--p-color-neutral-400);
   }
 
   /* Focus */
-  .switch:not(.switch--checked):not(.switch--disabled) .switch__input:focus-visible ~ .switch__control {
+  .switch:not(.switch--checked):not(.switch--disabled)
+    .switch__input:focus-visible
+    ~ .switch__control {
     background-color: var(--p-color-neutral-400);
     border-color: var(--p-color-neutral-400);
   }
 
-  .switch:not(.switch--checked):not(.switch--disabled) .switch__input:focus-visible ~ .switch__control .switch__thumb {
+  .switch:not(.switch--checked):not(.switch--disabled)
+    .switch__input:focus-visible
+    ~ .switch__control
+    .switch__thumb {
     background-color: var(--p-color-neutral-0);
     border-color: var(--p-color-primary-600);
     outline: var(--p-focus-ring);
@@ -121,18 +128,25 @@ export default css`
     border-color: var(--p-color-primary-600);
   }
 
-  .switch.switch--checked:not(.switch--disabled) .switch__control:hover .switch__thumb {
+  .switch.switch--checked:not(.switch--disabled)
+    .switch__control:hover
+    .switch__thumb {
     background-color: var(--p-color-neutral-0);
     border-color: var(--p-color-primary-600);
   }
 
   /* Checked + focus */
-  .switch.switch--checked:not(.switch--disabled) .switch__input:focus-visible ~ .switch__control {
+  .switch.switch--checked:not(.switch--disabled)
+    .switch__input:focus-visible
+    ~ .switch__control {
     background-color: var(--p-color-primary-600);
     border-color: var(--p-color-primary-600);
   }
 
-  .switch.switch--checked:not(.switch--disabled) .switch__input:focus-visible ~ .switch__control .switch__thumb {
+  .switch.switch--checked:not(.switch--disabled)
+    .switch__input:focus-visible
+    ~ .switch__control
+    .switch__thumb {
     background-color: var(--p-color-neutral-0);
     border-color: var(--p-color-primary-600);
     outline: var(--p-focus-ring);
@@ -160,7 +174,9 @@ export default css`
   }
 
   @media (forced-colors: active) {
-    .switch.switch--checked:not(.switch--disabled) .switch__control:hover .switch__thumb,
+    .switch.switch--checked:not(.switch--disabled)
+      .switch__control:hover
+      .switch__thumb,
     .switch--checked .switch__control .switch__thumb {
       background-color: ButtonText;
     }

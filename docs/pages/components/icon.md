@@ -70,7 +70,7 @@ Icons inherit their color from the current text color. Thus, you can set the `co
 {% raw %}
 
 ```jsx:react
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const App = () => (
   <>
@@ -132,7 +132,7 @@ Icons are sized relative to the current font size. To change their size, set the
 {% raw %}
 
 ```jsx:react
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const App = () => (
   <div style={{ fontSize: '32px' }}>
@@ -167,7 +167,7 @@ For non-decorative icons, use the `label` attribute to announce it to assistive 
 ```
 
 ```jsx:react
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const App = () => <PIcon name="star-fill" label="Add to favorites" />;
 ```
@@ -183,7 +183,7 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
 {% raw %}
 
 ```jsx:react
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const App = () => <PIcon src="https://pureui.xyz/assets/images/shoe.svg" style={{ fontSize: '8rem' }}></PIcon>;
 ```
@@ -204,11 +204,11 @@ Here's an example that registers an icon library located in the `/assets/icons` 
 
 ```html
 <script type="module">
-  import { registerIconLibrary } from '/dist/utilities/icon-library.js';
+  import { registerIconLibrary } from "/dist/utilities/icon-library.js";
 
-  registerIconLibrary('my-icons', {
-    resolver: name => `/assets/icons/${name}.svg`,
-    mutator: svg => svg.setAttribute('fill', 'currentColor')
+  registerIconLibrary("my-icons", {
+    resolver: (name) => `/assets/icons/${name}.svg`,
+    mutator: (svg) => svg.setAttribute("fill", "currentColor"),
   });
 </script>
 ```
@@ -626,10 +626,11 @@ This example will load the same set of icons from the jsDelivr CDN instead of yo
 
 ```html
 <script type="module">
-  import { registerIconLibrary } from '/dist/utilities/icon-library.js';
+  import { registerIconLibrary } from "/dist/utilities/icon-library.js";
 
-  registerIconLibrary('default', {
-    resolver: name => `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.0.0/icons/${name}.svg`
+  registerIconLibrary("default", {
+    resolver: (name) =>
+      `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.0.0/icons/${name}.svg`,
   });
 </script>
 ```
@@ -673,10 +674,10 @@ If you want to change the icons Pure UI uses internally, you can register an ico
 
 ```html
 <script type="module">
-  import { registerIconLibrary } from '/dist/utilities/icon-library.js';
+  import { registerIconLibrary } from "/dist/utilities/icon-library.js";
 
-  registerIconLibrary('system', {
-    resolver: name => `/path/to/custom/icons/${name}.svg`
+  registerIconLibrary("system", {
+    resolver: (name) => `/path/to/custom/icons/${name}.svg`,
   });
 </script>
 ```

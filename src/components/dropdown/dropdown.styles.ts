@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   :host {
@@ -9,19 +9,19 @@ export default css`
     z-index: var(--p-z-index-dropdown);
   }
 
-  .dropdown[data-current-placement^='top']::part(popup) {
+  .dropdown[data-current-placement^="top"]::part(popup) {
     transform-origin: bottom;
   }
 
-  .dropdown[data-current-placement^='bottom']::part(popup) {
+  .dropdown[data-current-placement^="bottom"]::part(popup) {
     transform-origin: top;
   }
 
-  .dropdown[data-current-placement^='left']::part(popup) {
+  .dropdown[data-current-placement^="left"]::part(popup) {
     transform-origin: right;
   }
 
-  .dropdown[data-current-placement^='right']::part(popup) {
+  .dropdown[data-current-placement^="right"]::part(popup) {
     transform-origin: left;
   }
 

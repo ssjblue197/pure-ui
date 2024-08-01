@@ -1,15 +1,15 @@
-import '../../../dist/pure-ui.js';
-import { expect, fixture, html } from '@open-wc/testing';
-import type PBreadcrumb from './breadcrumb.js';
+import "../../../dist/pure-ui.js";
+import { expect, fixture, html } from "@open-wc/testing";
+import type PBreadcrumb from "./breadcrumb.js";
 
 // The default link color just misses AA contrast, but the next step up is way too dark. Maybe we can solve this in the
 // future with a prefers-contrast media query.
-const ignoredRules = ['color-contrast'];
+const ignoredRules = ["color-contrast"];
 
-describe('<p-breadcrumb>', () => {
+describe("<p-breadcrumb>", () => {
   let el: PBreadcrumb;
 
-  describe('when provided a standard list of el-breadcrumb-item children and no parameters', () => {
+  describe("when provided a standard list of el-breadcrumb-item children and no parameters", () => {
     before(async () => {
       el = await fixture<PBreadcrumb>(html`
         <p-breadcrumb>
@@ -21,18 +21,18 @@ describe('<p-breadcrumb>', () => {
       `);
     });
 
-    it('should pass accessibility tests', async () => {
+    it("should pass accessibility tests", async () => {
       await expect(el).to.be.accessible({ ignoredRules });
     });
 
-    it('should render p-icon as separator', () => {
-      expect(el.querySelectorAll('p-icon').length).to.eq(4);
+    it("should render p-icon as separator", () => {
+      expect(el.querySelectorAll("p-icon").length).to.eq(4);
     });
 
     it('should attach aria-current "page" on the last breadcrumb item.', () => {
-      const breadcrumbItems = el.querySelectorAll('p-breadcrumb-item');
+      const breadcrumbItems = el.querySelectorAll("p-breadcrumb-item");
       const lastNode = breadcrumbItems[3];
-      expect(lastNode).attribute('aria-current', 'page');
+      expect(lastNode).attribute("aria-current", "page");
     });
   });
 
@@ -48,20 +48,22 @@ describe('<p-breadcrumb>', () => {
       `);
     });
 
-    it('should pass accessibility tests', async () => {
+    it("should pass accessibility tests", async () => {
       await expect(el).to.be.accessible({ ignoredRules });
     });
 
     it('should accept "separator" as an assigned child in the shadow root', () => {
-      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>('slot[name=separator]')!;
+      const slot = el.shadowRoot!.querySelector<HTMLSlotElement>(
+        "slot[name=separator]",
+      )!;
       const childNodes = slot.assignedNodes({ flatten: true });
 
       expect(childNodes.length).to.eq(1);
     });
 
-    it('should replace the p-icon separator with the provided separator', () => {
-      expect(el.querySelectorAll('.replacement-separator').length).to.eq(4);
-      expect(el.querySelectorAll('p-icon').length).to.eq(0);
+    it("should replace the p-icon separator with the provided separator", () => {
+      expect(el.querySelectorAll(".replacement-separator").length).to.eq(4);
+      expect(el.querySelectorAll("p-icon").length).to.eq(0);
     });
   });
 
@@ -80,7 +82,7 @@ describe('<p-breadcrumb>', () => {
       `);
     });
 
-    it('should pass accessibility tests', async () => {
+    it("should pass accessibility tests", async () => {
       await expect(el).to.be.accessible({ ignoredRules });
     });
   });
@@ -100,7 +102,7 @@ describe('<p-breadcrumb>', () => {
       `);
     });
 
-    it('should pass accessibility tests', async () => {
+    it("should pass accessibility tests", async () => {
       await expect(el).to.be.accessible({ ignoredRules });
     });
   });

@@ -15,15 +15,20 @@ function getCachedComputedStyle(el: HTMLElement): CSSStyleDeclaration {
 
 function isVisible(el: HTMLElement): boolean {
   // This is the fastest check, but isn't supported in Safari.
-  if (typeof el.checkVisibility === 'function') {
+  if (typeof el.checkVisibility === "function") {
     // Opacity is focusable, visibility is not.
-    return el.checkVisibility({ checkOpacity: false, checkVisibilityCSS: true });
+    return el.checkVisibility({
+      checkOpacity: false,
+      checkVisibilityCSS: true,
+    });
   }
 
   // Fallback "polyfill" for "checkVisibility"
   const computedStyle = getCachedComputedStyle(el);
 
-  return computedStyle.visibility !== 'hidden' && computedStyle.display !== 'none';
+  return (
+    computedStyle.visibility !== "hidden" && computedStyle.display !== "none"
+  );
 }
 
 // While this behavior isn't standard in Safari / Chrome yet, I think it's the most reasonable
@@ -34,24 +39,24 @@ function isOverflowingAndTabbable(el: HTMLElement): boolean {
 
   const { overflowY, overflowX } = computedStyle;
 
-  if (overflowY === 'scroll' || overflowX === 'scroll') {
+  if (overflowY === "scroll" || overflowX === "scroll") {
     return true;
   }
 
-  if (overflowY !== 'auto' || overflowX !== 'auto') {
+  if (overflowY !== "auto" || overflowX !== "auto") {
     return false;
   }
 
   // Always overflow === "auto" by this point
   const isOverflowingY = el.scrollHeight > el.clientHeight;
 
-  if (isOverflowingY && overflowY === 'auto') {
+  if (isOverflowingY && overflowY === "auto") {
     return true;
   }
 
   const isOverflowingX = el.scrollWidth > el.clientWidth;
 
-  if (isOverflowingX && overflowX === 'auto') {
+  if (isOverflowingX && overflowX === "auto") {
     return true;
   }
 
@@ -62,8 +67,8 @@ function isOverflowingAndTabbable(el: HTMLElement): boolean {
 function isTabbable(el: HTMLElement) {
   const tag = el.tagName.toLowerCase();
 
-  const tabindex = Number(el.getAttribute('tabindex'));
-  const hasTabindex = el.hasAttribute('tabindex');
+  const tabindex = Number(el.getAttribute("tabindex"));
+  const hasTabindex = el.hasAttribute("tabindex");
 
   // elements with a tabindex attribute that is either NaN or <= -1 are not tabbable
   if (hasTabindex && (isNaN(tabindex) || tabindex <= -1)) {
@@ -71,17 +76,21 @@ function isTabbable(el: HTMLElement) {
   }
 
   // Elements with a disabled attribute are not tabbable
-  if (el.hasAttribute('disabled')) {
+  if (el.hasAttribute("disabled")) {
     return false;
   }
 
   // If any parents have "inert", we aren't "tabbable"
-  if (el.closest('[inert]')) {
+  if (el.closest("[inert]")) {
     return false;
   }
 
   // Radios without a checked attribute are not tabbable
-  if (tag === 'input' && el.getAttribute('type') === 'radio' && !el.hasAttribute('checked')) {
+  if (
+    tag === "input" &&
+    el.getAttribute("type") === "radio" &&
+    !el.hasAttribute("checked")
+  ) {
     return false;
   }
 
@@ -90,31 +99,34 @@ function isTabbable(el: HTMLElement) {
   }
 
   // Audio and video elements with the controls attribute are tabbable
-  if ((tag === 'audio' || tag === 'video') && el.hasAttribute('controls')) {
+  if ((tag === "audio" || tag === "video") && el.hasAttribute("controls")) {
     return true;
   }
 
   // Elements with a tabindex other than -1 are tabbable
-  if (el.hasAttribute('tabindex')) {
+  if (el.hasAttribute("tabindex")) {
     return true;
   }
 
   // Elements with a contenteditable attribute are tabbable
-  if (el.hasAttribute('contenteditable') && el.getAttribute('contenteditable') !== 'false') {
+  if (
+    el.hasAttribute("contenteditable") &&
+    el.getAttribute("contenteditable") !== "false"
+  ) {
     return true;
   }
 
   // At this point, the following elements are considered tabbable
   const isNativelyTabbable = [
-    'button',
-    'input',
-    'select',
-    'textarea',
-    'a',
-    'audio',
-    'video',
-    'summary',
-    'iframe'
+    "button",
+    "input",
+    "select",
+    "textarea",
+    "a",
+    "audio",
+    "video",
+    "summary",
+    "iframe",
   ].includes(tag);
 
   if (isNativelyTabbable) {
@@ -144,8 +156,14 @@ export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
  * However, there is an edge case when, if the `root` is wrapped by another shadow DOM, it won't grab the children.
  * This fixes that fun edge case.
  */
-function getSlottedChildrenOutsideRootElement(slotElement: HTMLSlotElement, root: HTMLElement | ShadowRoot) {
-  return (slotElement.getRootNode({ composed: true }) as ShadowRoot | null)?.host !== root;
+function getSlottedChildrenOutsideRootElement(
+  slotElement: HTMLSlotElement,
+  root: HTMLElement | ShadowRoot,
+) {
+  return (
+    (slotElement.getRootNode({ composed: true }) as ShadowRoot | null)?.host !==
+    root
+  );
 }
 
 export function getTabbableElements(root: HTMLElement | ShadowRoot) {
@@ -155,7 +173,7 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
   function walk(el: HTMLElement | ShadowRoot) {
     if (el instanceof Element) {
       // if the element has "inert" we can just no-op it.
-      if (el.hasAttribute('inert') || el.closest('[inert]')) {
+      if (el.hasAttribute("inert") || el.closest("[inert]")) {
         return;
       }
 
@@ -168,13 +186,18 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
         tabbableElements.push(el);
       }
 
-      if (el instanceof HTMLSlotElement && getSlottedChildrenOutsideRootElement(el, root)) {
-        el.assignedElements({ flatten: true }).forEach((assignedEl: HTMLElement) => {
-          walk(assignedEl);
-        });
+      if (
+        el instanceof HTMLSlotElement &&
+        getSlottedChildrenOutsideRootElement(el, root)
+      ) {
+        el.assignedElements({ flatten: true }).forEach(
+          (assignedEl: HTMLElement) => {
+            walk(assignedEl);
+          },
+        );
       }
 
-      if (el.shadowRoot !== null && el.shadowRoot.mode === 'open') {
+      if (el.shadowRoot !== null && el.shadowRoot.mode === "open") {
         walk(el.shadowRoot);
       }
     }
@@ -191,8 +214,8 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
   // So is it worth being right? Or fast?
   return tabbableElements.sort((a, b) => {
     // Make sure we sort by tabindex.
-    const aTabindex = Number(a.getAttribute('tabindex')) || 0;
-    const bTabindex = Number(b.getAttribute('tabindex')) || 0;
+    const aTabindex = Number(a.getAttribute("tabindex")) || 0;
+    const bTabindex = Number(b.getAttribute("tabindex")) || 0;
     return bTabindex - aTabindex;
   });
 }

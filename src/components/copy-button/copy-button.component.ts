@@ -1,14 +1,17 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property, query, state } from 'lit/decorators.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PTooltip from '../tooltip/tooltip.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './copy-button.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import {
+  getAnimation,
+  setDefaultAnimation,
+} from "../../utilities/animation-registry.js";
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query, state } from "lit/decorators.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PTooltip from "../tooltip/tooltip.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./copy-button.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Copies text data to the clipboard when the user clicks the trigger.
@@ -44,8 +47,8 @@ import type { CSSResultGroup } from 'lit';
 export default class PCopyButton extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
-    'p-icon': PIcon,
-    'p-tooltip': PTooltip
+    "p-icon": PIcon,
+    "p-tooltip": PTooltip,
   };
 
   private readonly localize = new LocalizeController(this);
@@ -53,13 +56,13 @@ export default class PCopyButton extends PureElement {
   @query('slot[name="copy-icon"]') copyIcon: HTMLSlotElement;
   @query('slot[name="success-icon"]') successIcon: HTMLSlotElement;
   @query('slot[name="error-icon"]') errorIcon: HTMLSlotElement;
-  @query('p-tooltip') tooltip: PTooltip;
+  @query("p-tooltip") tooltip: PTooltip;
 
   @state() isCopying = false;
-  @state() status: 'rest' | 'success' | 'error' = 'rest';
+  @state() status: "rest" | "success" | "error" = "rest";
 
   /** The text value to copy. */
-  @property() value = '';
+  @property() value = "";
 
   /**
    * An id that references an element in the same document from which data will be copied. If both this and `value` are
@@ -67,25 +70,30 @@ export default class PCopyButton extends PureElement {
    * attribute, append the attribute name wrapped in square brackets, e.g. `from="el[value]"`. To copy a property,
    * append a dot and the property name, e.g. `from="el.value"`.
    */
-  @property() from = '';
+  @property() from = "";
 
   /** Disables the copy button. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** A custom label to show in the tooltip. */
-  @property({ attribute: 'copy-label' }) copyLabel = '';
+  @property({ attribute: "copy-label" }) copyLabel = "";
 
   /** A custom label to show in the tooltip after copying. */
-  @property({ attribute: 'success-label' }) successLabel = '';
+  @property({ attribute: "success-label" }) successLabel = "";
 
   /** A custom label to show in the tooltip when a copy error occurs. */
-  @property({ attribute: 'error-label' }) errorLabel = '';
+  @property({ attribute: "error-label" }) errorLabel = "";
 
   /** The length of time to show feedback before restoring the default trigger. */
-  @property({ attribute: 'feedback-duration', type: Number }) feedbackDuration = 1000;
+  @property({ attribute: "feedback-duration", type: Number }) feedbackDuration =
+    1000;
 
   /** The preferred placement of the tooltip. */
-  @property({ attribute: 'tooltip-placement' }) tooltipPlacement: 'top' | 'right' | 'bottom' | 'left' = 'top';
+  @property({ attribute: "tooltip-placement" }) tooltipPlacement:
+    | "top"
+    | "right"
+    | "bottom"
+    | "left" = "top";
 
   /**
    * Enable this option to prevent the tooltip from being clipped when the component is placed inside a container with
@@ -108,84 +116,90 @@ export default class PCopyButton extends PureElement {
       const root = this.getRootNode() as ShadowRoot | Document;
 
       // Simple way to parse ids, properties, and attributes
-      const isProperty = this.from.includes('.');
-      const isAttribute = this.from.includes('[') && this.from.includes(']');
+      const isProperty = this.from.includes(".");
+      const isAttribute = this.from.includes("[") && this.from.includes("]");
       let id = this.from;
-      let field = '';
+      let field = "";
 
       if (isProperty) {
         // Split at the dot
-        [id, field] = this.from.trim().split('.');
+        [id, field] = this.from.trim().split(".");
       } else if (isAttribute) {
         // Trim the ] and split at the [
-        [id, field] = this.from.trim().replace(/\]$/, '').split('[');
+        [id, field] = this.from.trim().replace(/\]$/, "").split("[");
       }
 
       // Locate the target element by id
-      const target = 'getElementById' in root ? root.getElementById(id) : null;
+      const target = "getElementById" in root ? root.getElementById(id) : null;
 
       if (target) {
         if (isAttribute) {
-          valueToCopy = target.getAttribute(field) || '';
+          valueToCopy = target.getAttribute(field) || "";
         } else if (isProperty) {
           // @ts-expect-error - deal with it
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          valueToCopy = target[field] || '';
+          valueToCopy = target[field] || "";
         } else {
-          valueToCopy = target.textContent || '';
+          valueToCopy = target.textContent || "";
         }
       } else {
         // No target
-        this.showStatus('error');
-        this.emit('p-error');
+        this.showStatus("error");
+        this.emit("p-error");
       }
     }
 
     // No value
     if (!valueToCopy) {
-      this.showStatus('error');
-      this.emit('p-error');
+      this.showStatus("error");
+      this.emit("p-error");
     } else {
       try {
         await navigator.clipboard.writeText(valueToCopy);
-        this.showStatus('success');
-        this.emit('p-copy', {
+        this.showStatus("success");
+        this.emit("p-copy", {
           detail: {
-            value: valueToCopy
-          }
+            value: valueToCopy,
+          },
         });
       } catch (error) {
         // Rejected by browser
-        this.showStatus('error');
-        this.emit('p-error');
+        this.showStatus("error");
+        this.emit("p-error");
       }
     }
   }
 
-  private async showStatus(status: 'success' | 'error') {
-    const copyLabel = this.copyLabel || this.localize.term('copy');
-    const successLabel = this.successLabel || this.localize.term('copied');
-    const errorLabel = this.errorLabel || this.localize.term('error');
-    const iconToShow = status === 'success' ? this.successIcon : this.errorIcon;
-    const showAnimation = getAnimation(this, 'copy.in', { dir: 'ltr' });
-    const hideAnimation = getAnimation(this, 'copy.out', { dir: 'ltr' });
+  private async showStatus(status: "success" | "error") {
+    const copyLabel = this.copyLabel || this.localize.term("copy");
+    const successLabel = this.successLabel || this.localize.term("copied");
+    const errorLabel = this.errorLabel || this.localize.term("error");
+    const iconToShow = status === "success" ? this.successIcon : this.errorIcon;
+    const showAnimation = getAnimation(this, "copy.in", { dir: "ltr" });
+    const hideAnimation = getAnimation(this, "copy.out", { dir: "ltr" });
 
-    this.tooltip.content = status === 'success' ? successLabel : errorLabel;
+    this.tooltip.content = status === "success" ? successLabel : errorLabel;
 
     // Show the feedback icon
-    await this.copyIcon.animate(hideAnimation.keyframes, hideAnimation.options).finished;
+    await this.copyIcon.animate(hideAnimation.keyframes, hideAnimation.options)
+      .finished;
     this.copyIcon.hidden = true;
     this.status = status;
     iconToShow.hidden = false;
-    await iconToShow.animate(showAnimation.keyframes, showAnimation.options).finished;
+    await iconToShow.animate(showAnimation.keyframes, showAnimation.options)
+      .finished;
 
     // After a brief delay, restore the original state
     setTimeout(async () => {
-      await iconToShow.animate(hideAnimation.keyframes, hideAnimation.options).finished;
+      await iconToShow.animate(hideAnimation.keyframes, hideAnimation.options)
+        .finished;
       iconToShow.hidden = true;
-      this.status = 'rest';
+      this.status = "rest";
       this.copyIcon.hidden = false;
-      await this.copyIcon.animate(showAnimation.keyframes, showAnimation.options).finished;
+      await this.copyIcon.animate(
+        showAnimation.keyframes,
+        showAnimation.options,
+      ).finished;
 
       this.tooltip.content = copyLabel;
       this.isCopying = false;
@@ -193,14 +207,14 @@ export default class PCopyButton extends PureElement {
   }
 
   render() {
-    const copyLabel = this.copyLabel || this.localize.term('copy');
+    const copyLabel = this.copyLabel || this.localize.term("copy");
 
     return html`
       <p-tooltip
         class=${classMap({
-          'copy-button': true,
-          'copy-button--success': this.status === 'success',
-          'copy-button--error': this.status === 'error'
+          "copy-button": true,
+          "copy-button--success": this.status === "success",
+          "copy-button--error": this.status === "error",
         })}
         content=${copyLabel}
         placement=${this.tooltipPlacement}
@@ -235,18 +249,18 @@ export default class PCopyButton extends PureElement {
   }
 }
 
-setDefaultAnimation('copy.in', {
+setDefaultAnimation("copy.in", {
   keyframes: [
-    { scale: '.25', opacity: '.25' },
-    { scale: '1', opacity: '1' }
+    { scale: ".25", opacity: ".25" },
+    { scale: "1", opacity: "1" },
   ],
-  options: { duration: 100 }
+  options: { duration: 100 },
 });
 
-setDefaultAnimation('copy.out', {
+setDefaultAnimation("copy.out", {
   keyframes: [
-    { scale: '1', opacity: '1' },
-    { scale: '.25', opacity: '0' }
+    { scale: "1", opacity: "1" },
+    { scale: ".25", opacity: "0" },
   ],
-  options: { duration: 100 }
+  options: { duration: 100 },
 });

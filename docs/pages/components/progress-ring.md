@@ -10,7 +10,7 @@ layout: component
 ```
 
 ```jsx:react
-import PProgressRing from '@pure-ui/core/dist/react/progress-ring';
+import PProgressRing from 'pure-uikit/dist/react/progress-ring';
 
 const App = () => <PProgressRing value="25" />;
 ```
@@ -28,7 +28,7 @@ Use the `--size` custom property to set the diameter of the progress ring.
 {% raw %}
 
 ```jsx:react
-import PProgressRing from '@pure-ui/core/dist/react/progress-ring';
+import PProgressRing from 'pure-uikit/dist/react/progress-ring';
 
 const App = () => <PProgressRing value="50" style={{ '--size': '200px' }} />;
 ```
@@ -46,7 +46,7 @@ Use the `--track-width` and `--indicator-width` custom properties to set the wid
 {% raw %}
 
 ```jsx:react
-import PProgressRing from '@pure-ui/core/dist/react/progress-ring';
+import PProgressRing from 'pure-uikit/dist/react/progress-ring';
 
 const App = () => <PProgressRing value="50" style={{ '--track-width': '6px', '--indicator-width': '12px' }} />;
 ```
@@ -70,7 +70,7 @@ To change the color, use the `--track-color` and `--indicator-color` custom prop
 {% raw %}
 
 ```jsx:react
-import PProgressRing from '@pure-ui/core/dist/react/progress-ring';
+import PProgressRing from 'pure-uikit/dist/react/progress-ring';
 
 const App = () => (
   <PProgressRing
@@ -94,7 +94,7 @@ Use the `label` attribute to label the progress ring and tell assistive devices 
 ```
 
 ```jsx:react
-import PProgressRing from '@pure-ui/core/dist/react/progress-ring';
+import PProgressRing from 'pure-uikit/dist/react/progress-ring';
 
 const App = () => <PProgressRing value="50" label="Upload progress" />;
 ```
@@ -134,9 +134,9 @@ Use the default slot to show a label inside the progress ring.
 
 ```jsx:react
 import { useState } from 'react';
-import PButton from '@pure-ui/core/dist/react/button';
-import PIcon from '@pure-ui/core/dist/react/icon';
-import PProgressRing from '@pure-ui/core/dist/react/progress-ring';
+import PButton from 'pure-uikit/dist/react/button';
+import PIcon from 'pure-uikit/dist/react/icon';
+import PProgressRing from 'pure-uikit/dist/react/progress-ring';
 
 const App = () => {
   const [value, setValue] = useState(50);

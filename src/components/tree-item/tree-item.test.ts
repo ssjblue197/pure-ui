@@ -1,9 +1,9 @@
-import '../../../dist/pure-ui.js';
-import { expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
-import sinon from 'sinon';
-import type PTreeItem from './tree-item.js';
+import "../../../dist/pure-ui.js";
+import { expect, fixture, html, oneEvent, waitUntil } from "@open-wc/testing";
+import sinon from "sinon";
+import type PTreeItem from "./tree-item.js";
 
-describe('<p-tree-item>', () => {
+describe("<p-tree-item>", () => {
   let leafItem: PTreeItem;
   let parentItem: PTreeItem;
 
@@ -18,24 +18,26 @@ describe('<p-tree-item>', () => {
     `);
   });
 
-  it('should render a component', () => {
+  it("should render a component", () => {
     expect(leafItem).to.exist;
     expect(parentItem).to.exist;
 
-    expect(leafItem).to.have.attribute('role', 'treeitem');
-    expect(leafItem).to.have.attribute('aria-selected', 'false');
-    expect(leafItem).to.have.attribute('aria-disabled', 'false');
+    expect(leafItem).to.have.attribute("role", "treeitem");
+    expect(leafItem).to.have.attribute("aria-selected", "false");
+    expect(leafItem).to.have.attribute("aria-disabled", "false");
   });
 
-  describe('when it contains child tree items', () => {
-    it('should set isLeaf to false', () => {
+  describe("when it contains child tree items", () => {
+    it("should set isLeaf to false", () => {
       // Assert
       expect(parentItem.isLeaf).to.be.false;
     });
 
-    it('should show the expand button', () => {
+    it("should show the expand button", () => {
       // Arrange
-      const expandButton = parentItem.shadowRoot?.querySelector('.tree-item__expand-button');
+      const expandButton = parentItem.shadowRoot?.querySelector(
+        ".tree-item__expand-button",
+      );
 
       // Act
 
@@ -43,20 +45,20 @@ describe('<p-tree-item>', () => {
       expect(expandButton?.childElementCount).to.be.greaterThan(0);
     });
 
-    it('should set the aria-expanded attribute', () => {
-      expect(parentItem).to.have.attribute('aria-expanded', 'false');
+    it("should set the aria-expanded attribute", () => {
+      expect(parentItem).to.have.attribute("aria-expanded", "false");
     });
   });
 
-  describe('when the user clicks the expand button', () => {
-    describe('and the item is collapsed', () => {
-      it('should emit p-expand and p-after-expand events', async () => {
+  describe("when the user clicks the expand button", () => {
+    describe("and the item is collapsed", () => {
+      it("should emit p-expand and p-after-expand events", async () => {
         // Arrange
         const expandSpy = sinon.spy();
         const afterExpandSpy = sinon.spy();
 
-        parentItem.addEventListener('p-expand', expandSpy);
-        parentItem.addEventListener('p-after-expand', afterExpandSpy);
+        parentItem.addEventListener("p-expand", expandSpy);
+        parentItem.addEventListener("p-after-expand", afterExpandSpy);
 
         // Act
         parentItem.expanded = true;
@@ -69,17 +71,17 @@ describe('<p-tree-item>', () => {
       });
     });
 
-    describe('and the item is expanded', () => {
-      it('should emit p-collapse and p-after-collapse events', async () => {
+    describe("and the item is expanded", () => {
+      it("should emit p-collapse and p-after-collapse events", async () => {
         // Arrange
         const collapseSpy = sinon.spy();
         const afterCollapseSpy = sinon.spy();
 
-        parentItem.addEventListener('p-collapse', collapseSpy);
-        parentItem.addEventListener('p-after-collapse', afterCollapseSpy);
+        parentItem.addEventListener("p-collapse", collapseSpy);
+        parentItem.addEventListener("p-after-collapse", afterCollapseSpy);
 
         parentItem.expanded = true;
-        await oneEvent(parentItem, 'p-after-expand');
+        await oneEvent(parentItem, "p-after-expand");
 
         // Act
         parentItem.expanded = false;
@@ -91,10 +93,11 @@ describe('<p-tree-item>', () => {
         expect(afterCollapseSpy).to.have.been.calledOnce;
       });
 
-      describe('and the item is disabled', () => {
-        it('should not expand', async () => {
+      describe("and the item is disabled", () => {
+        it("should not expand", async () => {
           // Arrange
-          const expandButton: HTMLElement = parentItem.shadowRoot!.querySelector('.tree-item__expand-button')!;
+          const expandButton: HTMLElement =
+            parentItem.shadowRoot!.querySelector(".tree-item__expand-button")!;
           parentItem.disabled = true;
 
           // Act
@@ -102,70 +105,82 @@ describe('<p-tree-item>', () => {
           await parentItem.updateComplete;
 
           // Assert
-          expect(parentItem).not.to.have.attribute('expanded');
-          expect(parentItem).to.have.attribute('aria-expanded', 'false');
+          expect(parentItem).not.to.have.attribute("expanded");
+          expect(parentItem).to.have.attribute("aria-expanded", "false");
         });
       });
     });
   });
 
-  describe('when the item is selected', () => {
-    it('should update the aria-selected attribute', async () => {
+  describe("when the item is selected", () => {
+    it("should update the aria-selected attribute", async () => {
       // Act
       leafItem.selected = true;
       await leafItem.updateComplete;
 
       // Assert
-      expect(leafItem).to.have.attribute('aria-selected', 'true');
+      expect(leafItem).to.have.attribute("aria-selected", "true");
     });
 
-    it('should set item--selected part', async () => {
+    it("should set item--selected part", async () => {
       // Act
       leafItem.selected = true;
       await leafItem.updateComplete;
 
       // Assert
-      expect(leafItem.shadowRoot?.querySelector('.tree-item__item')?.part.contains('item--selected')).to.be.true;
+      expect(
+        leafItem.shadowRoot
+          ?.querySelector(".tree-item__item")
+          ?.part.contains("item--selected"),
+      ).to.be.true;
     });
   });
 
-  describe('when the item is disabled', () => {
-    it('should update the aria-disabled attribute', async () => {
+  describe("when the item is disabled", () => {
+    it("should update the aria-disabled attribute", async () => {
       // Act
       leafItem.disabled = true;
       await leafItem.updateComplete;
 
       // Assert
-      expect(leafItem).to.have.attribute('aria-disabled', 'true');
+      expect(leafItem).to.have.attribute("aria-disabled", "true");
     });
 
-    it('should set item--disabled part', async () => {
+    it("should set item--disabled part", async () => {
       // Act
       leafItem.disabled = true;
       await leafItem.updateComplete;
 
       // Assert
-      expect(leafItem.shadowRoot?.querySelector('.tree-item__item')?.part.contains('item--disabled')).to.be.true;
+      expect(
+        leafItem.shadowRoot
+          ?.querySelector(".tree-item__item")
+          ?.part.contains("item--disabled"),
+      ).to.be.true;
     });
   });
 
-  describe('when the item is expanded', () => {
-    it('should set item--expanded part', async () => {
+  describe("when the item is expanded", () => {
+    it("should set item--expanded part", async () => {
       // Act
       leafItem.expanded = true;
       await leafItem.updateComplete;
 
       // Assert
-      expect(leafItem.shadowRoot?.querySelector('.tree-item__item')?.part.contains('item--expanded')).to.be.true;
+      expect(
+        leafItem.shadowRoot
+          ?.querySelector(".tree-item__item")
+          ?.part.contains("item--expanded"),
+      ).to.be.true;
     });
   });
 
-  describe('when the item is lazy', () => {
-    it('should emit p-lazy-change when the lazy attribute is added and removed', async () => {
+  describe("when the item is lazy", () => {
+    it("should emit p-lazy-change when the lazy attribute is added and removed", async () => {
       // Arrange
       const lazyChangeSpy = sinon.spy();
 
-      parentItem.addEventListener('p-lazy-change', lazyChangeSpy);
+      parentItem.addEventListener("p-lazy-change", lazyChangeSpy);
       parentItem.lazy = true;
 
       // Act

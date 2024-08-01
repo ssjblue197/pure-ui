@@ -1,9 +1,12 @@
-import type PCarouselItem from '../components/carousel-item/carousel-item.js';
+import type PCarouselItem from "../components/carousel-item/carousel-item.js";
 
-export type PSlideChangeEvent = CustomEvent<{ index: number; slide: PCarouselItem }>;
+export type PSlideChangeEvent = CustomEvent<{
+  index: number;
+  slide: PCarouselItem;
+}>;
 
 declare global {
   interface GlobalEventHandlersEventMap {
-    'p-slide-change': PSlideChangeEvent;
+    "p-slide-change": PSlideChangeEvent;
   }
 }

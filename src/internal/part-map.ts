@@ -7,5 +7,5 @@ export function partMap(map: { [partName: string]: boolean }) {
     }
   }
 
-  return parts.join(' ');
+  return parts.join(" ");
 }

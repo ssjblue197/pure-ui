@@ -1,21 +1,24 @@
-import { aTimeout, elementUpdated, expect, fixture } from '@open-wc/testing';
+import { aTimeout, elementUpdated, expect, fixture } from "@open-wc/testing";
 
-import { activeElements, getDeepestActiveElement } from './active-elements.js';
-import { clickOnElement } from './test.js';
-import { html } from 'lit';
-import { sendKeys } from '@web/test-runner-commands';
-import type { SlDialog } from '../pure-ui.js';
+import { activeElements, getDeepestActiveElement } from "./active-elements.js";
+import { clickOnElement } from "./test.js";
+import { html } from "lit";
+import { sendKeys } from "@web/test-runner-commands";
+import type { SlDialog } from "../pure-ui.js";
 
-import '../../../dist/pure-ui.js';
+import "../../../dist/pure-ui.js";
 
 async function holdShiftKey(callback: () => Promise<void>) {
-  await sendKeys({ down: 'Shift' });
+  await sendKeys({ down: "Shift" });
   await callback();
-  await sendKeys({ up: 'Shift' });
+  await sendKeys({ up: "Shift" });
 }
 
 const tabKey =
-  navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('HeadlessChrome') ? 'Alt+Tab' : 'Tab';
+  navigator.userAgent.includes("Safari") &&
+  !navigator.userAgent.includes("HeadlessChrome")
+    ? "Alt+Tab"
+    : "Tab";
 
 // Simple helper to turn the activeElements generator into an array
 function activeElementsArray() {
@@ -23,11 +26,11 @@ function activeElementsArray() {
 }
 
 window.customElements.define(
-  'tab-test-1',
+  "tab-test-1",
   class extends HTMLElement {
     constructor() {
       super();
-      this.attachShadow({ mode: 'open' });
+      this.attachShadow({ mode: "open" });
     }
     connectedCallback() {
       this.shadowRoot!.innerHTML = `
@@ -40,10 +43,10 @@ window.customElements.define(
       </p-drawer>
     `;
     }
-  }
+  },
 );
 
-it('Should allow tabbing to slotted elements', async () => {
+it("Should allow tabbing to slotted elements", async () => {
   const el = await fixture(html`
     <tab-test-1>
       <div slot="label">
@@ -64,9 +67,10 @@ it('Should allow tabbing to slotted elements', async () => {
     </tab-test-1>
   `);
 
-  const drawer = el.shadowRoot?.querySelector('p-drawer');
+  const drawer = el.shadowRoot?.querySelector("p-drawer");
 
-  if (drawer === null || drawer === undefined) throw Error('Could not find drawer inside of the test element');
+  if (drawer === null || drawer === undefined)
+    throw Error("Could not find drawer inside of the test element");
 
   await drawer.show();
 
@@ -74,17 +78,19 @@ it('Should allow tabbing to slotted elements', async () => {
 
   const focusZero = drawer.shadowRoot?.querySelector("[role='dialog']");
 
-  if (focusZero === null || focusZero === undefined) throw Error('Could not find dialog panel inside <p-drawer>');
+  if (focusZero === null || focusZero === undefined)
+    throw Error("Could not find dialog panel inside <p-drawer>");
 
-  const focusOne = el.querySelector('#focus-1');
+  const focusOne = el.querySelector("#focus-1");
   const focusTwo = drawer.shadowRoot?.querySelector("[part~='close-button']");
 
-  if (focusTwo === null || focusTwo === undefined) throw Error('Could not find close button inside <p-drawer>');
+  if (focusTwo === null || focusTwo === undefined)
+    throw Error("Could not find close button inside <p-drawer>");
 
-  const focusThree = el.querySelector('#focus-3');
-  const focusFour = el.querySelector('#focus-4');
-  const focusFive = el.querySelector('#focus-5');
-  const focusSix = el.querySelector('#focus-6');
+  const focusThree = el.querySelector("#focus-3");
+  const focusFour = el.querySelector("#focus-4");
+  const focusFive = el.querySelector("#focus-5");
+  const focusSix = el.querySelector("#focus-6");
 
   // When we open drawer, we should be focused on the panel to start.
   expect(getDeepestActiveElement()).to.equal(focusZero);
@@ -145,7 +151,7 @@ it('Should allow tabbing to slotted elements', async () => {
   expect(activeElementsArray()).to.include(focusSix);
 });
 
-it.skip('Should account for when focus is changed from outside sources (like clicking)', async () => {
+it.skip("Should account for when focus is changed from outside sources (like clicking)", async () => {
   const dialog = await fixture(html`
     <p-dialog open="" label="Dialog" class="dialog-overview">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -154,9 +160,9 @@ it.skip('Should account for when focus is changed from outside sources (like cli
     </p-dialog>
   `);
 
-  const inputEl = dialog.querySelector('p-input')!;
-  const closeButton = dialog.shadowRoot!.querySelector('p-icon-button')!;
-  const footerButton = dialog.querySelector('p-button')!;
+  const inputEl = dialog.querySelector("p-input")!;
+  const closeButton = dialog.shadowRoot!.querySelector("p-icon-button")!;
+  const footerButton = dialog.querySelector("p-button")!;
 
   expect(activeElementsArray()).to.not.include(inputEl);
 
@@ -179,37 +185,48 @@ it.skip('Should account for when focus is changed from outside sources (like cli
 });
 
 // https://github.com/ssjblue197/pure-ui/issues/1710
-it('Should respect nested modal instances', async () => {
-  const dialogOne = (): SlDialog => document.querySelector('#dialog-1')!;
-  const dialogTwo = (): SlDialog => document.querySelector('#dialog-2')!;
+it("Should respect nested modal instances", async () => {
+  const dialogOne = (): SlDialog => document.querySelector("#dialog-1")!;
+  const dialogTwo = (): SlDialog => document.querySelector("#dialog-2")!;
 
   // lit-a11y doesn't like the "autofocus" attribute.
   /* eslint-disable */
   await fixture(html`
     <div>
-      <p-button id="open-dialog-1" @click=${() => dialogOne().show()}></p-button>
+      <p-button
+        id="open-dialog-1"
+        @click=${() => dialogOne().show()}
+      ></p-button>
       <p-dialog id="dialog-1" label="Dialog 1">
-        <p-button @click=${() => dialogTwo().show()} id="open-dialog-2">Open Dialog 2</p-button>
+        <p-button @click=${() => dialogTwo().show()} id="open-dialog-2"
+          >Open Dialog 2</p-button
+        >
         <p-button slot="footer" variant="primary">Close</p-button>
       </p-dialog>
 
       <p-dialog id="dialog-2" label="Dialog 2">
-        <p-input id="focus-1" autofocus="" placeholder="I will have focus when the dialog is opened"></p-input>
+        <p-input
+          id="focus-1"
+          autofocus=""
+          placeholder="I will have focus when the dialog is opened"
+        ></p-input>
         <p-input id="focus-2" placeholder="Second input"></p-input>
-        <p-button slot="footer" variant="primary" class="close-2">Close</p-button>
+        <p-button slot="footer" variant="primary" class="close-2"
+          >Close</p-button
+        >
       </p-dialog>
     </div>
   `);
   /* eslint-enable */
 
-  const firstFocusedEl = document.querySelector('#focus-1');
-  const secondFocusedEl = document.querySelector('#focus-2');
+  const firstFocusedEl = document.querySelector("#focus-1");
+  const secondFocusedEl = document.querySelector("#focus-2");
 
   // So we can trigger auto-focus stuff
-  await clickOnElement(document.querySelector('#open-dialog-1')!);
+  await clickOnElement(document.querySelector("#open-dialog-1")!);
   // These clicks need a ~100ms timeout. I'm assuming for animation reasons?
   await aTimeout(100);
-  await clickOnElement(document.querySelector('#open-dialog-2')!);
+  await clickOnElement(document.querySelector("#open-dialog-2")!);
   await aTimeout(100);
 
   expect(activeElementsArray()).to.include(firstFocusedEl);

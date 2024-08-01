@@ -25,7 +25,7 @@ layout: component
 {% raw %}
 
 ```jsx:react
-import PSplitPanel from '@pure-ui/core/dist/react/split-panel';
+import PSplitPanel from 'pure-uikit/dist/react/split-panel';
 
 const App = () => (
   <PSplitPanel>
@@ -106,7 +106,7 @@ To set the initial position in pixels instead of a percentage, use the `position
 {% raw %}
 
 ```jsx:react
-import PSplitPanel from '@pure-ui/core/dist/react/split-panel';
+import PSplitPanel from 'pure-uikit/dist/react/split-panel';
 
 const App = () => (
   <PSplitPanel position="200">
@@ -164,7 +164,7 @@ Add the `vertical` attribute to render the split panel in a vertical orientation
 {% raw %}
 
 ```jsx:react
-import PSplitPanel from '@pure-ui/core/dist/react/split-panel';
+import PSplitPanel from 'pure-uikit/dist/react/split-panel';
 
 const App = () => (
   <PSplitPanel vertical style={{ height: '400px' }}>
@@ -252,7 +252,7 @@ To snap panels at specific positions while dragging, add the `snap` attribute wi
 {% raw %}
 
 ```jsx:react
-import PSplitPanel from '@pure-ui/core/dist/react/split-panel';
+import PSplitPanel from 'pure-uikit/dist/react/split-panel';
 
 const css = `
   .split-panel-snapping {
@@ -344,7 +344,7 @@ Add the `disabled` attribute to prevent the divider from being repositioned.
 {% raw %}
 
 ```jsx:react
-import PSplitPanel from '@pure-ui/core/dist/react/split-panel';
+import PSplitPanel from 'pure-uikit/dist/react/split-panel';
 
 const App = () => (
   <PSplitPanel disabled>
@@ -421,9 +421,9 @@ Try resizing the example below with each option and notice how the panels respon
 
 ```jsx:react
 import { useState } from 'react';
-import PSplitPanel from '@pure-ui/core/dist/react/split-panel';
-import PSelect from '@pure-ui/core/dist/react/select';
-import PMenuItem from '@pure-ui/core/dist/react/menu-item';
+import PSplitPanel from 'pure-uikit/dist/react/split-panel';
+import PSelect from 'pure-uikit/dist/react/select';
+import PMenuItem from 'pure-uikit/dist/react/menu-item';
 
 const App = () => {
   const [primary, setPrimary] = useState('');
@@ -500,7 +500,7 @@ This examples demonstrates how you can ensure both panels are at least 150px usi
 {% raw %}
 
 ```jsx:react
-import PSplitPanel from '@pure-ui/core/dist/react/split-panel';
+import PSplitPanel from 'pure-uikit/dist/react/split-panel';
 
 const App = () => (
   <PSplitPanel style={{ '--min': '150px', '--max': 'calc(100% - 150px)' }}>
@@ -568,7 +568,7 @@ Create complex layouts that can be repositioned independently by nesting split p
 {% raw %}
 
 ```jsx:react
-import PSplitPanel from '@pure-ui/core/dist/react/split-panel';
+import PSplitPanel from 'pure-uikit/dist/react/split-panel';
 
 const App = () => (
   <PSplitPanel>
@@ -643,8 +643,8 @@ You can target the `divider` part to apply CSS properties to the divider. To add
 {% raw %}
 
 ```jsx:react
-import PSplitPanel from '@pure-ui/core/dist/react/split-panel';
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PSplitPanel from 'pure-uikit/dist/react/split-panel';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const App = () => (
   <PSplitPanel style={{ '--divider-width': '20px' }}>
@@ -731,8 +731,8 @@ Here's a more elaborate example that changes the divider's color and width and a
 {% raw %}
 
 ```jsx:react
-import PSplitPanel from '@pure-ui/core/dist/react/split-panel';
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PSplitPanel from 'pure-uikit/dist/react/split-panel';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const css = `
   .split-panel-divider p-split-panel {

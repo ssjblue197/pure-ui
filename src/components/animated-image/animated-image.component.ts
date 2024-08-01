@@ -1,11 +1,11 @@
-import { html } from 'lit';
-import { property, query, state } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './animated-image.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { html } from "lit";
+import { property, query, state } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./animated-image.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary A component for displaying animated GIFs and WEBPs that play and pause on interaction.
@@ -28,9 +28,9 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class PAnimatedImage extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'p-icon': PIcon };
+  static dependencies = { "p-icon": PIcon };
 
-  @query('.animated-image__animated') animatedImage: HTMLImageElement;
+  @query(".animated-image__animated") animatedImage: HTMLImageElement;
 
   @state() frozenFrame: string;
   @state() isLoaded = false;
@@ -49,34 +49,34 @@ export default class PAnimatedImage extends PureElement {
   }
 
   private handleLoad() {
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
     const { width, height } = this.animatedImage;
     canvas.width = width;
     canvas.height = height;
-    canvas.getContext('2d')!.drawImage(this.animatedImage, 0, 0, width, height);
-    this.frozenFrame = canvas.toDataURL('image/gif');
+    canvas.getContext("2d")!.drawImage(this.animatedImage, 0, 0, width, height);
+    this.frozenFrame = canvas.toDataURL("image/gif");
 
     if (!this.isLoaded) {
-      this.emit('p-load');
+      this.emit("p-load");
       this.isLoaded = true;
     }
   }
 
   private handleError() {
-    this.emit('p-error');
+    this.emit("p-error");
   }
 
-  @watch('play', { waitUntilFirstUpdate: true })
+  @watch("play", { waitUntilFirstUpdate: true })
   handlePlayChange() {
     // When the animation starts playing, reset the src so it plays from the beginning. Since the src is cached, this
     // won't trigger another request.
     if (this.play) {
-      this.animatedImage.src = '';
+      this.animatedImage.src = "";
       this.animatedImage.src = this.src;
     }
   }
 
-  @watch('src')
+  @watch("src")
   handleSrcChange() {
     this.isLoaded = false;
   }
@@ -89,7 +89,7 @@ export default class PAnimatedImage extends PureElement {
           src=${this.src}
           alt=${this.alt}
           crossorigin="anonymous"
-          aria-hidden=${this.play ? 'false' : 'true'}
+          aria-hidden=${this.play ? "false" : "true"}
           @click=${this.handleClick}
           @load=${this.handleLoad}
           @error=${this.handleError}
@@ -101,16 +101,20 @@ export default class PAnimatedImage extends PureElement {
                 class="animated-image__frozen"
                 src=${this.frozenFrame}
                 alt=${this.alt}
-                aria-hidden=${this.play ? 'true' : 'false'}
+                aria-hidden=${this.play ? "true" : "false"}
                 @click=${this.handleClick}
               />
 
               <div part="control-box" class="animated-image__control-box">
-                <slot name="play-icon"><p-icon name="play-fill" library="system"></p-icon></slot>
-                <slot name="pause-icon"><p-icon name="pause-fill" library="system"></p-icon></slot>
+                <slot name="play-icon"
+                  ><p-icon name="play-fill" library="system"></p-icon
+                ></slot>
+                <slot name="pause-icon"
+                  ><p-icon name="pause-fill" library="system"></p-icon
+                ></slot>
               </div>
             `
-          : ''}
+          : ""}
       </div>
     `;
   }

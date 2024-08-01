@@ -1,13 +1,13 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property, query } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIconButton from '../icon-button/icon-button.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './tab.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIconButton from "../icon-button/icon-button.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./tab.styles.js";
+import type { CSSResultGroup } from "lit";
 
 let id = 0;
 
@@ -29,17 +29,17 @@ let id = 0;
  */
 export default class PTab extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'p-icon-button': PIconButton };
+  static dependencies = { "p-icon-button": PIconButton };
 
   private readonly localize = new LocalizeController(this);
 
   private readonly attrId = ++id;
   private readonly componentId = `p-tab-${this.attrId}`;
 
-  @query('.tab') tab: HTMLElement;
+  @query(".tab") tab: HTMLElement;
 
   /** The name of the tab panel this tab is associated with. The panel must be located in the same tab group. */
-  @property({ reflect: true }) panel = '';
+  @property({ reflect: true }) panel = "";
 
   /** Draws the tab in an active state. */
   @property({ type: Boolean, reflect: true }) active = false;
@@ -58,22 +58,22 @@ export default class PTab extends PureElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('role', 'tab');
+    this.setAttribute("role", "tab");
   }
 
   private handleCloseClick(event: Event) {
     event.stopPropagation();
-    this.emit('p-close');
+    this.emit("p-close");
   }
 
-  @watch('active')
+  @watch("active")
   handleActiveChange() {
-    this.setAttribute('aria-selected', this.active ? 'true' : 'false');
+    this.setAttribute("aria-selected", this.active ? "true" : "false");
   }
 
-  @watch('disabled')
+  @watch("disabled")
   handleDisabledChange() {
-    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+    this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
 
     if (this.disabled && !this.active) {
       this.tabIndex = -1;
@@ -91,9 +91,9 @@ export default class PTab extends PureElement {
         part="base"
         class=${classMap({
           tab: true,
-          'tab--active': this.active,
-          'tab--closable': this.closable,
-          'tab--disabled': this.disabled
+          "tab--active": this.active,
+          "tab--closable": this.closable,
+          "tab--disabled": this.disabled,
         })}
       >
         <slot></slot>
@@ -104,13 +104,13 @@ export default class PTab extends PureElement {
                 exportparts="base:close-button__base"
                 name="x-lg"
                 library="system"
-                label=${this.localize.term('close')}
+                label=${this.localize.term("close")}
                 class="tab__close-button"
                 @click=${this.handleCloseClick}
                 tabindex="-1"
               ></p-icon-button>
             `
-          : ''}
+          : ""}
       </div>
     `;
   }
@@ -118,6 +118,6 @@ export default class PTab extends PureElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'p-tab': PTab;
+    "p-tab": PTab;
   }
 }

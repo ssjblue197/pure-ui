@@ -43,7 +43,8 @@ body.search-visible {
   border: none;
   border-radius: 9999px;
   background: var(--docs-search-box-background);
-  border: solid var(--docs-search-box-border-width) var(--docs-search-box-border-color);
+  border: solid var(--docs-search-box-border-width)
+    var(--docs-search-box-border-color);
   font: inherit;
   color: var(--docs-search-box-color);
   padding: 0.75rem 1rem;
@@ -211,7 +212,8 @@ body.search-visible {
 }
 
 .search--has-results .search__body {
-  border-top: solid var(--docs-search-border-width) var(--docs-search-border-color);
+  border-top: solid var(--docs-search-border-width)
+    var(--docs-search-border-color);
 }
 
 .search__results {
@@ -242,8 +244,8 @@ body.search-visible {
   color: var(--docs-search-result-color-hover);
 }
 
-.search__results li[data-selected='true'] a,
-.search__results li[data-selected='true'] a * {
+.search__results li[data-selected="true"] a,
+.search__results li[data-selected="true"] a * {
   outline: none;
   background-color: var(--docs-search-result-background-active);
   color: var(--docs-search-result-color-active);
@@ -312,7 +314,8 @@ body.search-visible {
 
 .search__empty {
   display: none;
-  border-top: solid var(--docs-search-border-width) var(--docs-search-border-color);
+  border-top: solid var(--docs-search-border-width)
+    var(--docs-search-border-color);
   text-align: center;
   color: var(--docs-search-text-color-muted);
   padding: 2rem;
@@ -326,7 +329,8 @@ body.search-visible {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  border-top: solid var(--docs-search-border-width) var(--docs-search-border-color);
+  border-top: solid var(--docs-search-border-width)
+    var(--docs-search-border-color);
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
   padding: 1rem;

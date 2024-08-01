@@ -13,7 +13,7 @@ Localization is handled by the browser's [`Intl.DateTimeFormat` API](https://dev
 ```
 
 ```jsx:react
-import PFormatDate from '@pure-ui/core/dist/react/format-date';
+import PFormatDate from 'pure-uikit/dist/react/format-date';
 
 const App = () => <PFormatDate date="2020-07-15T09:17:00-04:00" />;
 ```
@@ -51,7 +51,7 @@ Formatting options are based on those found in the [`Intl.DateTimeFormat` API](h
 ```
 
 ```jsx:react
-import PFormatDate from '@pure-ui/core/dist/react/format-date';
+import PFormatDate from 'pure-uikit/dist/react/format-date';
 
 const App = () => (
   <>
@@ -91,7 +91,7 @@ By default, the browser will determine whether to use 12-hour or 24-hour time. T
 ```
 
 ```jsx:react
-import PFormatDate from '@pure-ui/core/dist/react/format-date';
+import PFormatDate from 'pure-uikit/dist/react/format-date';
 
 const App = () => (
   <>
@@ -113,7 +113,7 @@ Russian: <p-format-date lang="ru"></p-format-date>
 ```
 
 ```jsx:react
-import PFormatDate from '@pure-ui/core/dist/react/format-date';
+import PFormatDate from 'pure-uikit/dist/react/format-date';
 
 const App = () => (
   <>

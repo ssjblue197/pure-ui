@@ -17,20 +17,20 @@ These instructions are for Vue 2. If you're using Vue 3 or above, please see the
 To add Pure UI to your Vue app, install the package from npm.
 
 ```bash
-npm install @pure-ui/core
+npm install pure-uikit
 ```
 
 Next, [include a theme](/getting-started/themes) and set the [base path](/getting-started/installation#setting-the-base-path) for icons and other assets. In this example, we'll import the light theme and use the CDN as a base path.
 
 ```jsx
-import '@pure-ui/core/%NPMDIR%/themes/light.css';
-import { setBasePath } from '@pure-ui/core/%NPMDIR%/utilities/base-path';
+import "pure-uikit/%NPMDIR%/themes/light.css";
+import { setBasePath } from "pure-uikit/%NPMDIR%/utilities/base-path";
 
-setBasePath('https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/');
+setBasePath("https://cdn.jsdelivr.net/npm/pure-uikit@%VERSION%/%CDNDIR%/");
 ```
 
 :::tip
-If you'd rather not use the CDN for assets, you can create a build task that copies `node_modules/@pure-ui/core/dist/assets` into a public folder in your app. Then you can point the base path to that folder instead.
+If you'd rather not use the CDN for assets, you can create a build task that copies `node_modules/pure-uikit/dist/assets` into a public folder in your app. Then you can point the base path to that folder instead.
 :::
 
 ## Configuration
@@ -38,16 +38,16 @@ If you'd rather not use the CDN for assets, you can create a build task that cop
 You'll need to tell Vue to ignore Pure UI components. This is pretty easy because they all start with `p-`.
 
 ```js
-import Vue from 'vue';
-import App from './App.vue';
+import Vue from "vue";
+import App from "./App.vue";
 
 Vue.config.ignoredElements = [/p-/];
 
 const app = new Vue({
-  render: h => h(App)
+  render: (h) => h(App),
 });
 
-app.$mount('#app');
+app.$mount("#app");
 ```
 
 Now you can start using Pure UI components in your app!

@@ -1,11 +1,11 @@
-import { animations } from './animations.js';
-import { html } from 'lit';
-import { property, queryAsync } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './animation.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { animations } from "./animations.js";
+import { html } from "lit";
+import { property, queryAsync } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./animation.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Animate elements declaratively with nearly 100 baked-in presets, or roll your own with custom keyframes. Powered by the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API).
@@ -26,10 +26,10 @@ export default class PAnimation extends PureElement {
   private animation?: Animation;
   private hasStarted = false;
 
-  @queryAsync('slot') defaultPot: Promise<HTMLSlotElement>;
+  @queryAsync("slot") defaultPot: Promise<HTMLSlotElement>;
 
   /** The name of the built-in animation to use. For custom animations, use the `keyframes` prop. */
-  @property() name = 'none';
+  @property() name = "none";
 
   /**
    * Plays the animation. When omitted, the animation will be paused. This attribute will be automatically removed when
@@ -44,7 +44,7 @@ export default class PAnimation extends PureElement {
    * Determines the direction of playback as well as the behavior when reaching the end of an iteration.
    * [Learn more](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction)
    */
-  @property() direction: PlaybackDirection = 'normal';
+  @property() direction: PlaybackDirection = "normal";
 
   /** The number of milliseconds each iteration of the animation takes to complete. */
   @property({ type: Number }) duration = 1000;
@@ -53,19 +53,19 @@ export default class PAnimation extends PureElement {
    * The easing function to use for the animation. This can be a Pure UI easing function or a custom easing function
    * such as `cubic-bezier(0, 1, .76, 1.14)`.
    */
-  @property() easing = 'linear';
+  @property() easing = "linear";
 
   /** The number of milliseconds to delay after the active period of an animation sequence. */
-  @property({ attribute: 'end-delay', type: Number }) endDelay = 0;
+  @property({ attribute: "end-delay", type: Number }) endDelay = 0;
 
   /** Sets how the animation applies styles to its target before and after its execution. */
-  @property() fill: FillMode = 'auto';
+  @property() fill: FillMode = "auto";
 
   /** The number of iterations to run before the animation completes. Defaults to `Infinity`, which loops. */
   @property({ type: Number }) iterations = Infinity;
 
   /** The offset at which to start the animation, usually between 0 (start) and 1 (end). */
-  @property({ attribute: 'iteration-start', type: Number }) iterationStart = 0;
+  @property({ attribute: "iteration-start", type: Number }) iterationStart = 0;
 
   /** The keyframes to use for the animation. If this is set, `name` will be ignored. */
   @property({ attribute: false }) keyframes?: Keyframe[];
@@ -75,7 +75,7 @@ export default class PAnimation extends PureElement {
    * to `2`, for example, will double the animation's speed. A negative value can be used to reverse the animation. This
    * value can be changed without causing the animation to restart.
    */
-  @property({ attribute: 'playback-rate', type: Number }) playbackRate = 1;
+  @property({ attribute: "playback-rate", type: Number }) playbackRate = 1;
 
   /** Gets and sets the current animation time. */
   get currentTime(): CSSNumberish {
@@ -101,13 +101,13 @@ export default class PAnimation extends PureElement {
   private handleAnimationFinish = () => {
     this.play = false;
     this.hasStarted = false;
-    this.emit('p-finish');
+    this.emit("p-finish");
   };
 
   private handleAnimationCancel = () => {
     this.play = false;
     this.hasStarted = false;
-    this.emit('p-cancel');
+    this.emit("p-cancel");
   };
 
   private handlePotChange() {
@@ -117,7 +117,9 @@ export default class PAnimation extends PureElement {
 
   private async createAnimation() {
     const easing = animations.easings[this.easing] ?? this.easing;
-    const keyframes = this.keyframes ?? (animations as unknown as Partial<Record<string, Keyframe[]>>)[this.name];
+    const keyframes =
+      this.keyframes ??
+      (animations as unknown as Partial<Record<string, Keyframe[]>>)[this.name];
     const slot = await this.defaultPot;
     const element = slot.assignedElements()[0] as HTMLElement | undefined;
 
@@ -134,15 +136,15 @@ export default class PAnimation extends PureElement {
       endDelay: this.endDelay,
       fill: this.fill,
       iterationStart: this.iterationStart,
-      iterations: this.iterations
+      iterations: this.iterations,
     });
     this.animation.playbackRate = this.playbackRate;
-    this.animation.addEventListener('cancel', this.handleAnimationCancel);
-    this.animation.addEventListener('finish', this.handleAnimationFinish);
+    this.animation.addEventListener("cancel", this.handleAnimationCancel);
+    this.animation.addEventListener("finish", this.handleAnimationFinish);
 
     if (this.play) {
       this.hasStarted = true;
-      this.emit('p-start');
+      this.emit("p-start");
     } else {
       this.animation.pause();
     }
@@ -153,23 +155,23 @@ export default class PAnimation extends PureElement {
   private destroyAnimation() {
     if (this.animation) {
       this.animation.cancel();
-      this.animation.removeEventListener('cancel', this.handleAnimationCancel);
-      this.animation.removeEventListener('finish', this.handleAnimationFinish);
+      this.animation.removeEventListener("cancel", this.handleAnimationCancel);
+      this.animation.removeEventListener("finish", this.handleAnimationFinish);
       this.hasStarted = false;
     }
   }
 
   @watch([
-    'name',
-    'delay',
-    'direction',
-    'duration',
-    'easing',
-    'endDelay',
-    'fill',
-    'iterations',
-    'iterationsStart',
-    'keyframes'
+    "name",
+    "delay",
+    "direction",
+    "duration",
+    "easing",
+    "endDelay",
+    "fill",
+    "iterations",
+    "iterationsStart",
+    "keyframes",
   ])
   handleAnimationChange() {
     if (!this.hasUpdated) {
@@ -179,12 +181,12 @@ export default class PAnimation extends PureElement {
     this.createAnimation();
   }
 
-  @watch('play')
+  @watch("play")
   handlePlayChange() {
     if (this.animation) {
       if (this.play && !this.hasStarted) {
         this.hasStarted = true;
-        this.emit('p-start');
+        this.emit("p-start");
       }
 
       if (this.play) {
@@ -198,7 +200,7 @@ export default class PAnimation extends PureElement {
     return false;
   }
 
-  @watch('playbackRate')
+  @watch("playbackRate")
   handlePlaybackRateChange() {
     if (this.animation) {
       this.animation.playbackRate = this.playbackRate;

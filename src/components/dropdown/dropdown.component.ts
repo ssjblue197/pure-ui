@@ -1,22 +1,25 @@
-import { animateTo, stopAnimations } from '../../internal/animate.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
-import { getTabbableBoundary } from '../../internal/tabbable.js';
-import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property, query } from 'lit/decorators.js';
-import { waitForEvent } from '../../internal/event.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PPopup from '../popup/popup.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './dropdown.styles.js';
-import type { CSSResultGroup } from 'lit';
-import type { PSelectEvent } from '../../events/p-select.js';
-import type PButton from '../button/button.js';
-import type PIconButton from '../icon-button/icon-button.js';
-import type PMenu from '../menu/menu.js';
+import { animateTo, stopAnimations } from "../../internal/animate.js";
+import { classMap } from "lit/directives/class-map.js";
+import {
+  getAnimation,
+  setDefaultAnimation,
+} from "../../utilities/animation-registry.js";
+import { getTabbableBoundary } from "../../internal/tabbable.js";
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query } from "lit/decorators.js";
+import { waitForEvent } from "../../internal/event.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PPopup from "../popup/popup.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./dropdown.styles.js";
+import type { CSSResultGroup } from "lit";
+import type { PSelectEvent } from "../../events/p-select.js";
+import type PButton from "../button/button.js";
+import type PIconButton from "../icon-button/icon-button.js";
+import type PMenu from "../menu/menu.js";
 
 /**
  * @summary Dropdowns expose additional content that "drops down" in a panel.
@@ -44,11 +47,11 @@ import type PMenu from '../menu/menu.js';
  */
 export default class PDropdown extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'p-popup': PPopup };
+  static dependencies = { "p-popup": PPopup };
 
-  @query('.dropdown') popup: PPopup;
-  @query('.dropdown__trigger') trigger: HTMLSlotElement;
-  @query('.dropdown__panel') panel: HTMLSlotElement;
+  @query(".dropdown") popup: PPopup;
+  @query(".dropdown__trigger") trigger: HTMLSlotElement;
+  @query(".dropdown__panel") panel: HTMLSlotElement;
 
   private readonly localize = new LocalizeController(this);
   private closeWatcher: CloseWatcher | null;
@@ -64,18 +67,18 @@ export default class PDropdown extends PureElement {
    * inside of the viewport.
    */
   @property({ reflect: true }) placement:
-    | 'top'
-    | 'top-start'
-    | 'top-end'
-    | 'bottom'
-    | 'bottom-start'
-    | 'bottom-end'
-    | 'right'
-    | 'right-start'
-    | 'right-end'
-    | 'left'
-    | 'left-start'
-    | 'left-end' = 'bottom-start';
+    | "top"
+    | "top-start"
+    | "top-end"
+    | "bottom"
+    | "bottom-start"
+    | "bottom-end"
+    | "right"
+    | "right-start"
+    | "right-end"
+    | "left"
+    | "left-start"
+    | "left-end" = "bottom-start";
 
   /** Disables the dropdown so the panel will not open. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -84,7 +87,8 @@ export default class PDropdown extends PureElement {
    * By default, the dropdown is closed when an item is selected. This attribute will keep it open instead. Useful for
    * dropdowns that allow for multiple interactions.
    */
-  @property({ attribute: 'stay-open-on-select', type: Boolean, reflect: true }) stayOpenOnSelect = false;
+  @property({ attribute: "stay-open-on-select", type: Boolean, reflect: true })
+  stayOpenOnSelect = false;
 
   /**
    * The dropdown will close when the user interacts outside of this element (e.g. clicking). Useful for composing other
@@ -107,7 +111,8 @@ export default class PDropdown extends PureElement {
   /**
    * Syncs the popup width or height to that of the trigger element.
    */
-  @property({ reflect: true }) sync: 'width' | 'height' | 'both' | undefined = undefined;
+  @property({ reflect: true }) sync: "width" | "height" | "both" | undefined =
+    undefined;
 
   connectedCallback() {
     super.connectedCallback();
@@ -134,22 +139,24 @@ export default class PDropdown extends PureElement {
   }
 
   focusOnTrigger() {
-    const trigger = this.trigger.assignedElements({ flatten: true })[0] as HTMLElement | undefined;
-    if (typeof trigger?.focus === 'function') {
+    const trigger = this.trigger.assignedElements({ flatten: true })[0] as
+      | HTMLElement
+      | undefined;
+    if (typeof trigger?.focus === "function") {
       trigger.focus();
     }
   }
 
   getMenu() {
-    return this.panel.assignedElements({ flatten: true }).find(el => el.tagName.toLowerCase() === 'p-menu') as
-      | PMenu
-      | undefined;
+    return this.panel
+      .assignedElements({ flatten: true })
+      .find((el) => el.tagName.toLowerCase() === "p-menu") as PMenu | undefined;
   }
 
   private handleKeyDown = (event: KeyboardEvent) => {
     // Close when escape is pressed inside an open dropdown. We need to listen on the panel itself and stop propagation
     // in case any ancestors are also listening for this key.
-    if (this.open && event.key === 'Escape') {
+    if (this.open && event.key === "Escape") {
       event.stopPropagation();
       this.hide();
       this.focusOnTrigger();
@@ -158,7 +165,7 @@ export default class PDropdown extends PureElement {
 
   private handleDocumentKeyDown = (event: KeyboardEvent) => {
     // Close when escape or tab is pressed
-    if (event.key === 'Escape' && this.open && !this.closeWatcher) {
+    if (event.key === "Escape" && this.open && !this.closeWatcher) {
       event.stopPropagation();
       this.focusOnTrigger();
       this.hide();
@@ -166,9 +173,12 @@ export default class PDropdown extends PureElement {
     }
 
     // Handle tabbing
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       // Tabbing within an open menu should close the dropdown and refocus the trigger
-      if (this.open && document.activeElement?.tagName.toLowerCase() === 'p-menu-item') {
+      if (
+        this.open &&
+        document.activeElement?.tagName.toLowerCase() === "p-menu-item"
+      ) {
         event.preventDefault();
         this.hide();
         this.focusOnTrigger();
@@ -187,7 +197,9 @@ export default class PDropdown extends PureElement {
 
         if (
           !this.containingElement ||
-          activeElement?.closest(this.containingElement.tagName.toLowerCase()) !== this.containingElement
+          activeElement?.closest(
+            this.containingElement.tagName.toLowerCase(),
+          ) !== this.containingElement
         ) {
           this.hide();
         }
@@ -207,7 +219,7 @@ export default class PDropdown extends PureElement {
     const target = event.target as HTMLElement;
 
     // Hide the dropdown when a menu item is selected
-    if (!this.stayOpenOnSelect && target.tagName.toLowerCase() === 'p-menu') {
+    if (!this.stayOpenOnSelect && target.tagName.toLowerCase() === "p-menu") {
       this.hide();
       this.focusOnTrigger();
     }
@@ -225,7 +237,7 @@ export default class PDropdown extends PureElement {
   async handleTriggerKeyDown(event: KeyboardEvent) {
     // When spacebar/enter is pressed, show the panel but don't focus on the menu. This let's the user press the same
     // key again to hide the menu in case they don't want to make a selection.
-    if ([' ', 'Enter'].includes(event.key)) {
+    if ([" ", "Enter"].includes(event.key)) {
       event.preventDefault();
       this.handleTriggerClick();
       return;
@@ -241,7 +253,7 @@ export default class PDropdown extends PureElement {
       // When up/down is pressed, we make the assumption that the user is familiar with the menu and plans to make a
       // selection. Rather than toggle the panel, we focus on the menu (if one exists) and activate the first item for
       // faster navigation.
-      if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+      if (["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
         event.preventDefault();
 
         // Show the menu if it's not already open
@@ -255,12 +267,12 @@ export default class PDropdown extends PureElement {
         if (menuItems.length > 0) {
           // Focus on the first/last menu item after showing
           this.updateComplete.then(() => {
-            if (event.key === 'ArrowDown' || event.key === 'Home') {
+            if (event.key === "ArrowDown" || event.key === "Home") {
               menu.setCurrentItem(firstMenuItem);
               firstMenuItem.focus();
             }
 
-            if (event.key === 'ArrowUp' || event.key === 'End') {
+            if (event.key === "ArrowUp" || event.key === "End") {
               menu.setCurrentItem(lastMenuItem);
               lastMenuItem.focus();
             }
@@ -272,7 +284,7 @@ export default class PDropdown extends PureElement {
 
   handleTriggerKeyUp(event: KeyboardEvent) {
     // Prevent space from triggering a click event in Firefox
-    if (event.key === ' ') {
+    if (event.key === " ") {
       event.preventDefault();
     }
   }
@@ -292,15 +304,19 @@ export default class PDropdown extends PureElement {
   // To determine this, we assume the first tabbable element in the trigger slot is the "accessible trigger."
   //
   updateAccessibleTrigger() {
-    const assignedElements = this.trigger.assignedElements({ flatten: true }) as HTMLElement[];
-    const accessibleTrigger = assignedElements.find(el => getTabbableBoundary(el).start);
+    const assignedElements = this.trigger.assignedElements({
+      flatten: true,
+    }) as HTMLElement[];
+    const accessibleTrigger = assignedElements.find(
+      (el) => getTabbableBoundary(el).start,
+    );
     let target: HTMLElement;
 
     if (accessibleTrigger) {
       switch (accessibleTrigger.tagName.toLowerCase()) {
         // Pure UI buttons have to update the internal button so it's announced correctly by screen readers
-        case 'p-button':
-        case 'p-icon-button':
+        case "p-button":
+        case "p-icon-button":
           target = (accessibleTrigger as PButton | PIconButton).button;
           break;
 
@@ -308,8 +324,8 @@ export default class PDropdown extends PureElement {
           target = accessibleTrigger;
       }
 
-      target.setAttribute('aria-haspopup', 'true');
-      target.setAttribute('aria-expanded', this.open ? 'true' : 'false');
+      target.setAttribute("aria-haspopup", "true");
+      target.setAttribute("aria-expanded", this.open ? "true" : "false");
     }
   }
 
@@ -320,7 +336,7 @@ export default class PDropdown extends PureElement {
     }
 
     this.open = true;
-    return waitForEvent(this, 'p-after-show');
+    return waitForEvent(this, "p-after-show");
   }
 
   /** Hides the dropdown panel */
@@ -330,7 +346,7 @@ export default class PDropdown extends PureElement {
     }
 
     this.open = false;
-    return waitForEvent(this, 'p-after-hide');
+    return waitForEvent(this, "p-after-hide");
   }
 
   /**
@@ -342,8 +358,8 @@ export default class PDropdown extends PureElement {
   }
 
   addOpenListeners() {
-    this.panel.addEventListener('p-select', this.handlePanelSelect);
-    if ('CloseWatcher' in window) {
+    this.panel.addEventListener("p-select", this.handlePanelSelect);
+    if ("CloseWatcher" in window) {
       this.closeWatcher?.destroy();
       this.closeWatcher = new CloseWatcher();
       this.closeWatcher.onclose = () => {
@@ -351,23 +367,23 @@ export default class PDropdown extends PureElement {
         this.focusOnTrigger();
       };
     } else {
-      this.panel.addEventListener('keydown', this.handleKeyDown);
+      this.panel.addEventListener("keydown", this.handleKeyDown);
     }
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
-    document.addEventListener('mousedown', this.handleDocumentMouseDown);
+    document.addEventListener("keydown", this.handleDocumentKeyDown);
+    document.addEventListener("mousedown", this.handleDocumentMouseDown);
   }
 
   removeOpenListeners() {
     if (this.panel) {
-      this.panel.removeEventListener('p-select', this.handlePanelSelect);
-      this.panel.removeEventListener('keydown', this.handleKeyDown);
+      this.panel.removeEventListener("p-select", this.handlePanelSelect);
+      this.panel.removeEventListener("keydown", this.handleKeyDown);
     }
-    document.removeEventListener('keydown', this.handleDocumentKeyDown);
-    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+    document.removeEventListener("keydown", this.handleDocumentKeyDown);
+    document.removeEventListener("mousedown", this.handleDocumentMouseDown);
     this.closeWatcher?.destroy();
   }
 
-  @watch('open', { waitUntilFirstUpdate: true })
+  @watch("open", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.disabled) {
       this.open = false;
@@ -378,28 +394,32 @@ export default class PDropdown extends PureElement {
 
     if (this.open) {
       // Show
-      this.emit('p-show');
+      this.emit("p-show");
       this.addOpenListeners();
 
       await stopAnimations(this);
       this.panel.hidden = false;
       this.popup.active = true;
-      const { keyframes, options } = getAnimation(this, 'dropdown.show', { dir: this.localize.dir() });
+      const { keyframes, options } = getAnimation(this, "dropdown.show", {
+        dir: this.localize.dir(),
+      });
       await animateTo(this.popup.popup, keyframes, options);
 
-      this.emit('p-after-show');
+      this.emit("p-after-show");
     } else {
       // Hide
-      this.emit('p-hide');
+      this.emit("p-hide");
       this.removeOpenListeners();
 
       await stopAnimations(this);
-      const { keyframes, options } = getAnimation(this, 'dropdown.hide', { dir: this.localize.dir() });
+      const { keyframes, options } = getAnimation(this, "dropdown.hide", {
+        dir: this.localize.dir(),
+      });
       await animateTo(this.popup.popup, keyframes, options);
       this.panel.hidden = true;
       this.popup.active = false;
 
-      this.emit('p-after-hide');
+      this.emit("p-after-hide");
     }
   }
 
@@ -412,7 +432,7 @@ export default class PDropdown extends PureElement {
         placement=${this.placement}
         distance=${this.distance}
         skidding=${this.skidding}
-        strategy=${this.hoist ? 'fixed' : 'absolute'}
+        strategy=${this.hoist ? "fixed" : "absolute"}
         flip
         shift
         auto-size="vertical"
@@ -420,7 +440,7 @@ export default class PDropdown extends PureElement {
         sync=${ifDefined(this.sync ? this.sync : undefined)}
         class=${classMap({
           dropdown: true,
-          'dropdown--open': this.open
+          "dropdown--open": this.open,
         })}
       >
         <slot
@@ -434,7 +454,10 @@ export default class PDropdown extends PureElement {
           @slotchange=${this.handleTriggerSlotChange}
         ></slot>
 
-        <div aria-hidden=${this.open ? 'false' : 'true'} aria-labelledby="dropdown">
+        <div
+          aria-hidden=${this.open ? "false" : "true"}
+          aria-labelledby="dropdown"
+        >
           <slot part="panel" class="dropdown__panel"></slot>
         </div>
       </p-popup>
@@ -442,18 +465,18 @@ export default class PDropdown extends PureElement {
   }
 }
 
-setDefaultAnimation('dropdown.show', {
+setDefaultAnimation("dropdown.show", {
   keyframes: [
     { opacity: 0, scale: 0.9 },
-    { opacity: 1, scale: 1 }
+    { opacity: 1, scale: 1 },
   ],
-  options: { duration: 100, easing: 'ease' }
+  options: { duration: 100, easing: "ease" },
 });
 
-setDefaultAnimation('dropdown.hide', {
+setDefaultAnimation("dropdown.hide", {
   keyframes: [
     { opacity: 1, scale: 1 },
-    { opacity: 0, scale: 0.9 }
+    { opacity: 0, scale: 0.9 },
   ],
-  options: { duration: 100, easing: 'ease' }
+  options: { duration: 100, easing: "ease" },
 });

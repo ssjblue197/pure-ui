@@ -1,16 +1,20 @@
-import '../../../dist/pure-ui.js';
-import { expect, fixture, html } from '@open-wc/testing';
-import type PQrCode from './qr-code.js';
+import "../../../dist/pure-ui.js";
+import { expect, fixture, html } from "@open-wc/testing";
+import type PQrCode from "./qr-code.js";
 
 const getCanvas = (qrCode: PQrCode): HTMLCanvasElement => {
-  const possibleCanvas = qrCode.shadowRoot?.querySelector<HTMLCanvasElement>('.qr-code');
+  const possibleCanvas =
+    qrCode.shadowRoot?.querySelector<HTMLCanvasElement>(".qr-code");
   expect(possibleCanvas).to.exist;
   return possibleCanvas!;
 };
 
-const expectCanvasToHaveAriaLabel = (qrCode: PQrCode, expectedLabel: string): void => {
+const expectCanvasToHaveAriaLabel = (
+  qrCode: PQrCode,
+  expectedLabel: string,
+): void => {
   const canvas = getCanvas(qrCode);
-  expect(canvas).to.have.attribute('aria-label', expectedLabel);
+  expect(canvas).to.have.attribute("aria-label", expectedLabel);
 };
 
 class Color {
@@ -28,7 +32,11 @@ class Color {
 
   equals(other: Color): boolean {
     return (
-      other === this || (this.r === other.r && this.b === other.b && this.g === other.g && this.alpha === other.alpha)
+      other === this ||
+      (this.r === other.r &&
+        this.b === other.b &&
+        this.g === other.g &&
+        this.alpha === other.alpha)
     );
   }
 
@@ -42,19 +50,22 @@ interface QrCodeColors {
   background: Color;
 }
 
-const getColorFromPixel = (colorArray: Uint8ClampedArray, pixelNumber: number): Color => {
+const getColorFromPixel = (
+  colorArray: Uint8ClampedArray,
+  pixelNumber: number,
+): Color => {
   const startEntryNumber = pixelNumber * 4;
   return new Color(
     colorArray[startEntryNumber],
     colorArray[startEntryNumber + 1],
     colorArray[startEntryNumber + 2],
-    colorArray[startEntryNumber + 3]
+    colorArray[startEntryNumber + 3],
   );
 };
 
 const getQrCodeColors = (qrCode: PQrCode): QrCodeColors => {
   const canvas = getCanvas(qrCode);
-  const context = canvas.getContext('2d');
+  const context = canvas.getContext("2d");
   const imageData = context?.getImageData(0, 0, canvas.width, canvas.height);
   expect(imageData).not.to.be.null;
   const colorArray = imageData!.data;
@@ -70,7 +81,7 @@ const getQrCodeColors = (qrCode: PQrCode): QrCodeColors => {
   }
   return {
     foreground: foregroundColor,
-    background: backgroundColor!
+    background: backgroundColor!,
   };
 };
 
@@ -78,63 +89,88 @@ const red = new Color(255, 0, 0, 255);
 const white = new Color(255, 255, 255, 255);
 const blue = new Color(0, 0, 255, 255);
 
-const expectQrCodeColorsToBe = (qrCode: PQrCode, expectedColors: QrCodeColors): void => {
+const expectQrCodeColorsToBe = (
+  qrCode: PQrCode,
+  expectedColors: QrCodeColors,
+): void => {
   const qrCodeColors = getQrCodeColors(qrCode);
   const backgroundMessage =
-    'expected background color to be ' +
+    "expected background color to be " +
     expectedColors.background.toString() +
-    ' but got ' +
+    " but got " +
     qrCodeColors.background.toString();
-  expect(qrCodeColors.background.equals(expectedColors.background), backgroundMessage).to.be.true;
+  expect(
+    qrCodeColors.background.equals(expectedColors.background),
+    backgroundMessage,
+  ).to.be.true;
   const foregroundMessage =
-    'expected foreground color to be ' +
+    "expected foreground color to be " +
     expectedColors.foreground.toString() +
-    ' but got ' +
+    " but got " +
     qrCodeColors.foreground.toString();
-  expect(qrCodeColors.foreground.equals(expectedColors.foreground), foregroundMessage).to.be.true;
+  expect(
+    qrCodeColors.foreground.equals(expectedColors.foreground),
+    foregroundMessage,
+  ).to.be.true;
 };
 
-describe('<p-qr-code>', () => {
-  it('should render a component', async () => {
-    const qrCode = await fixture<PQrCode>(html` <p-qr-code value="test data"></p-qr-code>`);
+describe("<p-qr-code>", () => {
+  it("should render a component", async () => {
+    const qrCode = await fixture<PQrCode>(
+      html` <p-qr-code value="test data"></p-qr-code>`,
+    );
 
     expect(qrCode).to.exist;
   });
 
-  it('should be accessible', async () => {
-    const qrCode = await fixture<PQrCode>(html` <p-qr-code value="test data"></p-qr-code>`);
+  it("should be accessible", async () => {
+    const qrCode = await fixture<PQrCode>(
+      html` <p-qr-code value="test data"></p-qr-code>`,
+    );
 
     await expect(qrCode).to.be.accessible();
   });
 
-  it('uses the value as label if none given', async () => {
-    const qrCode = await fixture<PQrCode>(html` <p-qr-code value="test data"></p-qr-code>`);
+  it("uses the value as label if none given", async () => {
+    const qrCode = await fixture<PQrCode>(
+      html` <p-qr-code value="test data"></p-qr-code>`,
+    );
 
-    expectCanvasToHaveAriaLabel(qrCode, 'test data');
+    expectCanvasToHaveAriaLabel(qrCode, "test data");
   });
 
-  it('uses the label if given', async () => {
-    const qrCode = await fixture<PQrCode>(html` <p-qr-code value="test data" label="test label"></p-qr-code>`);
+  it("uses the label if given", async () => {
+    const qrCode = await fixture<PQrCode>(
+      html` <p-qr-code value="test data" label="test label"></p-qr-code>`,
+    );
 
-    expectCanvasToHaveAriaLabel(qrCode, 'test label');
+    expectCanvasToHaveAriaLabel(qrCode, "test label");
   });
 
-  it('sets the correct color for the qr code', async () => {
-    const qrCode = await fixture<PQrCode>(html` <p-qr-code value="test data" fill="red"></p-qr-code>`);
+  it("sets the correct color for the qr code", async () => {
+    const qrCode = await fixture<PQrCode>(
+      html` <p-qr-code value="test data" fill="red"></p-qr-code>`,
+    );
 
     expectQrCodeColorsToBe(qrCode, { foreground: red, background: white });
   });
 
-  it('sets the correct background for the qr code', async () => {
+  it("sets the correct background for the qr code", async () => {
     const qrCode = await fixture<PQrCode>(
-      html` <p-qr-code value="test data" fill="red" background="blue"></p-qr-code>`
+      html` <p-qr-code
+        value="test data"
+        fill="red"
+        background="blue"
+      ></p-qr-code>`,
     );
 
     expectQrCodeColorsToBe(qrCode, { foreground: red, background: blue });
   });
 
-  it('has the expected size', async () => {
-    const qrCode = await fixture<PQrCode>(html` <p-qr-code value="test data" size="100"></p-qr-code>`);
+  it("has the expected size", async () => {
+    const qrCode = await fixture<PQrCode>(
+      html` <p-qr-code value="test data" size="100"></p-qr-code>`,
+    );
 
     const height = qrCode.getBoundingClientRect().height;
     const width = qrCode.getBoundingClientRect().width;

@@ -1,12 +1,12 @@
-import PTag from './tag.component.js';
+import PTag from "./tag.component.js";
 
-export * from './tag.component.js';
+export * from "./tag.component.js";
 export default PTag;
 
-PTag.define('p-tag');
+PTag.define("p-tag");
 
 declare global {
   interface HTMLElementTagNameMap {
-    'p-tag': PTag;
+    "p-tag": PTag;
   }
 }

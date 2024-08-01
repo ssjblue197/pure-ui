@@ -1,21 +1,27 @@
-import { animateTo, stopAnimations } from '../../internal/animate.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { LocalizeController } from '../../utilities/localize.js';
-import { lockBodyScrolling, unlockBodyScrolling } from '../../internal/scroll.js';
-import { property, query } from 'lit/decorators.js';
-import { uppercaseFirstLetter } from '../../internal/string.js';
-import { waitForEvent } from '../../internal/event.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import Modal from '../../internal/modal.js';
-import PIconButton from '../icon-button/icon-button.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './drawer.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { animateTo, stopAnimations } from "../../internal/animate.js";
+import { classMap } from "lit/directives/class-map.js";
+import {
+  getAnimation,
+  setDefaultAnimation,
+} from "../../utilities/animation-registry.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { LocalizeController } from "../../utilities/localize.js";
+import {
+  lockBodyScrolling,
+  unlockBodyScrolling,
+} from "../../internal/scroll.js";
+import { property, query } from "lit/decorators.js";
+import { uppercaseFirstLetter } from "../../internal/string.js";
+import { waitForEvent } from "../../internal/event.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import Modal from "../../internal/modal.js";
+import PIconButton from "../icon-button/icon-button.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./drawer.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.
@@ -76,17 +82,17 @@ import type { CSSResultGroup } from 'lit';
  */
 export default class PDrawer extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
-  static dependencies = { 'p-icon-button': PIconButton };
+  static dependencies = { "p-icon-button": PIconButton };
 
-  private readonly hasSlotController = new HasSlotController(this, 'footer');
+  private readonly hasSlotController = new HasSlotController(this, "footer");
   private readonly localize = new LocalizeController(this);
   private originalTrigger: HTMLElement | null;
   public modal = new Modal(this);
   private closeWatcher: CloseWatcher | null;
 
-  @query('.drawer') drawer: HTMLElement;
-  @query('.drawer__panel') panel: HTMLElement;
-  @query('.drawer__overlay') overlay: HTMLElement;
+  @query(".drawer") drawer: HTMLElement;
+  @query(".drawer__panel") panel: HTMLElement;
+  @query(".drawer__overlay") overlay: HTMLElement;
 
   /**
    * Indicates whether or not the drawer is open. You can toggle this attribute to show and hide the drawer, or you can
@@ -98,10 +104,11 @@ export default class PDrawer extends PureElement {
    * The drawer's label as displayed in the header. You should always include a relevant label even when using
    * `no-header`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.
    */
-  @property({ reflect: true }) label = '';
+  @property({ reflect: true }) label = "";
 
   /** The direction from which the drawer will open. */
-  @property({ reflect: true }) placement: 'top' | 'end' | 'bottom' | 'start' = 'end';
+  @property({ reflect: true }) placement: "top" | "end" | "bottom" | "start" =
+    "end";
 
   /**
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
@@ -113,7 +120,8 @@ export default class PDrawer extends PureElement {
    * Removes the header. This will also remove the default close button, so please ensure you provide an easy,
    * accessible way for users to dismiss the drawer.
    */
-  @property({ attribute: 'no-header', type: Boolean, reflect: true }) noHeader = false;
+  @property({ attribute: "no-header", type: Boolean, reflect: true }) noHeader =
+    false;
 
   firstUpdated() {
     this.drawer.hidden = !this.open;
@@ -134,14 +142,16 @@ export default class PDrawer extends PureElement {
     this.closeWatcher?.destroy();
   }
 
-  private requestClose(source: 'close-button' | 'keyboard' | 'overlay') {
-    const slRequestClose = this.emit('p-request-close', {
+  private requestClose(source: "close-button" | "keyboard" | "overlay") {
+    const slRequestClose = this.emit("p-request-close", {
       cancelable: true,
-      detail: { source }
+      detail: { source },
     });
 
     if (slRequestClose.defaultPrevented) {
-      const animation = getAnimation(this, 'drawer.denyClose', { dir: this.localize.dir() });
+      const animation = getAnimation(this, "drawer.denyClose", {
+        dir: this.localize.dir(),
+      });
       animateTo(this.panel, animation.keyframes, animation.options);
       return;
     }
@@ -150,19 +160,19 @@ export default class PDrawer extends PureElement {
   }
 
   private addOpenListeners() {
-    if ('CloseWatcher' in window) {
+    if ("CloseWatcher" in window) {
       this.closeWatcher?.destroy();
       if (!this.contained) {
         this.closeWatcher = new CloseWatcher();
-        this.closeWatcher.onclose = () => this.requestClose('keyboard');
+        this.closeWatcher.onclose = () => this.requestClose("keyboard");
       }
     } else {
-      document.addEventListener('keydown', this.handleDocumentKeyDown);
+      document.addEventListener("keydown", this.handleDocumentKeyDown);
     }
   }
 
   private removeOpenListeners() {
-    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    document.removeEventListener("keydown", this.handleDocumentKeyDown);
     this.closeWatcher?.destroy();
   }
 
@@ -172,17 +182,17 @@ export default class PDrawer extends PureElement {
       return;
     }
 
-    if (event.key === 'Escape' && this.modal.isActive() && this.open) {
+    if (event.key === "Escape" && this.modal.isActive() && this.open) {
       event.stopImmediatePropagation();
-      this.requestClose('keyboard');
+      this.requestClose("keyboard");
     }
   };
 
-  @watch('open', { waitUntilFirstUpdate: true })
+  @watch("open", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open) {
       // Show
-      this.emit('p-show');
+      this.emit("p-show");
       this.addOpenListeners();
       this.originalTrigger = document.activeElement as HTMLElement;
 
@@ -198,22 +208,29 @@ export default class PDrawer extends PureElement {
       //
       // Related: https://github.com/ssjblue197/pure-ui/issues/693
       //
-      const autoFocusTarget = this.querySelector('[autofocus]');
+      const autoFocusTarget = this.querySelector("[autofocus]");
       if (autoFocusTarget) {
-        autoFocusTarget.removeAttribute('autofocus');
+        autoFocusTarget.removeAttribute("autofocus");
       }
 
-      await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
+      await Promise.all([
+        stopAnimations(this.drawer),
+        stopAnimations(this.overlay),
+      ]);
       this.drawer.hidden = false;
 
       // Set initial focus
       requestAnimationFrame(() => {
-        const slInitialFocus = this.emit('p-initial-focus', { cancelable: true });
+        const slInitialFocus = this.emit("p-initial-focus", {
+          cancelable: true,
+        });
 
         if (!slInitialFocus.defaultPrevented) {
           // Set focus to the autofocus target and restore the attribute
           if (autoFocusTarget) {
-            (autoFocusTarget as HTMLInputElement).focus({ preventScroll: true });
+            (autoFocusTarget as HTMLInputElement).focus({
+              preventScroll: true,
+            });
           } else {
             this.panel.focus({ preventScroll: true });
           }
@@ -221,23 +238,33 @@ export default class PDrawer extends PureElement {
 
         // Restore the autofocus attribute
         if (autoFocusTarget) {
-          autoFocusTarget.setAttribute('autofocus', '');
+          autoFocusTarget.setAttribute("autofocus", "");
         }
       });
 
-      const panelAnimation = getAnimation(this, `drawer.show${uppercaseFirstLetter(this.placement)}`, {
-        dir: this.localize.dir()
+      const panelAnimation = getAnimation(
+        this,
+        `drawer.show${uppercaseFirstLetter(this.placement)}`,
+        {
+          dir: this.localize.dir(),
+        },
+      );
+      const overlayAnimation = getAnimation(this, "drawer.overlay.show", {
+        dir: this.localize.dir(),
       });
-      const overlayAnimation = getAnimation(this, 'drawer.overlay.show', { dir: this.localize.dir() });
       await Promise.all([
         animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
-        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
+        animateTo(
+          this.overlay,
+          overlayAnimation.keyframes,
+          overlayAnimation.options,
+        ),
       ]);
 
-      this.emit('p-after-show');
+      this.emit("p-after-show");
     } else {
       // Hide
-      this.emit('p-hide');
+      this.emit("p-hide");
       this.removeOpenListeners();
 
       if (!this.contained) {
@@ -245,22 +272,39 @@ export default class PDrawer extends PureElement {
         unlockBodyScrolling(this);
       }
 
-      await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
-      const panelAnimation = getAnimation(this, `drawer.hide${uppercaseFirstLetter(this.placement)}`, {
-        dir: this.localize.dir()
+      await Promise.all([
+        stopAnimations(this.drawer),
+        stopAnimations(this.overlay),
+      ]);
+      const panelAnimation = getAnimation(
+        this,
+        `drawer.hide${uppercaseFirstLetter(this.placement)}`,
+        {
+          dir: this.localize.dir(),
+        },
+      );
+      const overlayAnimation = getAnimation(this, "drawer.overlay.hide", {
+        dir: this.localize.dir(),
       });
-      const overlayAnimation = getAnimation(this, 'drawer.overlay.hide', { dir: this.localize.dir() });
 
       // Animate the overlay and the panel at the same time. Because animation durations might be different, we need to
       // hide each one individually when the animation finishes, otherwise the first one that finishes will reappear
       // unexpectedly. We'll unhide them after all animations have completed.
       await Promise.all([
-        animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options).then(() => {
+        animateTo(
+          this.overlay,
+          overlayAnimation.keyframes,
+          overlayAnimation.options,
+        ).then(() => {
           this.overlay.hidden = true;
         }),
-        animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options).then(() => {
+        animateTo(
+          this.panel,
+          panelAnimation.keyframes,
+          panelAnimation.options,
+        ).then(() => {
           this.panel.hidden = true;
-        })
+        }),
       ]);
 
       this.drawer.hidden = true;
@@ -271,15 +315,15 @@ export default class PDrawer extends PureElement {
 
       // Restore focus to the original trigger
       const trigger = this.originalTrigger;
-      if (typeof trigger?.focus === 'function') {
+      if (typeof trigger?.focus === "function") {
         setTimeout(() => trigger.focus());
       }
 
-      this.emit('p-after-hide');
+      this.emit("p-after-hide");
     }
   }
 
-  @watch('contained', { waitUntilFirstUpdate: true })
+  @watch("contained", { waitUntilFirstUpdate: true })
   handleNoModalChange() {
     if (this.open && !this.contained) {
       this.modal.activate();
@@ -299,7 +343,7 @@ export default class PDrawer extends PureElement {
     }
 
     this.open = true;
-    return waitForEvent(this, 'p-after-show');
+    return waitForEvent(this, "p-after-show");
   }
 
   /** Hides the drawer */
@@ -309,7 +353,7 @@ export default class PDrawer extends PureElement {
     }
 
     this.open = false;
-    return waitForEvent(this, 'p-after-hide');
+    return waitForEvent(this, "p-after-hide");
   }
 
   render() {
@@ -318,27 +362,32 @@ export default class PDrawer extends PureElement {
         part="base"
         class=${classMap({
           drawer: true,
-          'drawer--open': this.open,
-          'drawer--top': this.placement === 'top',
-          'drawer--end': this.placement === 'end',
-          'drawer--bottom': this.placement === 'bottom',
-          'drawer--start': this.placement === 'start',
-          'drawer--contained': this.contained,
-          'drawer--fixed': !this.contained,
-          'drawer--rtl': this.localize.dir() === 'rtl',
-          'drawer--has-footer': this.hasSlotController.test('footer')
+          "drawer--open": this.open,
+          "drawer--top": this.placement === "top",
+          "drawer--end": this.placement === "end",
+          "drawer--bottom": this.placement === "bottom",
+          "drawer--start": this.placement === "start",
+          "drawer--contained": this.contained,
+          "drawer--fixed": !this.contained,
+          "drawer--rtl": this.localize.dir() === "rtl",
+          "drawer--has-footer": this.hasSlotController.test("footer"),
         })}
       >
-        <div part="overlay" class="drawer__overlay" @click=${() => this.requestClose('overlay')} tabindex="-1"></div>
+        <div
+          part="overlay"
+          class="drawer__overlay"
+          @click=${() => this.requestClose("overlay")}
+          tabindex="-1"
+        ></div>
 
         <div
           part="panel"
           class="drawer__panel"
           role="dialog"
           aria-modal="true"
-          aria-hidden=${this.open ? 'false' : 'true'}
+          aria-hidden=${this.open ? "false" : "true"}
           aria-label=${ifDefined(this.noHeader ? this.label : undefined)}
-          aria-labelledby=${ifDefined(!this.noHeader ? 'title' : undefined)}
+          aria-labelledby=${ifDefined(!this.noHeader ? "title" : undefined)}
           tabindex="0"
         >
           ${!this.noHeader
@@ -346,7 +395,11 @@ export default class PDrawer extends PureElement {
                 <header part="header" class="drawer__header">
                   <h2 part="title" class="drawer__title" id="title">
                     <!-- If there's no label, use an invisible character to prevent the header from collapsing -->
-                    <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
+                    <slot name="label">
+                      ${this.label.length > 0
+                        ? this.label
+                        : String.fromCharCode(65279)}
+                    </slot>
                   </h2>
                   <div part="header-actions" class="drawer__header-actions">
                     <slot name="header-actions"></slot>
@@ -355,14 +408,14 @@ export default class PDrawer extends PureElement {
                       exportparts="base:close-button__base"
                       class="drawer__close"
                       name="x-lg"
-                      label=${this.localize.term('close')}
+                      label=${this.localize.term("close")}
                       library="system"
-                      @click=${() => this.requestClose('close-button')}
+                      @click=${() => this.requestClose("close-button")}
                     ></p-icon-button>
                   </div>
                 </header>
               `
-            : ''}
+            : ""}
 
           <slot part="body" class="drawer__body"></slot>
 
@@ -376,102 +429,102 @@ export default class PDrawer extends PureElement {
 }
 
 // Top
-setDefaultAnimation('drawer.showTop', {
+setDefaultAnimation("drawer.showTop", {
   keyframes: [
-    { opacity: 0, translate: '0 -100%' },
-    { opacity: 1, translate: '0 0' }
+    { opacity: 0, translate: "0 -100%" },
+    { opacity: 1, translate: "0 0" },
   ],
-  options: { duration: 250, easing: 'ease' }
+  options: { duration: 250, easing: "ease" },
 });
 
-setDefaultAnimation('drawer.hideTop', {
+setDefaultAnimation("drawer.hideTop", {
   keyframes: [
-    { opacity: 1, translate: '0 0' },
-    { opacity: 0, translate: '0 -100%' }
+    { opacity: 1, translate: "0 0" },
+    { opacity: 0, translate: "0 -100%" },
   ],
-  options: { duration: 250, easing: 'ease' }
+  options: { duration: 250, easing: "ease" },
 });
 
 // End
-setDefaultAnimation('drawer.showEnd', {
+setDefaultAnimation("drawer.showEnd", {
   keyframes: [
-    { opacity: 0, translate: '100%' },
-    { opacity: 1, translate: '0' }
+    { opacity: 0, translate: "100%" },
+    { opacity: 1, translate: "0" },
   ],
   rtlKeyframes: [
-    { opacity: 0, translate: '-100%' },
-    { opacity: 1, translate: '0' }
+    { opacity: 0, translate: "-100%" },
+    { opacity: 1, translate: "0" },
   ],
-  options: { duration: 250, easing: 'ease' }
+  options: { duration: 250, easing: "ease" },
 });
 
-setDefaultAnimation('drawer.hideEnd', {
+setDefaultAnimation("drawer.hideEnd", {
   keyframes: [
-    { opacity: 1, translate: '0' },
-    { opacity: 0, translate: '100%' }
+    { opacity: 1, translate: "0" },
+    { opacity: 0, translate: "100%" },
   ],
   rtlKeyframes: [
-    { opacity: 1, translate: '0' },
-    { opacity: 0, translate: '-100%' }
+    { opacity: 1, translate: "0" },
+    { opacity: 0, translate: "-100%" },
   ],
-  options: { duration: 250, easing: 'ease' }
+  options: { duration: 250, easing: "ease" },
 });
 
 // Bottom
-setDefaultAnimation('drawer.showBottom', {
+setDefaultAnimation("drawer.showBottom", {
   keyframes: [
-    { opacity: 0, translate: '0 100%' },
-    { opacity: 1, translate: '0 0' }
+    { opacity: 0, translate: "0 100%" },
+    { opacity: 1, translate: "0 0" },
   ],
-  options: { duration: 250, easing: 'ease' }
+  options: { duration: 250, easing: "ease" },
 });
 
-setDefaultAnimation('drawer.hideBottom', {
+setDefaultAnimation("drawer.hideBottom", {
   keyframes: [
-    { opacity: 1, translate: '0 0' },
-    { opacity: 0, translate: '0 100%' }
+    { opacity: 1, translate: "0 0" },
+    { opacity: 0, translate: "0 100%" },
   ],
-  options: { duration: 250, easing: 'ease' }
+  options: { duration: 250, easing: "ease" },
 });
 
 // Start
-setDefaultAnimation('drawer.showStart', {
+setDefaultAnimation("drawer.showStart", {
   keyframes: [
-    { opacity: 0, translate: '-100%' },
-    { opacity: 1, translate: '0' }
+    { opacity: 0, translate: "-100%" },
+    { opacity: 1, translate: "0" },
   ],
   rtlKeyframes: [
-    { opacity: 0, translate: '100%' },
-    { opacity: 1, translate: '0' }
+    { opacity: 0, translate: "100%" },
+    { opacity: 1, translate: "0" },
   ],
-  options: { duration: 250, easing: 'ease' }
+  options: { duration: 250, easing: "ease" },
 });
 
-setDefaultAnimation('drawer.hideStart', {
+setDefaultAnimation("drawer.hideStart", {
   keyframes: [
-    { opacity: 1, translate: '0' },
-    { opacity: 0, translate: '-100%' }
+    { opacity: 1, translate: "0" },
+    { opacity: 0, translate: "-100%" },
   ],
   rtlKeyframes: [
-    { opacity: 1, translate: '0' },
-    { opacity: 0, translate: '100%' }
+    { opacity: 1, translate: "0" },
+    { opacity: 0, translate: "100%" },
   ],
-  options: { duration: 250, easing: 'ease' }
+  options: { duration: 250, easing: "ease" },
 });
 
 // Deny close
-setDefaultAnimation('drawer.denyClose', {
+setDefaultAnimation("drawer.denyClose", {
   keyframes: [{ scale: 1 }, { scale: 1.01 }, { scale: 1 }],
-  options: { duration: 250 }
+  options: { duration: 250 },
 });
 
 // Overlay
-setDefaultAnimation('drawer.overlay.show', {
+setDefaultAnimation("drawer.overlay.show", {
   keyframes: [{ opacity: 0 }, { opacity: 1 }],
-  options: { duration: 250 }
+  options: { duration: 250 },
 });
 
-setDefaultAnimation('drawer.overlay.hide', {
+setDefaultAnimation("drawer.overlay.hide", {
   keyframes: [{ opacity: 1 }, { opacity: 0 }],
-  options: { duration: 250 }
+  options: { duration: 250 },
 });

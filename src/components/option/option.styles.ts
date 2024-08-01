@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 export default css`
   :host {
@@ -21,7 +21,8 @@ export default css`
     line-height: var(--p-line-height-normal);
     letter-spacing: var(--p-letter-spacing-normal);
     color: var(--p-color-neutral-700);
-    padding: var(--p-spacing-x-small) var(--p-spacing-medium) var(--p-spacing-x-small) var(--p-spacing-x-small);
+    padding: var(--p-spacing-x-small) var(--p-spacing-medium)
+      var(--p-spacing-x-small) var(--p-spacing-x-small);
     transition: var(--p-transition-fast) fill;
     cursor: pointer;
   }
@@ -79,7 +80,7 @@ export default css`
   }
 
   @media (forced-colors: active) {
-    :host(:hover:not([aria-disabled='true'])) .option {
+    :host(:hover:not([aria-disabled="true"])) .option {
       outline: dashed 1px SelectedItem;
       outline-offset: -1px;
     }

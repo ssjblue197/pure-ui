@@ -1,7 +1,7 @@
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property } from 'lit/decorators.js';
-import PureElement from '../../internal/pure-ui-element.js';
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property } from "lit/decorators.js";
+import PureElement from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Formats a date/time using the specified locale and options.
@@ -20,41 +20,43 @@ export default class PFormatDate extends PureElement {
   @property() date: Date | string = new Date();
 
   /** The format for displaying the weekday. */
-  @property() weekday: 'narrow' | 'short' | 'long';
+  @property() weekday: "narrow" | "short" | "long";
 
   /** The format for displaying the era. */
-  @property() era: 'narrow' | 'short' | 'long';
+  @property() era: "narrow" | "short" | "long";
 
   /** The format for displaying the year. */
-  @property() year: 'numeric' | '2-digit';
+  @property() year: "numeric" | "2-digit";
 
   /** The format for displaying the month. */
-  @property() month: 'numeric' | '2-digit' | 'narrow' | 'short' | 'long';
+  @property() month: "numeric" | "2-digit" | "narrow" | "short" | "long";
 
   /** The format for displaying the day. */
-  @property() day: 'numeric' | '2-digit';
+  @property() day: "numeric" | "2-digit";
 
   /** The format for displaying the hour. */
-  @property() hour: 'numeric' | '2-digit';
+  @property() hour: "numeric" | "2-digit";
 
   /** The format for displaying the minute. */
-  @property() minute: 'numeric' | '2-digit';
+  @property() minute: "numeric" | "2-digit";
 
   /** The format for displaying the second. */
-  @property() second: 'numeric' | '2-digit';
+  @property() second: "numeric" | "2-digit";
 
   /** The format for displaying the time. */
-  @property({ attribute: 'time-zone-name' }) timeZoneName: 'short' | 'long';
+  @property({ attribute: "time-zone-name" }) timeZoneName: "short" | "long";
 
   /** The time zone to express the time in. */
-  @property({ attribute: 'time-zone' }) timeZone: string;
+  @property({ attribute: "time-zone" }) timeZone: string;
 
   /** The format for displaying the hour. */
-  @property({ attribute: 'hour-format' }) hourFormat: 'auto' | '12' | '24' = 'auto';
+  @property({ attribute: "hour-format" }) hourFormat: "auto" | "12" | "24" =
+    "auto";
 
   render() {
     const date = new Date(this.date);
-    const hour12 = this.hourFormat === 'auto' ? undefined : this.hourFormat === '12';
+    const hour12 =
+      this.hourFormat === "auto" ? undefined : this.hourFormat === "12";
 
     // Check for an invalid date
     if (isNaN(date.getMilliseconds())) {
@@ -74,7 +76,7 @@ export default class PFormatDate extends PureElement {
           second: this.second,
           timeZoneName: this.timeZoneName,
           timeZone: this.timeZone,
-          hour12: hour12
+          hour12: hour12,
         })}
       </time>
     `;

@@ -1,9 +1,11 @@
 (() => {
   // Append the search dialog to the body
-  const siteSearch = document.createElement('div');
-  const scrollbarWidth = Math.abs(window.innerWidth - document.documentElement.clientWidth);
+  const siteSearch = document.createElement("div");
+  const scrollbarWidth = Math.abs(
+    window.innerWidth - document.documentElement.clientWidth,
+  );
 
-  siteSearch.classList.add('search');
+  siteSearch.classList.add("search");
   siteSearch.innerHTML = `
     <div class="search__overlay"></div>
     <dialog id="search-dialog" class="search__dialog">
@@ -52,12 +54,12 @@
     </dialog>
   `;
 
-  const overlay = siteSearch.querySelector('.search__overlay');
-  const dialog = siteSearch.querySelector('.search__dialog');
-  const input = siteSearch.querySelector('.search__input');
-  const clearButton = siteSearch.querySelector('.search__clear-button');
-  const results = siteSearch.querySelector('.search__results');
-  const version = document.documentElement.getAttribute('data-pure-ui-version');
+  const overlay = siteSearch.querySelector(".search__overlay");
+  const dialog = siteSearch.querySelector(".search__dialog");
+  const input = siteSearch.querySelector(".search__input");
+  const clearButton = siteSearch.querySelector(".search__clear-button");
+  const results = siteSearch.querySelector(".search__results");
+  const version = document.documentElement.getAttribute("data-pure-ui-version");
   const key = `search_${version}`;
   const searchDebounce = 50;
   const animationDuration = 150;
@@ -66,15 +68,18 @@
   let searchIndex;
   let map;
 
-  const loadSearchIndex = new Promise(resolve => {
+  const loadSearchIndex = new Promise((resolve) => {
     const cache = localStorage.getItem(key);
-    const wait = 'requestIdleCallback' in window ? requestIdleCallback : requestAnimationFrame;
+    const wait =
+      "requestIdleCallback" in window
+        ? requestIdleCallback
+        : requestAnimationFrame;
 
     // Cleanup older search indices (everything before this version)
     try {
       const items = { ...localStorage };
 
-      Object.keys(items).forEach(k => {
+      Object.keys(items).forEach((k) => {
         if (key > k) {
           localStorage.removeItem(k);
         }
@@ -99,11 +104,11 @@
 
     // Wait until idle to fetch the index
     wait(() => {
-      fetch('/assets/search.json')
-        .then(res => res.json())
-        .then(data => {
+      fetch("/assets/search.json")
+        .then((res) => res.json())
+        .then((data) => {
           if (!window.lunr) {
-            console.error('The Lunr search client has not yet been loaded.');
+            console.error("The Lunr search client has not yet been loaded.");
           }
 
           searchIndex = window.lunr.Index.load(data.searchIndex);
@@ -126,8 +131,11 @@
   async function show() {
     isShowing = true;
     document.body.append(siteSearch);
-    document.body.classList.add('search-visible');
-    document.body.style.setProperty('--docs-search-scroll-lock-size', `${scrollbarWidth}px`);
+    document.body.classList.add("search-visible");
+    document.body.style.setProperty(
+      "--docs-search-scroll-lock-size",
+      `${scrollbarWidth}px`,
+    );
     clearButton.hidden = true;
     requestAnimationFrame(() => input.focus());
     updateResults();
@@ -137,16 +145,18 @@
     await Promise.all([
       dialog.animate(
         [
-          { opacity: 0, transform: 'scale(.9)', transformOrigin: 'top' },
-          { opacity: 1, transform: 'scale(1)', transformOrigin: 'top' }
+          { opacity: 0, transform: "scale(.9)", transformOrigin: "top" },
+          { opacity: 1, transform: "scale(1)", transformOrigin: "top" },
         ],
-        { duration: animationDuration }
+        { duration: animationDuration },
       ).finished,
-      overlay.animate([{ opacity: 0 }, { opacity: 1 }], { duration: animationDuration }).finished
+      overlay.animate([{ opacity: 0 }, { opacity: 1 }], {
+        duration: animationDuration,
+      }).finished,
     ]);
 
-    dialog.addEventListener('mousedown', handleMouseDown);
-    dialog.addEventListener('keydown', handleKeyDown);
+    dialog.addEventListener("mousedown", handleMouseDown);
+    dialog.addEventListener("keydown", handleKeyDown);
   }
 
   async function hide() {
@@ -155,51 +165,56 @@
     await Promise.all([
       dialog.animate(
         [
-          { opacity: 1, transform: 'scale(1)', transformOrigin: 'top' },
-          { opacity: 0, transform: 'scale(.9)', transformOrigin: 'top' }
+          { opacity: 1, transform: "scale(1)", transformOrigin: "top" },
+          { opacity: 0, transform: "scale(.9)", transformOrigin: "top" },
         ],
-        { duration: animationDuration }
+        { duration: animationDuration },
       ).finished,
-      overlay.animate([{ opacity: 1 }, { opacity: 0 }], { duration: animationDuration }).finished
+      overlay.animate([{ opacity: 1 }, { opacity: 0 }], {
+        duration: animationDuration,
+      }).finished,
     ]);
 
     dialog.close();
 
     input.blur(); // otherwise Safari will scroll to the bottom of the page on close
-    input.value = '';
-    document.body.classList.remove('search-visible');
-    document.body.style.removeProperty('--docs-search-scroll-lock-size');
+    input.value = "";
+    document.body.classList.remove("search-visible");
+    document.body.style.removeProperty("--docs-search-scroll-lock-size");
     siteSearch.remove();
     updateResults();
 
-    dialog.removeEventListener('mousedown', handleMouseDown);
-    dialog.removeEventListener('keydown', handleKeyDown);
+    dialog.removeEventListener("mousedown", handleMouseDown);
+    dialog.removeEventListener("keydown", handleKeyDown);
   }
 
   function handleInput() {
-    clearButton.hidden = input.value === '';
+    clearButton.hidden = input.value === "";
 
     // Debounce search queries
     clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => updateResults(input.value), searchDebounce);
+    searchTimeout = setTimeout(
+      () => updateResults(input.value),
+      searchDebounce,
+    );
   }
 
   function handleClear() {
     clearButton.hidden = true;
-    input.value = '';
+    input.value = "";
     input.focus();
     updateResults();
   }
 
   function handleMouseDown(event) {
-    if (!event.target.closest('.search__content')) {
+    if (!event.target.closest(".search__content")) {
       hide();
     }
   }
 
   function handleKeyDown(event) {
     // Close when pressing escape
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
       event.preventDefault(); // prevent <dialog> from closing immediately so it can animate
       event.stopImmediatePropagation();
       hide();
@@ -207,11 +222,11 @@
     }
 
     // Handle keyboard selections
-    if (['ArrowDown', 'ArrowUp', 'Home', 'End', 'Enter'].includes(event.key)) {
+    if (["ArrowDown", "ArrowUp", "Home", "End", "Enter"].includes(event.key)) {
       event.preventDefault();
 
       const currentEl = results.querySelector('[data-selected="true"]');
-      const items = [...results.querySelectorAll('li')];
+      const items = [...results.querySelectorAll("li")];
       const index = items.indexOf(currentEl);
       let nextEl;
 
@@ -220,43 +235,43 @@
       }
 
       switch (event.key) {
-        case 'ArrowUp':
+        case "ArrowUp":
           nextEl = items[Math.max(0, index - 1)];
           break;
-        case 'ArrowDown':
+        case "ArrowDown":
           nextEl = items[Math.min(items.length - 1, index + 1)];
           break;
-        case 'Home':
+        case "Home":
           nextEl = items[0];
           break;
-        case 'End':
+        case "End":
           nextEl = items[items.length - 1];
           break;
-        case 'Enter':
-          currentEl?.querySelector('a')?.click();
+        case "Enter":
+          currentEl?.querySelector("a")?.click();
           break;
       }
 
       // Update the selected item
-      items.forEach(item => {
+      items.forEach((item) => {
         if (item === nextEl) {
-          input.setAttribute('aria-activedescendant', item.id);
-          item.setAttribute('data-selected', 'true');
-          nextEl.scrollIntoView({ block: 'nearest' });
+          input.setAttribute("aria-activedescendant", item.id);
+          item.setAttribute("data-selected", "true");
+          nextEl.scrollIntoView({ block: "nearest" });
         } else {
-          item.setAttribute('data-selected', 'false');
+          item.setAttribute("data-selected", "false");
         }
       });
     }
   }
 
-  async function updateResults(query = '') {
+  async function updateResults(query = "") {
     try {
       await loadSearchIndex;
 
       const hasQuery = query.length > 0;
       const searchTerms = query
-        .split(' ')
+        .split(" ")
         .map((term, index, arr) => {
           // Search API: https://lunrjs.com/guides/searching.html
           if (index === arr.length - 1) {
@@ -268,51 +283,57 @@
             return `+${term}~1`;
           }
         })
-        .join(' ');
+        .join(" ");
       const matches = hasQuery ? searchIndex.search(searchTerms) : [];
       const hasResults = hasQuery && matches.length > 0;
 
-      siteSearch.classList.toggle('search--has-results', hasQuery && hasResults);
-      siteSearch.classList.toggle('search--no-results', hasQuery && !hasResults);
+      siteSearch.classList.toggle(
+        "search--has-results",
+        hasQuery && hasResults,
+      );
+      siteSearch.classList.toggle(
+        "search--no-results",
+        hasQuery && !hasResults,
+      );
 
-      input.setAttribute('aria-activedescendant', '');
-      results.innerHTML = '';
+      input.setAttribute("aria-activedescendant", "");
+      results.innerHTML = "";
 
       matches.forEach((match, index) => {
         const page = map[match.ref];
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        const displayTitle = page.title ?? '';
-        const displayDescription = page.description ?? '';
-        const displayUrl = page.url.replace(/^\//, '').replace(/\/$/, '');
-        let icon = 'file-text';
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        const displayTitle = page.title ?? "";
+        const displayDescription = page.description ?? "";
+        const displayUrl = page.url.replace(/^\//, "").replace(/\/$/, "");
+        let icon = "file-text";
 
-        a.setAttribute('role', 'option');
-        a.setAttribute('id', `search-result-item-${match.ref}`);
+        a.setAttribute("role", "option");
+        a.setAttribute("id", `search-result-item-${match.ref}`);
 
-        if (page.url.includes('getting-started/')) {
-          icon = 'lightbulb';
+        if (page.url.includes("getting-started/")) {
+          icon = "lightbulb";
         }
-        if (page.url.includes('resources/')) {
-          icon = 'book';
+        if (page.url.includes("resources/")) {
+          icon = "book";
         }
-        if (page.url.includes('components/')) {
-          icon = 'puzzle';
+        if (page.url.includes("components/")) {
+          icon = "puzzle";
         }
-        if (page.url.includes('tokens/')) {
-          icon = 'palette2';
+        if (page.url.includes("tokens/")) {
+          icon = "palette2";
         }
-        if (page.url.includes('utilities/')) {
-          icon = 'wrench';
+        if (page.url.includes("utilities/")) {
+          icon = "wrench";
         }
-        if (page.url.includes('tutorials/')) {
-          icon = 'joystick';
+        if (page.url.includes("tutorials/")) {
+          icon = "joystick";
         }
 
-        li.classList.add('search__result');
-        li.setAttribute('role', 'option');
-        li.setAttribute('id', `search-result-item-${match.ref}`);
-        li.setAttribute('data-selected', index === 0 ? 'true' : 'false');
+        li.classList.add("search__result");
+        li.setAttribute("role", "option");
+        li.setAttribute("id", `search-result-item-${match.ref}`);
+        li.setAttribute("data-selected", index === 0 ? "true" : "false");
 
         a.href = page.url;
         a.innerHTML = `
@@ -325,9 +346,10 @@
             <div class="search__result-url"></div>
           </div>
         `;
-        a.querySelector('.search__result-title').textContent = displayTitle;
-        a.querySelector('.search__result-description').textContent = displayDescription;
-        a.querySelector('.search__result-url').textContent = displayUrl;
+        a.querySelector(".search__result-title").textContent = displayTitle;
+        a.querySelector(".search__result-description").textContent =
+          displayDescription;
+        a.querySelector(".search__result-url").textContent = displayUrl;
 
         li.appendChild(a);
         results.appendChild(li);
@@ -338,7 +360,7 @@
   }
 
   // Show the search dialog when clicking on data-plugin="search"
-  document.addEventListener('click', event => {
+  document.addEventListener("click", (event) => {
     const searchButton = event.target.closest('[data-plugin="search"]');
     if (searchButton) {
       show();
@@ -346,11 +368,16 @@
   });
 
   // Show the search dialog when slash (or CMD+K) is pressed and focus is not inside a form element
-  document.addEventListener('keydown', event => {
+  document.addEventListener("keydown", (event) => {
     if (
       !isShowing &&
-      (event.key === '/' || (event.key === 'k' && (event.metaKey || event.ctrlKey))) &&
-      !event.composedPath().some(el => ['input', 'textarea'].includes(el?.tagName?.toLowerCase()))
+      (event.key === "/" ||
+        (event.key === "k" && (event.metaKey || event.ctrlKey))) &&
+      !event
+        .composedPath()
+        .some((el) =>
+          ["input", "textarea"].includes(el?.tagName?.toLowerCase()),
+        )
     ) {
       event.preventDefault();
       show();
@@ -358,18 +385,22 @@
   });
 
   // Purge cache when we press CMD+CTRL+R
-  document.addEventListener('keydown', event => {
-    if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === 'r') {
+  document.addEventListener("keydown", (event) => {
+    if (
+      (event.metaKey || event.ctrlKey) &&
+      event.shiftKey &&
+      event.key === "r"
+    ) {
       localStorage.clear();
     }
   });
 
-  input.addEventListener('input', handleInput);
-  clearButton.addEventListener('click', handleClear);
+  input.addEventListener("input", handleInput);
+  clearButton.addEventListener("click", handleClear);
 
   // Close when a result is selected
-  results.addEventListener('click', event => {
-    if (event.target.closest('a')) {
+  results.addEventListener("click", (event) => {
+    if (event.target.closest("a")) {
       hide();
     }
   });
@@ -377,8 +408,10 @@
   // We're using Turbo, so when a user searches for something, visits a result, and presses the back button, the search
   // UI will still be visible but not interactive. This removes the search UI when Turbo renders a page so they don't
   // get trapped.
-  window.addEventListener('turbo:render', () => {
-    document.body.classList.remove('search-visible');
-    document.querySelectorAll('.search__overlay, .search__dialog').forEach(el => el.remove());
+  window.addEventListener("turbo:render", () => {
+    document.body.classList.remove("search-visible");
+    document
+      .querySelectorAll(".search__overlay, .search__dialog")
+      .forEach((el) => el.remove());
   });
 })();

@@ -23,7 +23,7 @@ For best results, use images that share the same dimensions. The slider can be c
 ```
 
 ```jsx:react
-import PImageComparer from '@pure-ui/core/dist/react/image-comparer';
+import PImageComparer from 'pure-uikit/dist/react/image-comparer';
 
 const App = () => (
   <PImageComparer>
@@ -63,7 +63,7 @@ Use the `position` attribute to set the initial position of the slider. This is 
 ```
 
 ```jsx:react
-import PImageComparer from '@pure-ui/core/dist/react/image-comparer';
+import PImageComparer from 'pure-uikit/dist/react/image-comparer';
 
 const App = () => (
   <PImageComparer position={25}>

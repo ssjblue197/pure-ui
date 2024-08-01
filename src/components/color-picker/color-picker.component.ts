@@ -1,30 +1,30 @@
-import { clamp } from '../../internal/math.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { defaultValue } from '../../internal/default-value.js';
-import { drag } from '../../internal/drag.js';
-import { eventOptions, property, query, state } from 'lit/decorators.js';
-import { FormControlController } from '../../internal/form.js';
-import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { LocalizeController } from '../../utilities/localize.js';
-import { styleMap } from 'lit/directives/style-map.js';
-import { TinyColor } from '@ctrl/tinycolor';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PButton from '../button/button.component.js';
-import PButtonGroup from '../button-group/button-group.component.js';
-import PDropdown from '../dropdown/dropdown.component.js';
-import PIcon from '../icon/icon.component.js';
-import PInput from '../input/input.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import PVisuallyHidden from '../visually-hidden/visually-hidden.component.js';
-import styles from './color-picker.styles.js';
-import type { CSSResultGroup } from 'lit';
-import type { PChangeEvent } from '../../events/p-change.js';
-import type { PInputEvent } from '../../events/p-input.js';
-import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
+import { clamp } from "../../internal/math.js";
+import { classMap } from "lit/directives/class-map.js";
+import { defaultValue } from "../../internal/default-value.js";
+import { drag } from "../../internal/drag.js";
+import { eventOptions, property, query, state } from "lit/decorators.js";
+import { FormControlController } from "../../internal/form.js";
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { LocalizeController } from "../../utilities/localize.js";
+import { styleMap } from "lit/directives/style-map.js";
+import { TinyColor } from "@ctrl/tinycolor";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PButton from "../button/button.component.js";
+import PButtonGroup from "../button-group/button-group.component.js";
+import PDropdown from "../dropdown/dropdown.component.js";
+import PIcon from "../icon/icon.component.js";
+import PInput from "../input/input.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import PVisuallyHidden from "../visually-hidden/visually-hidden.component.js";
+import styles from "./color-picker.styles.js";
+import type { CSSResultGroup } from "lit";
+import type { PChangeEvent } from "../../events/p-change.js";
+import type { PInputEvent } from "../../events/p-input.js";
+import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
 
-const hasEyeDropper = 'EyeDropper' in window;
+const hasEyeDropper = "EyeDropper" in window;
 
 interface EyeDropperConstructor {
   new (): EyeDropperInterface;
@@ -90,16 +90,19 @@ declare const EyeDropper: EyeDropperConstructor;
  * @cssproperty --slider-handle-size - The diameter of the slider's handle.
  * @cssproperty --swatch-size - The size of each predefined color swatch.
  */
-export default class PColorPicker extends PureElement implements ShoelaceFormControl {
+export default class PColorPicker
+  extends PureElement
+  implements ShoelaceFormControl
+{
   static styles: CSSResultGroup = [componentStyles, styles];
 
   static dependencies = {
-    'p-button-group': PButtonGroup,
-    'p-button': PButton,
-    'p-dropdown': PDropdown,
-    'p-icon': PIcon,
-    'p-input': PInput,
-    'p-visually-hidden': PVisuallyHidden
+    "p-button-group": PButtonGroup,
+    "p-button": PButton,
+    "p-dropdown": PDropdown,
+    "p-icon": PIcon,
+    "p-input": PInput,
+    "p-visually-hidden": PVisuallyHidden,
   };
 
   private readonly formControlController = new FormControlController(this);
@@ -108,14 +111,14 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
 
   @query('[part~="base"]') base: HTMLElement;
   @query('[part~="input"]') input: PInput;
-  @query('.color-dropdown') dropdown: PDropdown;
+  @query(".color-dropdown") dropdown: PDropdown;
   @query('[part~="preview"]') previewButton: HTMLButtonElement;
   @query('[part~="trigger"]') trigger: HTMLButtonElement;
 
   @state() private hasFocus = false;
   @state() private isDraggingGridHandle = false;
   @state() private isEmpty = false;
-  @state() private inputValue = '';
+  @state() private inputValue = "";
   @state() private hue = 0;
   @state() private saturation = 100;
   @state() private brightness = 100;
@@ -126,34 +129,35 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
    * in a specific format, use the `getFormattedValue()` method. The value is submitted as a name/value pair with form
    * data.
    */
-  @property() value = '';
+  @property() value = "";
 
   /** The default value of the form control. Primarily used for resetting the form control. */
-  @defaultValue() defaultValue = '';
+  @defaultValue() defaultValue = "";
 
   /**
    * The color picker's label. This will not be displayed, but it will be announced by assistive devices. If you need to
    * display HTML, you can use the `label` slot` instead.
    */
-  @property() label = '';
+  @property() label = "";
 
   /**
    * The format to use. If opacity is enabled, these will translate to HEXA, RGBA, HSLA, and HSVA respectively. The color
    * picker will accept user input in any format (including CSS color names) and convert it to the desired format.
    */
-  @property() format: 'hex' | 'rgb' | 'hsl' | 'hsv' = 'hex';
+  @property() format: "hex" | "rgb" | "hsl" | "hsv" = "hex";
 
   /** Renders the color picker inline rather than in a dropdown. */
   @property({ type: Boolean, reflect: true }) inline = false;
 
   /** Determines the size of the color picker's trigger. This has no effect on inline color pickers. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
 
   /** Removes the button that lets users toggle between format.   */
-  @property({ attribute: 'no-format-toggle', type: Boolean }) noFormatToggle = false;
+  @property({ attribute: "no-format-toggle", type: Boolean }) noFormatToggle =
+    false;
 
   /** The name of the form control, submitted as a name/value pair with form data. */
-  @property() name = '';
+  @property() name = "";
 
   /** Disables the color picker. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -175,14 +179,14 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
    * picker can parse, including HEX(A), RGB(A), HSL(A), HSV(A), and CSS color names. Each color must be separated by a
    * semicolon (`;`). Alternatively, you can pass an array of color values to this property using JavaScript.
    */
-  @property() swatches: string | string[] = '';
+  @property() swatches: string | string[] = "";
 
   /**
    * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
    * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
    * the same document or shadow root for this to work.
    */
-  @property({ reflect: true }) form = '';
+  @property({ reflect: true }) form = "";
 
   /** Makes the color picker a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -199,8 +203,8 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
 
   constructor() {
     super();
-    this.addEventListener('focusin', this.handleFocusIn);
-    this.addEventListener('focusout', this.handleFocusOut);
+    this.addEventListener("focusin", this.handleFocusIn);
+    this.addEventListener("focusout", this.handleFocusOut);
   }
 
   firstUpdated() {
@@ -211,38 +215,44 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
 
   private handleCopy() {
     this.input.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
     this.previewButton.focus();
 
     // Show copied animation
-    this.previewButton.classList.add('color-picker__preview-color--copied');
-    this.previewButton.addEventListener('animationend', () => {
-      this.previewButton.classList.remove('color-picker__preview-color--copied');
+    this.previewButton.classList.add("color-picker__preview-color--copied");
+    this.previewButton.addEventListener("animationend", () => {
+      this.previewButton.classList.remove(
+        "color-picker__preview-color--copied",
+      );
     });
   }
 
   private handleFocusIn = () => {
     this.hasFocus = true;
-    this.emit('p-focus');
+    this.emit("p-focus");
   };
 
   private handleFocusOut = () => {
     this.hasFocus = false;
-    this.emit('p-blur');
+    this.emit("p-blur");
   };
 
   private handleFormatToggle() {
-    const formats = ['hex', 'rgb', 'hsl', 'hsv'];
+    const formats = ["hex", "rgb", "hsl", "hsv"];
     const nextIndex = (formats.indexOf(this.format) + 1) % formats.length;
-    this.format = formats[nextIndex] as 'hex' | 'rgb' | 'hsl' | 'hsv';
+    this.format = formats[nextIndex] as "hex" | "rgb" | "hsl" | "hsv";
     this.setColor(this.value);
-    this.emit('p-change');
-    this.emit('p-input');
+    this.emit("p-change");
+    this.emit("p-input");
   }
 
   private handleAlphaDrag(event: PointerEvent) {
-    const container = this.shadowRoot!.querySelector<HTMLElement>('.color-picker__slider.color-picker__alpha')!;
-    const handle = container.querySelector<HTMLElement>('.color-picker__slider-handle')!;
+    const container = this.shadowRoot!.querySelector<HTMLElement>(
+      ".color-picker__slider.color-picker__alpha",
+    )!;
+    const handle = container.querySelector<HTMLElement>(
+      ".color-picker__slider-handle",
+    )!;
     const { width } = container.getBoundingClientRect();
     let initialValue = this.value;
     let currentValue = this.value;
@@ -251,28 +261,32 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
     event.preventDefault();
 
     drag(container, {
-      onMove: x => {
+      onMove: (x) => {
         this.alpha = clamp((x / width) * 100, 0, 100);
         this.syncValues();
 
         if (this.value !== currentValue) {
           currentValue = this.value;
-          this.emit('p-input');
+          this.emit("p-input");
         }
       },
       onStop: () => {
         if (this.value !== initialValue) {
           initialValue = this.value;
-          this.emit('p-change');
+          this.emit("p-change");
         }
       },
-      initialEvent: event
+      initialEvent: event,
     });
   }
 
   private handleHueDrag(event: PointerEvent) {
-    const container = this.shadowRoot!.querySelector<HTMLElement>('.color-picker__slider.color-picker__hue')!;
-    const handle = container.querySelector<HTMLElement>('.color-picker__slider-handle')!;
+    const container = this.shadowRoot!.querySelector<HTMLElement>(
+      ".color-picker__slider.color-picker__hue",
+    )!;
+    const handle = container.querySelector<HTMLElement>(
+      ".color-picker__slider-handle",
+    )!;
     const { width } = container.getBoundingClientRect();
     let initialValue = this.value;
     let currentValue = this.value;
@@ -281,28 +295,32 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
     event.preventDefault();
 
     drag(container, {
-      onMove: x => {
+      onMove: (x) => {
         this.hue = clamp((x / width) * 360, 0, 360);
         this.syncValues();
 
         if (this.value !== currentValue) {
           currentValue = this.value;
-          this.emit('p-input');
+          this.emit("p-input");
         }
       },
       onStop: () => {
         if (this.value !== initialValue) {
           initialValue = this.value;
-          this.emit('p-change');
+          this.emit("p-change");
         }
       },
-      initialEvent: event
+      initialEvent: event,
     });
   }
 
   private handleGridDrag(event: PointerEvent) {
-    const grid = this.shadowRoot!.querySelector<HTMLElement>('.color-picker__grid')!;
-    const handle = grid.querySelector<HTMLElement>('.color-picker__grid-handle')!;
+    const grid = this.shadowRoot!.querySelector<HTMLElement>(
+      ".color-picker__grid",
+    )!;
+    const handle = grid.querySelector<HTMLElement>(
+      ".color-picker__grid-handle",
+    )!;
     const { width, height } = grid.getBoundingClientRect();
     let initialValue = this.value;
     let currentValue = this.value;
@@ -320,17 +338,17 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
 
         if (this.value !== currentValue) {
           currentValue = this.value;
-          this.emit('p-input');
+          this.emit("p-input");
         }
       },
       onStop: () => {
         this.isDraggingGridHandle = false;
         if (this.value !== initialValue) {
           initialValue = this.value;
-          this.emit('p-change');
+          this.emit("p-change");
         }
       },
-      initialEvent: event
+      initialEvent: event,
     });
   }
 
@@ -338,33 +356,33 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
     const increment = event.shiftKey ? 10 : 1;
     const oldValue = this.value;
 
-    if (event.key === 'ArrowLeft') {
+    if (event.key === "ArrowLeft") {
       event.preventDefault();
       this.alpha = clamp(this.alpha - increment, 0, 100);
       this.syncValues();
     }
 
-    if (event.key === 'ArrowRight') {
+    if (event.key === "ArrowRight") {
       event.preventDefault();
       this.alpha = clamp(this.alpha + increment, 0, 100);
       this.syncValues();
     }
 
-    if (event.key === 'Home') {
+    if (event.key === "Home") {
       event.preventDefault();
       this.alpha = 0;
       this.syncValues();
     }
 
-    if (event.key === 'End') {
+    if (event.key === "End") {
       event.preventDefault();
       this.alpha = 100;
       this.syncValues();
     }
 
     if (this.value !== oldValue) {
-      this.emit('p-change');
-      this.emit('p-input');
+      this.emit("p-change");
+      this.emit("p-input");
     }
   }
 
@@ -372,33 +390,33 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
     const increment = event.shiftKey ? 10 : 1;
     const oldValue = this.value;
 
-    if (event.key === 'ArrowLeft') {
+    if (event.key === "ArrowLeft") {
       event.preventDefault();
       this.hue = clamp(this.hue - increment, 0, 360);
       this.syncValues();
     }
 
-    if (event.key === 'ArrowRight') {
+    if (event.key === "ArrowRight") {
       event.preventDefault();
       this.hue = clamp(this.hue + increment, 0, 360);
       this.syncValues();
     }
 
-    if (event.key === 'Home') {
+    if (event.key === "Home") {
       event.preventDefault();
       this.hue = 0;
       this.syncValues();
     }
 
-    if (event.key === 'End') {
+    if (event.key === "End") {
       event.preventDefault();
       this.hue = 360;
       this.syncValues();
     }
 
     if (this.value !== oldValue) {
-      this.emit('p-change');
-      this.emit('p-input');
+      this.emit("p-change");
+      this.emit("p-input");
     }
   }
 
@@ -406,33 +424,33 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
     const increment = event.shiftKey ? 10 : 1;
     const oldValue = this.value;
 
-    if (event.key === 'ArrowLeft') {
+    if (event.key === "ArrowLeft") {
       event.preventDefault();
       this.saturation = clamp(this.saturation - increment, 0, 100);
       this.syncValues();
     }
 
-    if (event.key === 'ArrowRight') {
+    if (event.key === "ArrowRight") {
       event.preventDefault();
       this.saturation = clamp(this.saturation + increment, 0, 100);
       this.syncValues();
     }
 
-    if (event.key === 'ArrowUp') {
+    if (event.key === "ArrowUp") {
       event.preventDefault();
       this.brightness = clamp(this.brightness + increment, 0, 100);
       this.syncValues();
     }
 
-    if (event.key === 'ArrowDown') {
+    if (event.key === "ArrowDown") {
       event.preventDefault();
       this.brightness = clamp(this.brightness - increment, 0, 100);
       this.syncValues();
     }
 
     if (this.value !== oldValue) {
-      this.emit('p-change');
-      this.emit('p-input');
+      this.emit("p-change");
+      this.emit("p-input");
     }
   }
 
@@ -447,12 +465,12 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
       this.setColor(target.value);
       target.value = this.value;
     } else {
-      this.value = '';
+      this.value = "";
     }
 
     if (this.value !== oldValue) {
-      this.emit('p-change');
-      this.emit('p-input');
+      this.emit("p-change");
+      this.emit("p-input");
     }
   }
 
@@ -464,7 +482,7 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
   }
 
   private handleInputKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       const oldValue = this.value;
 
       if (this.input.value) {
@@ -472,8 +490,8 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
         this.input.value = this.value;
 
         if (this.value !== oldValue) {
-          this.emit('p-change');
-          this.emit('p-input');
+          this.emit("p-change");
+          this.emit("p-input");
         }
 
         setTimeout(() => this.input.select());
@@ -505,7 +523,7 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
       h: hslColor.h,
       s: hslColor.s * 100,
       l: hslColor.l * 100,
-      a: hslColor.a
+      a: hslColor.a,
     };
 
     const rgb = color.toRgb();
@@ -519,7 +537,7 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
       h: hsvColor.h,
       s: hsvColor.s * 100,
       v: hsvColor.v * 100,
-      a: hsvColor.a
+      a: hsvColor.a,
     };
 
     return {
@@ -527,7 +545,9 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
         h: hsl.h,
         s: hsl.s,
         l: hsl.l,
-        string: this.setLetterCase(`hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`)
+        string: this.setLetterCase(
+          `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`,
+        ),
       },
       hsla: {
         h: hsl.h,
@@ -535,14 +555,16 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
         l: hsl.l,
         a: hsl.a,
         string: this.setLetterCase(
-          `hsla(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%, ${hsl.a.toFixed(2).toString()})`
-        )
+          `hsla(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%, ${hsl.a.toFixed(2).toString()})`,
+        ),
       },
       hsv: {
         h: hsv.h,
         s: hsv.s,
         v: hsv.v,
-        string: this.setLetterCase(`hsv(${Math.round(hsv.h)}, ${Math.round(hsv.s)}%, ${Math.round(hsv.v)}%)`)
+        string: this.setLetterCase(
+          `hsv(${Math.round(hsv.h)}, ${Math.round(hsv.s)}%, ${Math.round(hsv.v)}%)`,
+        ),
       },
       hsva: {
         h: hsv.h,
@@ -550,14 +572,16 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
         v: hsv.v,
         a: hsv.a,
         string: this.setLetterCase(
-          `hsva(${Math.round(hsv.h)}, ${Math.round(hsv.s)}%, ${Math.round(hsv.v)}%, ${hsv.a.toFixed(2).toString()})`
-        )
+          `hsva(${Math.round(hsv.h)}, ${Math.round(hsv.s)}%, ${Math.round(hsv.v)}%, ${hsv.a.toFixed(2).toString()})`,
+        ),
       },
       rgb: {
         r: rgb.r,
         g: rgb.g,
         b: rgb.b,
-        string: this.setLetterCase(`rgb(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)})`)
+        string: this.setLetterCase(
+          `rgb(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)})`,
+        ),
       },
       rgba: {
         r: rgb.r,
@@ -565,11 +589,11 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
         b: rgb.b,
         a: rgb.a,
         string: this.setLetterCase(
-          `rgba(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)}, ${rgb.a.toFixed(2).toString()})`
-        )
+          `rgba(${Math.round(rgb.r)}, ${Math.round(rgb.g)}, ${Math.round(rgb.b)}, ${rgb.a.toFixed(2).toString()})`,
+        ),
       },
       hex: this.setLetterCase(hex),
-      hexa: this.setLetterCase(hexa)
+      hexa: this.setLetterCase(hexa),
     };
   }
 
@@ -591,15 +615,15 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
   }
 
   private setLetterCase(string: string) {
-    if (typeof string !== 'string') {
-      return '';
+    if (typeof string !== "string") {
+      return "";
     }
     return this.uppercase ? string.toUpperCase() : string.toLowerCase();
   }
 
   private async syncValues() {
     const currentColor = this.parseColor(
-      `hsva(${this.hue}, ${this.saturation}%, ${this.brightness}%, ${this.alpha / 100})`
+      `hsva(${this.hue}, ${this.saturation}%, ${this.brightness}%, ${this.alpha / 100})`,
     );
 
     if (currentColor === null) {
@@ -607,12 +631,18 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
     }
 
     // Update the value
-    if (this.format === 'hsl') {
-      this.inputValue = this.opacity ? currentColor.hsla.string : currentColor.hsl.string;
-    } else if (this.format === 'rgb') {
-      this.inputValue = this.opacity ? currentColor.rgba.string : currentColor.rgb.string;
-    } else if (this.format === 'hsv') {
-      this.inputValue = this.opacity ? currentColor.hsva.string : currentColor.hsv.string;
+    if (this.format === "hsl") {
+      this.inputValue = this.opacity
+        ? currentColor.hsla.string
+        : currentColor.hsl.string;
+    } else if (this.format === "rgb") {
+      this.inputValue = this.opacity
+        ? currentColor.rgba.string
+        : currentColor.rgb.string;
+    } else if (this.format === "hsv") {
+      this.inputValue = this.opacity
+        ? currentColor.hsva.string
+        : currentColor.hsv.string;
     } else {
       this.inputValue = this.opacity ? currentColor.hexa : currentColor.hex;
     }
@@ -627,7 +657,7 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
   }
 
   private handleAfterHide() {
-    this.previewButton.classList.remove('color-picker__preview-color--copied');
+    this.previewButton.classList.remove("color-picker__preview-color--copied");
   }
 
   private handleEyeDropper() {
@@ -639,14 +669,14 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
 
     eyeDropper
       .open()
-      .then(colorSelectionResult => {
+      .then((colorSelectionResult) => {
         const oldValue = this.value;
 
         this.setColor(colorSelectionResult.sRGBHex);
 
         if (this.value !== oldValue) {
-          this.emit('p-change');
-          this.emit('p-input');
+          this.emit("p-change");
+          this.emit("p-input");
         }
       })
       .catch(() => {
@@ -661,17 +691,24 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
       this.setColor(color);
 
       if (this.value !== oldValue) {
-        this.emit('p-change');
-        this.emit('p-input');
+        this.emit("p-change");
+        this.emit("p-input");
       }
     }
   }
 
   /** Generates a hex string from HSV values. Hue must be 0-360. All other arguments must be 0-100. */
-  private getHexString(hue: number, saturation: number, brightness: number, alpha = 100) {
-    const color = new TinyColor(`hsva(${hue}, ${saturation}%, ${brightness}%, ${alpha / 100})`);
+  private getHexString(
+    hue: number,
+    saturation: number,
+    brightness: number,
+    alpha = 100,
+  ) {
+    const color = new TinyColor(
+      `hsva(${hue}, ${saturation}%, ${brightness}%, ${alpha / 100})`,
+    );
     if (!color.isValid) {
-      return '';
+      return "";
     }
 
     return color.toHex8String();
@@ -682,17 +719,17 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
     event.stopImmediatePropagation();
   }
 
-  @watch('format', { waitUntilFirstUpdate: true })
+  @watch("format", { waitUntilFirstUpdate: true })
   handleFormatChange() {
     this.syncValues();
   }
 
-  @watch('opacity', { waitUntilFirstUpdate: true })
+  @watch("opacity", { waitUntilFirstUpdate: true })
   handleOpacityChange() {
     this.alpha = 100;
   }
 
-  @watch('value')
+  @watch("value")
   handleValueChange(oldValue: string | undefined, newValue: string) {
     this.isEmpty = !newValue;
 
@@ -714,7 +751,7 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
         this.alpha = newColor.hsva.a * 100;
         this.syncValues();
       } else {
-        this.inputValue = oldValue ?? '';
+        this.inputValue = oldValue ?? "";
       }
     }
   }
@@ -746,34 +783,44 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
   }
 
   /** Returns the current value as a string in the specified format. */
-  getFormattedValue(format: 'hex' | 'hexa' | 'rgb' | 'rgba' | 'hsl' | 'hsla' | 'hsv' | 'hsva' = 'hex') {
+  getFormattedValue(
+    format:
+      | "hex"
+      | "hexa"
+      | "rgb"
+      | "rgba"
+      | "hsl"
+      | "hsla"
+      | "hsv"
+      | "hsva" = "hex",
+  ) {
     const currentColor = this.parseColor(
-      `hsva(${this.hue}, ${this.saturation}%, ${this.brightness}%, ${this.alpha / 100})`
+      `hsva(${this.hue}, ${this.saturation}%, ${this.brightness}%, ${this.alpha / 100})`,
     );
 
     if (currentColor === null) {
-      return '';
+      return "";
     }
 
     switch (format) {
-      case 'hex':
+      case "hex":
         return currentColor.hex;
-      case 'hexa':
+      case "hexa":
         return currentColor.hexa;
-      case 'rgb':
+      case "rgb":
         return currentColor.rgb.string;
-      case 'rgba':
+      case "rgba":
         return currentColor.rgba.string;
-      case 'hsl':
+      case "hsl":
         return currentColor.hsl.string;
-      case 'hsla':
+      case "hsla":
         return currentColor.hsla.string;
-      case 'hsv':
+      case "hsv":
         return currentColor.hsv.string;
-      case 'hsva':
+      case "hsva":
         return currentColor.hsva.string;
       default:
-        return '';
+        return "";
     }
   }
 
@@ -792,7 +839,9 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
     if (!this.inline && !this.validity.valid) {
       // If the input is inline and invalid, show the dropdown so the browser can focus on it
       this.dropdown.show();
-      this.addEventListener('p-after-show', () => this.input.reportValidity(), { once: true });
+      this.addEventListener("p-after-show", () => this.input.reportValidity(), {
+        once: true,
+      });
 
       if (!this.disabled) {
         // By standards we have to emit a `p-invalid` event here synchronously.
@@ -816,20 +865,20 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
     const gridHandleY = 100 - this.brightness;
     const swatches = Array.isArray(this.swatches)
       ? this.swatches // allow arrays for legacy purposes
-      : this.swatches.split(';').filter(color => color.trim() !== '');
+      : this.swatches.split(";").filter((color) => color.trim() !== "");
 
     const colorPicker = html`
       <div
         part="base"
         class=${classMap({
-          'color-picker': true,
-          'color-picker--inline': this.inline,
-          'color-picker--disabled': this.disabled,
-          'color-picker--focused': this.hasFocus
+          "color-picker": true,
+          "color-picker--inline": this.inline,
+          "color-picker--disabled": this.disabled,
+          "color-picker--focused": this.hasFocus,
         })}
-        aria-disabled=${this.disabled ? 'true' : 'false'}
+        aria-disabled=${this.disabled ? "true" : "false"}
         aria-labelledby="label"
-        tabindex=${this.inline ? '0' : '-1'}
+        tabindex=${this.inline ? "0" : "-1"}
       >
         ${this.inline
           ? html`
@@ -842,24 +891,31 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
         <div
           part="grid"
           class="color-picker__grid"
-          style=${styleMap({ backgroundColor: this.getHexString(this.hue, 100, 100) })}
+          style=${styleMap({
+            backgroundColor: this.getHexString(this.hue, 100, 100),
+          })}
           @pointerdown=${this.handleGridDrag}
           @touchmove=${this.handleTouchMove}
         >
           <span
             part="grid-handle"
             class=${classMap({
-              'color-picker__grid-handle': true,
-              'color-picker__grid-handle--dragging': this.isDraggingGridHandle
+              "color-picker__grid-handle": true,
+              "color-picker__grid-handle--dragging": this.isDraggingGridHandle,
             })}
             style=${styleMap({
               top: `${gridHandleY}%`,
               left: `${gridHandleX}%`,
-              backgroundColor: this.getHexString(this.hue, this.saturation, this.brightness, this.alpha)
+              backgroundColor: this.getHexString(
+                this.hue,
+                this.saturation,
+                this.brightness,
+                this.alpha,
+              ),
             })}
             role="application"
             aria-label="HSV"
-            tabindex=${ifDefined(this.disabled ? undefined : '0')}
+            tabindex=${ifDefined(this.disabled ? undefined : "0")}
             @keydown=${this.handleGridKeyDown}
           ></span>
         </div>
@@ -876,7 +932,7 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
                 part="slider-handle hue-slider-handle"
                 class="color-picker__slider-handle"
                 style=${styleMap({
-                  left: `${this.hue === 0 ? 0 : 100 / (360 / this.hue)}%`
+                  left: `${this.hue === 0 ? 0 : 100 / (360 / this.hue)}%`,
                 })}
                 role="slider"
                 aria-label="hue"
@@ -884,7 +940,7 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
                 aria-valuemin="0"
                 aria-valuemax="360"
                 aria-valuenow=${`${Math.round(this.hue)}`}
-                tabindex=${ifDefined(this.disabled ? undefined : '0')}
+                tabindex=${ifDefined(this.disabled ? undefined : "0")}
                 @keydown=${this.handleHueKeyDown}
               ></span>
             </div>
@@ -904,14 +960,14 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
                           to right,
                           ${this.getHexString(this.hue, this.saturation, this.brightness, 0)} 0%,
                           ${this.getHexString(this.hue, this.saturation, this.brightness, 100)} 100%
-                        )`
+                        )`,
                       })}
                     ></div>
                     <span
                       part="slider-handle opacity-slider-handle"
                       class="color-picker__slider-handle"
                       style=${styleMap({
-                        left: `${this.alpha}%`
+                        left: `${this.alpha}%`,
                       })}
                       role="slider"
                       aria-label="alpha"
@@ -919,21 +975,26 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
                       aria-valuemin="0"
                       aria-valuemax="100"
                       aria-valuenow=${Math.round(this.alpha)}
-                      tabindex=${ifDefined(this.disabled ? undefined : '0')}
+                      tabindex=${ifDefined(this.disabled ? undefined : "0")}
                       @keydown=${this.handleAlphaKeyDown}
                     ></span>
                   </div>
                 `
-              : ''}
+              : ""}
           </div>
 
           <button
             type="button"
             part="preview"
             class="color-picker__preview color-picker__transparent-bg"
-            aria-label=${this.localize.term('copy')}
+            aria-label=${this.localize.term("copy")}
             style=${styleMap({
-              '--preview-color': this.getHexString(this.hue, this.saturation, this.brightness, this.alpha)
+              "--preview-color": this.getHexString(
+                this.hue,
+                this.saturation,
+                this.brightness,
+                this.alpha,
+              ),
             })}
             @click=${this.handleCopy}
           ></button>
@@ -948,10 +1009,10 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
             autocorrect="off"
             autocapitalize="off"
             spellcheck="false"
-            value=${this.isEmpty ? '' : this.inputValue}
+            value=${this.isEmpty ? "" : this.inputValue}
             ?required=${this.required}
             ?disabled=${this.disabled}
-            aria-label=${this.localize.term('currentValue')}
+            aria-label=${this.localize.term("currentValue")}
             @keydown=${this.handleInputKeyDown}
             @p-change=${this.handleInputChange}
             @p-input=${this.handleInputInput}
@@ -965,7 +1026,7 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
               ? html`
                   <p-button
                     part="format-button"
-                    aria-label=${this.localize.term('toggleColorFormat')}
+                    aria-label=${this.localize.term("toggleColorFormat")}
                     exportparts="
                       base:format-button__base,
                       prefix:format-button__prefix,
@@ -980,7 +1041,7 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
                     ${this.setLetterCase(this.format)}
                   </p-button>
                 `
-              : ''}
+              : ""}
             ${hasEyeDropper
               ? html`
                   <p-button
@@ -999,36 +1060,41 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
                     <p-icon
                       library="system"
                       name="eyedropper"
-                      label=${this.localize.term('selectAColorFromTheScreen')}
+                      label=${this.localize.term("selectAColorFromTheScreen")}
                     ></p-icon>
                   </p-button>
                 `
-              : ''}
+              : ""}
           </p-button-group>
         </div>
 
         ${swatches.length > 0
           ? html`
               <div part="swatches" class="color-picker__swatches">
-                ${swatches.map(swatch => {
+                ${swatches.map((swatch) => {
                   const parsedColor = this.parseColor(swatch);
 
                   // If we can't parse it, skip it
                   if (!parsedColor) {
-                    console.error(`Unable to parse swatch color: "${swatch}"`, this);
-                    return '';
+                    console.error(
+                      `Unable to parse swatch color: "${swatch}"`,
+                      this,
+                    );
+                    return "";
                   }
 
                   return html`
                     <div
                       part="swatch"
                       class="color-picker__swatch color-picker__transparent-bg"
-                      tabindex=${ifDefined(this.disabled ? undefined : '0')}
+                      tabindex=${ifDefined(this.disabled ? undefined : "0")}
                       role="button"
                       aria-label=${swatch}
                       @click=${() => this.selectSwatch(swatch)}
                       @keydown=${(event: KeyboardEvent) =>
-                        !this.disabled && event.key === 'Enter' && this.setColor(parsedColor.hexa)}
+                        !this.disabled &&
+                        event.key === "Enter" &&
+                        this.setColor(parsedColor.hexa)}
                     >
                       <div
                         class="color-picker__swatch-color"
@@ -1039,7 +1105,7 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
                 })}
               </div>
             `
-          : ''}
+          : ""}
       </div>
     `;
 
@@ -1052,7 +1118,7 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
     return html`
       <p-dropdown
         class="color-dropdown"
-        aria-disabled=${this.disabled ? 'true' : 'false'}
+        aria-disabled=${this.disabled ? "true" : "false"}
         .containing-element=${this}
         ?disabled=${this.disabled}
         ?hoist=${this.hoist}
@@ -1062,17 +1128,22 @@ export default class PColorPicker extends PureElement implements ShoelaceFormCon
           part="trigger"
           slot="trigger"
           class=${classMap({
-            'color-dropdown__trigger': true,
-            'color-dropdown__trigger--disabled': this.disabled,
-            'color-dropdown__trigger--small': this.size === 'small',
-            'color-dropdown__trigger--medium': this.size === 'medium',
-            'color-dropdown__trigger--large': this.size === 'large',
-            'color-dropdown__trigger--empty': this.isEmpty,
-            'color-dropdown__trigger--focused': this.hasFocus,
-            'color-picker__transparent-bg': true
+            "color-dropdown__trigger": true,
+            "color-dropdown__trigger--disabled": this.disabled,
+            "color-dropdown__trigger--small": this.size === "small",
+            "color-dropdown__trigger--medium": this.size === "medium",
+            "color-dropdown__trigger--large": this.size === "large",
+            "color-dropdown__trigger--empty": this.isEmpty,
+            "color-dropdown__trigger--focused": this.hasFocus,
+            "color-picker__transparent-bg": true,
           })}
           style=${styleMap({
-            color: this.getHexString(this.hue, this.saturation, this.brightness, this.alpha)
+            color: this.getHexString(
+              this.hue,
+              this.saturation,
+              this.brightness,
+              this.alpha,
+            ),
           })}
           type="button"
         >

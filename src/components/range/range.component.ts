@@ -1,19 +1,19 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { defaultValue } from '../../internal/default-value.js';
-import { eventOptions, property, query, state } from 'lit/decorators.js';
-import { FormControlController } from '../../internal/form.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { live } from 'lit/directives/live.js';
-import { LocalizeController } from '../../utilities/localize.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import formControlStyles from '../../styles/form-control.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './range.styles.js';
-import type { CSSResultGroup } from 'lit';
-import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
+import { classMap } from "lit/directives/class-map.js";
+import { defaultValue } from "../../internal/default-value.js";
+import { eventOptions, property, query, state } from "lit/decorators.js";
+import { FormControlController } from "../../internal/form.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { live } from "lit/directives/live.js";
+import { LocalizeController } from "../../utilities/localize.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import formControlStyles from "../../styles/form-control.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./range.styles.js";
+import type { CSSResultGroup } from "lit";
+import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Ranges allow the user to select a single value within a given range using a slider.
@@ -49,28 +49,32 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
 
   private readonly formControlController = new FormControlController(this);
-  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private readonly hasSlotController = new HasSlotController(
+    this,
+    "help-text",
+    "label",
+  );
   private readonly localize = new LocalizeController(this);
   private resizeObserver: ResizeObserver;
 
-  @query('.range__control') input: HTMLInputElement;
-  @query('.range__tooltip') output: HTMLOutputElement | null;
+  @query(".range__control") input: HTMLInputElement;
+  @query(".range__tooltip") output: HTMLOutputElement | null;
 
   @state() private hasFocus = false;
   @state() private hasTooltip = false;
-  @property() title = ''; // make reactive to pass through
+  @property() title = ""; // make reactive to pass through
 
   /** The name of the range, submitted as a name/value pair with form data. */
-  @property() name = '';
+  @property() name = "";
 
   /** The current value of the range, submitted as a name/value pair with form data. */
   @property({ type: Number }) value = 0;
 
   /** The range's label. If you need to display HTML, use the `label` slot instead. */
-  @property() label = '';
+  @property() label = "";
 
   /** The range's help text. If you need to display HTML, use the help-text slot instead. */
-  @property({ attribute: 'help-text' }) helpText = '';
+  @property({ attribute: "help-text" }) helpText = "";
 
   /** Disables the range. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -85,20 +89,21 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
   @property({ type: Number }) step = 1;
 
   /** The preferred placement of the range's tooltip. */
-  @property() tooltip: 'top' | 'bottom' | 'none' = 'top';
+  @property() tooltip: "top" | "bottom" | "none" = "top";
 
   /**
    * A function used to format the tooltip's value. The range's value is passed as the first and only argument. The
    * function should return a string to display in the tooltip.
    */
-  @property({ attribute: false }) tooltipFormatter: (value: number) => string = (value: number) => value.toString();
+  @property({ attribute: false }) tooltipFormatter: (value: number) => string =
+    (value: number) => value.toString();
 
   /**
    * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
    * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
    * the same document or shadow root for this to work.
    */
-  @property({ reflect: true }) form = '';
+  @property({ reflect: true }) form = "";
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue = 0;
@@ -136,25 +141,25 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
   }
 
   private handleChange() {
-    this.emit('p-change');
+    this.emit("p-change");
   }
 
   private handleInput() {
     this.value = parseFloat(this.input.value);
-    this.emit('p-input');
+    this.emit("p-input");
     this.syncRange();
   }
 
   private handleBlur() {
     this.hasFocus = false;
     this.hasTooltip = false;
-    this.emit('p-blur');
+    this.emit("p-blur");
   }
 
   private handleFocus() {
     this.hasFocus = true;
     this.hasTooltip = true;
-    this.emit('p-focus');
+    this.emit("p-focus");
   }
 
   @eventOptions({ passive: true })
@@ -167,15 +172,17 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
   }
 
   private syncProgress(percent: number) {
-    this.input.style.setProperty('--percent', `${percent * 100}%`);
+    this.input.style.setProperty("--percent", `${percent * 100}%`);
   }
 
   private syncTooltip(percent: number) {
     if (this.output !== null) {
       const inputWidth = this.input.offsetWidth;
       const tooltipWidth = this.output.offsetWidth;
-      const thumbSize = getComputedStyle(this.input).getPropertyValue('--thumb-size');
-      const isRtl = this.matches(':dir(rtl)');
+      const thumbSize = getComputedStyle(this.input).getPropertyValue(
+        "--thumb-size",
+      );
+      const isRtl = this.matches(":dir(rtl)");
       const percentAsWidth = inputWidth * percent;
 
       // The calculations are used to "guess" where the thumb is located. Since we're using the native range control
@@ -191,7 +198,7 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
     }
   }
 
-  @watch('value', { waitUntilFirstUpdate: true })
+  @watch("value", { waitUntilFirstUpdate: true })
   handleValueChange() {
     this.formControlController.updateValidity();
 
@@ -203,19 +210,22 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
     this.syncRange();
   }
 
-  @watch('disabled', { waitUntilFirstUpdate: true })
+  @watch("disabled", { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid
     this.formControlController.setValidity(this.disabled);
   }
 
-  @watch('hasTooltip', { waitUntilFirstUpdate: true })
+  @watch("hasTooltip", { waitUntilFirstUpdate: true })
   syncRange() {
-    const percent = Math.max(0, (this.value - this.min) / (this.max - this.min));
+    const percent = Math.max(
+      0,
+      (this.value - this.min) / (this.max - this.min),
+    );
 
     this.syncProgress(percent);
 
-    if (this.tooltip !== 'none') {
+    if (this.tooltip !== "none") {
       // Ensure updates are drawn before we sync the tooltip
       this.updateComplete.then(() => this.syncTooltip(percent));
     }
@@ -274,8 +284,8 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
   }
 
   render() {
-    const hasLabelSlot = this.hasSlotController.test('label');
-    const hasHelpTextSlot = this.hasSlotController.test('help-text');
+    const hasLabelSlot = this.hasSlotController.test("label");
+    const hasHelpTextSlot = this.hasSlotController.test("help-text");
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
 
@@ -284,17 +294,17 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
       <div
         part="form-control"
         class=${classMap({
-          'form-control': true,
-          'form-control--medium': true, // range only has one size
-          'form-control--has-label': hasLabel,
-          'form-control--has-help-text': hasHelpText
+          "form-control": true,
+          "form-control--medium": true, // range only has one size
+          "form-control--has-label": hasLabel,
+          "form-control--has-help-text": hasHelpText,
         })}
       >
         <label
           part="form-control-label"
           class="form-control__label"
           for="input"
-          aria-hidden=${hasLabel ? 'false' : 'true'}
+          aria-hidden=${hasLabel ? "false" : "true"}
         >
           <slot name="label">${this.label}</slot>
         </label>
@@ -304,12 +314,12 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
             part="base"
             class=${classMap({
               range: true,
-              'range--disabled': this.disabled,
-              'range--focused': this.hasFocus,
-              'range--rtl': this.localize.dir() === 'rtl',
-              'range--tooltip-visible': this.hasTooltip,
-              'range--tooltip-top': this.tooltip === 'top',
-              'range--tooltip-bottom': this.tooltip === 'bottom'
+              "range--disabled": this.disabled,
+              "range--focused": this.hasFocus,
+              "range--rtl": this.localize.dir() === "rtl",
+              "range--tooltip-visible": this.hasTooltip,
+              "range--tooltip-top": this.tooltip === "top",
+              "range--tooltip-bottom": this.tooltip === "bottom",
             })}
             @mousedown=${this.handleThumbDragStart}
             @mouseup=${this.handleThumbDragEnd}
@@ -320,7 +330,10 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
               part="input"
               id="input"
               class="range__control"
-              title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
+              title=${
+                this
+                  .title /* An empty title prevents browser validation tooltips from appearing on hover */
+              }
               type="range"
               name=${ifDefined(this.name)}
               ?disabled=${this.disabled}
@@ -335,13 +348,15 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
               @invalid=${this.handleInvalid}
               @blur=${this.handleBlur}
             />
-            ${this.tooltip !== 'none' && !this.disabled
+            ${this.tooltip !== "none" && !this.disabled
               ? html`
                   <output part="tooltip" class="range__tooltip">
-                    ${typeof this.tooltipFormatter === 'function' ? this.tooltipFormatter(this.value) : this.value}
+                    ${typeof this.tooltipFormatter === "function"
+                      ? this.tooltipFormatter(this.value)
+                      : this.value}
                   </output>
                 `
-              : ''}
+              : ""}
           </div>
         </div>
 
@@ -349,7 +364,7 @@ export default class PRange extends PureElement implements ShoelaceFormControl {
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
-          aria-hidden=${hasHelpText ? 'false' : 'true'}
+          aria-hidden=${hasHelpText ? "false" : "true"}
         >
           <slot name="help-text">${this.helpText}</slot>
         </div>

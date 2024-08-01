@@ -1,16 +1,23 @@
-import { animateTo, shimKeyframesHeightAuto, stopAnimations } from '../../internal/animate.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property, query } from 'lit/decorators.js';
-import { waitForEvent } from '../../internal/event.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './details.styles.js';
-import type { CSSResultGroup } from 'lit';
+import {
+  animateTo,
+  shimKeyframesHeightAuto,
+  stopAnimations,
+} from "../../internal/animate.js";
+import { classMap } from "lit/directives/class-map.js";
+import {
+  getAnimation,
+  setDefaultAnimation,
+} from "../../utilities/animation-registry.js";
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query } from "lit/decorators.js";
+import { waitForEvent } from "../../internal/event.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./details.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Details show a brief summary and expand to show additional content.
@@ -43,15 +50,15 @@ export default class PDetails extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   static dependencies = {
-    'p-icon': PIcon
+    "p-icon": PIcon,
   };
 
   private readonly localize = new LocalizeController(this);
 
-  @query('.details') details: HTMLDetailsElement;
-  @query('.details__header') header: HTMLElement;
-  @query('.details__body') body: HTMLElement;
-  @query('.details__expand-icon-slot') expandIconSlot: HTMLSlotElement;
+  @query(".details") details: HTMLDetailsElement;
+  @query(".details__header") header: HTMLElement;
+  @query(".details__body") body: HTMLElement;
+  @query(".details__expand-icon-slot") expandIconSlot: HTMLSlotElement;
 
   detailsObserver: MutationObserver;
 
@@ -68,14 +75,14 @@ export default class PDetails extends PureElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   firstUpdated() {
-    this.body.style.height = this.open ? 'auto' : '0';
+    this.body.style.height = this.open ? "auto" : "0";
     if (this.open) {
       this.details.open = true;
     }
 
-    this.detailsObserver = new MutationObserver(changes => {
+    this.detailsObserver = new MutationObserver((changes) => {
       for (const change of changes) {
-        if (change.type === 'attributes' && change.attributeName === 'open') {
+        if (change.type === "attributes" && change.attributeName === "open") {
           if (this.details.open) {
             this.show();
           } else {
@@ -106,7 +113,7 @@ export default class PDetails extends PureElement {
   }
 
   private handleSummaryKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
 
       if (this.open) {
@@ -116,23 +123,23 @@ export default class PDetails extends PureElement {
       }
     }
 
-    if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+    if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
       event.preventDefault();
       this.hide();
     }
 
-    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+    if (event.key === "ArrowDown" || event.key === "ArrowRight") {
       event.preventDefault();
       this.show();
     }
   }
 
-  @watch('open', { waitUntilFirstUpdate: true })
+  @watch("open", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open) {
       this.details.open = true;
       // Show
-      const slShow = this.emit('p-show', { cancelable: true });
+      const slShow = this.emit("p-show", { cancelable: true });
       if (slShow.defaultPrevented) {
         this.open = false;
         this.details.open = false;
@@ -141,14 +148,20 @@ export default class PDetails extends PureElement {
 
       await stopAnimations(this.body);
 
-      const { keyframes, options } = getAnimation(this, 'details.show', { dir: this.localize.dir() });
-      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-      this.body.style.height = 'auto';
+      const { keyframes, options } = getAnimation(this, "details.show", {
+        dir: this.localize.dir(),
+      });
+      await animateTo(
+        this.body,
+        shimKeyframesHeightAuto(keyframes, this.body.scrollHeight),
+        options,
+      );
+      this.body.style.height = "auto";
 
-      this.emit('p-after-show');
+      this.emit("p-after-show");
     } else {
       // Hide
-      const slHide = this.emit('p-hide', { cancelable: true });
+      const slHide = this.emit("p-hide", { cancelable: true });
       if (slHide.defaultPrevented) {
         this.details.open = true;
         this.open = true;
@@ -157,12 +170,18 @@ export default class PDetails extends PureElement {
 
       await stopAnimations(this.body);
 
-      const { keyframes, options } = getAnimation(this, 'details.hide', { dir: this.localize.dir() });
-      await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-      this.body.style.height = 'auto';
+      const { keyframes, options } = getAnimation(this, "details.hide", {
+        dir: this.localize.dir(),
+      });
+      await animateTo(
+        this.body,
+        shimKeyframesHeightAuto(keyframes, this.body.scrollHeight),
+        options,
+      );
+      this.body.style.height = "auto";
 
       this.details.open = false;
-      this.emit('p-after-hide');
+      this.emit("p-after-hide");
     }
   }
 
@@ -173,7 +192,7 @@ export default class PDetails extends PureElement {
     }
 
     this.open = true;
-    return waitForEvent(this, 'p-after-show');
+    return waitForEvent(this, "p-after-show");
   }
 
   /** Hides the details */
@@ -183,20 +202,20 @@ export default class PDetails extends PureElement {
     }
 
     this.open = false;
-    return waitForEvent(this, 'p-after-hide');
+    return waitForEvent(this, "p-after-hide");
   }
 
   render() {
-    const isRtl = this.matches(':dir(rtl)');
+    const isRtl = this.matches(":dir(rtl)");
 
     return html`
       <details
         part="base"
         class=${classMap({
           details: true,
-          'details--open': this.open,
-          'details--disabled': this.disabled,
-          'details--rtl': isRtl
+          "details--open": this.open,
+          "details--disabled": this.disabled,
+          "details--rtl": isRtl,
         })}
       >
         <summary
@@ -204,21 +223,29 @@ export default class PDetails extends PureElement {
           id="header"
           class="details__header"
           role="button"
-          aria-expanded=${this.open ? 'true' : 'false'}
+          aria-expanded=${this.open ? "true" : "false"}
           aria-controls="content"
-          aria-disabled=${this.disabled ? 'true' : 'false'}
-          tabindex=${this.disabled ? '-1' : '0'}
+          aria-disabled=${this.disabled ? "true" : "false"}
+          tabindex=${this.disabled ? "-1" : "0"}
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}
         >
-          <slot name="summary" part="summary" class="details__summary">${this.summary}</slot>
+          <slot name="summary" part="summary" class="details__summary"
+            >${this.summary}</slot
+          >
 
           <span part="summary-icon" class="details__summary-icon">
             <slot name="expand-icon">
-              <p-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></p-icon>
+              <p-icon
+                library="system"
+                name=${isRtl ? "chevron-left" : "chevron-right"}
+              ></p-icon>
             </slot>
             <slot name="collapse-icon">
-              <p-icon library="system" name=${isRtl ? 'chevron-left' : 'chevron-right'}></p-icon>
+              <p-icon
+                library="system"
+                name=${isRtl ? "chevron-left" : "chevron-right"}
+              ></p-icon>
             </slot>
           </span>
         </summary>
@@ -231,18 +258,18 @@ export default class PDetails extends PureElement {
   }
 }
 
-setDefaultAnimation('details.show', {
+setDefaultAnimation("details.show", {
   keyframes: [
-    { height: '0', opacity: '0' },
-    { height: 'auto', opacity: '1' }
+    { height: "0", opacity: "0" },
+    { height: "auto", opacity: "1" },
   ],
-  options: { duration: 250, easing: 'linear' }
+  options: { duration: 250, easing: "linear" },
 });
 
-setDefaultAnimation('details.hide', {
+setDefaultAnimation("details.hide", {
   keyframes: [
-    { height: 'auto', opacity: '1' },
-    { height: '0', opacity: '0' }
+    { height: "auto", opacity: "1" },
+    { height: "0", opacity: "0" },
   ],
-  options: { duration: 250, easing: 'linear' }
+  options: { duration: 250, easing: "linear" },
 });

@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from "lit";
 
 // Resizing a spinner element using anything but font-size will break the animation because the animation uses em units.
 // Therefore, if a spinner is used in a flex container without `flex: none` applied, the spinner can grow/shrink and

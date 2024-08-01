@@ -1,25 +1,25 @@
-const { format } = require('prettier');
+const { format } = require("prettier");
 
 /** Formats markup using prettier. */
 module.exports = function (content, options) {
   options = {
-    arrowParens: 'avoid',
+    arrowParens: "avoid",
     bracketSpacing: true,
-    htmlWhitespaceSensitivity: 'css',
+    htmlWhitespaceSensitivity: "css",
     insertPragma: false,
     bracketSameLine: false,
     jsxSingleQuote: false,
-    parser: 'html',
+    parser: "html",
     printWidth: 120,
-    proseWrap: 'preserve',
-    quoteProps: 'as-needed',
+    proseWrap: "preserve",
+    quoteProps: "as-needed",
     requirePragma: false,
     semi: true,
     singleQuote: true,
     tabWidth: 2,
-    trailingComma: 'none',
+    trailingComma: "none",
     useTabs: false,
-    ...options
+    ...options,
   };
 
   return format(content, options);

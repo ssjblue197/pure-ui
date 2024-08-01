@@ -1,10 +1,10 @@
-import '../../../dist/pure-ui.js';
-import { expect, fixture, html } from '@open-wc/testing';
-import sinon from 'sinon';
-import type PImageComparer from './image-comparer.js';
+import "../../../dist/pure-ui.js";
+import { expect, fixture, html } from "@open-wc/testing";
+import sinon from "sinon";
+import type PImageComparer from "./image-comparer.js";
 
-describe('<p-image-comparer>', () => {
-  it('should render a basic before/after', async () => {
+describe("<p-image-comparer>", () => {
+  it("should render a basic before/after", async () => {
     const el = await fixture<PImageComparer>(html`
       <p-image-comparer>
         <div slot="before"></div>
@@ -12,20 +12,26 @@ describe('<p-image-comparer>', () => {
       </p-image-comparer>
     `);
 
-    const afterPart = el.shadowRoot!.querySelector<HTMLElement>('[part~="after"]')!;
-    const iconContainer = el.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="handle"]')!;
-    const handle = el.shadowRoot!.querySelector<HTMLElement>('[part~="handle"]')!;
+    const afterPart =
+      el.shadowRoot!.querySelector<HTMLElement>('[part~="after"]')!;
+    const iconContainer = el.shadowRoot!.querySelector<HTMLSlotElement>(
+      'slot[name="handle"]',
+    )!;
+    const handle =
+      el.shadowRoot!.querySelector<HTMLElement>('[part~="handle"]')!;
 
     expect(el.position).to.equal(50);
-    expect(afterPart.getAttribute('style')).to.equal('clip-path:inset(0 50% 0 0);');
+    expect(afterPart.getAttribute("style")).to.equal(
+      "clip-path:inset(0 50% 0 0);",
+    );
     expect(iconContainer.assignedElements().length).to.equal(0);
-    expect(handle.getAttribute('role')).to.equal('scrollbar');
-    expect(handle.getAttribute('aria-valuenow')).to.equal('50');
-    expect(handle.getAttribute('aria-valuemin')).to.equal('0');
-    expect(handle.getAttribute('aria-valuemax')).to.equal('100');
+    expect(handle.getAttribute("role")).to.equal("scrollbar");
+    expect(handle.getAttribute("aria-valuenow")).to.equal("50");
+    expect(handle.getAttribute("aria-valuemin")).to.equal("0");
+    expect(handle.getAttribute("aria-valuemax")).to.equal("100");
   });
 
-  it('should emit change event when position changed manually', async () => {
+  it("should emit change event when position changed manually", async () => {
     const el = await fixture<PImageComparer>(html`
       <p-image-comparer>
         <div slot="before"></div>
@@ -34,7 +40,7 @@ describe('<p-image-comparer>', () => {
     `);
     const handler = sinon.spy();
 
-    el.addEventListener('p-change', handler, { once: true });
+    el.addEventListener("p-change", handler, { once: true });
 
     el.position = 40;
     await el.updateComplete;
@@ -42,7 +48,7 @@ describe('<p-image-comparer>', () => {
     expect(handler.called).to.equal(true);
   });
 
-  it('should increment position on arrow right', async () => {
+  it("should increment position on arrow right", async () => {
     const el = await fixture<PImageComparer>(html`
       <p-image-comparer>
         <div slot="before"></div>
@@ -53,16 +59,16 @@ describe('<p-image-comparer>', () => {
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'ArrowRight'
-      })
+      new KeyboardEvent("keydown", {
+        key: "ArrowRight",
+      }),
     );
     await el.updateComplete;
 
     expect(el.position).to.equal(51);
   });
 
-  it('should decrement position on arrow left', async () => {
+  it("should decrement position on arrow left", async () => {
     const el = await fixture<PImageComparer>(html`
       <p-image-comparer>
         <div slot="before"></div>
@@ -73,16 +79,16 @@ describe('<p-image-comparer>', () => {
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'ArrowLeft'
-      })
+      new KeyboardEvent("keydown", {
+        key: "ArrowLeft",
+      }),
     );
     await el.updateComplete;
 
     expect(el.position).to.equal(49);
   });
 
-  it('should set position to 0 on home key', async () => {
+  it("should set position to 0 on home key", async () => {
     const el = await fixture<PImageComparer>(html`
       <p-image-comparer>
         <div slot="before"></div>
@@ -93,16 +99,16 @@ describe('<p-image-comparer>', () => {
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'Home'
-      })
+      new KeyboardEvent("keydown", {
+        key: "Home",
+      }),
     );
     await el.updateComplete;
 
     expect(el.position).to.equal(0);
   });
 
-  it('should set position to 100 on end key', async () => {
+  it("should set position to 100 on end key", async () => {
     const el = await fixture<PImageComparer>(html`
       <p-image-comparer>
         <div slot="before"></div>
@@ -113,16 +119,16 @@ describe('<p-image-comparer>', () => {
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'End'
-      })
+      new KeyboardEvent("keydown", {
+        key: "End",
+      }),
     );
     await el.updateComplete;
 
     expect(el.position).to.equal(100);
   });
 
-  it('should clamp to 100 on arrow right', async () => {
+  it("should clamp to 100 on arrow right", async () => {
     const el = await fixture<PImageComparer>(html`
       <p-image-comparer>
         <div slot="before"></div>
@@ -136,16 +142,16 @@ describe('<p-image-comparer>', () => {
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'ArrowLeft'
-      })
+      new KeyboardEvent("keydown", {
+        key: "ArrowLeft",
+      }),
     );
     await el.updateComplete;
 
     expect(el.position).to.equal(0);
   });
 
-  it('should clamp to 0 on arrow left', async () => {
+  it("should clamp to 0 on arrow left", async () => {
     const el = await fixture<PImageComparer>(html`
       <p-image-comparer>
         <div slot="before"></div>
@@ -159,16 +165,16 @@ describe('<p-image-comparer>', () => {
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'ArrowRight'
-      })
+      new KeyboardEvent("keydown", {
+        key: "ArrowRight",
+      }),
     );
     await el.updateComplete;
 
     expect(el.position).to.equal(100);
   });
 
-  it('should increment position by 10 on arrow right + shift', async () => {
+  it("should increment position by 10 on arrow right + shift", async () => {
     const el = await fixture<PImageComparer>(html`
       <p-image-comparer>
         <div slot="before"></div>
@@ -179,17 +185,17 @@ describe('<p-image-comparer>', () => {
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'ArrowRight',
-        shiftKey: true
-      })
+      new KeyboardEvent("keydown", {
+        key: "ArrowRight",
+        shiftKey: true,
+      }),
     );
     await el.updateComplete;
 
     expect(el.position).to.equal(60);
   });
 
-  it('should decrement position by 10 on arrow left + shift', async () => {
+  it("should decrement position by 10 on arrow left + shift", async () => {
     const el = await fixture<PImageComparer>(html`
       <p-image-comparer>
         <div slot="before"></div>
@@ -200,17 +206,17 @@ describe('<p-image-comparer>', () => {
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
 
     base.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'ArrowLeft',
-        shiftKey: true
-      })
+      new KeyboardEvent("keydown", {
+        key: "ArrowLeft",
+        shiftKey: true,
+      }),
     );
     await el.updateComplete;
 
     expect(el.position).to.equal(40);
   });
 
-  it('should set position by attribute', async () => {
+  it("should set position by attribute", async () => {
     const el = await fixture<PImageComparer>(html`
       <p-image-comparer position="10">
         <div slot="before"></div>
@@ -221,29 +227,30 @@ describe('<p-image-comparer>', () => {
     expect(el.position).to.equal(10);
   });
 
-  it('should move position on drag', async () => {
+  it("should move position on drag", async () => {
     const el = await fixture<PImageComparer>(html`
       <p-image-comparer>
         <div slot="before" style="width: 50px"></div>
         <div slot="after" style="width: 50px"></div>
       </p-image-comparer>
     `);
-    const handle = el.shadowRoot!.querySelector<HTMLElement>('[part~="handle"]')!;
+    const handle =
+      el.shadowRoot!.querySelector<HTMLElement>('[part~="handle"]')!;
     const base = el.shadowRoot!.querySelector<HTMLElement>('[part~="base"]')!;
     const rect = base.getBoundingClientRect();
     const offsetX = rect.left + window.scrollX;
     const offsetY = rect.top + window.scrollY;
 
-    handle.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+    handle.dispatchEvent(new MouseEvent("mousedown", { bubbles: true }));
 
     document.dispatchEvent(
-      new PointerEvent('pointermove', {
+      new PointerEvent("pointermove", {
         clientX: offsetX + 20,
-        clientY: offsetY
-      })
+        clientY: offsetY,
+      }),
     );
 
-    document.dispatchEvent(new PointerEvent('pointerup'));
+    document.dispatchEvent(new PointerEvent("pointerup"));
 
     await el.updateComplete;
 

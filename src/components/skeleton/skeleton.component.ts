@@ -1,10 +1,10 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { html } from 'lit';
-import { property } from 'lit/decorators.js';
-import componentStyles from '../../styles/component.styles.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './skeleton.styles.js';
-import type { CSSResultGroup } from 'lit';
+import { classMap } from "lit/directives/class-map.js";
+import { html } from "lit";
+import { property } from "lit/decorators.js";
+import componentStyles from "../../styles/component.styles.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./skeleton.styles.js";
+import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Skeletons are used to provide a visual representation of where content will eventually be drawn.
@@ -23,7 +23,7 @@ export default class PSkeleton extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   /** Determines which effect the skeleton will use. */
-  @property() effect: 'pulse' | 'sheen' | 'none' = 'none';
+  @property() effect: "pulse" | "sheen" | "none" = "none";
 
   render() {
     return html`
@@ -31,8 +31,8 @@ export default class PSkeleton extends PureElement {
         part="base"
         class=${classMap({
           skeleton: true,
-          'skeleton--pulse': this.effect === 'pulse',
-          'skeleton--sheen': this.effect === 'sheen'
+          "skeleton--pulse": this.effect === "pulse",
+          "skeleton--sheen": this.effect === "sheen",
         })}
       >
         <div part="indicator" class="skeleton__indicator"></div>

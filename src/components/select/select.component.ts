@@ -1,27 +1,30 @@
-import { animateTo, stopAnimations } from '../../internal/animate.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { defaultValue } from '../../internal/default-value.js';
-import { FormControlController } from '../../internal/form.js';
-import { getAnimation, setDefaultAnimation } from '../../utilities/animation-registry.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { LocalizeController } from '../../utilities/localize.js';
-import { property, query, state } from 'lit/decorators.js';
-import { scrollIntoView } from '../../internal/scroll.js';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { waitForEvent } from '../../internal/event.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import formControlStyles from '../../styles/form-control.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PPopup from '../popup/popup.component.js';
-import PTag from '../tag/tag.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './select.styles.js';
-import type { CSSResultGroup, TemplateResult } from 'lit';
-import type { PRemoveEvent } from '../../events/p-remove.js';
-import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
-import type POption from '../option/option.component.js';
+import { animateTo, stopAnimations } from "../../internal/animate.js";
+import { classMap } from "lit/directives/class-map.js";
+import { defaultValue } from "../../internal/default-value.js";
+import { FormControlController } from "../../internal/form.js";
+import {
+  getAnimation,
+  setDefaultAnimation,
+} from "../../utilities/animation-registry.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query, state } from "lit/decorators.js";
+import { scrollIntoView } from "../../internal/scroll.js";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import { waitForEvent } from "../../internal/event.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import formControlStyles from "../../styles/form-control.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PPopup from "../popup/popup.component.js";
+import PTag from "../tag/tag.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./select.styles.js";
+import type { CSSResultGroup, TemplateResult } from "lit";
+import type { PRemoveEvent } from "../../events/p-remove.js";
+import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
+import type POption from "../option/option.component.js";
 
 /**
  * @summary Selects allow you to choose items from a menu of predefined options.
@@ -70,36 +73,43 @@ import type POption from '../option/option.component.js';
  * @csspart clear-button - The clear button.
  * @csspart expand-icon - The container that wraps the expand icon.
  */
-export default class PSelect extends PureElement implements ShoelaceFormControl {
+export default class PSelect
+  extends PureElement
+  implements ShoelaceFormControl
+{
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
   static dependencies = {
-    'p-icon': PIcon,
-    'p-popup': PPopup,
-    'p-tag': PTag
+    "p-icon": PIcon,
+    "p-popup": PPopup,
+    "p-tag": PTag,
   };
 
   private readonly formControlController = new FormControlController(this, {
-    assumeInteractionOn: ['p-blur', 'p-input']
+    assumeInteractionOn: ["p-blur", "p-input"],
   });
-  private readonly hasSlotController = new HasSlotController(this, 'help-text', 'label');
+  private readonly hasSlotController = new HasSlotController(
+    this,
+    "help-text",
+    "label",
+  );
   private readonly localize = new LocalizeController(this);
-  private typeToSelectString = '';
+  private typeToSelectString = "";
   private typeToSelectTimeout: number;
   private closeWatcher: CloseWatcher | null;
 
-  @query('.select') popup: PPopup;
-  @query('.select__combobox') combobox: HTMLSlotElement;
-  @query('.select__display-input') displayInput: HTMLInputElement;
-  @query('.select__value-input') valueInput: HTMLInputElement;
-  @query('.select__listbox') listbox: HTMLSlotElement;
+  @query(".select") popup: PPopup;
+  @query(".select__combobox") combobox: HTMLSlotElement;
+  @query(".select__display-input") displayInput: HTMLInputElement;
+  @query(".select__value-input") valueInput: HTMLInputElement;
+  @query(".select__listbox") listbox: HTMLSlotElement;
 
   @state() private hasFocus = false;
-  @state() displayLabel = '';
+  @state() displayLabel = "";
   @state() currentOption: POption;
   @state() selectedOptions: POption[] = [];
 
   /** The name of the select, submitted as a name/value pair with form data. */
-  @property() name = '';
+  @property() name = "";
 
   /**
    * The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the
@@ -108,20 +118,20 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
    */
   @property({
     converter: {
-      fromAttribute: (value: string) => value.split(' '),
-      toAttribute: (value: string[]) => value.join(' ')
-    }
+      fromAttribute: (value: string) => value.split(" "),
+      toAttribute: (value: string[]) => value.join(" "),
+    },
   })
-  value: string | string[] = '';
+  value: string | string[] = "";
 
   /** The default value of the form control. Primarily used for resetting the form control. */
-  @defaultValue() defaultValue: string | string[] = '';
+  @defaultValue() defaultValue: string | string[] = "";
 
   /** The select's size. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
 
   /** Placeholder text to show as a hint when the select is empty. */
-  @property() placeholder = '';
+  @property() placeholder = "";
 
   /** Allows more than one option to be selected. */
   @property({ type: Boolean, reflect: true }) multiple = false;
@@ -130,7 +140,8 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
    * The maximum number of selected options to show when `multiple` is true. After the maximum, "+n" will be shown to
    * indicate the number of additional items that are selected. Set to 0 to remove the limit.
    */
-  @property({ attribute: 'max-options-visible', type: Number }) maxOptionsVisible = 3;
+  @property({ attribute: "max-options-visible", type: Number })
+  maxOptionsVisible = 3;
 
   /** Disables the select control. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -157,23 +168,23 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
   @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The select's label. If you need to display HTML, use the `label` slot instead. */
-  @property() label = '';
+  @property() label = "";
 
   /**
    * The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox
    * inside of the viewport.
    */
-  @property({ reflect: true }) placement: 'top' | 'bottom' = 'bottom';
+  @property({ reflect: true }) placement: "top" | "bottom" = "bottom";
 
   /** The select's help text. If you need to display HTML, use the `help-text` slot instead. */
-  @property({ attribute: 'help-text' }) helpText = '';
+  @property({ attribute: "help-text" }) helpText = "";
 
   /**
    * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
    * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
    * the same document or shadow root for this to work.
    */
-  @property({ reflect: true }) form = '';
+  @property({ reflect: true }) form = "";
 
   /** The select's required attribute. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -183,7 +194,10 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
    * is the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at
    * the specified value.
    */
-  @property() getTag: (option: POption, index: number) => TemplateResult | string | HTMLElement = option => {
+  @property() getTag: (
+    option: POption,
+    index: number,
+  ) => TemplateResult | string | HTMLElement = (option) => {
     return html`
       <p-tag
         part="tag"
@@ -196,7 +210,8 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
         ?pill=${this.pill}
         size=${this.size}
         removable
-        @p-remove=${(event: PRemoveEvent) => this.handleTagRemove(event, option)}
+        @p-remove=${(event: PRemoveEvent) =>
+          this.handleTagRemove(event, option)}
       >
         ${option.getTextLabel()}
       </p-tag>
@@ -226,16 +241,19 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
     //
     // https://github.com/ssjblue197/pure-ui/issues/1763
     //
-    document.addEventListener('focusin', this.handleDocumentFocusIn);
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
-    document.addEventListener('mousedown', this.handleDocumentMouseDown);
+    document.addEventListener("focusin", this.handleDocumentFocusIn);
+    document.addEventListener("keydown", this.handleDocumentKeyDown);
+    document.addEventListener("mousedown", this.handleDocumentMouseDown);
 
     // If the component is rendered in a shadow root, we need to attach the focusin listener there too
     if (this.getRootNode() !== document) {
-      this.getRootNode().addEventListener('focusin', this.handleDocumentFocusIn);
+      this.getRootNode().addEventListener(
+        "focusin",
+        this.handleDocumentFocusIn,
+      );
     }
 
-    if ('CloseWatcher' in window) {
+    if ("CloseWatcher" in window) {
       this.closeWatcher?.destroy();
       this.closeWatcher = new CloseWatcher();
       this.closeWatcher.onclose = () => {
@@ -248,12 +266,15 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
   }
 
   private removeOpenListeners() {
-    document.removeEventListener('focusin', this.handleDocumentFocusIn);
-    document.removeEventListener('keydown', this.handleDocumentKeyDown);
-    document.removeEventListener('mousedown', this.handleDocumentMouseDown);
+    document.removeEventListener("focusin", this.handleDocumentFocusIn);
+    document.removeEventListener("keydown", this.handleDocumentKeyDown);
+    document.removeEventListener("mousedown", this.handleDocumentMouseDown);
 
     if (this.getRootNode() !== document) {
-      this.getRootNode().removeEventListener('focusin', this.handleDocumentFocusIn);
+      this.getRootNode().removeEventListener(
+        "focusin",
+        this.handleDocumentFocusIn,
+      );
     }
 
     this.closeWatcher?.destroy();
@@ -262,12 +283,12 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
   private handleFocus() {
     this.hasFocus = true;
     this.displayInput.setSelectionRange(0, 0);
-    this.emit('p-focus');
+    this.emit("p-focus");
   }
 
   private handleBlur() {
     this.hasFocus = false;
-    this.emit('p-blur');
+    this.emit("p-blur");
   }
 
   private handleDocumentFocusIn = (event: KeyboardEvent) => {
@@ -280,8 +301,8 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
 
   private handleDocumentKeyDown = (event: KeyboardEvent) => {
     const target = event.target as HTMLElement;
-    const isClearButton = target.closest('.select__clear') !== null;
-    const isIconButton = target.closest('p-icon-button') !== null;
+    const isClearButton = target.closest(".select__clear") !== null;
+    const isIconButton = target.closest("p-icon-button") !== null;
 
     // Ignore presses when the target is an icon button (e.g. the remove button in <p-tag>)
     if (isClearButton || isIconButton) {
@@ -289,7 +310,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
     }
 
     // Close when pressing escape
-    if (event.key === 'Escape' && this.open && !this.closeWatcher) {
+    if (event.key === "Escape" && this.open && !this.closeWatcher) {
       event.preventDefault();
       event.stopPropagation();
       this.hide();
@@ -298,7 +319,10 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
 
     // Handle enter and space. When pressing space, we allow for type to select behaviors so if there's anything in the
     // buffer we _don't_ close it.
-    if (event.key === 'Enter' || (event.key === ' ' && this.typeToSelectString === '')) {
+    if (
+      event.key === "Enter" ||
+      (event.key === " " && this.typeToSelectString === "")
+    ) {
       event.preventDefault();
       event.stopImmediatePropagation();
 
@@ -318,8 +342,8 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
 
         // Emit after updating
         this.updateComplete.then(() => {
-          this.emit('p-input');
-          this.emit('p-change');
+          this.emit("p-input");
+          this.emit("p-change");
         });
 
         if (!this.multiple) {
@@ -332,7 +356,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
     }
 
     // Navigate options
-    if (['ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
+    if (["ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) {
       const allOptions = this.getAllOptions();
       const currentIndex = allOptions.indexOf(this.currentOption);
       let newIndex = Math.max(0, currentIndex);
@@ -351,15 +375,15 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
         }
       }
 
-      if (event.key === 'ArrowDown') {
+      if (event.key === "ArrowDown") {
         newIndex = currentIndex + 1;
         if (newIndex > allOptions.length - 1) newIndex = 0;
-      } else if (event.key === 'ArrowUp') {
+      } else if (event.key === "ArrowUp") {
         newIndex = currentIndex - 1;
         if (newIndex < 0) newIndex = allOptions.length - 1;
-      } else if (event.key === 'Home') {
+      } else if (event.key === "Home") {
         newIndex = 0;
-      } else if (event.key === 'End') {
+      } else if (event.key === "End") {
         newIndex = allOptions.length - 1;
       }
 
@@ -367,7 +391,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
     }
 
     // All other "printable" keys trigger type to select
-    if (event.key.length === 1 || event.key === 'Backspace') {
+    if (event.key.length === 1 || event.key === "Backspace") {
       const allOptions = this.getAllOptions();
 
       // Don't block important key combos like CMD+R
@@ -377,7 +401,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
 
       // Open, unless the key that triggered is backspace
       if (!this.open) {
-        if (event.key === 'Backspace') {
+        if (event.key === "Backspace") {
           return;
         }
 
@@ -388,9 +412,12 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
       event.preventDefault();
 
       clearTimeout(this.typeToSelectTimeout);
-      this.typeToSelectTimeout = window.setTimeout(() => (this.typeToSelectString = ''), 1000);
+      this.typeToSelectTimeout = window.setTimeout(
+        () => (this.typeToSelectString = ""),
+        1000,
+      );
 
-      if (event.key === 'Backspace') {
+      if (event.key === "Backspace") {
         this.typeToSelectString = this.typeToSelectString.slice(0, -1);
       } else {
         this.typeToSelectString += event.key.toLowerCase();
@@ -421,7 +448,10 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
 
   private handleComboboxMouseDown(event: MouseEvent) {
     const path = event.composedPath();
-    const isIconButton = path.some(el => el instanceof Element && el.tagName.toLowerCase() === 'p-icon-button');
+    const isIconButton = path.some(
+      (el) =>
+        el instanceof Element && el.tagName.toLowerCase() === "p-icon-button",
+    );
 
     // Ignore disabled controls and clicks on tags (remove buttons)
     if (this.disabled || isIconButton) {
@@ -434,7 +464,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
   }
 
   private handleComboboxKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       return;
     }
 
@@ -445,15 +475,15 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
   private handleClearClick(event: MouseEvent) {
     event.stopPropagation();
 
-    if (this.value !== '') {
+    if (this.value !== "") {
       this.setSelectedOptions([]);
       this.displayInput.focus({ preventScroll: true });
 
       // Emit after update
       this.updateComplete.then(() => {
-        this.emit('p-clear');
-        this.emit('p-input');
-        this.emit('p-change');
+        this.emit("p-clear");
+        this.emit("p-input");
+        this.emit("p-change");
       });
     }
   }
@@ -466,7 +496,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
 
   private handleOptionClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const option = target.closest('p-option');
+    const option = target.closest("p-option");
     const oldValue = this.value;
 
     if (option && !option.disabled) {
@@ -477,13 +507,15 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
       }
 
       // Set focus after updating so the value is announced by screen readers
-      this.updateComplete.then(() => this.displayInput.focus({ preventScroll: true }));
+      this.updateComplete.then(() =>
+        this.displayInput.focus({ preventScroll: true }),
+      );
 
       if (this.value !== oldValue) {
         // Emit after updating
         this.updateComplete.then(() => {
-          this.emit('p-input');
-          this.emit('p-change');
+          this.emit("p-input");
+          this.emit("p-change");
         });
       }
 
@@ -500,14 +532,18 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
     const values: string[] = [];
 
     // Check for duplicate values in menu items
-    if (customElements.get('p-option')) {
-      allOptions.forEach(option => values.push(option.value));
+    if (customElements.get("p-option")) {
+      allOptions.forEach((option) => values.push(option.value));
 
       // Select only the options that match the new value
-      this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
+      this.setSelectedOptions(
+        allOptions.filter((el) => value.includes(el.value)),
+      );
     } else {
       // Rerun this handler when <p-option> is registered
-      customElements.whenDefined('p-option').then(() => this.handleDefaultSlotChange());
+      customElements
+        .whenDefined("p-option")
+        .then(() => this.handleDefaultSlotChange());
     }
   }
 
@@ -519,20 +555,20 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
 
       // Emit after updating
       this.updateComplete.then(() => {
-        this.emit('p-input');
-        this.emit('p-change');
+        this.emit("p-input");
+        this.emit("p-change");
       });
     }
   }
 
   // Gets an array of all <p-option> elements
   private getAllOptions() {
-    return [...this.querySelectorAll<POption>('p-option')];
+    return [...this.querySelectorAll<POption>("p-option")];
   }
 
   // Gets the first <p-option> element
   private getFirstOption() {
-    return this.querySelector<POption>('p-option');
+    return this.querySelector<POption>("p-option");
   }
 
   // Sets the current option, which is the option the user is currently interacting with (e.g. via keyboard). Only one
@@ -541,7 +577,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
     const allOptions = this.getAllOptions();
 
     // Clear selection
-    allOptions.forEach(el => {
+    allOptions.forEach((el) => {
       el.current = false;
       el.tabIndex = -1;
     });
@@ -561,11 +597,11 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
     const newSelectedOptions = Array.isArray(option) ? option : [option];
 
     // Clear existing selection
-    allOptions.forEach(el => (el.selected = false));
+    allOptions.forEach((el) => (el.selected = false));
 
     // Set the new selection
     if (newSelectedOptions.length) {
-      newSelectedOptions.forEach(el => (el.selected = true));
+      newSelectedOptions.forEach((el) => (el.selected = true));
     }
 
     // Update selection, value, and display label
@@ -587,21 +623,24 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
   // value, and the display value
   private selectionChanged() {
     // Update selected options cache
-    this.selectedOptions = this.getAllOptions().filter(el => el.selected);
+    this.selectedOptions = this.getAllOptions().filter((el) => el.selected);
 
     // Update the value and display label
     if (this.multiple) {
-      this.value = this.selectedOptions.map(el => el.value);
+      this.value = this.selectedOptions.map((el) => el.value);
 
       if (this.placeholder && this.value.length === 0) {
         // When no items are selected, keep the value empty so the placeholder shows
-        this.displayLabel = '';
+        this.displayLabel = "";
       } else {
-        this.displayLabel = this.localize.term('numOptionsSelected', this.selectedOptions.length);
+        this.displayLabel = this.localize.term(
+          "numOptionsSelected",
+          this.selectedOptions.length,
+        );
       }
     } else {
-      this.value = this.selectedOptions[0]?.value ?? '';
-      this.displayLabel = this.selectedOptions[0]?.getTextLabel() ?? '';
+      this.value = this.selectedOptions[0]?.value ?? "";
+      this.displayLabel = this.selectedOptions[0]?.getTextLabel() ?? "";
     }
 
     // Update validity
@@ -614,12 +653,16 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
       if (index < this.maxOptionsVisible || this.maxOptionsVisible <= 0) {
         const tag = this.getTag(option, index);
         // Wrap so we can handle the remove
-        return html`<div @p-remove=${(e: PRemoveEvent) => this.handleTagRemove(e, option)}>
-          ${typeof tag === 'string' ? unsafeHTML(tag) : tag}
+        return html`<div
+          @p-remove=${(e: PRemoveEvent) => this.handleTagRemove(e, option)}
+        >
+          ${typeof tag === "string" ? unsafeHTML(tag) : tag}
         </div>`;
       } else if (index === this.maxOptionsVisible) {
         // Hit tag limit
-        return html`<p-tag size=${this.size}>+${this.selectedOptions.length - index}</p-tag>`;
+        return html`<p-tag size=${this.size}
+          >+${this.selectedOptions.length - index}</p-tag
+        >`;
       }
       return html``;
     });
@@ -630,7 +673,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
     this.formControlController.emitInvalidEvent(event);
   }
 
-  @watch('disabled', { waitUntilFirstUpdate: true })
+  @watch("disabled", { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Close the listbox when the control is disabled
     if (this.disabled) {
@@ -639,23 +682,25 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
     }
   }
 
-  @watch('value', { waitUntilFirstUpdate: true })
+  @watch("value", { waitUntilFirstUpdate: true })
   handleValueChange() {
     const allOptions = this.getAllOptions();
     const value = Array.isArray(this.value) ? this.value : [this.value];
 
     // Select only the options that match the new value
-    this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
+    this.setSelectedOptions(
+      allOptions.filter((el) => value.includes(el.value)),
+    );
   }
 
-  @watch('open', { waitUntilFirstUpdate: true })
+  @watch("open", { waitUntilFirstUpdate: true })
   async handleOpenChange() {
     if (this.open && !this.disabled) {
       // Reset the current option
       this.setCurrentOption(this.selectedOptions[0] || this.getFirstOption());
 
       // Show
-      this.emit('p-show');
+      this.emit("p-show");
       this.addOpenListeners();
 
       await stopAnimations(this);
@@ -667,27 +712,31 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
         this.setCurrentOption(this.currentOption);
       });
 
-      const { keyframes, options } = getAnimation(this, 'select.show', { dir: this.localize.dir() });
+      const { keyframes, options } = getAnimation(this, "select.show", {
+        dir: this.localize.dir(),
+      });
       await animateTo(this.popup.popup, keyframes, options);
 
       // Make sure the current option is scrolled into view (required for Safari)
       if (this.currentOption) {
-        scrollIntoView(this.currentOption, this.listbox, 'vertical', 'auto');
+        scrollIntoView(this.currentOption, this.listbox, "vertical", "auto");
       }
 
-      this.emit('p-after-show');
+      this.emit("p-after-show");
     } else {
       // Hide
-      this.emit('p-hide');
+      this.emit("p-hide");
       this.removeOpenListeners();
 
       await stopAnimations(this);
-      const { keyframes, options } = getAnimation(this, 'select.hide', { dir: this.localize.dir() });
+      const { keyframes, options } = getAnimation(this, "select.hide", {
+        dir: this.localize.dir(),
+      });
       await animateTo(this.popup.popup, keyframes, options);
       this.listbox.hidden = true;
       this.popup.active = false;
 
-      this.emit('p-after-hide');
+      this.emit("p-after-hide");
     }
   }
 
@@ -699,7 +748,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
     }
 
     this.open = true;
-    return waitForEvent(this, 'p-after-show');
+    return waitForEvent(this, "p-after-show");
   }
 
   /** Hides the listbox. */
@@ -710,7 +759,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
     }
 
     this.open = false;
-    return waitForEvent(this, 'p-after-hide');
+    return waitForEvent(this, "p-after-hide");
   }
 
   /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
@@ -745,30 +794,31 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
   }
 
   render() {
-    const hasLabelSlot = this.hasSlotController.test('label');
-    const hasHelpTextSlot = this.hasSlotController.test('help-text');
+    const hasLabelSlot = this.hasSlotController.test("label");
+    const hasHelpTextSlot = this.hasSlotController.test("help-text");
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
-    const hasClearIcon = this.clearable && !this.disabled && this.value.length > 0;
+    const hasClearIcon =
+      this.clearable && !this.disabled && this.value.length > 0;
     const isPlaceholderVisible = this.placeholder && this.value.length === 0;
 
     return html`
       <div
         part="form-control"
         class=${classMap({
-          'form-control': true,
-          'form-control--small': this.size === 'small',
-          'form-control--medium': this.size === 'medium',
-          'form-control--large': this.size === 'large',
-          'form-control--has-label': hasLabel,
-          'form-control--has-help-text': hasHelpText
+          "form-control": true,
+          "form-control--small": this.size === "small",
+          "form-control--medium": this.size === "medium",
+          "form-control--large": this.size === "large",
+          "form-control--has-label": hasLabel,
+          "form-control--has-help-text": hasHelpText,
         })}
       >
         <label
           id="label"
           part="form-control-label"
           class="form-control__label"
-          aria-hidden=${hasLabel ? 'false' : 'true'}
+          aria-hidden=${hasLabel ? "false" : "true"}
           @click=${this.handleLabelClick}
         >
           <slot name="label">${this.label}</slot>
@@ -778,22 +828,22 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
           <p-popup
             class=${classMap({
               select: true,
-              'select--standard': true,
-              'select--filled': this.filled,
-              'select--pill': this.pill,
-              'select--open': this.open,
-              'select--disabled': this.disabled,
-              'select--multiple': this.multiple,
-              'select--focused': this.hasFocus,
-              'select--placeholder-visible': isPlaceholderVisible,
-              'select--top': this.placement === 'top',
-              'select--bottom': this.placement === 'bottom',
-              'select--small': this.size === 'small',
-              'select--medium': this.size === 'medium',
-              'select--large': this.size === 'large'
+              "select--standard": true,
+              "select--filled": this.filled,
+              "select--pill": this.pill,
+              "select--open": this.open,
+              "select--disabled": this.disabled,
+              "select--multiple": this.multiple,
+              "select--focused": this.hasFocus,
+              "select--placeholder-visible": isPlaceholderVisible,
+              "select--top": this.placement === "top",
+              "select--bottom": this.placement === "bottom",
+              "select--small": this.size === "small",
+              "select--medium": this.size === "medium",
+              "select--large": this.size === "large",
             })}
             placement=${this.placement}
-            strategy=${this.hoist ? 'fixed' : 'absolute'}
+            strategy=${this.hoist ? "fixed" : "absolute"}
             flip
             shift
             sync="width"
@@ -821,10 +871,10 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
                 autocapitalize="off"
                 readonly
                 aria-controls="listbox"
-                aria-expanded=${this.open ? 'true' : 'false'}
+                aria-expanded=${this.open ? "true" : "false"}
                 aria-haspopup="listbox"
                 aria-labelledby="label"
-                aria-disabled=${this.disabled ? 'true' : 'false'}
+                aria-disabled=${this.disabled ? "true" : "false"}
                 aria-describedby="help-text"
                 role="combobox"
                 tabindex="0"
@@ -832,14 +882,18 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
                 @blur=${this.handleBlur}
               />
 
-              ${this.multiple ? html`<div part="tags" class="select__tags">${this.tags}</div>` : ''}
+              ${this.multiple
+                ? html`<div part="tags" class="select__tags">${this.tags}</div>`
+                : ""}
 
               <input
                 class="select__value-input"
                 type="text"
                 ?disabled=${this.disabled}
                 ?required=${this.required}
-                .value=${Array.isArray(this.value) ? this.value.join(', ') : this.value}
+                .value=${Array.isArray(this.value)
+                  ? this.value.join(", ")
+                  : this.value}
                 tabindex="-1"
                 aria-hidden="true"
                 @focus=${() => this.focus()}
@@ -852,7 +906,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
                       part="clear-button"
                       class="select__clear"
                       type="button"
-                      aria-label=${this.localize.term('clearEntry')}
+                      aria-label=${this.localize.term("clearEntry")}
                       @mousedown=${this.handleClearMouseDown}
                       @click=${this.handleClearClick}
                       tabindex="-1"
@@ -862,11 +916,15 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
                       </slot>
                     </button>
                   `
-                : ''}
+                : ""}
 
               <slot name="suffix" part="suffix" class="select__suffix"></slot>
 
-              <slot name="expand-icon" part="expand-icon" class="select__expand-icon">
+              <slot
+                name="expand-icon"
+                part="expand-icon"
+                class="select__expand-icon"
+              >
                 <p-icon library="system" name="chevron-down"></p-icon>
               </slot>
             </div>
@@ -874,8 +932,8 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
             <div
               id="listbox"
               role="listbox"
-              aria-expanded=${this.open ? 'true' : 'false'}
-              aria-multiselectable=${this.multiple ? 'true' : 'false'}
+              aria-expanded=${this.open ? "true" : "false"}
+              aria-multiselectable=${this.multiple ? "true" : "false"}
               aria-labelledby="label"
               part="listbox"
               class="select__listbox"
@@ -892,7 +950,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
           part="form-control-help-text"
           id="help-text"
           class="form-control__help-text"
-          aria-hidden=${hasHelpText ? 'false' : 'true'}
+          aria-hidden=${hasHelpText ? "false" : "true"}
         >
           <slot name="help-text">${this.helpText}</slot>
         </div>
@@ -901,18 +959,18 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
   }
 }
 
-setDefaultAnimation('select.show', {
+setDefaultAnimation("select.show", {
   keyframes: [
     { opacity: 0, scale: 0.9 },
-    { opacity: 1, scale: 1 }
+    { opacity: 1, scale: 1 },
   ],
-  options: { duration: 100, easing: 'ease' }
+  options: { duration: 100, easing: "ease" },
 });
 
-setDefaultAnimation('select.hide', {
+setDefaultAnimation("select.hide", {
   keyframes: [
     { opacity: 1, scale: 1 },
-    { opacity: 0, scale: 0.9 }
+    { opacity: 0, scale: 0.9 },
   ],
-  options: { duration: 100, easing: 'ease' }
+  options: { duration: 100, easing: "ease" },
 });

@@ -15,7 +15,7 @@ Angular [plays nice](https://custom-elements-everywhere.com/#angular) with custo
 To add Pure UI to your Angular app, install the package from npm.
 
 ```bash
-npm install @pure-ui/core
+npm install pure-uikit
 ```
 
 ### Update the Angular Configuration
@@ -32,10 +32,10 @@ Its also important to load the components by using a `<script>` tag into the ind
       ...
       "styles": [
         "src/styles.scss",
-        "@pure-ui/core/dist/themes/light.css"
+        "pure-uikit/dist/themes/light.css"
        ],
       "scripts": [
-        "@pure-ui/core/dist/pure-ui.js"
+        "pure-uikit/dist/pure-ui.js"
       ]
       ...
 ```
@@ -45,13 +45,13 @@ Its also important to load the components by using a `<script>` tag into the ind
 Next, set the [base path](/getting-started/installation#setting-the-base-path) for icons and other assets in the `main.ts`. In this example, we'll use the CDN as a base path.
 
 ```jsx
-import { setBasePath } from '@pure-ui/core/%NPMDIR%/utilities/base-path';
+import { setBasePath } from "pure-uikit/%NPMDIR%/utilities/base-path";
 
-setBasePath('https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/');
+setBasePath("https://cdn.jsdelivr.net/npm/pure-uikit@%VERSION%/%CDNDIR%/");
 ```
 
 :::tip
-If you'd rather not use the CDN for assets, you can create a build task that copies `node_modules/@pure-ui/core/%NPMDIR%/assets` into a public folder in your app. Then you can point the base path to that folder instead.
+If you'd rather not use the CDN for assets, you can create a build task that copies `node_modules/pure-uikit/%NPMDIR%/assets` into a public folder in your app. Then you can point the base path to that folder instead.
 :::
 
 ## Configuration
@@ -59,17 +59,17 @@ If you'd rather not use the CDN for assets, you can create a build task that cop
 Then make sure to apply the custom elements schema as shown below.
 
 ```js
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
-import { AppComponent } from './app.component';
+import { AppComponent } from "./app.component";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
 ```
@@ -77,7 +77,7 @@ export class AppModule {}
 ## Reference Pure UI components in your Angular component code
 
 ```js
-import { SlDrawer } from '@pure-ui/core';
+import { SlDrawer } from 'pure-uikit';
 
 @Component({
   selector: 'app-drawer-example',

@@ -1,19 +1,19 @@
-import { classMap } from 'lit/directives/class-map.js';
-import { defaultValue } from '../../internal/default-value.js';
-import { FormControlController } from '../../internal/form.js';
-import { HasSlotController } from '../../internal/slot.js';
-import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { live } from 'lit/directives/live.js';
-import { property, query, state } from 'lit/decorators.js';
-import { watch } from '../../internal/watch.js';
-import componentStyles from '../../styles/component.styles.js';
-import formControlStyles from '../../styles/form-control.styles.js';
-import PIcon from '../icon/icon.component.js';
-import PureElement from '../../internal/pure-ui-element.js';
-import styles from './checkbox.styles.js';
-import type { CSSResultGroup } from 'lit';
-import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
+import { classMap } from "lit/directives/class-map.js";
+import { defaultValue } from "../../internal/default-value.js";
+import { FormControlController } from "../../internal/form.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { live } from "lit/directives/live.js";
+import { property, query, state } from "lit/decorators.js";
+import { watch } from "../../internal/watch.js";
+import componentStyles from "../../styles/component.styles.js";
+import formControlStyles from "../../styles/form-control.styles.js";
+import PIcon from "../icon/icon.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import styles from "./checkbox.styles.js";
+import type { CSSResultGroup } from "lit";
+import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Checkboxes allow the user to toggle an option on or off.
@@ -41,31 +41,36 @@ import type { ShoelaceFormControl } from '../../internal/pure-ui-element.js';
  * @csspart label - The container that wraps the checkbox's label.
  * @csspart form-control-help-text - The help text's wrapper.
  */
-export default class PCheckbox extends PureElement implements ShoelaceFormControl {
+export default class PCheckbox
+  extends PureElement
+  implements ShoelaceFormControl
+{
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
-  static dependencies = { 'p-icon': PIcon };
+  static dependencies = { "p-icon": PIcon };
 
   private readonly formControlController = new FormControlController(this, {
-    value: (control: PCheckbox) => (control.checked ? control.value || 'on' : undefined),
+    value: (control: PCheckbox) =>
+      control.checked ? control.value || "on" : undefined,
     defaultValue: (control: PCheckbox) => control.defaultChecked,
-    setValue: (control: PCheckbox, checked: boolean) => (control.checked = checked)
+    setValue: (control: PCheckbox, checked: boolean) =>
+      (control.checked = checked),
   });
-  private readonly hasSlotController = new HasSlotController(this, 'help-text');
+  private readonly hasSlotController = new HasSlotController(this, "help-text");
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
   @state() private hasFocus = false;
 
-  @property() title = ''; // make reactive to pass through
+  @property() title = ""; // make reactive to pass through
 
   /** The name of the checkbox, submitted as a name/value pair with form data. */
-  @property() name = '';
+  @property() name = "";
 
   /** The current value of the checkbox, submitted as a name/value pair with form data. */
   @property() value: string;
 
   /** The checkbox's size. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
+  @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
 
   /** Disables the checkbox. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -80,20 +85,20 @@ export default class PCheckbox extends PureElement implements ShoelaceFormContro
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   /** The default value of the form control. Primarily used for resetting the form control. */
-  @defaultValue('checked') defaultChecked = false;
+  @defaultValue("checked") defaultChecked = false;
 
   /**
    * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
    * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
    * the same document or shadow root for this to work.
    */
-  @property({ reflect: true }) form = '';
+  @property({ reflect: true }) form = "";
 
   /** Makes the checkbox a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
   /** The checkbox's help text. If you need to display HTML, use the `help-text` slot instead. */
-  @property({ attribute: 'help-text' }) helpText = '';
+  @property({ attribute: "help-text" }) helpText = "";
 
   /** Gets the validity state object */
   get validity() {
@@ -112,16 +117,16 @@ export default class PCheckbox extends PureElement implements ShoelaceFormContro
   private handleClick() {
     this.checked = !this.checked;
     this.indeterminate = false;
-    this.emit('p-change');
+    this.emit("p-change");
   }
 
   private handleBlur() {
     this.hasFocus = false;
-    this.emit('p-blur');
+    this.emit("p-blur");
   }
 
   private handleInput() {
-    this.emit('p-input');
+    this.emit("p-input");
   }
 
   private handleInvalid(event: Event) {
@@ -131,16 +136,16 @@ export default class PCheckbox extends PureElement implements ShoelaceFormContro
 
   private handleFocus() {
     this.hasFocus = true;
-    this.emit('p-focus');
+    this.emit("p-focus");
   }
 
-  @watch('disabled', { waitUntilFirstUpdate: true })
+  @watch("disabled", { waitUntilFirstUpdate: true })
   handleDisabledChange() {
     // Disabled form controls are always valid
     this.formControlController.setValidity(this.disabled);
   }
 
-  @watch(['checked', 'indeterminate'], { waitUntilFirstUpdate: true })
+  @watch(["checked", "indeterminate"], { waitUntilFirstUpdate: true })
   handleStateChange() {
     this.input.checked = this.checked; // force a sync update
     this.input.indeterminate = this.indeterminate; // force a sync update
@@ -187,7 +192,7 @@ export default class PCheckbox extends PureElement implements ShoelaceFormContro
   }
 
   render() {
-    const hasHelpTextSlot = this.hasSlotController.test('help-text');
+    const hasHelpTextSlot = this.hasSlotController.test("help-text");
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
 
     //
@@ -198,37 +203,40 @@ export default class PCheckbox extends PureElement implements ShoelaceFormContro
     return html`
       <div
         class=${classMap({
-          'form-control': true,
-          'form-control--small': this.size === 'small',
-          'form-control--medium': this.size === 'medium',
-          'form-control--large': this.size === 'large',
-          'form-control--has-help-text': hasHelpText
+          "form-control": true,
+          "form-control--small": this.size === "small",
+          "form-control--medium": this.size === "medium",
+          "form-control--large": this.size === "large",
+          "form-control--has-help-text": hasHelpText,
         })}
       >
         <label
           part="base"
           class=${classMap({
             checkbox: true,
-            'checkbox--checked': this.checked,
-            'checkbox--disabled': this.disabled,
-            'checkbox--focused': this.hasFocus,
-            'checkbox--indeterminate': this.indeterminate,
-            'checkbox--small': this.size === 'small',
-            'checkbox--medium': this.size === 'medium',
-            'checkbox--large': this.size === 'large'
+            "checkbox--checked": this.checked,
+            "checkbox--disabled": this.disabled,
+            "checkbox--focused": this.hasFocus,
+            "checkbox--indeterminate": this.indeterminate,
+            "checkbox--small": this.size === "small",
+            "checkbox--medium": this.size === "medium",
+            "checkbox--large": this.size === "large",
           })}
         >
           <input
             class="checkbox__input"
             type="checkbox"
-            title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
+            title=${
+              this
+                .title /* An empty title prevents browser validation tooltips from appearing on hover */
+            }
             name=${this.name}
             value=${ifDefined(this.value)}
             .indeterminate=${live(this.indeterminate)}
             .checked=${live(this.checked)}
             .disabled=${this.disabled}
             .required=${this.required}
-            aria-checked=${this.checked ? 'true' : 'false'}
+            aria-checked=${this.checked ? "true" : "false"}
             aria-describedby="help-text"
             @click=${this.handleClick}
             @input=${this.handleInput}
@@ -238,16 +246,22 @@ export default class PCheckbox extends PureElement implements ShoelaceFormContro
           />
 
           <span
-            part="control${this.checked ? ' control--checked' : ''}${this.indeterminate
-              ? ' control--indeterminate'
-              : ''}"
+            part="control${this.checked ? " control--checked" : ""}${this
+              .indeterminate
+              ? " control--indeterminate"
+              : ""}"
             class="checkbox__control"
           >
             ${this.checked
               ? html`
-                  <p-icon part="checked-icon" class="checkbox__checked-icon" library="system" name="check"></p-icon>
+                  <p-icon
+                    part="checked-icon"
+                    class="checkbox__checked-icon"
+                    library="system"
+                    name="check"
+                  ></p-icon>
                 `
-              : ''}
+              : ""}
             ${!this.checked && this.indeterminate
               ? html`
                   <p-icon
@@ -257,7 +271,7 @@ export default class PCheckbox extends PureElement implements ShoelaceFormContro
                     name="indeterminate"
                   ></p-icon>
                 `
-              : ''}
+              : ""}
           </span>
 
           <div part="label" class="checkbox__label">
@@ -266,7 +280,7 @@ export default class PCheckbox extends PureElement implements ShoelaceFormContro
         </label>
 
         <div
-          aria-hidden=${hasHelpText ? 'false' : 'true'}
+          aria-hidden=${hasHelpText ? "false" : "true"}
           class="form-control__help-text"
           id="help-text"
           part="form-control-help-text"

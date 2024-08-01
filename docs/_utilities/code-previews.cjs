@@ -1,7 +1,11 @@
 let count = 1;
 
 function escapeHtml(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 /**
@@ -9,8 +13,8 @@ function escapeHtml(str) {
  */
 module.exports = function (doc, options) {
   options = {
-    within: 'body', // the element containing the code fields to convert
-    ...options
+    within: "body", // the element containing the code fields to convert
+    ...options,
   };
 
   const within = doc.querySelector(options.within);
@@ -18,16 +22,19 @@ module.exports = function (doc, options) {
     return doc;
   }
 
-  within.querySelectorAll('[class*=":preview"]').forEach(code => {
-    const pre = code.closest('pre');
+  within.querySelectorAll('[class*=":preview"]').forEach((code) => {
+    const pre = code.closest("pre");
     if (!pre) {
       return;
     }
-    const adjacentPre = pre.nextElementSibling?.tagName.toLowerCase() === 'pre' ? pre.nextElementSibling : null;
+    const adjacentPre =
+      pre.nextElementSibling?.tagName.toLowerCase() === "pre"
+        ? pre.nextElementSibling
+        : null;
     const reactCode = adjacentPre?.querySelector('code[class$="react"]');
     const sourceGroupId = `code-preview-source-group-${count}`;
-    const isExpanded = code.getAttribute('class').includes(':expanded');
-    const noCodePen = code.getAttribute('class').includes(':no-codepen');
+    const isExpanded = code.getAttribute("class").includes(":expanded");
+    const noCodePen = code.getAttribute("class").includes(":no-codepen");
 
     count++;
 
@@ -64,7 +71,7 @@ module.exports = function (doc, options) {
     `;
 
     const codePreview = `
-      <div class="code-preview ${isExpanded ? 'code-preview--expanded' : ''}">
+      <div class="code-preview ${isExpanded ? "code-preview--expanded" : ""}">
         <div class="code-preview__preview">
           ${code.textContent}
           <div class="code-preview__resizer">
@@ -73,7 +80,7 @@ module.exports = function (doc, options) {
         </div>
 
         <div class="code-preview__source-group" id="${sourceGroupId}">
-          <div class="code-preview__source code-preview__source--html" ${reactCode ? 'data-flavor="html"' : ''}>
+          <div class="code-preview__source code-preview__source--html" ${reactCode ? 'data-flavor="html"' : ""}>
             <pre><code class="language-html">${escapeHtml(code.textContent)}</code></pre>
           </div>
 
@@ -84,7 +91,7 @@ module.exports = function (doc, options) {
               <pre><code class="language-jsx">${escapeHtml(reactCode.textContent)}</code></pre>
             </div>
           `
-              : ''
+              : ""
           }
         </div>
 
@@ -92,7 +99,7 @@ module.exports = function (doc, options) {
           <button
             type="button"
             class="code-preview__button code-preview__toggle"
-            aria-expanded="${isExpanded ? 'true' : 'false'}"
+            aria-expanded="${isExpanded ? "true" : "false"}"
             aria-controls="${sourceGroupId}"
           >
             Source
@@ -108,14 +115,14 @@ module.exports = function (doc, options) {
             </svg>
           </button>
 
-          ${reactCode ? ` ${htmlButton} ${reactButton} ` : ''}
+          ${reactCode ? ` ${htmlButton} ${reactButton} ` : ""}
 
-          ${noCodePen ? '' : codePenButton}
+          ${noCodePen ? "" : codePenButton}
         </div>
       </div>
     `;
 
-    pre.insertAdjacentHTML('afterend', codePreview);
+    pre.insertAdjacentHTML("afterend", codePreview);
     pre.remove();
 
     if (adjacentPre) {
@@ -124,8 +131,8 @@ module.exports = function (doc, options) {
   });
 
   // Wrap code preview scripts in anonymous functions so they don't run in the global scope
-  doc.querySelectorAll('.code-preview__preview script').forEach(script => {
-    if (script.type === 'module') {
+  doc.querySelectorAll(".code-preview__preview script").forEach((script) => {
+    if (script.type === "module") {
       // Modules are already scoped
       script.textContent = script.innerHTML;
     } else {

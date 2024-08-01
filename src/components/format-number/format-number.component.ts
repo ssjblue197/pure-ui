@@ -1,6 +1,6 @@
-import { LocalizeController } from '../../utilities/localize.js';
-import { property } from 'lit/decorators.js';
-import PureElement from '../../internal/pure-ui-element.js';
+import { LocalizeController } from "../../utilities/localize.js";
+import { property } from "lit/decorators.js";
+import PureElement from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Formats a number using the specified locale and options.
@@ -15,35 +15,44 @@ export default class PFormatNumber extends PureElement {
   @property({ type: Number }) value = 0;
 
   /** The formatting style to use. */
-  @property() type: 'currency' | 'decimal' | 'percent' = 'decimal';
+  @property() type: "currency" | "decimal" | "percent" = "decimal";
 
   /** Turns off grouping separators. */
-  @property({ attribute: 'no-grouping', type: Boolean }) noGrouping = false;
+  @property({ attribute: "no-grouping", type: Boolean }) noGrouping = false;
 
   /** The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code to use when formatting. */
-  @property() currency = 'USD';
+  @property() currency = "USD";
 
   /** How to display the currency. */
-  @property({ attribute: 'currency-display' }) currencyDisplay: 'symbol' | 'narrowSymbol' | 'code' | 'name' = 'symbol';
+  @property({ attribute: "currency-display" }) currencyDisplay:
+    | "symbol"
+    | "narrowSymbol"
+    | "code"
+    | "name" = "symbol";
 
   /** The minimum number of integer digits to use. Possible values are 1-21. */
-  @property({ attribute: 'minimum-integer-digits', type: Number }) minimumIntegerDigits: number;
+  @property({ attribute: "minimum-integer-digits", type: Number })
+  minimumIntegerDigits: number;
 
   /** The minimum number of fraction digits to use. Possible values are 0-20. */
-  @property({ attribute: 'minimum-fraction-digits', type: Number }) minimumFractionDigits: number;
+  @property({ attribute: "minimum-fraction-digits", type: Number })
+  minimumFractionDigits: number;
 
   /** The maximum number of fraction digits to use. Possible values are 0-0. */
-  @property({ attribute: 'maximum-fraction-digits', type: Number }) maximumFractionDigits: number;
+  @property({ attribute: "maximum-fraction-digits", type: Number })
+  maximumFractionDigits: number;
 
   /** The minimum number of significant digits to use. Possible values are 1-21. */
-  @property({ attribute: 'minimum-significant-digits', type: Number }) minimumSignificantDigits: number;
+  @property({ attribute: "minimum-significant-digits", type: Number })
+  minimumSignificantDigits: number;
 
   /** The maximum number of significant digits to use,. Possible values are 1-21. */
-  @property({ attribute: 'maximum-significant-digits', type: Number }) maximumSignificantDigits: number;
+  @property({ attribute: "maximum-significant-digits", type: Number })
+  maximumSignificantDigits: number;
 
   render() {
     if (isNaN(this.value)) {
-      return '';
+      return "";
     }
 
     return this.localize.number(this.value, {
@@ -55,7 +64,7 @@ export default class PFormatNumber extends PureElement {
       minimumFractionDigits: this.minimumFractionDigits,
       maximumFractionDigits: this.maximumFractionDigits,
       minimumSignificantDigits: this.minimumSignificantDigits,
-      maximumSignificantDigits: this.maximumSignificantDigits
+      maximumSignificantDigits: this.maximumSignificantDigits,
     });
   }
 }

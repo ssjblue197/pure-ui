@@ -17,9 +17,9 @@ layout: component
 ```
 
 ```jsx:react
-import PBreadcrumb from '@pure-ui/core/dist/react/breadcrumb';
-import PBreadcrumbItem from '@pure-ui/core/dist/react/breadcrumb-item';
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PBreadcrumb from 'pure-uikit/dist/react/breadcrumb';
+import PBreadcrumbItem from 'pure-uikit/dist/react/breadcrumb-item';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const App = () => (
   <PBreadcrumb>

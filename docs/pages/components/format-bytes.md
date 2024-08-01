@@ -24,9 +24,9 @@ layout: component
 
 ```jsx:react
 import { useState } from 'react';
-import PButton from '@pure-ui/core/dist/react/button';
-import PFormatBytes from '@pure-ui/core/dist/react/format-bytes';
-import PInput from '@pure-ui/core/dist/react/input';
+import PButton from 'pure-uikit/dist/react/button';
+import PFormatBytes from 'pure-uikit/dist/react/format-bytes';
+import PInput from 'pure-uikit/dist/react/input';
 
 const App = () => {
   const [value, setValue] = useState(1000);
@@ -64,7 +64,7 @@ Set the `value` attribute to a number to get the value in bytes.
 ```
 
 ```jsx:react
-import PFormatBytes from '@pure-ui/core/dist/react/format-bytes';
+import PFormatBytes from 'pure-uikit/dist/react/format-bytes';
 
 const App = () => (
   <>
@@ -91,7 +91,7 @@ To get the value in bits, set the `unit` attribute to `bit`.
 ```
 
 ```jsx:react
-import PFormatBytes from '@pure-ui/core/dist/react/format-bytes';
+import PFormatBytes from 'pure-uikit/dist/react/format-bytes';
 
 const App = () => (
   <>
@@ -118,7 +118,7 @@ Use the `lang` attribute to set the number formatting locale.
 ```
 
 ```jsx:react
-import PFormatBytes from '@pure-ui/core/dist/react/format-bytes';
+import PFormatBytes from 'pure-uikit/dist/react/format-bytes';
 
 const App = () => (
   <>

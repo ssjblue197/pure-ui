@@ -1,24 +1,31 @@
-import '../../../dist/pure-ui.js';
-import { expect, fixture, html } from '@open-wc/testing';
-import sinon from 'sinon';
-import type PRelativeTime from './relative-time.js';
+import "../../../dist/pure-ui.js";
+import { expect, fixture, html } from "@open-wc/testing";
+import sinon from "sinon";
+import type PRelativeTime from "./relative-time.js";
 
 interface PRelativeTimeTestCase {
   date: Date;
   expectedOutput: string;
 }
 
-const extractTimeElement = (relativeTime: PRelativeTime): HTMLTimeElement | null => {
-  return relativeTime.shadowRoot?.querySelector('time') || null;
+const extractTimeElement = (
+  relativeTime: PRelativeTime,
+): HTMLTimeElement | null => {
+  return relativeTime.shadowRoot?.querySelector("time") || null;
 };
 
-const expectFormattedRelativeTimeToBe = async (relativeTime: PRelativeTime, expectedOutput: string): Promise<void> => {
+const expectFormattedRelativeTimeToBe = async (
+  relativeTime: PRelativeTime,
+  expectedOutput: string,
+): Promise<void> => {
   await relativeTime.updateComplete;
   const textContent = extractTimeElement(relativeTime)?.textContent;
   expect(textContent).to.equal(expectedOutput);
 };
 
-const createRelativeTimeWithDate = async (relativeDate: Date): Promise<PRelativeTime> => {
+const createRelativeTimeWithDate = async (
+  relativeDate: Date,
+): Promise<PRelativeTime> => {
   const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
     <p-relative-time lang="en-US"></p-relative-time>
   `);
@@ -33,51 +40,51 @@ const weekInSeconds = dayInSeconds * 7;
 const monthInSeconds = dayInSeconds * 30;
 const nonLeapYearInSeconds = dayInSeconds * 356;
 
-const currentTime = new Date('2022-10-30T15:22:10.100Z');
+const currentTime = new Date("2022-10-30T15:22:10.100Z");
 const yesterday = new Date(currentTime.getTime() - dayInSeconds);
 const testCases: PRelativeTimeTestCase[] = [
   {
     date: new Date(currentTime.getTime() - minuteInSeconds),
-    expectedOutput: '1 minute ago'
+    expectedOutput: "1 minute ago",
   },
   {
     date: new Date(currentTime.getTime() - hourInSeconds),
-    expectedOutput: '1 hour ago'
+    expectedOutput: "1 hour ago",
   },
   {
     date: yesterday,
-    expectedOutput: 'yesterday'
+    expectedOutput: "yesterday",
   },
   {
     date: new Date(currentTime.getTime() - 4 * dayInSeconds),
-    expectedOutput: '4 days ago'
+    expectedOutput: "4 days ago",
   },
   {
     date: new Date(currentTime.getTime() - weekInSeconds),
-    expectedOutput: 'last week'
+    expectedOutput: "last week",
   },
   {
     date: new Date(currentTime.getTime() - monthInSeconds),
-    expectedOutput: 'last month'
+    expectedOutput: "last month",
   },
   {
     date: new Date(currentTime.getTime() - nonLeapYearInSeconds),
-    expectedOutput: 'last year'
+    expectedOutput: "last year",
   },
   {
     date: new Date(currentTime.getTime() + minuteInSeconds),
-    expectedOutput: 'in 1 minute'
-  }
+    expectedOutput: "in 1 minute",
+  },
 ];
 
-describe('p-relative-time', () => {
-  it('should pass accessibility tests', async () => {
+describe("p-relative-time", () => {
+  it("should pass accessibility tests", async () => {
     const relativeTime = await createRelativeTimeWithDate(currentTime);
 
     await expect(relativeTime).to.be.accessible();
   });
 
-  describe('handles time correctly', () => {
+  describe("handles time correctly", () => {
     let clock: sinon.SinonFakeTimers | null = null;
 
     beforeEach(() => {
@@ -88,11 +95,14 @@ describe('p-relative-time', () => {
       clock?.restore();
     });
 
-    testCases.forEach(testCase => {
+    testCases.forEach((testCase) => {
       it(`shows the correct relative time given a Date object: ${testCase.expectedOutput}`, async () => {
         const relativeTime = await createRelativeTimeWithDate(testCase.date);
 
-        await expectFormattedRelativeTimeToBe(relativeTime, testCase.expectedOutput);
+        await expectFormattedRelativeTimeToBe(
+          relativeTime,
+          testCase.expectedOutput,
+        );
       });
 
       it(`shows the correct relative time given a String object: ${testCase.expectedOutput}`, async () => {
@@ -102,29 +112,32 @@ describe('p-relative-time', () => {
           <p-relative-time lang="en-US" date="${dateString}"></p-relative-time>
         `);
 
-        await expectFormattedRelativeTimeToBe(relativeTime, testCase.expectedOutput);
+        await expectFormattedRelativeTimeToBe(
+          relativeTime,
+          testCase.expectedOutput,
+        );
       });
     });
 
-    it('always shows numeric if requested via numeric property', async () => {
+    it("always shows numeric if requested via numeric property", async () => {
       const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
         <p-relative-time lang="en-US" numeric="always"></p-relative-time>
       `);
       relativeTime.date = yesterday;
 
-      await expectFormattedRelativeTimeToBe(relativeTime, '1 day ago');
+      await expectFormattedRelativeTimeToBe(relativeTime, "1 day ago");
     });
 
-    it('shows human readable form if appropriate and numeric property is auto', async () => {
+    it("shows human readable form if appropriate and numeric property is auto", async () => {
       const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
         <p-relative-time lang="en-US" numeric="auto"></p-relative-time>
       `);
       relativeTime.date = yesterday;
 
-      await expectFormattedRelativeTimeToBe(relativeTime, 'yesterday');
+      await expectFormattedRelativeTimeToBe(relativeTime, "yesterday");
     });
 
-    it('shows the set date with the proper attributes at the time object', async () => {
+    it("shows the set date with the proper attributes at the time object", async () => {
       const relativeTime = await createRelativeTimeWithDate(yesterday);
 
       await relativeTime.updateComplete;
@@ -132,52 +145,67 @@ describe('p-relative-time', () => {
       expect(timeElement?.dateTime).to.equal(yesterday.toISOString());
     });
 
-    it('allows to use a short form of the unit', async () => {
-      const twoYearsAgo = new Date(currentTime.getTime() - 2 * nonLeapYearInSeconds);
+    it("allows to use a short form of the unit", async () => {
+      const twoYearsAgo = new Date(
+        currentTime.getTime() - 2 * nonLeapYearInSeconds,
+      );
       const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
-        <p-relative-time lang="en-US" numeric="always" format="short"></p-relative-time>
+        <p-relative-time
+          lang="en-US"
+          numeric="always"
+          format="short"
+        ></p-relative-time>
       `);
       relativeTime.date = twoYearsAgo;
 
-      await expectFormattedRelativeTimeToBe(relativeTime, '2 yr. ago');
+      await expectFormattedRelativeTimeToBe(relativeTime, "2 yr. ago");
     });
 
-    it('allows to use a long form of the unit', async () => {
-      const twoYearsAgo = new Date(currentTime.getTime() - 2 * nonLeapYearInSeconds);
+    it("allows to use a long form of the unit", async () => {
+      const twoYearsAgo = new Date(
+        currentTime.getTime() - 2 * nonLeapYearInSeconds,
+      );
       const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
-        <p-relative-time lang="en-US" numeric="always" format="long"></p-relative-time>
+        <p-relative-time
+          lang="en-US"
+          numeric="always"
+          format="long"
+        ></p-relative-time>
       `);
       relativeTime.date = twoYearsAgo;
 
-      await expectFormattedRelativeTimeToBe(relativeTime, '2 years ago');
+      await expectFormattedRelativeTimeToBe(relativeTime, "2 years ago");
     });
 
-    it('is formatted according to the requested locale', async () => {
+    it("is formatted according to the requested locale", async () => {
       const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
         <p-relative-time lang="de-DE" numeric="auto"></p-relative-time>
       `);
       relativeTime.date = yesterday;
 
-      await expectFormattedRelativeTimeToBe(relativeTime, 'gestern');
+      await expectFormattedRelativeTimeToBe(relativeTime, "gestern");
     });
 
-    it('keeps the component in sync if requested', async () => {
+    it("keeps the component in sync if requested", async () => {
       const relativeTime = await createRelativeTimeWithDate(yesterday);
       relativeTime.sync = true;
 
-      await expectFormattedRelativeTimeToBe(relativeTime, 'yesterday');
+      await expectFormattedRelativeTimeToBe(relativeTime, "yesterday");
 
       clock?.tick(dayInSeconds);
 
-      await expectFormattedRelativeTimeToBe(relativeTime, '2 days ago');
+      await expectFormattedRelativeTimeToBe(relativeTime, "2 days ago");
     });
   });
 
-  it('does not display a time element on invalid time string', async () => {
-    const invalidDateString = 'thisIsNotATimeString';
+  it("does not display a time element on invalid time string", async () => {
+    const invalidDateString = "thisIsNotATimeString";
 
     const relativeTime: PRelativeTime = await fixture<PRelativeTime>(html`
-      <p-relative-time lang="en-US" date="${invalidDateString}"></p-relative-time>
+      <p-relative-time
+        lang="en-US"
+        date="${invalidDateString}"
+      ></p-relative-time>
     `);
 
     await relativeTime.updateComplete;

@@ -14,7 +14,7 @@ The included content will be inserted into the `<p-include>` element's default s
 ```
 
 ```jsx:react
-import PInclude from '@pure-ui/core/dist/react/include';
+import PInclude from 'pure-uikit/dist/react/include';
 
 const App = () => <PInclude src="https://pureui.xyz/assets/examples/include.html" />;
 ```
@@ -31,17 +31,17 @@ If the request fails, the `p-error` event will be emitted. In this case, `event.
 <p-include src="https://pureui.xyz/assets/examples/include.html"></p-include>
 
 <script>
-  const include = document.querySelector('p-include');
+  const include = document.querySelector("p-include");
 
-  include.addEventListener('p-load', event => {
+  include.addEventListener("p-load", (event) => {
     if (event.eventPhase === Event.AT_TARGET) {
-      console.log('Success');
+      console.log("Success");
     }
   });
 
-  include.addEventListener('p-error', event => {
+  include.addEventListener("p-error", (event) => {
     if (event.eventPhase === Event.AT_TARGET) {
-      console.log('Error', event.detail.status);
+      console.log("Error", event.detail.status);
     }
   });
 </script>

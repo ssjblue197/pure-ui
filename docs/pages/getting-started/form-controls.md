@@ -21,7 +21,7 @@ Serialization is just a fancy word for collecting form data. If you're relying o
 The [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) interface offers a standard way to serialize forms in the browser. You can create a `FormData` object from any `<form>` element like this.
 
 ```js
-const form = document.querySelector('form');
+const form = document.querySelector("form");
 const data = new FormData(form);
 
 // All form control data is available in a FormData object
@@ -30,9 +30,9 @@ const data = new FormData(form);
 However, some folks find `FormData` tricky to work with or they need to pass a JSON payload to their server. To accommodate this, Pure UI offers a serialization utility that gathers form data and returns a simple JavaScript object instead.
 
 ```js
-import { serialize } from '@pure-ui/core/dist/utilities/form.js';
+import { serialize } from "pure-uikit/dist/utilities/form.js";
 
-const form = document.querySelector('form');
+const form = document.querySelector("form");
 const data = serialize(form);
 
 // All form control data is available in a plain object
@@ -99,12 +99,12 @@ The form will not be submitted if a required field is incomplete.
 ```
 
 ```jsx:react
-import SlButton from '@pure-ui/core/dist/react/button';
-import SlCheckbox from '@pure-ui/core/dist/react/checkbox';
-import SlInput from '@pure-ui/core/dist/react/input';
-import SlMenuItem from '@pure-ui/core/dist/react/menu-item';
-import SlSelect from '@pure-ui/core/dist/react/select';
-import SlTextarea from '@pure-ui/core/dist/react/textarea';
+import SlButton from 'pure-uikit/dist/react/button';
+import SlCheckbox from 'pure-uikit/dist/react/checkbox';
+import SlInput from 'pure-uikit/dist/react/input';
+import SlMenuItem from 'pure-uikit/dist/react/menu-item';
+import SlSelect from 'pure-uikit/dist/react/select';
+import SlTextarea from 'pure-uikit/dist/react/textarea';
 
 const App = () => {
   function handleSubmit(event) {
@@ -165,8 +165,8 @@ To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/
 ```
 
 ```jsx:react
-import SlButton from '@pure-ui/core/dist/react/button';
-import SlInput from '@pure-ui/core/dist/react/input';
+import SlButton from 'pure-uikit/dist/react/button';
+import SlInput from 'pure-uikit/dist/react/input';
 
 const App = () => {
   function handleSubmit(event) {
@@ -217,8 +217,8 @@ Some input types will automatically trigger constraints, such as `email` and `ur
 ```
 
 ```jsx:react
-import SlButton from '@pure-ui/core/dist/react/button';
-import SlInput from '@pure-ui/core/dist/react/input';
+import SlButton from 'pure-uikit/dist/react/button';
+import SlInput from 'pure-uikit/dist/react/input';
 
 const App = () => {
   function handleSubmit(event) {
@@ -279,8 +279,8 @@ To create a custom validation error, pass a non-empty string to the `setCustomVa
 
 ```jsx:react
 import { useRef, useState } from 'react';
-import SlButton from '@pure-ui/core/dist/react/button';
-import SlInput from '@pure-ui/core/dist/react/input';
+import SlButton from 'pure-uikit/dist/react/button';
+import SlInput from 'pure-uikit/dist/react/input';
 
 const App = () => {
   const input = useRef(null);
@@ -557,9 +557,9 @@ This example is meant to demonstrate the concept of providing your own error mes
 At this time, using [`HTMLFormElement.elements`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements) will not return Pure UI form controls because the browser is unaware of their status as custom element form controls. Fortunately, Pure UI provides an `elements()` function that does something very similar. However, instead of returning an [`HTMLFormControlsCollection`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection), it returns an array of HTML and Pure UI form controls in the order they appear in the DOM.
 
 ```js
-import { getFormControls } from '@pure-ui/core/dist/utilities/form.js';
+import { getFormControls } from "pure-uikit/dist/utilities/form.js";
 
-const form = document.querySelector('#my-form');
+const form = document.querySelector("#my-form");
 const formControls = getFormControls(form);
 
 console.log(formControls); // e.g. [input, p-input, ...]

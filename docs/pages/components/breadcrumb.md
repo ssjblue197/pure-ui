@@ -17,8 +17,8 @@ Breadcrumbs are usually placed before a page's main content with the current pag
 ```
 
 ```jsx:react
-import PBreadcrumb from '@pure-ui/core/dist/react/breadcrumb';
-import PBreadcrumbItem from '@pure-ui/core/dist/react/breadcrumb-item';
+import PBreadcrumb from 'pure-uikit/dist/react/breadcrumb';
+import PBreadcrumbItem from 'pure-uikit/dist/react/breadcrumb-item';
 
 const App = () => (
   <PBreadcrumb>
@@ -51,8 +51,8 @@ For websites, you'll probably want to use links instead. You can make any breadc
 ```
 
 ```jsx:react
-import PBreadcrumb from '@pure-ui/core/dist/react/breadcrumb';
-import PBreadcrumbItem from '@pure-ui/core/dist/react/breadcrumb-item';
+import PBreadcrumb from 'pure-uikit/dist/react/breadcrumb';
+import PBreadcrumbItem from 'pure-uikit/dist/react/breadcrumb-item';
 
 const App = () => (
   <PBreadcrumb>
@@ -99,9 +99,9 @@ Use the `separator` slot to change the separator that goes between breadcrumb it
 ```
 
 ```jsx:react
-import '@pure-ui/core/dist/components/icon/icon.js';
-import PBreadcrumb from '@pure-ui/core/dist/react/breadcrumb';
-import PBreadcrumbItem from '@pure-ui/core/dist/react/breadcrumb-item';
+import 'pure-uikit/dist/components/icon/icon.js';
+import PBreadcrumb from 'pure-uikit/dist/react/breadcrumb';
+import PBreadcrumbItem from 'pure-uikit/dist/react/breadcrumb-item';
 
 const App = () => (
   <>
@@ -149,9 +149,9 @@ Use the `prefix` slot to add content before any breadcrumb item.
 ```
 
 ```jsx:react
-import PBreadcrumb from '@pure-ui/core/dist/react/breadcrumb';
-import PBreadcrumbItem from '@pure-ui/core/dist/react/breadcrumb-item';
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PBreadcrumb from 'pure-uikit/dist/react/breadcrumb';
+import PBreadcrumbItem from 'pure-uikit/dist/react/breadcrumb-item';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const App = () => (
   <PBreadcrumb>
@@ -181,9 +181,9 @@ Use the `suffix` slot to add content after any breadcrumb item.
 ```
 
 ```jsx:react
-import PBreadcrumb from '@pure-ui/core/dist/react/breadcrumb';
-import PBreadcrumbItem from '@pure-ui/core/dist/react/breadcrumb-item';
-import PIcon from '@pure-ui/core/dist/react/icon';
+import PBreadcrumb from 'pure-uikit/dist/react/breadcrumb';
+import PBreadcrumbItem from 'pure-uikit/dist/react/breadcrumb-item';
+import PIcon from 'pure-uikit/dist/react/icon';
 
 const App = () => (
   <PBreadcrumb>
@@ -231,7 +231,7 @@ import {
   PIcon,
   PMenu,
   PMenuItem
-} from '@pure-ui/core/dist/react';
+} from 'pure-uikit/dist/react';
 
 const App = () => (
   <PBreadcrumb>

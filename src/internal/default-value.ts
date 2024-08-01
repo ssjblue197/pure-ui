@@ -14,11 +14,11 @@
 //  @defaultValue('checked') defaultChecked = false;
 //
 
-import { defaultConverter } from 'lit';
-import type { ReactiveElement } from 'lit';
+import { defaultConverter } from "lit";
+import type { ReactiveElement } from "lit";
 
 export const defaultValue =
-  (propertyName = 'value') =>
+  (propertyName = "value") =>
   (proto: ReactiveElement, key: string) => {
     const ctor = proto.constructor as typeof ReactiveElement;
 
@@ -27,15 +27,20 @@ export const defaultValue =
       this: ReactiveElement & { [name: string]: unknown },
       name,
       old,
-      value
+      value,
     ) {
       const options = ctor.getPropertyOptions(propertyName);
-      const attributeName = typeof options.attribute === 'string' ? options.attribute : propertyName;
+      const attributeName =
+        typeof options.attribute === "string"
+          ? options.attribute
+          : propertyName;
 
       if (name === attributeName) {
         const converter = options.converter || defaultConverter;
         const fromAttribute =
-          typeof converter === 'function' ? converter : converter?.fromAttribute ?? defaultConverter.fromAttribute;
+          typeof converter === "function"
+            ? converter
+            : converter?.fromAttribute ?? defaultConverter.fromAttribute;
 
         const newValue: unknown = fromAttribute!(value, options.type);
 
