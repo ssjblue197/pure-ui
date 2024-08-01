@@ -1139,16 +1139,6 @@
   resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.19.2.tgz#d67206c5f2e4b2832ce360bbbde194e96d16dc51"
   integrity sha512-DPi0ubYhSow/00YqmG1jWm3qt1F8aXziHc/UNy8bo9cpCacqhuWu+iSq/fp2SyEQK7iYTZ60fBU9cat3MXTjIQ==
 
-"@shoelace-style/animations@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@shoelace-style/animations/-/animations-1.1.0.tgz#17539abafd6dcbf2a79e089e1593175e9f7835b5"
-  integrity sha512-Be+cahtZyI2dPKRm8EZSx3YJQ+jLvEcn3xzRP7tM4tqBnvd/eW/64Xh0iOf0t2w5P8iJKfdBbpVNE9naCaOf2g==
-
-"@shoelace-style/localize@^3.1.2":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@shoelace-style/localize/-/localize-3.2.1.tgz#9aa0078bef68a357070b104df95c75701c962c79"
-  integrity sha512-r4C9C/5kSfMBIr0D9imvpRdCNXtUNgyYThc4YlS6K5Hchv1UyxNQ9mxwj+BTRH2i1Neits260sR3OjKMnplsFA==
-
 "@sigstore/bundle@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@sigstore/bundle/-/bundle-1.1.0.tgz#17f8d813b09348b16eeed66a8cf1c3d6bd3d04f1"
@@ -8450,6 +8440,16 @@ puppeteer-core@^22.0.0:
     debug "^4.3.6"
     devtools-protocol "0.0.1312386"
     ws "^8.18.0"
+
+pure-animations@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/pure-animations/-/pure-animations-1.0.0.tgz#b6c8f2b1db898c6d1811f8f409b219022aebd7ce"
+  integrity sha512-ESOGh4ZJl/+rf14ACTxJZzNQ2oDYRGug0UsOMsXX94frv5dRADbaIPumuzbG9tJpZi9Ell5XMBIkyjHLQ+O08Q==
+
+pure-localize@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/pure-localize/-/pure-localize-1.0.0.tgz#31c82c9e65e4078daa5598f0a4d123054d297e2d"
+  integrity sha512-tBn5aW4qOsBnmnl4uPdkgAfIfT2SF+EHIK8R3WFfwvevX9UamaP32KMgduSHZNsZNkaXd7EM9F8zQGG8Yt/xYA==
 
 q-io@1.13.2:
   version "1.13.2"

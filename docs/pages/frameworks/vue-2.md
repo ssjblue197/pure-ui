@@ -73,20 +73,20 @@ One caveat is there's currently [no support for v-model on custom elements](http
 <p-input :value="name" @input="name = $event.target.value"></p-input>
 ```
 
-If that's too verbose for your liking, you can use a custom directive instead. [This utility](https://www.npmjs.com/package/@shoelace-style/vue-p-model) adds a custom directive that will work just like `v-model` but for Pure UI components. To install it, use this command.
+If that's too verbose for your liking, you can use a custom directive instead. [This utility](https://www.npmjs.com/package/pure-v-model) adds a custom directive that will work just like `v-model` but for Pure UI components. To install it, use this command.
 
 ```bash
-npm install @shoelace-style/vue-p-model@1
+npm install pure-v-model@1.0.1
 ```
 
 Next, import the directive and enable it like this.
 
 ```js
 import Vue from 'vue';
-import Pure UIModelDirective from '@shoelace-style/vue-p-model';
+import PureUIModelDirective from 'pure-v-model';
 import App from './App.vue';
 
-Vue.use(Pure UIModelDirective);
+Vue.use(PureUIModelDirective);
 Vue.config.ignoredElements = [/p-/];
 
 const app = new Vue({

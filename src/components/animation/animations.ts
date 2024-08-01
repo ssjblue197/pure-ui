@@ -1,4 +1,4 @@
-import * as animations from "@shoelace-style/animations";
+import * as animations from "pure-animations";
 
 export { animations };
 

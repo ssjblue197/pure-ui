@@ -106,7 +106,7 @@ One caveat is there's currently [no support for v-model on custom elements](http
 <p-input :value="name" @input="name = $event.target.value"></p-input>
 ```
 
-If that's too verbose for your liking, you can use a custom directive instead. [This utility](https://www.npmjs.com/package/@shoelace-style/vue-p-model) adds a custom directive that will work just like `v-model` but for Pure UI components.
+If that's too verbose for your liking, you can use a custom directive instead. [This utility](https://www.npmjs.com/package/pure-v-model) adds a custom directive that will work just like `v-model` but for Pure UI components.
 
 :::tip
 Are you using Pure UI with Vue? [Help us improve this page!](https://github.com/ssjblue197/pure-ui/blob/next/docs/frameworks/vue.md)

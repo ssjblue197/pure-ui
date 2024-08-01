@@ -71,8 +71,8 @@
         "@ctrl/tinycolor": "^4.0.2",
         "@floating-ui/dom": "^1.5.3",
         "@lit/react": "^1.0.0",
-        "@shoelace-style/animations": "^1.1.0",
-        "@shoelace-style/localize": "^3.1.2",
+        "pure-animations": "^1.0.0",
+        "pure-localize": "^1.0.0",
         "composed-offset-position": "^0.0.4",
         "lit": "^3.0.0",
         "qr-creator": "^1.0.0"
