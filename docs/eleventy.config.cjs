@@ -103,7 +103,7 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("classNameToComponentName", className => {
-    let name = capitalCase(className.replace(/^Sl/, ""));
+    let name = capitalCase(className.replace(/^P/, ""));
     if (name === "Qr Code") name = "QR Code"; // manual override
     return name;
   });

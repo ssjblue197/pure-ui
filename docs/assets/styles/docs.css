@@ -8,26 +8,27 @@
   --docs-sidebar-transition-speed: 250ms;
   --docs-content-toc-max-width: 260px;
   --docs-content-padding: 2rem;
-  --docs-content-vertical-spacing: 0rem;
+  --docs-content-vertical-spacing: 1rem;
   --docs-search-overlay-background: rgb(0 0 0 / 0.2);
   --docs-skip-to-main-width: 200px;
+  --p-font-weight-semibold: 600 !important;
 }
 
 /* Light theme */
 :root {
   color-scheme: normal;
 
-  --p-color-primary-50: var(--p-color-green-50);
-  --p-color-primary-100: var(--p-color-green-100);
-  --p-color-primary-200: var(--p-color-green-200);
-  --p-color-primary-300: var(--p-color-green-300);
-  --p-color-primary-400: var(--p-color-green-400);
-  --p-color-primary-500: var(--p-color-green-500);
-  --p-color-primary-600: var(--p-color-green-600);
-  --p-color-primary-700: var(--p-color-green-700);
-  --p-color-primary-800: var(--p-color-green-800);
-  --p-color-primary-900: var(--p-color-green-900);
-  --p-color-primary-950: var(--p-color-green-950);
+  --p-color-primary-50: var(--p-color-indigo-50) !important;
+  --p-color-primary-100: var(--p-color-indigo-100) !important;
+  --p-color-primary-200: var(--p-color-indigo-200) !important;
+  --p-color-primary-300: var(--p-color-indigo-300) !important;
+  --p-color-primary-400: var(--p-color-indigo-400) !important;
+  --p-color-primary-500: var(--p-color-indigo-500) !important;
+  --p-color-primary-600: var(--p-color-indigo-600) !important;
+  --p-color-primary-700: var(--p-color-indigo-700) !important;
+  --p-color-primary-800: var(--p-color-indigo-800) !important;
+  --p-color-primary-900: var(--p-color-indigo-900) !important;
+  --p-color-primary-950: var(--p-color-indigo-950) !important;
 
   --docs-overlay-color: hsl(240 3.8% 46.1% / 33%);
   --docs-shadow-x-small: 0 1px 2px hsl(240 3.8% 46.1% / 12%);
@@ -759,7 +760,7 @@ pre:hover .copy-code-button,
 #sidebar ul li {
   list-style: none;
   padding: 0;
-  margin: 0.125rem 0.5rem;
+  margin: 0.125rem 0rem;
 }
 
 #sidebar ul ul ul {
@@ -770,16 +771,21 @@ pre:hover .copy-code-button,
   line-height: 1.33;
   color: inherit;
   display: inline-block;
-  padding: 0;
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 0.75rem;
 }
 
 #sidebar ul li a:not(.active-link):hover {
   color: var(--p-color-primary-700);
+  border-bottom: dashed 1px var(--p-color-primary-600);
+  background-color: var(--p-color-primary-50);
 }
 
 #sidebar nav .active-link {
   color: var(--p-color-primary-700);
   border-bottom: dashed 1px var(--p-color-primary-700);
+  background-color: var(--p-color-primary-100);
 }
 
 #sidebar > header img {

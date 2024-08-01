@@ -24,7 +24,7 @@ The [discussion forum](https://github.com/ssjblue197/pure-ui/discussions) is ope
   Join the Discussion
 </p-button>
 
-## Community Chat
+<!-- ## Community Chat
 
 The [community chat](https://discord.gg/mg8f26C) is open to the public and powered by [Discord](https://discord.com/). This is a good place to:
 
@@ -36,7 +36,7 @@ The [community chat](https://discord.gg/mg8f26C) is open to the public and power
 <p-button variant="primary" href="https://discord.gg/mg8f26C" target="_blank">
   <p-icon name="discord" slot="prefix"></p-icon>
   Join the Chat
-</p-button>
+</p-button> -->
 
 ## Stack Overflow
 

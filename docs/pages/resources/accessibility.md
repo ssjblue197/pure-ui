@@ -20,5 +20,5 @@ I’m fully aware that I may not get it right every time for every user, so I in
 
 This is the path forward. Together, we will continue to make Pure UI accessible to as many users as possible.
 
-— Cory LaViska<br>
+— Mr.P —<br>
 _Creator of Pure UI_

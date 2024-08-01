@@ -41,7 +41,7 @@ body.search-visible {
   align-items: center;
   width: 100%;
   border: none;
-  border-radius: 9999px;
+  border-radius: 12px;
   background: var(--docs-search-box-background);
   border: solid var(--docs-search-box-border-width) var(--docs-search-box-border-color);
   font: inherit;
