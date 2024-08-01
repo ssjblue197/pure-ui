@@ -40,12 +40,12 @@ Preact users facing type errors using components may benefit from setting "paths
 
 ### Importing Components
 
-Every Pure UI component is available to import as a React component. Note that we're importing the `<SlButton>` _React component_ instead of the `<p-button>` _custom element_ in the example below.
+Every Pure UI component is available to import as a React component. Note that we're importing the `<PButton>` _React component_ instead of the `<p-button>` _custom element_ in the example below.
 
 ```jsx
-import SlButton from "pure-uikit/%NPMDIR%/react/button";
+import PButton from "pure-uikit/%NPMDIR%/react/button";
 
-const MyComponent = () => <SlButton variant="primary">Click me</SlButton>;
+const MyComponent = () => <PButton variant="primary">Click me</PButton>;
 
 export default MyComponent;
 ```
@@ -55,35 +55,35 @@ export default MyComponent;
 Previously, it was recommended to import from a single entrypoint like so:
 
 ```jsx
-import { SlButton } from "pure-uikit/%NPMDIR%/react";
+import { PButton } from "pure-uikit/%NPMDIR%/react";
 ```
 
 However, tree-shaking extra Pure UI components proved to be a challenge. As a result, we now recommend cherry-picking components you want to use, rather than importing from a single entrypoint.
 
 ```diff
-- import { SlButton } from 'pure-uikit/%NPMDIR%/react';
-+ import SlButton from 'pure-uikit/%NPMDIR%/react/button';
+- import { PButton } from 'pure-uikit/%NPMDIR%/react';
++ import PButton from 'pure-uikit/%NPMDIR%/react/button';
 ```
 
 You can find a copy + paste import for each component in the "importing" section of its documentation.
 
 ### Event Handling
 
-Many Pure UI components emit [custom events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent). For example, the [input component](/components/input) emits the `p-input` event when it receives input. In React, you can listen for the event using `onSlInput`.
+Many Pure UI components emit [custom events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent). For example, the [input component](/components/input) emits the `p-input` event when it receives input. In React, you can listen for the event using `onPInput`.
 
 Here's how you can bind the input's value to a state variable.
 
 ```jsx
 import { useState } from "react";
-import SlInput from "pure-uikit/%NPMDIR%/react/input";
+import PInput from "pure-uikit/%NPMDIR%/react/input";
 
 function MyComponent() {
   const [value, setValue] = useState("");
 
   return (
-    <SlInput
+    <PInput
       value={value}
-      onSlInput={(event) => setValue(event.target.value)}
+      onPInput={(event) => setValue(event.target.value)}
     />
   );
 }
@@ -95,16 +95,16 @@ If you're using TypeScript, it's important to note that `event.target` will be a
 
 ```tsx
 import { useState } from "react";
-import SlInput from "pure-uikit/%NPMDIR%/react/input";
-import type SlInputElement from "pure-uikit/%NPMDIR%/components/input/input";
+import PInput from "pure-uikit/%NPMDIR%/react/input";
+import type PInputElement from "pure-uikit/%NPMDIR%/components/input/input";
 
 function MyComponent() {
   const [value, setValue] = useState("");
 
   return (
-    <SlInput
+    <PInput
       value={value}
-      onSlInput={(event) => setValue((event.target as SlInputElement).value)}
+      onPInput={(event) => setValue((event.target as PInputElement).value)}
     />
   );
 }
@@ -116,19 +116,19 @@ You can also import the event type for use in your callbacks, shown below.
 
 ```tsx
 import { useCallback, useState } from "react";
-import SlInput, { type SlInputEvent } from "pure-uikit/%NPMDIR%/react/input";
-import type SlInputElement from "pure-uikit/%NPMDIR%/components/input/input";
+import PInput, { type PInputEvent } from "pure-uikit/%NPMDIR%/react/input";
+import type PInputElement from "pure-uikit/%NPMDIR%/components/input/input";
 
 function MyComponent() {
   const [value, setValue] = useState("");
-  const onInput = useCallback((event: SlInputEvent) => {
+  const onInput = useCallback((event: PInputEvent) => {
     setValue(event.detail);
   }, []);
 
   return (
-    <SlInput
+    <PInput
       value={value}
-      onSlInput={(event) => setValue((event.target as SlInputElement).value)}
+      onPInput={(event) => setValue((event.target as PInputElement).value)}
     />
   );
 }

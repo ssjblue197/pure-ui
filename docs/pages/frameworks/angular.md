@@ -77,7 +77,7 @@ export class AppModule {}
 ## Reference Pure UI components in your Angular component code
 
 ```js
-import { SlDrawer } from 'pure-uikit';
+import { PDrawer } from 'pure-uikit';
 
 @Component({
   selector: 'app-drawer-example',
@@ -87,7 +87,7 @@ export class DrawerExampleComponent implements OnInit {
 
   // use @ViewChild to get a reference to the #drawer element within component template
   @ViewChild('drawer')
-  drawer?: ElementRef<SlDrawer>;
+  drawer?: ElementRef<PDrawer>;
 
   ...
 
