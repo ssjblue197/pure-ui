@@ -12,7 +12,7 @@ By default, a generic icon will be shown. You can personalize avatars by adding 
 ```
 
 ```jsx:react
-import PAvatar from '@shoelace-style/shoelace/dist/react/avatar';
+import PAvatar from '@pure-ui/core/dist/react/avatar';
 
 const App = () => <PAvatar label="User avatar" />;
 ```
@@ -37,7 +37,7 @@ Avatar images can be lazily loaded by setting the `loading` attribute to `lazy`.
 ```
 
 ```jsx:react
-import PAvatar from '@shoelace-style/shoelace/dist/react/avatar';
+import PAvatar from '@pure-ui/core/dist/react/avatar';
 
 const App = () => (
   <PAvatar
@@ -61,7 +61,7 @@ When you don't have an image to use, you can set the `initials` attribute to sho
 ```
 
 ```jsx:react
-import PAvatar from '@shoelace-style/shoelace/dist/react/avatar';
+import PAvatar from '@pure-ui/core/dist/react/avatar';
 
 const App = () => <PAvatar initials="SL" label="Avatar with initials: SL" />;
 ```
@@ -85,8 +85,8 @@ When no image or initials are set, an icon will be shown. The default avatar sho
 ```
 
 ```jsx:react
-import PAvatar from '@shoelace-style/shoelace/dist/react/avatar';
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PAvatar from '@pure-ui/core/dist/react/avatar';
+import PIcon from '@pure-ui/core/dist/react/icon';
 
 const App = () => (
   <>
@@ -116,8 +116,8 @@ Avatars can be shaped using the `shape` attribute.
 ```
 
 ```jsx:react
-import PAvatar from '@shoelace-style/shoelace/dist/react/avatar';
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PAvatar from '@pure-ui/core/dist/react/avatar';
+import PIcon from '@pure-ui/core/dist/react/icon';
 
 const App = () => (
   <>
@@ -167,8 +167,8 @@ You can group avatars with a few lines of CSS.
 ```
 
 ```jsx:react
-import PAvatar from '@shoelace-style/shoelace/dist/react/avatar';
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PAvatar from '@pure-ui/core/dist/react/avatar';
+import PIcon from '@pure-ui/core/dist/react/icon';
 
 const css = `
   .avatar-group p-avatar:not(:first-of-type) {

@@ -36,7 +36,7 @@ The resize observer will report changes to the dimensions of the elements it wra
 ```
 
 ```jsx:react
-import PResizeObserver from '@shoelace-style/shoelace/dist/react/resize-observer';
+import PResizeObserver from '@pure-ui/core/dist/react/resize-observer';
 
 const css = `
   .resize-observer-overview div {

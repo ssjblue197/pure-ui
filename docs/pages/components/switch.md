@@ -10,7 +10,7 @@ layout: component
 ```
 
 ```jsx:react
-import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PSwitch from '@pure-ui/core/dist/react/switch';
 
 const App = () => <PSwitch>Switch</PSwitch>;
 ```
@@ -30,7 +30,7 @@ Use the `checked` attribute to activate the switch.
 ```
 
 ```jsx:react
-import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PSwitch from '@pure-ui/core/dist/react/switch';
 
 const App = () => <PSwitch checked>Checked</PSwitch>;
 ```
@@ -44,7 +44,7 @@ Use the `disabled` attribute to disable the switch.
 ```
 
 ```jsx:react
-import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PSwitch from '@pure-ui/core/dist/react/switch';
 
 const App = () => <PSwitch disabled>Disabled</PSwitch>;
 ```
@@ -62,7 +62,7 @@ Use the `size` attribute to change a switch's size.
 ```
 
 ```jsx:react
-import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PSwitch from '@pure-ui/core/dist/react/switch';
 
 const App = () => (
   <>
@@ -84,7 +84,7 @@ Add descriptive help text to a switch with the `help-text` attribute. For help t
 ```
 
 ```jsx:react
-import PSwitch from '@shoelace-style/shoelace/dist/react/checkbox';
+import PSwitch from '@pure-ui/core/dist/react/checkbox';
 
 const App = () => <PSwitch help-text="What should the user know about the switch?">Label</PSwitch>;
 ```
@@ -100,7 +100,7 @@ Use the available custom properties to change how the switch is styled.
 {% raw %}
 
 ```jsx:react
-import PSwitch from '@shoelace-style/shoelace/dist/react/switch';
+import PSwitch from '@pure-ui/core/dist/react/switch';
 
 const App = () => (
   <PSwitch

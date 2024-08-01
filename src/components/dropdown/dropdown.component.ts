@@ -298,7 +298,7 @@ export default class PDropdown extends PureElement {
 
     if (accessibleTrigger) {
       switch (accessibleTrigger.tagName.toLowerCase()) {
-        // Shoelace buttons have to update the internal button so it's announced correctly by screen readers
+        // Pure UI buttons have to update the internal button so it's announced correctly by screen readers
         case 'p-button':
         case 'p-icon-button':
           target = (accessibleTrigger as PButton | PIconButton).button;

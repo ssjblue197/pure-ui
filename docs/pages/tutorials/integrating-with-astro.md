@@ -9,7 +9,7 @@ meta:
 This page explains how to integrate Pure UI with an Astro app.
 
 :::tip
-This is a community-maintained document. Please [ask the community](/resources/community) if you have questions about this integration. You can also [suggest improvements](https://github.com/shoelace-style/shoelace/blob/next/docs/tutorials/integrating-with-astro.md) to make it better.
+This is a community-maintained document. Please [ask the community](/resources/community) if you have questions about this integration. You can also [suggest improvements](https://github.com/ssjblue197/pure-ui/blob/next/docs/tutorials/integrating-with-astro.md) to make it better.
 :::
 
 ## SSR and client scripts
@@ -27,7 +27,7 @@ There is a [Lit + Astro integration for SSR](https://docs.astro.build/en/guides/
 To get started using Pure UI with Astro, the following packages must be installed.
 
 ```bash
-npm install @shoelace-style/shoelace rollup-plugin-copy
+npm install @pure-ui/core rollup-plugin-copy
 ```
 
 ### Importing components
@@ -37,7 +37,7 @@ In `/src/pages/index.astro`, set the base path and import Pure UI.
 ```html
 ---
 // import default stylesheet
-import "@shoelace-style/shoelace/dist/themes/light.css";
+import "@pure-ui/core/dist/themes/light.css";
 ---
 
 <html>
@@ -48,16 +48,16 @@ import "@shoelace-style/shoelace/dist/themes/light.css";
 
 <script>
   // setBasePath to tell Pure UI where to load icons from.
-  import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
-  setBasePath('/shoelace-assets/');
+  import { setBasePath } from '@pure-ui/core/dist/utilities/base-path.js';
+  setBasePath('/pure-ui-assets/');
 
   // Load all components.
-  import '@shoelace-style/shoelace';
+  import '@pure-ui/core';
 </script>
 ```
 
 :::tip
-If you want to cherry pick components, replace the main Pure UI import with 'import "@shoelace-style/shoelace/dist/components/button/button.js";' for whichever component you would like.
+If you want to cherry pick components, replace the main Pure UI import with 'import "@pure-ui/core/dist/components/button/button.js";' for whichever component you would like.
 :::
 
 You only have to import in the main `index.astro` file. The components can be used anywhere throughout the project.
@@ -68,7 +68,7 @@ In `/src/pages/index.astro`, set custom animations after the Pure UI import.
 
 ```html
 ---
-import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
+import { setBasePath } from "@pure-ui/core/dist/utilities/base-path.js";
 setBasePath("dist/assets");
 ---
 
@@ -82,14 +82,14 @@ setBasePath("dist/assets");
 
 <script>
   // setBasePath to tell Pure UI where to load icons from.
-  import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
-  setBasePath('/shoelace-assets/');
+  import { setBasePath } from '@pure-ui/core/dist/utilities/base-path.js';
+  setBasePath('/pure-ui-assets/');
 
   // Load all components.
-  import '@shoelace-style/shoelace';
+  import '@pure-ui/core';
 
   const duration = 3000;
-  import { setDefaultAnimation } from '@shoelace-style/shoelace/dist/utilities/animation-registry.js';
+  import { setDefaultAnimation } from '@pure-ui/core/dist/utilities/animation-registry.js';
 
   setDefaultAnimation('tooltip.show', {
     keyframes: [
@@ -122,7 +122,7 @@ export default defineConfig({
         copyOnce: true,
         hook: 'buildStart',
         targets: [
-          { src: 'node_modules/@shoelace-style/shoelace/dist/assets/*', dest: 'public/shoelace-assets/assets/' }
+          { src: 'node_modules/@pure-ui/core/dist/assets/*', dest: 'public/pure-ui-assets/assets/' }
         ]
       })
     ]

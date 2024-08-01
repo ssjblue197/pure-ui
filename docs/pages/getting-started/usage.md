@@ -204,7 +204,7 @@ Pure UI ships with a file called `vscode.html-custom-data.json` that can be used
 
 ```js
 {
-  "html.customData": ["./node_modules/@shoelace-style/shoelace/dist/vscode.html-custom-data.json"]
+  "html.customData": ["./node_modules/@pure-ui/core/dist/vscode.html-custom-data.json"]
 }
 ```
 
@@ -214,7 +214,7 @@ If `settings.json` already exists, simply add the above line to the root of the 
 
 If you are using a [JetBrains IDE](https://www.jetbrains.com/) and you are installing Pure UI from NPM, the editor will automatically detect the `web-types.json` file from the package and you should immediately see component information in your editor.
 
-If you are installing from the CDN, you can [download a local copy](https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace/dist/web-types.json) and add it to the root of your project. Be sure to add a reference to the `web-types.json` file in your `package.json` in order for your editor to properly detect it.
+If you are installing from the CDN, you can [download a local copy](https://cdn.jsdelivr.net/npm/@pure-ui/core/dist/web-types.json) and add it to the root of your project. Be sure to add a reference to the `web-types.json` file in your `package.json` in order for your editor to properly detect it.
 
 ```json
 {
@@ -239,4 +239,4 @@ If you are using types from multiple projects, you can add an array of reference
 
 ### Other Editors
 
-Most popular editors support custom code completion with a bit of configuration. Please [submit a feature request](https://github.com/shoelace-style/shoelace/issues/new/choose) for your editor of choice. PRs are also welcome!
+Most popular editors support custom code completion with a bit of configuration. Please [submit a feature request](https://github.com/ssjblue197/pure-ui/issues/new/choose) for your editor of choice. PRs are also welcome!

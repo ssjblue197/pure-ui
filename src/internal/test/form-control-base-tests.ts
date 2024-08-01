@@ -3,7 +3,7 @@ import type { ShoelaceFormControl } from '../pure-ui-element.js';
 
 type CreateControlFn = () => Promise<ShoelaceFormControl>;
 
-/** Runs a set of generic tests for Shoelace form controls */
+/** Runs a set of generic tests for Pure UI form controls */
 export function runFormControlBaseTests<T extends ShoelaceFormControl = ShoelaceFormControl>(
   tagNameOrConfig:
     | string
@@ -38,7 +38,7 @@ export function runFormControlBaseTests<T extends ShoelaceFormControl = Shoelace
 }
 
 //
-// Applicable for all Shoelace form controls. This function checks the behavior of:
+// Applicable for all Pure UI form controls. This function checks the behavior of:
 //   - `.validity`
 //   - `.validationMessage`,
 //   - `.checkValidity()`
@@ -282,7 +282,7 @@ function runSpecialTests_standard(createControl: CreateControlFn) {
 // Local helper functions
 //
 
-// Creates a testable Shoelace form control instance
+// Creates a testable Pure UI form control instance
 async function createFormControl<T extends ShoelaceFormControl = ShoelaceFormControl>(tagName: string): Promise<T> {
   return await fixture<T>(`<${tagName}></${tagName}>`);
 }
@@ -307,7 +307,7 @@ function checkEventEmissions(control: ShoelaceFormControl, eventType: string, ac
 }
 
 // Component `p-button` behaves quite different to the other components. To keep things simple we use simple conditions
-// here. `p-button` might stay the only component in Shoelace core behaves that way, so we just hard code it here.
+// here. `p-button` might stay the only component in Pure UI core behaves that way, so we just hard code it here.
 function getMode(control: ShoelaceFormControl) {
   if (
     control.localName === 'p-button' && //

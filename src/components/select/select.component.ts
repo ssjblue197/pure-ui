@@ -224,7 +224,7 @@ export default class PSelect extends PureElement implements ShoelaceFormControl 
     //
     // Listen on the root node instead of the document in case the elements are inside a shadow root
     //
-    // https://github.com/shoelace-style/shoelace/issues/1763
+    // https://github.com/ssjblue197/pure-ui/issues/1763
     //
     document.addEventListener('focusin', this.handleDocumentFocusIn);
     document.addEventListener('keydown', this.handleDocumentKeyDown);

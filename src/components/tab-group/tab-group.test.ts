@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 import { aTimeout, elementUpdated, expect, fixture, oneEvent, waitUntil } from '@open-wc/testing';
 import { clickOnElement } from '../../internal/test.js';
 import { html } from 'lit';

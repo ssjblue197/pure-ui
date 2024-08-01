@@ -14,8 +14,8 @@ layout: component
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
+import PButton from '@pure-ui/core/dist/react/button';
+import PButtonGroup from '@pure-ui/core/dist/react/button-group';
 
 const App = () => (
   <PButtonGroup label="Alignment">
@@ -57,8 +57,8 @@ All button sizes are supported, but avoid mixing sizes within the same button gr
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
+import PButton from '@pure-ui/core/dist/react/button';
+import PButtonGroup from '@pure-ui/core/dist/react/button-group';
 
 const App = () => (
   <>
@@ -134,8 +134,8 @@ Theme buttons are supported through the button's `variant` attribute.
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
+import PButton from '@pure-ui/core/dist/react/button';
+import PButtonGroup from '@pure-ui/core/dist/react/button-group';
 
 const App = () => (
   <>
@@ -213,8 +213,8 @@ Pill buttons are supported through the button's `pill` attribute.
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
+import PButton from '@pure-ui/core/dist/react/button';
+import PButtonGroup from '@pure-ui/core/dist/react/button-group';
 
 const App = () => (
   <>
@@ -283,11 +283,11 @@ Dropdowns can be placed inside button groups as long as the trigger is an `<p-bu
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
-import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@pure-ui/core/dist/react/button';
+import PButtonGroup from '@pure-ui/core/dist/react/button-group';
+import PDropdown from '@pure-ui/core/dist/react/dropdown';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => (
   <PButtonGroup label="Example Button Group">
@@ -328,11 +328,11 @@ Create a split button using a button and a dropdown. Use a [visually hidden](/co
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
-import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@pure-ui/core/dist/react/button';
+import PButtonGroup from '@pure-ui/core/dist/react/button-group';
+import PDropdown from '@pure-ui/core/dist/react/dropdown';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => (
   <PButtonGroup label="Example Button Group">
@@ -370,9 +370,9 @@ Buttons can be wrapped in tooltips to provide more detail when the user interact
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
-import PTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
+import PButton from '@pure-ui/core/dist/react/button';
+import PButtonGroup from '@pure-ui/core/dist/react/button-group';
+import PTooltip from '@pure-ui/core/dist/react/tooltip';
 
 const App = () => (
   <>
@@ -441,10 +441,10 @@ Create interactive toolbars with button groups.
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PButtonGroup from '@shoelace-style/shoelace/dist/react/button-group';
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
-import PTooltip from '@shoelace-style/shoelace/dist/react/tooltip';
+import PButton from '@pure-ui/core/dist/react/button';
+import PButtonGroup from '@pure-ui/core/dist/react/button-group';
+import PIcon from '@pure-ui/core/dist/react/icon';
+import PTooltip from '@pure-ui/core/dist/react/tooltip';
 
 const css = `
   .button-group-toolbar p-button-group:not(:last-of-type) {

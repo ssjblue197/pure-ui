@@ -10,7 +10,7 @@ layout: component
 ```
 
 ```jsx:react
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => <PInput />;
 ```
@@ -30,8 +30,8 @@ Use the `label` attribute to give the input an accessible label. For labels that
 ```
 
 ```jsx:react
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PIcon from '@pure-ui/core/dist/react/icon';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => <PInput label="What is your name?" />;
 ```
@@ -45,8 +45,8 @@ Add descriptive help text to an input with the `help-text` attribute. For help t
 ```
 
 ```jsx:react
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PIcon from '@pure-ui/core/dist/react/icon';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => <PInput label="Nickname" help-text="What would you like people to call you?" />;
 ```
@@ -60,7 +60,7 @@ Use the `placeholder` attribute to add a placeholder.
 ```
 
 ```jsx:react
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => <PInput placeholder="Type something" />;
 ```
@@ -74,7 +74,7 @@ Add the `clearable` attribute to add a clear button when the input has content.
 ```
 
 ```jsx:react
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => <PInput placeholder="Clearable" clearable />;
 ```
@@ -88,7 +88,7 @@ Add the `password-toggle` attribute to add a toggle button that will show the pa
 ```
 
 ```jsx:react
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => <PInput type="password" placeholder="Password Toggle" size="medium" password-toggle />;
 ```
@@ -102,7 +102,7 @@ Add the `filled` attribute to draw a filled input.
 ```
 
 ```jsx:react
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => <PInput placeholder="Type something" filled />;
 ```
@@ -116,7 +116,7 @@ Use the `disabled` attribute to disable an input.
 ```
 
 ```jsx:react
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => <PInput placeholder="Disabled" disabled />;
 ```
@@ -134,7 +134,7 @@ Use the `size` attribute to change an input's size.
 ```
 
 ```jsx:react
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => (
   <>
@@ -160,7 +160,7 @@ Use the `pill` attribute to give inputs rounded edges.
 ```
 
 ```jsx:react
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => (
   <>
@@ -186,7 +186,7 @@ The `type` attribute controls the type of input the browser renders.
 ```
 
 ```jsx:react
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => (
   <>
@@ -221,8 +221,8 @@ Use the `prefix` and `suffix` slots to add icons.
 ```
 
 ```jsx:react
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PIcon from '@pure-ui/core/dist/react/icon';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => (
   <>

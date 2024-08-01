@@ -1,6 +1,6 @@
 // eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
 import { elementUpdated, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
-import { getFormControls, serialize } from '../../../dist/shoelace.js';
+import { getFormControls, serialize } from '../../../dist/pure-ui.js';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests.js';
 import { sendKeys } from '@web/test-runner-commands'; // must come from the same module
 import sinon from 'sinon';
@@ -520,7 +520,7 @@ describe('<p-input>', () => {
   });
 
   describe('when using the getFormControls() function', () => {
-    it('should return both native and Shoelace form controls in the correct DOM order', async () => {
+    it('should return both native and Pure UI form controls in the correct DOM order', async () => {
       const el = await fixture<HTMLFormElement>(html`
         <div>
           <input type="text" name="a" value="1" form="f1" />

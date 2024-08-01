@@ -39,8 +39,8 @@ QR codes are useful for providing small pieces of information to users who can q
 
 ```jsx:react
 import { useState } from 'react';
-import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PQrCode from '@pure-ui/core/dist/react/qr-code';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const css = `
   .qr-overview {
@@ -81,7 +81,7 @@ Use the `fill` and `background` attributes to modify the QR code's colors. You s
 ```
 
 ```jsx:react
-import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
+import PQrCode from '@pure-ui/core/dist/react/qr-code';
 
 const App = () => <PQrCode value="https://pureui.xyz/" fill="deeppink" background="white" />;
 ```
@@ -95,7 +95,7 @@ Use the `size` attribute to change the size of the QR code.
 ```
 
 ```jsx:react
-import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
+import PQrCode from '@pure-ui/core/dist/react/qr-code';
 
 const App = () => <PQrCode value="https://pureui.xyz/" size="64" />;
 ```
@@ -109,7 +109,7 @@ Create a rounded effect with the `radius` attribute.
 ```
 
 ```jsx:react
-import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
+import PQrCode from '@pure-ui/core/dist/react/qr-code';
 
 const App = () => <PQrCode value="https://pureui.xyz/" radius="0.5" />;
 ```
@@ -136,7 +136,7 @@ QR codes can be rendered with various levels of [error correction](https://www.q
 ```
 
 ```jsx:react
-import PQrCode from '@shoelace-style/shoelace/dist/react/qr-code';
+import PQrCode from '@pure-ui/core/dist/react/qr-code';
 
 const css = `
   .qr-error-correction {

@@ -3,7 +3,7 @@ import type { ShoelaceFormControl } from './pure-ui-element.js';
 import type SlButton from '../components/button/button.js';
 
 //
-// We store a WeakMap of forms + controls so we can keep references to all Shoelace controls within a given form. As
+// We store a WeakMap of forms + controls so we can keep references to all Pure UI controls within a given form. As
 // elements connect and disconnect to/from the DOM, their containing form is used as the key and the form control is
 // added and removed from the form's set, respectively.
 //
@@ -183,7 +183,7 @@ export class FormControlController implements ReactiveController {
     // Check to make sure there's no other form controls in the collection. If we do this
     // without checking if any other controls are still in the collection, then we will wipe out the
     // validity checks for all other elements.
-    // see: https://github.com/shoelace-style/shoelace/issues/1703
+    // see: https://github.com/ssjblue197/pure-ui/issues/1703
     if (formCollection.size <= 0) {
       this.form.removeEventListener('formdata', this.handleFormData);
       this.form.removeEventListener('submit', this.handleFormSubmit);
@@ -282,7 +282,7 @@ export class FormControlController implements ReactiveController {
     // Note that we're also honoring the form's novalidate attribute.
     //
     if (this.form && !this.form.noValidate) {
-      // This seems sloppy, but checking all elements will cover native inputs, Shoelace inputs, and other custom
+      // This seems sloppy, but checking all elements will cover native inputs, Pure UI inputs, and other custom
       // elements that support the constraint validation API.
       const elements = this.form.querySelectorAll<HTMLInputElement>('*');
 
@@ -300,7 +300,7 @@ export class FormControlController implements ReactiveController {
 
   private reportFormValidity = () => {
     //
-    // Shoelace form controls work hard to act like regular form controls. They support the Constraint Validation API
+    // Pure UI form controls work hard to act like regular form controls. They support the Constraint Validation API
     // and its associated methods such as setCustomValidity() and reportValidity(). However, the HTMLFormElement also
     // has a reportValidity() method that will trigger validation on all child controls. Since we're not yet using
     // ElementInternals, we need to overload this method so it looks for any element with the reportValidity() method.
@@ -312,7 +312,7 @@ export class FormControlController implements ReactiveController {
     // Note that we're also honoring the form's novalidate attribute.
     //
     if (this.form && !this.form.noValidate) {
-      // This seems sloppy, but checking all elements will cover native inputs, Shoelace inputs, and other custom
+      // This seems sloppy, but checking all elements will cover native inputs, Pure UI inputs, and other custom
       // elements that support the constraint validation API.
       const elements = this.form.querySelectorAll<HTMLInputElement>('*');
 
@@ -397,7 +397,7 @@ export class FormControlController implements ReactiveController {
     // We're mapping the following "states" to data attributes. In the future, we can use ElementInternals.states to
     // create a similar mapping, but instead of [data-invalid] it will look like :--invalid.
     //
-    // See this RFC for more details: https://github.com/shoelace-style/shoelace/issues/1011
+    // See this RFC for more details: https://github.com/ssjblue197/pure-ui/issues/1011
     //
     host.toggleAttribute('data-required', required);
     host.toggleAttribute('data-optional', !required);

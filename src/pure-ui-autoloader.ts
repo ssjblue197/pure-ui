@@ -20,7 +20,7 @@ export async function discover(root: Element | ShadowRoot) {
     .map(el => el.tagName.toLowerCase())
     .filter(tag => tag.startsWith('p-'));
 
-  // If the root element is an undefined Shoelace component, add it to the list
+  // If the root element is an undefined Pure UI component, add it to the list
   if (rootIsPureElement && !customElements.get(rootTagName)) {
     tags.push(rootTagName);
   }

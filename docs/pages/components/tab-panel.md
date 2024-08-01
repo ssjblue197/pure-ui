@@ -20,9 +20,9 @@ layout: component
 ```
 
 ```jsx:react
-import PTab from '@shoelace-style/shoelace/dist/react/tab';
-import PTabGroup from '@shoelace-style/shoelace/dist/react/tab-group';
-import PTabPanel from '@shoelace-style/shoelace/dist/react/tab-panel';
+import PTab from '@pure-ui/core/dist/react/tab';
+import PTabGroup from '@pure-ui/core/dist/react/tab-group';
+import PTabPanel from '@pure-ui/core/dist/react/tab-panel';
 
 const App = () => (
   <PTabGroup>

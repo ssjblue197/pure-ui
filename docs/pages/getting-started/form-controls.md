@@ -30,7 +30,7 @@ const data = new FormData(form);
 However, some folks find `FormData` tricky to work with or they need to pass a JSON payload to their server. To accommodate this, Pure UI offers a serialization utility that gathers form data and returns a simple JavaScript object instead.
 
 ```js
-import { serialize } from '@shoelace-style/shoelace/dist/utilities/form.js';
+import { serialize } from '@pure-ui/core/dist/utilities/form.js';
 
 const form = document.querySelector('form');
 const data = serialize(form);
@@ -99,12 +99,12 @@ The form will not be submitted if a required field is incomplete.
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlCheckbox from '@shoelace-style/shoelace/dist/react/checkbox';
-import SlInput from '@shoelace-style/shoelace/dist/react/input';
-import SlMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
-import SlSelect from '@shoelace-style/shoelace/dist/react/select';
-import SlTextarea from '@shoelace-style/shoelace/dist/react/textarea';
+import SlButton from '@pure-ui/core/dist/react/button';
+import SlCheckbox from '@pure-ui/core/dist/react/checkbox';
+import SlInput from '@pure-ui/core/dist/react/input';
+import SlMenuItem from '@pure-ui/core/dist/react/menu-item';
+import SlSelect from '@pure-ui/core/dist/react/select';
+import SlTextarea from '@pure-ui/core/dist/react/textarea';
 
 const App = () => {
   function handleSubmit(event) {
@@ -165,8 +165,8 @@ To restrict a value to a specific [pattern](https://developer.mozilla.org/en-US/
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlInput from '@shoelace-style/shoelace/dist/react/input';
+import SlButton from '@pure-ui/core/dist/react/button';
+import SlInput from '@pure-ui/core/dist/react/input';
 
 const App = () => {
   function handleSubmit(event) {
@@ -217,8 +217,8 @@ Some input types will automatically trigger constraints, such as `email` and `ur
 ```
 
 ```jsx:react
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlInput from '@shoelace-style/shoelace/dist/react/input';
+import SlButton from '@pure-ui/core/dist/react/button';
+import SlInput from '@pure-ui/core/dist/react/input';
 
 const App = () => {
   function handleSubmit(event) {
@@ -246,7 +246,7 @@ To create a custom validation error, pass a non-empty string to the `setCustomVa
 
 ```html:preview
 <form class="input-validation-custom">
-  <p-input label="Type “shoelace”" required></p-input>
+  <p-input label="Type “Pure UI”" required></p-input>
   <br />
   <p-button type="submit" variant="primary">Submit</p-button>
   <p-button type="reset" variant="default">Reset</p-button>
@@ -267,10 +267,10 @@ To create a custom validation error, pass a non-empty string to the `setCustomVa
     });
 
     input.addEventListener('p-input', () => {
-      if (input.value === 'shoelace') {
+      if (input.value === 'pure ui ') {
         input.setCustomValidity('');
       } else {
-        input.setCustomValidity("Hey, you're supposed to type 'shoelace' before submitting this!");
+        input.setCustomValidity("Hey, you're supposed to type 'pure ui ' before submitting this!");
       }
     });
   });
@@ -279,8 +279,8 @@ To create a custom validation error, pass a non-empty string to the `setCustomVa
 
 ```jsx:react
 import { useRef, useState } from 'react';
-import SlButton from '@shoelace-style/shoelace/dist/react/button';
-import SlInput from '@shoelace-style/shoelace/dist/react/input';
+import SlButton from '@pure-ui/core/dist/react/button';
+import SlInput from '@pure-ui/core/dist/react/input';
 
 const App = () => {
   const input = useRef(null);
@@ -289,10 +289,10 @@ const App = () => {
   function handleInput(event) {
     setValue(event.target.value);
 
-    if (event.target.value === 'shoelace') {
+    if (event.target.value === 'pure ui ') {
       input.current.setCustomValidity('');
     } else {
-      input.current.setCustomValidity("Hey, you're supposed to type 'shoelace' before submitting this!");
+      input.current.setCustomValidity("Hey, you're supposed to type 'pure ui ' before submitting this!");
     }
   }
 
@@ -303,7 +303,7 @@ const App = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <SlInput ref={input} label="Type 'shoelace'" required value={value} onSlInput={handleInput} />
+      <SlInput ref={input} label="Type 'pure ui '" required value={value} onSlInput={handleInput} />
       <br />
       <SlButton type="submit" variant="primary">
         Submit
@@ -557,7 +557,7 @@ This example is meant to demonstrate the concept of providing your own error mes
 At this time, using [`HTMLFormElement.elements`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements) will not return Pure UI form controls because the browser is unaware of their status as custom element form controls. Fortunately, Pure UI provides an `elements()` function that does something very similar. However, instead of returning an [`HTMLFormControlsCollection`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection), it returns an array of HTML and Pure UI form controls in the order they appear in the DOM.
 
 ```js
-import { getFormControls } from '@shoelace-style/shoelace/dist/utilities/form.js';
+import { getFormControls } from '@pure-ui/core/dist/utilities/form.js';
 
 const form = document.querySelector('#my-form');
 const formControls = getFormControls(form);

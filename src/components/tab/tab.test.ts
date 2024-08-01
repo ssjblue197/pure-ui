@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import sinon from 'sinon';
 import type PIconButton from '../icon-button/icon-button.js';

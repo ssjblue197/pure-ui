@@ -41,8 +41,8 @@ layout: component
 ```
 
 ```jsx:react
-import PCarousel from '@shoelace-style/shoelace/dist/react/carousel';
-import PCarouselItem from '@shoelace-style/shoelace/dist/react/carousel-item';
+import PCarousel from '@pure-ui/core/dist/react/carousel';
+import PCarouselItem from '@pure-ui/core/dist/react/carousel-item';
 
 const App = () => (
   <PCarousel pagination>

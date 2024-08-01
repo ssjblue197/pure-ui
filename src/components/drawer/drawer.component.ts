@@ -72,7 +72,7 @@ import type { CSSResultGroup } from 'lit';
  *
  * @property modal - Exposes the internal modal utility that controls focus trapping. To temporarily disable focus
  *   trapping and allow third-party modals spawned from an active Shoelace modal, call `modal.activateExternal()` when
- *   the third-party modal opens. Upon closing, call `modal.deactivateExternal()` to restore Shoelace's focus trapping.
+ *   the third-party modal opens. Upon closing, call `modal.deactivateExternal()` to restore pure ui 's focus trapping.
  */
 export default class PDrawer extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
@@ -196,7 +196,7 @@ export default class PDrawer extends PureElement {
       // drawer's animation to jitter, so we'll temporarily remove the attribute, call `focus({ preventScroll: true })`
       // ourselves, and add the attribute back afterwards.
       //
-      // Related: https://github.com/shoelace-style/shoelace/issues/693
+      // Related: https://github.com/ssjblue197/pure-ui/issues/693
       //
       const autoFocusTarget = this.querySelector('[autofocus]');
       if (autoFocusTarget) {

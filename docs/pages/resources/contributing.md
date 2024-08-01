@@ -33,10 +33,10 @@ I realize that one cannot reasonably enforce this any more than one can enforce 
 
 ## Using the Issue Tracker
 
-The [issue tracker](https://github.com/shoelace-style/shoelace/issues) is for bug reports, feature requests, and pull requests.
+The [issue tracker](https://github.com/ssjblue197/pure-ui/issues) is for bug reports, feature requests, and pull requests.
 
-- Please **do not** use the issue tracker for personal support requests. Use [the discussion forum](https://github.com/shoelace-style/shoelace/discussions/categories/help) instead.
-- Please **do not** use the issue tracker for feature requests. Use [the discussion forum](https://github.com/shoelace-style/shoelace/discussions/categories/ideas) instead.
+- Please **do not** use the issue tracker for personal support requests. Use [the discussion forum](https://github.com/ssjblue197/pure-ui/discussions/categories/help) instead.
+- Please **do not** use the issue tracker for feature requests. Use [the discussion forum](https://github.com/ssjblue197/pure-ui/discussions/categories/ideas) instead.
 - Please **do not** derail, hijack, or troll issues. Keep the discussion on topic and be respectful of others.
 - Please **do not** post comments with "+1" or "👍". Use [reactions](https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/) instead.
 - Please **do** use the issue tracker for feature requests, bug reports, and pull requests.
@@ -45,7 +45,7 @@ Issues that do not follow these guidelines are subject to closure. There simply 
 
 ### Feature Requests
 
-Feature requests can be added using [the discussion forum](https://github.com/shoelace-style/shoelace/discussions/categories/ideas).
+Feature requests can be added using [the discussion forum](https://github.com/ssjblue197/pure-ui/discussions/categories/ideas).
 
 - Please **do** search for an existing request before suggesting a new feature.
 - Please **do** use the voting buttons to vote for a feature.
@@ -83,11 +83,11 @@ The author reserves the right to reject any PR that's outside the scope of the p
 
 ## Developing
 
-To set up a local dev environment, [fork the repo](https://github.com/shoelace-style/shoelace/fork) on GitHub, clone it locally, and install its dependencies.
+To set up a local dev environment, [fork the repo](https://github.com/ssjblue197/pure-ui/fork) on GitHub, clone it locally, and install its dependencies.
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/shoelace
-cd shoelace
+git clone https://github.com/YOUR_GITHUB_USERNAME/pure-ui
+cd pure-ui
 npm install
 ```
 
@@ -103,7 +103,7 @@ After the initial build, a browser will open automatically to a local version of
 
 Alternatively, you can use [Gitpod](https://www.gitpod.io/) to setup a dev environment in the cloud using only your browser.
 
-[![Open in Gitpod](/assets/images/gitpod.svg)](https://gitpod.io/#https://github.com/shoelace-style/shoelace)
+[![Open in Gitpod](/assets/images/gitpod.svg)](https://gitpod.io/#https://github.com/ssjblue197/pure-ui)
 
 ### Creating New Components
 
@@ -251,7 +251,7 @@ This section can be a lot to digest in one sitting, so don't feel like you need 
 
 Pure UI is built with accessibility in mind. Creating generic components that are fully accessible to users with varying capabilities across a multitude of circumstances is a daunting challenge. Oftentimes, the solution to an a11y problem is not written in black and white and, therefore, we may not get it right the first time around. There are, however, guidelines we can follow in our effort to make Pure UI an accessible foundation from which applications and websites can be built.
 
-We take this commitment seriously, so please ensure your contributions have this goal in mind. If you need help with anything a11y-related, please [reach out to the community](/resources/community) for assistance. If you discover an accessibility concern within the library, please file a bug on the [issue tracker](https://github.com/shoelace-style/shoelace/issues).
+We take this commitment seriously, so please ensure your contributions have this goal in mind. If you need help with anything a11y-related, please [reach out to the community](/resources/community) for assistance. If you discover an accessibility concern within the library, please file a bug on the [issue tracker](https://github.com/ssjblue197/pure-ui/issues).
 
 It's important to remember that, although accessibility starts with foundational components, it doesn't end with them. It everyone's responsibility to encourage best practices and ensure we're providing an optimal experience for all of our users.
 

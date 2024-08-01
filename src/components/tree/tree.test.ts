@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 import { aTimeout, expect, fixture, html, triggerBlurFor, triggerFocusFor } from '@open-wc/testing';
 import { clickOnElement } from '../../internal/test.js';
 import { sendKeys } from '@web/test-runner-commands';
@@ -753,7 +753,7 @@ describe('<p-tree>', () => {
     });
   });
 
-  // https://github.com/shoelace-style/shoelace/issues/1916
+  // https://github.com/ssjblue197/pure-ui/issues/1916
   it("Should not render 'null' if it can't find a custom icon", async () => {
     const tree = await fixture<PTree>(html`
       <p-tree>

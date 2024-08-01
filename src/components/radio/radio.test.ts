@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import type PRadio from './radio.js';
 import type PRadioGroup from '../radio-group/radio-group.js';

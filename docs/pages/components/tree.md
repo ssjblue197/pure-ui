@@ -37,8 +37,8 @@ layout: component
 
 <!-- prettier-ignore -->
 ```jsx:react
-import PTree from '@shoelace-style/shoelace/dist/react/tree';
-import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@pure-ui/core/dist/react/tree';
+import PTreeItem from '@pure-ui/core/dist/react/tree-item';
 
 const App = () => (
   <PTree>
@@ -119,8 +119,8 @@ The `selection` attribute lets you change the selection behavior of the tree.
 
 <!-- prettier-ignore -->
 ```jsx:react
-import PTree from '@shoelace-style/shoelace/dist/react/tree';
-import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@pure-ui/core/dist/react/tree';
+import PTreeItem from '@pure-ui/core/dist/react/tree-item';
 
 const App = () => {
   const [selection, setSelection] = useState('single');
@@ -199,8 +199,8 @@ Indent guides can be drawn by setting `--indent-guide-width`. You can also chang
 
 <!-- prettier-ignore -->
 ```jsx:react
-import PTree from '@shoelace-style/shoelace/dist/react/tree';
-import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@pure-ui/core/dist/react/tree';
+import PTreeItem from '@pure-ui/core/dist/react/tree-item';
 
 const App = () => (
   <PTree class="tree-with-lines" style={{ '--indent-guide-width': '1px' }}>
@@ -268,8 +268,8 @@ If you want to disable this behavior after the first load, simply remove the `la
 ```
 
 ```jsx:react
-import PTree from '@shoelace-style/shoelace/dist/react/tree';
-import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@pure-ui/core/dist/react/tree';
+import PTreeItem from '@pure-ui/core/dist/react/tree-item';
 
 const App = () => {
   const [childItems, setChildItems] = useState([]);
@@ -344,8 +344,8 @@ Use the `expand-icon` and `collapse-icon` slots to change the expand and collaps
 
 <!-- prettier-ignore -->
 ```jsx:react
-import PTree from '@shoelace-style/shoelace/dist/react/tree';
-import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@pure-ui/core/dist/react/tree';
+import PTreeItem from '@pure-ui/core/dist/react/tree-item';
 
 const App = () => (
   <PTree>
@@ -429,9 +429,9 @@ Decorative icons can be used before labels to provide hints for each node.
 ```
 
 ```jsx:react
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
-import PTree from '@shoelace-style/shoelace/dist/react/tree';
-import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PIcon from '@pure-ui/core/dist/react/icon';
+import PTree from '@pure-ui/core/dist/react/tree';
+import PTreeItem from '@pure-ui/core/dist/react/tree-item';
 
 const App = () => {
   return (

@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 import { elementUpdated, expect, fixture, html } from '@open-wc/testing';
 import type PDivider from './divider.js';
 

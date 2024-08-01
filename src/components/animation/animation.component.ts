@@ -50,7 +50,7 @@ export default class PAnimation extends PureElement {
   @property({ type: Number }) duration = 1000;
 
   /**
-   * The easing function to use for the animation. This can be a Shoelace easing function or a custom easing function
+   * The easing function to use for the animation. This can be a Pure UI easing function or a custom easing function
    * such as `cubic-bezier(0, 1, .76, 1.14)`.
    */
   @property() easing = 'linear';

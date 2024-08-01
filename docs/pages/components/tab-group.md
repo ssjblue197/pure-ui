@@ -22,9 +22,9 @@ Tab groups make use of [tabs](/components/tab) and [tab panels](/components/tab-
 ```
 
 ```jsx:react
-import PTab from '@shoelace-style/shoelace/dist/react/tab';
-import PTabGroup from '@shoelace-style/shoelace/dist/react/tab-group';
-import PTabPanel from '@shoelace-style/shoelace/dist/react/tab-panel';
+import PTab from '@pure-ui/core/dist/react/tab';
+import PTabGroup from '@pure-ui/core/dist/react/tab-group';
+import PTabPanel from '@pure-ui/core/dist/react/tab-panel';
 
 const App = () => (
   <PTabGroup>
@@ -70,9 +70,9 @@ Tabs can be shown on the bottom by setting `placement` to `bottom`.
 ```
 
 ```jsx:react
-import PTab from '@shoelace-style/shoelace/dist/react/tab';
-import PTabGroup from '@shoelace-style/shoelace/dist/react/tab-group';
-import PTabPanel from '@shoelace-style/shoelace/dist/react/tab-panel';
+import PTab from '@pure-ui/core/dist/react/tab';
+import PTabGroup from '@pure-ui/core/dist/react/tab-group';
+import PTabPanel from '@pure-ui/core/dist/react/tab-panel';
 
 const App = () => (
   <PTabGroup placement="bottom">
@@ -116,9 +116,9 @@ Tabs can be shown on the starting side by setting `placement` to `start`.
 ```
 
 ```jsx:react
-import PTab from '@shoelace-style/shoelace/dist/react/tab';
-import PTabGroup from '@shoelace-style/shoelace/dist/react/tab-group';
-import PTabPanel from '@shoelace-style/shoelace/dist/react/tab-panel';
+import PTab from '@pure-ui/core/dist/react/tab';
+import PTabGroup from '@pure-ui/core/dist/react/tab-group';
+import PTabPanel from '@pure-ui/core/dist/react/tab-panel';
 
 const App = () => (
   <PTabGroup placement="start">
@@ -162,9 +162,9 @@ Tabs can be shown on the ending side by setting `placement` to `end`.
 ```
 
 ```jsx:react
-import PTab from '@shoelace-style/shoelace/dist/react/tab';
-import PTabGroup from '@shoelace-style/shoelace/dist/react/tab-group';
-import PTabPanel from '@shoelace-style/shoelace/dist/react/tab-panel';
+import PTab from '@pure-ui/core/dist/react/tab';
+import PTabGroup from '@pure-ui/core/dist/react/tab-group';
+import PTabPanel from '@pure-ui/core/dist/react/tab-panel';
 
 const App = () => (
   <PTabGroup placement="end">
@@ -226,9 +226,9 @@ Add the `closable` attribute to a tab to show a close button. This example shows
 ```
 
 ```jsx:react
-import PTab from '@shoelace-style/shoelace/dist/react/tab';
-import PTabGroup from '@shoelace-style/shoelace/dist/react/tab-group';
-import PTabPanel from '@shoelace-style/shoelace/dist/react/tab-panel';
+import PTab from '@pure-ui/core/dist/react/tab';
+import PTabGroup from '@pure-ui/core/dist/react/tab-group';
+import PTabPanel from '@pure-ui/core/dist/react/tab-panel';
 
 const App = () => {
   function handleClose(event) {
@@ -320,9 +320,9 @@ When there are more tabs than horizontal space allows, the nav will be scrollabl
 ```
 
 ```jsx:react
-import PTab from '@shoelace-style/shoelace/dist/react/tab';
-import PTabGroup from '@shoelace-style/shoelace/dist/react/tab-group';
-import PTabPanel from '@shoelace-style/shoelace/dist/react/tab-panel';
+import PTab from '@pure-ui/core/dist/react/tab';
+import PTabGroup from '@pure-ui/core/dist/react/tab-group';
+import PTabPanel from '@pure-ui/core/dist/react/tab-panel';
 
 const App = () => (
   <PTabGroup>
@@ -430,9 +430,9 @@ When focused, keyboard users can press [[Left]] or [[Right]] to select the desir
 ```
 
 ```jsx:react
-import PTab from '@shoelace-style/shoelace/dist/react/tab';
-import PTabGroup from '@shoelace-style/shoelace/dist/react/tab-group';
-import PTabPanel from '@shoelace-style/shoelace/dist/react/tab-panel';
+import PTab from '@pure-ui/core/dist/react/tab';
+import PTabGroup from '@pure-ui/core/dist/react/tab-group';
+import PTabPanel from '@pure-ui/core/dist/react/tab-panel';
 
 const App = () => (
   <PTabGroup activation="manual">

@@ -34,7 +34,7 @@ To activate a theme, import it and apply the theme's class to the `<html>` eleme
 ```html
 <html class="p-theme-dark">
   <head>
-    <link rel="stylesheet" href="path/to/shoelace/%NPMDIR%/themes/dark.css" />
+    <link rel="stylesheet" href="path/to/pure-ui/%NPMDIR%/themes/dark.css" />
   </head>
 
   <body>
@@ -54,8 +54,8 @@ You can activate themes on various containers throughout the page. This example 
 ```html
 <html>
   <head>
-    <link rel="stylesheet" href="path/to/shoelace/%NPMDIR%/themes/light.css" />
-    <link rel="stylesheet" href="path/to/shoelace/%NPMDIR%/themes/dark.css" />
+    <link rel="stylesheet" href="path/to/pure-ui/%NPMDIR%/themes/light.css" />
+    <link rel="stylesheet" href="path/to/pure-ui/%NPMDIR%/themes/dark.css" />
   </head>
 
   <body>
@@ -129,7 +129,7 @@ To install the dark theme, add the following to the `<head>` section of your pag
 ```html
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css"
+  href="https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/themes/dark.css"
 />
 ```
 

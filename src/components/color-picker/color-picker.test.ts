@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 import { aTimeout, expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { clickOnElement, dragElement } from '../../internal/test.js';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests.js';

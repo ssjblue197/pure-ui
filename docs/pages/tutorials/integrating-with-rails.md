@@ -9,7 +9,7 @@ meta:
 This page explains how to integrate Pure UI with a Rails app.
 
 :::tip
-This is a community-maintained document. Please [ask the community](/resources/community) if you have questions about this integration. You can also [suggest improvements](https://github.com/shoelace-style/shoelace/blob/next/docs/tutorials/integrating-with-rails.md) to make it better.
+This is a community-maintained document. Please [ask the community](/resources/community) if you have questions about this integration. You can also [suggest improvements](https://github.com/ssjblue197/pure-ui/blob/next/docs/tutorials/integrating-with-rails.md) to make it better.
 :::
 
 ## Requirements
@@ -25,7 +25,7 @@ This integration has been tested with the following:
 To get started using Pure UI with Rails, the following packages must be installed.
 
 ```bash
-yarn add @shoelace-style/shoelace copy-webpack-plugin
+yarn add @pure-ui/core copy-webpack-plugin
 ```
 
 ### Importing the Default Theme
@@ -33,8 +33,8 @@ yarn add @shoelace-style/shoelace copy-webpack-plugin
 The next step is to import Pure UI's default theme (stylesheet) in `app/javascript/stylesheets/application.scss`.
 
 ```css
-@import '@shoelace-style/shoelace/dist/themes/light';
-@import '@shoelace-style/shoelace/dist/themes/dark'; // Optional dark theme
+@import '@pure-ui/core/dist/themes/light';
+@import '@pure-ui/core/dist/themes/dark'; // Optional dark theme
 ```
 
 Fore more details about themes, please refer to [Theme Basics](/getting-started/themes#theme-basics).
@@ -45,7 +45,7 @@ After importing the theme, you'll need to import the JavaScript files for Pure U
 
 ```js
 import '../stylesheets/application.scss'
-import { setBasePath, SlAlert, SlAnimation, SlButton, ... } from '@shoelace-style/shoelace'
+import { setBasePath, SlAlert, SlAnimation, SlButton, ... } from '@pure-ui/core'
 
 // ...
 
@@ -67,13 +67,13 @@ const { environment } = require('@rails/webpacker');
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
-// Add shoelace assets to webpack's build process
+// Add pure-ui assets to webpack's build process
 environment.plugins.append(
   'CopyPlugin',
   new CopyPlugin({
     patterns: [
       {
-        from: path.resolve(__dirname, '../../node_modules/@shoelace-style/shoelace/dist/assets'),
+        from: path.resolve(__dirname, '../../node_modules/@pure-ui/core/dist/assets'),
         to: path.resolve(__dirname, '../../public/packs/js/assets')
       }
     ]
@@ -106,5 +106,5 @@ Now you can start using Pure UI components with Rails!
 
 ## Additional Resources
 
-- There is a third-party [example repo](https://github.com/ParamagicDev/rails-shoelace-example), courtesy of [ParamagicDev](https://github.com/ParamagicDev) available to help you get started.
+- There is a third-party [example repo](https://github.com/ParamagicDev/rails-pure-ui-example), courtesy of [ParamagicDev](https://github.com/ParamagicDev) available to help you get started.
 - If you would like to avoid repeating this process, check out the associated [Railsbyte for Pure UI](https://railsbytes.com/templates/X8BsEb).

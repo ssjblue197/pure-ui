@@ -20,8 +20,8 @@ layout: component
 
 <!-- prettier-ignore -->
 ```jsx:react
-import PTree from '@shoelace-style/shoelace/dist/react/tree';
-import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@pure-ui/core/dist/react/tree';
+import PTreeItem from '@pure-ui/core/dist/react/tree-item';
 
 const App = () => (
   <PTree>
@@ -63,8 +63,8 @@ A tree item can contain other tree items. This allows the node to be expanded or
 
 <!-- prettier-ignore -->
 ```jsx:react
-import PTree from '@shoelace-style/shoelace/dist/react/tree';
-import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@pure-ui/core/dist/react/tree';
+import PTreeItem from '@pure-ui/core/dist/react/tree-item';
 
 const App = () => (
   <PTree>
@@ -104,8 +104,8 @@ Use the `selected` attribute to select a tree item initially.
 
 <!-- prettier-ignore -->
 ```jsx:react
-import PTree from '@shoelace-style/shoelace/dist/react/tree';
-import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@pure-ui/core/dist/react/tree';
+import PTreeItem from '@pure-ui/core/dist/react/tree-item';
 
 const App = () => (
   <PTree>
@@ -145,8 +145,8 @@ Use the `expanded` attribute to expand a tree item initially.
 
 <!-- prettier-ignore -->
 ```jsx:react
-import PTree from '@shoelace-style/shoelace/dist/react/tree';
-import PTreeItem from '@shoelace-style/shoelace/dist/react/tree-item';
+import PTree from '@pure-ui/core/dist/react/tree';
+import PTreeItem from '@pure-ui/core/dist/react/tree-item';
 
 const App = () => (
   <PTree>

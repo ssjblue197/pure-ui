@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { clickOnElement } from '../../internal/test.js';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests.js';
@@ -99,7 +99,7 @@ describe('<p-checkbox>', () => {
 
   it('should hide the native input with the correct positioning to scroll correctly when contained in an overflow', async () => {
     //
-    // See: https://github.com/shoelace-style/shoelace/issues/1169
+    // See: https://github.com/ssjblue197/pure-ui/issues/1169
     //
     const el = await fixture<PCheckbox>(html` <p-checkbox></p-checkbox> `);
     const label = el.shadowRoot!.querySelector('.checkbox')!;
@@ -278,7 +278,7 @@ describe('<p-checkbox>', () => {
     });
 
     it('should not jump the page to the bottom when focusing a checkbox at the bottom of an element with overflow: auto;', async () => {
-      // https://github.com/shoelace-style/shoelace/issues/1169
+      // https://github.com/ssjblue197/pure-ui/issues/1169
       const el = await fixture<HTMLDivElement>(html`
         <div style="display: flex; flex-direction: column; overflow: auto; max-height: 400px; gap: 8px;">
           <p-checkbox>Checkbox</p-checkbox>

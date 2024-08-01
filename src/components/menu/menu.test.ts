@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 import { clickOnElement } from '../../internal/test.js';
 import { expect, fixture } from '@open-wc/testing';
 import { html } from 'lit';
@@ -102,7 +102,7 @@ describe('<p-menu>', () => {
     expect(selectHandler).to.not.have.been.called;
   });
 
-  // @see https://github.com/shoelace-style/shoelace/issues/1596
+  // @see https://github.com/ssjblue197/pure-ui/issues/1596
   it('Should fire "p-select" when clicking an element within a menu-item', async () => {
     // eslint-disable-next-line
     const selectHandler = sinon.spy(() => {});
@@ -122,7 +122,7 @@ describe('<p-menu>', () => {
     expect(selectHandler).to.have.been.calledOnce;
   });
 
-  // @see https://github.com/shoelace-style/shoelace/issues/2115
+  // @see https://github.com/ssjblue197/pure-ui/issues/2115
   it('Should be able to check a checkbox menu item in a submenu', async () => {
     const menu: PMenu = await fixture(html`
       <p-menu style="max-width: 200px;">

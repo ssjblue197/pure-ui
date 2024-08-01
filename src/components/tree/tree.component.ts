@@ -294,7 +294,7 @@ export default class PTree extends PureElement {
     // from mousedown. The latter case prevents the user from starting a click on one item and ending it on another,
     // causing the parent node to collapse.
     //
-    // See https://github.com/shoelace-style/shoelace/issues/1082
+    // See https://github.com/ssjblue197/pure-ui/issues/1082
     //
     if (!treeItem || treeItem.disabled || target !== this.clickTarget) {
       return;

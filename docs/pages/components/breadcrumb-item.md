@@ -17,9 +17,9 @@ layout: component
 ```
 
 ```jsx:react
-import PBreadcrumb from '@shoelace-style/shoelace/dist/react/breadcrumb';
-import PBreadcrumbItem from '@shoelace-style/shoelace/dist/react/breadcrumb-item';
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PBreadcrumb from '@pure-ui/core/dist/react/breadcrumb';
+import PBreadcrumbItem from '@pure-ui/core/dist/react/breadcrumb-item';
+import PIcon from '@pure-ui/core/dist/react/icon';
 
 const App = () => (
   <PBreadcrumb>

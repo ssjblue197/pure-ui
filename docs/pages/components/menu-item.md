@@ -28,10 +28,10 @@ layout: component
 {% raw %}
 
 ```jsx:react
-import PDivider from '@shoelace-style/shoelace/dist/react/divider';
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PDivider from '@pure-ui/core/dist/react/divider';
+import PIcon from '@pure-ui/core/dist/react/icon';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => (
   <PMenu style={{ maxWidth: '200px' }}>
@@ -89,11 +89,11 @@ Add content to the start and end of menu items using the `prefix` and `suffix` s
 {% raw %}
 
 ```jsx:react
-import PBadge from '@shoelace-style/shoelace/dist/react/badge';
-import PDivider from '@shoelace-style/shoelace/dist/react/divider';
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PBadge from '@pure-ui/core/dist/react/badge';
+import PDivider from '@pure-ui/core/dist/react/divider';
+import PIcon from '@pure-ui/core/dist/react/icon';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => (
   <PMenu style={{ maxWidth: '200px' }}>
@@ -137,8 +137,8 @@ Add the `disabled` attribute to disable the menu item so it cannot be selected.
 {% raw %}
 
 ```jsx:react
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => (
   <PMenu style={{ maxWidth: '200px' }}>
@@ -166,8 +166,8 @@ Use the `loading` attribute to indicate that a menu item is busy. Like a disable
 {% raw %}
 
 ```jsx:react
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => (
   <PMenu style={{ maxWidth: '200px' }}>
@@ -197,8 +197,8 @@ Checkbox menu items are visually indistinguishable from regular menu items. Thei
 {% raw %}
 
 ```jsx:react
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => (
   <PMenu style={{ maxWidth: '200px' }}>
@@ -247,8 +247,8 @@ The `value` attribute can be used to assign a hidden value, such as a unique ide
 {% raw %}
 
 ```jsx:react
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => {
   function handleSelect(event) {

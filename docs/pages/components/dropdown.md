@@ -33,12 +33,12 @@ Dropdowns are designed to work well with [menus](/components/menu) to provide a 
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PDivider from '@shoelace-style/shoelace/dist/react/divider';
-import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@pure-ui/core/dist/react/button';
+import PDivider from '@pure-ui/core/dist/react/divider';
+import PDropdown from '@pure-ui/core/dist/react/dropdown';
+import PIcon from '@pure-ui/core/dist/react/icon';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => (
   <PDropdown>
@@ -98,10 +98,10 @@ When dropdowns are used with [menus](/components/menu), you can listen for the [
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@pure-ui/core/dist/react/button';
+import PDropdown from '@pure-ui/core/dist/react/dropdown';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => {
   function handleSelect(event) {
@@ -151,10 +151,10 @@ Alternatively, you can listen for the `click` event on individual menu items. No
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@pure-ui/core/dist/react/button';
+import PDropdown from '@pure-ui/core/dist/react/dropdown';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => {
   function handleCut() {
@@ -203,11 +203,11 @@ The preferred placement of the dropdown can be set with the `placement` attribut
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PDivider from '@shoelace-style/shoelace/dist/react/divider';
-import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@pure-ui/core/dist/react/button';
+import PDivider from '@pure-ui/core/dist/react/divider';
+import PDropdown from '@pure-ui/core/dist/react/dropdown';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => (
   <PDropdown placement="top-start">
@@ -245,11 +245,11 @@ The distance from the panel to the trigger can be customized using the `distance
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PDivider from '@shoelace-style/shoelace/dist/react/divider';
-import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@pure-ui/core/dist/react/button';
+import PDivider from '@pure-ui/core/dist/react/divider';
+import PDropdown from '@pure-ui/core/dist/react/dropdown';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => (
   <PDropdown distance={30}>
@@ -287,11 +287,11 @@ The offset of the panel along the trigger can be customized using the `skidding`
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PDivider from '@shoelace-style/shoelace/dist/react/divider';
-import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@pure-ui/core/dist/react/button';
+import PDivider from '@pure-ui/core/dist/react/divider';
+import PDropdown from '@pure-ui/core/dist/react/dropdown';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => (
   <PDropdown skidding={30}>
@@ -347,11 +347,11 @@ To create a submenu, nest an `<p-menu slot="submenu">` element in a [menu item](
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PDivider from '@shoelace-style/shoelace/dist/react/divider';
-import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@pure-ui/core/dist/react/button';
+import PDivider from '@pure-ui/core/dist/react/divider';
+import PDropdown from '@pure-ui/core/dist/react/dropdown';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const css = `
   .dropdown-hoist {
@@ -436,11 +436,11 @@ Dropdown panels will be clipped if they're inside a container that has `overflow
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PDivider from '@shoelace-style/shoelace/dist/react/divider';
-import PDropdown from '@shoelace-style/shoelace/dist/react/dropdown';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PButton from '@pure-ui/core/dist/react/button';
+import PDivider from '@pure-ui/core/dist/react/divider';
+import PDropdown from '@pure-ui/core/dist/react/dropdown';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const css = `
   .dropdown-hoist {

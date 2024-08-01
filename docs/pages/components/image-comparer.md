@@ -23,7 +23,7 @@ For best results, use images that share the same dimensions. The slider can be c
 ```
 
 ```jsx:react
-import PImageComparer from '@shoelace-style/shoelace/dist/react/image-comparer';
+import PImageComparer from '@pure-ui/core/dist/react/image-comparer';
 
 const App = () => (
   <PImageComparer>
@@ -57,13 +57,13 @@ Use the `position` attribute to set the initial position of the slider. This is 
   <img
     slot="after"
     src="https://images.unsplash.com/photo-1520640023173-50a135e35804?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
-    alt="A person sitting on a yellow curb tying shoelaces on a boot."
+    alt="A person sitting on a yellow curb tying pure ui on a boot."
   />
 </p-image-comparer>
 ```
 
 ```jsx:react
-import PImageComparer from '@shoelace-style/shoelace/dist/react/image-comparer';
+import PImageComparer from '@pure-ui/core/dist/react/image-comparer';
 
 const App = () => (
   <PImageComparer position={25}>
@@ -75,7 +75,7 @@ const App = () => (
     <img
       slot="after"
       src="https://images.unsplash.com/photo-1520640023173-50a135e35804?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
-      alt="A person sitting on a yellow curb tying shoelaces on a boot."
+      alt="A person sitting on a yellow curb tying pure ui on a boot."
     />
   </PImageComparer>
 );

@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 // cspell:dictionaries lorem-ipsum
 import { aTimeout, elementUpdated, expect, fixture, waitUntil } from '@open-wc/testing';
 import { html, LitElement } from 'lit';
@@ -148,7 +148,7 @@ describe('<p-dialog>', () => {
     expect(el.open).to.be.false;
   });
 
-  // https://github.com/shoelace-style/shoelace/issues/1382
+  // https://github.com/ssjblue197/pure-ui/issues/1382
   it('should properly cycle through tabbable elements when p-dialog is used in a shadowRoot', async () => {
     class AContainer extends LitElement {
       get dialog() {

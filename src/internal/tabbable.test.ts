@@ -4,9 +4,9 @@ import { activeElements, getDeepestActiveElement } from './active-elements.js';
 import { clickOnElement } from './test.js';
 import { html } from 'lit';
 import { sendKeys } from '@web/test-runner-commands';
-import type { SlDialog } from '../shoelace.js';
+import type { SlDialog } from '../pure-ui.js';
 
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 
 async function holdShiftKey(callback: () => Promise<void>) {
   await sendKeys({ down: 'Shift' });
@@ -178,7 +178,7 @@ it.skip('Should account for when focus is changed from outside sources (like cli
   expect(activeElementsArray()).to.include(closeButton);
 });
 
-// https://github.com/shoelace-style/shoelace/issues/1710
+// https://github.com/ssjblue197/pure-ui/issues/1710
 it('Should respect nested modal instances', async () => {
   const dialogOne = (): SlDialog => document.querySelector('#dialog-1')!;
   const dialogTwo = (): SlDialog => document.querySelector('#dialog-2')!;

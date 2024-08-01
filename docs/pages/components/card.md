@@ -41,9 +41,9 @@ layout: component
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PCard from '@shoelace-style/shoelace/dist/react/card';
-import PRating from '@shoelace-style/shoelace/dist/react/rating';
+import PButton from '@pure-ui/core/dist/react/button';
+import PCard from '@pure-ui/core/dist/react/card';
+import PRating from '@pure-ui/core/dist/react/rating';
 
 const css = `
   .card-overview {
@@ -106,7 +106,7 @@ Basic cards aren't very exciting, but they can display any content you want them
 ```
 
 ```jsx:react
-import PCard from '@shoelace-style/shoelace/dist/react/card';
+import PCard from '@pure-ui/core/dist/react/card';
 
 const css = `
   .card-basic {
@@ -161,8 +161,8 @@ Headers can be used to display titles and more.
 ```
 
 ```jsx:react
-import PCard from '@shoelace-style/shoelace/dist/react/card';
-import PIconButton from '@shoelace-style/shoelace/dist/react/icon-button';
+import PCard from '@pure-ui/core/dist/react/card';
+import PIconButton from '@pure-ui/core/dist/react/icon-button';
 
 const css = `
   .card-header {
@@ -227,9 +227,9 @@ Footers can be used to display actions, summaries, or other relevant content.
 ```
 
 ```jsx:react
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PCard from '@shoelace-style/shoelace/dist/react/card';
-import PRating from '@shoelace-style/shoelace/dist/react/rating';
+import PButton from '@pure-ui/core/dist/react/button';
+import PCard from '@pure-ui/core/dist/react/card';
+import PRating from '@pure-ui/core/dist/react/rating';
 
 const css = `
   .card-footer {
@@ -282,7 +282,7 @@ Cards accept an `image` slot. The image is displayed atop the card and stretches
 ```
 
 ```jsx:react
-import PCard from '@shoelace-style/shoelace/dist/react/card';
+import PCard from '@pure-ui/core/dist/react/card';
 
 const css = `
   .card-image {

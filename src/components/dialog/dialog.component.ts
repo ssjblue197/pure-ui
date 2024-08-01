@@ -63,8 +63,8 @@ import type { CSSResultGroup } from 'lit';
  * @animation dialog.overlay.hide - The animation to use when hiding the dialog's overlay.
  *
  * @property modal - Exposes the internal modal utility that controls focus trapping. To temporarily disable focus
- *   trapping and allow third-party modals spawned from an active Shoelace modal, call `modal.activateExternal()` when
- *   the third-party modal opens. Upon closing, call `modal.deactivateExternal()` to restore Shoelace's focus trapping.
+ *   trapping and allow third-party modals spawned from an active Pure UI modal, call `modal.activateExternal()` when
+ *   the third-party modal opens. Upon closing, call `modal.deactivateExternal()` to restore pure ui 's focus trapping.
  */
 export default class PDialog extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
@@ -169,7 +169,7 @@ export default class PDialog extends PureElement {
       // the dialogs's animation to jitter (if it starts offscreen), so we'll temporarily remove the attribute, call
       // `focus({ preventScroll: true })` ourselves, and add the attribute back afterwards.
       //
-      // Related: https://github.com/shoelace-style/shoelace/issues/693
+      // Related: https://github.com/ssjblue197/pure-ui/issues/693
       //
       const autoFocusTarget = this.querySelector('[autofocus]');
       if (autoFocusTarget) {
@@ -310,7 +310,7 @@ export default class PDialog extends PureElement {
               `
             : ''}
           ${
-            '' /* The tabindex="-1" is here because the body is technically scrollable if overflowing. However, if there's no focusable elements inside, you won't actually be able to scroll it via keyboard. Previously this was just a <slot>, but tabindex="-1" on the slot causes children to not be focusable. https://github.com/shoelace-style/shoelace/issues/1753#issuecomment-1836803277 */
+            '' /* The tabindex="-1" is here because the body is technically scrollable if overflowing. However, if there's no focusable elements inside, you won't actually be able to scroll it via keyboard. Previously this was just a <slot>, but tabindex="-1" on the slot causes children to not be focusable. https://github.com/ssjblue197/pure-ui/issues/1753#issuecomment-1836803277 */
           }
           <div part="body" class="dialog__body" tabindex="-1"><slot></slot></div>
 

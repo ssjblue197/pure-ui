@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import type PSpinner from './spinner.js';
 
@@ -23,7 +23,7 @@ describe('<p-spinner>', () => {
       // This matrix is the computed value when using `transform: rotate(x)` on the indicator. When using `rotate: x`,
       // it will be "none" instead.
       //
-      // Related: https://github.com/shoelace-style/shoelace/issues/1121
+      // Related: https://github.com/ssjblue197/pure-ui/issues/1121
       //
       expect(getComputedStyle(indicator).transform).to.equal('matrix(1, 0, 0, 1, 0, 0)');
     });

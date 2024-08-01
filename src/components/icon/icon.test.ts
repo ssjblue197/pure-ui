@@ -1,5 +1,5 @@
 import { aTimeout, elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
-import { registerIconLibrary } from '../../../dist/shoelace.js';
+import { registerIconLibrary } from '../../../dist/pure-ui.js';
 import type { PErrorEvent } from '../../events/p-error.js';
 import type { PLoadEvent } from '../../events/p-load.js';
 import type PIcon from './icon.js';
@@ -206,7 +206,7 @@ describe('<p-icon>', () => {
       expect(rect?.width).to.equal(0);
 
       // Make sure the mutator is applied.
-      // https://github.com/shoelace-style/shoelace/issues/1925
+      // https://github.com/ssjblue197/pure-ui/issues/1925
       expect(svg?.getAttribute('fill')).to.equal('currentColor');
     });
 

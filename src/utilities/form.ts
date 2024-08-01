@@ -25,8 +25,8 @@ export function serialize(form: HTMLFormElement) {
 }
 
 /**
- * Returns all form controls that are associated with the specified form. Includes both native and Shoelace form
- * controls. Use this function in lieu of the `HTMLFormElement.elements` property, which doesn't recognize Shoelace
+ * Returns all form controls that are associated with the specified form. Includes both native and Pure UI form
+ * controls. Use this function in lieu of the `HTMLFormElement.elements` property, which doesn't recognize Pure UI
  * form controls.
  */
 export function getFormControls(form: HTMLFormElement) {

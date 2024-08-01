@@ -15,7 +15,7 @@ Angular [plays nice](https://custom-elements-everywhere.com/#angular) with custo
 To add Pure UI to your Angular app, install the package from npm.
 
 ```bash
-npm install @shoelace-style/shoelace
+npm install @pure-ui/core
 ```
 
 ### Update the Angular Configuration
@@ -32,10 +32,10 @@ Its also important to load the components by using a `<script>` tag into the ind
       ...
       "styles": [
         "src/styles.scss",
-        "@shoelace-style/shoelace/dist/themes/light.css"
+        "@pure-ui/core/dist/themes/light.css"
        ],
       "scripts": [
-        "@shoelace-style/shoelace/dist/shoelace.js"
+        "@pure-ui/core/dist/pure-ui.js"
       ]
       ...
 ```
@@ -45,13 +45,13 @@ Its also important to load the components by using a `<script>` tag into the ind
 Next, set the [base path](/getting-started/installation#setting-the-base-path) for icons and other assets in the `main.ts`. In this example, we'll use the CDN as a base path.
 
 ```jsx
-import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path';
+import { setBasePath } from '@pure-ui/core/%NPMDIR%/utilities/base-path';
 
-setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/');
+setBasePath('https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/');
 ```
 
 :::tip
-If you'd rather not use the CDN for assets, you can create a build task that copies `node_modules/@shoelace-style/shoelace/%NPMDIR%/assets` into a public folder in your app. Then you can point the base path to that folder instead.
+If you'd rather not use the CDN for assets, you can create a build task that copies `node_modules/@pure-ui/core/%NPMDIR%/assets` into a public folder in your app. Then you can point the base path to that folder instead.
 :::
 
 ## Configuration
@@ -77,7 +77,7 @@ export class AppModule {}
 ## Reference Pure UI components in your Angular component code
 
 ```js
-import { SlDrawer } from '@shoelace-style/shoelace';
+import { SlDrawer } from '@pure-ui/core';
 
 @Component({
   selector: 'app-drawer-example',
@@ -109,5 +109,5 @@ export class DrawerExampleComponent implements OnInit {
 Now you can start using Pure UI components in your app!
 
 :::tip
-Are you using Pure UI with Angular? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/angular.md)
+Are you using Pure UI with Angular? [Help us improve this page!](https://github.com/ssjblue197/pure-ui/blob/next/docs/frameworks/angular.md)
 :::

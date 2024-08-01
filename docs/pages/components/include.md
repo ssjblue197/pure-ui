@@ -14,7 +14,7 @@ The included content will be inserted into the `<p-include>` element's default s
 ```
 
 ```jsx:react
-import PInclude from '@shoelace-style/shoelace/dist/react/include';
+import PInclude from '@pure-ui/core/dist/react/include';
 
 const App = () => <PInclude src="https://pureui.xyz/assets/examples/include.html" />;
 ```

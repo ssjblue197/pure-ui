@@ -22,8 +22,8 @@ While convenient, autoloading may lead to a [Flash of Undefined Custom Elements]
 
 <!-- prettier-ignore -->
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/pure-ui-autoloader.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/pure-ui-autoloader.js"></script>
 ```
 
 </p-tab-panel>
@@ -34,8 +34,8 @@ The traditional CDN loader registers all Pure UI elements up front. Note that, i
 
 <!-- prettier-ignore -->
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/light.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/shoelace.js" ></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/themes/light.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/pure-ui.js" ></script>
 ```
 
 </p-tab-panel>
@@ -47,7 +47,7 @@ The code above will load the light theme. If you want to use the [dark theme](/g
 
 <!-- prettier-ignore -->
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/themes/dark.css" />
 ```
 
 ### Light & Dark Theme
@@ -58,12 +58,12 @@ If you want to load the light or dark theme based on the user's `prefers-color-s
 <link
   rel="stylesheet"
   media="(prefers-color-scheme:light)"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/light.css"
+  href="https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/themes/light.css"
 />
 <link
   rel="stylesheet"
   media="(prefers-color-scheme:dark)"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/themes/dark.css"
+  href="https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/themes/dark.css"
   onload="document.documentElement.classList.add('p-theme-dark');"
 />
 ```
@@ -75,39 +75,39 @@ Now you can [start using Pure UI!](/getting-started/usage)
 If you don't want to use the CDN, you can install Pure UI from npm with the following command.
 
 ```bash
-npm install @shoelace-style/shoelace
+npm install @pure-ui/core
 ```
 
-It's up to you to make the source files available to your app. One way to do this is to create a route in your app called `/shoelace` that serves static files from `node_modules/@shoelace-style/shoelace`.
+It's up to you to make the source files available to your app. One way to do this is to create a route in your app called `/pure-ui` that serves static files from `node_modules/@pure-ui/core`.
 
 Once you've done that, add the following tags to your page. Make sure to update `href` and `src` so they point to the route you created.
 
 ```html
-<link rel="stylesheet" href="/shoelace/%NPMDIR%/themes/light.css" />
-<script type="module" src="/shoelace/%NPMDIR%/shoelace.js"></script>
+<link rel="stylesheet" href="/pure-ui/%NPMDIR%/themes/light.css" />
+<script type="module" src="/pure-ui/%NPMDIR%/pure-ui.js"></script>
 ```
 
 Alternatively, [you can use a bundler](#bundling).
 
 :::tip
-For clarity, the docs will usually show imports from `@shoelace-style/shoelace`. If you're not using a module resolver or bundler, you'll need to adjust these paths to point to the folder Pure UI is in.
+For clarity, the docs will usually show imports from `@pure-ui/core`. If you're not using a module resolver or bundler, you'll need to adjust these paths to point to the folder Pure UI is in.
 :::
 
 ## Setting the Base Path
 
-Some components rely on assets (icons, images, etc.) and Pure UI needs to know where they're located. For convenience, Pure UI will try to auto-detect the correct location based on the script you've loaded it from. This assumes assets are colocated with `shoelace.js` or `pure-ui-autoloader.js` and will "just work" for most users.
+Some components rely on assets (icons, images, etc.) and Pure UI needs to know where they're located. For convenience, Pure UI will try to auto-detect the correct location based on the script you've loaded it from. This assumes assets are colocated with `pure-ui.js` or `pure-ui-autoloader.js` and will "just work" for most users.
 
 However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Pure UI, you'll need to set the base path. You can do this one of two ways.
 
 ```html
-<!-- Option 1: the data-shoelace attribute -->
-<script src="bundle.js" data-shoelace="/path/to/shoelace/%NPMDIR%"></script>
+<!-- Option 1: the data-pure-ui attribute -->
+<script src="bundle.js" data-pure-ui="/path/to/pure-ui/%NPMDIR%"></script>
 
 <!-- Option 2: the setBasePath() method -->
 <script src="bundle.js"></script>
 <script type="module">
-  import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path.js';
-  setBasePath('/path/to/shoelace/%NPMDIR%');
+  import { setBasePath } from '@pure-ui/core/%NPMDIR%/utilities/base-path.js';
+  setBasePath('/path/to/pure-ui/%NPMDIR%');
 </script>
 ```
 
@@ -121,7 +121,7 @@ Most of the magic behind assets is handled internally by Pure UI, but if you nee
 
 ```html
 <script type="module">
-  import { getBasePath, setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path.js';
+  import { getBasePath, setBasePath } from '@pure-ui/core/%NPMDIR%/utilities/base-path.js';
 
   setBasePath('/path/to/assets');
 
@@ -142,10 +142,10 @@ Cherry picking can be done from [the CDN](#cdn-installation-easiest) or from [np
 Here's an example that loads only the button component. Again, if you're not using a module resolver, you'll need to adjust the path to point to the folder Pure UI is in.
 
 ```html
-<link rel="stylesheet" href="/path/to/shoelace/%NPMDIR%/themes/light.css" />
+<link rel="stylesheet" href="/path/to/pure-ui/%NPMDIR%/themes/light.css" />
 
-<script type="module" data-shoelace="/path/to/shoelace/%NPMDIR%">
-  import '@shoelace-style/shoelace/%NPMDIR%/components/button/button.js';
+<script type="module" data-pure-ui="/path/to/pure-ui/%NPMDIR%">
+  import '@pure-ui/core/%NPMDIR%/components/button/button.js';
 
   // <p-button> is ready to use!
 </script>
@@ -154,7 +154,7 @@ Here's an example that loads only the button component. Again, if you're not usi
 You can copy and paste the code to import a component from the "Importing" section of the component's documentation. Note that some components have dependencies that are automatically imported when you cherry pick. If a component has dependencies, they will be listed in the "Dependencies" section of its docs.
 
 :::warning
-Never cherry pick components or utilities from `shoelace.js` as this will cause the browser to load the entire library. Instead, cherry pick from specific modules as shown above.
+Never cherry pick components or utilities from `pure-ui.js` as this will cause the browser to load the entire library. Instead, cherry pick from specific modules as shown above.
 :::
 
 :::warning
@@ -168,7 +168,7 @@ Pure UI is distributed as a collection of standard ES modules that [all modern b
 To use Pure UI with a bundler, first install Pure UI along with your bundler of choice.
 
 ```bash
-npm install @shoelace-style/shoelace
+npm install @pure-ui/core
 ```
 
 Now it's time to configure your bundler. Configurations vary for each tool, but here are some examples to help you get started.
@@ -179,21 +179,21 @@ Now it's time to configure your bundler. Configurations vary for each tool, but 
 Once your bundler is configured, you'll be able to import Pure UI components and utilities.
 
 ```js
-import '@shoelace-style/shoelace/%NPMDIR%/themes/light.css';
-import '@shoelace-style/shoelace/%NPMDIR%/components/button/button.js';
-import '@shoelace-style/shoelace/%NPMDIR%/components/icon/icon.js';
-import '@shoelace-style/shoelace/%NPMDIR%/components/input/input.js';
-import '@shoelace-style/shoelace/%NPMDIR%/components/rating/rating.js';
-import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path.js';
+import '@pure-ui/core/%NPMDIR%/themes/light.css';
+import '@pure-ui/core/%NPMDIR%/components/button/button.js';
+import '@pure-ui/core/%NPMDIR%/components/icon/icon.js';
+import '@pure-ui/core/%NPMDIR%/components/input/input.js';
+import '@pure-ui/core/%NPMDIR%/components/rating/rating.js';
+import { setBasePath } from '@pure-ui/core/%NPMDIR%/utilities/base-path.js';
 
 // Set the base path to the folder you copied Pure UI's assets to
-setBasePath('/path/to/shoelace/%NPMDIR%');
+setBasePath('/path/to/pure-ui/%NPMDIR%');
 
 // <p-button>, <p-icon>, <p-input>, and <p-rating> are ready to use!
 ```
 
 :::warning
-Component modules include side effects for registration purposes. Because of this, importing directly from `@shoelace-style/shoelace` may result in a larger bundle size than necessary. For optimal tree shaking, always cherry pick, i.e. import components and utilities from their respective files, as shown above.
+Component modules include side effects for registration purposes. Because of this, importing directly from `@pure-ui/core` may result in a larger bundle size than necessary. For optimal tree shaking, always cherry pick, i.e. import components and utilities from their respective files, as shown above.
 :::
 
 ### Avoiding auto-registering imports
@@ -201,14 +201,14 @@ Component modules include side effects for registration purposes. Because of thi
 By default, imports to components will auto-register themselves. This may not be ideal in all cases. To import just the component's class without auto-registering it's tag we can do the following:
 
 ```diff
-- import SlButton from '@shoelace-style/shoelace/%NPMDIR%/components/button/button.js';
-+ import SlButton from '@shoelace-style/shoelace/%NPMDIR%/components/button/button.component.js';
+- import SlButton from '@pure-ui/core/%NPMDIR%/components/button/button.js';
++ import SlButton from '@pure-ui/core/%NPMDIR%/components/button/button.component.js';
 ```
 
 Notice how the import ends with `.component.js`. This is the current convention to convey the import does not register itself.
 
 :::danger
-While you can override the class or re-register the shoelace class under a different tag name, if you do so, many components won’t work as expected.
+While you can override the class or re-register the pure ui class under a different tag name, if you do so, many components won’t work as expected.
 :::
 
 ## The difference between CDN and npm
@@ -217,7 +217,7 @@ You'll notice that the CDN links all start with `/%CDNDIR%/<path>` and npm impor
 
 TL;DR:
 
-- `@shoelace-style/shoelace/%CDNDIR%` is for CDN users
-- `@shoelace-style/shoelace/%NPMDIR%` is for npm users
+- `@pure-ui/core/%CDNDIR%` is for CDN users
+- `@pure-ui/core/%NPMDIR%` is for npm users
 
 This change was introduced in `v2.5.0` to address issues around installations from npm loading multiple versions of libraries (such as the Lit) that Pure UI uses internally.

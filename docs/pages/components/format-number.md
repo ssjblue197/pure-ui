@@ -27,8 +27,8 @@ Localization is handled by the browser's [`Intl.NumberFormat` API](https://devel
 
 ```jsx:react
 import { useState } from 'react';
-import PFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
-import PInput from '@shoelace-style/shoelace/dist/react/input';
+import PFormatNumber from '@pure-ui/core/dist/react/format-number';
+import PInput from '@pure-ui/core/dist/react/input';
 
 const App = () => {
   const [value, setValue] = useState(1000);
@@ -67,7 +67,7 @@ To get the value as a percent, set the `type` attribute to `percent`.
 ```
 
 ```jsx:react
-import PFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
+import PFormatNumber from '@pure-ui/core/dist/react/format-number';
 
 const App = () => (
   <>
@@ -95,7 +95,7 @@ Russian: <p-format-number value="2000" lang="ru" minimum-fraction-digits="2"></p
 ```
 
 ```jsx:react
-import PFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
+import PFormatNumber from '@pure-ui/core/dist/react/format-number';
 
 const App = () => (
   <>
@@ -121,7 +121,7 @@ To format a number as a monetary value, set the `type` attribute to `currency` a
 ```
 
 ```jsx:react
-import PFormatNumber from '@shoelace-style/shoelace/dist/react/format-number';
+import PFormatNumber from '@pure-ui/core/dist/react/format-number';
 
 const App = () => (
   <>

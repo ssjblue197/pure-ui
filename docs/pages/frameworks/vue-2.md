@@ -17,20 +17,20 @@ These instructions are for Vue 2. If you're using Vue 3 or above, please see the
 To add Pure UI to your Vue app, install the package from npm.
 
 ```bash
-npm install @shoelace-style/shoelace
+npm install @pure-ui/core
 ```
 
 Next, [include a theme](/getting-started/themes) and set the [base path](/getting-started/installation#setting-the-base-path) for icons and other assets. In this example, we'll import the light theme and use the CDN as a base path.
 
 ```jsx
-import '@shoelace-style/shoelace/%NPMDIR%/themes/light.css';
-import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path';
+import '@pure-ui/core/%NPMDIR%/themes/light.css';
+import { setBasePath } from '@pure-ui/core/%NPMDIR%/utilities/base-path';
 
-setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/');
+setBasePath('https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/');
 ```
 
 :::tip
-If you'd rather not use the CDN for assets, you can create a build task that copies `node_modules/@shoelace-style/shoelace/dist/assets` into a public folder in your app. Then you can point the base path to that folder instead.
+If you'd rather not use the CDN for assets, you can create a build task that copies `node_modules/@pure-ui/core/dist/assets` into a public folder in your app. Then you can point the base path to that folder instead.
 :::
 
 ## Configuration
@@ -103,5 +103,5 @@ Now you can use the `v-p-model` directive to keep your data in sync!
 ```
 
 :::tip
-Are you using Pure UI with Vue? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/vue-2.md)
+Are you using Pure UI with Vue? [Help us improve this page!](https://github.com/ssjblue197/pure-ui/blob/next/docs/frameworks/vue-2.md)
 :::

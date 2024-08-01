@@ -35,7 +35,7 @@ To customize a design token, simply override it in your stylesheet using a `:roo
 }
 ```
 
-Many design tokens are described further along in this documentation. For a complete list, refer to `src/themes/light.css` in the project's [source code](https://github.com/shoelace-style/shoelace/blob/current/src/themes/light.css).
+Many design tokens are described further along in this documentation. For a complete list, refer to `src/themes/light.css` in the project's [source code](https://github.com/ssjblue197/pure-ui/blob/current/src/themes/light.css).
 
 ## CSS Parts
 
@@ -119,7 +119,7 @@ To customize a default animation, use the `setDefaultAnimation()` method. The fu
 This example will make all dialogs use a custom show animation.
 
 ```js
-import { setDefaultAnimation } from '@shoelace-style/shoelace/dist/utilities/animation-registry.js';
+import { setDefaultAnimation } from '@pure-ui/core/dist/utilities/animation-registry.js';
 
 // Change the default animation for all dialogs
 setDefaultAnimation('dialog.show', {
@@ -142,7 +142,7 @@ If you only want to target a single component, use the `setAnimation()` method i
 In this example, only the target dialog will use a custom show animation.
 
 ```js
-import { setAnimation } from '@shoelace-style/shoelace/dist/utilities/animation-registry.js';
+import { setAnimation } from '@pure-ui/core/dist/utilities/animation-registry.js';
 
 // Change the animation for a single dialog
 const dialog = document.querySelector('#my-dialog');

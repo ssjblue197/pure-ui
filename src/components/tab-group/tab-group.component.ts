@@ -374,7 +374,7 @@ export default class PTabGroup extends PureElement {
       // Safari appears to calculate this incorrectly when zoomed at 110%, causing the controls to toggle indefinitely.
       // Adding a single pixel to the comparison seems to resolve it.
       //
-      // See https://github.com/shoelace-style/shoelace/issues/1839
+      // See https://github.com/ssjblue197/pure-ui/issues/1839
       this.hasScrollControls =
         ['top', 'bottom'].includes(this.placement) && this.nav.scrollWidth > this.nav.clientWidth + 1;
     }

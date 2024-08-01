@@ -13,21 +13,21 @@ Pure UI offers a React version of every component to provide an idiomatic experi
 To add Pure UI to your React app, install the package from npm.
 
 ```bash
-npm install @shoelace-style/shoelace
+npm install @pure-ui/core
 ```
 
 Next, [include a theme](/getting-started/themes) and set the [base path](/getting-started/installation#setting-the-base-path) for icons and other assets. In this example, we'll import the light theme and use the CDN as a base path.
 
 ```jsx
 // App.jsx
-import '@shoelace-style/shoelace/%NPMDIR%/themes/light.css';
-import { setBasePath } from '@shoelace-style/shoelace/%NPMDIR%/utilities/base-path';
+import '@pure-ui/core/%NPMDIR%/themes/light.css';
+import { setBasePath } from '@pure-ui/core/%NPMDIR%/utilities/base-path';
 
-setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@%VERSION%/%CDNDIR%/');
+setBasePath('https://cdn.jsdelivr.net/npm/@pure-ui/core@%VERSION%/%CDNDIR%/');
 ```
 
 :::tip
-If you'd rather not use the CDN for assets, you can create a [build task](https://webpack.js.org/plugins/copy-webpack-plugin/) that copies `node_modules/@shoelace-style/shoelace/%NPMDIR%/assets` into your app's `public` directory. Then you can point the base path to that folder instead.
+If you'd rather not use the CDN for assets, you can create a [build task](https://webpack.js.org/plugins/copy-webpack-plugin/) that copies `node_modules/@pure-ui/core/%NPMDIR%/assets` into your app's `public` directory. Then you can point the base path to that folder instead.
 :::
 
 Now you can start using components!
@@ -43,7 +43,7 @@ Preact users facing type errors using components may benefit from setting "paths
 Every Pure UI component is available to import as a React component. Note that we're importing the `<SlButton>` _React component_ instead of the `<p-button>` _custom element_ in the example below.
 
 ```jsx
-import SlButton from '@shoelace-style/shoelace/%NPMDIR%/react/button';
+import SlButton from '@pure-ui/core/%NPMDIR%/react/button';
 
 const MyComponent = () => <SlButton variant="primary">Click me</SlButton>;
 
@@ -55,14 +55,14 @@ export default MyComponent;
 Previously, it was recommended to import from a single entrypoint like so:
 
 ```jsx
-import { SlButton } from '@shoelace-style/shoelace/%NPMDIR%/react';
+import { SlButton } from '@pure-ui/core/%NPMDIR%/react';
 ```
 
 However, tree-shaking extra Pure UI components proved to be a challenge. As a result, we now recommend cherry-picking components you want to use, rather than importing from a single entrypoint.
 
 ```diff
-- import { SlButton } from '@shoelace-style/shoelace/%NPMDIR%/react';
-+ import SlButton from '@shoelace-style/shoelace/%NPMDIR%/react/button';
+- import { SlButton } from '@pure-ui/core/%NPMDIR%/react';
++ import SlButton from '@pure-ui/core/%NPMDIR%/react/button';
 ```
 
 You can find a copy + paste import for each component in the "importing" section of its documentation.
@@ -75,7 +75,7 @@ Here's how you can bind the input's value to a state variable.
 
 ```jsx
 import { useState } from 'react';
-import SlInput from '@shoelace-style/shoelace/%NPMDIR%/react/input';
+import SlInput from '@pure-ui/core/%NPMDIR%/react/input';
 
 function MyComponent() {
   const [value, setValue] = useState('');
@@ -90,8 +90,8 @@ If you're using TypeScript, it's important to note that `event.target` will be a
 
 ```tsx
 import { useState } from 'react';
-import SlInput from '@shoelace-style/shoelace/%NPMDIR%/react/input';
-import type SlInputElement from '@shoelace-style/shoelace/%NPMDIR%/components/input/input';
+import SlInput from '@pure-ui/core/%NPMDIR%/react/input';
+import type SlInputElement from '@pure-ui/core/%NPMDIR%/components/input/input';
 
 function MyComponent() {
   const [value, setValue] = useState('');
@@ -106,8 +106,8 @@ You can also import the event type for use in your callbacks, shown below.
 
 ```tsx
 import { useCallback, useState } from 'react';
-import SlInput, { type SlInputEvent } from '@shoelace-style/shoelace/%NPMDIR%/react/input';
-import type SlInputElement from '@shoelace-style/shoelace/%NPMDIR%/components/input/input';
+import SlInput, { type SlInputEvent } from '@pure-ui/core/%NPMDIR%/react/input';
+import type SlInputElement from '@pure-ui/core/%NPMDIR%/components/input/input';
 
 function MyComponent() {
   const [value, setValue] = useState('');
@@ -178,7 +178,7 @@ To fix this, add the following to your `package.json` which tells the transpiler
 ```js
 {
   "jest": {
-    "transformIgnorePatterns": ["node_modules/(?!(@shoelace))"]
+    "transformIgnorePatterns": ["node_modules/(?!(@pure-ui))"]
   }
 }
 ```
@@ -188,5 +188,5 @@ These instructions are for apps created via Create React App. If you're using Je
 For more details, refer to Jest's [`transformIgnorePatterns` customization](https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization) documentation.
 
 :::tip
-Are you using Pure UI with React? [Help us improve this page!](https://github.com/shoelace-style/shoelace/blob/next/docs/frameworks/react.md)
+Are you using Pure UI with React? [Help us improve this page!](https://github.com/ssjblue197/pure-ui/blob/next/docs/frameworks/react.md)
 :::

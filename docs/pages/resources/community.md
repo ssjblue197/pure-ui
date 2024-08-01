@@ -12,14 +12,14 @@ Please be respectful of other users and remember that Pure UI is an open source 
 
 ## Discussion Forum
 
-The [discussion forum](https://github.com/shoelace-style/shoelace/discussions) is open to anyone with a GitHub account. This is the best place to:
+The [discussion forum](https://github.com/ssjblue197/pure-ui/discussions) is open to anyone with a GitHub account. This is the best place to:
 
 - Ask for help
 - Share ideas and get feedback
 - Show the community what you're working on
 - Learn more about the project, its values, and its roadmap
 
-<p-button variant="primary" href="https://github.com/shoelace-style/shoelace/discussions" target="_blank">
+<p-button variant="primary" href="https://github.com/ssjblue197/pure-ui/discussions" target="_blank">
   <p-icon name="github" slot="prefix"></p-icon>
   Join the Discussion
 </p-button>
@@ -40,20 +40,9 @@ The [community chat](https://discord.gg/mg8f26C) is open to the public and power
 
 ## Stack Overflow
 
-You can post questions on Stack Overflow using [the "shoelace" tag](https://stackoverflow.com/questions/tagged/shoelace). This is a public forum where talented developers answer questions. It's a great way to get help, but it is not maintained by the Pure UI author.
+You can post questions on Stack Overflow using [the "pure-ui" tag](https://stackoverflow.com/questions/tagged/pure-ui). This is a public forum where talented developers answer questions. It's a great way to get help, but it is not maintained by the Pure UI author.
 
-<p-button variant="primary" href="https://stackoverflow.com/questions/ask?tags=shoelace" target="_blank">
+<p-button variant="primary" href="https://stackoverflow.com/questions/ask?tags=pure-ui" target="_blank">
   <p-icon name="stack-overflow" slot="prefix"></p-icon>
   Ask for Help
-</p-button>
-
-## Twitter
-
-Follow [@shoelace_style](https://twitter.com/shoelace_style) on Twitter for general updates and announcements about Pure UI. This is a great place to say "hi" or to share something you're working on. You're also welcome to follow [@claviska](https://twitter.com/claviska), the creator, for tweets about web components, web development, and life.
-
-**Please avoid using Twitter for support questions.** The [discussion forum](https://github.com/shoelace-style/shoelace/discussions) is a much better place to share code snippets, screenshots, and other troubleshooting info. You'll have much better luck there, as more users will have a chance to help you.
-
-<p-button variant="primary" href="https://twitter.com/shoelace_style" target="_blank">
-  <p-icon name="twitter" slot="prefix"></p-icon>
-  Follow on Twitter
 </p-button>

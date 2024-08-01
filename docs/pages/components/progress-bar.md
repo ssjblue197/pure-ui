@@ -10,7 +10,7 @@ layout: component
 ```
 
 ```jsx:react
-import PProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
+import PProgressBar from '@pure-ui/core/dist/react/progress-bar';
 
 const App = () => <PProgressBar value={50} />;
 ```
@@ -26,7 +26,7 @@ Use the `label` attribute to label the progress bar and tell assistive devices h
 ```
 
 ```jsx:react
-import PProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
+import PProgressBar from '@pure-ui/core/dist/react/progress-bar';
 
 const App = () => <PProgressBar value="50" label="Upload progress" />;
 ```
@@ -42,7 +42,7 @@ Use the `--height` custom property to set the progress bar's height.
 {% raw %}
 
 ```jsx:react
-import PProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
+import PProgressBar from '@pure-ui/core/dist/react/progress-bar';
 
 const App = () => <PProgressBar value={50} style={{ '--height': '6px' }} />;
 ```
@@ -82,9 +82,9 @@ Use the default slot to show a value.
 
 ```jsx:react
 import { useState } from 'react';
-import PButton from '@shoelace-style/shoelace/dist/react/button';
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
-import PProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
+import PButton from '@pure-ui/core/dist/react/button';
+import PIcon from '@pure-ui/core/dist/react/icon';
+import PProgressBar from '@pure-ui/core/dist/react/progress-bar';
 
 const App = () => {
   const [value, setValue] = useState(50);
@@ -123,7 +123,7 @@ The `indeterminate` attribute can be used to inform the user that the operation 
 ```
 
 ```jsx:react
-import PProgressBar from '@shoelace-style/shoelace/dist/react/progress-bar';
+import PProgressBar from '@pure-ui/core/dist/react/progress-bar';
 
 const App = () => <PProgressBar indeterminate />;
 ```

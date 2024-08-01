@@ -22,10 +22,10 @@ layout: component
 {% raw %}
 
 ```jsx:react
-import PDivider from '@shoelace-style/shoelace/dist/react/divider';
-import PMenu from '@shoelace-style/shoelace/dist/react/menu';
-import PMenuLabel from '@shoelace-style/shoelace/dist/react/menu-label';
-import PMenuItem from '@shoelace-style/shoelace/dist/react/menu-item';
+import PDivider from '@pure-ui/core/dist/react/divider';
+import PMenu from '@pure-ui/core/dist/react/menu';
+import PMenuLabel from '@pure-ui/core/dist/react/menu-label';
+import PMenuItem from '@pure-ui/core/dist/react/menu-item';
 
 const App = () => (
   <PMenu style={{ maxWidth: '200px' }}>

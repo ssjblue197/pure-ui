@@ -70,7 +70,7 @@ Icons inherit their color from the current text color. Thus, you can set the `co
 {% raw %}
 
 ```jsx:react
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PIcon from '@pure-ui/core/dist/react/icon';
 
 const App = () => (
   <>
@@ -132,7 +132,7 @@ Icons are sized relative to the current font size. To change their size, set the
 {% raw %}
 
 ```jsx:react
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PIcon from '@pure-ui/core/dist/react/icon';
 
 const App = () => (
   <div style={{ fontSize: '32px' }}>
@@ -167,7 +167,7 @@ For non-decorative icons, use the `label` attribute to announce it to assistive 
 ```
 
 ```jsx:react
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PIcon from '@pure-ui/core/dist/react/icon';
 
 const App = () => <PIcon name="star-fill" label="Add to favorites" />;
 ```
@@ -183,7 +183,7 @@ Custom icons can be loaded individually with the `src` attribute. Only SVGs on a
 {% raw %}
 
 ```jsx:react
-import PIcon from '@shoelace-style/shoelace/dist/react/icon';
+import PIcon from '@pure-ui/core/dist/react/icon';
 
 const App = () => <PIcon src="https://pureui.xyz/assets/images/shoe.svg" style={{ fontSize: '8rem' }}></PIcon>;
 ```
@@ -722,7 +722,7 @@ If you want to change the icons Pure UI uses internally, you can register an ico
         list.appendChild(item);
 
         // Wrap it with a tooltip the first time the mouse lands on it. We do this instead of baking them into the DOM
-        // to improve this page's performance. See: https://github.com/shoelace-style/shoelace/issues/1122
+        // to improve this page's performance. See: https://github.com/ssjblue197/pure-ui/issues/1122
         item.addEventListener('mouseover', () => wrapWithTooltip(item), { once: true });
 
         // Copy on click

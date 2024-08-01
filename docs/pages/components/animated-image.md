@@ -13,7 +13,7 @@ layout: component
 ```
 
 ```jsx:react
-import PAnimatedImage from '@shoelace-style/shoelace/dist/react/animated-image';
+import PAnimatedImage from '@pure-ui/core/dist/react/animated-image';
 
 const App = () => (
   <PAnimatedImage
@@ -41,7 +41,7 @@ Both GIF and WEBP images are supported.
 ```
 
 ```jsx:react
-import PAnimatedImage from '@shoelace-style/shoelace/dist/react/animated-image';
+import PAnimatedImage from '@pure-ui/core/dist/react/animated-image';
 
 const App = () => (
   <PAnimatedImage src="https://pureui.xyz/assets/images/tie.webp" alt="Animation of a shoe being tied" />
@@ -64,7 +64,7 @@ To set a custom size, apply a width and/or height to the host element.
 {% raw %}
 
 ```jsx:react
-import PAnimatedImage from '@shoelace-style/shoelace/dist/react/animated-image';
+import PAnimatedImage from '@pure-ui/core/dist/react/animated-image';
 
 const App = () => (
   <PAnimatedImage
@@ -102,7 +102,7 @@ You can change the appearance and location of the control box by targeting the `
 ```
 
 ```jsx:react
-import PAnimatedImage from '@shoelace-style/shoelace/dist/react/animated-image';
+import PAnimatedImage from '@pure-ui/core/dist/react/animated-image';
 
 const css = `
   .animated-image-custom-control-box::part(control-box) {

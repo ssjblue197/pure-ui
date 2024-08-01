@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests.js';
 import { sendKeys } from '@web/test-runner-commands';
@@ -118,7 +118,7 @@ describe('<p-switch>', () => {
 
   it('should hide the native input with the correct positioning to scroll correctly when contained in an overflow', async () => {
     //
-    // See: https://github.com/shoelace-style/shoelace/issues/1169
+    // See: https://github.com/ssjblue197/pure-ui/issues/1169
     //
     const el = await fixture<PSwitch>(html` <p-switch></p-switch> `);
     const label = el.shadowRoot!.querySelector('.switch')!;
@@ -265,7 +265,7 @@ describe('<p-switch>', () => {
   });
 
   it('should not jump the page to the bottom when focusing a switch at the bottom of an element with overflow: auto;', async () => {
-    // https://github.com/shoelace-style/shoelace/issues/1169
+    // https://github.com/ssjblue197/pure-ui/issues/1169
     const el = await fixture<HTMLDivElement>(html`
       <div style="display: flex; flex-direction: column; overflow: auto; max-height: 400px;">
         <p-switch>Switch</p-switch>

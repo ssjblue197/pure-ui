@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 import { aTimeout, expect, fixture, html, oneEvent, waitUntil } from '@open-wc/testing';
 import { clickOnElement } from '../../internal/test.js';
 import { runFormControlBaseTests } from '../../internal/test/form-control-base-tests.js';
@@ -368,7 +368,7 @@ describe('when the value changes', () => {
 
   it('should relatively position content to prevent visually hidden scroll bugs', async () => {
     //
-    // See https://github.com/shoelace-style/shoelace/issues/1380
+    // See https://github.com/ssjblue197/pure-ui/issues/1380
     //
     const radioGroup = await fixture<PRadioGroup>(html`
       <p-radio-group value="1">
@@ -384,8 +384,8 @@ describe('when the value changes', () => {
   });
 
   /**
-   * @see https://github.com/shoelace-style/shoelace/issues/1361
-   * This isn't really possible to test right now due to importing "shoelace.js" which
+   * @see https://github.com/ssjblue197/pure-ui/issues/1361
+   * This isn't really possible to test right now due to importing "pure-ui.js" which
    * auto-defines all of our components up front. This should be tested if we ever split
    * to non-auto-defining components and not auto-defining for tests.
    */

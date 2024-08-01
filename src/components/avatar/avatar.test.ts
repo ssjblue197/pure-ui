@@ -1,4 +1,4 @@
-import '../../../dist/shoelace.js';
+import '../../../dist/pure-ui.js';
 import { aTimeout, expect, fixture, html, waitUntil } from '@open-wc/testing';
 import type PAvatar from './avatar.js';
 

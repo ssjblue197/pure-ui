@@ -14,8 +14,8 @@ layout: component
 ```
 
 ```jsx:react
-import POption from '@shoelace-style/shoelace/dist/react/option';
-import PSelect from '@shoelace-style/shoelace/dist/react/select';
+import POption from '@pure-ui/core/dist/react/option';
+import PSelect from '@pure-ui/core/dist/react/select';
 
 const App = () => (
   <PSelect>
@@ -41,8 +41,8 @@ Use the `disabled` attribute to disable an option and prevent it from being sele
 ```
 
 ```jsx:react
-import POption from '@shoelace-style/shoelace/dist/react/option';
-import PSelect from '@shoelace-style/shoelace/dist/react/select';
+import POption from '@pure-ui/core/dist/react/option';
+import PSelect from '@pure-ui/core/dist/react/select';
 
 const App = () => (
   <PSelect>
