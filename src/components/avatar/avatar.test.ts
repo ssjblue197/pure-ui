@@ -60,7 +60,7 @@ describe("<p-avatar>", () => {
   });
 
   describe("when provided initials parameter", () => {
-    const initials = "SL";
+    const initials = "P";
     before(async () => {
       el = await fixture<PAvatar>(
         html`<p-avatar initials="${initials}" label="Avatar"></p-avatar>`,
@@ -80,7 +80,7 @@ describe("<p-avatar>", () => {
   });
 
   describe("when image is present, the initials or icon part should not render", () => {
-    const initials = "SL";
+    const initials = "P";
     const image =
       "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
     const label = "Small transparent square";
