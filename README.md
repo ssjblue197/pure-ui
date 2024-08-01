@@ -29,3 +29,9 @@ If that's not what you're trying to do, the [documentation website](https://pure
 ### What are you using to build Pure UI?
 
 Components are built with [LitElement](https://lit-element.polymer-project.org/), a custom elements base class that provides an intuitive API and reactive data binding. The build is a custom script with bundling powered by [esbuild](https://esbuild.github.io/).
+
+## Support Me
+
+If you like this project, please consider buying me a coffee. Your support helps me to keep the project alive and improving it.
+
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/ssjblue1979)
