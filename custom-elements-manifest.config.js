@@ -34,7 +34,7 @@ export default {
     plugins: [
         // Append package data
         {
-            name: 'shoelace-package-data',
+            name: 'pure-ui-package-data',
             packageLinkPhase({ customElementsManifest }) {
                 customElementsManifest.package = { name, description, version, author, homepage, license };
             }
@@ -42,7 +42,7 @@ export default {
 
         // Infer tag names because we no longer use @customElement decorators.
         {
-            name: 'shoelace-infer-tag-names',
+            name: 'pure-ui-infer-tag-names',
             analyzePhase({ ts, node, moduleDoc }) {
                 switch (node.kind) {
                     case ts.SyntaxKind.ClassDeclaration:
@@ -72,7 +72,7 @@ export default {
 
         // Parse custom jsDoc tags
         {
-            name: 'shoelace-custom-tags',
+            name: 'pure-ui-custom-tags',
             analyzePhase({ ts, node, moduleDoc }) {
                 switch (node.kind) {
                     case ts.SyntaxKind.ClassDeclaration:
@@ -144,7 +144,7 @@ export default {
         },
 
         {
-            name: 'shoelace-react-event-names',
+            name: 'pure-ui-react-event-names',
             analyzePhase({ ts, node, moduleDoc }) {
                 switch (node.kind) {
                     case ts.SyntaxKind.ClassDeclaration:
@@ -164,7 +164,7 @@ export default {
         },
 
         {
-            name: 'shoelace-translate-module-paths',
+            name: 'pure-ui-translate-module-paths',
             packageLinkPhase({ customElementsManifest }) {
                 customElementsManifest?.modules?.forEach(mod => {
                     //

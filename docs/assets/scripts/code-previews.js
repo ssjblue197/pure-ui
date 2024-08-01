@@ -1,7 +1,7 @@
 (() => {
     function convertModuleLinks(html) {
         html = html
-            .replace(/@shoelace-style\/shoelace/g, `https://esm.sh/@shoelace-style/shoelace@${shoelaceVersion}`)
+            .replace(/@pure-ui\/core/g, `https://esm.sh/@pure-ui/core@${pureUIVersion}`)
             .replace(/from 'react'/g, `from 'https://esm.sh/react@${reactVersion}'`)
             .replace(/from "react"/g, `from "https://esm.sh/react@${reactVersion}"`);
 
@@ -64,7 +64,7 @@
         });
     }
 
-    const shoelaceVersion = document.documentElement.getAttribute('data-shoelace-version');
+    const pureUIVersion = document.documentElement.getAttribute('data-pure-ui-version');
     const reactVersion = '^18';
     const cdndir = 'cdn';
     const npmdir = 'dist';
@@ -72,8 +72,8 @@
     let count = 1;
 
     // We need the version to open
-    if (!shoelaceVersion) {
-        throw new Error('The data-shoelace-version attribute is missing from <html>.');
+    if (!pureUIVersion) {
+        throw new Error('The data-pure-ui-version attribute is missing from <html>.');
     }
 
     // Sync flavor UI on page load
@@ -182,7 +182,7 @@
             // HTML templates
             if (!isReact) {
                 htmlTemplate =
-                    `<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${shoelaceVersion}/${cdndir}/shoelace.js"></script>\n` +
+                    `<script type="module" src="https://cdn.jsdelivr.net/npm/@pure-ui/core@${pureUIVersion}/${cdndir}/pure-ui.js"></script>\n` +
                     `\n${htmlExample}`;
                 jsTemplate = '';
             }
@@ -193,10 +193,10 @@
                 jsTemplate =
                     `import React from 'https://esm.sh/react@${reactVersion}';\n` +
                     `import ReactDOM from 'https://esm.sh/react-dom@${reactVersion}';\n` +
-                    `import { setBasePath } from 'https://esm.sh/@shoelace-style/shoelace@${shoelaceVersion}/${cdndir}/utilities/base-path';\n` +
+                    `import { setBasePath } from 'https://esm.sh/@pure-ui/core@${pureUIVersion}/${cdndir}/utilities/base-path';\n` +
                     `\n` +
                     `// Set the base path for Pure UI assets\n` +
-                    `setBasePath('https://esm.sh/@shoelace-style/shoelace@${shoelaceVersion}/${npmdir}/')\n` +
+                    `setBasePath('https://esm.sh/@pure-ui/core@${pureUIVersion}/${npmdir}/')\n` +
                     `\n${convertModuleLinks(reactExample)}\n` +
                     `\n` +
                     `ReactDOM.render(<App />, document.getElementById('root'));`;
@@ -204,7 +204,7 @@
 
             // CSS templates
             cssTemplate =
-                `@import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@${shoelaceVersion}/${cdndir}/themes/${
+                `@import 'https://cdn.jsdelivr.net/npm/@pure-ui/core@${pureUIVersion}/${cdndir}/themes/${
           isDark ? 'dark' : 'light'
         }.css';\n` +
                 '\n' +
@@ -219,7 +219,7 @@
             const data = {
                 title: '',
                 description: '',
-                tags: ['shoelace', 'web components'],
+                tags: ['pure-ui', 'web components'],
                 editors,
                 head: `<meta name="viewport" content="width=device-width">`,
                 html_classes: `p-theme-${isDark ? 'dark' : 'light'}`,
