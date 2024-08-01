@@ -1,7 +1,7 @@
 (() => {
   function convertModuleLinks(html) {
     html = html
-      .replace(/@pure-ui\/core/g, `https://esm.sh/pure-uikit@${pureUIVersion}`)
+      .replace(/pure-uikit/g, `https://esm.sh/pure-uikit@${pureUIVersion}`)
       .replace(/from 'react'/g, `from 'https://esm.sh/react@${reactVersion}'`)
       .replace(/from "react"/g, `from "https://esm.sh/react@${reactVersion}"`);
 

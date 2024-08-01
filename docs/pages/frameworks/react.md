@@ -190,7 +190,7 @@ To fix this, add the following to your `package.json` which tells the transpiler
 ```js
 {
   "jest": {
-    "transformIgnorePatterns": ["node_modules/(?!(@pure-ui))"]
+    "transformIgnorePatterns": ["node_modules/(?!(pure-uikit))"]
   }
 }
 ```
