@@ -8,6 +8,7 @@
     "customElements": "dist/custom-elements.json",
     "web-types": "./dist/web-types.json",
     "type": "module",
+    "main": "pure-ui.js",
     "types": "dist/pure-ui.d.ts",
     "jsdelivr": "./cdn/pure-ui-autoloader.js",
     "exports": {

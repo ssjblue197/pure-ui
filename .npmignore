@@ -1,0 +1,9 @@
+_site
+.vscode
+docs
+.cache
+.DS_Store
+cdn
+node_modules
+src
+scripts
