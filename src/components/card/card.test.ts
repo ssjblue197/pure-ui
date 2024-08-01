@@ -9,8 +9,7 @@ describe("<p-card>", () => {
     before(async () => {
       el = await fixture<PCard>(html`
         <p-card
-          >This is just a basic card. No image, no header, and no footer. Just
-          your content.</p-card
+          >This is just a basic card. No image, no header, and no footer. Just your content.</p-card
         >
       `);
     });
@@ -118,9 +117,7 @@ describe("<p-card>", () => {
             slot="image"
             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             alt="A kitten walks towards camera on top of pallet."
-          />
-          This is a kitten, but not just any kitten. This kitten likes walking
-          along pallets.
+          />This is a kitten, but not just any kitten. This kitten likes walking along pallets.
         </p-card>`,
       );
     });

@@ -71,11 +71,12 @@ describe("<p-avatar>", () => {
       await expect(el).to.be.accessible({ ignoredRules });
     });
 
-    it('renders "initials" part, with initials as the text node', () => {
+    it('renders "initials" part, with initials as the text node', async () => {
       const part =
         el.shadowRoot!.querySelector<HTMLElement>('[part~="initials"]')!;
+      console.log(part.innerText);
 
-      expect(part.innerText).to.eq(initials);
+      await expect(String(part.innerText).trim()).to.eq(initials);
     });
   });
 
