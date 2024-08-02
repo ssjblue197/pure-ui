@@ -7,7 +7,7 @@ import PureElement from "../../internal/pure-ui-element.js";
  * @summary Formats a date/time using the specified locale and options.
  * @documentation https://pureui.xyz/components/format-date
  * @status stable
- * @since 2.0
+ * @since 1.0
  */
 export default class PFormatDate extends PureElement {
   private readonly localize = new LocalizeController(this);

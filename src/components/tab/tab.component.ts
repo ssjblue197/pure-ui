@@ -15,7 +15,7 @@ let id = 0;
  * @summary Tabs are used inside [tab groups](/components/tab-group) to represent and activate [tab panels](/components/tab-panel).
  * @documentation https://pureui.xyz/components/tab
  * @status stable
- * @since 2.0
+ * @since 1.0
  *
  * @dependency p-icon-button
  *

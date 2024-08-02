@@ -14,7 +14,7 @@ import type { CSSResultGroup } from "lit";
  * @summary Split panels display two adjacent panels, allowing the user to reposition them.
  * @documentation https://pureui.xyz/components/split-panel
  * @status stable
- * @since 2.0
+ * @since 1.0
  *
  * @event p-reposition - Emitted when the divider's position changes.
  *

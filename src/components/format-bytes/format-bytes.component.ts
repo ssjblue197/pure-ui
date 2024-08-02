@@ -6,7 +6,7 @@ import PureElement from "../../internal/pure-ui-element.js";
  * @summary Formats a number as a human readable bytes value.
  * @documentation https://pureui.xyz/components/format-bytes
  * @status stable
- * @since 2.0
+ * @since 1.0
  */
 export default class PFormatBytes extends PureElement {
   private readonly localize = new LocalizeController(this);

@@ -43,7 +43,7 @@ export default css`
     overscroll-behavior-x: contain;
     scrollbar-width: none;
     aspect-ratio: calc(var(--aspect-ratio) * var(--slides-per-page));
-    border-radius: var(--p-border-radius-small);
+    border-radius: var(--p-border-radius-large);
 
     --slide-size: calc((100% - (var(--slides-per-page) - 1) * var(--slide-gap)) / var(--slides-per-page));
   }
@@ -99,7 +99,7 @@ export default css`
     align-items: center;
     background: none;
     border: none;
-    border-radius: var(--p-border-radius-small);
+    border-radius: var(--p-border-radius-large);
     font-size: inherit;
     color: var(--p-color-neutral-600);
     padding: var(--p-spacing-x-small);

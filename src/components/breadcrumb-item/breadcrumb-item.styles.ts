@@ -14,6 +14,26 @@ export default css`
     color: var(--p-color-neutral-600);
     line-height: var(--p-line-height-normal);
     white-space: nowrap;
+    background-color: var(--p-color-primary-50);
+    padding: 0.24rem 0.75rem;
+    position: relative;
+    min-height: 2.5rem;
+  }
+
+  :host(:first-child) .breadcrumb-item {
+    border-radius: var(--p-border-radius-large) 0 0 var(--p-border-radius-large);
+  }
+
+  :host(:last-child) .breadcrumb-item::after {
+    content: '';
+    display: block;
+    height: 100%;
+    aspect-ratio: 1 / 2;
+    border-radius: 0 var(--p-border-radius-large) var(--p-border-radius-large) 0;
+    position: absolute;
+    background-color: var(--p-color-primary-50);
+    top: 0;
+    left: 100%;
   }
 
   .breadcrumb-item__label {

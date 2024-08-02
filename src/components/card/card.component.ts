@@ -10,7 +10,7 @@ import type { CSSResultGroup } from "lit";
  * @summary Cards can be used to group related subjects in a container.
  * @documentation https://pureui.xyz/components/card
  * @status stable
- * @since 2.0
+ * @since 1.0
  *
  * @slot - The card's main content.
  * @slot header - An optional header for the card.

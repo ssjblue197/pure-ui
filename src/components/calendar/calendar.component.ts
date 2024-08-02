@@ -19,7 +19,7 @@ export interface RenderDayOptions {
  * @summary A calendar prototype for Pure UI.
  * @documentation https://pureui.xyz/components/calendar
  *
- * @since 2.0
+ * @since 1.0
  * @status experimental
  *
  * @dependency p-example

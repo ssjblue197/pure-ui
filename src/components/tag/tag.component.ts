@@ -12,7 +12,7 @@ import type { CSSResultGroup } from "lit";
  * @summary Tags are used as labels to organize things or to indicate a selection.
  * @documentation https://pureui.xyz/components/tag
  * @status stable
- * @since 2.0
+ * @since 1.0
  *
  * @dependency p-icon-button
  *

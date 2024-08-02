@@ -36,6 +36,7 @@ export default css`
     box-shadow: var(--p-shadow-large);
     border-radius: var(--p-border-radius-large);
     pointer-events: none;
+    margin-top: 0.25rem;
   }
 
   .dropdown--open .dropdown__panel {

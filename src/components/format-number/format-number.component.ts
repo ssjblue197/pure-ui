@@ -6,7 +6,7 @@ import PureElement from "../../internal/pure-ui-element.js";
  * @summary Formats a number using the specified locale and options.
  * @documentation https://pureui.xyz/components/format-number
  * @status stable
- * @since 2.0
+ * @since 1.0
  */
 export default class PFormatNumber extends PureElement {
   private readonly localize = new LocalizeController(this);

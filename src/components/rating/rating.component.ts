@@ -15,7 +15,7 @@ import type { CSSResultGroup } from "lit";
  * @summary Ratings give users a way to quickly view and provide feedback.
  * @documentation https://pureui.xyz/components/rating
  * @status stable
- * @since 2.0
+ * @since 1.0
  *
  * @dependency p-icon
  *

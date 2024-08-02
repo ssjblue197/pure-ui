@@ -5,5 +5,6 @@ export default css`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    position: relative;
   }
 `;

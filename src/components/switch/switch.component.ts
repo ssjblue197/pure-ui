@@ -18,7 +18,7 @@ import type { PureFormControl } from "../../internal/pure-ui-element.js";
  * @summary Switches allow the user to toggle an option on or off.
  * @documentation https://pureui.xyz/components/switch
  * @status stable
- * @since 2.0
+ * @since 1.0
  *
  * @slot - The switch's label.
  * @slot help-text - Text that describes how to use the switch. Alternatively, you can use the `help-text` attribute.

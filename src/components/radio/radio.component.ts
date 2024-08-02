@@ -12,7 +12,7 @@ import type { CSSResultGroup } from "lit";
  * @summary Radios allow the user to select a single option from a group.
  * @documentation https://pureui.xyz/components/radio
  * @status stable
- * @since 2.0
+ * @since 1.0
  *
  * @dependency p-icon
  *

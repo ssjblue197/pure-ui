@@ -21,7 +21,7 @@ import type { CSSResultGroup } from "lit";
  * @summary Drawers slide in from a container to expose additional options and information.
  * @documentation https://pureui.xyz/components/drawer
  * @status stable
- * @since 2.0
+ * @since 1.0
  *
  * @dependency p-icon-button
  *

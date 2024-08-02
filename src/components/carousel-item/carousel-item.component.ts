@@ -7,7 +7,7 @@ import type { CSSResultGroup } from "lit";
 /**
  * @summary A carousel item represent a slide within a [carousel](/components/carousel).
  *
- * @since 2.0
+ * @since 1.0
  * @status experimental
  *
  * @slot - The carousel item's content..

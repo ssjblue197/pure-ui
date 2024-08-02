@@ -218,7 +218,7 @@ export default css`
     position: relative;
     width: var(--swatch-size);
     height: var(--swatch-size);
-    border-radius: var(--p-border-radius-small);
+    border-radius: var(--p-border-radius-large);
   }
 
   .color-picker__swatch .color-picker__swatch-color {
