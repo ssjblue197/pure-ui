@@ -25,7 +25,7 @@ export default css`
   }
 
   :host(:last-child) .breadcrumb-item::after {
-    content: '';
+    content: "";
     display: block;
     height: 100%;
     aspect-ratio: 1 / 2;
