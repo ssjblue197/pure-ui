@@ -30,7 +30,7 @@ export default css`
     max-width: calc(100% - var(--p-spacing-2x-large));
     max-height: calc(100% - var(--p-spacing-2x-large));
     background-color: var(--p-panel-background-color);
-    border-radius: var(--p-border-radius-medium);
+    border-radius: var(--p-border-radius-large);
     box-shadow: var(--p-shadow-x-large);
   }
 

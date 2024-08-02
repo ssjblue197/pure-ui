@@ -7,7 +7,7 @@ export default css`
 
   :host([size="small"]) {
     --height: var(--p-toggle-size-small);
-    --thumb-size: calc(var(--p-toggle-size-small) + 4px);
+    --thumb-size: calc(var(--p-toggle-size-small) - 2px);
     --width: calc(var(--height) * 2);
 
     font-size: var(--p-input-font-size-small);
@@ -15,7 +15,7 @@ export default css`
 
   :host([size="medium"]) {
     --height: var(--p-toggle-size-medium);
-    --thumb-size: calc(var(--p-toggle-size-medium) + 4px);
+    --thumb-size: calc(var(--p-toggle-size-medium) - 4px);
     --width: calc(var(--height) * 2);
 
     font-size: var(--p-input-font-size-medium);
@@ -23,7 +23,7 @@ export default css`
 
   :host([size="large"]) {
     --height: var(--p-toggle-size-large);
-    --thumb-size: calc(var(--p-toggle-size-large) + 4px);
+    --thumb-size: calc(var(--p-toggle-size-large) - 6px);
     --width: calc(var(--height) * 2);
 
     font-size: var(--p-input-font-size-large);

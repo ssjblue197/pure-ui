@@ -15,7 +15,7 @@ export default css`
     background-color: var(--p-panel-background-color);
     border: solid var(--p-panel-border-width) var(--p-panel-border-color);
     border-top-width: calc(var(--p-panel-border-width) * 3);
-    border-radius: var(--p-border-radius-medium);
+    border-radius: var(--p-border-radius-large);
     font-family: var(--p-font-sans);
     font-size: var(--p-font-size-small);
     font-weight: var(--p-font-weight-normal);

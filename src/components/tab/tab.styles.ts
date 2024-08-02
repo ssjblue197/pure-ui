@@ -11,7 +11,7 @@ export default css`
     font-family: var(--p-font-sans);
     font-size: var(--p-font-size-small);
     font-weight: var(--p-font-weight-medium);
-    border-radius: var(--p-border-radius-medium);
+    border-radius: var(--p-border-radius-large) var(--p-border-radius-large) 0 0;
     color: var(--p-color-neutral-600);
     padding: var(--p-spacing-medium) var(--p-spacing-large);
     white-space: nowrap;
@@ -25,6 +25,7 @@ export default css`
 
   .tab:hover:not(.tab--disabled) {
     color: var(--p-color-primary-600);
+    background-color: var(--p-color-primary-50);
   }
 
   :host(:focus) {
@@ -42,6 +43,7 @@ export default css`
 
   .tab.tab--active:not(.tab--disabled) {
     color: var(--p-color-primary-600);
+    background-color: var(--p-color-primary-50);
   }
 
   .tab.tab--closable {

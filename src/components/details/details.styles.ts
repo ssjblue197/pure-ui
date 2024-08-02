@@ -7,7 +7,7 @@ export default css`
 
   .details {
     border: solid 1px var(--p-color-neutral-200);
-    border-radius: var(--p-border-radius-medium);
+    border-radius: var(--p-border-radius-large);
     background-color: var(--p-color-neutral-0);
     overflow-anchor: none;
   }

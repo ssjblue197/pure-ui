@@ -186,7 +186,7 @@ export default css`
   }
 
   .select--medium .select__combobox {
-    border-radius: var(--p-input-border-radius-medium);
+    border-radius: var(--p-input-border-radius-large);
     font-size: var(--p-input-font-size-medium);
     min-height: var(--p-input-height-medium);
     padding-block: 0;
@@ -310,8 +310,8 @@ export default css`
     box-shadow: var(--p-shadow-large);
     background: var(--p-panel-background-color);
     border: solid var(--p-panel-border-width) var(--p-panel-border-color);
-    border-radius: var(--p-border-radius-medium);
-    padding-block: var(--p-spacing-x-small);
+    border-radius: var(--p-border-radius-large);
+    padding-block: 0; //OLD: var(--p-spacing-x-small)
     padding-inline: 0;
     overflow: auto;
     overscroll-behavior: none;

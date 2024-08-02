@@ -3,7 +3,7 @@ import { css } from "lit";
 export default css`
   :host {
     --border-color: var(--p-color-neutral-200);
-    --border-radius: var(--p-border-radius-medium);
+    --border-radius: var(--p-border-radius-large);
     --border-width: 1px;
     --padding: var(--p-spacing-large);
 

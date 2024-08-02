@@ -13,7 +13,7 @@ export default css`
     font-weight: var(--p-font-weight-medium);
     letter-spacing: var(--p-letter-spacing-normal);
     line-height: 1;
-    border-radius: var(--p-border-radius-small);
+    border-radius: var(--p-border-radius-large);
     border: solid 1px var(--p-color-neutral-0);
     white-space: nowrap;
     padding: 0.35em 0.6em;

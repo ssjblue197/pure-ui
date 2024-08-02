@@ -34,7 +34,7 @@ export default css`
     font-size: var(--p-font-size-medium);
     font-weight: var(--p-font-weight-normal);
     box-shadow: var(--p-shadow-large);
-    border-radius: var(--p-border-radius-medium);
+    border-radius: var(--p-border-radius-large);
     pointer-events: none;
   }
 
