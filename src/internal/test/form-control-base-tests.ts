@@ -105,7 +105,7 @@ function runAllValidityTests(
       expect(emittedEvents.length).to.equal(0);
     });
 
-    // TODO: As soon as `SlRadioGroup` has a property `disabled` this
+    // TODO: As soon as `PRadioGroup` has a property `disabled` this
     // condition can be removed
     if (tagName !== "p-radio-group") {
       it("should not emit an `p-invalid` event when `.checkValidity()` is called in custom error case while disabled", async () => {
