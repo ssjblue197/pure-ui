@@ -82,18 +82,18 @@ npm install pure-v-model@1.0.1
 Next, import the directive and enable it like this.
 
 ```js
-import Vue from 'vue';
-import PureUIModelDirective from 'pure-v-model';
-import App from './App.vue';
+import Vue from "vue";
+import PureUIModelDirective from "pure-v-model";
+import App from "./App.vue";
 
 Vue.use(PureUIModelDirective);
 Vue.config.ignoredElements = [/p-/];
 
 const app = new Vue({
-  render: h => h(App)
+  render: h => h(App),
 });
 
-app.$mount('#app');
+app.$mount("#app");
 ```
 
 Now you can use the `v-p-model` directive to keep your data in sync!

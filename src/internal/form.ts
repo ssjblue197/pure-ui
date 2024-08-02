@@ -1,5 +1,5 @@
-import type { ReactiveController, ReactiveControllerHost } from "lit";
 import type { PureFormControl } from "./pure-ui-element.js";
+import type { ReactiveController, ReactiveControllerHost } from "lit";
 import type SlButton from "../components/button/button.js";
 
 //
