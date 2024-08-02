@@ -10,7 +10,7 @@ export default css`
     align-items: center;
     justify-content: center;
     font-size: max(12px, 0.75em);
-    font-weight: var(--p-font-weight-semibold);
+    font-weight: var(--p-font-weight-medium);
     letter-spacing: var(--p-letter-spacing-normal);
     line-height: 1;
     border-radius: var(--p-border-radius-small);

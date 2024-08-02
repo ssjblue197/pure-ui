@@ -16,7 +16,7 @@ export default css`
     border-style: solid;
     border-width: var(--p-input-border-width);
     font-family: var(--p-input-font-family);
-    font-weight: var(--p-font-weight-semibold);
+    font-weight: var(--p-font-weight-normal);
     text-decoration: none;
     user-select: none;
     -webkit-user-select: none;

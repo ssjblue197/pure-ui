@@ -385,7 +385,8 @@
   /* Font weights */
   --p-font-weight-light: 300;
   --p-font-weight-normal: 400;
-  --p-font-weight-semibold: 500;
+  --p-font-weight-medium: 500;
+  --p-font-weight-semibold: 600;
   --p-font-weight-bold: 700;
 
   /* Letter spacings */

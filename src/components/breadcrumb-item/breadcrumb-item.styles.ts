@@ -10,7 +10,7 @@ export default css`
     align-items: center;
     font-family: var(--p-font-sans);
     font-size: var(--p-font-size-small);
-    font-weight: var(--p-font-weight-semibold);
+    font-weight: var(--p-font-weight-medium);
     color: var(--p-color-neutral-600);
     line-height: var(--p-line-height-normal);
     white-space: nowrap;

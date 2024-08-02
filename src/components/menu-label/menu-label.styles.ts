@@ -8,7 +8,7 @@ export default css`
     display: inline-block;
     font-family: var(--p-font-sans);
     font-size: var(--p-font-size-small);
-    font-weight: var(--p-font-weight-semibold);
+    font-weight: var(--p-font-weight-medium);
     line-height: var(--p-line-height-normal);
     letter-spacing: var(--p-letter-spacing-normal);
     color: var(--p-color-neutral-500);

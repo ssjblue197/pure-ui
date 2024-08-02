@@ -10,7 +10,7 @@ export default css`
     align-items: center;
     font-family: var(--p-font-sans);
     font-size: var(--p-font-size-small);
-    font-weight: var(--p-font-weight-semibold);
+    font-weight: var(--p-font-weight-medium);
     border-radius: var(--p-border-radius-medium);
     color: var(--p-color-neutral-600);
     padding: var(--p-spacing-medium) var(--p-spacing-large);
