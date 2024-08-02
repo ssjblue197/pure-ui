@@ -15,7 +15,7 @@ import PButtonGroup from "../button-group/button-group.component.js";
 import PureElement from "../../internal/pure-ui-element.js";
 import styles from "./radio-group.styles.js";
 import type { CSSResultGroup } from "lit";
-import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
+import type { PureFormControl } from "../../internal/pure-ui-element.js";
 import type PRadio from "../radio/radio.js";
 import type PRadioButton from "../radio-button/radio-button.js";
 
@@ -43,7 +43,7 @@ import type PRadioButton from "../radio-button/radio-button.js";
  * @csspart button-group - The button group that wraps radio buttons.
  * @csspart button-group__base - The button group's `base` part.
  */
-export default class PRadioGroup extends PureElement implements ShoelaceFormControl {
+export default class PRadioGroup extends PureElement implements PureFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
   static dependencies = { "p-button-group": PButtonGroup };
 

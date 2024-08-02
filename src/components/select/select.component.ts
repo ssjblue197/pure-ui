@@ -20,7 +20,7 @@ import PureElement from "../../internal/pure-ui-element.js";
 import styles from "./select.styles.js";
 import type { CSSResultGroup, TemplateResult } from "lit";
 import type { PRemoveEvent } from "../../events/p-remove.js";
-import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
+import type { PureFormControl } from "../../internal/pure-ui-element.js";
 import type POption from "../option/option.component.js";
 
 /**
@@ -70,7 +70,7 @@ import type POption from "../option/option.component.js";
  * @csspart clear-button - The clear button.
  * @csspart expand-icon - The container that wraps the expand icon.
  */
-export default class PSelect extends PureElement implements ShoelaceFormControl {
+export default class PSelect extends PureElement implements PureFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
   static dependencies = {
     "p-icon": PIcon,

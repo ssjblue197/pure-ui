@@ -34,10 +34,10 @@ export function getFormControls(form: HTMLFormElement) {
   const allNodes = [...rootNode.querySelectorAll("*")];
   const formControls = [...form.elements];
   const collection = formCollections.get(form);
-  const shoelaceFormControls = collection ? Array.from(collection) : [];
+  const PureFormControls = collection ? Array.from(collection) : [];
 
   // To return form controls in the right order, we sort by DOM index
-  return [...formControls, ...shoelaceFormControls].sort((a: Element, b: Element) => {
+  return [...formControls, ...PureFormControls].sort((a: Element, b: Element) => {
     if (allNodes.indexOf(a) < allNodes.indexOf(b)) return -1;
     if (allNodes.indexOf(a) > allNodes.indexOf(b)) return 1;
     return 0;

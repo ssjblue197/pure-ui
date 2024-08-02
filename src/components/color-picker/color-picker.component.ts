@@ -22,7 +22,7 @@ import styles from "./color-picker.styles.js";
 import type { CSSResultGroup } from "lit";
 import type { PChangeEvent } from "../../events/p-change.js";
 import type { PInputEvent } from "../../events/p-input.js";
-import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
+import type { PureFormControl } from "../../internal/pure-ui-element.js";
 
 const hasEyeDropper = "EyeDropper" in window;
 
@@ -90,7 +90,7 @@ declare const EyeDropper: EyeDropperConstructor;
  * @cssproperty --slider-handle-size - The diameter of the slider's handle.
  * @cssproperty --swatch-size - The size of each predefined color swatch.
  */
-export default class PColorPicker extends PureElement implements ShoelaceFormControl {
+export default class PColorPicker extends PureElement implements PureFormControl {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   static dependencies = {

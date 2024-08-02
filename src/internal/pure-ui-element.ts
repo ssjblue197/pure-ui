@@ -95,7 +95,7 @@ export default class PureElement extends LitElement {
 
   /* eslint-disable */
   // @ts-expect-error This is auto-injected at build time.
-  static version = __SHOELACE_VERSION__;
+  static version = __PURE_UI_VERSION__;
   /* eslint-enable */
 
   static define(name: string, elementConstructor = this, options: ElementDefinitionOptions = {}) {
@@ -146,7 +146,7 @@ export default class PureElement extends LitElement {
   }
 }
 
-export interface ShoelaceFormControl extends PureElement {
+export interface PureFormControl extends PureElement {
   // Form attributes
   name: string;
   value: unknown;

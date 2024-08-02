@@ -12,7 +12,7 @@ import formControlStyles from "../../styles/form-control.styles.js";
 import PureElement from "../../internal/pure-ui-element.js";
 import styles from "./textarea.styles.js";
 import type { CSSResultGroup } from "lit";
-import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
+import type { PureFormControl } from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Textareas collect data from the user and allow multiple lines of text.
@@ -36,7 +36,7 @@ import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
  * @csspart base - The component's base wrapper.
  * @csspart textarea - The internal `<textarea>` control.
  */
-export default class PTextarea extends PureElement implements ShoelaceFormControl {
+export default class PTextarea extends PureElement implements PureFormControl {
   static styles: CSSResultGroup = [componentStyles, formControlStyles, styles];
 
   private readonly formControlController = new FormControlController(this, {

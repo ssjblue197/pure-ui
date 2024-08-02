@@ -12,7 +12,7 @@ import PSpinner from "../spinner/spinner.component.js";
 import PureElement from "../../internal/pure-ui-element.js";
 import styles from "./button.styles.js";
 import type { CSSResultGroup } from "lit";
-import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
+import type { PureFormControl } from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Buttons represent actions that are available to the user.
@@ -38,7 +38,7 @@ import type { ShoelaceFormControl } from "../../internal/pure-ui-element.js";
  * @csspart caret - The button's caret icon, an `<p-icon>` element.
  * @csspart spinner - The spinner that shows when the button is in the loading state.
  */
-export default class PButton extends PureElement implements ShoelaceFormControl {
+export default class PButton extends PureElement implements PureFormControl {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
     "p-icon": PIcon,

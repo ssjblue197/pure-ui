@@ -171,13 +171,6 @@ To use Pure UI with a bundler, first install Pure UI along with your bundler of 
 npm install pure-uikit
 ```
 
-Now it's time to configure your bundler. Configurations vary for each tool, but here are some examples to help you get started.
-
-- [Example webpack config](https://github.com/shoelace-style/webpack-example/blob/master/webpack.config.js)
-- [Example Rollup config](https://github.com/shoelace-style/rollup-example/blob/master/rollup.config.js)
-
-Once your bundler is configured, you'll be able to import Pure UI components and utilities.
-
 ```js
 import "pure-uikit/%NPMDIR%/themes/light.css";
 import "pure-uikit/%NPMDIR%/components/button/button.js";
