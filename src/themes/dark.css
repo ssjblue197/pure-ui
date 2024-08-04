@@ -436,9 +436,9 @@
   --p-input-required-content-offset: -2px;
   --p-input-required-content-color: var(--p-input-label-color);
 
-  --p-input-border-radius-small: var(--p-border-radius-medium);
-  --p-input-border-radius-medium: var(--p-border-radius-medium);
-  --p-input-border-radius-large: var(--p-border-radius-medium);
+  --p-input-border-radius-small: var(--p-border-radius-large);
+  --p-input-border-radius-medium: var(--p-border-radius-large);
+  --p-input-border-radius-large: var(--p-border-radius-large);
 
   --p-input-font-family: var(--p-font-sans);
   --p-input-font-weight: var(--p-font-weight-normal);
