@@ -321,7 +321,8 @@
   --p-border-radius-small: 0.1875rem; /* 3px */
   --p-border-radius-medium: 0.25rem; /* 4px */
   --p-border-radius-large: 0.5rem; /* 8px */
-  --p-border-radius-x-large: 1rem; /* 16px */
+  --p-border-radius-x-large: 0.75rem; /* 12px */
+  --p-border-radius-2x-large: 1rem; /* 16px */
 
   --p-border-radius-circle: 50%;
   --p-border-radius-pill: 9999px;
