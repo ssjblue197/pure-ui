@@ -5,7 +5,8 @@ meta:
 layout: component
 ---
 
-```html preview
+### Basic Usage 
+```html:preview
 <p-combobox autofilter class="language-autocomplete">
   <p-input slot="trigger" class="language-input"></p-input>
 
@@ -17,9 +18,9 @@ layout: component
 </p-combobox>
 
 <script>
-  const autocomplete = document.querySelector('.language-autocomplete');
-  const input = document.querySelector('.language-input');
-  autocomplete.addEventListener('p-select', event => {
+  const autocomplete = document.querySelector(".language-autocomplete");
+  const input = document.querySelector(".language-input");
+  autocomplete.addEventListener("p-select", event => {
     input.value = event.detail.item.textContent;
   });
 </script>
@@ -45,27 +46,27 @@ const App = () => (
 
 ### Async
 
-```html preview
+```html:preview
 <p-combobox class="async-autocomplete">
   <p-input slot="trigger" class="async-input"></p-input>
 </p-combobox>
 
 <script>
-  const autocomplete = document.querySelector('.async-autocomplete');
-  const input = document.querySelector('.async-input');
-  input.addEventListener('p-input', event => {
+  const autocomplete = document.querySelector(".async-autocomplete");
+  const input = document.querySelector(".async-input");
+  input.addEventListener("p-input", event => {
     autocomplete.loading = true;
     setTimeout(() => {
-      const menuItemTags = ['English', 'Mandarin', 'Spanish']
-        .filter(option => new RegExp(event.target.value, 'ig').test(option))
+      const menuItemTags = ["English", "Mandarin", "Spanish"]
+        .filter(option => new RegExp(event.target.value, "ig").test(option))
         .map(option => `<p-menu-item value="${option}">${option}</p-menu-item>`)
-        .join('');
-      autocomplete.querySelectorAll('p-menu-item').forEach(el => el.remove());
-      autocomplete.insertAdjacentHTML('beforeend', menuItemTags);
+        .join("");
+      autocomplete.querySelectorAll("p-menu-item").forEach(el => el.remove());
+      autocomplete.insertAdjacentHTML("beforeend", menuItemTags);
       autocomplete.loading = false;
     }, 1000);
   });
-  autocomplete.addEventListener('p-select', event => {
+  autocomplete.addEventListener("p-select", event => {
     input.value = event.detail.item.textContent;
   });
 </script>
@@ -73,7 +74,7 @@ const App = () => (
 
 ### Loading State
 
-```html preview
+```html:preview
 <p-combobox class="loading-autocomplete">
   <p-input slot="trigger" class="loading-input"></p-input>
 
@@ -85,20 +86,20 @@ const App = () => (
 </p-combobox>
 
 <script>
-  const autocomplete = document.querySelector('.loading-autocomplete');
-  const input = document.querySelector('.loading-input');
-  input.addEventListener('p-input', event => {
+  const autocomplete = document.querySelector(".loading-autocomplete");
+  const input = document.querySelector(".loading-input");
+  input.addEventListener("p-input", event => {
     autocomplete.loading = true;
     setTimeout(() => {
-      const menuItemTags = ['English', 'Mandarin', 'Spanish']
+      const menuItemTags = ["English", "Mandarin", "Spanish"]
         .map(option => `<p-menu-item value="${option}">${option}</p-menu-item>`)
-        .join('');
-      autocomplete.querySelectorAll('p-menu-item').forEach(el => el.remove());
-      autocomplete.insertAdjacentHTML('beforeend', menuItemTags);
+        .join("");
+      autocomplete.querySelectorAll("p-menu-item").forEach(el => el.remove());
+      autocomplete.insertAdjacentHTML("beforeend", menuItemTags);
       autocomplete.loading = false;
     }, 1000);
   });
-  autocomplete.addEventListener('p-select', event => {
+  autocomplete.addEventListener("p-select", event => {
     input.value = event.detail.item.textContent;
   });
 </script>
@@ -112,7 +113,7 @@ const App = () => (
 
 ### Empty State
 
-```html preview
+```html:preview
 <p-combobox autofilter>
   <p-input slot="trigger"></p-input>
   <p-menu-item value="option-1">Option 1</p-menu-item>
@@ -123,4 +124,6 @@ const App = () => (
   </div>
 </p-combobox>
 ```
-[component-metadata:p-combobox]
+:::warning
+Be sure you trust the content you are outputting! Passing unsanitized user input to `getTag()` can result in XSS vulnerabilities.
+:::

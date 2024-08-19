@@ -51,7 +51,15 @@ export class HasSlotController implements ReactiveController {
     this.host.shadowRoot!.removeEventListener("slotchange", this.handleSlotChange);
   }
 
+  /**
+   * This function is the event handler for the `slotchange` event. When a slot's content changes, this function
+   * is called. It checks if the slot that changed is one of the slots that this controller is watching. If it is,
+   * it requests an update from the host element.
+   *
+   * @param {Event} event - The event object that triggered this function.
+   */
   private handleSlotChange = (event: Event) => {
+    // Get the slot element that triggered the event
     const slot = event.target as HTMLSlotElement;
 
     if ((this.slotNames.includes("[default]") && !slot.name) || (slot.name && this.slotNames.includes(slot.name))) {

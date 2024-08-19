@@ -1,19 +1,17 @@
-import { HasSlotController } from "../../internal/slot.js";
-import { property, query, state } from "lit/decorators.js";
-import { styleMap } from "lit/directives/style-map.js";
-import { html } from "lit";
 import "../dropdown/dropdown.js";
 import "../menu-item/menu-item.js";
-import "../menu/menu";
-import styles from "./combobox.styles.js";
-import type PDropdown from "../dropdown/dropdown.js";
-import type PInput from "../input/input.js";
-import type PMenuItem from "../menu-item/menu-item.js";
-import type PMenu from "../menu/menu.js";
-import type { CSSResultGroup } from "lit";
+import "../menu/menu.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { html } from "lit";
+import { property, query, state } from "lit/decorators.js";
+import { styleMap } from "lit/directives/style-map.js";
+import PInput from "../input/input.js";
+import PMenu from "../menu/menu.component.js";
+import PMenuItem from "../menu-item/menu-item.component.js";
 import PureElement from "../../internal/pure-ui-element.js";
-
-const escapeRegExp = (text: string) => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+import styles from "./combobox.styles.js";
+import type { CSSResultGroup } from "lit";
+import type PDropdown from "../dropdown/dropdown.js";
 
 /**
  * @summary Combobox displays suggestions as you type.
@@ -21,15 +19,12 @@ const escapeRegExp = (text: string) => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, 
  * @status stable
  * @since 1.0
  *
- * @since unreleased
- * @status unknown
- *
  * @dependency p-dropdown
  * @dependency p-menu
  *
  * @slot - The content that includes an input.
  * @slot empty-text - The text or content that is displayed when there is no suggestion based on the input.
- * @slot lading-text - The text or content that is displayed when the `loading` attribute evaluates to true.
+ * @slot lading-text - The text or content that is displayed when the loading attribute evaluates to true.
  *
  * @csspart base - The component's internal wrapper.
  * @csspart trigger - The wrapper for the trigger slot.
@@ -38,66 +33,48 @@ const escapeRegExp = (text: string) => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, 
  *
  */
 
+// Utility function to escape special characters for RegExp
+const escapeRegExp = (text: string) => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+
 export default class PCombobox extends PureElement {
   static styles: CSSResultGroup = [styles];
 
-  @query("p-menu") menu: PMenu;
-  @query("p-dropdown") dropdown: PDropdown;
-  @query("slot:not([name])") defaultSlot: HTMLSlotElement;
+  static dependencies = {
+    "p-input": PInput,
+    "p-menu-item": PMenuItem,
+  };
+
+  @query("p-menu") menu!: PMenu;
+  @query("p-dropdown") dropdown!: PDropdown;
+  @query("slot:not([name])") defaultSlot!: HTMLSlotElement;
 
   private readonly hasSlotController = new HasSlotController(this, "loading-text", "empty-text");
 
   @state() private value = "";
   @state() private hasFocus = false;
 
-  @property({ type: String, reflect: true }) emptyText: string;
-
+  @property({ type: String, reflect: true }) emptyText = "";
   @property({ type: Boolean, reflect: true }) loading = false;
-
-  @property({ type: String, reflect: true }) loadingText: string;
-
+  @property({ type: String, reflect: true }) loadingText = "";
   @property({ type: Boolean, reflect: true }) autofilter = false;
-
   @property({ type: Boolean, reflect: true }) highlight = false;
-
   @property({ type: Number, reflect: true }) threshold = 1;
 
-  handlePInput(event: CustomEvent) {
+  private handleInput(event: CustomEvent) {
     const { value } = event.target as PInput;
+    this.value = value;
+    this.hasFocus = true;
 
     if (this.autofilter) {
-      this.options.forEach(option => {
-        const shouldDisplay = new RegExp(`(${escapeRegExp(value ?? "")})`, "ig").test(option.getTextLabel());
-
-        if (shouldDisplay) {
-          option.style.display = "block";
-          option.disabled = false;
-          option.ariaHidden = "false";
-        } else {
-          option.style.display = "none";
-          option.disabled = true;
-          option.ariaHidden = "true";
-        }
-      });
+      this.filterOptions(value);
     }
-
-    this.hasFocus = true;
-    this.value = value;
   }
 
-  handleKeydown(event: KeyboardEvent) {
-    if (!this.shouldDisplayAutoComplete || event.ctrlKey || event.metaKey) {
-      return;
-    }
+  private handleKeydown(event: KeyboardEvent) {
+    if (!this.shouldDisplayAutoComplete || event.ctrlKey || event.metaKey) return;
 
     const options = this.visibleOptions;
-
-    if (options.length === 0) {
-      return;
-    }
-
-    const firstItem = options[0];
-    const lastItem = options[options.length - 1];
+    if (options.length === 0) return;
 
     switch (event.key) {
       case "Tab":
@@ -107,27 +84,38 @@ export default class PCombobox extends PureElement {
 
       case "ArrowDown":
         event.preventDefault();
-        this.menu.setCurrentItem(firstItem);
-        firstItem.focus();
+        this.menu.setCurrentItem(options[0]);
+        options[0].focus();
         break;
 
       case "ArrowUp":
         event.preventDefault();
-        this.menu.setCurrentItem(lastItem);
-        lastItem.focus();
+        this.menu.setCurrentItem(options[options.length - 1]);
+        options[options.length - 1].focus();
         break;
     }
   }
 
-  handlePFocus() {
+  private handleFocus() {
     if (this.value.length >= this.threshold) {
       this.hasFocus = true;
       this.show();
     }
   }
 
-  handlePAfterHide() {
+  private handleDropdownHide() {
     this.hasFocus = false;
+  }
+
+  private filterOptions(value: string) {
+    const regex = new RegExp(`(${escapeRegExp(value)})`, "ig");
+
+    this.options.forEach(option => {
+      const shouldDisplay = regex.test(option.getTextLabel());
+      option.style.display = shouldDisplay ? "block" : "none";
+      option.disabled = !shouldDisplay;
+      option.ariaHidden = shouldDisplay ? "false" : "true";
+    });
   }
 
   show() {
@@ -176,26 +164,20 @@ export default class PCombobox extends PureElement {
   }
 
   render() {
-    const { shouldDisplayLoadingText } = this;
-
     return html`
       <div part="base">
-        <div part="trigger" @p-focus=${this.handlePFocus} @p-input=${this.handlePInput} @keydown=${this.handleKeydown}>
+        <div part="trigger" @p-focus=${this.handleFocus} @p-input=${this.handleInput} @keydown=${this.handleKeydown}>
           <slot name="trigger"></slot>
         </div>
-        <p-dropdown ?open=${this.shouldDisplayAutoComplete} @p-after-hide=${this.handlePAfterHide}>
+        <p-dropdown ?open=${this.shouldDisplayAutoComplete} @p-after-hide=${this.handleDropdownHide}>
           <p-menu>
-            <slot
-              aria-hidden=${shouldDisplayLoadingText ? "true" : "false"}
-              style="${styleMap({ display: shouldDisplayLoadingText ? "none" : "block" })}"
-            >
-            </slot>
+            <slot style=${styleMap({ display: this.shouldDisplayLoadingText ? "none" : "block" })}></slot>
             <div
               part="loading-text"
               id="loading-text"
               class="loading-text"
-              aria-hidden=${shouldDisplayLoadingText ? "false" : "true"}
-              style="${styleMap({ display: shouldDisplayLoadingText ? "block" : "none" })}"
+              aria-hidden=${this.shouldDisplayLoadingText ? "false" : "true"}
+              style=${styleMap({ display: this.shouldDisplayLoadingText ? "block" : "none" })}
             >
               <slot name="loading-text">${this.loadingText}</slot>
             </div>
@@ -204,7 +186,7 @@ export default class PCombobox extends PureElement {
               id="empty-text"
               class="empty-text"
               aria-hidden=${this.shouldDisplayEmptyText ? "false" : "true"}
-              style="${styleMap({ display: this.shouldDisplayEmptyText ? "block" : "none" })}"
+              style=${styleMap({ display: this.shouldDisplayEmptyText ? "block" : "none" })}
             >
               <slot name="empty-text">${this.emptyText}</slot>
             </div>

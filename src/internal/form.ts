@@ -1,6 +1,6 @@
 import type { PureFormControl } from "./pure-ui-element.js";
 import type { ReactiveController, ReactiveControllerHost } from "lit";
-import type SlButton from "../components/button/button.js";
+import type PButton from "../components/button/button.js";
 
 //
 // We store a WeakMap of forms + controls so we can keep references to all Pure UI controls within a given form. As
@@ -338,7 +338,7 @@ export class FormControlController implements ReactiveController {
     el.requestUpdate();
   }
 
-  private doAction(type: "submit" | "reset", submitter?: HTMLInputElement | SlButton) {
+  private doAction(type: "submit" | "reset", submitter?: HTMLInputElement | PButton) {
     if (this.form) {
       const button = document.createElement("button");
       button.type = type;
@@ -373,12 +373,12 @@ export class FormControlController implements ReactiveController {
   }
 
   /** Resets the form, restoring all the control to their default value */
-  reset(submitter?: HTMLInputElement | SlButton) {
+  reset(submitter?: HTMLInputElement | PButton) {
     this.doAction("reset", submitter);
   }
 
   /** Submits the form, triggering validation and form data injection. */
-  submit(submitter?: HTMLInputElement | SlButton) {
+  submit(submitter?: HTMLInputElement | PButton) {
     // Calling form.submit() bypasses the submit event and constraint validation. To prevent this, we can inject a
     // native submit button into the form, "click" it, then remove it to simulate a standard form submission.
     this.doAction("submit", submitter);
@@ -424,7 +424,7 @@ export class FormControlController implements ReactiveController {
    * event will be cancelled before being dispatched.
    */
   emitInvalidEvent(originalInvalidEvent?: Event) {
-    const slInvalidEvent = new CustomEvent<Record<PropertyKey, never>>("p-invalid", {
+    const pInvalidEvent = new CustomEvent<Record<PropertyKey, never>>("p-invalid", {
       bubbles: false,
       composed: false,
       cancelable: true,
@@ -432,10 +432,10 @@ export class FormControlController implements ReactiveController {
     });
 
     if (!originalInvalidEvent) {
-      slInvalidEvent.preventDefault();
+      pInvalidEvent.preventDefault();
     }
 
-    if (!this.host.dispatchEvent(slInvalidEvent)) {
+    if (!this.host.dispatchEvent(pInvalidEvent)) {
       originalInvalidEvent?.preventDefault();
     }
   }
