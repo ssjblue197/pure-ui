@@ -59,7 +59,7 @@ export default css`
     overflow: hidden;
     padding: 0;
     margin: 0;
-    -webkit-appearance: none;
+    // -webkit-appearance: none;
   }
 
   .select__display-input::placeholder {
@@ -76,13 +76,10 @@ export default css`
 
   /* Visually hide the display input when multiple is enabled */
   .select--multiple:not(.select--placeholder-visible) .select__display-input {
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
+    width: auto;
+    flex: 1;
+    min-width: 80px;
+    padding-left: var(--p-input-spacing-small);
   }
 
   .select__value-input {
@@ -99,7 +96,7 @@ export default css`
 
   .select__tags {
     display: flex;
-    flex: 1;
+    width: auto;
     align-items: center;
     flex-wrap: wrap;
     margin-inline-start: var(--p-spacing-2x-small);
@@ -107,6 +104,14 @@ export default css`
 
   .select__tags::slotted(p-tag) {
     cursor: pointer !important;
+  }
+  .select__tags--overflow {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: var(--p-spacing-2x-small);
+    align-items: flex-start;
+    justify-content: center;
+    margin-inline-start: var(--p-spacing-2x-small);
   }
 
   .select--disabled .select__tags,

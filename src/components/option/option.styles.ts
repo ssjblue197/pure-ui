@@ -63,6 +63,10 @@ export default css`
     visibility: visible;
   }
 
+  .option--hidden {
+    display: none;
+  }
+
   .option__prefix,
   .option__suffix {
     flex: 0 0 auto;

@@ -54,6 +54,16 @@ export default class PDropdown extends PureElement {
   private closeWatcher: CloseWatcher | null;
 
   /**
+   * The behavior of the dropdown. This determines how the dropdown is triggered. The default behavior is "click",
+   * which means the dropdown is triggered by a click event on the trigger element. The other allowed value is "hover",
+   * which means the dropdown is triggered by a mouse hover event on the trigger element.
+   *
+   * @type {"click" | "hover"}
+   * @default "click"
+   */
+  @property({ reflect: true }) behavior: "click" | "hover" = "click";
+
+  /**
    * Indicates whether or not the dropdown is open. You can toggle this attribute to show and hide the dropdown, or you
    * can use the `show()` and `hide()` methods and this attribute will reflect the dropdown's open state.
    */
@@ -220,6 +230,18 @@ export default class PDropdown extends PureElement {
     } else {
       this.show();
       this.focusOnTrigger();
+    }
+  }
+
+  private handleTriggerMouseEnter() {
+    if (!this.open && this.behavior === "hover") {
+      this.show();
+      this.focusOnTrigger();
+    }
+  }
+  private handleTriggerMouseLeave() {
+    if (this.open && this.behavior === "hover") {
+      this.hide();
     }
   }
 
@@ -439,6 +461,8 @@ export default class PDropdown extends PureElement {
           @keydown=${this.handleTriggerKeyDown}
           @keyup=${this.handleTriggerKeyUp}
           @slotchange=${this.handleTriggerSlotChange}
+          @mouseenter=${this.handleTriggerMouseEnter}
+          @mouseleave=${this.handleTriggerMouseLeave}
         ></slot>
 
         <div aria-hidden=${this.open ? "false" : "true"} aria-labelledby="dropdown">

@@ -113,6 +113,31 @@ const App = () => (
 );
 ```
 
+### Show search
+
+The `show-search` attribute is a boolean attribute that enables the search functionality within the `<p-select>` component. When set to `true`, users can type to filter the options.
+
+```html:preview
+<p-select placeholder="Select one" show-search>
+  <p-option value="option-1">Option 1</p-option>
+  <p-option value="option-2">Option 2</p-option>
+  <p-option value="option-3">Option 3</p-option>
+</p-select>
+```
+
+```jsx:react
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
+
+const App = () => (
+  <PSelect placeholder="Select one">
+    <POption value="option-1">Option 1</POption>
+    <POption value="option-2">Option 2</POption>
+    <POption value="option-3">Option 3</POption>
+  </PSelect>
+);
+```
+
 ### Clearable
 
 Use the `clearable` attribute to make the control clearable. The clear button only appears when an option is selected.
@@ -218,13 +243,17 @@ const App = () => (
 To allow multiple options to be selected, use the `multiple` attribute. It's a good practice to use `clearable` when this option is enabled. To set multiple values at once, set `value` to a space-delimited list of values.
 
 ```html:preview
-<p-select label="Select a Few" value="option-1 option-2 option-3" multiple clearable>
+<p-select label="Select a Few" value="option-1 option-2 option-3" multiple clearable show-search>
   <p-option value="option-1">Option 1</p-option>
   <p-option value="option-2">Option 2</p-option>
   <p-option value="option-3">Option 3</p-option>
   <p-option value="option-4">Option 4</p-option>
   <p-option value="option-5">Option 5</p-option>
   <p-option value="option-6">Option 6</p-option>
+  <p-option value="option-7">Option 7</p-option>
+  <p-option value="option-8">Option 8</p-option>
+  <p-option value="option-9">Option 9</p-option>
+  <p-option value="option-10">Option 10</p-option>
 </p-select>
 ```
 

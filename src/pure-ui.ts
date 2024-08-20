@@ -14,7 +14,6 @@ export { default as PCarousel } from "./components/carousel/carousel.js";
 export { default as PCarouselItem } from "./components/carousel-item/carousel-item.js";
 export { default as PCheckbox } from "./components/checkbox/checkbox.js";
 export { default as PColorPicker } from "./components/color-picker/color-picker.js";
-export { default as PCombobox } from "./components/combobox/combobox.js";
 export { default as PCopyButton } from "./components/copy-button/copy-button.js";
 export { default as PDetails } from "./components/details/details.js";
 export { default as PDialog } from "./components/dialog/dialog.js";
