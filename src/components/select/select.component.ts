@@ -345,8 +345,6 @@ export default class PSelect extends PureElement implements PureFormControl {
 
     // Navigate options
     if (["ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) {
-      console.log("key", this.typeToSelectString);
-
       const allOptions = this.getAllOptions();
 
       allOptions.forEach(option => {
@@ -416,7 +414,11 @@ export default class PSelect extends PureElement implements PureFormControl {
         //If search text is not empty, remove the last character
         if (this.typeToSelectString.length > 0) {
           this.typeToSelectString = this.typeToSelectString.slice(0, -1);
-          this.displayLabel = this.typeToSelectString;
+          if (this.showSearch) {
+            this.displayLabel = this.typeToSelectString;
+          } else {
+            this.displayLabel = "";
+          }
         } else {
           // Remove the last selected option if multiple mode is ON
           if (this.multiple && this.typeToSelectString === "") {
@@ -430,7 +432,11 @@ export default class PSelect extends PureElement implements PureFormControl {
         this.handleFilterOptions();
       } else {
         this.typeToSelectString += event.key.toLowerCase();
-        this.displayLabel = this.typeToSelectString;
+        if (this.showSearch) {
+          this.displayLabel = this.typeToSelectString;
+        } else {
+          this.displayLabel = "";
+        }
         this.handleFilterOptions();
       }
 
@@ -761,6 +767,7 @@ export default class PSelect extends PureElement implements PureFormControl {
   }
 
   private handleFilterOptions() {
+    if (!this.showSearch) return;
     const allOptions = this.getAllOptions();
     if (this.typeToSelectString) {
       allOptions.forEach(option => {
