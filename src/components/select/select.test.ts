@@ -63,7 +63,7 @@ describe("<p-select>", () => {
 
   it("should show a placeholder when no options are selected and multiple is set", async () => {
     const el = await fixture<PSelect>(html`
-      <p-select placeholder="Select a few" multiple>
+      <p-select placeholder="No options selected" multiple>
         <p-option value="option-1">Option 1</p-option>
         <p-option value="option-2">Option 2</p-option>
         <p-option value="option-3">Option 3</p-option>
@@ -72,7 +72,7 @@ describe("<p-select>", () => {
     const displayInput = el.shadowRoot!.querySelector<HTMLInputElement>('[part~="display-input"]')!;
 
     expect(getComputedStyle(displayInput).opacity).to.not.equal("0");
-    expect(displayInput.placeholder).to.equal("Select a few");
+    expect(displayInput.placeholder).to.equal("No options selected");
   });
 
   it("should not allow selection when the option is disabled", async () => {

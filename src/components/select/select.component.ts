@@ -280,6 +280,13 @@ export default class PSelect extends PureElement implements PureFormControl {
     this.emit("p-blur");
   }
 
+  private handleInput(e: Event) {
+    console.log("input", e);
+
+    this.typeToSelectString = this.displayInput.value;
+    this.emit("p-input");
+  }
+
   private handleDocumentFocusIn = (event: KeyboardEvent) => {
     // Close when focusing out of the select
     const path = event.composedPath();
@@ -289,6 +296,7 @@ export default class PSelect extends PureElement implements PureFormControl {
   };
 
   private handleDocumentKeyDown = (event: KeyboardEvent) => {
+    console.log("document keydown", event);
     const target = event.target as HTMLElement;
     const isClearButton = target.closest(".select__clear") !== null;
     const isIconButton = target.closest("p-icon-button") !== null;
@@ -322,10 +330,13 @@ export default class PSelect extends PureElement implements PureFormControl {
       if (this.currentOption && !this.currentOption.disabled) {
         if (this.multiple) {
           this.toggleOptionSelection(this.currentOption);
+          this.displayInput.focus({ preventScroll: true });
+          this.hasFocus = true;
         } else {
           this.setSelectedOptions(this.currentOption);
-          this.displayInput.blur();
-          this.hasFocus = false;
+          // this.displayInput.blur();
+          // this.hasFocus = false;
+          this.hide();
         }
 
         // Emit after updating
@@ -333,11 +344,6 @@ export default class PSelect extends PureElement implements PureFormControl {
           this.emit("p-input");
           this.emit("p-change");
         });
-
-        if (!this.multiple) {
-          this.hide();
-        }
-        this.displayInput.focus({ preventScroll: true });
       }
 
       return;
@@ -396,7 +402,7 @@ export default class PSelect extends PureElement implements PureFormControl {
 
       // Open, unless the key that triggered is backspace
       if (!this.open) {
-        if (this.hasFocus && !this.open) {
+        if (this.hasFocus) {
           this.show();
         }
         if (event.key === "Backspace") {
@@ -632,19 +638,13 @@ export default class PSelect extends PureElement implements PureFormControl {
     // Update the value and display label
     if (this.multiple) {
       this.value = this.selectedOptions.map(el => el.value);
-
-      if (this.placeholder && this.value.length === 0) {
-        // When no items are selected, keep the value empty so the placeholder shows
-        this.displayLabel = "";
-      } else {
-        this.displayLabel = "";
-        // this.localize.term("numOptionsSelected", this.selectedOptions.length);
-      }
       //Reset typeToSelectString
+      this.displayLabel = "";
       this.typeToSelectString = "";
       this.placeholder = this.localize.term("numOptionsSelected", this.selectedOptions.length);
     } else {
       this.value = this.selectedOptions[0]?.value ?? "";
+      this.typeToSelectString = "";
       this.displayLabel = this.selectedOptions[0]?.getTextLabel() ?? "";
     }
 
@@ -666,7 +666,7 @@ export default class PSelect extends PureElement implements PureFormControl {
         return html`
           <p-dropdown placement="top" active>
             <p-tag slot="trigger" size=${this.size}>+${this.selectedOptions.length - index}</p-tag>
-            <div class="select__tags--overflow" @click=${(e: Event) => e.stopPropagation()}>
+            <div class="select__tags--overflow" @click=${(e: PClickEvent) => e.stopPropagation()}>
               ${this.selectedOptions.slice(this.maxOptionsVisible).map((other, idx) => {
                 const otherTag = this.getTag(other, this.maxOptionsVisible + idx);
                 return html`<div @p-remove=${(e: PRemoveEvent) => this.handleTagRemove(e, option)}>
@@ -929,6 +929,7 @@ export default class PSelect extends PureElement implements PureFormControl {
                 tabindex="0"
                 @focus=${this.handleFocus}
                 @blur=${this.handleBlur}
+                @input=${this.handleInput}
               />
 
               <input
