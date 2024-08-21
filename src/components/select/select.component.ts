@@ -1,5 +1,6 @@
 import { animateTo, stopAnimations } from "../../internal/animate.js";
 import { classMap } from "lit/directives/class-map.js";
+import { debounce } from "../../internal/debounce.js";
 import { defaultValue } from "../../internal/default-value.js";
 import { FormControlController } from "../../internal/form.js";
 import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
@@ -22,7 +23,6 @@ import type { CSSResultGroup, TemplateResult } from "lit";
 import type { PRemoveEvent } from "../../events/p-remove.js";
 import type { PureFormControl } from "../../internal/pure-ui-element.js";
 import type POption from "../option/option.component.js";
-import { debounce } from "../../internal/debounce.js";
 
 /**
  * @summary Selects allow you to choose items from a menu of predefined options.

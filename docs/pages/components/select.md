@@ -280,11 +280,13 @@ Note that multi-select options may wrap, causing the control to expand verticall
 ### Tag mode
 
 - Enable tag mode:
+
   - The `tag-mode` attribute enables users to add new tags by pressing the "Enter" key after typing a new tag.
   - This feature is useful when you want to allow users to add new items that are not already included in the list of options.
   - Note that in tag mode, the component will not validate whether the user's input matches any of the available options.
 
 - Good practice to use `clearable`:
+
   - The `clearable` attribute is a good practice to use when the `multiple` attribute is enabled.
   - This allows users to remove all selected options at once by clicking the clear icon.
 
