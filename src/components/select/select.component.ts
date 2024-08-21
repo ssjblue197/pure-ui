@@ -4,7 +4,7 @@ import { defaultValue } from "../../internal/default-value.js";
 import { FormControlController } from "../../internal/form.js";
 import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
 import { HasSlotController } from "../../internal/slot.js";
-import { html } from "lit";
+import { html, render } from "lit";
 import { LocalizeController } from "../../utilities/localize.js";
 import { property, query, state } from "lit/decorators.js";
 import { scrollIntoView } from "../../internal/scroll.js";
@@ -22,6 +22,7 @@ import type { CSSResultGroup, TemplateResult } from "lit";
 import type { PRemoveEvent } from "../../events/p-remove.js";
 import type { PureFormControl } from "../../internal/pure-ui-element.js";
 import type POption from "../option/option.component.js";
+import { debounce } from "../../internal/debounce.js";
 
 /**
  * @summary Selects allow you to choose items from a menu of predefined options.
@@ -83,7 +84,7 @@ export default class PSelect extends PureElement implements PureFormControl {
   });
   private readonly hasSlotController = new HasSlotController(this, "help-text", "label");
   private readonly localize = new LocalizeController(this);
-  private typeToSelectString = "";
+  private keyword = "";
   private closeWatcher: CloseWatcher | null;
 
   @query(".select") popup: PPopup;
@@ -92,10 +93,52 @@ export default class PSelect extends PureElement implements PureFormControl {
   @query(".select__value-input") valueInput: HTMLInputElement;
   @query(".select__listbox") listbox: HTMLSlotElement;
 
+  /**
+   * Indicates whether the control has focus.
+   * @type {boolean}
+   */
   @state() private hasFocus = false;
+
+  /**
+   * The display label to show in the select when no options are selected.
+   * Used when the control is not focused.
+   * @type {string}
+   */
   @state() displayLabel = "";
+
+  /**
+   * The currently selected option.
+   * @type {POption}
+   */
   @state() currentOption: POption;
+
+  /**
+   * The selected options.
+   * @type {POption[]}
+   */
   @state() selectedOptions: POption[] = [];
+
+  /**
+   * The maximum number of options that can be selected.
+   * Defaults to -1, which means there is no limit.
+   *
+   * @type {number}
+   * @reflect
+   * @attribute
+   * @default -1
+   */
+  @property({ type: Number, reflect: true, attribute: "max-count" }) maxCount = -1;
+
+  /**
+   * Indicates whether the select should operate in tag mode, where selected options
+   * are shown as tags and the user can remove them or add new tag by "Enter" after typing new tag.
+   * This property is reflected as a boolean attribute, `tag-mode`, on the element.
+   *
+   * @type {boolean}
+   * @reflect
+   * @attribute
+   */
+  @property({ type: Boolean, reflect: true, attribute: "tag-mode" }) tagMode = false;
 
   /**
    * Indicates whether a search box should be shown for finding options quickly.
@@ -251,7 +294,9 @@ export default class PSelect extends PureElement implements PureFormControl {
       this.closeWatcher.onclose = () => {
         if (this.open) {
           this.hide();
-          this.displayInput.focus({ preventScroll: true });
+          if (!document.activeElement || document.activeElement !== this.displayInput) {
+            this.displayInput.focus({ preventScroll: true });
+          }
         }
       };
     }
@@ -271,19 +316,30 @@ export default class PSelect extends PureElement implements PureFormControl {
 
   private handleFocus() {
     this.hasFocus = true;
-    this.displayInput.setSelectionRange(0, 0);
+    // this.displayInput.setSelectionRange(0, 0);
     this.emit("p-focus");
   }
 
   private handleBlur() {
     this.hasFocus = false;
+    if (!this.multiple) {
+      this.displayLabel = this.selectedOptions.map(option => option.getTextLabel()).join(", ");
+    } else {
+      this.displayLabel = " ";
+    }
     this.emit("p-blur");
   }
 
-  private handleInput(e: Event) {
-    console.log("input", e);
+  @debounce(100)
+  handleInput() {
+    this.keyword = this.displayInput.value;
+    this.handleFilterOptions();
 
-    this.typeToSelectString = this.displayInput.value;
+    if (document.activeElement !== this.displayInput) {
+      // Keep the focus in the input
+      this.displayInput.focus({ preventScroll: true });
+    }
+
     this.emit("p-input");
   }
 
@@ -296,7 +352,6 @@ export default class PSelect extends PureElement implements PureFormControl {
   };
 
   private handleDocumentKeyDown = (event: KeyboardEvent) => {
-    console.log("document keydown", event);
     const target = event.target as HTMLElement;
     const isClearButton = target.closest(".select__clear") !== null;
     const isIconButton = target.closest("p-icon-button") !== null;
@@ -311,7 +366,7 @@ export default class PSelect extends PureElement implements PureFormControl {
       event.preventDefault();
       event.stopPropagation();
       this.hide();
-      this.displayInput.focus({ preventScroll: true });
+      return;
     }
 
     // Handle enter. When pressing Enter, we allow for type to select behaviors so if there's anything in the
@@ -326,11 +381,22 @@ export default class PSelect extends PureElement implements PureFormControl {
         return;
       }
 
+      if (this.tagMode && this.keyword) {
+        this.handleAddNewTag(this.keyword);
+        this.keyword = "";
+        if (!document.activeElement || document.activeElement !== this.displayInput) {
+          this.displayInput.focus({ preventScroll: true });
+        }
+        return;
+      }
+
       // If it is open, update the value based on the current selection and close it
       if (this.currentOption && !this.currentOption.disabled) {
         if (this.multiple) {
           this.toggleOptionSelection(this.currentOption);
-          this.displayInput.focus({ preventScroll: true });
+          if (!document.activeElement || document.activeElement !== this.displayInput) {
+            this.displayInput.focus({ preventScroll: true });
+          }
           this.hasFocus = true;
         } else {
           this.setSelectedOptions(this.currentOption);
@@ -345,7 +411,6 @@ export default class PSelect extends PureElement implements PureFormControl {
           this.emit("p-change");
         });
       }
-
       return;
     }
 
@@ -355,8 +420,8 @@ export default class PSelect extends PureElement implements PureFormControl {
 
       allOptions.forEach(option => {
         option.hidden =
-          !option.getTextLabel().toLowerCase().includes(this.typeToSelectString.toLowerCase()) &&
-          !option.value.toLowerCase().includes(this.typeToSelectString.toLowerCase());
+          !option.getTextLabel().toLowerCase().includes(this.keyword.toLowerCase()) &&
+          !option.value.toLowerCase().includes(this.keyword.toLowerCase());
       });
       const availableOptions = allOptions.filter(el => !el.hidden);
       const currentIndex = availableOptions.indexOf(this.currentOption);
@@ -389,66 +454,31 @@ export default class PSelect extends PureElement implements PureFormControl {
       }
 
       this.setCurrentOption(availableOptions[newIndex]);
+      return;
+    }
+
+    if (event.key === "Backspace") {
+      if (!this.open && this.hasFocus) {
+        this.show();
+      }
+      event.stopPropagation();
+      // Remove the last selected option if multiple mode is ON
+      if (this.multiple && this.keyword === "") {
+        const allOptions = this.getAllOptions();
+        const optionsSelected = allOptions.filter(el => el.selected);
+        if (optionsSelected.length > 0) {
+          console.log("removing", optionsSelected[optionsSelected.length - 1]);
+
+          this.handleTagRemove(new CustomEvent("p-remove"), optionsSelected[optionsSelected.length - 1]);
+        }
+      }
+      return;
     }
 
     // All other "printable" keys trigger type to select
-    if (event.key.length === 1 || event.key === "Backspace") {
-      const allOptions = this.getAllOptions();
-
-      // Don't block important key combos like CMD+R
-      if (event.metaKey || event.ctrlKey || event.altKey) {
-        return;
-      }
-
-      // Open, unless the key that triggered is backspace
-      if (!this.open) {
-        if (this.hasFocus) {
-          this.show();
-        }
-        if (event.key === "Backspace") {
-          return;
-        }
-
+    if (event.key.length === 1) {
+      if (!this.open && this.hasFocus) {
         this.show();
-      }
-
-      event.stopPropagation();
-      event.preventDefault();
-
-      // Remove the last character
-      if (event.key === "Backspace") {
-        //If search text is not empty, remove the last character
-        if (this.typeToSelectString.length > 0) {
-          this.typeToSelectString = this.typeToSelectString.slice(0, -1);
-          if (this.showSearch) {
-            this.displayLabel = this.typeToSelectString;
-          } else {
-            this.displayLabel = "";
-          }
-        } else {
-          // Remove the last selected option if multiple mode is ON
-          if (this.multiple && this.typeToSelectString === "") {
-            const optionsSelected = allOptions.filter(el => el.selected);
-            if (optionsSelected.length > 0) {
-              this.handleTagRemove(new CustomEvent("p-remove"), optionsSelected[optionsSelected.length - 1]);
-              this.displayInput.focus();
-            }
-          }
-        }
-        this.handleFilterOptions();
-      } else {
-        this.typeToSelectString += event.key.toLowerCase();
-        if (this.showSearch) {
-          this.displayLabel = this.typeToSelectString;
-        } else {
-          this.displayLabel = "";
-        }
-        this.handleFilterOptions();
-      }
-
-      this.requestUpdate();
-      if (this.open) {
-        this.displayInput.focus();
       }
     }
   };
@@ -462,7 +492,9 @@ export default class PSelect extends PureElement implements PureFormControl {
   };
 
   private handleLabelClick() {
-    this.displayInput.focus();
+    if (!document.activeElement || document.activeElement !== this.displayInput) {
+      this.displayInput.focus();
+    }
   }
 
   private handleComboboxMouseDown(event: MouseEvent) {
@@ -475,7 +507,7 @@ export default class PSelect extends PureElement implements PureFormControl {
     }
 
     event.preventDefault();
-    this.displayInput.focus({ preventScroll: true });
+    event.stopPropagation();
     this.open = !this.open;
   }
 
@@ -562,12 +594,27 @@ export default class PSelect extends PureElement implements PureFormControl {
 
     if (!this.disabled) {
       this.toggleOptionSelection(option, false);
-
+      if (this.selectedOptions.length > 0) {
+        this.setCurrentOption(this.selectedOptions[this.selectedOptions.length - 1]);
+      }
       // Emit after updating
       this.updateComplete.then(() => {
         this.emit("p-input");
         this.emit("p-change");
       });
+    }
+  }
+
+  private handleAddNewTag(value: string) {
+    if (!this.disabled) {
+      const newOption = html`
+        <p-option value="${value.replace(/\s/g, "_")}">${value.charAt(0).toUpperCase() + value.slice(1)}</p-option>
+      `;
+      // Create a DocumentFragment
+      const fragment = document.createDocumentFragment();
+      // Render the TemplateResult into the fragment
+      render(newOption, fragment);
+      this.appendChild(fragment);
     }
   }
 
@@ -597,7 +644,7 @@ export default class PSelect extends PureElement implements PureFormControl {
       this.currentOption = option;
       option.current = true;
       option.tabIndex = 0;
-      option.focus();
+      // option.focus();
     }
   }
 
@@ -638,14 +685,10 @@ export default class PSelect extends PureElement implements PureFormControl {
     // Update the value and display label
     if (this.multiple) {
       this.value = this.selectedOptions.map(el => el.value);
-      //Reset typeToSelectString
-      this.displayLabel = "";
-      this.typeToSelectString = "";
       this.placeholder = this.localize.term("numOptionsSelected", this.selectedOptions.length);
     } else {
       this.value = this.selectedOptions[0]?.value ?? "";
-      this.typeToSelectString = "";
-      this.displayLabel = this.selectedOptions[0]?.getTextLabel() ?? "";
+      this.placeholder = this.selectedOptions[0]?.getTextLabel() ?? "";
     }
 
     // Update validity
@@ -666,7 +709,7 @@ export default class PSelect extends PureElement implements PureFormControl {
         return html`
           <p-dropdown placement="top" active>
             <p-tag slot="trigger" size=${this.size}>+${this.selectedOptions.length - index}</p-tag>
-            <div class="select__tags--overflow" @click=${(e: PClickEvent) => e.stopPropagation()}>
+            <div class="select__tags--overflow" @click=${(e: Event) => e.stopPropagation()}>
               ${this.selectedOptions.slice(this.maxOptionsVisible).map((other, idx) => {
                 const otherTag = this.getTag(other, this.maxOptionsVisible + idx);
                 return html`<div @p-remove=${(e: PRemoveEvent) => this.handleTagRemove(e, option)}>
@@ -745,9 +788,15 @@ export default class PSelect extends PureElement implements PureFormControl {
           }
         }
         this.displayLabel = "";
-        this.typeToSelectString = "";
+        this.keyword = "";
       }
-      this.displayInput.focus({ preventScroll: true });
+      if (!document.activeElement || document.activeElement !== this.displayInput) {
+        this.displayInput.focus({ preventScroll: true });
+      }
+      const allOptions = this.getAllOptions();
+      allOptions.forEach(option => {
+        option.hidden = false;
+      });
     } else {
       // Hide
       this.emit("p-hide");
@@ -762,24 +811,23 @@ export default class PSelect extends PureElement implements PureFormControl {
       this.popup.active = false;
 
       this.emit("p-after-hide");
-      this.typeToSelectString = "";
+      this.keyword = "";
     }
   }
 
   private handleFilterOptions() {
     if (!this.showSearch) return;
     const allOptions = this.getAllOptions();
-    if (this.typeToSelectString) {
+    if (this.keyword) {
       allOptions.forEach(option => {
         option.hidden =
-          !option.getTextLabel().toLowerCase().includes(this.typeToSelectString.toLowerCase()) &&
-          !option.value.toLowerCase().includes(this.typeToSelectString.toLowerCase());
+          !option.getTextLabel().toLowerCase().includes(this.keyword.toLowerCase()) &&
+          !option.value.toLowerCase().includes(this.keyword.toLowerCase());
       });
       const availableOptions = allOptions.filter(el => !el.hidden);
       if (availableOptions.length > 0) {
         this.setCurrentOption(availableOptions[0]);
       }
-      this.displayInput.focus();
     } else {
       allOptions.forEach(option => {
         option.hidden = false;
@@ -914,7 +962,7 @@ export default class PSelect extends PureElement implements PureFormControl {
                 type="text"
                 placeholder=${this.placeholder}
                 .disabled=${this.disabled}
-                .value=${this.displayLabel}
+                .value=${this.hasFocus ? this.keyword : this.displayLabel}
                 autocomplete="off"
                 spellcheck="false"
                 autocapitalize="off"

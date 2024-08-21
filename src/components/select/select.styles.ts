@@ -78,7 +78,7 @@ export default css`
   .select--multiple:not(.select--placeholder-visible) .select__display-input {
     width: auto;
     flex: 1;
-    min-width: 80px;
+    min-width: 0px;
     padding-left: var(--p-input-spacing-small);
   }
 

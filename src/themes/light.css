@@ -407,7 +407,7 @@
   /* Focus rings */
   --p-focus-ring-color: var(--p-color-primary-600);
   --p-focus-ring-style: solid;
-  --p-focus-ring-width: 3px;
+  --p-focus-ring-width: 2px;
   --p-focus-ring: var(--p-focus-ring-style) var(--p-focus-ring-width) var(--p-focus-ring-color);
   --p-focus-ring-offset: 1px;
 

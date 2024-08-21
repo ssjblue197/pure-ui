@@ -14,6 +14,10 @@ New versions of Pure UI are released as-needed and generally occur when a critic
 
 ## 1.1.0
 
+- Select component support tag mode
+
+## 1.1.0
+
 - Remake Select component to support searching for options
 
 ## 1.0.6

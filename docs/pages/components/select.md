@@ -6,7 +6,7 @@ layout: component
 ---
 
 ```html:preview
-<p-select>
+<p-select show-search>
   <p-option value="option-1">Option 1</p-option>
   <p-option value="option-2">Option 2</p-option>
   <p-option value="option-3">Option 3</p-option>
@@ -243,7 +243,7 @@ const App = () => (
 To allow multiple options to be selected, use the `multiple` attribute. It's a good practice to use `clearable` when this option is enabled. To set multiple values at once, set `value` to a space-delimited list of values.
 
 ```html:preview
-<p-select label="Select a Few" value="option-1 option-2 option-3" multiple clearable show-search>
+<p-select label="Select a Few" value="option-1 option-2 option-3" multiple clearable max-options-visible="4" show-search>
   <p-option value="option-1">Option 1</p-option>
   <p-option value="option-2">Option 2</p-option>
   <p-option value="option-3">Option 3</p-option>
@@ -276,6 +276,51 @@ const App = () => (
 :::tip
 Note that multi-select options may wrap, causing the control to expand vertically. You can use the `max-options-visible` attribute to control the maximum number of selected options to show at once.
 :::
+
+### Tag mode
+
+- Enable tag mode:
+  - The `tag-mode` attribute enables users to add new tags by pressing the "Enter" key after typing a new tag.
+  - This feature is useful when you want to allow users to add new items that are not already included in the list of options.
+  - Note that in tag mode, the component will not validate whether the user's input matches any of the available options.
+
+- Good practice to use `clearable`:
+  - The `clearable` attribute is a good practice to use when the `multiple` attribute is enabled.
+  - This allows users to remove all selected options at once by clicking the clear icon.
+
+- Set multiple values at once:
+  - To set multiple values at once, set the `value` attribute to a space-delimited list of values.
+
+```html:preview
+<p-select label="Select a Few" value="option-1 option-2 option-3" multiple clearable max-options-visible="4" tag-mode show-search>
+  <p-option value="option-1">Option 1</p-option>
+  <p-option value="option-2">Option 2</p-option>
+  <p-option value="option-3">Option 3</p-option>
+  <p-option value="option-4">Option 4</p-option>
+  <p-option value="option-5">Option 5</p-option>
+  <p-option value="option-6">Option 6</p-option>
+  <p-option value="option-7">Option 7</p-option>
+  <p-option value="option-8">Option 8</p-option>
+  <p-option value="option-9">Option 9</p-option>
+  <p-option value="option-10">Option 10</p-option>
+</p-select>
+```
+
+```jsx:react
+import POption from 'pure-uikit/dist/react/option';
+import PSelect from 'pure-uikit/dist/react/select';
+
+const App = () => (
+  <PSelect label="Select a Few" value={["option-1", "option-2", "option-3"]} multiple clearable>
+    <POption value="option-1">Option 1</POption>
+    <POption value="option-2">Option 2</POption>
+    <POption value="option-3">Option 3</POption>
+    <POption value="option-4">Option 4</POption>
+    <POption value="option-5">Option 5</POption>
+    <POption value="option-6">Option 6</POption>
+  </PSelect>
+);
+```
 
 ### Setting Initial Values
 
