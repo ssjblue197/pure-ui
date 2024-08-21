@@ -477,7 +477,7 @@ describe("<p-select>", () => {
         <p-option value="option-3">Option 3</p-option>
       </p-select>
     `);
-    const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>(".select__display-input")!;
+    // const displayInput = el.shadowRoot!.querySelector<HTMLSelectElement>(".select__display-input")!;
     const option = el.querySelector("p-option")!;
 
     // expect(displayInput.value).to.equal("Option 1");
