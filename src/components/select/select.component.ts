@@ -383,7 +383,6 @@ export default class PSelect extends PureElement implements PureFormControl {
 
       if (this.tagMode && this.keyword) {
         this.handleAddNewTag(this.keyword);
-        this.keyword = "";
         if (!document.activeElement || document.activeElement !== this.displayInput) {
           this.displayInput.focus({ preventScroll: true });
         }
@@ -615,6 +614,9 @@ export default class PSelect extends PureElement implements PureFormControl {
       // Render the TemplateResult into the fragment
       render(newOption, fragment);
       this.appendChild(fragment);
+      this.keyword = "";
+
+      this.handleFilterOptions();
     }
   }
 
