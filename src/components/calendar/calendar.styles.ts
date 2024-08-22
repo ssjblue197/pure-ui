@@ -9,11 +9,12 @@ export default css`
     --border-radius: var(--p-input-border-radius-large);
     --border-width: 1px;
     --border-style: solid;
+    --calendar-background-color: var(--p-surface);
+    --calendar-box-shadow: var(--p-shadow-medium);
 
-    border: var(--border-width) var(--border-style) var(--border-color);
     border-radius: var(--border-radius);
     display: block;
-    overflow: hidden;
+    background-color: var(--calendar-background-color);
   }
 
   .calendar__header {
@@ -189,5 +190,353 @@ export default css`
 
   p-icon-button::part(base) {
     color: var(--p-color-neutral-600);
+  }
+
+  /** The popup */
+  .calendar {
+    flex: 1 1 auto;
+    display: inline-flex;
+    width: 100%;
+    position: relative;
+    vertical-align: middle;
+  }
+
+  .calendar::part(popup) {
+    z-index: var(--p-z-index-dropdown);
+  }
+
+  .calendar[data-current-placement^="top"]::part(popup) {
+    transform-origin: bottom;
+  }
+
+  .calendar[data-current-placement^="bottom"]::part(popup) {
+    transform-origin: top;
+  }
+
+  /* Combobox */
+  .calendar__combobox {
+    flex: 1;
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    position: relative;
+    align-items: center;
+    justify-content: start;
+    font-family: var(--p-input-font-family);
+    font-weight: var(--p-input-font-weight);
+    letter-spacing: var(--p-input-letter-spacing);
+    vertical-align: middle;
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+      var(--p-transition-fast) color,
+      var(--p-transition-fast) border,
+      var(--p-transition-fast) box-shadow,
+      var(--p-transition-fast) background-color;
+  }
+
+  .calendar__display-input {
+    position: relative;
+    width: 100%;
+    font: inherit;
+    border: none;
+    background: none;
+    color: var(--p-input-color);
+    cursor: inherit;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    line-height: normal !important;
+    -webkit-appearance: none;
+  }
+
+  .calendar__display-input::placeholder {
+    color: var(--p-input-placeholder-color);
+  }
+
+  .calendar:not(.calendar--disabled):hover .calendar__display-input {
+    color: var(--p-input-color-hover);
+  }
+
+  .calendar__display-input:focus {
+    outline: none;
+  }
+
+  /* Visually hide the display input when multiple is enabled */
+  .calendar--multiple:not(.calendar--placeholder-visible) .calendar__display-input {
+    width: auto;
+    flex: 1;
+    min-width: 0px;
+    padding-left: var(--p-input-spacing-small);
+  }
+
+  .calendar__value-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  .calendar__tags {
+    display: flex;
+    width: auto;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-inline-start: var(--p-spacing-2x-small);
+  }
+
+  .calendar__tags::slotted(p-tag) {
+    cursor: pointer !important;
+  }
+  .calendar__tags--overflow {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: var(--p-spacing-2x-small);
+    align-items: flex-start;
+    justify-content: center;
+    margin-inline-start: var(--p-spacing-2x-small);
+  }
+
+  .calendar--disabled .calendar__tags,
+  .calendar--disabled .calendar__tags::slotted(p-tag) {
+    cursor: not-allowed !important;
+  }
+
+  /* Standard selects */
+  .calendar--standard .calendar__combobox {
+    background-color: var(--p-input-background-color);
+    border: solid var(--p-input-border-width) var(--p-input-border-color);
+  }
+
+  .calendar--standard.calendar--disabled .calendar__combobox {
+    background-color: var(--p-input-background-color-disabled);
+    border-color: var(--p-input-border-color-disabled);
+    color: var(--p-input-color-disabled);
+    opacity: 0.5;
+    cursor: not-allowed;
+    outline: none;
+  }
+
+  .calendar--standard:not(.calendar--disabled).calendar--open .calendar__combobox,
+  .calendar--standard:not(.calendar--disabled).calendar--focused .calendar__combobox {
+    background-color: var(--p-input-background-color-focus);
+    border-color: var(--p-input-border-color-focus);
+    box-shadow: 0 0 0 var(--p-focus-ring-width) var(--p-input-focus-ring-color);
+  }
+
+  /* Filled selects */
+  .calendar--filled .calendar__combobox {
+    border: none;
+    background-color: var(--p-input-filled-background-color);
+    color: var(--p-input-color);
+  }
+
+  .calendar--filled:hover:not(.calendar--disabled) .calendar__combobox {
+    background-color: var(--p-input-filled-background-color-hover);
+  }
+
+  .calendar--filled.calendar--disabled .calendar__combobox {
+    background-color: var(--p-input-filled-background-color-disabled);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .calendar--filled:not(.calendar--disabled).calendar--open .calendar__combobox,
+  .calendar--filled:not(.calendar--disabled).calendar--focused .calendar__combobox {
+    background-color: var(--p-input-filled-background-color-focus);
+    outline: var(--p-focus-ring);
+  }
+
+  /* Sizes */
+  .calendar--small .calendar__combobox {
+    border-radius: var(--p-input-border-radius-small);
+    font-size: var(--p-input-font-size-small);
+    min-height: var(--p-input-height-small);
+    padding-block: 0;
+    padding-inline: var(--p-input-spacing-small);
+  }
+
+  .calendar--small .calendar__clear {
+    margin-inline-start: var(--p-input-spacing-small);
+  }
+
+  .calendar--small .calendar__prefix::slotted(*) {
+    margin-inline-end: var(--p-input-spacing-small);
+  }
+
+  .calendar--small.calendar--multiple:not(.calendar--placeholder-visible) .calendar__combobox {
+    padding-block: 2px;
+    padding-inline-start: 0;
+  }
+
+  .calendar--small .calendar__tags {
+    gap: 2px;
+  }
+
+  .calendar--medium .calendar__combobox {
+    border-radius: var(--p-input-border-radius-large);
+    font-size: var(--p-input-font-size-medium);
+    min-height: var(--p-input-height-medium);
+    padding-block: 0;
+    padding-inline: var(--p-input-spacing-medium);
+  }
+
+  .calendar--medium .calendar__clear {
+    margin-inline-start: var(--p-input-spacing-medium);
+  }
+
+  .calendar--medium .calendar__prefix::slotted(*) {
+    margin-inline-end: var(--p-input-spacing-medium);
+  }
+
+  .calendar--medium.calendar--multiple:not(.calendar--placeholder-visible) .calendar__combobox {
+    padding-inline-start: 0;
+    padding-block: 3px;
+  }
+
+  .calendar--medium .calendar__tags {
+    gap: 3px;
+  }
+
+  .calendar--large .calendar__combobox {
+    border-radius: var(--p-input-border-radius-large);
+    font-size: var(--p-input-font-size-large);
+    min-height: var(--p-input-height-large);
+    padding-block: 0;
+    padding-inline: var(--p-input-spacing-large);
+  }
+
+  .calendar--large .calendar__clear {
+    margin-inline-start: var(--p-input-spacing-large);
+  }
+
+  .calendar--large .calendar__prefix::slotted(*) {
+    margin-inline-end: var(--p-input-spacing-large);
+  }
+
+  .calendar--large.calendar--multiple:not(.calendar--placeholder-visible) .calendar__combobox {
+    padding-inline-start: 0;
+    padding-block: 4px;
+  }
+
+  .calendar--large .calendar__tags {
+    gap: 4px;
+  }
+
+  /* Pills */
+  .calendar--pill.calendar--small .calendar__combobox {
+    border-radius: var(--p-input-height-small);
+  }
+
+  .calendar--pill.calendar--medium .calendar__combobox {
+    border-radius: var(--p-input-height-medium);
+  }
+
+  .calendar--pill.calendar--large .calendar__combobox {
+    border-radius: var(--p-input-height-large);
+  }
+
+  /* Prefix */
+  .calendar__prefix {
+    flex: 0;
+    display: inline-flex;
+    align-items: center;
+    color: var(--p-input-placeholder-color);
+  }
+
+  /* Suffix */
+  .calendar__suffix {
+    flex: 0;
+    display: inline-flex;
+    align-items: center;
+    color: var(--p-input-placeholder-color);
+  }
+
+  /* Icon */
+  .calendar__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline-end: var(--p-input-spacing-small);
+    font-size: var(--p-font-size-large);
+  }
+
+  /* Clear button */
+  .calendar__clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: inherit;
+    color: var(--p-input-icon-color);
+    border: none;
+    background: none;
+    padding: 0;
+    transition: var(--p-transition-fast) color;
+    cursor: pointer;
+  }
+
+  .calendar__clear:hover {
+    color: var(--p-input-icon-color-hover);
+  }
+
+  .calendar__clear:focus {
+    outline: none;
+  }
+
+  /* Expand icon */
+  .calendar__expand-icon {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    transition: var(--p-transition-medium) rotate ease;
+    rotate: 0;
+    margin-inline-start: var(--p-spacing-small);
+  }
+
+  .calendar--open .calendar__expand-icon {
+    rotate: -180deg;
+  }
+
+  /* Listbox */
+  .calendar--dialog {
+    display: block;
+    position: relative;
+    font-family: var(--p-font-sans);
+    font-size: var(--p-font-size-medium);
+    font-weight: var(--p-font-weight-normal);
+    box-shadow: var(--p-shadow-large);
+    background: var(--p-panel-background-color);
+    border: solid var(--p-panel-border-width) var(--p-panel-border-color);
+    border-radius: var(--p-border-radius-large);
+    padding-block: 0; //OLD: var(--p-spacing-x-small)
+    padding-inline: 0;
+    overflow: auto;
+    overscroll-behavior: none;
+
+    /* Make sure it adheres to the popup's auto size */
+    max-width: var(--auto-size-available-width);
+    max-height: var(--auto-size-available-height);
+  }
+
+  .calendar--dialog.calendar--dialog-inline {
+    box-shadow: var(--p-shadow-small) !important;
+  }
+
+  .calendar--dialog ::slotted(p-divider) {
+    --spacing: var(--p-spacing-x-small);
+  }
+
+  .calendar--dialog ::slotted(small) {
+    display: block;
+    font-size: var(--p-font-size-small);
+    font-weight: var(--p-font-weight-medium);
+    color: var(--p-color-neutral-500);
+    padding-block: var(--p-spacing-2x-small);
+    padding-inline: var(--p-spacing-x-large);
   }
 `;

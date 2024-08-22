@@ -6,7 +6,7 @@ layout: component
 ---
 
 ```html:preview
-<p-calendar show-today>
+<p-calendar show-today mode="inline" clearable>
   <div slot="footer"></div>
 </p-calendar>
 ```
