@@ -50,11 +50,58 @@ export default class PCalendar extends PureElement {
   private readonly localize = new LocalizeController(this);
   private readonly hasSlotController = new HasSlotController(this, "prefix", "suffix");
 
+  /**
+   * When `true`, the calendar will show a button to quickly jump to today's date.
+   *
+   * @attribute show-today
+   * @type {boolean}
+   * @default false
+   */
+  @property({ type: Boolean, reflect: true, attribute: "show-today" }) showToday = false;
+
+  /**
+   * The mode of the calendar.
+   * - "default": calendar is displayed in a popup.
+   * - "inline": calendar is displayed inline.
+   *
+   * @attribute mode
+   * @type {"default" | "inline"}
+   * @default "default"
+   */
+  @property({ reflect: true }) mode: "default" | "inline" = "default";
+
+  /**
+   * The type of selection the calendar allows.
+   * - "single": allows selecting a single date.
+   * - "multiple": allows selecting multiple dates.
+   * - "range": allows selecting a range of dates.
+   *
+   * @attribute type
+   * @type {"single" | "multiple" | "range"}
+   * @default "single"
+   */
+  @property({ reflect: true }) type: "single" | "multiple" | "range" = "single";
+
+  /**
+   * If `true`, the calendar will automatically receive focus when it open.
+   * This can be useful when using the calendar in a dialog or other scenario where it should
+   * receive focus without requiring the user to click on it.
+   */
+  @property({ type: Boolean, reflect: true }) autofocus = false;
+
+  /**
+   - Set to `true` to prevent the user from interacting with the calendar.
+   */
+  @property({ type: Boolean, reflect: true }) disabled = false;
+
   /** The month to render, 1-12/ */
   @property({ type: Number, reflect: true }) month: number = new Date().getMonth() + 1;
 
   /** The year to render. */
   @property({ type: Number, reflect: true }) year: number = new Date().getFullYear();
+
+  /** The date to render. */
+  @property({ type: Number, reflect: true }) date: number = new Date().getDate();
 
   /** Determines how day labels are shown, e.g. "M", "Mon", or "Monday". */
   @property({ attribute: "day-labels" }) dayLabels: "narrow" | "short" | "long" = "short";
@@ -73,6 +120,7 @@ export default class PCalendar extends PureElement {
   goToToday() {
     this.month = new Date().getMonth() + 1;
     this.year = new Date().getFullYear();
+    this.date = new Date().getDate();
   }
 
   /** Moves the calendar to the previous month. */
@@ -93,6 +141,16 @@ export default class PCalendar extends PureElement {
     } else {
       this.month++;
     }
+  }
+
+  /** Moves the calendar to the previous year. */
+  goToPreviousYear() {
+    this.year > 1970 && this.year--;
+  }
+
+  /** Moves the calendar to the next year. */
+  goToNextYear() {
+    this.year++;
   }
 
   @watch("month")
@@ -124,22 +182,60 @@ export default class PCalendar extends PureElement {
         })}
       >
         <header class="calendar__header">
-          <p-icon-button
-            name="chevron-left"
-            label=${this.localize.term("previousMonth")}
+          <p-button
+            variant="default"
+            size="small"
+            @click=${this.goToPreviousYear}
+            class=${classMap({
+              "calendar__header-button": true,
+              "calendar__header-button--disabled": this.disabled,
+            })}
+          >
+            <p-icon-button name="chevron-double-left" label=${this.localize.term("previousMonth")}></p-icon-button>
+          </p-button>
+          <p-button
+            variant="default"
+            size="small"
             @click=${this.goToPreviousMonth}
-          ></p-icon-button>
+            class=${classMap({
+              "calendar__header-button": true,
+              "calendar__header-button--disabled": this.disabled,
+            })}
+          >
+            <p-icon-button name="chevron-left" label=${this.localize.term("previousMonth")}></p-icon-button>
+          </p-button>
+
+          <slot name="header-prefix"></slot>
 
           <span class="calendar__label">
             <span class="calendar__month-label">${getMonthName(month, lang, this.monthLabels)}</span>
             <span class="calendar__year-label">${month.getFullYear()}</span>
           </span>
 
-          <p-icon-button
-            name="chevron-right"
-            label=${this.localize.term("nextMonth")}
+          <slot name="suffix-prefix"></slot>
+
+          <p-button
+            variant="default"
+            size="small"
             @click=${this.goToNextMonth}
-          ></p-icon-button>
+            class=${classMap({
+              "calendar__header-button": true,
+              "calendar__header-button--disabled": this.disabled,
+            })}
+          >
+            <p-icon-button name="chevron-right" label=${this.localize.term("nextMonth")}></p-icon-button>
+          </p-button>
+          <p-button
+            variant="default"
+            size="small"
+            @click=${this.goToNextYear}
+            class=${classMap({
+              "calendar__header-button": true,
+              "calendar__header-button--disabled": this.disabled,
+            })}
+          >
+            <p-icon-button name="chevron-double-right" label=${this.localize.term("nextMonth")}></p-icon-button>
+          </p-button>
         </header>
 
         <div class="calendar__days">
@@ -197,6 +293,20 @@ export default class PCalendar extends PureElement {
         </div>
 
         <footer class="calendar__footer">
+          ${this.showToday
+            ? html`
+                <p-button
+                  @click=${this.goToToday}
+                  variant="primary"
+                  size="small"
+                  class=${classMap({
+                    "calendar__today-button": true,
+                    "calendar__today-button--disabled": this.disabled,
+                  })}
+                  >${this.localize.term("today")}
+                </p-button>
+              `
+            : null}
           <slot name="footer"></slot>
         </footer>
       </div>

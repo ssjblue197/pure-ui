@@ -6,7 +6,9 @@ layout: component
 ---
 
 ```html:preview
-<p-calendar></p-calendar>
+<p-calendar show-today>
+  <div slot="footer"></div>
+</p-calendar>
 ```
 
 ## Examples
@@ -16,7 +18,8 @@ layout: component
 Month and day labels can be customized using the `month-labels` and `day-labels` attributes. Note that month names are localized automatically based on the component's `lang` attribute, falling back to the document language.
 
 ```html:preview
-<p-calendar month-labels="short" day-labels="narrow"></p-calendar>
+<p-calendar month-labels="short" day-labels="narrow">
+</p-calendar>
 ```
 
 ### Showing Adjacent Dates

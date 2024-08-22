@@ -17,6 +17,7 @@ const translation: Translation = {
   hidePassword: "Ẩn mật khẩu",
   loading: "Đang tải",
   nextMonth: "Tháng sau",
+  nextYear: "Năm sau",
   nextSlide: "Trang tiếp theo",
   numOptionsSelected: num => {
     if (num === 0) return "Không có lựa chọn nào";
@@ -24,6 +25,7 @@ const translation: Translation = {
     return `${num} lựa chọn đã được chọn`;
   },
   previousMonth: "Tháng trước",
+  previousYear: "Năm trước",
   previousSlide: "Trang trước",
   progress: "Tiến độ",
   remove: "Xóa",
@@ -34,6 +36,7 @@ const translation: Translation = {
   showPassword: "Hiện mật khẩu",
   slideNum: slide => `Trang ${slide}`,
   toggleColorFormat: "Chuyển đổi định dạng màu",
+  today: "Hôm nay",
 };
 
 registerTranslation(translation);

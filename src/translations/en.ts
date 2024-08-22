@@ -17,6 +17,7 @@ const translation: Translation = {
   hidePassword: "Hide password",
   loading: "Loading",
   nextMonth: "Next month",
+  nextYear: "Next year",
   nextSlide: "Next slide",
   numOptionsSelected: num => {
     if (num === 0) return "No options selected";
@@ -24,6 +25,7 @@ const translation: Translation = {
     return `${num} options selected`;
   },
   previousMonth: "Previous month",
+  previousYear: "Previous year",
   previousSlide: "Previous slide",
   progress: "Progress",
   remove: "Remove",
@@ -34,6 +36,7 @@ const translation: Translation = {
   showPassword: "Show password",
   slideNum: slide => `Slide ${slide}`,
   toggleColorFormat: "Toggle color format",
+  today: "Today",
 };
 
 registerTranslation(translation);
