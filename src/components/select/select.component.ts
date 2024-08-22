@@ -390,7 +390,7 @@ export default class PSelect extends PureElement implements PureFormControl {
       }
 
       // If it is open, update the value based on the current selection and close it
-      if (this.currentOption && !this.currentOption.disabled) {
+      if (this.currentOption && !this.currentOption.disabled && this.open) {
         if (this.multiple) {
           this.toggleOptionSelection(this.currentOption);
           if (!document.activeElement || document.activeElement !== this.displayInput) {
@@ -646,7 +646,7 @@ export default class PSelect extends PureElement implements PureFormControl {
       this.currentOption = option;
       option.current = true;
       option.tabIndex = 0;
-      // option.focus();
+      option.focus();
     }
   }
 
@@ -829,6 +829,8 @@ export default class PSelect extends PureElement implements PureFormControl {
       const availableOptions = allOptions.filter(el => !el.hidden);
       if (availableOptions.length > 0) {
         this.setCurrentOption(availableOptions[0]);
+      } else {
+        this.setCurrentOption(null);
       }
     } else {
       allOptions.forEach(option => {
