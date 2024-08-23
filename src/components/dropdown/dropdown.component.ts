@@ -53,6 +53,8 @@ export default class PDropdown extends PureElement {
   private readonly localize = new LocalizeController(this);
   private closeWatcher: CloseWatcher | null;
 
+  @property({ type: Boolean, reflect: true, attribute: "auto-close" }) autoClose = false;
+
   /**
    * The behavior of the dropdown. This determines how the dropdown is triggered. The default behavior is "click",
    * which means the dropdown is triggered by a click event on the trigger element. The other allowed value is "hover",
@@ -240,7 +242,7 @@ export default class PDropdown extends PureElement {
     }
   }
   private handleTriggerMouseLeave() {
-    if (this.open && this.behavior === "hover") {
+    if (this.open && this.behavior === "hover" && this.autoClose) {
       this.hide();
     }
   }

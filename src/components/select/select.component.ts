@@ -733,7 +733,7 @@ export default class PSelect extends PureElement implements PureFormControl {
       } else if (index === this.maxOptionsVisible) {
         // Hit tag limit
         return html`
-          <p-dropdown placement="top" active>
+          <p-dropdown placement="top" behavior="hover">
             <p-tag slot="trigger" size=${this.size}>+${this.selectedOptions.length - index}</p-tag>
             <div class="select__tags--overflow" @click=${(e: Event) => e.stopPropagation()}>
               ${this.selectedOptions.slice(this.maxOptionsVisible).map((other, idx) => {

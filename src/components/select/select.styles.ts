@@ -39,7 +39,7 @@ export default css`
     font-weight: var(--p-input-font-weight);
     letter-spacing: var(--p-input-letter-spacing);
     vertical-align: middle;
-    overflow: hidden;
+    // overflow: hidden;
     cursor: pointer;
     transition:
       var(--p-transition-fast) color,
@@ -56,7 +56,7 @@ export default css`
     background: none;
     color: var(--p-input-color);
     cursor: inherit;
-    overflow: hidden;
+    // overflow: hidden;
     padding: 0;
     margin: 0;
     // -webkit-appearance: none;
@@ -112,7 +112,8 @@ export default css`
     align-items: flex-start;
     justify-content: center;
     margin-inline-start: var(--p-spacing-2x-small);
-  }
+    padding: var(--p-spacing-x-small);
+    background-color: var(--p-surface);
 
   .select--disabled .select__tags,
   .select--disabled .select__tags::slotted(p-tag) {

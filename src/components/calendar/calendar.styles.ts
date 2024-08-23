@@ -86,7 +86,7 @@ export default css`
   .calendar__day:nth-child(6),
   .calendar__day:nth-child(7) {
     font-weight: var(--p-font-weight-medium);
-    background-color: var(--p-color-neutral-100);
+    background-color: var(--p-color-neutral-100) !important;
   }
 
   .calendar__day:nth-child(1) {
@@ -144,24 +144,31 @@ export default css`
     background-color: var(--p-color-green-50);
   }
 
-  .calendar__day[part~="day-today"]:hover {
+  .calendar__day[part~="day-today"]:not([part~="day-selected"]):hover {
     font-weight: var(--p-font-weight-bold);
     color: var(--p-color-green-600);
     background-color: var(--p-color-green-200);
   }
 
-  .calendar__day[part~="day-selected"] {
+  .calendar__day[part~="day-selected-in-range"] {
     background-color: var(--p-color-primary-300);
   }
 
-  .calendar__day[part~="day-selection-start"] {
+  .calendar__day[part~="day-selected"] {
     background-color: var(--p-color-primary-600);
-    color: var(--p-color-neutral-0);
+    color: var(--p-color-neutral-0) !important;
+  }
+
+  .calendar__day[part~="day-selection-start"] {
+    background-color: var(--p-color-primary-600) !important;
+    color: var(--p-color-neutral-0) !important;
+    font-weight: var(--p-font-weight-medium) !important;
   }
 
   .calendar__day[part~="day-selection-end"] {
-    background-color: var(--p-color-primary-600);
-    color: var(--p-color-neutral-0);
+    background-color: var(--p-color-primary-600) !important;
+    color: var(--p-color-neutral-0) !important;
+    font-weight: var(--p-font-weight-medium) !important;
   }
 
   .calendar__day[part~="day-previous-month"],
@@ -169,10 +176,19 @@ export default css`
     color: var(--p-color-neutral-500);
     // background-color: var(--p-color-neutral-50) !important;
   }
+  .calendar__day[part~="day-previous-month"][part~="day-selected"],
+  .calendar__day[part~="day-next-month"][part~="day-selected"] {
+    color: var(--p-color-neutral-0) !important;
+    // background-color: var(--p-color-neutral-50) !important;
+  }
 
   .calendar__day[part~="day-previous-month"][part~="day-weekend"],
   .calendar__day[part~="day-next-month"][part~="day-weekend"] {
     color: var(--p-color-primary-400);
+  }
+
+  .calendar__day[part~="day-current-focus"] {
+    background-color: var(--p-color-rose-100);
   }
 
   .calendar__footer {
@@ -226,7 +242,7 @@ export default css`
     font-weight: var(--p-input-font-weight);
     letter-spacing: var(--p-input-letter-spacing);
     vertical-align: middle;
-    overflow: hidden;
+    // overflow: hidden;
     cursor: pointer;
     transition:
       var(--p-transition-fast) color,
@@ -243,7 +259,7 @@ export default css`
     background: none;
     color: var(--p-input-color);
     cursor: inherit;
-    overflow: hidden;
+    // overflow: hidden;
     padding: 0;
     margin: 0;
     line-height: normal !important;
@@ -296,10 +312,13 @@ export default css`
   .calendar__tags--overflow {
     display: flex;
     flex-flow: column nowrap;
-    gap: var(--p-spacing-2x-small);
+    gap: var(--p-spacing-x-small);
     align-items: flex-start;
     justify-content: center;
     margin-inline-start: var(--p-spacing-2x-small);
+    padding: var(--p-spacing-x-small);
+    overflow: hidden;
+    background-color: var(--p-color-neutral-0);
   }
 
   .calendar--disabled .calendar__tags,
@@ -371,7 +390,7 @@ export default css`
 
   .calendar--small.calendar--multiple:not(.calendar--placeholder-visible) .calendar__combobox {
     padding-block: 2px;
-    padding-inline-start: 0;
+    // padding-inline-start: 0;
   }
 
   .calendar--small .calendar__tags {
@@ -395,7 +414,7 @@ export default css`
   }
 
   .calendar--medium.calendar--multiple:not(.calendar--placeholder-visible) .calendar__combobox {
-    padding-inline-start: 0;
+    // padding-inline-start: 0;
     padding-block: 3px;
   }
 
@@ -420,7 +439,7 @@ export default css`
   }
 
   .calendar--large.calendar--multiple:not(.calendar--placeholder-visible) .calendar__combobox {
-    padding-inline-start: 0;
+    // padding-inline-start: 0;
     padding-block: 4px;
   }
 
@@ -443,8 +462,9 @@ export default css`
 
   /* Prefix */
   .calendar__prefix {
-    flex: 0;
+    flex: 0 0 auto;
     display: inline-flex;
+    justify-content: center;
     align-items: center;
     color: var(--p-input-placeholder-color);
   }

@@ -97,7 +97,7 @@ export function getAllDayNames(locale = "en", format: Intl.DateTimeFormatOptions
   });
   const days = [1, 2, 3, 4, 5, 6, 7].map(day => {
     const dd = day < 10 ? `0${day}` : day;
-    return new Date(`2017-01-${dd}T00:00:00+00:00`);
+    return new Date(`2024-01-${dd}T00:00:00+00:00`);
   });
   return days.map(date => formatter.format(date));
 }
@@ -110,7 +110,7 @@ export function getAllMonthNames(locale = "en", format: Intl.DateTimeFormatOptio
   });
   const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => {
     const mm = month < 10 ? `0${month}` : month;
-    return new Date(`2017-${mm}-01T00:00:00+00:00`);
+    return new Date(`2024-${mm}-01T00:00:00+00:00`);
   });
   return months.map(date => formatter.format(date));
 }
@@ -144,4 +144,12 @@ export function getDayName(date: Date, locale = "en", format: Intl.DateTimeForma
 /** Returns a localized, human-readable month name. */
 export function getMonthName(date: Date, locale = "en", format: Intl.DateTimeFormatOptions["month"] = "long") {
   return getAllMonthNames(locale, format)[date.getMonth()];
+}
+
+export function getDateLabelWithFormat(date: Date, locale = "en", format?: Intl.DateTimeFormatOptions) {
+  return new Intl.DateTimeFormat(locale, format).format(date);
+}
+
+export function getDateDifferentFrom(date: Date, days: number) {
+  return new Date(date.getTime() + days * 24 * 60 * 60 * 1000);
 }

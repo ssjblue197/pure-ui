@@ -553,7 +553,9 @@ export default class PPopup extends PureElement {
 
   render() {
     return html`
-      <slot name="anchor" @slotchange=${this.handleAnchorChange}></slot>
+      <div style="display: contents; z-index: 1; position: relative;">
+        <slot name="anchor" @slotchange=${this.handleAnchorChange}></slot>
+      </div>
 
       <span
         part="hover-bridge"

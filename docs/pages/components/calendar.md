@@ -6,7 +6,7 @@ layout: component
 ---
 
 ```html:preview
-<p-calendar show-today mode="inline" clearable>
+<p-calendar show-today mode="dialog" close-on-select type="range" show-adjacent-dates>
   <div slot="footer"></div>
 </p-calendar>
 ```
@@ -32,7 +32,7 @@ By default, only dates in the target month are shown. You can fill the grid with
 
 ### Date Selection
 
-One or more dates can be selected by setting the `selectedDates` property. An array of dates is accepted and the selection does not have to be continuous.
+One or more dates can be selected by setting the `value` property. An array of dates is accepted and the selection does not have to be continuous.
 
 ```html:preview
 <p-calendar class="calendar-selection"></p-calendar>
@@ -42,7 +42,7 @@ One or more dates can be selected by setting the `selectedDates` property. An ar
   const today = new Date();
 
   // Set the selected date range from the 12-15 of the current month
-  calendar.selectedDates = [
+  calendar.value = [
     new Date(today.getFullYear(), today.getMonth(), 12),
     new Date(today.getFullYear(), today.getMonth(), 13),
     new Date(today.getFullYear(), today.getMonth(), 14),

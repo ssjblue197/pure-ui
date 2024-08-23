@@ -12,7 +12,11 @@ Components with the <p-badge variant="warning" pill>Experimental</p-badge> badge
 
 New versions of Pure UI are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.pureui.xyz](https://next.pureui.xyz).
 
-## 1.1.0
+## 1.1.5
+
+- Add calendar component
+
+## 1.1.1
 
 - Select component support tag mode
 
