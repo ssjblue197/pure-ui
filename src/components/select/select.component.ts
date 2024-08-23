@@ -334,6 +334,7 @@ export default class PSelect extends PureElement implements PureFormControl {
   handleInput() {
     this.keyword = this.displayInput.value;
     this.handleFilterOptions();
+    console.log("handleInput", this.keyword);
 
     if (document.activeElement !== this.displayInput) {
       // Keep the focus in the input
@@ -382,10 +383,13 @@ export default class PSelect extends PureElement implements PureFormControl {
       }
 
       if (this.tagMode && this.keyword) {
-        this.handleAddNewTag(this.keyword);
+        this.handleAddNewTag(this.keyword.trim());
         if (!document.activeElement || document.activeElement !== this.displayInput) {
           this.displayInput.focus({ preventScroll: true });
         }
+
+        this.requestUpdate();
+
         return;
       }
 
@@ -466,8 +470,6 @@ export default class PSelect extends PureElement implements PureFormControl {
         const allOptions = this.getAllOptions();
         const optionsSelected = allOptions.filter(el => el.selected);
         if (optionsSelected.length > 0) {
-          console.log("removing", optionsSelected[optionsSelected.length - 1]);
-
           this.handleTagRemove(new CustomEvent("p-remove"), optionsSelected[optionsSelected.length - 1]);
         }
       }
@@ -492,7 +494,8 @@ export default class PSelect extends PureElement implements PureFormControl {
 
   private handleLabelClick() {
     if (!document.activeElement || document.activeElement !== this.displayInput) {
-      this.displayInput.focus();
+      this.open = true;
+      this.displayInput.focus({ preventScroll: true });
     }
   }
 
@@ -606,6 +609,18 @@ export default class PSelect extends PureElement implements PureFormControl {
 
   private handleAddNewTag(value: string) {
     if (!this.disabled) {
+      const allOptions = this.getAllOptions();
+
+      // Get the values of all options in the select
+      const selectedOptionValues = allOptions.map(option => option.value);
+
+      // Check if the new tag value already exists in the select options
+      // If it does, there is no need to add a new option, so return early
+      // This prevents duplicate options from being added to the select
+      if (selectedOptionValues.includes(value)) {
+        return;
+      }
+
       const option = html`
         <p-option value="${value.replace(/\s/g, "_")}">${value.charAt(0).toUpperCase() + value.slice(1)}</p-option>
       `;
@@ -614,23 +629,18 @@ export default class PSelect extends PureElement implements PureFormControl {
       // Render the TemplateResult into the fragment
       render(option, fragment);
       this.appendChild(fragment);
-      this.keyword = "";
-      this.displayLabel = "";
 
-      this.handleFilterOptions();
+      this.updateComplete.then(() => {
+        this.keyword = "";
+        this.displayLabel = "";
+        this.handleFilterOptions();
 
-      const allOptions = this.getAllOptions();
-      const newOption = allOptions[allOptions.length - 1];
-
-      this.setCurrentOption(newOption);
-
-      this.toggleOptionSelection(newOption);
-
-      if (!document.activeElement || document.activeElement !== this.displayInput) {
-        this.displayInput.focus({ preventScroll: true });
-      }
-
-      this.hasFocus = true;
+        const newAllOptions = this.getAllOptions();
+        const newOption = newAllOptions[newAllOptions.length - 1];
+        this.toggleOptionSelection(newOption, true);
+        this.setCurrentOption(newOption);
+        this.emit("p-change");
+      });
     }
   }
 
@@ -806,7 +816,6 @@ export default class PSelect extends PureElement implements PureFormControl {
         this.displayLabel = "";
         this.keyword = "";
         this.displayInput.focus({ preventScroll: true });
-        console.log("show placeholder", this.placeholder, document.activeElement);
       }
       if (!document.activeElement || document.activeElement !== this.displayInput) {
         // Keep the focus in the input element
