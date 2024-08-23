@@ -606,17 +606,31 @@ export default class PSelect extends PureElement implements PureFormControl {
 
   private handleAddNewTag(value: string) {
     if (!this.disabled) {
-      const newOption = html`
+      const option = html`
         <p-option value="${value.replace(/\s/g, "_")}">${value.charAt(0).toUpperCase() + value.slice(1)}</p-option>
       `;
       // Create a DocumentFragment
       const fragment = document.createDocumentFragment();
       // Render the TemplateResult into the fragment
-      render(newOption, fragment);
+      render(option, fragment);
       this.appendChild(fragment);
       this.keyword = "";
+      this.displayLabel = "";
 
       this.handleFilterOptions();
+
+      const allOptions = this.getAllOptions();
+      const newOption = allOptions[allOptions.length - 1];
+
+      this.setCurrentOption(newOption);
+
+      this.toggleOptionSelection(newOption);
+
+      if (!document.activeElement || document.activeElement !== this.displayInput) {
+        this.displayInput.focus({ preventScroll: true });
+      }
+
+      this.hasFocus = true;
     }
   }
 
