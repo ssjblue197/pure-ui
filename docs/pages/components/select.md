@@ -6,7 +6,7 @@ layout: component
 ---
 
 ```html:preview
-<p-select show-search>
+<p-select show-search clearable>
   <p-option value="option-1">Option 1</p-option>
   <p-option value="option-2">Option 2</p-option>
   <p-option value="option-3">Option 3</p-option>

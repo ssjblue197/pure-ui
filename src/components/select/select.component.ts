@@ -646,7 +646,7 @@ export default class PSelect extends PureElement implements PureFormControl {
       this.currentOption = option;
       option.current = true;
       option.tabIndex = 0;
-      option.focus();
+      // option.focus();
     }
   }
 
@@ -791,8 +791,11 @@ export default class PSelect extends PureElement implements PureFormControl {
         }
         this.displayLabel = "";
         this.keyword = "";
+        this.displayInput.focus({ preventScroll: true });
+        console.log("show placeholder", this.placeholder, document.activeElement);
       }
       if (!document.activeElement || document.activeElement !== this.displayInput) {
+        // Keep the focus in the input element
         this.displayInput.focus({ preventScroll: true });
       }
       const allOptions = this.getAllOptions();
