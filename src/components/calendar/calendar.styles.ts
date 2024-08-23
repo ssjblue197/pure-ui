@@ -69,7 +69,7 @@ export default css`
     background-color: var(--p-color-neutral-50);
   }
 
-  .calendar__day:not(.calendar__day--empty):hover {
+  .calendar__day:not(.calendar__day--empty):not([part~="day-selected"]):hover {
     background-color: var(--p-color-primary-200);
     color: var(--p-color-neutral-900);
   }
@@ -187,8 +187,23 @@ export default css`
     color: var(--p-color-primary-400);
   }
 
-  .calendar__day[part~="day-current-focus"] {
-    background-color: var(--p-color-rose-100);
+  
+
+  @media (min-width: 768px) {
+    /* CSS styles for tablet devices */
+    .calendar__day[part~="day-current-focus"] {
+      background-color: var(--p-color-rose-100);
+    }
+  }
+
+    /* CSS for desktop devices */
+  @media (min-width: 1024px) {
+    /* CSS styles for desktop devices */
+  }
+
+  /* CSS for larger screens */
+  @media (min-width: 1200px) {
+    /* CSS styles for larger screens */
   }
 
   .calendar__footer {
@@ -545,7 +560,8 @@ export default css`
 
   .calendar--dialog.calendar--dialog-inline {
     box-shadow: var(--p-shadow-small) !important;
-  }
+  }import { query } from 'lit/decorators.js';
+
 
   .calendar--dialog ::slotted(p-divider) {
     --spacing: var(--p-spacing-x-small);

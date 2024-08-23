@@ -2,13 +2,11 @@ export function shadowQuery(selector: string, rootNode: Document | Element = doc
   const selectors = String(selector).split(">>>");
   let currentNode = rootNode;
 
-  selectors.find((s, index) => {
-    console.log("selector", s);
-
+  selectors.find((_, index) => {
     if (index === 0) {
       currentNode = rootNode.querySelector(selectors[index])!;
     } else if (currentNode instanceof Element) {
-      currentNode = currentNode?.shadowRoot?.querySelector(selectors[index]) as Element;
+      currentNode = currentNode.shadowRoot!.querySelector(selectors[index])!;
     }
 
     return currentNode === null;

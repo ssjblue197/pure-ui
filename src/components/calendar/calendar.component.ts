@@ -18,6 +18,7 @@ import { LocalizeController } from "../../utilities/localize.js";
 import { partMap } from "../../internal/part-map.js";
 import { property, query, state } from "lit/decorators.js";
 // import { scrollIntoView } from "../../internal/scroll.js";
+// import { shadowQuery } from "../../utilities/shadow.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import { waitForEvent } from "../../internal/event.js";
 import { watch } from "../../internal/watch.js";
@@ -39,7 +40,7 @@ export interface RenderDayOptions {
 }
 
 /**
- * @summary A calendar prototype for Pure UI.
+ * @summary Calendar shows a monthly view of the Gregorian calendar, optionally allowing users to interact with dates.
  * @documentation https://pureui.xyz/components/calendar
  *
  * @since 1.1.5
@@ -68,17 +69,22 @@ export interface RenderDayOptions {
  * @slot clear-icon - An icon to use in lieu of the default clear icon.
  * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
  *
+ * @csspart calendar - The component's container.
  * @csspart day - Targets day cells.
  * @csspart day-label - Targets the day labels (the name of the days in the grid).
  * @csspart day-weekend - Targets days that fall on weekends.
  * @csspart day-weekday - Targets weekdays.
+ * @csspart day-current-focus - Targets days that are focused (used for keyboard navigation).
  * @csspart day-current-month - Targets days in the current month.
  * @csspart day-previous-month - Targets days in the previous month.
  * @csspart day-next-month - Targets days in the next month.
  * @csspart day-today - Targets today.
  * @csspart day-selected - Targets selected days.
  * @csspart day-selection-start - Targets days that begin a selection.
+ * @csspart day-selected-in-range - Targets days that are in the middle of a selection when use type="range".
  * @csspart day-selection-end - Targets days that end a selection.
+ * @csspart tag - Targets days that selected when use type="multiple".
+ *
  *
  * @cssproperty --border-color - The calendar's border color.
  * @cssproperty --border-width - The calendar's border width.
@@ -484,7 +490,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
     }
 
     // Navigate options
-    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Tab"].includes(event.key)) {
       if (this.currentOption) {
         let newCurrentOption = undefined;
         switch (event.key) {
@@ -498,6 +504,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
             newCurrentOption = getDateDifferentFrom(this.currentOption, -1);
             break;
           case "ArrowRight":
+          case "Tab":
             newCurrentOption = getDateDifferentFrom(this.currentOption, 1);
             break;
           default:
@@ -515,29 +522,6 @@ export default class PCalendar extends PureElement implements PureFormControl {
         event.preventDefault();
         return;
       }
-
-      // Open it
-      // if (!this.open) {
-      //   this.show();
-
-      //   // If an option is already selected, stop here because we want that one to remain highlighted when the calendar
-      //   // opens for the first time
-      //   if (this.currentOption) {
-      //     return;
-      //   }
-      // }
-
-      // if (event.key === "ArrowDown") {
-      //   newIndex = currentIndex + 1;
-      //   if (newIndex > availableOptions.length - 1) newIndex = 0;
-      // } else if (event.key === "ArrowUp") {
-      //   newIndex = currentIndex - 1;
-      //   if (newIndex < 0) newIndex = availableOptions.length - 1;
-      // } else if (event.key === "Home") {
-      //   newIndex = 0;
-      // } else if (event.key === "End") {
-      //   newIndex = availableOptions.length - 1;
-      // }
     }
 
     if (event.key === "Backspace") {
@@ -589,10 +573,11 @@ export default class PCalendar extends PureElement implements PureFormControl {
   }
 
   private handleComboboxKeyDown(event: KeyboardEvent) {
-    if (event.key === "Tab") {
-      return;
-    }
+    // if (event.key === "Tab") {
+    //   return;
+    // }
 
+    //Note: not prevent default because it will prevent typing from virtual keyboard on mobile devices
     event.stopPropagation();
     this.handleDocumentKeyDown(event);
   }

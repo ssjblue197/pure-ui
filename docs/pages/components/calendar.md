@@ -6,7 +6,7 @@ layout: component
 ---
 
 ```html:preview
-<p-calendar show-today mode="dialog" close-on-select type="range" show-adjacent-dates>
+<p-calendar mode="inline">
   <div slot="footer"></div>
 </p-calendar>
 ```
@@ -30,23 +30,58 @@ By default, only dates in the target month are shown. You can fill the grid with
 <p-calendar show-adjacent-dates></p-calendar>
 ```
 
-### Date Selection
+### Multiple Selection
 
 One or more dates can be selected by setting the `value` property. An array of dates is accepted and the selection does not have to be continuous.
 
 ```html:preview
-<p-calendar class="calendar-selection"></p-calendar>
+<p-calendar class="calendar-selection" type="multiple"></p-calendar>
 
 <script>
   const calendar = document.querySelector('.calendar-selection');
   const today = new Date();
 
-  // Set the selected date range from the 12-15 of the current month
   calendar.value = [
     new Date(today.getFullYear(), today.getMonth(), 12),
-    new Date(today.getFullYear(), today.getMonth(), 13),
     new Date(today.getFullYear(), today.getMonth(), 14),
-    new Date(today.getFullYear(), today.getMonth(), 15)
+    new Date(today.getFullYear(), today.getMonth(), 17),
+    new Date(today.getFullYear(), today.getMonth(), 19)
+  ];
+</script>
+```
+
+### Range Selection
+
+One or more dates can be selected by setting the `value` property. An array of dates is accepted and the selection does not have to be continuous. When the `type` attribute is set to `range`, the selected range of dates is highlighted on the calendar.
+
+```html:preview
+<p-calendar class="calendar-selection" type="range"></p-calendar>
+
+<script>
+  const calendar = document.querySelector('.calendar-selection');
+  const today = new Date();
+
+  calendar.value = [
+    new Date(today.getFullYear(), today.getMonth(), 12),
+    new Date(today.getFullYear(), today.getMonth(), 19)
+  ];
+</script>
+```
+
+### Mode Display
+
+The `mode` property determines how the calendar is displayed. When set to `inline`, the calendar is displayed inline with the rest of the content, rather than in a popup (default).
+
+```html:preview
+<p-calendar class="calendar-selection" mode="inline"></p-calendar>
+
+<script>
+  const calendar = document.querySelector('.calendar-selection');
+  const today = new Date();
+
+  calendar.value = [
+    new Date(today.getFullYear(), today.getMonth(), 12),
+    new Date(today.getFullYear(), today.getMonth(), 19)
   ];
 </script>
 ```
