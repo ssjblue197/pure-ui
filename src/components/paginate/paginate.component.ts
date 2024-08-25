@@ -129,7 +129,7 @@ export default class PPaginate extends PureElement {
                 ?disabled="${this.page === page || this.disabled}"
                 class=${classMap({
                   page: true,
-                  "page--active": this.page === page && !this.disabled && !(String(this.page) !== "..."),
+                  "page--active": Number(this.page) === Number(page) && String(this.page) !== "...",
                 })}
                 ?circle=${this.pill}
               >

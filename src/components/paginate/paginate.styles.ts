@@ -26,9 +26,17 @@ export default css`
     gap: var(--p-spacing-x-small);
   }
 
-  .page.page--active {
-    background-color: var(--p-color-primary-600) !important;
-    color: var(--p-color-white) !important;
-    border-color: var(--p-color-primary-600) !important;
+  .page::part(base) {
+    border: none !important;
+  }
+
+  .page::part(base):hover {
+    background-color: var(--p-color-neutral-100) !important;
+  }
+
+  .page.page--active::part(base) {
+    background-color: var(--p-color-neutral-100) !important;
+    color: var(--p-color-neutral-900) !important;
+    opacity: 1 !important;
   }
 `;
