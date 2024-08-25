@@ -6,9 +6,25 @@ layout: component
 ---
 
 ```html:preview
-<p-calendar mode="inline">
+<p-calendar mode="inline" type="multiple" class="calendar-preview">
   <div slot="footer"></div>
 </p-calendar>
+
+<script>
+
+  const calendar = document.querySelector('.calendar-preview');
+  const today = new Date();
+
+  calendar.value = [
+    new Date(today.getFullYear(), today.getMonth(), 12),
+    new Date(today.getFullYear(), today.getMonth(), 14),
+    new Date(today.getFullYear(), today.getMonth(), 17),
+    new Date(today.getFullYear(), today.getMonth(), 19)
+  ];
+
+  console.log('calendar', {calendar});
+
+</script>
 ```
 
 ## Examples
@@ -35,10 +51,10 @@ By default, only dates in the target month are shown. You can fill the grid with
 One or more dates can be selected by setting the `value` property. An array of dates is accepted and the selection does not have to be continuous.
 
 ```html:preview
-<p-calendar class="calendar-selection" type="multiple"></p-calendar>
+<p-calendar class="calendar-multiple-selection" type="multiple"></p-calendar>
 
 <script>
-  const calendar = document.querySelector('.calendar-selection');
+  const calendar = document.querySelector('.calendar-multiple-selection');
   const today = new Date();
 
   calendar.value = [
@@ -55,10 +71,10 @@ One or more dates can be selected by setting the `value` property. An array of d
 One or more dates can be selected by setting the `value` property. An array of dates is accepted and the selection does not have to be continuous. When the `type` attribute is set to `range`, the selected range of dates is highlighted on the calendar.
 
 ```html:preview
-<p-calendar class="calendar-selection" type="range"></p-calendar>
+<p-calendar class="calendar-range-selection" type="range"></p-calendar>
 
 <script>
-  const calendar = document.querySelector('.calendar-selection');
+  const calendar = document.querySelector('.calendar-range-selection');
   const today = new Date();
 
   calendar.value = [
@@ -73,10 +89,10 @@ One or more dates can be selected by setting the `value` property. An array of d
 The `mode` property determines how the calendar is displayed. When set to `inline`, the calendar is displayed inline with the rest of the content, rather than in a popup (default).
 
 ```html:preview
-<p-calendar class="calendar-selection" mode="inline"></p-calendar>
+<p-calendar class="calendar-mode-inline" mode="inline"></p-calendar>
 
 <script>
-  const calendar = document.querySelector('.calendar-selection');
+  const calendar = document.querySelector('.calendar-mode-inline');
   const today = new Date();
 
   calendar.value = [
