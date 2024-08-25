@@ -31,10 +31,12 @@ export interface Translation extends DefaultTranslation {
   goToSlide: (slide: number, count: number) => string;
   hidePassword: string;
   loading: string;
+  nextPage?: string;
   nextMonth?: string; // TODO - add to other language packs and remove optional ? flag
   nextYear?: string; // TODO - add to other language packs and remove optional ? flag
   nextSlide: string;
   numOptionsSelected: (num: number) => string;
+  previousPage?: string;
   previousMonth?: string; // TODO - add to other language packs and remove optional ? flag
   previousYear?: string; // TODO - add to other language packs and remove optional ? flag
   previousSlide: string;

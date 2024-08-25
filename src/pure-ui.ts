@@ -32,6 +32,7 @@ export { default as PMenu } from "./components/menu/menu.js";
 export { default as PMenuItem } from "./components/menu-item/menu-item.js";
 export { default as PMenuLabel } from "./components/menu-label/menu-label.js";
 export { default as PMutationObserver } from "./components/mutation-observer/mutation-observer.js";
+export { default as PPaginate } from "./components/paginate/paginate.js";
 export { default as POption } from "./components/option/option.js";
 export { default as PPopup } from "./components/popup/popup.js";
 export { default as PProgressBar } from "./components/progress-bar/progress-bar.js";

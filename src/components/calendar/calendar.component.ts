@@ -203,7 +203,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
    * value attribute will be a space-delimited list of values based on the dates selected, and the value property will
    * be an array. **For this reason, values must not contain spaces.**
    */
-  @property({ type: Array }) value?: Date | Date[] = undefined;
+  @property({ type: Array }) value: Date | Date[] = [];
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue: Date | Date[] = new Date();

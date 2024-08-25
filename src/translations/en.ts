@@ -16,6 +16,7 @@ const translation: Translation = {
   goToSlide: (slide, count) => `Go to slide ${slide} of ${count}`,
   hidePassword: "Hide password",
   loading: "Loading",
+  nextPage: "Next",
   nextMonth: "Next month",
   nextYear: "Next year",
   nextSlide: "Next slide",
@@ -24,6 +25,7 @@ const translation: Translation = {
     if (num === 1) return "1 option selected";
     return `${num} options selected`;
   },
+  previousPage: "Previous",
   previousMonth: "Previous month",
   previousYear: "Previous year",
   previousSlide: "Previous slide",
