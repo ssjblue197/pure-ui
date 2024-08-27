@@ -187,8 +187,6 @@ export default css`
     color: var(--p-color-primary-400);
   }
 
-  
-
   @media (min-width: 768px) {
     /* CSS styles for tablet devices */
     .calendar__day[part~="day-current-focus"] {
@@ -196,7 +194,7 @@ export default css`
     }
   }
 
-    /* CSS for desktop devices */
+  /* CSS for desktop devices */
   @media (min-width: 1024px) {
     /* CSS styles for desktop devices */
   }
@@ -560,8 +558,7 @@ export default css`
 
   .calendar--dialog.calendar--dialog-inline {
     box-shadow: var(--p-shadow-small) !important;
-  }import { query } from 'lit/decorators.js';
-
+  }
 
   .calendar--dialog ::slotted(p-divider) {
     --spacing: var(--p-spacing-x-small);
