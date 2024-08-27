@@ -114,7 +114,7 @@ export default css`
     margin-inline-start: var(--p-spacing-2x-small);
     padding: var(--p-spacing-x-small);
     background-color: var(--p-surface);
-
+  }
   .select--disabled .select__tags,
   .select--disabled .select__tags::slotted(p-tag) {
     cursor: not-allowed !important;
