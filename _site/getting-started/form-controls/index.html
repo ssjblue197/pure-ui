@@ -1,0 +1,1852 @@
+<!doctype html>
+<html lang="en" data-layout="default" data-pure-ui-version="1.1.11">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Some things to note about Pure UI and forms." />
+    <title>Form Controls</title>
+
+    <meta name="turbo-cache-control" />
+
+    <link rel="stylesheet" href="/assets/styles/docs.css" />
+    <link rel="stylesheet" href="/assets/styles/code-previews.css" />
+    <link rel="stylesheet" href="/assets/styles/search.css" />
+
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="pure_ui" />
+    <meta name="twitter:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <meta property="og:url" content="https://pureui.xyz/getting-started/form-controls/" />
+    <meta property="og:title" content="Form Controls" />
+    <meta property="og:description" content="Some things to note about Pure UI and forms." />
+    <meta property="og:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <link rel="stylesheet" href="/dist/themes/light.css" />
+    <link rel="stylesheet" href="/dist/themes/dark.css" />
+    <script type="module" src="/dist/pure-ui-autoloader.js"></script>
+
+    <script>
+      (() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = localStorage.getItem('theme') || 'auto';
+        document.documentElement.classList.toggle(
+          'p-theme-dark',
+          theme === 'dark' || (theme === 'auto' && prefersDark)
+        );
+      })();
+    </script>
+
+    <script src="/assets/scripts/turbo.js" type="module"></script>
+    <script src="/assets/scripts/docs.js" defer=""></script>
+    <script src="/assets/scripts/code-previews.js" defer=""></script>
+    <script src="/assets/scripts/lunr.js" defer=""></script>
+    <script src="/assets/scripts/search.js" defer=""></script>
+  </head>
+  <body>
+    <button id="menu-toggle" type="button" aria-label="Menu">
+      <svg width="148" height="148" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="18" fill="none" fill-rule="evenodd" stroke-linecap="round">
+          <path d="M9.5 125.5h129M9.5 74.5h129M9.5 23.5h129"></path>
+        </g>
+      </svg>
+    </button>
+
+    <div id="icon-toolbar">
+      <a
+        href="https://github.com/ssjblue197/Pure-UI-Document"
+        title="View Pure UI on GitHub"
+        class="external-link"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <p-icon name="github"></p-icon>
+      </a>
+
+      <p-dropdown id="theme-selector" placement="bottom-end" distance="3">
+        <p-button slot="trigger" size="small" variant="text" caret="" title="Press \ to toggle">
+          <p-icon class="only-light" name="sun-fill"></p-icon>
+          <p-icon class="only-dark" name="moon-fill"></p-icon>
+        </p-button>
+        <p-menu>
+          <p-menu-item type="checkbox" value="light">Light</p-menu-item>
+          <p-menu-item type="checkbox" value="dark">Dark</p-menu-item>
+          <p-divider></p-divider>
+          <p-menu-item type="checkbox" value="auto">System</p-menu-item>
+        </p-menu>
+      </p-dropdown>
+    </div>
+
+    <aside id="sidebar" data-preserve-scroll="">
+      <header>
+        <a href="/">
+          <img src="/assets/images/wordmark.svg" alt="Pure UI" />
+        </a>
+        <div class="sidebar-version">1.1.11</div>
+      </header>
+
+      <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
+        <p-icon name="search"></p-icon>
+        <span>Search</span>
+      </button>
+
+      <nav>
+        <ul>
+          <li>
+            <h2>Getting Started</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/getting-started/installation">Installation</a></li>
+              <li><a href="/getting-started/usage">Usage</a></li>
+              <li><a href="/getting-started/themes">Themes</a></li>
+              <li><a href="/getting-started/customizing">Customizing</a></li>
+              <li><a href="/getting-started/form-controls" class="active-link">Form Controls</a></li>
+              <li><a href="/getting-started/localization">Localization</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Frameworks</h2>
+            <ul>
+              <li><a href="/frameworks/react">React</a></li>
+              <li><a href="/frameworks/vue">Vue</a></li>
+              <li><a href="/frameworks/angular">Angular</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="/resources/community">Community</a></li>
+              <li><a href="/resources/accessibility">Accessibility</a></li>
+              <li><a href="/resources/contributing">Contributing</a></li>
+              <li><a href="/resources/changelog">Changelog</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Components</h2>
+            <ul>
+              <li>
+                <a href="/components/alert"> Alert </a>
+              </li>
+
+              <li>
+                <a href="/components/animated-image"> Animated Image </a>
+              </li>
+
+              <li>
+                <a href="/components/animation"> Animation </a>
+              </li>
+
+              <li>
+                <a href="/components/avatar"> Avatar </a>
+              </li>
+
+              <li>
+                <a href="/components/badge"> Badge </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb"> Breadcrumb </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb-item"> Breadcrumb Item </a>
+              </li>
+
+              <li>
+                <a href="/components/button"> Button </a>
+              </li>
+
+              <li>
+                <a href="/components/button-group"> Button Group </a>
+              </li>
+
+              <li>
+                <a href="/components/calendar"> Calendar </a>
+              </li>
+
+              <li>
+                <a href="/components/card"> Card </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel"> Carousel </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel-item"> Carousel Item </a>
+              </li>
+
+              <li>
+                <a href="/components/checkbox"> Checkbox </a>
+              </li>
+
+              <li>
+                <a href="/components/color-picker"> Color Picker </a>
+              </li>
+
+              <li>
+                <a href="/components/copy-button"> Copy Button </a>
+              </li>
+
+              <li>
+                <a href="/components/details"> Details </a>
+              </li>
+
+              <li>
+                <a href="/components/dialog"> Dialog </a>
+              </li>
+
+              <li>
+                <a href="/components/divider"> Divider </a>
+              </li>
+
+              <li>
+                <a href="/components/drawer"> Drawer </a>
+              </li>
+
+              <li>
+                <a href="/components/dropdown"> Dropdown </a>
+              </li>
+
+              <li>
+                <a href="/components/format-bytes"> Format Bytes </a>
+              </li>
+
+              <li>
+                <a href="/components/format-date"> Format Date </a>
+              </li>
+
+              <li>
+                <a href="/components/format-number"> Format Number </a>
+              </li>
+
+              <li>
+                <a href="/components/icon"> Icon </a>
+              </li>
+
+              <li>
+                <a href="/components/icon-button"> Icon Button </a>
+              </li>
+
+              <li>
+                <a href="/components/image-comparer"> Image Comparer </a>
+              </li>
+
+              <li>
+                <a href="/components/include"> Include </a>
+              </li>
+
+              <li>
+                <a href="/components/input"> Input </a>
+              </li>
+
+              <li>
+                <a href="/components/menu"> Menu </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-item"> Menu Item </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-label"> Menu Label </a>
+              </li>
+
+              <li>
+                <a href="/components/mutation-observer"> Mutation Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/option"> Option </a>
+              </li>
+
+              <li>
+                <a href="/components/paginate"> Paginate </a>
+              </li>
+
+              <li>
+                <a href="/components/popup"> Popup </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-bar"> Progress Bar </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-ring"> Progress Ring </a>
+              </li>
+
+              <li>
+                <a href="/components/qr-code"> QR Code </a>
+              </li>
+
+              <li>
+                <a href="/components/radio"> Radio </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-button"> Radio Button </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-group"> Radio Group </a>
+              </li>
+
+              <li>
+                <a href="/components/range"> Range </a>
+              </li>
+
+              <li>
+                <a href="/components/rating"> Rating </a>
+              </li>
+
+              <li>
+                <a href="/components/relative-time"> Relative Time </a>
+              </li>
+
+              <li>
+                <a href="/components/resize-observer"> Resize Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/select"> Select </a>
+              </li>
+
+              <li>
+                <a href="/components/skeleton"> Skeleton </a>
+              </li>
+
+              <li>
+                <a href="/components/spinner"> Spinner </a>
+              </li>
+
+              <li>
+                <a href="/components/split-panel"> Split Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/switch"> Switch </a>
+              </li>
+
+              <li>
+                <a href="/components/tab"> Tab </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-group"> Tab Group </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-panel"> Tab Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/tag"> Tag </a>
+              </li>
+
+              <li>
+                <a href="/components/textarea"> Textarea </a>
+              </li>
+
+              <li>
+                <a href="/components/tooltip"> Tooltip </a>
+              </li>
+
+              <li>
+                <a href="/components/tree"> Tree </a>
+              </li>
+
+              <li>
+                <a href="/components/tree-item"> Tree Item </a>
+              </li>
+
+              <li>
+                <a href="/components/visually-hidden"> Visually Hidden </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h2>Design Tokens</h2>
+            <ul>
+              <li><a href="/tokens/typography">Typography</a></li>
+              <li><a href="/tokens/color">Color</a></li>
+              <li><a href="/tokens/spacing">Spacing</a></li>
+              <li><a href="/tokens/elevation">Elevation</a></li>
+              <li><a href="/tokens/border-radius">Border Radius</a></li>
+              <li><a href="/tokens/transition">Transition</a></li>
+              <li><a href="/tokens/z-index">Z-index</a></li>
+              <li><a href="/tokens/more">More Tokens</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Tutorials</h2>
+            <ul>
+              <li><a href="/tutorials/integrating-with-astro">Integrating with Astro</a></li>
+              <li><a href="/tutorials/integrating-with-laravel">Integrating with Laravel</a></li>
+              <li><a href="/tutorials/integrating-with-nextjs">Integrating with NextJS</a></li>
+              <li><a href="/tutorials/integrating-with-rails">Integrating with Rails</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <article id="content" class="content content--with-toc">
+        <div class="content__toc">
+          <ul>
+            <li class="top"><a href="#">Form Controls</a></li>
+            <li data-level="2"><a href="#data-serialization">Data Serialization</a></li>
+            <li data-level="2"><a href="#constraint-validation">Constraint Validation</a></li>
+            <li data-level="3"><a href="#required-fields">Required Fields</a></li>
+            <li data-level="3"><a href="#input-patterns">Input Patterns</a></li>
+            <li data-level="3"><a href="#input-types">Input Types</a></li>
+            <li data-level="3"><a href="#custom-error-messages">Custom Error Messages</a></li>
+            <li data-level="2"><a href="#custom-validation-styles">Custom Validation Styles</a></li>
+            <li data-level="3"><a href="#styling-invalid-form-controls">Styling Invalid Form Controls</a></li>
+            <li data-level="2"><a href="#inline-form-validation">Inline Form Validation</a></li>
+            <li data-level="2"><a href="#getting-associated-form-controls">Getting Associated Form Controls</a></li>
+          </ul>
+        </div>
+
+        <div class="content__body">
+          <h1>Form Controls</h1>
+          <p>
+            Every Pure UI component makes use of a
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >shadow DOM</a
+            >
+            to encapsulate markup, styles, and behavior. One caveat of this approach is that native
+            <code>&lt;form&gt;</code> elements do not recognize form controls located inside a shadow root.
+          </p>
+          <p>
+            Pure UI solves this problem by using the
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/formdata_event"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>formdata</code></a
+            >
+            event, which is
+            <a
+              href="https://caniuse.com/mdn-api_htmlformelement_formdata_event"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >available in all modern browsers</a
+            >. This means, when a form is submitted, Pure UI form controls will automatically append their values to the
+            <code>FormData</code> object that’s used to submit the form. In most cases, things will “just work.”
+            However, if you’re using a form serialization library, it might need to be adapted to recognize Pure UI form
+            controls.
+          </p>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              Pure UI uses event listeners to intercept the form’s <code>formdata</code> and <code>submit</code> events.
+              This allows it to inject data and trigger validation as necessary. If you’re also attaching an event
+              listener to the form, <em>you must attach it after Pure UI form controls are connected to the DOM</em>,
+              otherwise your logic will run before Pure UI has a chance to inject form data and validate form controls.
+            </p>
+          </div>
+          <h2 id="data-serialization" class="anchor-heading">
+            Data Serialization<a href="#data-serialization" aria-label='Direct link to "Data Serialization"'></a>
+          </h2>
+          <p>
+            Serialization is just a fancy word for collecting form data. If you’re relying on standard form submissions,
+            e.g. <code>&lt;form action="..."&gt;</code>, you can probably skip this section. However, most modern apps
+            use the
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Fetch API</a
+            >
+            or a library such as
+            <a href="https://github.com/axios/axios" class="external-link" rel="noopener noreferrer" target="_blank"
+              >axios</a
+            >
+            to submit forms using JavaScript.
+          </p>
+          <p>
+            The
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/FormData"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>FormData</code></a
+            >
+            interface offers a standard way to serialize forms in the browser. You can create a
+            <code>FormData</code> object from any <code>&lt;form&gt;</code> element like this.
+          </p>
+          <pre><code class="language-js" id="code-block-22"><span class="token keyword">const</span> form <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">"form"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FormData</span><span class="token punctuation">(</span>form<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// All form control data is available in a FormData object</span>
+</code><p-copy-button class="copy-code-button" from="code-block-22"></p-copy-button></pre>
+          <p>
+            However, some folks find <code>FormData</code> tricky to work with or they need to pass a JSON payload to
+            their server. To accommodate this, Pure UI offers a serialization utility that gathers form data and returns
+            a simple JavaScript object instead.
+          </p>
+          <pre><code class="language-js" id="code-block-23"><span class="token keyword">import</span> <span class="token punctuation">{</span> serialize <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"pure-uikit/dist/utilities/form.js"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> form <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">"form"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token function">serialize</span><span class="token punctuation">(</span>form<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// All form control data is available in a plain object</span>
+</code><p-copy-button class="copy-code-button" from="code-block-23"></p-copy-button></pre>
+          <p>
+            This results in an object with name/value pairs that map to each form control. If more than one form control
+            shares the same name, the values will be passed as an array, e.g.
+            <code>{ name: ['value1', 'value2'] }</code>.
+          </p>
+          <h2 id="constraint-validation" class="anchor-heading">
+            Constraint Validation<a
+              href="#constraint-validation"
+              aria-label='Direct link to "Constraint Validation"'
+            ></a>
+          </h2>
+          <p>
+            Client-side validation can be enabled through the browser’s
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Constraint Validation API</a
+            >
+            for Pure UI form controls. You can activate it using attributes such as <code>required</code>,
+            <code>pattern</code>, <code>minlength</code>, <code>maxlength</code>, etc. Pure UI implements many of the
+            same attributes as native form controls, but check the documentation for a list of supported properties for
+            each component.
+          </p>
+          <p>
+            If you don’t want to use client-side validation, you can suppress this behavior by adding
+            <code>novalidate</code> to the surrounding <code>&lt;form&gt;</code> element.
+          </p>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              If this syntax looks unfamiliar, don’t worry! Most of what you’re learning on this page is platform
+              knowledge that applies to regular form controls, too.
+            </p>
+          </div>
+          <div role="alert" class="callout callout--warning">
+            <p>
+              Client-side validation can be used to improve the UX of forms, but it is not a replacement for server-side
+              validation. <strong>You should always validate and sanitize user input on the server!</strong>
+            </p>
+          </div>
+          <h3 id="required-fields" class="anchor-heading">
+            Required Fields<a href="#required-fields" aria-label='Direct link to "Required Fields"'></a>
+          </h3>
+          <p>
+            To make a field required, use the <code>required</code> attribute. Required fields will automatically
+            receive a <code>*</code> after their labels. This is configurable through the
+            <code>--p-input-required-content</code> custom property.
+          </p>
+          <p>The form will not be submitted if a required field is incomplete.</p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <form class="input-validation-required">
+                <p-input name="name" label="Name" required=""></p-input>
+                <br />
+                <p-select label="Favorite Animal" clearable="" required="">
+                  <p-option value="birds">Birds</p-option>
+                  <p-option value="cats">Cats</p-option>
+                  <p-option value="dogs">Dogs</p-option>
+                  <p-option value="other">Other</p-option>
+                </p-select>
+                <br />
+                <p-textarea name="comment" label="Comment" required=""></p-textarea>
+                <br />
+                <p-checkbox required="">Check me before submitting</p-checkbox>
+                <br /><br />
+                <p-button type="submit" variant="primary">Submit</p-button>
+              </form>
+
+              <script type="module">
+                const form = document.querySelector('.input-validation-required');
+
+                // Wait for controls to be defined before attaching form listeners
+                await Promise.all([
+                  customElements.whenDefined('p-button'),
+                  customElements.whenDefined('p-checkbox'),
+                  customElements.whenDefined('p-input'),
+                  customElements.whenDefined('p-option'),
+                  customElements.whenDefined('p-select'),
+                  customElements.whenDefined('p-textarea')
+                ]).then(() => {
+                  form.addEventListener('submit', event => {
+                    event.preventDefault();
+                    alert('All fields are valid!');
+                  });
+                });
+              </script>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-3">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-24"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>input-validation-required<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Name<span class="token punctuation">"</span></span> <span class="token attr-name">required</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-input</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-select</span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Favorite Animal<span class="token punctuation">"</span></span> <span class="token attr-name">clearable</span> <span class="token attr-name">required</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>birds<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Birds<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-option</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cats<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Cats<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-option</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dogs<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Dogs<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-option</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>other<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Other<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-option</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-select</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-textarea</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>comment<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Comment<span class="token punctuation">"</span></span> <span class="token attr-name">required</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-textarea</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-checkbox</span> <span class="token attr-name">required</span><span class="token punctuation">&gt;</span></span>Check me before submitting<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-checkbox</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Submit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">const</span> form <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.input-validation-required'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Wait for controls to be defined before attaching form listeners</span>
+  <span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-button'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-checkbox'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-input'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-option'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-select'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-textarea'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    form<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'submit'</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'All fields are valid!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-24"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-25"><span class="token keyword">import</span> SlButton <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/button'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> SlCheckbox <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/checkbox'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> SlInput <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/input'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> SlMenuItem <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/menu-item'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> SlSelect <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/select'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> SlTextarea <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/textarea'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">function</span> <span class="token function">handleSubmit</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'All fields are valid!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">onSubmit</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>handleSubmit<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlInput</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Name<span class="token punctuation">"</span></span> <span class="token attr-name">required</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlSelect</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Favorite Animal<span class="token punctuation">"</span></span> <span class="token attr-name">clearable</span> <span class="token attr-name">required</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlMenuItem</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>birds<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Birds</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">SlMenuItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlMenuItem</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cats<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Cats</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">SlMenuItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlMenuItem</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dogs<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Dogs</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">SlMenuItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlMenuItem</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>other<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Other</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">SlMenuItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">SlSelect</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlTextarea</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>comment<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Comment<span class="token punctuation">"</span></span> <span class="token attr-name">required</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">SlTextarea</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlCheckbox</span></span> <span class="token attr-name">required</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Check me before submitting</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">SlCheckbox</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlButton</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        Submit
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">SlButton</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-25"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-3"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h3 id="input-patterns" class="anchor-heading">
+            Input Patterns<a href="#input-patterns" aria-label='Direct link to "Input Patterns"'></a>
+          </h3>
+          <p>
+            To restrict a value to a specific
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/pattern"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >pattern</a
+            >, use the <code>pattern</code> attribute. This example only allows the letters A-Z, so the form will not
+            submit if a number or symbol is entered. This only works with <code>&lt;p-input&gt;</code> elements.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <form class="input-validation-pattern">
+                <p-input name="letters" required="" label="Letters" pattern="[A-Za-z]+"></p-input>
+                <br />
+                <p-button type="submit" variant="primary">Submit</p-button>
+                <p-button type="reset" variant="default">Reset</p-button>
+              </form>
+
+              <script type="module">
+                const form = document.querySelector('.input-validation-pattern');
+
+                // Wait for controls to be defined before attaching form listeners
+                await Promise.all([customElements.whenDefined('p-button'), customElements.whenDefined('p-input')]).then(
+                  () => {
+                    form.addEventListener('submit', event => {
+                      event.preventDefault();
+                      alert('All fields are valid!');
+                    });
+                  }
+                );
+              </script>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-4">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-26"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>input-validation-pattern<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>letters<span class="token punctuation">"</span></span> <span class="token attr-name">required</span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Letters<span class="token punctuation">"</span></span> <span class="token attr-name">pattern</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>[A-Za-z]+<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-input</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Submit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>reset<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>default<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Reset<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">const</span> form <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.input-validation-pattern'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Wait for controls to be defined before attaching form listeners</span>
+  <span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-button'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-input'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    form<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'submit'</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'All fields are valid!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-26"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-27"><span class="token keyword">import</span> SlButton <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/button'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> SlInput <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/input'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">function</span> <span class="token function">handleSubmit</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'All fields are valid!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">onSubmit</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>handleSubmit<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlInput</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>letters<span class="token punctuation">"</span></span> <span class="token attr-name">required</span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Letters<span class="token punctuation">"</span></span> <span class="token attr-name">pattern</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>[A-Za-z]+<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlButton</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        Submit
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">SlButton</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-27"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-4"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h3 id="input-types" class="anchor-heading">
+            Input Types<a href="#input-types" aria-label='Direct link to "Input Types"'></a>
+          </h3>
+          <p>
+            Some input types will automatically trigger constraints, such as <code>email</code> and <code>url</code>.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <form class="input-validation-type">
+                <p-input type="email" label="Email" placeholder="you@example.com" required=""></p-input>
+                <br />
+                <p-input type="url" label="URL" placeholder="https://example.com/" required=""></p-input>
+                <br />
+                <p-button type="submit" variant="primary">Submit</p-button>
+                <p-button type="reset" variant="default">Reset</p-button>
+              </form>
+
+              <script type="module">
+                const form = document.querySelector('.input-validation-type');
+
+                // Wait for controls to be defined before attaching form listeners
+                await Promise.all([customElements.whenDefined('p-button'), customElements.whenDefined('p-input')]).then(
+                  () => {
+                    form.addEventListener('submit', event => {
+                      event.preventDefault();
+                      alert('All fields are valid!');
+                    });
+                  }
+                );
+              </script>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-5">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-28"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>input-validation-type<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Email<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>you@example.com<span class="token punctuation">"</span></span> <span class="token attr-name">required</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-input</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>url<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>URL<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://example.com/<span class="token punctuation">"</span></span> <span class="token attr-name">required</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-input</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Submit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>reset<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>default<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Reset<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">const</span> form <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.input-validation-type'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Wait for controls to be defined before attaching form listeners</span>
+  <span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-button'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-input'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    form<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'submit'</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'All fields are valid!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-28"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-29"><span class="token keyword">import</span> SlButton <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/button'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> SlInput <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/input'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">function</span> <span class="token function">handleSubmit</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'All fields are valid!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">onSubmit</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>handleSubmit<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlInput</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Email<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>you@example.com<span class="token punctuation">"</span></span> <span class="token attr-name">required</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlInput</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>url<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>URL<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://example.com/<span class="token punctuation">"</span></span> <span class="token attr-name">required</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlButton</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        Submit
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">SlButton</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-29"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-5"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h3 id="custom-error-messages" class="anchor-heading">
+            Custom Error Messages<a
+              href="#custom-error-messages"
+              aria-label='Direct link to "Custom Error Messages"'
+            ></a>
+          </h3>
+          <p>
+            To create a custom validation error, pass a non-empty string to the <code>setCustomValidity()</code> method.
+            This will override any existing validation constraints. The form will not be submitted when a custom
+            validity is set and the browser will show a validation error when the containing form is submitted. To make
+            the input valid again, call <code>setCustomValidity()</code> again with an empty string.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <form class="input-validation-custom">
+                <p-input label="Type “Pure UI”" required=""></p-input>
+                <br />
+                <p-button type="submit" variant="primary">Submit</p-button>
+                <p-button type="reset" variant="default">Reset</p-button>
+              </form>
+
+              <script type="module">
+                const form = document.querySelector('.input-validation-custom');
+                const input = form.querySelector('p-input');
+
+                // Wait for controls to be defined before attaching form listeners
+                await Promise.all([customElements.whenDefined('p-button'), customElements.whenDefined('p-input')]).then(
+                  () => {
+                    form.addEventListener('submit', event => {
+                      event.preventDefault();
+                      alert('All fields are valid!');
+                    });
+
+                    input.addEventListener('p-input', () => {
+                      if (input.value === 'pure ui ') {
+                        input.setCustomValidity('');
+                      } else {
+                        input.setCustomValidity("Hey, you're supposed to type 'pure ui ' before submitting this!");
+                      }
+                    });
+                  }
+                );
+              </script>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-6">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-30"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>input-validation-custom<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-input</span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Type “Pure UI”<span class="token punctuation">"</span></span> <span class="token attr-name">required</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-input</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Submit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>reset<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>default<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Reset<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">const</span> form <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.input-validation-custom'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> input <span class="token operator">=</span> form<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'p-input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Wait for controls to be defined before attaching form listeners</span>
+  <span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-button'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-input'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    form<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'submit'</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'All fields are valid!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    input<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'p-input'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>input<span class="token punctuation">.</span>value <span class="token operator">===</span> <span class="token string">'pure ui '</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        input<span class="token punctuation">.</span><span class="token function">setCustomValidity</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        input<span class="token punctuation">.</span><span class="token function">setCustomValidity</span><span class="token punctuation">(</span><span class="token string">"Hey, you're supposed to type 'pure ui ' before submitting this!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-30"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-31"><span class="token keyword">import</span> <span class="token punctuation">{</span> useRef<span class="token punctuation">,</span> useState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> SlButton <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/button'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> SlInput <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/input'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> input <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>value<span class="token punctuation">,</span> setValue<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> <span class="token function">handleInput</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">setValue</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value <span class="token operator">===</span> <span class="token string">'pure ui '</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      input<span class="token punctuation">.</span>current<span class="token punctuation">.</span><span class="token function">setCustomValidity</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      input<span class="token punctuation">.</span>current<span class="token punctuation">.</span><span class="token function">setCustomValidity</span><span class="token punctuation">(</span><span class="token string">"Hey, you're supposed to type 'pure ui ' before submitting this!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">handleSubmit</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'All fields are valid!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">onSubmit</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>handleSubmit<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlInput</span></span> <span class="token attr-name">ref</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>input<span class="token punctuation">}</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Type 'pure ui '<span class="token punctuation">"</span></span> <span class="token attr-name">required</span> <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>value<span class="token punctuation">}</span></span> <span class="token attr-name">onSlInput</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>handleInput<span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">SlButton</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        Submit
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">SlButton</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-31"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-6"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div role="alert" class="callout callout--tip">
+            <p>
+              Custom validation can be applied to any form control that supports the
+              <code>setCustomValidity()</code> method. It is not limited to inputs and textareas.
+            </p>
+          </div>
+          <h2 id="custom-validation-styles" class="anchor-heading">
+            Custom Validation Styles<a
+              href="#custom-validation-styles"
+              aria-label='Direct link to "Custom Validation Styles"'
+            ></a>
+          </h2>
+          <p>
+            Due to the many ways form controls are used, Pure UI doesn’t provide out of the box validation styles for
+            form controls as part of its default theme. Instead, the following attributes will be applied to reflect a
+            control’s validity as users interact with it. You can use them to create custom styles for any of the
+            validation states you’re interested in.
+          </p>
+          <ul>
+            <li><code>data-required</code> - the form control is required</li>
+            <li><code>data-optional</code> - the form control is optional</li>
+            <li><code>data-invalid</code> - the form control is currently invalid</li>
+            <li><code>data-valid</code> - the form control is currently valid</li>
+            <li>
+              <code>data-user-invalid</code> - the form control is currently invalid and the user has interacted with it
+            </li>
+            <li>
+              <code>data-user-valid</code> - the form control is currently valid and the user has interacted with it
+            </li>
+          </ul>
+          <p>
+            These attributes map to the browser’s built-in pseudo classes for validation:
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/:required"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>:required</code></a
+            >,
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/:optional"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>:optional</code></a
+            >,
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/:invalid"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>:invalid</code></a
+            >,
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/:valid"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>:valid</code></a
+            >, and the proposed
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/:user-invalid"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>:user-invalid</code></a
+            >
+            and
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/:user-valid"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>:user-valid</code></a
+            >.
+          </p>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              In the future, data attributes will be replaced with custom pseudo classes such as
+              <code>:--valid</code> and <code>:--invalid</code>. Pure UI is using data attributes as a workaround until
+              browsers support custom states through
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states"
+                class="external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                ><code>ElementInternals.states</code></a
+              >.
+            </p>
+          </div>
+          <h3 id="styling-invalid-form-controls" class="anchor-heading">
+            Styling Invalid Form Controls<a
+              href="#styling-invalid-form-controls"
+              aria-label='Direct link to "Styling Invalid Form Controls"'
+            ></a>
+          </h3>
+          <p>
+            You can target validity using any of the aforementioned data attributes, but it’s usually preferable to
+            target <code>data-user-invalid</code> and <code>data-user-valid</code> since they get applied only after a
+            user interaction such as typing or submitting. This prevents empty form controls from appearing invalid
+            immediately, which often results in a poor user experience.
+          </p>
+          <p>
+            This example demonstrates custom validation styles using <code>data-user-invalid</code> and
+            <code>data-user-valid</code>. Try Typing in the fields to see how validity changes with user input.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <form class="validity-styles">
+                <p-input
+                  name="name"
+                  label="Name"
+                  help-text="What would you like people to call you?"
+                  autocomplete="off"
+                  required=""
+                ></p-input>
+
+                <p-select
+                  name="animal"
+                  label="Favorite Animal"
+                  help-text="Select the best option."
+                  clearable=""
+                  required=""
+                >
+                  <p-option value="birds">Birds</p-option>
+                  <p-option value="cats">Cats</p-option>
+                  <p-option value="dogs">Dogs</p-option>
+                  <p-option value="other">Other</p-option>
+                </p-select>
+
+                <p-checkbox value="accept" required="">Accept terms and conditions</p-checkbox>
+
+                <p-button type="submit" variant="primary">Submit</p-button>
+                <p-button type="reset" variant="default">Reset</p-button>
+              </form>
+
+              <script type="module">
+                const form = document.querySelector('.validity-styles');
+
+                // Wait for controls to be defined before attaching form listeners
+                await Promise.all([
+                  customElements.whenDefined('p-button'),
+                  customElements.whenDefined('p-checkbox'),
+                  customElements.whenDefined('p-input'),
+                  customElements.whenDefined('p-option'),
+                  customElements.whenDefined('p-select')
+                ]).then(() => {
+                  form.addEventListener('submit', event => {
+                    event.preventDefault();
+                    alert('All fields are valid!');
+                  });
+                });
+              </script>
+
+              <style>
+                .validity-styles p-input,
+                .validity-styles p-select,
+                .validity-styles p-checkbox {
+                  display: block;
+                  margin-bottom: var(--p-spacing-medium);
+                }
+
+                /* user invalid styles */
+                .validity-styles p-input[data-user-invalid]::part(base),
+                .validity-styles p-select[data-user-invalid]::part(combobox),
+                .validity-styles p-checkbox[data-user-invalid]::part(control) {
+                  border-color: var(--p-color-danger-600);
+                }
+
+                .validity-styles [data-user-invalid]::part(form-control-label),
+                .validity-styles [data-user-invalid]::part(form-control-help-text),
+                .validity-styles p-checkbox[data-user-invalid]::part(label) {
+                  color: var(--p-color-danger-700);
+                }
+
+                .validity-styles p-checkbox[data-user-invalid]::part(control) {
+                  outline: none;
+                }
+
+                .validity-styles p-input:focus-within[data-user-invalid]::part(base),
+                .validity-styles p-select:focus-within[data-user-invalid]::part(combobox),
+                .validity-styles p-checkbox:focus-within[data-user-invalid]::part(control) {
+                  border-color: var(--p-color-danger-600);
+                  box-shadow: 0 0 0 var(--p-focus-ring-width) var(--p-color-danger-300);
+                }
+
+                /* User valid styles */
+                .validity-styles p-input[data-user-valid]::part(base),
+                .validity-styles p-select[data-user-valid]::part(combobox),
+                .validity-styles p-checkbox[data-user-valid]::part(control) {
+                  border-color: var(--p-color-success-600);
+                }
+
+                .validity-styles [data-user-valid]::part(form-control-label),
+                .validity-styles [data-user-valid]::part(form-control-help-text),
+                .validity-styles p-checkbox[data-user-valid]::part(label) {
+                  color: var(--p-color-success-700);
+                }
+
+                .validity-styles p-checkbox[data-user-valid]::part(control) {
+                  background-color: var(--p-color-success-600);
+                  outline: none;
+                }
+
+                .validity-styles p-input:focus-within[data-user-valid]::part(base),
+                .validity-styles p-select:focus-within[data-user-valid]::part(combobox),
+                .validity-styles p-checkbox:focus-within[data-user-valid]::part(control) {
+                  border-color: var(--p-color-success-600);
+                  box-shadow: 0 0 0 var(--p-focus-ring-width) var(--p-color-success-300);
+                }
+              </style>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-7">
+              <div class="code-preview__source code-preview__source--html">
+                <pre><code class="language-html" id="code-block-32"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>validity-styles<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-input</span>
+    <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span>
+    <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Name<span class="token punctuation">"</span></span>
+    <span class="token attr-name">help-text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>What would you like people to call you?<span class="token punctuation">"</span></span>
+    <span class="token attr-name">autocomplete</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>off<span class="token punctuation">"</span></span>
+    <span class="token attr-name">required</span>
+  <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-input</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-select</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>animal<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Favorite Animal<span class="token punctuation">"</span></span> <span class="token attr-name">help-text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select the best option.<span class="token punctuation">"</span></span> <span class="token attr-name">clearable</span> <span class="token attr-name">required</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>birds<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Birds<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-option</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cats<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Cats<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-option</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dogs<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Dogs<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-option</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>other<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Other<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-option</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-select</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-checkbox</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>accept<span class="token punctuation">"</span></span> <span class="token attr-name">required</span><span class="token punctuation">&gt;</span></span>Accept terms and conditions<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-checkbox</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Submit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>reset<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>default<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Reset<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">const</span> form <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.validity-styles'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Wait for controls to be defined before attaching form listeners</span>
+  <span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-button'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-checkbox'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-input'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-option'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-select'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    form<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'submit'</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'All fields are valid!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.validity-styles p-input,
+  .validity-styles p-select,
+  .validity-styles p-checkbox</span> <span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+    <span class="token property">margin-bottom</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-spacing-medium<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* user invalid styles */</span>
+  <span class="token selector">.validity-styles p-input[data-user-invalid]::part(base),
+  .validity-styles p-select[data-user-invalid]::part(combobox),
+  .validity-styles p-checkbox[data-user-invalid]::part(control)</span> <span class="token punctuation">{</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-danger-600<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.validity-styles [data-user-invalid]::part(form-control-label),
+  .validity-styles [data-user-invalid]::part(form-control-help-text),
+  .validity-styles p-checkbox[data-user-invalid]::part(label)</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-danger-700<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.validity-styles p-checkbox[data-user-invalid]::part(control)</span> <span class="token punctuation">{</span>
+    <span class="token property">outline</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.validity-styles p-input:focus-within[data-user-invalid]::part(base),
+  .validity-styles p-select:focus-within[data-user-invalid]::part(combobox),
+  .validity-styles p-checkbox:focus-within[data-user-invalid]::part(control)</span> <span class="token punctuation">{</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-danger-600<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 0 0 <span class="token function">var</span><span class="token punctuation">(</span>--p-focus-ring-width<span class="token punctuation">)</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-danger-300<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* User valid styles */</span>
+  <span class="token selector">.validity-styles p-input[data-user-valid]::part(base),
+  .validity-styles p-select[data-user-valid]::part(combobox),
+  .validity-styles p-checkbox[data-user-valid]::part(control)</span> <span class="token punctuation">{</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-success-600<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.validity-styles [data-user-valid]::part(form-control-label),
+  .validity-styles [data-user-valid]::part(form-control-help-text),
+  .validity-styles p-checkbox[data-user-valid]::part(label)</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-success-700<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.validity-styles p-checkbox[data-user-valid]::part(control)</span> <span class="token punctuation">{</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-success-600<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">outline</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.validity-styles p-input:focus-within[data-user-valid]::part(base),
+  .validity-styles p-select:focus-within[data-user-valid]::part(combobox),
+  .validity-styles p-checkbox:focus-within[data-user-valid]::part(control)</span> <span class="token punctuation">{</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-success-600<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 0 0 <span class="token function">var</span><span class="token punctuation">(</span>--p-focus-ring-width<span class="token punctuation">)</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-success-300<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-32"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-7"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h2 id="inline-form-validation" class="anchor-heading">
+            Inline Form Validation<a
+              href="#inline-form-validation"
+              aria-label='Direct link to "Inline Form Validation"'
+            ></a>
+          </h2>
+          <p>
+            By default, Pure UI form controls use the browser’s tooltip-style error messages. No mechanism is provided
+            to show errors inline, as there are too many opinions on how that would work when combined with native form
+            controls and other custom elements. You can, however, implement your own solution using the following
+            technique.
+          </p>
+          <p>
+            To disable the browser’s error messages, you need to cancel the <code>p-invalid</code> event. Then you can
+            apply your own inline validation errors. This example demonstrates a primitive way to do this.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <form class="inline-validation">
+                <p-input
+                  name="name"
+                  label="Name"
+                  help-text="What would you like people to call you?"
+                  autocomplete="off"
+                  required=""
+                ></p-input>
+
+                <div id="name-error" aria-live="polite" hidden=""></div>
+
+                <p-button type="submit" variant="primary">Submit</p-button>
+                <p-button type="reset" variant="default">Reset</p-button>
+              </form>
+
+              <script type="module">
+                const form = document.querySelector('.inline-validation');
+                const nameError = document.querySelector('#name-error');
+
+                // Wait for controls to be defined before attaching form listeners
+                await Promise.all([customElements.whenDefined('p-button'), customElements.whenDefined('p-input')]).then(
+                  () => {
+                    // A form control is invalid
+                    form.addEventListener(
+                      'p-invalid',
+                      event => {
+                        // Suppress the browser's constraint validation message
+                        event.preventDefault();
+
+                        nameError.textContent = `Error: ${event.target.validationMessage}`;
+                        nameError.hidden = false;
+
+                        event.target.focus();
+                      },
+                      { capture: true } // you must use capture since p-invalid doesn't bubble!
+                    );
+
+                    // Handle form submit
+                    form.addEventListener('submit', event => {
+                      event.preventDefault();
+                      nameError.hidden = true;
+                      nameError.textContent = '';
+                      setTimeout(() => alert('All fields are valid'), 50);
+                    });
+
+                    // Handle form reset
+                    form.addEventListener('reset', event => {
+                      nameError.hidden = true;
+                      nameError.textContent = '';
+                    });
+                  }
+                );
+              </script>
+
+              <style>
+                #name-error {
+                  font-size: var(--p-input-help-text-font-size-medium);
+                  color: var(--p-color-danger-700);
+                }
+
+                #name-error ~ p-button {
+                  margin-top: var(--p-spacing-medium);
+                }
+
+                .inline-validation p-input {
+                  display: block;
+                }
+
+                /* user invalid styles */
+                .inline-validation p-input[data-user-invalid]::part(base) {
+                  border-color: var(--p-color-danger-600);
+                }
+
+                .inline-validation [data-user-invalid]::part(form-control-label),
+                .inline-validation [data-user-invalid]::part(form-control-help-text) {
+                  color: var(--p-color-danger-700);
+                }
+
+                .inline-validation p-input:focus-within[data-user-invalid]::part(base) {
+                  border-color: var(--p-color-danger-600);
+                  box-shadow: 0 0 0 var(--p-focus-ring-width) var(--p-color-danger-300);
+                }
+
+                /* User valid styles */
+                .inline-validation p-input[data-user-valid]::part(base) {
+                  border-color: var(--p-color-success-600);
+                }
+
+                .inline-validation [data-user-valid]::part(form-control-label),
+                .inline-validation [data-user-valid]::part(form-control-help-text) {
+                  color: var(--p-color-success-700);
+                }
+
+                .inline-validation p-input:focus-within[data-user-valid]::part(base) {
+                  border-color: var(--p-color-success-600);
+                  box-shadow: 0 0 0 var(--p-focus-ring-width) var(--p-color-success-300);
+                }
+              </style>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-8">
+              <div class="code-preview__source code-preview__source--html">
+                <pre><code class="language-html" id="code-block-33"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>inline-validation<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-input</span>
+    <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span>
+    <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Name<span class="token punctuation">"</span></span>
+    <span class="token attr-name">help-text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>What would you like people to call you?<span class="token punctuation">"</span></span>
+    <span class="token attr-name">autocomplete</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>off<span class="token punctuation">"</span></span>
+    <span class="token attr-name">required</span>
+  <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-input</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>name-error<span class="token punctuation">"</span></span> <span class="token attr-name">aria-live</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>polite<span class="token punctuation">"</span></span> <span class="token attr-name">hidden</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Submit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>reset<span class="token punctuation">"</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>default<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Reset<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">const</span> form <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.inline-validation'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> nameError <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#name-error'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Wait for controls to be defined before attaching form listeners</span>
+  <span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-button'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    customElements<span class="token punctuation">.</span><span class="token function">whenDefined</span><span class="token punctuation">(</span><span class="token string">'p-input'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// A form control is invalid</span>
+    form<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span>
+      <span class="token string">'p-invalid'</span><span class="token punctuation">,</span>
+      <span class="token parameter">event</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Suppress the browser's constraint validation message</span>
+        event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        nameError<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Error: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>validationMessage<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+        nameError<span class="token punctuation">.</span>hidden <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+        event<span class="token punctuation">.</span>target<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> <span class="token literal-property property">capture</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span> <span class="token comment">// you must use capture since p-invalid doesn't bubble!</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Handle form submit</span>
+    form<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'submit'</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      nameError<span class="token punctuation">.</span>hidden <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      nameError<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+      <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'All fields are valid'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Handle form reset</span>
+    form<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'reset'</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      nameError<span class="token punctuation">.</span>hidden <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      nameError<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">#name-error</span> <span class="token punctuation">{</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-input-help-text-font-size-medium<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-danger-700<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">#name-error ~ p-button</span> <span class="token punctuation">{</span>
+    <span class="token property">margin-top</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-spacing-medium<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.inline-validation p-input</span> <span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* user invalid styles */</span>
+  <span class="token selector">.inline-validation p-input[data-user-invalid]::part(base)</span> <span class="token punctuation">{</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-danger-600<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.inline-validation [data-user-invalid]::part(form-control-label),
+  .inline-validation [data-user-invalid]::part(form-control-help-text)</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-danger-700<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.inline-validation p-input:focus-within[data-user-invalid]::part(base)</span> <span class="token punctuation">{</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-danger-600<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 0 0 <span class="token function">var</span><span class="token punctuation">(</span>--p-focus-ring-width<span class="token punctuation">)</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-danger-300<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* User valid styles */</span>
+  <span class="token selector">.inline-validation p-input[data-user-valid]::part(base)</span> <span class="token punctuation">{</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-success-600<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.inline-validation [data-user-valid]::part(form-control-label),
+  .inline-validation [data-user-valid]::part(form-control-help-text)</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-success-700<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token selector">.inline-validation p-input:focus-within[data-user-valid]::part(base)</span> <span class="token punctuation">{</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-success-600<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 0 0 <span class="token function">var</span><span class="token punctuation">(</span>--p-focus-ring-width<span class="token punctuation">)</span> <span class="token function">var</span><span class="token punctuation">(</span>--p-color-success-300<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-33"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-8"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div role="alert" class="callout callout--warning">
+            <p>
+              This example is meant to demonstrate the concept of providing your own error messages inline. It is not
+              intended to scale to more complex forms. Users who want this functionality are encouraged to build a more
+              appropriate validation solution using the techniques shown below. Depending on how you implement this
+              feature, custom error messages may affect the accessibility of your form controls.
+            </p>
+          </div>
+          <h2 id="getting-associated-form-controls" class="anchor-heading">
+            Getting Associated Form Controls<a
+              href="#getting-associated-form-controls"
+              aria-label='Direct link to "Getting Associated Form Controls"'
+            ></a>
+          </h2>
+          <p>
+            At this time, using
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>HTMLFormElement.elements</code></a
+            >
+            will not return Pure UI form controls because the browser is unaware of their status as custom element form
+            controls. Fortunately, Pure UI provides an <code>elements()</code> function that does something very
+            similar. However, instead of returning an
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>HTMLFormControlsCollection</code></a
+            >, it returns an array of HTML and Pure UI form controls in the order they appear in the DOM.
+          </p>
+          <pre><code class="language-js" id="code-block-34"><span class="token keyword">import</span> <span class="token punctuation">{</span> getFormControls <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"pure-uikit/dist/utilities/form.js"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> form <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">"#my-form"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> formControls <span class="token operator">=</span> <span class="token function">getFormControls</span><span class="token punctuation">(</span>form<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>formControls<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// e.g. [input, p-input, ...]</span>
+</code><p-copy-button class="copy-code-button" from="code-block-34"></p-copy-button></pre>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              You probably don’t need this function! If you’re gathering form data for submission, you probably want to
+              use <a href="#data-serializing">Data Serialization</a> instead.
+            </p>
+          </div>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

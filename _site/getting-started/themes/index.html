@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en" data-layout="default" data-pure-ui-version="1.1.11">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Everything you need to know about theming Pure UI." />
+    <title>Themes</title>
+
+    <meta name="turbo-cache-control" />
+
+    <link rel="stylesheet" href="/assets/styles/docs.css" />
+    <link rel="stylesheet" href="/assets/styles/code-previews.css" />
+    <link rel="stylesheet" href="/assets/styles/search.css" />
+
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="pure_ui" />
+    <meta name="twitter:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <meta property="og:url" content="https://pureui.xyz/getting-started/themes/" />
+    <meta property="og:title" content="Themes" />
+    <meta property="og:description" content="Everything you need to know about theming Pure UI." />
+    <meta property="og:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <link rel="stylesheet" href="/dist/themes/light.css" />
+    <link rel="stylesheet" href="/dist/themes/dark.css" />
+    <script type="module" src="/dist/pure-ui-autoloader.js"></script>
+
+    <script>
+      (() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = localStorage.getItem('theme') || 'auto';
+        document.documentElement.classList.toggle(
+          'p-theme-dark',
+          theme === 'dark' || (theme === 'auto' && prefersDark)
+        );
+      })();
+    </script>
+
+    <script src="/assets/scripts/turbo.js" type="module"></script>
+    <script src="/assets/scripts/docs.js" defer=""></script>
+    <script src="/assets/scripts/code-previews.js" defer=""></script>
+    <script src="/assets/scripts/lunr.js" defer=""></script>
+    <script src="/assets/scripts/search.js" defer=""></script>
+  </head>
+  <body>
+    <button id="menu-toggle" type="button" aria-label="Menu">
+      <svg width="148" height="148" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="18" fill="none" fill-rule="evenodd" stroke-linecap="round">
+          <path d="M9.5 125.5h129M9.5 74.5h129M9.5 23.5h129"></path>
+        </g>
+      </svg>
+    </button>
+
+    <div id="icon-toolbar">
+      <a
+        href="https://github.com/ssjblue197/Pure-UI-Document"
+        title="View Pure UI on GitHub"
+        class="external-link"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <p-icon name="github"></p-icon>
+      </a>
+
+      <p-dropdown id="theme-selector" placement="bottom-end" distance="3">
+        <p-button slot="trigger" size="small" variant="text" caret="" title="Press \ to toggle">
+          <p-icon class="only-light" name="sun-fill"></p-icon>
+          <p-icon class="only-dark" name="moon-fill"></p-icon>
+        </p-button>
+        <p-menu>
+          <p-menu-item type="checkbox" value="light">Light</p-menu-item>
+          <p-menu-item type="checkbox" value="dark">Dark</p-menu-item>
+          <p-divider></p-divider>
+          <p-menu-item type="checkbox" value="auto">System</p-menu-item>
+        </p-menu>
+      </p-dropdown>
+    </div>
+
+    <aside id="sidebar" data-preserve-scroll="">
+      <header>
+        <a href="/">
+          <img src="/assets/images/wordmark.svg" alt="Pure UI" />
+        </a>
+        <div class="sidebar-version">1.1.11</div>
+      </header>
+
+      <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
+        <p-icon name="search"></p-icon>
+        <span>Search</span>
+      </button>
+
+      <nav>
+        <ul>
+          <li>
+            <h2>Getting Started</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/getting-started/installation">Installation</a></li>
+              <li><a href="/getting-started/usage">Usage</a></li>
+              <li><a href="/getting-started/themes" class="active-link">Themes</a></li>
+              <li><a href="/getting-started/customizing">Customizing</a></li>
+              <li><a href="/getting-started/form-controls">Form Controls</a></li>
+              <li><a href="/getting-started/localization">Localization</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Frameworks</h2>
+            <ul>
+              <li><a href="/frameworks/react">React</a></li>
+              <li><a href="/frameworks/vue">Vue</a></li>
+              <li><a href="/frameworks/angular">Angular</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="/resources/community">Community</a></li>
+              <li><a href="/resources/accessibility">Accessibility</a></li>
+              <li><a href="/resources/contributing">Contributing</a></li>
+              <li><a href="/resources/changelog">Changelog</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Components</h2>
+            <ul>
+              <li>
+                <a href="/components/alert"> Alert </a>
+              </li>
+
+              <li>
+                <a href="/components/animated-image"> Animated Image </a>
+              </li>
+
+              <li>
+                <a href="/components/animation"> Animation </a>
+              </li>
+
+              <li>
+                <a href="/components/avatar"> Avatar </a>
+              </li>
+
+              <li>
+                <a href="/components/badge"> Badge </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb"> Breadcrumb </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb-item"> Breadcrumb Item </a>
+              </li>
+
+              <li>
+                <a href="/components/button"> Button </a>
+              </li>
+
+              <li>
+                <a href="/components/button-group"> Button Group </a>
+              </li>
+
+              <li>
+                <a href="/components/calendar"> Calendar </a>
+              </li>
+
+              <li>
+                <a href="/components/card"> Card </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel"> Carousel </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel-item"> Carousel Item </a>
+              </li>
+
+              <li>
+                <a href="/components/checkbox"> Checkbox </a>
+              </li>
+
+              <li>
+                <a href="/components/color-picker"> Color Picker </a>
+              </li>
+
+              <li>
+                <a href="/components/copy-button"> Copy Button </a>
+              </li>
+
+              <li>
+                <a href="/components/details"> Details </a>
+              </li>
+
+              <li>
+                <a href="/components/dialog"> Dialog </a>
+              </li>
+
+              <li>
+                <a href="/components/divider"> Divider </a>
+              </li>
+
+              <li>
+                <a href="/components/drawer"> Drawer </a>
+              </li>
+
+              <li>
+                <a href="/components/dropdown"> Dropdown </a>
+              </li>
+
+              <li>
+                <a href="/components/format-bytes"> Format Bytes </a>
+              </li>
+
+              <li>
+                <a href="/components/format-date"> Format Date </a>
+              </li>
+
+              <li>
+                <a href="/components/format-number"> Format Number </a>
+              </li>
+
+              <li>
+                <a href="/components/icon"> Icon </a>
+              </li>
+
+              <li>
+                <a href="/components/icon-button"> Icon Button </a>
+              </li>
+
+              <li>
+                <a href="/components/image-comparer"> Image Comparer </a>
+              </li>
+
+              <li>
+                <a href="/components/include"> Include </a>
+              </li>
+
+              <li>
+                <a href="/components/input"> Input </a>
+              </li>
+
+              <li>
+                <a href="/components/menu"> Menu </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-item"> Menu Item </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-label"> Menu Label </a>
+              </li>
+
+              <li>
+                <a href="/components/mutation-observer"> Mutation Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/option"> Option </a>
+              </li>
+
+              <li>
+                <a href="/components/paginate"> Paginate </a>
+              </li>
+
+              <li>
+                <a href="/components/popup"> Popup </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-bar"> Progress Bar </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-ring"> Progress Ring </a>
+              </li>
+
+              <li>
+                <a href="/components/qr-code"> QR Code </a>
+              </li>
+
+              <li>
+                <a href="/components/radio"> Radio </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-button"> Radio Button </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-group"> Radio Group </a>
+              </li>
+
+              <li>
+                <a href="/components/range"> Range </a>
+              </li>
+
+              <li>
+                <a href="/components/rating"> Rating </a>
+              </li>
+
+              <li>
+                <a href="/components/relative-time"> Relative Time </a>
+              </li>
+
+              <li>
+                <a href="/components/resize-observer"> Resize Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/select"> Select </a>
+              </li>
+
+              <li>
+                <a href="/components/skeleton"> Skeleton </a>
+              </li>
+
+              <li>
+                <a href="/components/spinner"> Spinner </a>
+              </li>
+
+              <li>
+                <a href="/components/split-panel"> Split Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/switch"> Switch </a>
+              </li>
+
+              <li>
+                <a href="/components/tab"> Tab </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-group"> Tab Group </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-panel"> Tab Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/tag"> Tag </a>
+              </li>
+
+              <li>
+                <a href="/components/textarea"> Textarea </a>
+              </li>
+
+              <li>
+                <a href="/components/tooltip"> Tooltip </a>
+              </li>
+
+              <li>
+                <a href="/components/tree"> Tree </a>
+              </li>
+
+              <li>
+                <a href="/components/tree-item"> Tree Item </a>
+              </li>
+
+              <li>
+                <a href="/components/visually-hidden"> Visually Hidden </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h2>Design Tokens</h2>
+            <ul>
+              <li><a href="/tokens/typography">Typography</a></li>
+              <li><a href="/tokens/color">Color</a></li>
+              <li><a href="/tokens/spacing">Spacing</a></li>
+              <li><a href="/tokens/elevation">Elevation</a></li>
+              <li><a href="/tokens/border-radius">Border Radius</a></li>
+              <li><a href="/tokens/transition">Transition</a></li>
+              <li><a href="/tokens/z-index">Z-index</a></li>
+              <li><a href="/tokens/more">More Tokens</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Tutorials</h2>
+            <ul>
+              <li><a href="/tutorials/integrating-with-astro">Integrating with Astro</a></li>
+              <li><a href="/tutorials/integrating-with-laravel">Integrating with Laravel</a></li>
+              <li><a href="/tutorials/integrating-with-nextjs">Integrating with NextJS</a></li>
+              <li><a href="/tutorials/integrating-with-rails">Integrating with Rails</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <article id="content" class="content content--with-toc">
+        <div class="content__toc">
+          <ul>
+            <li class="top"><a href="#">Themes</a></li>
+            <li data-level="2"><a href="#theme-basics">Theme Basics</a></li>
+            <li data-level="3"><a href="#activating-themes">Activating Themes</a></li>
+            <li data-level="3"><a href="#using-multiple-themes">Using Multiple Themes</a></li>
+            <li data-level="2"><a href="#creating-themes">Creating Themes</a></li>
+            <li data-level="3"><a href="#customizing-a-built-in-theme">Customizing a Built-in Theme</a></li>
+            <li data-level="3"><a href="#creating-a-new-theme">Creating a New Theme</a></li>
+            <li data-level="2"><a href="#dark-theme">Dark Theme</a></li>
+            <li data-level="3">
+              <a href="#detecting-the-users-color-scheme-preference">Detecting the User’s Color Scheme Preference</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="content__body">
+          <h1>Themes</h1>
+          <p>
+            Pure UI is designed to be highly customizable through pure CSS. Out of the box, you can choose from a light
+            or dark theme. Alternatively, you can design your own theme.
+          </p>
+          <p>
+            A theme is nothing more than a stylesheet that uses the Pure UI API to define design tokens and apply custom
+            styles to components. To create a theme, you will need a decent understanding of CSS, including
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >CSS Custom Properties</a
+            >
+            and the
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/::part"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>::part</code> selector</a
+            >.
+          </p>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              For component developers, built-in themes are also available as JavaScript modules that export
+              <a
+                href="https://lit.dev/docs/api/styles/#CSSResult"
+                class="external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Lit CSSResult</a
+              >
+              objects. You can find them in <code>dist/themes/*.styles.js</code>.
+            </p>
+          </div>
+          <h2 id="theme-basics" class="anchor-heading">
+            Theme Basics<a href="#theme-basics" aria-label='Direct link to "Theme Basics"'></a>
+          </h2>
+          <p>
+            All themes are scoped to classes using the <code>p-theme-{name}</code> convention, where
+            <code>{name}</code> is a lowercase, hyphen-delimited value representing the name of the theme. The included
+            light and dark themes use <code>p-theme-light</code> and <code>p-theme-dark</code>, respectively. A custom
+            theme called “Purple Power”, for example, would use a class called <code>p-theme-purple-power</code>
+          </p>
+          <p>
+            All selectors must be scoped to the theme’s class to ensure interoperability with other themes. You should
+            also scope them to <code>:host</code> so they can be imported and applied to custom element shadow roots.
+          </p>
+          <pre><code class="language-css" id="code-block-41"><span class="token selector">:host,
+.p-theme-purple-power</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* ... */</span>
+<span class="token punctuation">}</span>
+</code><p-copy-button class="copy-code-button" from="code-block-41"></p-copy-button></pre>
+          <h3 id="activating-themes" class="anchor-heading">
+            Activating Themes<a href="#activating-themes" aria-label='Direct link to "Activating Themes"'></a>
+          </h3>
+          <p>
+            To activate a theme, import it and apply the theme’s class to the <code>&lt;html&gt;</code> element. This
+            example imports and activates the built-in dark theme.
+          </p>
+          <pre><code class="language-html" id="code-block-42"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>p-theme-dark<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>path/to/pure-ui/dist/themes/dark.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    ...
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-42"></p-copy-button></pre>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              There is one exception to this rule — the light theme <em>does not</em> need to be activated. For
+              convenience, the light theme is scoped to <code>:root</code> and will be activated by default when
+              imported.
+            </p>
+          </div>
+          <h3 id="using-multiple-themes" class="anchor-heading">
+            Using Multiple Themes<a
+              href="#using-multiple-themes"
+              aria-label='Direct link to "Using Multiple Themes"'
+            ></a>
+          </h3>
+          <p>
+            You can activate themes on various containers throughout the page. This example uses the light theme with a
+            dark-themed sidebar.
+          </p>
+          <pre><code class="language-html" id="code-block-43"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>path/to/pure-ui/dist/themes/light.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>path/to/pure-ui/dist/themes/dark.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nav</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>p-theme-dark<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token comment">&lt;!-- dark-themed sidebar --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nav</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token comment">&lt;!-- light-themed content --&gt;</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-43"></p-copy-button></pre>
+          <p>It’s for this reason that themes must be scoped to specific classes.</p>
+          <h2 id="creating-themes" class="anchor-heading">
+            Creating Themes<a href="#creating-themes" aria-label='Direct link to "Creating Themes"'></a>
+          </h2>
+          <p>
+            There are two ways to create themes. The easiest way is to customize a built-in theme. The advanced way is
+            to create a new theme from scratch. Which method you choose depends on your project’s requirements and the
+            amount of effort you’re willing to commit to.
+          </p>
+          <h3 id="customizing-a-built-in-theme" class="anchor-heading">
+            Customizing a Built-in Theme<a
+              href="#customizing-a-built-in-theme"
+              aria-label='Direct link to "Customizing a Built-in Theme"'
+            ></a>
+          </h3>
+          <p>
+            The easiest way to customize Pure UI is to override one of the built-in themes. You can do this by importing
+            the light or dark theme as-is, then creating a separate stylesheet that overrides
+            <a href="/getting-started/customizing#design-tokens">design tokens</a> and adds
+            <a href="/getting-started/customizing#component-parts">component styles</a> to your liking. You must import
+            your theme <em>after</em> the built-in theme.
+          </p>
+          <p>If you’re customizing the light theme, you should scope your styles to the following selectors.</p>
+          <pre><code class="language-css" id="code-block-44"><span class="token selector">:root,
+:host,
+.p-theme-light</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* your custom styles here */</span>
+<span class="token punctuation">}</span>
+</code><p-copy-button class="copy-code-button" from="code-block-44"></p-copy-button></pre>
+          <p>If you’re customizing the dark theme, you should scope your styles to the following selectors.</p>
+          <pre><code class="language-css" id="code-block-45"><span class="token selector">:host,
+.p-theme-dark</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* your custom styles here */</span>
+<span class="token punctuation">}</span>
+</code><p-copy-button class="copy-code-button" from="code-block-45"></p-copy-button></pre>
+          <p>
+            By customizing a built-in theme, you’ll maintain a smaller stylesheet containing only the changes you’ve
+            made. Contrast this to <a href="#creating-a-new-theme">creating a new theme</a>, where you need to
+            explicitly define every design token required by the library. This approach is more “future-proof,” as new
+            design tokens that emerge in subsequent versions of Pure UI will be accounted for by the built-in theme.
+          </p>
+          <p>
+            While this approach is easier to maintain, the drawback is that your theme can’t be activated independently
+            — it’s tied to the built-in theme you’re extending.
+          </p>
+          <h3 id="creating-a-new-theme" class="anchor-heading">
+            Creating a New Theme<a href="#creating-a-new-theme" aria-label='Direct link to "Creating a New Theme"'></a>
+          </h3>
+          <p>
+            Creating a new theme is more of an undertaking than
+            <a href="#customizing-a-built-in-theme">customizing an existing one</a>. At a minimum, you must implement
+            all of the required design tokens. The easiest way to do this is by “forking” one of the built-in themes and
+            modifying it from there.
+          </p>
+          <p>
+            Start by changing the selector to match your theme’s name. Assuming your new theme is called “Purple Power”,
+            your theme should be scoped like this.
+          </p>
+          <pre><code class="language-css" id="code-block-46"><span class="token selector">:host,
+.p-theme-purple-power</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* your custom styles here */</span>
+<span class="token punctuation">}</span>
+</code><p-copy-button class="copy-code-button" from="code-block-46"></p-copy-button></pre>
+          <p>
+            By creating a new theme, you won’t be relying on a built-in theme as a foundation. Because the theme is
+            decoupled from the built-ins, you can activate it independently as an alternative to the built-ins. This is
+            the recommended approach if you’re looking to open source your theme for others to use.
+          </p>
+          <p>
+            You will, however, need to maintain your theme more carefully, as new versions of Pure UI may introduce new
+            design tokens that your theme won’t have accounted for. Because of this, it’s recommended that you clearly
+            specify which version(s) of Pure UI your theme is designed to work with and keep it up to date as new
+            versions of Pure UI are released.
+          </p>
+          <h2 id="dark-theme" class="anchor-heading">
+            Dark Theme<a href="#dark-theme" aria-label='Direct link to "Dark Theme"'></a>
+          </h2>
+          <p>
+            The built-in dark theme uses an inverted color scale so, if you’re using design tokens as intended, you’ll
+            get dark mode for free. While this isn’t the same as a professionally curated dark theme, it provides an
+            excellent baseline for one and you’re encouraged to customize it depending on your needs.
+          </p>
+          <p>
+            The dark theme works by taking the light theme’s <a href="/tokens/color">color tokens</a> and “flipping” the
+            scale so 100 becomes 900, 200 becomes 800, 300 becomes 700, etc. Next, the luminance of each primitive was
+            fine-tuned to avoid true black, which is often undesirable in dark themes, and provide a richer experience.
+            The result is a custom dark palette that complements the light theme and makes it easy to offer light and
+            dark modes with minimal effort.
+          </p>
+          <p>To install the dark theme, add the following to the <code>&lt;head&gt;</code> section of your page.</p>
+          <pre><code class="language-html" id="code-block-47"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/themes/dark.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-47"></p-copy-button></pre>
+          <p>
+            To activate the theme, apply the <code>p-theme-dark</code> class to the <code>&lt;html&gt;</code> element.
+          </p>
+          <pre><code class="language-html" id="code-block-48"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>p-theme-dark<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  ...
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-48"></p-copy-button></pre>
+          <h3 id="detecting-the-users-color-scheme-preference" class="anchor-heading">
+            Detecting the User’s Color Scheme Preference<a
+              href="#detecting-the-users-color-scheme-preference"
+              aria-label='Direct link to "Detecting the User&apos;s Color Scheme Preference"'
+            ></a>
+          </h3>
+          <p>
+            Pure UI doesn’t try to auto-detect the user’s light/dark mode preference. This should be done at the
+            application level. As a best practice, to provide a dark theme in your app, you should:
+          </p>
+          <ul>
+            <li>
+              Check for
+              <a
+                href="https://stackoverflow.com/a/57795495/567486"
+                class="external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                ><code>prefers-color-scheme</code></a
+              >
+              and use its value by default
+            </li>
+            <li>Allow the user to override the setting in your app</li>
+            <li>Remember the user’s preference and restore it on subsequent logins</li>
+          </ul>
+          <p>
+            Pure UI avoids using the <code>prefers-color-scheme</code> media query because not all apps support dark
+            mode, and it would break things for the ones that don’t.
+          </p>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

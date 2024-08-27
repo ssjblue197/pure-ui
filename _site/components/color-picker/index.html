@@ -1,0 +1,1776 @@
+<!doctype html>
+<html lang="en" data-layout="component" data-pure-ui-version="1.1.11">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Color pickers allow the user to select a color." />
+    <title>Color Picker</title>
+
+    <meta name="turbo-cache-control" />
+
+    <link rel="stylesheet" href="/assets/styles/docs.css" />
+    <link rel="stylesheet" href="/assets/styles/code-previews.css" />
+    <link rel="stylesheet" href="/assets/styles/search.css" />
+
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="pure_ui" />
+    <meta name="twitter:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <meta property="og:url" content="https://pureui.xyz/components/color-picker/" />
+    <meta property="og:title" content="Color Picker" />
+    <meta property="og:description" content="Color pickers allow the user to select a color." />
+    <meta property="og:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <link rel="stylesheet" href="/dist/themes/light.css" />
+    <link rel="stylesheet" href="/dist/themes/dark.css" />
+    <script type="module" src="/dist/pure-ui-autoloader.js"></script>
+
+    <script>
+      (() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = localStorage.getItem('theme') || 'auto';
+        document.documentElement.classList.toggle(
+          'p-theme-dark',
+          theme === 'dark' || (theme === 'auto' && prefersDark)
+        );
+      })();
+    </script>
+
+    <script src="/assets/scripts/turbo.js" type="module"></script>
+    <script src="/assets/scripts/docs.js" defer=""></script>
+    <script src="/assets/scripts/code-previews.js" defer=""></script>
+    <script src="/assets/scripts/lunr.js" defer=""></script>
+    <script src="/assets/scripts/search.js" defer=""></script>
+  </head>
+  <body>
+    <button id="menu-toggle" type="button" aria-label="Menu">
+      <svg width="148" height="148" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="18" fill="none" fill-rule="evenodd" stroke-linecap="round">
+          <path d="M9.5 125.5h129M9.5 74.5h129M9.5 23.5h129"></path>
+        </g>
+      </svg>
+    </button>
+
+    <div id="icon-toolbar">
+      <a
+        href="https://github.com/ssjblue197/Pure-UI-Document"
+        title="View Pure UI on GitHub"
+        class="external-link"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <p-icon name="github"></p-icon>
+      </a>
+
+      <p-dropdown id="theme-selector" placement="bottom-end" distance="3">
+        <p-button slot="trigger" size="small" variant="text" caret="" title="Press \ to toggle">
+          <p-icon class="only-light" name="sun-fill"></p-icon>
+          <p-icon class="only-dark" name="moon-fill"></p-icon>
+        </p-button>
+        <p-menu>
+          <p-menu-item type="checkbox" value="light">Light</p-menu-item>
+          <p-menu-item type="checkbox" value="dark">Dark</p-menu-item>
+          <p-divider></p-divider>
+          <p-menu-item type="checkbox" value="auto">System</p-menu-item>
+        </p-menu>
+      </p-dropdown>
+    </div>
+
+    <aside id="sidebar" data-preserve-scroll="">
+      <header>
+        <a href="/">
+          <img src="/assets/images/wordmark.svg" alt="Pure UI" />
+        </a>
+        <div class="sidebar-version">1.1.11</div>
+      </header>
+
+      <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
+        <p-icon name="search"></p-icon>
+        <span>Search</span>
+      </button>
+
+      <nav>
+        <ul>
+          <li>
+            <h2>Getting Started</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/getting-started/installation">Installation</a></li>
+              <li><a href="/getting-started/usage">Usage</a></li>
+              <li><a href="/getting-started/themes">Themes</a></li>
+              <li><a href="/getting-started/customizing">Customizing</a></li>
+              <li><a href="/getting-started/form-controls">Form Controls</a></li>
+              <li><a href="/getting-started/localization">Localization</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Frameworks</h2>
+            <ul>
+              <li><a href="/frameworks/react">React</a></li>
+              <li><a href="/frameworks/vue">Vue</a></li>
+              <li><a href="/frameworks/angular">Angular</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="/resources/community">Community</a></li>
+              <li><a href="/resources/accessibility">Accessibility</a></li>
+              <li><a href="/resources/contributing">Contributing</a></li>
+              <li><a href="/resources/changelog">Changelog</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Components</h2>
+            <ul>
+              <li>
+                <a href="/components/alert"> Alert </a>
+              </li>
+
+              <li>
+                <a href="/components/animated-image"> Animated Image </a>
+              </li>
+
+              <li>
+                <a href="/components/animation"> Animation </a>
+              </li>
+
+              <li>
+                <a href="/components/avatar"> Avatar </a>
+              </li>
+
+              <li>
+                <a href="/components/badge"> Badge </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb"> Breadcrumb </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb-item"> Breadcrumb Item </a>
+              </li>
+
+              <li>
+                <a href="/components/button"> Button </a>
+              </li>
+
+              <li>
+                <a href="/components/button-group"> Button Group </a>
+              </li>
+
+              <li>
+                <a href="/components/calendar"> Calendar </a>
+              </li>
+
+              <li>
+                <a href="/components/card"> Card </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel"> Carousel </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel-item"> Carousel Item </a>
+              </li>
+
+              <li>
+                <a href="/components/checkbox"> Checkbox </a>
+              </li>
+
+              <li>
+                <a href="/components/color-picker" class="active-link"> Color Picker </a>
+              </li>
+
+              <li>
+                <a href="/components/copy-button"> Copy Button </a>
+              </li>
+
+              <li>
+                <a href="/components/details"> Details </a>
+              </li>
+
+              <li>
+                <a href="/components/dialog"> Dialog </a>
+              </li>
+
+              <li>
+                <a href="/components/divider"> Divider </a>
+              </li>
+
+              <li>
+                <a href="/components/drawer"> Drawer </a>
+              </li>
+
+              <li>
+                <a href="/components/dropdown"> Dropdown </a>
+              </li>
+
+              <li>
+                <a href="/components/format-bytes"> Format Bytes </a>
+              </li>
+
+              <li>
+                <a href="/components/format-date"> Format Date </a>
+              </li>
+
+              <li>
+                <a href="/components/format-number"> Format Number </a>
+              </li>
+
+              <li>
+                <a href="/components/icon"> Icon </a>
+              </li>
+
+              <li>
+                <a href="/components/icon-button"> Icon Button </a>
+              </li>
+
+              <li>
+                <a href="/components/image-comparer"> Image Comparer </a>
+              </li>
+
+              <li>
+                <a href="/components/include"> Include </a>
+              </li>
+
+              <li>
+                <a href="/components/input"> Input </a>
+              </li>
+
+              <li>
+                <a href="/components/menu"> Menu </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-item"> Menu Item </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-label"> Menu Label </a>
+              </li>
+
+              <li>
+                <a href="/components/mutation-observer"> Mutation Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/option"> Option </a>
+              </li>
+
+              <li>
+                <a href="/components/paginate"> Paginate </a>
+              </li>
+
+              <li>
+                <a href="/components/popup"> Popup </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-bar"> Progress Bar </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-ring"> Progress Ring </a>
+              </li>
+
+              <li>
+                <a href="/components/qr-code"> QR Code </a>
+              </li>
+
+              <li>
+                <a href="/components/radio"> Radio </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-button"> Radio Button </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-group"> Radio Group </a>
+              </li>
+
+              <li>
+                <a href="/components/range"> Range </a>
+              </li>
+
+              <li>
+                <a href="/components/rating"> Rating </a>
+              </li>
+
+              <li>
+                <a href="/components/relative-time"> Relative Time </a>
+              </li>
+
+              <li>
+                <a href="/components/resize-observer"> Resize Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/select"> Select </a>
+              </li>
+
+              <li>
+                <a href="/components/skeleton"> Skeleton </a>
+              </li>
+
+              <li>
+                <a href="/components/spinner"> Spinner </a>
+              </li>
+
+              <li>
+                <a href="/components/split-panel"> Split Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/switch"> Switch </a>
+              </li>
+
+              <li>
+                <a href="/components/tab"> Tab </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-group"> Tab Group </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-panel"> Tab Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/tag"> Tag </a>
+              </li>
+
+              <li>
+                <a href="/components/textarea"> Textarea </a>
+              </li>
+
+              <li>
+                <a href="/components/tooltip"> Tooltip </a>
+              </li>
+
+              <li>
+                <a href="/components/tree"> Tree </a>
+              </li>
+
+              <li>
+                <a href="/components/tree-item"> Tree Item </a>
+              </li>
+
+              <li>
+                <a href="/components/visually-hidden"> Visually Hidden </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h2>Design Tokens</h2>
+            <ul>
+              <li><a href="/tokens/typography">Typography</a></li>
+              <li><a href="/tokens/color">Color</a></li>
+              <li><a href="/tokens/spacing">Spacing</a></li>
+              <li><a href="/tokens/elevation">Elevation</a></li>
+              <li><a href="/tokens/border-radius">Border Radius</a></li>
+              <li><a href="/tokens/transition">Transition</a></li>
+              <li><a href="/tokens/z-index">Z-index</a></li>
+              <li><a href="/tokens/more">More Tokens</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Tutorials</h2>
+            <ul>
+              <li><a href="/tutorials/integrating-with-astro">Integrating with Astro</a></li>
+              <li><a href="/tutorials/integrating-with-laravel">Integrating with Laravel</a></li>
+              <li><a href="/tutorials/integrating-with-nextjs">Integrating with NextJS</a></li>
+              <li><a href="/tutorials/integrating-with-rails">Integrating with Rails</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <article id="content" class="content content--with-toc">
+        <div class="content__toc">
+          <ul>
+            <li class="top"><a href="#">Color Picker</a></li>
+            <li data-level="2"><a href="#examples">Examples</a></li>
+            <li data-level="3"><a href="#initial-value">Initial Value</a></li>
+            <li data-level="3"><a href="#opacity">Opacity</a></li>
+            <li data-level="3"><a href="#formats">Formats</a></li>
+            <li data-level="3"><a href="#swatches">Swatches</a></li>
+            <li data-level="3"><a href="#sizes">Sizes</a></li>
+            <li data-level="3"><a href="#inline">Inline</a></li>
+            <li data-level="2"><a href="#importing">Importing</a></li>
+            <li data-level="2"><a href="#slots">Slots</a></li>
+            <li data-level="2"><a href="#properties">Properties</a></li>
+            <li data-level="2"><a href="#events">Events</a></li>
+            <li data-level="2"><a href="#methods">Methods</a></li>
+            <li data-level="2"><a href="#custom-properties">Custom Properties</a></li>
+            <li data-level="2"><a href="#parts">Parts</a></li>
+            <li data-level="2"><a href="#dependencies">Dependencies</a></li>
+          </ul>
+        </div>
+
+        <div class="content__body">
+          <header class="component-header">
+            <h1>Color Picker</h1>
+
+            <div class="component-header__tag">
+              <code>&lt;p-color-picker&gt; | PColorPicker</code>
+            </div>
+
+            <div class="component-header__info">
+              <p-badge variant="neutral" pill=""> Since 1.0 </p-badge>
+              <p-badge variant="primary" pill="" style="text-transform: capitalize"> stable </p-badge>
+            </div>
+          </header>
+
+          <p class="component-summary">Color pickers allow the user to select a color.</p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-color-picker label="Select a color"></p-color-picker>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-92">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-354"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-color-picker</span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-color-picker</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-354"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-355"><span class="token keyword">import</span> PColorPicker <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/color-picker'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PColorPicker</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-355"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-92"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div role="alert" class="callout callout--tip">
+            <p>
+              This component works with standard <code>&lt;form&gt;</code> elements. Please refer to the section on
+              <a href="/getting-started/form-controls">form controls</a> to learn more about form submission and
+              client-side validation.
+            </p>
+          </div>
+          <h2 id="examples" class="anchor-heading">
+            Examples<a href="#examples" aria-label='Direct link to "Examples"'></a>
+          </h2>
+          <h3 id="initial-value" class="anchor-heading">
+            Initial Value<a href="#initial-value" aria-label='Direct link to "Initial Value"'></a>
+          </h3>
+          <p>Use the <code>value</code> attribute to set an initial value for the color picker.</p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-color-picker value="#4a90e2" label="Select a color"></p-color-picker>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-93">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-356"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-color-picker</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#4a90e2<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-color-picker</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-356"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-357"><span class="token keyword">import</span> PColorPicker <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/color-picker'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PColorPicker</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#4a90e2<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-357"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-93"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h3 id="opacity" class="anchor-heading">
+            Opacity<a href="#opacity" aria-label='Direct link to "Opacity"'></a>
+          </h3>
+          <p>
+            Use the <code>opacity</code> attribute to enable the opacity slider. When this is enabled, the value will be
+            displayed as HEXA, RGBA, HSLA, or HSVA based on <code>format</code>.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-color-picker value="#f5a623ff" opacity="" label="Select a color"></p-color-picker>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-94">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-358"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-color-picker</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#f5a623ff<span class="token punctuation">"</span></span> <span class="token attr-name">opacity</span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-color-picker</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-358"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-359"><span class="token keyword">import</span> PColorPicker <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/color-picker'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PColorPicker</span></span> <span class="token attr-name">opacity</span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-359"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-94"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h3 id="formats" class="anchor-heading">
+            Formats<a href="#formats" aria-label='Direct link to "Formats"'></a>
+          </h3>
+          <p>
+            Set the color picker’s format with the <code>format</code> attribute. Valid options include
+            <code>hex</code>, <code>rgb</code>, <code>hsl</code>, and <code>hsv</code>. Note that the color picker’s
+            input will accept any parsable format (including CSS color names) regardless of this option.
+          </p>
+          <p>To prevent users from toggling the format themselves, add the <code>no-format-toggle</code> attribute.</p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-color-picker format="hex" value="#4a90e2" label="Select a color"></p-color-picker>
+              <p-color-picker format="rgb" value="rgb(80, 227, 194)" label="Select a color"></p-color-picker>
+              <p-color-picker format="hsl" value="hsl(290, 87%, 47%)" label="Select a color"></p-color-picker>
+              <p-color-picker format="hsv" value="hsv(55, 89%, 97%)" label="Select a color"></p-color-picker>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-95">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-360"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-color-picker</span> <span class="token attr-name">format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hex<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#4a90e2<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-color-picker</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-color-picker</span> <span class="token attr-name">format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>rgb<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>rgb(80, 227, 194)<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-color-picker</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-color-picker</span> <span class="token attr-name">format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hsl<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hsl(290, 87%, 47%)<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-color-picker</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-color-picker</span> <span class="token attr-name">format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hsv<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hsv(55, 89%, 97%)<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-color-picker</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-360"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-361"><span class="token keyword">import</span> PColorPicker <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/color-picker'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PColorPicker</span></span> <span class="token attr-name">format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hex<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#4a90e2<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PColorPicker</span></span> <span class="token attr-name">format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>rgb<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>rgb(80, 227, 194)<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PColorPicker</span></span> <span class="token attr-name">format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hsl<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hsl(290, 87%, 47%)<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PColorPicker</span></span> <span class="token attr-name">format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hsv<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hsv(55, 89%, 97%)<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-361"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-95"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h3 id="swatches" class="anchor-heading">
+            Swatches<a href="#swatches" aria-label='Direct link to "Swatches"'></a>
+          </h3>
+          <p>
+            Use the <code>swatches</code> attribute to add convenient presets to the color picker. Any format the color
+            picker can parse is acceptable (including CSS color names), but each value must be separated by a semicolon
+            (<code>;</code>). Alternatively, you can pass an array of color values to this property using JavaScript.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-color-picker
+                label="Select a color"
+                swatches="
+    #d0021b; #f5a623; #f8e71c; #8b572a; #7ed321; #417505; #bd10e0; #9013fe;
+    #4a90e2; #50e3c2; #b8e986; #000; #444; #888; #ccc; #fff;
+  "
+              ></p-color-picker>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-96">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-362"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-color-picker</span>
+  <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span>
+  <span class="token attr-name">swatches</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>
+    #d0021b; #f5a623; #f8e71c; #8b572a; #7ed321; #417505; #bd10e0; #9013fe;
+    #4a90e2; #50e3c2; #b8e986; #000; #444; #888; #ccc; #fff;
+  <span class="token punctuation">"</span></span>
+<span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-color-picker</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-362"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-363"><span class="token keyword">import</span> PColorPicker <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/color-picker'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PColorPicker</span></span>
+    <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span>
+    <span class="token attr-name">swatches</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>
+      #d0021b; #f5a623; #f8e71c; #8b572a; #7ed321; #417505; #bd10e0; #9013fe;
+      #4a90e2; #50e3c2; #b8e986; #000; #444; #888; #ccc; #fff;
+    <span class="token punctuation">"</span></span>
+  <span class="token punctuation">/&gt;</span></span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-363"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-96"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h3 id="sizes" class="anchor-heading">Sizes<a href="#sizes" aria-label='Direct link to "Sizes"'></a></h3>
+          <p>Use the <code>size</code> attribute to change the color picker’s trigger size.</p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-color-picker size="small" label="Select a color"></p-color-picker>
+              <p-color-picker size="medium" label="Select a color"></p-color-picker>
+              <p-color-picker size="large" label="Select a color"></p-color-picker>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-97">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-364"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-color-picker</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>small<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-color-picker</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-color-picker</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>medium<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-color-picker</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-color-picker</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>large<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-color-picker</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-364"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-365"><span class="token keyword">import</span> PColorPicker <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/color-picker'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PColorPicker</span></span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>small<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PColorPicker</span></span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>medium<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PColorPicker</span></span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>large<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-365"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-97"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h3 id="inline" class="anchor-heading">Inline<a href="#inline" aria-label='Direct link to "Inline"'></a></h3>
+          <p>
+            The color picker can be rendered inline instead of in a dropdown using the <code>inline</code> attribute.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-color-picker inline="" label="Select a color"></p-color-picker>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-98">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-366"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-color-picker</span> <span class="token attr-name">inline</span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-color-picker</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-366"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-367"><span class="token keyword">import</span> PColorPicker <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/color-picker'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PColorPicker</span></span> <span class="token attr-name">inline</span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Select a color<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-367"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-98"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h2 id="importing" class="anchor-heading">
+            Importing<a href="#importing" aria-label='Direct link to "Importing"'></a>
+          </h2>
+          <p>
+            If you’re using the autoloader or the traditional loader, you can ignore this section. Otherwise, feel free
+            to use any of the following snippets to
+            <a href="/getting-started/installation#cherry-picking">cherry pick</a> this component.
+          </p>
+
+          <p-tab-group>
+            <p-tab slot="nav" panel="script">Script</p-tab>
+            <p-tab slot="nav" panel="import">Import</p-tab>
+            <p-tab slot="nav" panel="bundler">Bundler</p-tab>
+            <p-tab slot="nav" panel="react">React</p-tab>
+
+            <p-tab-panel name="script">
+              <p>
+                To import this component from
+                <a
+                  href="https://www.jsdelivr.com/package/npm/pure-uikit"
+                  class="external-link"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >the CDN</a
+                >
+                using a script tag:
+              </p>
+              <pre><code class="language-html" id="code-block-368"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/components/color-picker/color-picker.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></code><p-copy-button class="copy-code-button" from="code-block-368"></p-copy-button></pre>
+            </p-tab-panel>
+
+            <p-tab-panel name="import">
+              <p>
+                To import this component from
+                <a
+                  href="https://www.jsdelivr.com/package/npm/pure-uikit"
+                  class="external-link"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >the CDN</a
+                >
+                using a JavaScript import:
+              </p>
+              <pre><code class="language-js" id="code-block-369"><span class="token keyword">import</span> <span class="token string">'https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/components/color-picker/color-picker.js'</span><span class="token punctuation">;</span></code><p-copy-button class="copy-code-button" from="code-block-369"></p-copy-button></pre>
+            </p-tab-panel>
+
+            <p-tab-panel name="bundler">
+              <p>To import this component using <a href="/getting-started/installation#bundling">a bundler</a>:</p>
+              <pre><code class="language-js" id="code-block-370"><span class="token keyword">import</span> <span class="token string">'pure-uikit/dist/components/color-picker/color-picker.js'</span><span class="token punctuation">;</span></code><p-copy-button class="copy-code-button" from="code-block-370"></p-copy-button></pre>
+            </p-tab-panel>
+
+            <p-tab-panel name="react">
+              <p>To import this component as a <a href="/frameworks/react">React component</a>:</p>
+              <pre><code class="language-js" id="code-block-371"><span class="token keyword">import</span> PColorPicker <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/color-picker'</span><span class="token punctuation">;</span></code><p-copy-button class="copy-code-button" from="code-block-371"></p-copy-button></pre>
+            </p-tab-panel>
+          </p-tab-group>
+
+          <h2 id="slots" class="anchor-heading">Slots<a href="#slots" aria-label='Direct link to "Slots"'></a></h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name">Name</th>
+                  <th class="table-description">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="nowrap">
+                    <code>label</code>
+                  </td>
+                  <td>The color picker’s form label. Alternatively, you can use the <code>label</code> attribute.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em>Learn more about <a href="/getting-started/usage#slots">using slots</a>.</em>
+          </p>
+
+          <h2 id="properties" class="anchor-heading">
+            Properties<a href="#properties" aria-label='Direct link to "Properties"'></a>
+          </h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name">Name</th>
+                  <th class="table-description">Description</th>
+                  <th class="table-reflects">Reflects</th>
+                  <th class="table-type">Type</th>
+                  <th class="table-default">Default</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <code class="nowrap">value</code>
+                  </td>
+                  <td>
+                    The current value of the color picker. The value’s format will vary based the
+                    <code>format</code> attribute. To get the value in a specific format, use the
+                    <code>getFormattedValue()</code> method. The value is submitted as a name/value pair with form data.
+                  </td>
+                  <td style="text-align: center"></td>
+                  <td>
+                    <code>string</code>
+                  </td>
+                  <td>
+                    <code>""</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">defaultValue</code>
+                  </td>
+                  <td>The default value of the form control. Primarily used for resetting the form control.</td>
+                  <td style="text-align: center"></td>
+                  <td>
+                    <code>string</code>
+                  </td>
+                  <td>
+                    <code>""</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">label</code>
+                  </td>
+                  <td>
+                    The color picker’s label. This will not be displayed, but it will be announced by assistive devices.
+                    If you need to display HTML, you can use the <code>label</code> slot` instead.
+                  </td>
+                  <td style="text-align: center"></td>
+                  <td>
+                    <code>string</code>
+                  </td>
+                  <td>
+                    <code>""</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">format</code>
+                  </td>
+                  <td>
+                    The format to use. If opacity is enabled, these will translate to HEXA, RGBA, HSLA, and HSVA
+                    respectively. The color picker will accept user input in any format (including CSS color names) and
+                    convert it to the desired format.
+                  </td>
+                  <td style="text-align: center"></td>
+                  <td>
+                    <code>"hex" | "rgb" | "hsl" | "hsv"</code>
+                  </td>
+                  <td>
+                    <code>"hex"</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">inline</code>
+                  </td>
+                  <td>Renders the color picker inline rather than in a dropdown.</td>
+                  <td style="text-align: center">
+                    <p-icon label="yes" name="check-lg"></p-icon>
+                  </td>
+                  <td>
+                    <code>boolean</code>
+                  </td>
+                  <td>
+                    <code>false</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">size</code>
+                  </td>
+                  <td>
+                    Determines the size of the color picker’s trigger. This has no effect on inline color pickers.
+                  </td>
+                  <td style="text-align: center">
+                    <p-icon label="yes" name="check-lg"></p-icon>
+                  </td>
+                  <td>
+                    <code>"small" | "medium" | "large"</code>
+                  </td>
+                  <td>
+                    <code>"medium"</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">noFormatToggle</code>
+
+                    <br />
+                    <p-tooltip content="This attribute is different from its property">
+                      <small>
+                        <code class="nowrap"> no-format-toggle </code>
+                      </small>
+                    </p-tooltip>
+                  </td>
+                  <td>Removes the button that lets users toggle between format.</td>
+                  <td style="text-align: center"></td>
+                  <td>
+                    <code>boolean</code>
+                  </td>
+                  <td>
+                    <code>false</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">name</code>
+                  </td>
+                  <td>The name of the form control, submitted as a name/value pair with form data.</td>
+                  <td style="text-align: center"></td>
+                  <td>
+                    <code>string</code>
+                  </td>
+                  <td>
+                    <code>""</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">disabled</code>
+                  </td>
+                  <td>Disables the color picker.</td>
+                  <td style="text-align: center">
+                    <p-icon label="yes" name="check-lg"></p-icon>
+                  </td>
+                  <td>
+                    <code>boolean</code>
+                  </td>
+                  <td>
+                    <code>false</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">hoist</code>
+                  </td>
+                  <td>
+                    Enable this option to prevent the panel from being clipped when the component is placed inside a
+                    container with
+                    <code>overflow: auto|scroll</code>. Hoisting uses a fixed positioning strategy that works in many,
+                    but not all, scenarios.
+                  </td>
+                  <td style="text-align: center"></td>
+                  <td>
+                    <code>boolean</code>
+                  </td>
+                  <td>
+                    <code>false</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">opacity</code>
+                  </td>
+                  <td>
+                    Shows the opacity slider. Enabling this will cause the formatted value to be HEXA, RGBA, or HSLA.
+                  </td>
+                  <td style="text-align: center"></td>
+                  <td>
+                    <code>boolean</code>
+                  </td>
+                  <td>
+                    <code>false</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">uppercase</code>
+                  </td>
+                  <td>By default, values are lowercase. With this attribute, values will be uppercase instead.</td>
+                  <td style="text-align: center"></td>
+                  <td>
+                    <code>boolean</code>
+                  </td>
+                  <td>
+                    <code>false</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">swatches</code>
+                  </td>
+                  <td>
+                    One or more predefined color swatches to display as presets in the color picker. Can include any
+                    format the color picker can parse, including HEX(A), RGB(A), HSL(A), HSV(A), and CSS color names.
+                    Each color must be separated by a semicolon (<code>;</code>). Alternatively, you can pass an array
+                    of color values to this property using JavaScript.
+                  </td>
+                  <td style="text-align: center"></td>
+                  <td>
+                    <code>string | string[]</code>
+                  </td>
+                  <td>
+                    <code>""</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">form</code>
+                  </td>
+                  <td>
+                    By default, form controls are associated with the nearest containing
+                    <code>&lt;form&gt;</code> element. This attribute allows you to place the form control outside of a
+                    form and associate it with the form that has this <code>id</code>. The form must be in the same
+                    document or shadow root for this to work.
+                  </td>
+                  <td style="text-align: center">
+                    <p-icon label="yes" name="check-lg"></p-icon>
+                  </td>
+                  <td>
+                    <code>string</code>
+                  </td>
+                  <td>
+                    <code>""</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">required</code>
+                  </td>
+                  <td>Makes the color picker a required field.</td>
+                  <td style="text-align: center">
+                    <p-icon label="yes" name="check-lg"></p-icon>
+                  </td>
+                  <td>
+                    <code>boolean</code>
+                  </td>
+                  <td>
+                    <code>false</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">validity</code>
+                  </td>
+                  <td>Gets the validity state object</td>
+                  <td style="text-align: center"></td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <code class="nowrap">validationMessage</code>
+                  </td>
+                  <td>Gets the validation message</td>
+                  <td style="text-align: center"></td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>updateComplete</code></td>
+                  <td>
+                    A read-only promise that resolves when the component has
+                    <a href="/getting-started/usage?#component-rendering-and-updating">finished updating</a>.
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em
+              >Learn more about
+              <a href="/getting-started/usage#attributes-and-properties">attributes and properties</a>.</em
+            >
+          </p>
+
+          <h2 id="events" class="anchor-heading">Events<a href="#events" aria-label='Direct link to "Events"'></a></h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name" data-flavor="html">Name</th>
+                  <th class="table-name" data-flavor="react">React Event</th>
+                  <th class="table-description">Description</th>
+                  <th class="table-event-detail">Event Detail</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-flavor="html"><code class="nowrap">p-blur</code></td>
+                  <td data-flavor="react"><code class="nowrap">onPBlur</code></td>
+                  <td>Emitted when the color picker loses focus.</td>
+                  <td>-</td>
+                </tr>
+
+                <tr>
+                  <td data-flavor="html"><code class="nowrap">p-change</code></td>
+                  <td data-flavor="react"><code class="nowrap">onPChange</code></td>
+                  <td>Emitted when the color picker’s value changes.</td>
+                  <td>-</td>
+                </tr>
+
+                <tr>
+                  <td data-flavor="html"><code class="nowrap">p-focus</code></td>
+                  <td data-flavor="react"><code class="nowrap">onPFocus</code></td>
+                  <td>Emitted when the color picker receives focus.</td>
+                  <td>-</td>
+                </tr>
+
+                <tr>
+                  <td data-flavor="html"><code class="nowrap">p-input</code></td>
+                  <td data-flavor="react"><code class="nowrap">onPInput</code></td>
+                  <td>Emitted when the color picker receives input.</td>
+                  <td>-</td>
+                </tr>
+
+                <tr>
+                  <td data-flavor="html"><code class="nowrap">p-invalid</code></td>
+                  <td data-flavor="react"><code class="nowrap">onPInvalid</code></td>
+                  <td>
+                    Emitted when the form control has been checked for validity and its constraints aren’t satisfied.
+                  </td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em>Learn more about <a href="/getting-started/usage#events">events</a>.</em>
+          </p>
+
+          <h2 id="methods" class="anchor-heading">
+            Methods<a href="#methods" aria-label='Direct link to "Methods"'></a>
+          </h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name">Name</th>
+                  <th class="table-description">Description</th>
+                  <th class="table-arguments">Arguments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="nowrap"><code>focus()</code></td>
+                  <td>Sets focus on the color picker.</td>
+                  <td>
+                    <code> options: FocusOptions </code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>blur()</code></td>
+                  <td>Removes focus from the color picker.</td>
+                  <td>-</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>getFormattedValue()</code></td>
+                  <td>Returns the current value as a string in the specified format.</td>
+                  <td>
+                    <code> format: "hex" | "hexa" | "rgb" | "rgba" | "hsl" | "hsla" | "hsv" | "hsva" </code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>checkValidity()</code></td>
+                  <td>
+                    Checks for validity but does not show a validation message. Returns <code>true</code> when valid and
+                    <code>false</code> when invalid.
+                  </td>
+                  <td>-</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>getForm()</code></td>
+                  <td>Gets the associated form, if one exists.</td>
+                  <td>-</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>reportValidity()</code></td>
+                  <td>Checks for validity and shows the browser’s validation message if the control is invalid.</td>
+                  <td>-</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>setCustomValidity()</code></td>
+                  <td>Sets a custom validation message. Pass an empty string to restore validity.</td>
+                  <td>
+                    <code> message: string </code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em>Learn more about <a href="/getting-started/usage#methods">methods</a>.</em>
+          </p>
+
+          <h2 id="custom-properties" class="anchor-heading">
+            Custom Properties<a href="#custom-properties" aria-label='Direct link to "Custom Properties"'></a>
+          </h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name">Name</th>
+                  <th class="table-description">Description</th>
+                  <th class="table-default">Default</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="nowrap"><code>--grid-width</code></td>
+                  <td>The width of the color grid.</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>--grid-height</code></td>
+                  <td>The height of the color grid.</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>--grid-handle-size</code></td>
+                  <td>The size of the color grid’s handle.</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>--slider-height</code></td>
+                  <td>The height of the hue and alpha sliders.</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>--slider-handle-size</code></td>
+                  <td>The diameter of the slider’s handle.</td>
+                  <td></td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>--swatch-size</code></td>
+                  <td>The size of each predefined color swatch.</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em
+              >Learn more about
+              <a href="/getting-started/usage#custom-properties">customizing CSS custom properties</a>.</em
+            >
+          </p>
+
+          <h2 id="parts" class="anchor-heading">Parts<a href="#parts" aria-label='Direct link to "Parts"'></a></h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name">Name</th>
+                  <th class="table-description">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="nowrap"><code>base</code></td>
+                  <td>The component’s base wrapper.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>trigger</code></td>
+                  <td>The color picker’s dropdown trigger.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>swatches</code></td>
+                  <td>The container that holds the swatches.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>swatch</code></td>
+                  <td>Each individual swatch.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>grid</code></td>
+                  <td>The color grid.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>grid-handle</code></td>
+                  <td>The color grid’s handle.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>slider</code></td>
+                  <td>Hue and opacity sliders.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>slider-handle</code></td>
+                  <td>Hue and opacity slider handles.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>hue-slider</code></td>
+                  <td>The hue slider.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>hue-slider-handle</code></td>
+                  <td>The hue slider’s handle.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>opacity-slider</code></td>
+                  <td>The opacity slider.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>opacity-slider-handle</code></td>
+                  <td>The opacity slider’s handle.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>preview</code></td>
+                  <td>The preview color.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>input</code></td>
+                  <td>The text input.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>eye-dropper-button</code></td>
+                  <td>The eye dropper button.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>eye-dropper-button__base</code></td>
+                  <td>The eye dropper button’s exported <code>button</code> part.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>eye-dropper-button__prefix</code></td>
+                  <td>The eye dropper button’s exported <code>prefix</code> part.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>eye-dropper-button__label</code></td>
+                  <td>The eye dropper button’s exported <code>label</code> part.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>eye-dropper-button__suffix</code></td>
+                  <td>The eye dropper button’s exported <code>suffix</code> part.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>eye-dropper-button__caret</code></td>
+                  <td>The eye dropper button’s exported <code>caret</code> part.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>format-button</code></td>
+                  <td>The format button.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>format-button__base</code></td>
+                  <td>The format button’s exported <code>button</code> part.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>format-button__prefix</code></td>
+                  <td>The format button’s exported <code>prefix</code> part.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>format-button__label</code></td>
+                  <td>The format button’s exported <code>label</code> part.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>format-button__suffix</code></td>
+                  <td>The format button’s exported <code>suffix</code> part.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>format-button__caret</code></td>
+                  <td>The format button’s exported <code>caret</code> part.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em>Learn more about <a href="/getting-started/customizing/#css-parts">customizing CSS parts</a>.</em>
+          </p>
+
+          <h2 id="dependencies" class="anchor-heading">
+            Dependencies<a href="#dependencies" aria-label='Direct link to "Dependencies"'></a>
+          </h2>
+
+          <p>This component automatically imports the following dependencies.</p>
+
+          <ul>
+            <li><code>&lt;p-button&gt;</code></li>
+
+            <li><code>&lt;p-button-group&gt;</code></li>
+
+            <li><code>&lt;p-dropdown&gt;</code></li>
+
+            <li><code>&lt;p-icon&gt;</code></li>
+
+            <li><code>&lt;p-input&gt;</code></li>
+
+            <li><code>&lt;p-popup&gt;</code></li>
+
+            <li><code>&lt;p-spinner&gt;</code></li>
+
+            <li><code>&lt;p-visually-hidden&gt;</code></li>
+          </ul>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

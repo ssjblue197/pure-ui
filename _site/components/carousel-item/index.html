@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en" data-layout="component" data-pure-ui-version="1.1.11">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A carousel item represent a slide within a carousel." />
+    <title>Carousel Item</title>
+
+    <meta name="turbo-cache-control" />
+
+    <link rel="stylesheet" href="/assets/styles/docs.css" />
+    <link rel="stylesheet" href="/assets/styles/code-previews.css" />
+    <link rel="stylesheet" href="/assets/styles/search.css" />
+
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="pure_ui" />
+    <meta name="twitter:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <meta property="og:url" content="https://pureui.xyz/components/carousel-item/" />
+    <meta property="og:title" content="Carousel Item" />
+    <meta property="og:description" content="A carousel item represent a slide within a carousel." />
+    <meta property="og:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <link rel="stylesheet" href="/dist/themes/light.css" />
+    <link rel="stylesheet" href="/dist/themes/dark.css" />
+    <script type="module" src="/dist/pure-ui-autoloader.js"></script>
+
+    <script>
+      (() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = localStorage.getItem('theme') || 'auto';
+        document.documentElement.classList.toggle(
+          'p-theme-dark',
+          theme === 'dark' || (theme === 'auto' && prefersDark)
+        );
+      })();
+    </script>
+
+    <script src="/assets/scripts/turbo.js" type="module"></script>
+    <script src="/assets/scripts/docs.js" defer=""></script>
+    <script src="/assets/scripts/code-previews.js" defer=""></script>
+    <script src="/assets/scripts/lunr.js" defer=""></script>
+    <script src="/assets/scripts/search.js" defer=""></script>
+  </head>
+  <body>
+    <button id="menu-toggle" type="button" aria-label="Menu">
+      <svg width="148" height="148" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="18" fill="none" fill-rule="evenodd" stroke-linecap="round">
+          <path d="M9.5 125.5h129M9.5 74.5h129M9.5 23.5h129"></path>
+        </g>
+      </svg>
+    </button>
+
+    <div id="icon-toolbar">
+      <a
+        href="https://github.com/ssjblue197/Pure-UI-Document"
+        title="View Pure UI on GitHub"
+        class="external-link"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <p-icon name="github"></p-icon>
+      </a>
+
+      <p-dropdown id="theme-selector" placement="bottom-end" distance="3">
+        <p-button slot="trigger" size="small" variant="text" caret="" title="Press \ to toggle">
+          <p-icon class="only-light" name="sun-fill"></p-icon>
+          <p-icon class="only-dark" name="moon-fill"></p-icon>
+        </p-button>
+        <p-menu>
+          <p-menu-item type="checkbox" value="light">Light</p-menu-item>
+          <p-menu-item type="checkbox" value="dark">Dark</p-menu-item>
+          <p-divider></p-divider>
+          <p-menu-item type="checkbox" value="auto">System</p-menu-item>
+        </p-menu>
+      </p-dropdown>
+    </div>
+
+    <aside id="sidebar" data-preserve-scroll="">
+      <header>
+        <a href="/">
+          <img src="/assets/images/wordmark.svg" alt="Pure UI" />
+        </a>
+        <div class="sidebar-version">1.1.11</div>
+      </header>
+
+      <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
+        <p-icon name="search"></p-icon>
+        <span>Search</span>
+      </button>
+
+      <nav>
+        <ul>
+          <li>
+            <h2>Getting Started</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/getting-started/installation">Installation</a></li>
+              <li><a href="/getting-started/usage">Usage</a></li>
+              <li><a href="/getting-started/themes">Themes</a></li>
+              <li><a href="/getting-started/customizing">Customizing</a></li>
+              <li><a href="/getting-started/form-controls">Form Controls</a></li>
+              <li><a href="/getting-started/localization">Localization</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Frameworks</h2>
+            <ul>
+              <li><a href="/frameworks/react">React</a></li>
+              <li><a href="/frameworks/vue">Vue</a></li>
+              <li><a href="/frameworks/angular">Angular</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="/resources/community">Community</a></li>
+              <li><a href="/resources/accessibility">Accessibility</a></li>
+              <li><a href="/resources/contributing">Contributing</a></li>
+              <li><a href="/resources/changelog">Changelog</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Components</h2>
+            <ul>
+              <li>
+                <a href="/components/alert"> Alert </a>
+              </li>
+
+              <li>
+                <a href="/components/animated-image"> Animated Image </a>
+              </li>
+
+              <li>
+                <a href="/components/animation"> Animation </a>
+              </li>
+
+              <li>
+                <a href="/components/avatar"> Avatar </a>
+              </li>
+
+              <li>
+                <a href="/components/badge"> Badge </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb"> Breadcrumb </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb-item"> Breadcrumb Item </a>
+              </li>
+
+              <li>
+                <a href="/components/button"> Button </a>
+              </li>
+
+              <li>
+                <a href="/components/button-group"> Button Group </a>
+              </li>
+
+              <li>
+                <a href="/components/calendar"> Calendar </a>
+              </li>
+
+              <li>
+                <a href="/components/card"> Card </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel"> Carousel </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel-item" class="active-link"> Carousel Item </a>
+              </li>
+
+              <li>
+                <a href="/components/checkbox"> Checkbox </a>
+              </li>
+
+              <li>
+                <a href="/components/color-picker"> Color Picker </a>
+              </li>
+
+              <li>
+                <a href="/components/copy-button"> Copy Button </a>
+              </li>
+
+              <li>
+                <a href="/components/details"> Details </a>
+              </li>
+
+              <li>
+                <a href="/components/dialog"> Dialog </a>
+              </li>
+
+              <li>
+                <a href="/components/divider"> Divider </a>
+              </li>
+
+              <li>
+                <a href="/components/drawer"> Drawer </a>
+              </li>
+
+              <li>
+                <a href="/components/dropdown"> Dropdown </a>
+              </li>
+
+              <li>
+                <a href="/components/format-bytes"> Format Bytes </a>
+              </li>
+
+              <li>
+                <a href="/components/format-date"> Format Date </a>
+              </li>
+
+              <li>
+                <a href="/components/format-number"> Format Number </a>
+              </li>
+
+              <li>
+                <a href="/components/icon"> Icon </a>
+              </li>
+
+              <li>
+                <a href="/components/icon-button"> Icon Button </a>
+              </li>
+
+              <li>
+                <a href="/components/image-comparer"> Image Comparer </a>
+              </li>
+
+              <li>
+                <a href="/components/include"> Include </a>
+              </li>
+
+              <li>
+                <a href="/components/input"> Input </a>
+              </li>
+
+              <li>
+                <a href="/components/menu"> Menu </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-item"> Menu Item </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-label"> Menu Label </a>
+              </li>
+
+              <li>
+                <a href="/components/mutation-observer"> Mutation Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/option"> Option </a>
+              </li>
+
+              <li>
+                <a href="/components/paginate"> Paginate </a>
+              </li>
+
+              <li>
+                <a href="/components/popup"> Popup </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-bar"> Progress Bar </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-ring"> Progress Ring </a>
+              </li>
+
+              <li>
+                <a href="/components/qr-code"> QR Code </a>
+              </li>
+
+              <li>
+                <a href="/components/radio"> Radio </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-button"> Radio Button </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-group"> Radio Group </a>
+              </li>
+
+              <li>
+                <a href="/components/range"> Range </a>
+              </li>
+
+              <li>
+                <a href="/components/rating"> Rating </a>
+              </li>
+
+              <li>
+                <a href="/components/relative-time"> Relative Time </a>
+              </li>
+
+              <li>
+                <a href="/components/resize-observer"> Resize Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/select"> Select </a>
+              </li>
+
+              <li>
+                <a href="/components/skeleton"> Skeleton </a>
+              </li>
+
+              <li>
+                <a href="/components/spinner"> Spinner </a>
+              </li>
+
+              <li>
+                <a href="/components/split-panel"> Split Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/switch"> Switch </a>
+              </li>
+
+              <li>
+                <a href="/components/tab"> Tab </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-group"> Tab Group </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-panel"> Tab Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/tag"> Tag </a>
+              </li>
+
+              <li>
+                <a href="/components/textarea"> Textarea </a>
+              </li>
+
+              <li>
+                <a href="/components/tooltip"> Tooltip </a>
+              </li>
+
+              <li>
+                <a href="/components/tree"> Tree </a>
+              </li>
+
+              <li>
+                <a href="/components/tree-item"> Tree Item </a>
+              </li>
+
+              <li>
+                <a href="/components/visually-hidden"> Visually Hidden </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h2>Design Tokens</h2>
+            <ul>
+              <li><a href="/tokens/typography">Typography</a></li>
+              <li><a href="/tokens/color">Color</a></li>
+              <li><a href="/tokens/spacing">Spacing</a></li>
+              <li><a href="/tokens/elevation">Elevation</a></li>
+              <li><a href="/tokens/border-radius">Border Radius</a></li>
+              <li><a href="/tokens/transition">Transition</a></li>
+              <li><a href="/tokens/z-index">Z-index</a></li>
+              <li><a href="/tokens/more">More Tokens</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Tutorials</h2>
+            <ul>
+              <li><a href="/tutorials/integrating-with-astro">Integrating with Astro</a></li>
+              <li><a href="/tutorials/integrating-with-laravel">Integrating with Laravel</a></li>
+              <li><a href="/tutorials/integrating-with-nextjs">Integrating with NextJS</a></li>
+              <li><a href="/tutorials/integrating-with-rails">Integrating with Rails</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <article id="content" class="content content--with-toc">
+        <div class="content__toc">
+          <ul>
+            <li class="top"><a href="#">Carousel Item</a></li>
+            <li data-level="2"><a href="#importing">Importing</a></li>
+            <li data-level="2"><a href="#slots">Slots</a></li>
+            <li data-level="2"><a href="#custom-properties">Custom Properties</a></li>
+          </ul>
+        </div>
+
+        <div class="content__body">
+          <header class="component-header">
+            <h1>Carousel Item</h1>
+
+            <div class="component-header__tag">
+              <code>&lt;p-carousel-item&gt; | PCarouselItem</code>
+            </div>
+
+            <div class="component-header__info">
+              <p-badge variant="neutral" pill=""> Since 1.0 </p-badge>
+              <p-badge variant="warning" pill="" style="text-transform: capitalize"> experimental </p-badge>
+            </div>
+          </header>
+
+          <p class="component-summary">
+            A carousel item represent a slide within a <a href="/components/carousel">carousel</a>.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-carousel pagination="">
+                <p-carousel-item>
+                  <img
+                    alt="The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash"
+                    src="/assets/examples/carousel/mountains.jpg"
+                  />
+                </p-carousel-item>
+                <p-carousel-item>
+                  <img
+                    alt="A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash"
+                    src="/assets/examples/carousel/waterfall.jpg"
+                  />
+                </p-carousel-item>
+                <p-carousel-item>
+                  <img
+                    alt="The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash"
+                    src="/assets/examples/carousel/sunset.jpg"
+                  />
+                </p-carousel-item>
+                <p-carousel-item>
+                  <img
+                    alt="A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash"
+                    src="/assets/examples/carousel/field.jpg"
+                  />
+                </p-carousel-item>
+                <p-carousel-item>
+                  <img
+                    alt="A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash"
+                    src="/assets/examples/carousel/valley.jpg"
+                  />
+                </p-carousel-item>
+              </p-carousel>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-79">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-320"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-carousel</span> <span class="token attr-name">pagination</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-carousel-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>
+      <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash<span class="token punctuation">"</span></span>
+      <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/examples/carousel/mountains.jpg<span class="token punctuation">"</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-carousel-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-carousel-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>
+      <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash<span class="token punctuation">"</span></span>
+      <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/examples/carousel/waterfall.jpg<span class="token punctuation">"</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-carousel-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-carousel-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>
+      <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash<span class="token punctuation">"</span></span>
+      <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/examples/carousel/sunset.jpg<span class="token punctuation">"</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-carousel-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-carousel-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>
+      <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash<span class="token punctuation">"</span></span>
+      <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/examples/carousel/field.jpg<span class="token punctuation">"</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-carousel-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-carousel-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>
+      <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash<span class="token punctuation">"</span></span>
+      <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/examples/carousel/valley.jpg<span class="token punctuation">"</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-carousel-item</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-carousel</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-320"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-321"><span class="token keyword">import</span> PCarousel <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/carousel'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> PCarouselItem <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/carousel-item'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PCarousel</span></span> <span class="token attr-name">pagination</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PCarouselItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>
+        <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>The sun shines on the mountains and trees - Photo by Adam Kool on Unsplash<span class="token punctuation">"</span></span>
+        <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/examples/carousel/mountains.jpg<span class="token punctuation">"</span></span>
+      <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PCarouselItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PCarouselItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>
+        <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A waterfall in the middle of a forest - Photo by Thomas Kelly on Unsplash<span class="token punctuation">"</span></span>
+        <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/examples/carousel/waterfall.jpg<span class="token punctuation">"</span></span>
+      <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PCarouselItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PCarouselItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>
+        <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>The sun is setting over a lavender field - Photo by Leonard Cotte on Unsplash<span class="token punctuation">"</span></span>
+        <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/examples/carousel/sunset.jpg<span class="token punctuation">"</span></span>
+      <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PCarouselItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PCarouselItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>
+        <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A field of grass with the sun setting in the background - Photo by Sapan Patel on Unsplash<span class="token punctuation">"</span></span>
+        <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/examples/carousel/field.jpg<span class="token punctuation">"</span></span>
+      <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PCarouselItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PCarouselItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>
+        <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A scenic view of a mountain with clouds rolling in - Photo by V2osk on Unsplash<span class="token punctuation">"</span></span>
+        <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/examples/carousel/valley.jpg<span class="token punctuation">"</span></span>
+      <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PCarouselItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PCarousel</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-321"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-79"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div role="alert" class="callout callout--tip">
+            <p>Additional demonstrations can be found in the <a href="/components/carousel">carousel examples</a>.</p>
+          </div>
+
+          <h2 id="importing" class="anchor-heading">
+            Importing<a href="#importing" aria-label='Direct link to "Importing"'></a>
+          </h2>
+          <p>
+            If you’re using the autoloader or the traditional loader, you can ignore this section. Otherwise, feel free
+            to use any of the following snippets to
+            <a href="/getting-started/installation#cherry-picking">cherry pick</a> this component.
+          </p>
+
+          <p-tab-group>
+            <p-tab slot="nav" panel="script">Script</p-tab>
+            <p-tab slot="nav" panel="import">Import</p-tab>
+            <p-tab slot="nav" panel="bundler">Bundler</p-tab>
+            <p-tab slot="nav" panel="react">React</p-tab>
+
+            <p-tab-panel name="script">
+              <p>
+                To import this component from
+                <a
+                  href="https://www.jsdelivr.com/package/npm/pure-uikit"
+                  class="external-link"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >the CDN</a
+                >
+                using a script tag:
+              </p>
+              <pre><code class="language-html" id="code-block-322"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/components/carousel-item/carousel-item.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></code><p-copy-button class="copy-code-button" from="code-block-322"></p-copy-button></pre>
+            </p-tab-panel>
+
+            <p-tab-panel name="import">
+              <p>
+                To import this component from
+                <a
+                  href="https://www.jsdelivr.com/package/npm/pure-uikit"
+                  class="external-link"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >the CDN</a
+                >
+                using a JavaScript import:
+              </p>
+              <pre><code class="language-js" id="code-block-323"><span class="token keyword">import</span> <span class="token string">'https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/components/carousel-item/carousel-item.js'</span><span class="token punctuation">;</span></code><p-copy-button class="copy-code-button" from="code-block-323"></p-copy-button></pre>
+            </p-tab-panel>
+
+            <p-tab-panel name="bundler">
+              <p>To import this component using <a href="/getting-started/installation#bundling">a bundler</a>:</p>
+              <pre><code class="language-js" id="code-block-324"><span class="token keyword">import</span> <span class="token string">'pure-uikit/dist/components/carousel-item/carousel-item.js'</span><span class="token punctuation">;</span></code><p-copy-button class="copy-code-button" from="code-block-324"></p-copy-button></pre>
+            </p-tab-panel>
+
+            <p-tab-panel name="react">
+              <p>To import this component as a <a href="/frameworks/react">React component</a>:</p>
+              <pre><code class="language-js" id="code-block-325"><span class="token keyword">import</span> PCarouselItem <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/carousel-item'</span><span class="token punctuation">;</span></code><p-copy-button class="copy-code-button" from="code-block-325"></p-copy-button></pre>
+            </p-tab-panel>
+          </p-tab-group>
+
+          <h2 id="slots" class="anchor-heading">Slots<a href="#slots" aria-label='Direct link to "Slots"'></a></h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name">Name</th>
+                  <th class="table-description">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="nowrap">(default)</td>
+                  <td>The carousel item’s content..</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em>Learn more about <a href="/getting-started/usage#slots">using slots</a>.</em>
+          </p>
+
+          <h2 id="custom-properties" class="anchor-heading">
+            Custom Properties<a href="#custom-properties" aria-label='Direct link to "Custom Properties"'></a>
+          </h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name">Name</th>
+                  <th class="table-description">Description</th>
+                  <th class="table-default">Default</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="nowrap"><code>--aspect-ratio</code></td>
+                  <td>The slide’s aspect ratio. Inherited from the carousel by default.</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em
+              >Learn more about
+              <a href="/getting-started/usage#custom-properties">customizing CSS custom properties</a>.</em
+            >
+          </p>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

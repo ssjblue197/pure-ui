@@ -1,0 +1,1740 @@
+<!doctype html>
+<html lang="en" data-layout="component" data-pure-ui-version="1.1.11">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Trees allow you to display a hierarchical list of selectable tree items. Items with children can be expanded and collapsed as desired by the user."
+    />
+    <title>Tree</title>
+
+    <meta name="turbo-cache-control" />
+
+    <link rel="stylesheet" href="/assets/styles/docs.css" />
+    <link rel="stylesheet" href="/assets/styles/code-previews.css" />
+    <link rel="stylesheet" href="/assets/styles/search.css" />
+
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="pure_ui" />
+    <meta name="twitter:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <meta property="og:url" content="https://pureui.xyz/components/tree/" />
+    <meta property="og:title" content="Tree" />
+    <meta
+      property="og:description"
+      content="Trees allow you to display a hierarchical list of selectable tree items. Items with children can be expanded and collapsed as desired by the user."
+    />
+    <meta property="og:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <link rel="stylesheet" href="/dist/themes/light.css" />
+    <link rel="stylesheet" href="/dist/themes/dark.css" />
+    <script type="module" src="/dist/pure-ui-autoloader.js"></script>
+
+    <script>
+      (() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = localStorage.getItem('theme') || 'auto';
+        document.documentElement.classList.toggle(
+          'p-theme-dark',
+          theme === 'dark' || (theme === 'auto' && prefersDark)
+        );
+      })();
+    </script>
+
+    <script src="/assets/scripts/turbo.js" type="module"></script>
+    <script src="/assets/scripts/docs.js" defer=""></script>
+    <script src="/assets/scripts/code-previews.js" defer=""></script>
+    <script src="/assets/scripts/lunr.js" defer=""></script>
+    <script src="/assets/scripts/search.js" defer=""></script>
+  </head>
+  <body>
+    <button id="menu-toggle" type="button" aria-label="Menu">
+      <svg width="148" height="148" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="18" fill="none" fill-rule="evenodd" stroke-linecap="round">
+          <path d="M9.5 125.5h129M9.5 74.5h129M9.5 23.5h129"></path>
+        </g>
+      </svg>
+    </button>
+
+    <div id="icon-toolbar">
+      <a
+        href="https://github.com/ssjblue197/Pure-UI-Document"
+        title="View Pure UI on GitHub"
+        class="external-link"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <p-icon name="github"></p-icon>
+      </a>
+
+      <p-dropdown id="theme-selector" placement="bottom-end" distance="3">
+        <p-button slot="trigger" size="small" variant="text" caret="" title="Press \ to toggle">
+          <p-icon class="only-light" name="sun-fill"></p-icon>
+          <p-icon class="only-dark" name="moon-fill"></p-icon>
+        </p-button>
+        <p-menu>
+          <p-menu-item type="checkbox" value="light">Light</p-menu-item>
+          <p-menu-item type="checkbox" value="dark">Dark</p-menu-item>
+          <p-divider></p-divider>
+          <p-menu-item type="checkbox" value="auto">System</p-menu-item>
+        </p-menu>
+      </p-dropdown>
+    </div>
+
+    <aside id="sidebar" data-preserve-scroll="">
+      <header>
+        <a href="/">
+          <img src="/assets/images/wordmark.svg" alt="Pure UI" />
+        </a>
+        <div class="sidebar-version">1.1.11</div>
+      </header>
+
+      <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
+        <p-icon name="search"></p-icon>
+        <span>Search</span>
+      </button>
+
+      <nav>
+        <ul>
+          <li>
+            <h2>Getting Started</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/getting-started/installation">Installation</a></li>
+              <li><a href="/getting-started/usage">Usage</a></li>
+              <li><a href="/getting-started/themes">Themes</a></li>
+              <li><a href="/getting-started/customizing">Customizing</a></li>
+              <li><a href="/getting-started/form-controls">Form Controls</a></li>
+              <li><a href="/getting-started/localization">Localization</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Frameworks</h2>
+            <ul>
+              <li><a href="/frameworks/react">React</a></li>
+              <li><a href="/frameworks/vue">Vue</a></li>
+              <li><a href="/frameworks/angular">Angular</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="/resources/community">Community</a></li>
+              <li><a href="/resources/accessibility">Accessibility</a></li>
+              <li><a href="/resources/contributing">Contributing</a></li>
+              <li><a href="/resources/changelog">Changelog</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Components</h2>
+            <ul>
+              <li>
+                <a href="/components/alert"> Alert </a>
+              </li>
+
+              <li>
+                <a href="/components/animated-image"> Animated Image </a>
+              </li>
+
+              <li>
+                <a href="/components/animation"> Animation </a>
+              </li>
+
+              <li>
+                <a href="/components/avatar"> Avatar </a>
+              </li>
+
+              <li>
+                <a href="/components/badge"> Badge </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb"> Breadcrumb </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb-item"> Breadcrumb Item </a>
+              </li>
+
+              <li>
+                <a href="/components/button"> Button </a>
+              </li>
+
+              <li>
+                <a href="/components/button-group"> Button Group </a>
+              </li>
+
+              <li>
+                <a href="/components/calendar"> Calendar </a>
+              </li>
+
+              <li>
+                <a href="/components/card"> Card </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel"> Carousel </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel-item"> Carousel Item </a>
+              </li>
+
+              <li>
+                <a href="/components/checkbox"> Checkbox </a>
+              </li>
+
+              <li>
+                <a href="/components/color-picker"> Color Picker </a>
+              </li>
+
+              <li>
+                <a href="/components/copy-button"> Copy Button </a>
+              </li>
+
+              <li>
+                <a href="/components/details"> Details </a>
+              </li>
+
+              <li>
+                <a href="/components/dialog"> Dialog </a>
+              </li>
+
+              <li>
+                <a href="/components/divider"> Divider </a>
+              </li>
+
+              <li>
+                <a href="/components/drawer"> Drawer </a>
+              </li>
+
+              <li>
+                <a href="/components/dropdown"> Dropdown </a>
+              </li>
+
+              <li>
+                <a href="/components/format-bytes"> Format Bytes </a>
+              </li>
+
+              <li>
+                <a href="/components/format-date"> Format Date </a>
+              </li>
+
+              <li>
+                <a href="/components/format-number"> Format Number </a>
+              </li>
+
+              <li>
+                <a href="/components/icon"> Icon </a>
+              </li>
+
+              <li>
+                <a href="/components/icon-button"> Icon Button </a>
+              </li>
+
+              <li>
+                <a href="/components/image-comparer"> Image Comparer </a>
+              </li>
+
+              <li>
+                <a href="/components/include"> Include </a>
+              </li>
+
+              <li>
+                <a href="/components/input"> Input </a>
+              </li>
+
+              <li>
+                <a href="/components/menu"> Menu </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-item"> Menu Item </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-label"> Menu Label </a>
+              </li>
+
+              <li>
+                <a href="/components/mutation-observer"> Mutation Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/option"> Option </a>
+              </li>
+
+              <li>
+                <a href="/components/paginate"> Paginate </a>
+              </li>
+
+              <li>
+                <a href="/components/popup"> Popup </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-bar"> Progress Bar </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-ring"> Progress Ring </a>
+              </li>
+
+              <li>
+                <a href="/components/qr-code"> QR Code </a>
+              </li>
+
+              <li>
+                <a href="/components/radio"> Radio </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-button"> Radio Button </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-group"> Radio Group </a>
+              </li>
+
+              <li>
+                <a href="/components/range"> Range </a>
+              </li>
+
+              <li>
+                <a href="/components/rating"> Rating </a>
+              </li>
+
+              <li>
+                <a href="/components/relative-time"> Relative Time </a>
+              </li>
+
+              <li>
+                <a href="/components/resize-observer"> Resize Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/select"> Select </a>
+              </li>
+
+              <li>
+                <a href="/components/skeleton"> Skeleton </a>
+              </li>
+
+              <li>
+                <a href="/components/spinner"> Spinner </a>
+              </li>
+
+              <li>
+                <a href="/components/split-panel"> Split Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/switch"> Switch </a>
+              </li>
+
+              <li>
+                <a href="/components/tab"> Tab </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-group"> Tab Group </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-panel"> Tab Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/tag"> Tag </a>
+              </li>
+
+              <li>
+                <a href="/components/textarea"> Textarea </a>
+              </li>
+
+              <li>
+                <a href="/components/tooltip"> Tooltip </a>
+              </li>
+
+              <li>
+                <a href="/components/tree" class="active-link"> Tree </a>
+              </li>
+
+              <li>
+                <a href="/components/tree-item"> Tree Item </a>
+              </li>
+
+              <li>
+                <a href="/components/visually-hidden"> Visually Hidden </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h2>Design Tokens</h2>
+            <ul>
+              <li><a href="/tokens/typography">Typography</a></li>
+              <li><a href="/tokens/color">Color</a></li>
+              <li><a href="/tokens/spacing">Spacing</a></li>
+              <li><a href="/tokens/elevation">Elevation</a></li>
+              <li><a href="/tokens/border-radius">Border Radius</a></li>
+              <li><a href="/tokens/transition">Transition</a></li>
+              <li><a href="/tokens/z-index">Z-index</a></li>
+              <li><a href="/tokens/more">More Tokens</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Tutorials</h2>
+            <ul>
+              <li><a href="/tutorials/integrating-with-astro">Integrating with Astro</a></li>
+              <li><a href="/tutorials/integrating-with-laravel">Integrating with Laravel</a></li>
+              <li><a href="/tutorials/integrating-with-nextjs">Integrating with NextJS</a></li>
+              <li><a href="/tutorials/integrating-with-rails">Integrating with Rails</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <article id="content" class="content content--with-toc">
+        <div class="content__toc">
+          <ul>
+            <li class="top"><a href="#">Tree</a></li>
+            <li data-level="2"><a href="#examples">Examples</a></li>
+            <li data-level="3"><a href="#selection-modes">Selection Modes</a></li>
+            <li data-level="3"><a href="#showing-indent-guides">Showing Indent Guides</a></li>
+            <li data-level="3"><a href="#lazy-loading">Lazy Loading</a></li>
+            <li data-level="3">
+              <a href="#customizing-the-expand-and-collapse-icons">Customizing the Expand and Collapse Icons</a>
+            </li>
+            <li data-level="3"><a href="#with-icons">With Icons</a></li>
+            <li data-level="2"><a href="#importing">Importing</a></li>
+            <li data-level="2"><a href="#slots">Slots</a></li>
+            <li data-level="2"><a href="#properties">Properties</a></li>
+            <li data-level="2"><a href="#events">Events</a></li>
+            <li data-level="2"><a href="#custom-properties">Custom Properties</a></li>
+            <li data-level="2"><a href="#parts">Parts</a></li>
+          </ul>
+        </div>
+
+        <div class="content__body">
+          <header class="component-header">
+            <h1>Tree</h1>
+
+            <div class="component-header__tag">
+              <code>&lt;p-tree&gt; | PTree</code>
+            </div>
+
+            <div class="component-header__info">
+              <p-badge variant="neutral" pill=""> Since 1.0 </p-badge>
+              <p-badge variant="primary" pill="" style="text-transform: capitalize"> stable </p-badge>
+            </div>
+          </header>
+
+          <p class="component-summary">
+            Trees allow you to display a hierarchical list of selectable <a href="/components/tree-item">tree items</a>.
+            Items with children can be expanded and collapsed as desired by the user.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-tree>
+                <p-tree-item>
+                  Deciduous
+                  <p-tree-item>Birch</p-tree-item>
+                  <p-tree-item>
+                    Maple
+                    <p-tree-item>Field maple</p-tree-item>
+                    <p-tree-item>Red maple</p-tree-item>
+                    <p-tree-item>Sugar maple</p-tree-item>
+                  </p-tree-item>
+                  <p-tree-item>Oak</p-tree-item>
+                </p-tree-item>
+
+                <p-tree-item>
+                  Coniferous
+                  <p-tree-item>Cedar</p-tree-item>
+                  <p-tree-item>Pine</p-tree-item>
+                  <p-tree-item>Spruce</p-tree-item>
+                </p-tree-item>
+
+                <p-tree-item>
+                  Non-trees
+                  <p-tree-item>Bamboo</p-tree-item>
+                  <p-tree-item>Cactus</p-tree-item>
+                  <p-tree-item>Fern</p-tree-item>
+                </p-tree-item>
+              </p-tree>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-367">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-1081"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    Deciduous
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Birch<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      Maple
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Field maple<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Red maple<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Sugar maple<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Oak<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    Coniferous
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Cedar<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Pine<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Spruce<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    Non-trees
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Bamboo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Cactus<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Fern<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-1081"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-1082"><span class="token keyword">import</span> PTree <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> PTreeItem <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree-item'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTree</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      Deciduous
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Birch</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        Maple
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Field maple</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Red maple</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Sugar maple</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Oak</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      Coniferous
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Cedar</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Pine</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Spruce</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      Non-trees
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Bamboo</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Cactus</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Fern</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTree</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-1082"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-367"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- prettier-ignore -->
+
+          <h2 id="examples" class="anchor-heading">Examples<a href="#examples" aria-label="Direct link to &quot;Examples&quot;"></a></h2>
+          <h3 id="selection-modes" class="anchor-heading">
+            Selection Modes<a href="#selection-modes" aria-label='Direct link to "Selection Modes"'></a>
+          </h3>
+          <p>The <code>selection</code> attribute lets you change the selection behavior of the tree.</p>
+          <ul>
+            <li>Use <code>single</code> to allow the selection of a single item (default).</li>
+            <li>Use <code>multiple</code> to allow the selection of multiple items.</li>
+            <li>Use <code>leaf</code> to only allow leaf nodes to be selected.</li>
+          </ul>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-select id="selection-mode" value="single" label="Selection">
+                <p-option value="single">Single</p-option>
+                <p-option value="multiple">Multiple</p-option>
+                <p-option value="leaf">Leaf</p-option>
+              </p-select>
+
+              <br />
+
+              <p-tree class="tree-selectable">
+                <p-tree-item>
+                  Item 1
+                  <p-tree-item>
+                    Item A
+                    <p-tree-item>Item Z</p-tree-item>
+                    <p-tree-item>Item Y</p-tree-item>
+                    <p-tree-item>Item X</p-tree-item>
+                  </p-tree-item>
+                  <p-tree-item>Item B</p-tree-item>
+                  <p-tree-item>Item C</p-tree-item>
+                </p-tree-item>
+                <p-tree-item>Item 2</p-tree-item>
+                <p-tree-item>Item 3</p-tree-item>
+              </p-tree>
+
+              <script>
+                (() => {
+                  const selectionMode = document.querySelector('#selection-mode');
+                  const tree = document.querySelector('.tree-selectable');
+
+                  selectionMode.addEventListener('p-change', () => {
+                    tree.querySelectorAll('p-tree-item').forEach(item => (item.selected = false));
+                    tree.selection = selectionMode.value;
+                  });
+                })();
+              </script>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-368">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-1083"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-select</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>selection-mode<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>single<span class="token punctuation">"</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Selection<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>single<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Single<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-option</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>multiple<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Multiple<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-option</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>leaf<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Leaf<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-option</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-select</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tree-selectable<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    Item 1
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      Item A
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Item Z<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Item Y<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Item X<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Item B<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Item C<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Item 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Item 3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">const</span> selectionMode <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#selection-mode'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> tree <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'.tree-selectable'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  selectionMode<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'p-change'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    tree<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">'p-tree-item'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>item<span class="token punctuation">.</span>selected <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    tree<span class="token punctuation">.</span>selection <span class="token operator">=</span> selectionMode<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-1083"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-1084"><span class="token keyword">import</span> PTree <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> PTreeItem <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree-item'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>selection<span class="token punctuation">,</span> setSelection<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token string">'single'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PSelect</span></span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Selection<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>selection<span class="token punctuation">}</span></span> <span class="token attr-name">onPChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token parameter">event</span> <span class="token operator">=&gt;</span> <span class="token function">setSelection</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PMenuItem</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>single<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">single</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PMenuItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PMenuItem</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>multiple<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">multiple</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PMenuItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PMenuItem</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>leaf<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">leaf</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PMenuItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PSelect</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTree</span></span> <span class="token attr-name">selection</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>selection<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+          Item 1
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+            Item A
+            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Item Z</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Item Y</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Item X</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Item B</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Item C</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Item 2</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Item 3</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTree</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-1084"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-368"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- prettier-ignore -->
+
+          <h3 id="showing-indent-guides" class="anchor-heading">Showing Indent Guides<a href="#showing-indent-guides" aria-label="Direct link to &quot;Showing Indent Guides&quot;"></a></h3>
+          <p>
+            Indent guides can be drawn by setting <code>--indent-guide-width</code>. You can also change the color,
+            offset, and style, using <code>--indent-guide-color</code>, <code>--indent-guide-style</code>, and
+            <code>--indent-guide-offset</code>, respectively.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-tree class="tree-with-lines">
+                <p-tree-item expanded="">
+                  Deciduous
+                  <p-tree-item>Birch</p-tree-item>
+                  <p-tree-item expanded="">
+                    Maple
+                    <p-tree-item>Field maple</p-tree-item>
+                    <p-tree-item>Red maple</p-tree-item>
+                    <p-tree-item>Sugar maple</p-tree-item>
+                  </p-tree-item>
+                  <p-tree-item>Oak</p-tree-item>
+                </p-tree-item>
+
+                <p-tree-item>
+                  Coniferous
+                  <p-tree-item>Cedar</p-tree-item>
+                  <p-tree-item>Pine</p-tree-item>
+                  <p-tree-item>Spruce</p-tree-item>
+                </p-tree-item>
+
+                <p-tree-item>
+                  Non-trees
+                  <p-tree-item>Bamboo</p-tree-item>
+                  <p-tree-item>Cactus</p-tree-item>
+                  <p-tree-item>Fern</p-tree-item>
+                </p-tree-item>
+              </p-tree>
+
+              <style>
+                .tree-with-lines {
+                  --indent-guide-width: 1px;
+                }
+              </style>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-369">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-1085"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tree-with-lines<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span> <span class="token attr-name">expanded</span><span class="token punctuation">&gt;</span></span>
+    Deciduous
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Birch<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span> <span class="token attr-name">expanded</span><span class="token punctuation">&gt;</span></span>
+      Maple
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Field maple<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Red maple<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Sugar maple<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Oak<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    Coniferous
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Cedar<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Pine<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Spruce<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    Non-trees
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Bamboo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Cactus<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Fern<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.tree-with-lines</span> <span class="token punctuation">{</span>
+    <span class="token property">--indent-guide-width</span><span class="token punctuation">:</span> 1px<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-1085"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-1086"><span class="token keyword">import</span> PTree <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> PTreeItem <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree-item'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTree</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tree-with-lines<span class="token punctuation">"</span></span> <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token string-property property">'--indent-guide-width'</span><span class="token operator">:</span> <span class="token string">'1px'</span> <span class="token punctuation">}</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span> <span class="token attr-name">expanded</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      Deciduous
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Birch</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span> <span class="token attr-name">expanded</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        Maple
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Field maple</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Red maple</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Sugar maple</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Oak</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      Coniferous
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Cedar</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Pine</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Spruce</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      Non-trees
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Bamboo</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Cactus</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Fern</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTree</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-1086"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-369"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- prettier-ignore -->
+
+          <h3 id="lazy-loading" class="anchor-heading">Lazy Loading<a href="#lazy-loading" aria-label="Direct link to &quot;Lazy Loading&quot;"></a></h3>
+          <p>
+            Use the <code>lazy</code> attribute on a tree item to indicate that the content is not yet present and will
+            be loaded later. When the user tries to expand the node, the <code>loading</code> state is set to
+            <code>true</code> and the <code>p-lazy-load</code> event will be emitted to allow you to load data
+            asynchronously. The item will remain in a loading state until its content is changed.
+          </p>
+          <p>
+            If you want to disable this behavior after the first load, simply remove the <code>lazy</code> attribute
+            and, on the next expand, the existing content will be shown instead.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-tree>
+                <p-tree-item lazy="">Available Trees</p-tree-item>
+              </p-tree>
+
+              <script type="module">
+                const lazyItem = document.querySelector('p-tree-item[lazy]');
+
+                lazyItem.addEventListener('p-lazy-load', () => {
+                  // Simulate asynchronous loading
+                  setTimeout(() => {
+                    const subItems = ['Birch', 'Cedar', 'Maple', 'Pine'];
+
+                    for (const item of subItems) {
+                      const treeItem = document.createElement('p-tree-item');
+                      treeItem.innerText = item;
+                      lazyItem.append(treeItem);
+                    }
+
+                    // Disable lazy mode once the content has been loaded
+                    lazyItem.lazy = false;
+                  }, 1000);
+                });
+              </script>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-370">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-1087"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span> <span class="token attr-name">lazy</span><span class="token punctuation">&gt;</span></span>Available Trees<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">const</span> lazyItem <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'p-tree-item[lazy]'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  lazyItem<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'p-lazy-load'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Simulate asynchronous loading</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> subItems <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Birch'</span><span class="token punctuation">,</span> <span class="token string">'Cedar'</span><span class="token punctuation">,</span> <span class="token string">'Maple'</span><span class="token punctuation">,</span> <span class="token string">'Pine'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> item <span class="token keyword">of</span> subItems<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> treeItem <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'p-tree-item'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        treeItem<span class="token punctuation">.</span>innerText <span class="token operator">=</span> item<span class="token punctuation">;</span>
+        lazyItem<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>treeItem<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token comment">// Disable lazy mode once the content has been loaded</span>
+      lazyItem<span class="token punctuation">.</span>lazy <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-1087"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-1088"><span class="token keyword">import</span> PTree <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> PTreeItem <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree-item'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>childItems<span class="token punctuation">,</span> setChildItems<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>lazy<span class="token punctuation">,</span> setLazy<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> <span class="token function-variable function">handleLazyLoad</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Simulate asynchronous loading</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token function">setChildItems</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'Birch'</span><span class="token punctuation">,</span> <span class="token string">'Cedar'</span><span class="token punctuation">,</span> <span class="token string">'Maple'</span><span class="token punctuation">,</span> <span class="token string">'Pine'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token comment">// Disable lazy mode once the content has been loaded</span>
+      <span class="token function">setLazy</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTree</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span> <span class="token attr-name">lazy</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>lazy<span class="token punctuation">}</span></span> <span class="token attr-name">onPLazyLoad</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>handleLazyLoad<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        Available Trees
+        </span><span class="token punctuation">{</span>childItems<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token punctuation">{</span>item<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTree</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-1088"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-370"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h3 id="customizing-the-expand-and-collapse-icons" class="anchor-heading">
+            Customizing the Expand and Collapse Icons<a
+              href="#customizing-the-expand-and-collapse-icons"
+              aria-label='Direct link to "Customizing the Expand and Collapse Icons"'
+            ></a>
+          </h3>
+          <p>
+            Use the <code>expand-icon</code> and <code>collapse-icon</code> slots to change the expand and collapse
+            icons, respectively. To disable the animation, override the <code>rotate</code> property on the
+            <code>expand-button</code> part as shown below.
+          </p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-tree class="custom-icons">
+                <p-icon name="plus-square" slot="expand-icon"></p-icon>
+                <p-icon name="dash-square" slot="collapse-icon"></p-icon>
+
+                <p-tree-item>
+                  Deciduous
+                  <p-tree-item>Birch</p-tree-item>
+                  <p-tree-item>
+                    Maple
+                    <p-tree-item>Field maple</p-tree-item>
+                    <p-tree-item>Red maple</p-tree-item>
+                    <p-tree-item>Sugar maple</p-tree-item>
+                  </p-tree-item>
+                  <p-tree-item>Oak</p-tree-item>
+                </p-tree-item>
+
+                <p-tree-item>
+                  Coniferous
+                  <p-tree-item>Cedar</p-tree-item>
+                  <p-tree-item>Pine</p-tree-item>
+                  <p-tree-item>Spruce</p-tree-item>
+                </p-tree-item>
+
+                <p-tree-item>
+                  Non-trees
+                  <p-tree-item>Bamboo</p-tree-item>
+                  <p-tree-item>Cactus</p-tree-item>
+                  <p-tree-item>Fern</p-tree-item>
+                </p-tree-item>
+              </p-tree>
+
+              <style>
+                .custom-icons p-tree-item::part(expand-button) {
+                  /* Disable the expand/collapse animation */
+                  rotate: none;
+                }
+              </style>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-371">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-1089"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>custom-icons<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-icon</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>plus-square<span class="token punctuation">"</span></span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>expand-icon<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-icon</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-icon</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dash-square<span class="token punctuation">"</span></span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>collapse-icon<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-icon</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    Deciduous
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Birch<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      Maple
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Field maple<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Red maple<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Sugar maple<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Oak<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    Coniferous
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Cedar<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Pine<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Spruce<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    Non-trees
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Bamboo<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Cactus<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>Fern<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.custom-icons p-tree-item::part(expand-button)</span> <span class="token punctuation">{</span>
+    <span class="token comment">/* Disable the expand/collapse animation */</span>
+    <span class="token property">rotate</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-1089"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-1090"><span class="token keyword">import</span> PTree <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> PTreeItem <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree-item'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTree</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PIcon</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>plus-square<span class="token punctuation">"</span></span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>expand-icon<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PIcon</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PIcon</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dash-square<span class="token punctuation">"</span></span> <span class="token attr-name">slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>collapse-icon<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PIcon</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      Deciduous
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Birch</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        Maple
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Field maple</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Red maple</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Sugar maple</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Oak</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      Coniferous
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Cedar</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Pine</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Spruce</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      Non-trees
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Bamboo</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Cactus</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Fern</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTree</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-1090"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-371"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- prettier-ignore -->
+
+          <h3 id="with-icons" class="anchor-heading">With Icons<a href="#with-icons" aria-label="Direct link to &quot;With Icons&quot;"></a></h3>
+          <p>Decorative icons can be used before labels to provide hints for each node.</p>
+
+          <div class="code-preview">
+            <div class="code-preview__preview">
+              <p-tree class="tree-with-icons">
+                <p-tree-item expanded="">
+                  <p-icon name="folder"></p-icon>
+                  Documents
+
+                  <p-tree-item>
+                    <p-icon name="folder"> </p-icon>
+                    Photos
+                    <p-tree-item>
+                      <p-icon name="image"></p-icon>
+                      birds.jpg
+                    </p-tree-item>
+                    <p-tree-item>
+                      <p-icon name="image"></p-icon>
+                      kitten.jpg
+                    </p-tree-item>
+                    <p-tree-item>
+                      <p-icon name="image"></p-icon>
+                      puppy.jpg
+                    </p-tree-item>
+                  </p-tree-item>
+
+                  <p-tree-item>
+                    <p-icon name="folder"></p-icon>
+                    Writing
+                    <p-tree-item>
+                      <p-icon name="file"></p-icon>
+                      draft.txt
+                    </p-tree-item>
+                    <p-tree-item>
+                      <p-icon name="file-pdf"></p-icon>
+                      final.pdf
+                    </p-tree-item>
+                    <p-tree-item>
+                      <p-icon name="file-bar-graph"></p-icon>
+                      sales.xls
+                    </p-tree-item>
+                  </p-tree-item>
+                </p-tree-item>
+              </p-tree>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-372">
+              <div class="code-preview__source code-preview__source--html" data-flavor="html">
+                <pre><code class="language-html" id="code-block-1091"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tree-with-icons<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span> <span class="token attr-name">expanded</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-icon</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>folder<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-icon</span><span class="token punctuation">&gt;</span></span>
+    Documents
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-icon</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>folder<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-icon</span><span class="token punctuation">&gt;</span></span>
+      Photos
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-icon</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>image<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-icon</span><span class="token punctuation">&gt;</span></span>
+        birds.jpg
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-icon</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>image<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-icon</span><span class="token punctuation">&gt;</span></span>
+        kitten.jpg
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-icon</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>image<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-icon</span><span class="token punctuation">&gt;</span></span>
+        puppy.jpg
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-icon</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>folder<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-icon</span><span class="token punctuation">&gt;</span></span>
+      Writing
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-icon</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-icon</span><span class="token punctuation">&gt;</span></span>
+        draft.txt
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-icon</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>file-pdf<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-icon</span><span class="token punctuation">&gt;</span></span>
+        final.pdf
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-icon</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>file-bar-graph<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-icon</span><span class="token punctuation">&gt;</span></span>
+        sales.xls
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree-item</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-tree</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-1091"></p-copy-button></pre>
+              </div>
+
+              <div class="code-preview__source code-preview__source--react" data-flavor="react">
+                <pre><code class="language-jsx" id="code-block-1092"><span class="token keyword">import</span> PIcon <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/icon'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> PTree <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> PTreeItem <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree-item'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">App</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTree</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>tree-with-icons<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span> <span class="token attr-name">expanded</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PIcon</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>folder<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+        Root
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PIcon</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>folder<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+          Folder 1</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PIcon</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>files<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+            File 1 - 1
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span> <span class="token attr-name">disabled</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PIcon</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>files<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+            File 1 - 2
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PIcon</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>files<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+            File 1 - 3
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PIcon</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>files<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+          Folder 2</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PIcon</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>files<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+            File 2 - 1
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PIcon</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>files<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+            File 2 - 2
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PIcon</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>files<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+          File 1
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTreeItem</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PTree</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-1092"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="false"
+                aria-controls="code-preview-source-group-372"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <button type="button" title="Show HTML code" class="code-preview__button code-preview__button--html">
+                HTML
+              </button>
+
+              <button type="button" title="Show React code" class="code-preview__button code-preview__button--react">
+                React
+              </button>
+
+              <button type="button" class="code-preview__button code-preview__button--codepen" title="Edit on CodePen">
+                <svg
+                  width="138"
+                  height="26"
+                  viewBox="0 0 138 26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <h2 id="importing" class="anchor-heading">
+            Importing<a href="#importing" aria-label='Direct link to "Importing"'></a>
+          </h2>
+          <p>
+            If you’re using the autoloader or the traditional loader, you can ignore this section. Otherwise, feel free
+            to use any of the following snippets to
+            <a href="/getting-started/installation#cherry-picking">cherry pick</a> this component.
+          </p>
+
+          <p-tab-group>
+            <p-tab slot="nav" panel="script">Script</p-tab>
+            <p-tab slot="nav" panel="import">Import</p-tab>
+            <p-tab slot="nav" panel="bundler">Bundler</p-tab>
+            <p-tab slot="nav" panel="react">React</p-tab>
+
+            <p-tab-panel name="script">
+              <p>
+                To import this component from
+                <a
+                  href="https://www.jsdelivr.com/package/npm/pure-uikit"
+                  class="external-link"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >the CDN</a
+                >
+                using a script tag:
+              </p>
+              <pre><code class="language-html" id="code-block-1093"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/components/tree/tree.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></code><p-copy-button class="copy-code-button" from="code-block-1093"></p-copy-button></pre>
+            </p-tab-panel>
+
+            <p-tab-panel name="import">
+              <p>
+                To import this component from
+                <a
+                  href="https://www.jsdelivr.com/package/npm/pure-uikit"
+                  class="external-link"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >the CDN</a
+                >
+                using a JavaScript import:
+              </p>
+              <pre><code class="language-js" id="code-block-1094"><span class="token keyword">import</span> <span class="token string">'https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/components/tree/tree.js'</span><span class="token punctuation">;</span></code><p-copy-button class="copy-code-button" from="code-block-1094"></p-copy-button></pre>
+            </p-tab-panel>
+
+            <p-tab-panel name="bundler">
+              <p>To import this component using <a href="/getting-started/installation#bundling">a bundler</a>:</p>
+              <pre><code class="language-js" id="code-block-1095"><span class="token keyword">import</span> <span class="token string">'pure-uikit/dist/components/tree/tree.js'</span><span class="token punctuation">;</span></code><p-copy-button class="copy-code-button" from="code-block-1095"></p-copy-button></pre>
+            </p-tab-panel>
+
+            <p-tab-panel name="react">
+              <p>To import this component as a <a href="/frameworks/react">React component</a>:</p>
+              <pre><code class="language-js" id="code-block-1096"><span class="token keyword">import</span> PTree <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/react/tree'</span><span class="token punctuation">;</span></code><p-copy-button class="copy-code-button" from="code-block-1096"></p-copy-button></pre>
+            </p-tab-panel>
+          </p-tab-group>
+
+          <h2 id="slots" class="anchor-heading">Slots<a href="#slots" aria-label='Direct link to "Slots"'></a></h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name">Name</th>
+                  <th class="table-description">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="nowrap">(default)</td>
+                  <td>The default slot.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap">
+                    <code>expand-icon</code>
+                  </td>
+                  <td>The icon to show when the tree item is expanded. Works best with <code>&lt;p-icon&gt;</code>.</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap">
+                    <code>collapse-icon</code>
+                  </td>
+                  <td>
+                    The icon to show when the tree item is collapsed. Works best with <code>&lt;p-icon&gt;</code>.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em>Learn more about <a href="/getting-started/usage#slots">using slots</a>.</em>
+          </p>
+
+          <h2 id="properties" class="anchor-heading">
+            Properties<a href="#properties" aria-label='Direct link to "Properties"'></a>
+          </h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name">Name</th>
+                  <th class="table-description">Description</th>
+                  <th class="table-reflects">Reflects</th>
+                  <th class="table-type">Type</th>
+                  <th class="table-default">Default</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <code class="nowrap">selection</code>
+                  </td>
+                  <td>
+                    The selection behavior of the tree. Single selection allows only one node to be selected at a time.
+                    Multiple displays checkboxes and allows more than one node to be selected. Leaf allows only leaf
+                    nodes to be selected.
+                  </td>
+                  <td style="text-align: center"></td>
+                  <td>
+                    <code>"single" | "multiple" | "leaf"</code>
+                  </td>
+                  <td>
+                    <code>"single"</code>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>updateComplete</code></td>
+                  <td>
+                    A read-only promise that resolves when the component has
+                    <a href="/getting-started/usage?#component-rendering-and-updating">finished updating</a>.
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em
+              >Learn more about
+              <a href="/getting-started/usage#attributes-and-properties">attributes and properties</a>.</em
+            >
+          </p>
+
+          <h2 id="events" class="anchor-heading">Events<a href="#events" aria-label='Direct link to "Events"'></a></h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name" data-flavor="html">Name</th>
+                  <th class="table-name" data-flavor="react">React Event</th>
+                  <th class="table-description">Description</th>
+                  <th class="table-event-detail">Event Detail</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-flavor="html"><code class="nowrap">p-selection-change</code></td>
+                  <td data-flavor="react"><code class="nowrap">onPSelectionChange</code></td>
+                  <td>Emitted when a tree item is selected or deselected.</td>
+                  <td>
+                    <code>{ selection: PTreeItem[] }</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em>Learn more about <a href="/getting-started/usage#events">events</a>.</em>
+          </p>
+
+          <h2 id="custom-properties" class="anchor-heading">
+            Custom Properties<a href="#custom-properties" aria-label='Direct link to "Custom Properties"'></a>
+          </h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name">Name</th>
+                  <th class="table-description">Description</th>
+                  <th class="table-default">Default</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="nowrap"><code>--indent-size</code></td>
+                  <td>The size of the indentation for nested items.</td>
+                  <td>var(–p-spacing-medium)</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>--indent-guide-color</code></td>
+                  <td>The color of the indentation line.</td>
+                  <td>var(–p-color-neutral-200)</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>--indent-guide-offset</code></td>
+                  <td>
+                    The amount of vertical spacing to leave between the top and bottom of the indentation line’s
+                    starting position.
+                  </td>
+                  <td>0</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>--indent-guide-style</code></td>
+                  <td>The style of the indentation line, e.g. solid, dotted, dashed.</td>
+                  <td>solid</td>
+                </tr>
+
+                <tr>
+                  <td class="nowrap"><code>--indent-guide-width</code></td>
+                  <td>The width of the indentation line.</td>
+                  <td>0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em
+              >Learn more about
+              <a href="/getting-started/usage#custom-properties">customizing CSS custom properties</a>.</em
+            >
+          </p>
+
+          <h2 id="parts" class="anchor-heading">Parts<a href="#parts" aria-label='Direct link to "Parts"'></a></h2>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th class="table-name">Name</th>
+                  <th class="table-description">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="nowrap"><code>base</code></td>
+                  <td>The component’s base wrapper.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <em>Learn more about <a href="/getting-started/customizing/#css-parts">customizing CSS parts</a>.</em>
+          </p>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

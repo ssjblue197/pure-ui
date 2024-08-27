@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en" data-layout="default" data-pure-ui-version="1.1.11">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Hand-crafted custom elements for any occasion." />
+    <title>Pure UI: Keep UI simplest.</title>
+
+    <meta name="turbo-cache-control" />
+
+    <link rel="stylesheet" href="/assets/styles/docs.css" />
+    <link rel="stylesheet" href="/assets/styles/code-previews.css" />
+    <link rel="stylesheet" href="/assets/styles/search.css" />
+
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="pure_ui" />
+    <meta name="twitter:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <meta property="og:url" content="https://pureui.xyz/" />
+    <meta property="og:title" content="Pure UI: Keep UI simplest." />
+    <meta property="og:description" content="Hand-crafted custom elements for any occasion." />
+    <meta property="og:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <link rel="stylesheet" href="/dist/themes/light.css" />
+    <link rel="stylesheet" href="/dist/themes/dark.css" />
+    <script type="module" src="/dist/pure-ui-autoloader.js"></script>
+
+    <script>
+      (() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = localStorage.getItem('theme') || 'auto';
+        document.documentElement.classList.toggle(
+          'p-theme-dark',
+          theme === 'dark' || (theme === 'auto' && prefersDark)
+        );
+      })();
+    </script>
+
+    <script src="/assets/scripts/turbo.js" type="module"></script>
+    <script src="/assets/scripts/docs.js" defer=""></script>
+    <script src="/assets/scripts/code-previews.js" defer=""></script>
+    <script src="/assets/scripts/lunr.js" defer=""></script>
+    <script src="/assets/scripts/search.js" defer=""></script>
+  </head>
+  <body>
+    <button id="menu-toggle" type="button" aria-label="Menu">
+      <svg width="148" height="148" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="18" fill="none" fill-rule="evenodd" stroke-linecap="round">
+          <path d="M9.5 125.5h129M9.5 74.5h129M9.5 23.5h129"></path>
+        </g>
+      </svg>
+    </button>
+
+    <div id="icon-toolbar">
+      <a
+        href="https://github.com/ssjblue197/Pure-UI-Document"
+        title="View Pure UI on GitHub"
+        class="external-link"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <p-icon name="github"></p-icon>
+      </a>
+
+      <p-dropdown id="theme-selector" placement="bottom-end" distance="3">
+        <p-button slot="trigger" size="small" variant="text" caret="" title="Press \ to toggle">
+          <p-icon class="only-light" name="sun-fill"></p-icon>
+          <p-icon class="only-dark" name="moon-fill"></p-icon>
+        </p-button>
+        <p-menu>
+          <p-menu-item type="checkbox" value="light">Light</p-menu-item>
+          <p-menu-item type="checkbox" value="dark">Dark</p-menu-item>
+          <p-divider></p-divider>
+          <p-menu-item type="checkbox" value="auto">System</p-menu-item>
+        </p-menu>
+      </p-dropdown>
+    </div>
+
+    <aside id="sidebar" data-preserve-scroll="">
+      <header>
+        <a href="/" class="active-link">
+          <img src="/assets/images/wordmark.svg" alt="Pure UI" />
+        </a>
+        <div class="sidebar-version">1.1.11</div>
+      </header>
+
+      <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
+        <p-icon name="search"></p-icon>
+        <span>Search</span>
+      </button>
+
+      <nav>
+        <ul>
+          <li>
+            <h2>Getting Started</h2>
+            <ul>
+              <li><a href="/" class="active-link">Home</a></li>
+              <li><a href="/getting-started/installation">Installation</a></li>
+              <li><a href="/getting-started/usage">Usage</a></li>
+              <li><a href="/getting-started/themes">Themes</a></li>
+              <li><a href="/getting-started/customizing">Customizing</a></li>
+              <li><a href="/getting-started/form-controls">Form Controls</a></li>
+              <li><a href="/getting-started/localization">Localization</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Frameworks</h2>
+            <ul>
+              <li><a href="/frameworks/react">React</a></li>
+              <li><a href="/frameworks/vue">Vue</a></li>
+              <li><a href="/frameworks/angular">Angular</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="/resources/community">Community</a></li>
+              <li><a href="/resources/accessibility">Accessibility</a></li>
+              <li><a href="/resources/contributing">Contributing</a></li>
+              <li><a href="/resources/changelog">Changelog</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Components</h2>
+            <ul>
+              <li>
+                <a href="/components/alert"> Alert </a>
+              </li>
+
+              <li>
+                <a href="/components/animated-image"> Animated Image </a>
+              </li>
+
+              <li>
+                <a href="/components/animation"> Animation </a>
+              </li>
+
+              <li>
+                <a href="/components/avatar"> Avatar </a>
+              </li>
+
+              <li>
+                <a href="/components/badge"> Badge </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb"> Breadcrumb </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb-item"> Breadcrumb Item </a>
+              </li>
+
+              <li>
+                <a href="/components/button"> Button </a>
+              </li>
+
+              <li>
+                <a href="/components/button-group"> Button Group </a>
+              </li>
+
+              <li>
+                <a href="/components/calendar"> Calendar </a>
+              </li>
+
+              <li>
+                <a href="/components/card"> Card </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel"> Carousel </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel-item"> Carousel Item </a>
+              </li>
+
+              <li>
+                <a href="/components/checkbox"> Checkbox </a>
+              </li>
+
+              <li>
+                <a href="/components/color-picker"> Color Picker </a>
+              </li>
+
+              <li>
+                <a href="/components/copy-button"> Copy Button </a>
+              </li>
+
+              <li>
+                <a href="/components/details"> Details </a>
+              </li>
+
+              <li>
+                <a href="/components/dialog"> Dialog </a>
+              </li>
+
+              <li>
+                <a href="/components/divider"> Divider </a>
+              </li>
+
+              <li>
+                <a href="/components/drawer"> Drawer </a>
+              </li>
+
+              <li>
+                <a href="/components/dropdown"> Dropdown </a>
+              </li>
+
+              <li>
+                <a href="/components/format-bytes"> Format Bytes </a>
+              </li>
+
+              <li>
+                <a href="/components/format-date"> Format Date </a>
+              </li>
+
+              <li>
+                <a href="/components/format-number"> Format Number </a>
+              </li>
+
+              <li>
+                <a href="/components/icon"> Icon </a>
+              </li>
+
+              <li>
+                <a href="/components/icon-button"> Icon Button </a>
+              </li>
+
+              <li>
+                <a href="/components/image-comparer"> Image Comparer </a>
+              </li>
+
+              <li>
+                <a href="/components/include"> Include </a>
+              </li>
+
+              <li>
+                <a href="/components/input"> Input </a>
+              </li>
+
+              <li>
+                <a href="/components/menu"> Menu </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-item"> Menu Item </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-label"> Menu Label </a>
+              </li>
+
+              <li>
+                <a href="/components/mutation-observer"> Mutation Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/option"> Option </a>
+              </li>
+
+              <li>
+                <a href="/components/paginate"> Paginate </a>
+              </li>
+
+              <li>
+                <a href="/components/popup"> Popup </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-bar"> Progress Bar </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-ring"> Progress Ring </a>
+              </li>
+
+              <li>
+                <a href="/components/qr-code"> QR Code </a>
+              </li>
+
+              <li>
+                <a href="/components/radio"> Radio </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-button"> Radio Button </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-group"> Radio Group </a>
+              </li>
+
+              <li>
+                <a href="/components/range"> Range </a>
+              </li>
+
+              <li>
+                <a href="/components/rating"> Rating </a>
+              </li>
+
+              <li>
+                <a href="/components/relative-time"> Relative Time </a>
+              </li>
+
+              <li>
+                <a href="/components/resize-observer"> Resize Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/select"> Select </a>
+              </li>
+
+              <li>
+                <a href="/components/skeleton"> Skeleton </a>
+              </li>
+
+              <li>
+                <a href="/components/spinner"> Spinner </a>
+              </li>
+
+              <li>
+                <a href="/components/split-panel"> Split Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/switch"> Switch </a>
+              </li>
+
+              <li>
+                <a href="/components/tab"> Tab </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-group"> Tab Group </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-panel"> Tab Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/tag"> Tag </a>
+              </li>
+
+              <li>
+                <a href="/components/textarea"> Textarea </a>
+              </li>
+
+              <li>
+                <a href="/components/tooltip"> Tooltip </a>
+              </li>
+
+              <li>
+                <a href="/components/tree"> Tree </a>
+              </li>
+
+              <li>
+                <a href="/components/tree-item"> Tree Item </a>
+              </li>
+
+              <li>
+                <a href="/components/visually-hidden"> Visually Hidden </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h2>Design Tokens</h2>
+            <ul>
+              <li><a href="/tokens/typography">Typography</a></li>
+              <li><a href="/tokens/color">Color</a></li>
+              <li><a href="/tokens/spacing">Spacing</a></li>
+              <li><a href="/tokens/elevation">Elevation</a></li>
+              <li><a href="/tokens/border-radius">Border Radius</a></li>
+              <li><a href="/tokens/transition">Transition</a></li>
+              <li><a href="/tokens/z-index">Z-index</a></li>
+              <li><a href="/tokens/more">More Tokens</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Tutorials</h2>
+            <ul>
+              <li><a href="/tutorials/integrating-with-astro">Integrating with Astro</a></li>
+              <li><a href="/tutorials/integrating-with-laravel">Integrating with Laravel</a></li>
+              <li><a href="/tutorials/integrating-with-nextjs">Integrating with NextJS</a></li>
+              <li><a href="/tutorials/integrating-with-rails">Integrating with Rails</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <article id="content" class="content">
+        <div class="content__body">
+          <div class="splash">
+            <div class="splash-start">
+              <img class="splash-logo" src="/assets/images/wordmark.svg" alt="Pure UI" />
+              <h1><p-visually-hidden>Pure UI:</p-visually-hidden> A forward-thinking library of web components.</h1>
+              <ul>
+                <li>Works with all frameworks 🧩</li>
+                <li>Works with CDNs 🚛</li>
+                <li>Fully customizable with CSS 🎨</li>
+                <li>Includes a dark theme 🌛</li>
+                <li>Built with accessibility in mind ♿️</li>
+                <li>First-class <a href="/frameworks/react">React support</a> ⚛️</li>
+                <li>Built-in localization 💬</li>
+                <li>Open source 😸</li>
+              </ul>
+            </div>
+            <div class="splash-end">
+              <img
+                class="splash-image"
+                src="/assets/images/undraw-content-team.svg"
+                alt="Cartoon of people assembling components while standing on a giant laptop."
+              />
+            </div>
+          </div>
+          <h2 id="quick-start" class="anchor-heading">
+            Quick Start<a href="#quick-start" aria-label='Direct link to "Quick Start"'></a>
+          </h2>
+          <p>Add the following code to your page.</p>
+          <!-- prettier-ignore -->
+          <pre><code class="language-html" id="code-block-8"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/themes/light.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/pure-ui-autoloader.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-8"></p-copy-button></pre>
+          <p>Now you have access to all of Pure UI’s components! Try adding a button:</p>
+
+          <div class="code-preview code-preview--expanded">
+            <div class="code-preview__preview">
+              <p-button>Click me</p-button>
+
+              <div class="code-preview__resizer">
+                <p-icon name="grip-vertical"></p-icon>
+              </div>
+            </div>
+
+            <div class="code-preview__source-group" id="code-preview-source-group-2">
+              <div class="code-preview__source code-preview__source--html">
+                <pre><code class="language-html" id="code-block-9"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span><span class="token punctuation">&gt;</span></span>Click me<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-9"></p-copy-button></pre>
+              </div>
+            </div>
+
+            <div class="code-preview__buttons">
+              <button
+                type="button"
+                class="code-preview__button code-preview__toggle"
+                aria-expanded="true"
+                aria-controls="code-preview-source-group-2"
+              >
+                Source
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div role="alert" class="callout callout--tip">
+            <p>
+              This will activate Pure UI’s experimental autoloader, which registers components on the fly as you use
+              them. To learn more about it, or for other ways to install Pure UI, refer to the
+              <a href="getting-started/installation">installation instructions</a>.
+            </p>
+          </div>
+          <h2 id="new-to-web-components" class="anchor-heading">
+            New to Web Components?<a
+              href="#new-to-web-components"
+              aria-label='Direct link to "New to Web Components?"'
+            ></a>
+          </h2>
+          <p>
+            <strong>TL;DR</strong> –&nbsp;we finally have a way to create
+            <a
+              href="https://html.spec.whatwg.org/multipage/custom-elements.html"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >our own HTML elements</a
+            >
+            and use them in any framework we want!
+          </p>
+          <p>
+            Thanks to the popularity of frameworks such as Angular, Vue, and React, component-driven development has
+            become a part of our every day lives. Components help us encapsulate styles and behaviors into reusable
+            building blocks. They make a lot of sense in terms of design, development, and testing.
+          </p>
+          <p>Unfortunately, <em>framework-specific</em> components fail us in a number of ways:</p>
+          <ul>
+            <li>You can only use them in the framework they’re designed for 🔒</li>
+            <li>Their lifespan is limited to that of the framework’s ⏳</li>
+            <li>
+              New frameworks/versions can lead to breaking changes, requiring substantial effort to update components 😭
+            </li>
+          </ul>
+          <p>
+            Web components solve these problems. They’re
+            <a
+              href="https://caniuse.com/#feat=custom-elementsv1"
+              class="active-link external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >supported by all modern browsers</a
+            >, they’re framework-agnostic, and they’re
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/Web_Components"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >part of the standard</a
+            >, so we know they’ll be supported for many years to come.
+          </p>
+          <p>This is the technology that Pure UI is built on.</p>
+          <h2 id="what-problem-does-this-solve" class="anchor-heading">
+            What Problem Does This Solve?<a
+              href="#what-problem-does-this-solve"
+              aria-label='Direct link to "What Problem Does This Solve?"'
+            ></a>
+          </h2>
+          <p>
+            Pure UI provides a collection of professionally designed, highly customizable UI components built on a
+            framework agnostic technology. Why spend hundreds of hours (or more) building a design system from scratch?
+            Why make a component library that only works with one framework?
+          </p>
+          <p>With Pure UI, you can:</p>
+          <ul>
+            <li>Start building things faster (no need to roll your own buttons)</li>
+            <li>Build multiple apps with different frameworks that all share the same UI components</li>
+            <li>Fully customize components to match your existing designs</li>
+            <li>Incrementally adopt components as needed (no need to ditch your framework)</li>
+            <li>Upgrade or switch frameworks without rebuilding foundational components</li>
+          </ul>
+          <p>
+            If your organization is looking to build a design system,
+            <a
+              href="https://medium.com/eightshapes-llc/and-you-thought-buttons-were-easy-26eb5b5c1871"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Pure UI will save you thousands of dollars</a
+            >. All the foundational components you need are right here, ready to be customized for your brand. And since
+            it’s built on web standards, browsers will continue to support it for many years to come.
+          </p>
+          <p>
+            Whether you use Pure UI as a starting point for your organization’s design system or for a fun personal
+            project, there’s no limit to what you can do with it.
+          </p>
+          <h2 id="browser-support" class="anchor-heading">
+            Browser Support<a href="#browser-support" aria-label='Direct link to "Browser Support"'></a>
+          </h2>
+          <p>Pure UI is tested in the latest two versions of the following browsers.</p>
+          <img src="/assets/images/chrome.png" alt="Chrome" width="64" height="64" />
+          <img src="/assets/images/edge.png" alt="Edge" width="64" height="64" />
+          <img src="/assets/images/firefox.png" alt="Firefox" width="64" height="64" />
+          <img src="/assets/images/opera.png" alt="Opera" width="64" height="64" />
+          <img src="/assets/images/safari.png" alt="Safari" width="64" height="64" />
+          <p>Critical bug fixes in earlier versions will be addressed based on their severity and impact.</p>
+          <p>
+            If you need to support IE11 or pre-Chromium Edge, this library isn’t for you. Although web components can
+            (to some degree) be polyfilled for legacy browsers, supporting them is outside the scope of this project. If
+            you’re using Pure UI in such a browser, you’re gonna have a bad time. ⛷
+          </p>
+          <h2 id="attribution" class="anchor-heading">
+            Attribution<a href="#attribution" aria-label='Direct link to "Attribution"'></a>
+          </h2>
+          <p>Special thanks to the following projects and individuals that help make Pure UI possible.</p>
+          <ul>
+            <li>
+              Components are built with
+              <a href="https://lit.dev/" class="active-link external-link" rel="noopener noreferrer" target="_blank"
+                >Lit</a
+              >
+            </li>
+            <li>
+              Component metadata is generated by the
+              <a
+                href="https://github.com/open-wc/custom-elements-manifest"
+                class="external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Custom Elements Manifest Analyzer</a
+              >
+            </li>
+            <li>
+              Documentation is powered by
+              <a
+                href="https://www.11ty.dev/"
+                class="active-link external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                >11ty</a
+              >
+            </li>
+            <li>
+              CDN services are provided by
+              <a
+                href="https://www.jsdelivr.com/"
+                class="active-link external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                >jsDelivr</a
+              >
+            </li>
+            <li>
+              Color primitives are inspired by
+              <a
+                href="https://tailwindcss.com/"
+                class="active-link external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Tailwind</a
+              >
+            </li>
+            <li>
+              Icons are courtesy of
+              <a
+                href="https://icons.getbootstrap.com/"
+                class="active-link external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Bootstrap Icons</a
+              >
+            </li>
+            <li>
+              The homepage illustration is courtesy of
+              <a href="https://undraw.co/" class="active-link external-link" rel="noopener noreferrer" target="_blank"
+                >unDraw</a
+              >
+            </li>
+            <li>
+              Positioning of dropdowns, tooltips, et al is handled by
+              <a
+                href="https://floating-ui.com/"
+                class="active-link external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Floating UI</a
+              >
+            </li>
+            <li>
+              Animations are courtesy of
+              <a
+                href="https://animate.style/"
+                class="active-link external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                >animate.css</a
+              >
+            </li>
+            <li>
+              Search is powered by
+              <a href="https://lunrjs.com/" class="active-link external-link" rel="noopener noreferrer" target="_blank"
+                >Lunr</a
+              >
+            </li>
+          </ul>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en" data-layout="default" data-pure-ui-version="1.1.11">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Choose the installation method that works best for you." />
+    <title>Installation</title>
+
+    <meta name="turbo-cache-control" />
+
+    <link rel="stylesheet" href="/assets/styles/docs.css" />
+    <link rel="stylesheet" href="/assets/styles/code-previews.css" />
+    <link rel="stylesheet" href="/assets/styles/search.css" />
+
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="pure_ui" />
+    <meta name="twitter:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <meta property="og:url" content="https://pureui.xyz/getting-started/installation/" />
+    <meta property="og:title" content="Installation" />
+    <meta property="og:description" content="Choose the installation method that works best for you." />
+    <meta property="og:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <link rel="stylesheet" href="/dist/themes/light.css" />
+    <link rel="stylesheet" href="/dist/themes/dark.css" />
+    <script type="module" src="/dist/pure-ui-autoloader.js"></script>
+
+    <script>
+      (() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = localStorage.getItem('theme') || 'auto';
+        document.documentElement.classList.toggle(
+          'p-theme-dark',
+          theme === 'dark' || (theme === 'auto' && prefersDark)
+        );
+      })();
+    </script>
+
+    <script src="/assets/scripts/turbo.js" type="module"></script>
+    <script src="/assets/scripts/docs.js" defer=""></script>
+    <script src="/assets/scripts/code-previews.js" defer=""></script>
+    <script src="/assets/scripts/lunr.js" defer=""></script>
+    <script src="/assets/scripts/search.js" defer=""></script>
+  </head>
+  <body>
+    <button id="menu-toggle" type="button" aria-label="Menu">
+      <svg width="148" height="148" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="18" fill="none" fill-rule="evenodd" stroke-linecap="round">
+          <path d="M9.5 125.5h129M9.5 74.5h129M9.5 23.5h129"></path>
+        </g>
+      </svg>
+    </button>
+
+    <div id="icon-toolbar">
+      <a
+        href="https://github.com/ssjblue197/Pure-UI-Document"
+        title="View Pure UI on GitHub"
+        class="external-link"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <p-icon name="github"></p-icon>
+      </a>
+
+      <p-dropdown id="theme-selector" placement="bottom-end" distance="3">
+        <p-button slot="trigger" size="small" variant="text" caret="" title="Press \ to toggle">
+          <p-icon class="only-light" name="sun-fill"></p-icon>
+          <p-icon class="only-dark" name="moon-fill"></p-icon>
+        </p-button>
+        <p-menu>
+          <p-menu-item type="checkbox" value="light">Light</p-menu-item>
+          <p-menu-item type="checkbox" value="dark">Dark</p-menu-item>
+          <p-divider></p-divider>
+          <p-menu-item type="checkbox" value="auto">System</p-menu-item>
+        </p-menu>
+      </p-dropdown>
+    </div>
+
+    <aside id="sidebar" data-preserve-scroll="">
+      <header>
+        <a href="/">
+          <img src="/assets/images/wordmark.svg" alt="Pure UI" />
+        </a>
+        <div class="sidebar-version">1.1.11</div>
+      </header>
+
+      <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
+        <p-icon name="search"></p-icon>
+        <span>Search</span>
+      </button>
+
+      <nav>
+        <ul>
+          <li>
+            <h2>Getting Started</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/getting-started/installation" class="active-link">Installation</a></li>
+              <li><a href="/getting-started/usage">Usage</a></li>
+              <li><a href="/getting-started/themes">Themes</a></li>
+              <li><a href="/getting-started/customizing">Customizing</a></li>
+              <li><a href="/getting-started/form-controls">Form Controls</a></li>
+              <li><a href="/getting-started/localization">Localization</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Frameworks</h2>
+            <ul>
+              <li><a href="/frameworks/react">React</a></li>
+              <li><a href="/frameworks/vue">Vue</a></li>
+              <li><a href="/frameworks/angular">Angular</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="/resources/community">Community</a></li>
+              <li><a href="/resources/accessibility">Accessibility</a></li>
+              <li><a href="/resources/contributing">Contributing</a></li>
+              <li><a href="/resources/changelog">Changelog</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Components</h2>
+            <ul>
+              <li>
+                <a href="/components/alert"> Alert </a>
+              </li>
+
+              <li>
+                <a href="/components/animated-image"> Animated Image </a>
+              </li>
+
+              <li>
+                <a href="/components/animation"> Animation </a>
+              </li>
+
+              <li>
+                <a href="/components/avatar"> Avatar </a>
+              </li>
+
+              <li>
+                <a href="/components/badge"> Badge </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb"> Breadcrumb </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb-item"> Breadcrumb Item </a>
+              </li>
+
+              <li>
+                <a href="/components/button"> Button </a>
+              </li>
+
+              <li>
+                <a href="/components/button-group"> Button Group </a>
+              </li>
+
+              <li>
+                <a href="/components/calendar"> Calendar </a>
+              </li>
+
+              <li>
+                <a href="/components/card"> Card </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel"> Carousel </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel-item"> Carousel Item </a>
+              </li>
+
+              <li>
+                <a href="/components/checkbox"> Checkbox </a>
+              </li>
+
+              <li>
+                <a href="/components/color-picker"> Color Picker </a>
+              </li>
+
+              <li>
+                <a href="/components/copy-button"> Copy Button </a>
+              </li>
+
+              <li>
+                <a href="/components/details"> Details </a>
+              </li>
+
+              <li>
+                <a href="/components/dialog"> Dialog </a>
+              </li>
+
+              <li>
+                <a href="/components/divider"> Divider </a>
+              </li>
+
+              <li>
+                <a href="/components/drawer"> Drawer </a>
+              </li>
+
+              <li>
+                <a href="/components/dropdown"> Dropdown </a>
+              </li>
+
+              <li>
+                <a href="/components/format-bytes"> Format Bytes </a>
+              </li>
+
+              <li>
+                <a href="/components/format-date"> Format Date </a>
+              </li>
+
+              <li>
+                <a href="/components/format-number"> Format Number </a>
+              </li>
+
+              <li>
+                <a href="/components/icon"> Icon </a>
+              </li>
+
+              <li>
+                <a href="/components/icon-button"> Icon Button </a>
+              </li>
+
+              <li>
+                <a href="/components/image-comparer"> Image Comparer </a>
+              </li>
+
+              <li>
+                <a href="/components/include"> Include </a>
+              </li>
+
+              <li>
+                <a href="/components/input"> Input </a>
+              </li>
+
+              <li>
+                <a href="/components/menu"> Menu </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-item"> Menu Item </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-label"> Menu Label </a>
+              </li>
+
+              <li>
+                <a href="/components/mutation-observer"> Mutation Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/option"> Option </a>
+              </li>
+
+              <li>
+                <a href="/components/paginate"> Paginate </a>
+              </li>
+
+              <li>
+                <a href="/components/popup"> Popup </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-bar"> Progress Bar </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-ring"> Progress Ring </a>
+              </li>
+
+              <li>
+                <a href="/components/qr-code"> QR Code </a>
+              </li>
+
+              <li>
+                <a href="/components/radio"> Radio </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-button"> Radio Button </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-group"> Radio Group </a>
+              </li>
+
+              <li>
+                <a href="/components/range"> Range </a>
+              </li>
+
+              <li>
+                <a href="/components/rating"> Rating </a>
+              </li>
+
+              <li>
+                <a href="/components/relative-time"> Relative Time </a>
+              </li>
+
+              <li>
+                <a href="/components/resize-observer"> Resize Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/select"> Select </a>
+              </li>
+
+              <li>
+                <a href="/components/skeleton"> Skeleton </a>
+              </li>
+
+              <li>
+                <a href="/components/spinner"> Spinner </a>
+              </li>
+
+              <li>
+                <a href="/components/split-panel"> Split Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/switch"> Switch </a>
+              </li>
+
+              <li>
+                <a href="/components/tab"> Tab </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-group"> Tab Group </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-panel"> Tab Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/tag"> Tag </a>
+              </li>
+
+              <li>
+                <a href="/components/textarea"> Textarea </a>
+              </li>
+
+              <li>
+                <a href="/components/tooltip"> Tooltip </a>
+              </li>
+
+              <li>
+                <a href="/components/tree"> Tree </a>
+              </li>
+
+              <li>
+                <a href="/components/tree-item"> Tree Item </a>
+              </li>
+
+              <li>
+                <a href="/components/visually-hidden"> Visually Hidden </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h2>Design Tokens</h2>
+            <ul>
+              <li><a href="/tokens/typography">Typography</a></li>
+              <li><a href="/tokens/color">Color</a></li>
+              <li><a href="/tokens/spacing">Spacing</a></li>
+              <li><a href="/tokens/elevation">Elevation</a></li>
+              <li><a href="/tokens/border-radius">Border Radius</a></li>
+              <li><a href="/tokens/transition">Transition</a></li>
+              <li><a href="/tokens/z-index">Z-index</a></li>
+              <li><a href="/tokens/more">More Tokens</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Tutorials</h2>
+            <ul>
+              <li><a href="/tutorials/integrating-with-astro">Integrating with Astro</a></li>
+              <li><a href="/tutorials/integrating-with-laravel">Integrating with Laravel</a></li>
+              <li><a href="/tutorials/integrating-with-nextjs">Integrating with NextJS</a></li>
+              <li><a href="/tutorials/integrating-with-rails">Integrating with Rails</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <article id="content" class="content content--with-toc">
+        <div class="content__toc">
+          <ul>
+            <li class="top"><a href="#">Installation</a></li>
+            <li data-level="2"><a href="#cdn-installation-easiest">CDN Installation (Easiest)</a></li>
+            <li data-level="3"><a href="#dark-theme">Dark Theme</a></li>
+            <li data-level="3"><a href="#light-and-dark-theme">Light &amp; Dark Theme</a></li>
+            <li data-level="2"><a href="#npm-installation">npm installation</a></li>
+            <li data-level="2"><a href="#setting-the-base-path">Setting the Base Path</a></li>
+            <li data-level="3"><a href="#referencing-assets">Referencing Assets</a></li>
+            <li data-level="2"><a href="#cherry-picking">Cherry Picking</a></li>
+            <li data-level="2"><a href="#bundling">Bundling</a></li>
+            <li data-level="3"><a href="#avoiding-auto-registering-imports">Avoiding auto-registering imports</a></li>
+            <li data-level="2"><a href="#the-difference-between-cdn-and-npm">The difference between CDN and npm</a></li>
+          </ul>
+        </div>
+
+        <div class="content__body">
+          <h1>Installation</h1>
+          <p>
+            You can load Pure UI via CDN or by installing it locally. If you’re using a framework, make sure to check
+            out the pages for <a href="/frameworks/react">React</a>, <a href="/frameworks/vue">Vue</a>, and
+            <a href="/frameworks/angular">Angular</a> for additional information.
+          </p>
+          <h2 id="cdn-installation-easiest" class="anchor-heading">
+            CDN Installation (Easiest)<a
+              href="#cdn-installation-easiest"
+              aria-label='Direct link to "CDN Installation (Easiest)"'
+            ></a>
+          </h2>
+          <p-tab-group>
+            <p-tab slot="nav" panel="autoloader" active="">Autoloader</p-tab>
+            <p-tab slot="nav" panel="traditional">Traditional Loader</p-tab>
+            <p-tab-panel name="autoloader">
+              <p>
+                The experimental autoloader is the easiest and most efficient way to use Pure UI. A lightweight script
+                watches the DOM for unregistered Pure UI elements and lazy loads them for you —&nbsp;even if they’re
+                added dynamically.
+              </p>
+              <p>
+                While convenient, autoloading may lead to a
+                <a
+                  href="https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/"
+                  class="external-link"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Flash of Undefined Custom Elements</a
+                >. The linked article describes some ways to alleviate it.
+              </p>
+              <!-- prettier-ignore -->
+              <pre><code class="language-html" id="code-block-10"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/themes/light.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/pure-ui-autoloader.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-10"></p-copy-button></pre>
+            </p-tab-panel>
+            <p-tab-panel name="traditional">
+              <p>
+                The traditional CDN loader registers all Pure UI elements up front. Note that, if you’re only using a
+                handful of components, it will be much more efficient to stick with the autoloader. However, you can
+                also <a href="#cherry-picking">cherry pick</a> components if you want to load specific ones up front.
+              </p>
+              <!-- prettier-ignore -->
+              <pre><code class="language-html" id="code-block-11"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/themes/light.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/pure-ui.js<span class="token punctuation">"</span></span> <span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-11"></p-copy-button></pre>
+            </p-tab-panel>
+          </p-tab-group>
+          <h3 id="dark-theme" class="anchor-heading">
+            Dark Theme<a href="#dark-theme" aria-label='Direct link to "Dark Theme"'></a>
+          </h3>
+          <p>
+            The code above will load the light theme. If you want to use the
+            <a href="/getting-started/themes#dark-theme">dark theme</a> instead, update the stylesheet as shown below
+            and add <code>&lt;html class="p-theme-dark"&gt;</code> to your page.
+          </p>
+          <!-- prettier-ignore -->
+          <pre><code class="language-html" id="code-block-12"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/themes/dark.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-12"></p-copy-button></pre>
+          <h3 id="light-and-dark-theme" class="anchor-heading">
+            Light &amp; Dark Theme<a
+              href="#light-and-dark-theme"
+              aria-label='Direct link to "Light &amp; Dark Theme"'
+            ></a>
+          </h3>
+          <p>
+            If you want to load the light or dark theme based on the user’s <code>prefers-color-scheme</code> setting,
+            use the stylesheets below. The <code>media</code> attributes ensure that only the user’s preferred theme
+            stylesheet loads and the <code>onload</code> attribute sets the appropriate
+            <a href="/getting-started/themes">theme class</a> on the <code>&lt;html&gt;</code> element.
+          </p>
+          <pre><code class="language-html" id="code-block-13"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span>
+  <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span>
+  <span class="token attr-name">media</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>(prefers-color-scheme:light)<span class="token punctuation">"</span></span>
+  <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/themes/light.css<span class="token punctuation">"</span></span>
+<span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span>
+  <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span>
+  <span class="token attr-name">media</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>(prefers-color-scheme:dark)<span class="token punctuation">"</span></span>
+  <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/pure-uikit@1.1.11/cdn/themes/dark.css<span class="token punctuation">"</span></span>
+  <span class="token special-attr"><span class="token attr-name">onload</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript">document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'p-theme-dark'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span>
+<span class="token punctuation">/&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-13"></p-copy-button></pre>
+          <p>Now you can <a href="/getting-started/usage">start using Pure UI!</a></p>
+          <h2 id="npm-installation" class="anchor-heading">
+            npm installation<a href="#npm-installation" aria-label='Direct link to "npm installation"'></a>
+          </h2>
+          <p>If you don’t want to use the CDN, you can install Pure UI from npm with the following command.</p>
+          <pre><code class="language-bash" id="code-block-14"><span class="token function">npm</span> <span class="token function">install</span> pure-uikit
+</code><p-copy-button class="copy-code-button" from="code-block-14"></p-copy-button></pre>
+          <p>
+            It’s up to you to make the source files available to your app. One way to do this is to create a route in
+            your app called <code>/pure-ui</code> that serves static files from <code>node_modules/pure-uikit</code>.
+          </p>
+          <p>
+            Once you’ve done that, add the following tags to your page. Make sure to update <code>href</code> and
+            <code>src</code> so they point to the route you created.
+          </p>
+          <pre><code class="language-html" id="code-block-15"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/pure-ui/dist/themes/light.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/pure-ui/dist/pure-ui.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-15"></p-copy-button></pre>
+          <p>Alternatively, <a href="#bundling">you can use a bundler</a>.</p>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              For clarity, the docs will usually show imports from <code>pure-uikit</code>. If you’re not using a module
+              resolver or bundler, you’ll need to adjust these paths to point to the folder Pure UI is in.
+            </p>
+          </div>
+          <h2 id="setting-the-base-path" class="anchor-heading">
+            Setting the Base Path<a
+              href="#setting-the-base-path"
+              aria-label='Direct link to "Setting the Base Path"'
+            ></a>
+          </h2>
+          <p>
+            Some components rely on assets (icons, images, etc.) and Pure UI needs to know where they’re located. For
+            convenience, Pure UI will try to auto-detect the correct location based on the script you’ve loaded it from.
+            This assumes assets are colocated with <code>pure-ui.js</code> or <code>pure-ui-autoloader.js</code> and
+            will “just work” for most users.
+          </p>
+          <p>
+            However, if you’re <a href="#cherry-picking">cherry picking</a> or <a href="#bundling">bundling</a> Pure UI,
+            you’ll need to set the base path. You can do this one of two ways.
+          </p>
+          <pre><code class="language-html" id="code-block-16"><span class="token comment">&lt;!-- Option 1: the data-pure-ui attribute --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>bundle.js<span class="token punctuation">"</span></span> <span class="token attr-name">data-pure-ui</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/path/to/pure-ui/dist<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment">&lt;!-- Option 2: the setBasePath() method --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>bundle.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">import</span> <span class="token punctuation">{</span> setBasePath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"pure-uikit/dist/utilities/base-path.js"</span><span class="token punctuation">;</span>
+  <span class="token function">setBasePath</span><span class="token punctuation">(</span><span class="token string">"/path/to/pure-ui/dist"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-16"></p-copy-button></pre>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              An easy way to make sure the base path is configured properly is to check if
+              <a href="/components/icon">icons</a> are loading.
+            </p>
+          </div>
+          <h3 id="referencing-assets" class="anchor-heading">
+            Referencing Assets<a href="#referencing-assets" aria-label='Direct link to "Referencing Assets"'></a>
+          </h3>
+          <p>
+            Most of the magic behind assets is handled internally by Pure UI, but if you need to reference the base path
+            for any reason, the same module exports a function called <code>getBasePath()</code>. An optional string
+            argument can be passed, allowing you to get the full path to any asset.
+          </p>
+          <pre><code class="language-html" id="code-block-17"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">import</span> <span class="token punctuation">{</span> getBasePath<span class="token punctuation">,</span> setBasePath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"pure-uikit/dist/utilities/base-path.js"</span><span class="token punctuation">;</span>
+
+  <span class="token function">setBasePath</span><span class="token punctuation">(</span><span class="token string">"/path/to/assets"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// ...</span>
+
+  <span class="token comment">// Get the base path, e.g. /path/to/assets</span>
+  <span class="token keyword">const</span> basePath <span class="token operator">=</span> <span class="token function">getBasePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Get the path to an asset, e.g. /path/to/assets/file.ext</span>
+  <span class="token keyword">const</span> assetPath <span class="token operator">=</span> <span class="token function">getBasePath</span><span class="token punctuation">(</span><span class="token string">"file.ext"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-17"></p-copy-button></pre>
+          <h2 id="cherry-picking" class="anchor-heading">
+            Cherry Picking<a href="#cherry-picking" aria-label='Direct link to "Cherry Picking"'></a>
+          </h2>
+          <p>
+            Cherry picking can be done from <a href="#cdn-installation-easiest">the CDN</a> or from
+            <a href="#npm-installation">npm</a>. This approach will load only the components you need up front, while
+            limiting the number of files the browser has to download. The disadvantage is that you need to import each
+            individual component.
+          </p>
+          <p>
+            Here’s an example that loads only the button component. Again, if you’re not using a module resolver, you’ll
+            need to adjust the path to point to the folder Pure UI is in.
+          </p>
+          <pre><code class="language-html" id="code-block-18"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/path/to/pure-ui/dist/themes/light.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">data-pure-ui</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/path/to/pure-ui/dist<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">import</span> <span class="token string">"pure-uikit/dist/components/button/button.js"</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// &lt;p-button&gt; is ready to use!</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-18"></p-copy-button></pre>
+          <p>
+            You can copy and paste the code to import a component from the “Importing” section of the component’s
+            documentation. Note that some components have dependencies that are automatically imported when you cherry
+            pick. If a component has dependencies, they will be listed in the “Dependencies” section of its docs.
+          </p>
+          <div role="alert" class="callout callout--warning">
+            <p>
+              Never cherry pick components or utilities from <code>pure-ui.js</code> as this will cause the browser to
+              load the entire library. Instead, cherry pick from specific modules as shown above.
+            </p>
+          </div>
+          <div role="alert" class="callout callout--warning">
+            <p>
+              You will see files named <code>chunk.[hash].js</code> in the <code>chunks</code> directory. Never import
+              these files directly, as they are generated and change from version to version.
+            </p>
+          </div>
+          <h2 id="bundling" class="anchor-heading">
+            Bundling<a href="#bundling" aria-label='Direct link to "Bundling"'></a>
+          </h2>
+          <p>
+            Pure UI is distributed as a collection of standard ES modules that
+            <a href="https://caniuse.com/es6-module" class="external-link" rel="noopener noreferrer" target="_blank"
+              >all modern browsers can understand</a
+            >. However, importing a lot of modules can result in a lot of HTTP requests and potentially longer load
+            times. Using a CDN can alleviate this, but some users may wish to further optimize their imports with a
+            bundler.
+          </p>
+          <p>To use Pure UI with a bundler, first install Pure UI along with your bundler of choice.</p>
+          <pre><code class="language-bash" id="code-block-19"><span class="token function">npm</span> <span class="token function">install</span> pure-uikit
+</code><p-copy-button class="copy-code-button" from="code-block-19"></p-copy-button></pre>
+          <pre><code class="language-js" id="code-block-20"><span class="token keyword">import</span> <span class="token string">"pure-uikit/dist/themes/light.css"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">"pure-uikit/dist/components/button/button.js"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">"pure-uikit/dist/components/icon/icon.js"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">"pure-uikit/dist/components/input/input.js"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">"pure-uikit/dist/components/rating/rating.js"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> setBasePath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"pure-uikit/dist/utilities/base-path.js"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Set the base path to the folder you copied Pure UI's assets to</span>
+<span class="token function">setBasePath</span><span class="token punctuation">(</span><span class="token string">"/path/to/pure-ui/dist"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// &lt;p-button&gt;, &lt;p-icon&gt;, &lt;p-input&gt;, and &lt;p-rating&gt; are ready to use!</span>
+</code><p-copy-button class="copy-code-button" from="code-block-20"></p-copy-button></pre>
+          <div role="alert" class="callout callout--warning">
+            <p>
+              Component modules include side effects for registration purposes. Because of this, importing directly from
+              <code>pure-uikit</code> may result in a larger bundle size than necessary. For optimal tree shaking,
+              always cherry pick, i.e. import components and utilities from their respective files, as shown above.
+            </p>
+          </div>
+          <h3 id="avoiding-auto-registering-imports" class="anchor-heading">
+            Avoiding auto-registering imports<a
+              href="#avoiding-auto-registering-imports"
+              aria-label='Direct link to "Avoiding auto-registering imports"'
+            ></a>
+          </h3>
+          <p>
+            By default, imports to components will auto-register themselves. This may not be ideal in all cases. To
+            import just the component’s class without auto-registering it’s tag we can do the following:
+          </p>
+          <pre><code class="language-diff" id="code-block-21"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> import SlButton from 'pure-uikit/dist/components/button/button.js';
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import SlButton from 'pure-uikit/dist/components/button/button.component.js';
+</span></span></code><p-copy-button class="copy-code-button" from="code-block-21"></p-copy-button></pre>
+          <p>
+            Notice how the import ends with <code>.component.js</code>. This is the current convention to convey the
+            import does not register itself.
+          </p>
+          <div role="alert" class="callout callout--danger">
+            <p>
+              While you can override the class or re-register the pure ui class under a different tag name, if you do
+              so, many components won’t work as expected.
+            </p>
+          </div>
+          <h2 id="the-difference-between-cdn-and-npm" class="anchor-heading">
+            The difference between CDN and npm<a
+              href="#the-difference-between-cdn-and-npm"
+              aria-label='Direct link to "The difference between CDN and npm"'
+            ></a>
+          </h2>
+          <p>
+            You’ll notice that the CDN links all start with <code>/cdn/&lt;path&gt;</code> and npm imports use
+            <code>/dist/&lt;path&gt;</code>. The <code>/cdn</code> files are bundled separately from the
+            <code>/dist</code> files. The <code>/cdn</code> files come pre-bundled, which means all dependencies are
+            inlined so you do not need to worry about loading additional libraries. The <code>/dist</code> files
+            <strong>DO NOT</strong> come pre-bundled, allowing your bundler of choice to more efficiently deduplicate
+            dependencies, resulting in smaller bundles and optimal code sharing.
+          </p>
+          <p>TL;DR:</p>
+          <ul>
+            <li><code>pure-uikit/cdn</code> is for CDN users</li>
+            <li><code>pure-uikit/dist</code> is for npm users</li>
+          </ul>
+          <p>
+            This change was introduced in <code>v2.5.0</code> to address issues around installations from npm loading
+            multiple versions of libraries (such as the Lit) that Pure UI uses internally.
+          </p>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

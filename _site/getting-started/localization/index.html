@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en" data-layout="default" data-pure-ui-version="1.1.11">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Discover how to localize Pure UI with minimal effort." />
+    <title>Localization</title>
+
+    <meta name="turbo-cache-control" />
+
+    <link rel="stylesheet" href="/assets/styles/docs.css" />
+    <link rel="stylesheet" href="/assets/styles/code-previews.css" />
+    <link rel="stylesheet" href="/assets/styles/search.css" />
+
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="pure_ui" />
+    <meta name="twitter:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <meta property="og:url" content="https://pureui.xyz/getting-started/localization/" />
+    <meta property="og:title" content="Localization" />
+    <meta property="og:description" content="Discover how to localize Pure UI with minimal effort." />
+    <meta property="og:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <link rel="stylesheet" href="/dist/themes/light.css" />
+    <link rel="stylesheet" href="/dist/themes/dark.css" />
+    <script type="module" src="/dist/pure-ui-autoloader.js"></script>
+
+    <script>
+      (() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = localStorage.getItem('theme') || 'auto';
+        document.documentElement.classList.toggle(
+          'p-theme-dark',
+          theme === 'dark' || (theme === 'auto' && prefersDark)
+        );
+      })();
+    </script>
+
+    <script src="/assets/scripts/turbo.js" type="module"></script>
+    <script src="/assets/scripts/docs.js" defer=""></script>
+    <script src="/assets/scripts/code-previews.js" defer=""></script>
+    <script src="/assets/scripts/lunr.js" defer=""></script>
+    <script src="/assets/scripts/search.js" defer=""></script>
+  </head>
+  <body>
+    <button id="menu-toggle" type="button" aria-label="Menu">
+      <svg width="148" height="148" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="18" fill="none" fill-rule="evenodd" stroke-linecap="round">
+          <path d="M9.5 125.5h129M9.5 74.5h129M9.5 23.5h129"></path>
+        </g>
+      </svg>
+    </button>
+
+    <div id="icon-toolbar">
+      <a
+        href="https://github.com/ssjblue197/Pure-UI-Document"
+        title="View Pure UI on GitHub"
+        class="external-link"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <p-icon name="github"></p-icon>
+      </a>
+
+      <p-dropdown id="theme-selector" placement="bottom-end" distance="3">
+        <p-button slot="trigger" size="small" variant="text" caret="" title="Press \ to toggle">
+          <p-icon class="only-light" name="sun-fill"></p-icon>
+          <p-icon class="only-dark" name="moon-fill"></p-icon>
+        </p-button>
+        <p-menu>
+          <p-menu-item type="checkbox" value="light">Light</p-menu-item>
+          <p-menu-item type="checkbox" value="dark">Dark</p-menu-item>
+          <p-divider></p-divider>
+          <p-menu-item type="checkbox" value="auto">System</p-menu-item>
+        </p-menu>
+      </p-dropdown>
+    </div>
+
+    <aside id="sidebar" data-preserve-scroll="">
+      <header>
+        <a href="/">
+          <img src="/assets/images/wordmark.svg" alt="Pure UI" />
+        </a>
+        <div class="sidebar-version">1.1.11</div>
+      </header>
+
+      <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
+        <p-icon name="search"></p-icon>
+        <span>Search</span>
+      </button>
+
+      <nav>
+        <ul>
+          <li>
+            <h2>Getting Started</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/getting-started/installation">Installation</a></li>
+              <li><a href="/getting-started/usage">Usage</a></li>
+              <li><a href="/getting-started/themes">Themes</a></li>
+              <li><a href="/getting-started/customizing">Customizing</a></li>
+              <li><a href="/getting-started/form-controls">Form Controls</a></li>
+              <li><a href="/getting-started/localization" class="active-link">Localization</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Frameworks</h2>
+            <ul>
+              <li><a href="/frameworks/react">React</a></li>
+              <li><a href="/frameworks/vue">Vue</a></li>
+              <li><a href="/frameworks/angular">Angular</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="/resources/community">Community</a></li>
+              <li><a href="/resources/accessibility">Accessibility</a></li>
+              <li><a href="/resources/contributing">Contributing</a></li>
+              <li><a href="/resources/changelog">Changelog</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Components</h2>
+            <ul>
+              <li>
+                <a href="/components/alert"> Alert </a>
+              </li>
+
+              <li>
+                <a href="/components/animated-image"> Animated Image </a>
+              </li>
+
+              <li>
+                <a href="/components/animation"> Animation </a>
+              </li>
+
+              <li>
+                <a href="/components/avatar"> Avatar </a>
+              </li>
+
+              <li>
+                <a href="/components/badge"> Badge </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb"> Breadcrumb </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb-item"> Breadcrumb Item </a>
+              </li>
+
+              <li>
+                <a href="/components/button"> Button </a>
+              </li>
+
+              <li>
+                <a href="/components/button-group"> Button Group </a>
+              </li>
+
+              <li>
+                <a href="/components/calendar"> Calendar </a>
+              </li>
+
+              <li>
+                <a href="/components/card"> Card </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel"> Carousel </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel-item"> Carousel Item </a>
+              </li>
+
+              <li>
+                <a href="/components/checkbox"> Checkbox </a>
+              </li>
+
+              <li>
+                <a href="/components/color-picker"> Color Picker </a>
+              </li>
+
+              <li>
+                <a href="/components/copy-button"> Copy Button </a>
+              </li>
+
+              <li>
+                <a href="/components/details"> Details </a>
+              </li>
+
+              <li>
+                <a href="/components/dialog"> Dialog </a>
+              </li>
+
+              <li>
+                <a href="/components/divider"> Divider </a>
+              </li>
+
+              <li>
+                <a href="/components/drawer"> Drawer </a>
+              </li>
+
+              <li>
+                <a href="/components/dropdown"> Dropdown </a>
+              </li>
+
+              <li>
+                <a href="/components/format-bytes"> Format Bytes </a>
+              </li>
+
+              <li>
+                <a href="/components/format-date"> Format Date </a>
+              </li>
+
+              <li>
+                <a href="/components/format-number"> Format Number </a>
+              </li>
+
+              <li>
+                <a href="/components/icon"> Icon </a>
+              </li>
+
+              <li>
+                <a href="/components/icon-button"> Icon Button </a>
+              </li>
+
+              <li>
+                <a href="/components/image-comparer"> Image Comparer </a>
+              </li>
+
+              <li>
+                <a href="/components/include"> Include </a>
+              </li>
+
+              <li>
+                <a href="/components/input"> Input </a>
+              </li>
+
+              <li>
+                <a href="/components/menu"> Menu </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-item"> Menu Item </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-label"> Menu Label </a>
+              </li>
+
+              <li>
+                <a href="/components/mutation-observer"> Mutation Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/option"> Option </a>
+              </li>
+
+              <li>
+                <a href="/components/paginate"> Paginate </a>
+              </li>
+
+              <li>
+                <a href="/components/popup"> Popup </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-bar"> Progress Bar </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-ring"> Progress Ring </a>
+              </li>
+
+              <li>
+                <a href="/components/qr-code"> QR Code </a>
+              </li>
+
+              <li>
+                <a href="/components/radio"> Radio </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-button"> Radio Button </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-group"> Radio Group </a>
+              </li>
+
+              <li>
+                <a href="/components/range"> Range </a>
+              </li>
+
+              <li>
+                <a href="/components/rating"> Rating </a>
+              </li>
+
+              <li>
+                <a href="/components/relative-time"> Relative Time </a>
+              </li>
+
+              <li>
+                <a href="/components/resize-observer"> Resize Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/select"> Select </a>
+              </li>
+
+              <li>
+                <a href="/components/skeleton"> Skeleton </a>
+              </li>
+
+              <li>
+                <a href="/components/spinner"> Spinner </a>
+              </li>
+
+              <li>
+                <a href="/components/split-panel"> Split Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/switch"> Switch </a>
+              </li>
+
+              <li>
+                <a href="/components/tab"> Tab </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-group"> Tab Group </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-panel"> Tab Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/tag"> Tag </a>
+              </li>
+
+              <li>
+                <a href="/components/textarea"> Textarea </a>
+              </li>
+
+              <li>
+                <a href="/components/tooltip"> Tooltip </a>
+              </li>
+
+              <li>
+                <a href="/components/tree"> Tree </a>
+              </li>
+
+              <li>
+                <a href="/components/tree-item"> Tree Item </a>
+              </li>
+
+              <li>
+                <a href="/components/visually-hidden"> Visually Hidden </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h2>Design Tokens</h2>
+            <ul>
+              <li><a href="/tokens/typography">Typography</a></li>
+              <li><a href="/tokens/color">Color</a></li>
+              <li><a href="/tokens/spacing">Spacing</a></li>
+              <li><a href="/tokens/elevation">Elevation</a></li>
+              <li><a href="/tokens/border-radius">Border Radius</a></li>
+              <li><a href="/tokens/transition">Transition</a></li>
+              <li><a href="/tokens/z-index">Z-index</a></li>
+              <li><a href="/tokens/more">More Tokens</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Tutorials</h2>
+            <ul>
+              <li><a href="/tutorials/integrating-with-astro">Integrating with Astro</a></li>
+              <li><a href="/tutorials/integrating-with-laravel">Integrating with Laravel</a></li>
+              <li><a href="/tutorials/integrating-with-nextjs">Integrating with NextJS</a></li>
+              <li><a href="/tutorials/integrating-with-rails">Integrating with Rails</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <article id="content" class="content content--with-toc">
+        <div class="content__toc">
+          <ul>
+            <li class="top"><a href="#">Localization</a></li>
+            <li data-level="2"><a href="#available-translations">Available Translations</a></li>
+            <li data-level="3"><a href="#translation-resolution">Translation Resolution</a></li>
+            <li data-level="3">
+              <a href="#submitting-new-translations-or-improvements">Submitting New Translations or Improvements</a>
+            </li>
+            <li data-level="2"><a href="#multiple-locales-per-page">Multiple Locales Per Page</a></li>
+            <li data-level="2"><a href="#creating-your-own-translations">Creating Your Own Translations</a></li>
+          </ul>
+        </div>
+
+        <div class="content__body">
+          <h1>Localization</h1>
+          <p>
+            Components can be localized by importing the appropriate translation file and setting the desired
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>lang</code> attribute</a
+            >
+            and/or
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>dir</code> attribute</a
+            >
+            on the <code>&lt;html&gt;</code> element. Here’s an example that renders Pure UI components in Spanish.
+          </p>
+          <pre><code class="language-html" id="code-block-35"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>es<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/path/to/pure-ui/dist/translations/es.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    ...
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-35"></p-copy-button></pre>
+          <p>
+            Through the magic of a mutation observer, changing the <code>lang</code> attribute will automatically update
+            all localized components to use the new locale.
+          </p>
+          <h2 id="available-translations" class="anchor-heading">
+            Available Translations<a
+              href="#available-translations"
+              aria-label='Direct link to "Available Translations"'
+            ></a>
+          </h2>
+          <p>
+            Pure UI ships with a number of translations. The default is English (US), which also serves as the fallback
+            locale. As such, you do not need to import the English translation. To see a list of all available
+            translations in the latest version,
+            <a
+              href="https://github.com/ssjblue197/pure-ui/tree/current/src/translations"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >refer to this directory</a
+            >.
+          </p>
+          <p>The location of translations depends on how you’re consuming Pure UI.</p>
+          <ul>
+            <li>
+              If you’re using the CDN,
+              <a
+                href="https://www.jsdelivr.com/package/npm/pure-uikit?path=cdn25%2Ftranslations"
+                class="external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                >import them from the CDN</a
+              >
+            </li>
+            <li>If you’re using a bundler, import them from <code>pure-uikit/dist/translations/[lang].js</code></li>
+          </ul>
+          <p>
+            You do not need to load translations up front. You can import them dynamically even after updating the
+            <code>lang</code> attribute. Once a translation is registered, localized components will update
+            automatically.
+          </p>
+          <pre><code class="language-js" id="code-block-36"><span class="token comment">// Same as setting &lt;html lang="de"&gt;</span>
+document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>lang <span class="token operator">=</span> <span class="token string">"de"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Import the translation</span>
+<span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"/path/to/pure-ui/dist/translations/de.js"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-36"></p-copy-button></pre>
+          <h3 id="translation-resolution" class="anchor-heading">
+            Translation Resolution<a
+              href="#translation-resolution"
+              aria-label='Direct link to "Translation Resolution"'
+            ></a>
+          </h3>
+          <p>
+            The locale set by <code>&lt;html lang="..."&gt;</code> is the default locale for the document. If a country
+            code is provided, e.g. <code>es-PE</code> for Peruvian Spanish, the localization library will resolve it
+            like this:
+          </p>
+          <ol>
+            <li>Look for <code>es-PE</code></li>
+            <li>Look for <code>es</code></li>
+            <li>Fall back to <code>en</code></li>
+          </ol>
+          <p>
+            Pure UI uses English as a fallback to provide a better experience than rendering nothing or throwing an
+            error.
+          </p>
+          <h3 id="submitting-new-translations-or-improvements" class="anchor-heading">
+            Submitting New Translations or Improvements<a
+              href="#submitting-new-translations-or-improvements"
+              aria-label='Direct link to "Submitting New Translations or Improvements"'
+            ></a>
+          </h3>
+          <p>
+            To contribute new translations or improvements to existing translations, please submit a pull request on
+            GitHub. Translations are located in
+            <a
+              href="https://github.com/ssjblue197/pure-ui/blob/next/src/translations"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              ><code>src/translations</code></a
+            >
+            and can be edited directly on GitHub if you don’t want to clone the repo locally.
+          </p>
+          <p>
+            Regional translations are welcome! For example, if a German translation (<code>de</code>) exists it’s
+            perfectly acceptable to submit a German (Switzerland) (<code>de-CH</code>) translation.
+          </p>
+          <p>
+            If you have any questions, please start a
+            <a
+              href="https://github.com/ssjblue197/pure-ui/discussions"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >discussion</a
+            >
+            or ask in the
+            <a href="https://discord.gg/mg8f26C" class="external-link" rel="noopener noreferrer" target="_blank"
+              >community chat</a
+            >.
+          </p>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              Pure UI provides a localization mechanism for component internals. This is not designed to be used as
+              localization tool for your entire application. You should use a more appropriate tool such as
+              <a href="https://www.i18next.com/" class="external-link" rel="noopener noreferrer" target="_blank"
+                >i18next</a
+              >
+              if you need to localize content in your app.
+            </p>
+          </div>
+          <h2 id="multiple-locales-per-page" class="anchor-heading">
+            Multiple Locales Per Page<a
+              href="#multiple-locales-per-page"
+              aria-label='Direct link to "Multiple Locales Per Page"'
+            ></a>
+          </h2>
+          <p>
+            You can use a different locale for an individual component by setting its <code>lang</code> and/or
+            <code>dir</code> attributes. Here’s a contrived example to demonstrate.
+          </p>
+          <pre><code class="language-html" id="code-block-37"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>es<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  ...
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span><span class="token punctuation">&gt;</span></span><span class="token comment">&lt;!-- Spanish --&gt;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ru<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token comment">&lt;!-- Russian --&gt;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-37"></p-copy-button></pre>
+          <p>
+            For performance reasons, the <code>lang</code> and <code>dir</code> attributes must be on the component
+            itself, not on an ancestor element.
+          </p>
+          <pre><code class="language-html" id="code-block-38"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>es<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  ...
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ru<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p-button</span><span class="token punctuation">&gt;</span></span><span class="token comment">&lt;!-- still in Spanish --&gt;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p-button</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-38"></p-copy-button></pre>
+          <p>
+            This limitation exists because there’s no efficient way to determine the current locale of a given element
+            in a DOM tree. I consider this a gap in the platform and
+            <a
+              href="https://github.com/whatwg/html/issues/7039"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >I’ve proposed a couple properties</a
+            >
+            to make this possible.
+          </p>
+          <h2 id="creating-your-own-translations" class="anchor-heading">
+            Creating Your Own Translations<a
+              href="#creating-your-own-translations"
+              aria-label='Direct link to "Creating Your Own Translations"'
+            ></a>
+          </h2>
+          <p>
+            You can provide your own translations if you have specific needs or if you don’t want to wait for a
+            translation to land upstream. The easiest way to do this is to copy <code>src/translations/en.ts</code> into
+            your own project and translate the terms inside. When your translation is done, you can import it and use it
+            just like a built-in translation.
+          </p>
+          <p>
+            Let’s create a Spanish translation as an example. The following assumes you’re using TypeScript, but you can
+            also create translations with regular JavaScript.
+          </p>
+          <pre><code class="language-js" id="code-block-39"><span class="token keyword">import</span> <span class="token punctuation">{</span> registerTranslation <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/utilities/localize'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> type <span class="token punctuation">{</span> Translation <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'pure-uikit/dist/utilities/localize'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token literal-property property">translation</span><span class="token operator">:</span> Translation <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">$code</span><span class="token operator">:</span> <span class="token string">'es'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">$name</span><span class="token operator">:</span> <span class="token string">'Español'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">$dir</span><span class="token operator">:</span> <span class="token string">'ltr'</span><span class="token punctuation">,</span>
+
+  <span class="token literal-property property">term1</span><span class="token operator">:</span> <span class="token string">'...'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">term2</span><span class="token operator">:</span> <span class="token string">'...'</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token function">registerTranslation</span><span class="token punctuation">(</span>translation<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> translation<span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-39"></p-copy-button></pre>
+          <p>Once your translation has been compiled to JavaScript, import it and activate it like this.</p>
+          <pre><code class="language-html" id="code-block-40"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>es<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/path/to/es.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    ...
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code><p-copy-button class="copy-code-button" from="code-block-40"></p-copy-button></pre>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              If your translation isn’t working, make sure you’re using the same localize module when importing
+              <code>registerTranslation</code>. If you’re using a different module, your translation won’t be
+              recognized.
+            </p>
+          </div>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

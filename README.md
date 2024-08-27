@@ -8,7 +8,7 @@ A forward-thinking library of web components.
 - Includes an official dark theme 🌛
 - Built with accessibility in mind ♿️
 
-Designed in New Hampshire by [Mr.P](https://www.facebook.com/ssjblue197).
+Designed in Hanoi, Vietnam by [Mr.P](https://www.facebook.com/ssjblue197).
 
 ---
 

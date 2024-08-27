@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en" data-layout="default" data-pure-ui-version="1.1.11">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="This page explains how to integrate Pure UI with a NextJS app." />
+    <title>Integrating with NextJS</title>
+
+    <meta name="turbo-cache-control" />
+
+    <link rel="stylesheet" href="/assets/styles/docs.css" />
+    <link rel="stylesheet" href="/assets/styles/code-previews.css" />
+    <link rel="stylesheet" href="/assets/styles/search.css" />
+
+    <link rel="icon" href="/assets/images/logo.png" type="image/x-icon" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="pure_ui" />
+    <meta name="twitter:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <meta property="og:url" content="https://pureui.xyz/tutorials/integrating-with-nextjs/" />
+    <meta property="og:title" content="Integrating with NextJS" />
+    <meta property="og:description" content="This page explains how to integrate Pure UI with a NextJS app." />
+    <meta property="og:image" content="https://pureui.xyz/assets/images/og-image.png" />
+
+    <link rel="stylesheet" href="/dist/themes/light.css" />
+    <link rel="stylesheet" href="/dist/themes/dark.css" />
+    <script type="module" src="/dist/pure-ui-autoloader.js"></script>
+
+    <script>
+      (() => {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = localStorage.getItem('theme') || 'auto';
+        document.documentElement.classList.toggle(
+          'p-theme-dark',
+          theme === 'dark' || (theme === 'auto' && prefersDark)
+        );
+      })();
+    </script>
+
+    <script src="/assets/scripts/turbo.js" type="module"></script>
+    <script src="/assets/scripts/docs.js" defer=""></script>
+    <script src="/assets/scripts/code-previews.js" defer=""></script>
+    <script src="/assets/scripts/lunr.js" defer=""></script>
+    <script src="/assets/scripts/search.js" defer=""></script>
+  </head>
+  <body>
+    <button id="menu-toggle" type="button" aria-label="Menu">
+      <svg width="148" height="148" viewBox="0 0 148 148" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="currentColor" stroke-width="18" fill="none" fill-rule="evenodd" stroke-linecap="round">
+          <path d="M9.5 125.5h129M9.5 74.5h129M9.5 23.5h129"></path>
+        </g>
+      </svg>
+    </button>
+
+    <div id="icon-toolbar">
+      <a
+        href="https://github.com/ssjblue197/Pure-UI-Document"
+        title="View Pure UI on GitHub"
+        class="external-link"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <p-icon name="github"></p-icon>
+      </a>
+
+      <p-dropdown id="theme-selector" placement="bottom-end" distance="3">
+        <p-button slot="trigger" size="small" variant="text" caret="" title="Press \ to toggle">
+          <p-icon class="only-light" name="sun-fill"></p-icon>
+          <p-icon class="only-dark" name="moon-fill"></p-icon>
+        </p-button>
+        <p-menu>
+          <p-menu-item type="checkbox" value="light">Light</p-menu-item>
+          <p-menu-item type="checkbox" value="dark">Dark</p-menu-item>
+          <p-divider></p-divider>
+          <p-menu-item type="checkbox" value="auto">System</p-menu-item>
+        </p-menu>
+      </p-dropdown>
+    </div>
+
+    <aside id="sidebar" data-preserve-scroll="">
+      <header>
+        <a href="/">
+          <img src="/assets/images/wordmark.svg" alt="Pure UI" />
+        </a>
+        <div class="sidebar-version">1.1.11</div>
+      </header>
+
+      <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
+        <p-icon name="search"></p-icon>
+        <span>Search</span>
+      </button>
+
+      <nav>
+        <ul>
+          <li>
+            <h2>Getting Started</h2>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/getting-started/installation">Installation</a></li>
+              <li><a href="/getting-started/usage">Usage</a></li>
+              <li><a href="/getting-started/themes">Themes</a></li>
+              <li><a href="/getting-started/customizing">Customizing</a></li>
+              <li><a href="/getting-started/form-controls">Form Controls</a></li>
+              <li><a href="/getting-started/localization">Localization</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Frameworks</h2>
+            <ul>
+              <li><a href="/frameworks/react">React</a></li>
+              <li><a href="/frameworks/vue">Vue</a></li>
+              <li><a href="/frameworks/angular">Angular</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="/resources/community">Community</a></li>
+              <li><a href="/resources/accessibility">Accessibility</a></li>
+              <li><a href="/resources/contributing">Contributing</a></li>
+              <li><a href="/resources/changelog">Changelog</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Components</h2>
+            <ul>
+              <li>
+                <a href="/components/alert"> Alert </a>
+              </li>
+
+              <li>
+                <a href="/components/animated-image"> Animated Image </a>
+              </li>
+
+              <li>
+                <a href="/components/animation"> Animation </a>
+              </li>
+
+              <li>
+                <a href="/components/avatar"> Avatar </a>
+              </li>
+
+              <li>
+                <a href="/components/badge"> Badge </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb"> Breadcrumb </a>
+              </li>
+
+              <li>
+                <a href="/components/breadcrumb-item"> Breadcrumb Item </a>
+              </li>
+
+              <li>
+                <a href="/components/button"> Button </a>
+              </li>
+
+              <li>
+                <a href="/components/button-group"> Button Group </a>
+              </li>
+
+              <li>
+                <a href="/components/calendar"> Calendar </a>
+              </li>
+
+              <li>
+                <a href="/components/card"> Card </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel"> Carousel </a>
+              </li>
+
+              <li>
+                <a href="/components/carousel-item"> Carousel Item </a>
+              </li>
+
+              <li>
+                <a href="/components/checkbox"> Checkbox </a>
+              </li>
+
+              <li>
+                <a href="/components/color-picker"> Color Picker </a>
+              </li>
+
+              <li>
+                <a href="/components/copy-button"> Copy Button </a>
+              </li>
+
+              <li>
+                <a href="/components/details"> Details </a>
+              </li>
+
+              <li>
+                <a href="/components/dialog"> Dialog </a>
+              </li>
+
+              <li>
+                <a href="/components/divider"> Divider </a>
+              </li>
+
+              <li>
+                <a href="/components/drawer"> Drawer </a>
+              </li>
+
+              <li>
+                <a href="/components/dropdown"> Dropdown </a>
+              </li>
+
+              <li>
+                <a href="/components/format-bytes"> Format Bytes </a>
+              </li>
+
+              <li>
+                <a href="/components/format-date"> Format Date </a>
+              </li>
+
+              <li>
+                <a href="/components/format-number"> Format Number </a>
+              </li>
+
+              <li>
+                <a href="/components/icon"> Icon </a>
+              </li>
+
+              <li>
+                <a href="/components/icon-button"> Icon Button </a>
+              </li>
+
+              <li>
+                <a href="/components/image-comparer"> Image Comparer </a>
+              </li>
+
+              <li>
+                <a href="/components/include"> Include </a>
+              </li>
+
+              <li>
+                <a href="/components/input"> Input </a>
+              </li>
+
+              <li>
+                <a href="/components/menu"> Menu </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-item"> Menu Item </a>
+              </li>
+
+              <li>
+                <a href="/components/menu-label"> Menu Label </a>
+              </li>
+
+              <li>
+                <a href="/components/mutation-observer"> Mutation Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/option"> Option </a>
+              </li>
+
+              <li>
+                <a href="/components/paginate"> Paginate </a>
+              </li>
+
+              <li>
+                <a href="/components/popup"> Popup </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-bar"> Progress Bar </a>
+              </li>
+
+              <li>
+                <a href="/components/progress-ring"> Progress Ring </a>
+              </li>
+
+              <li>
+                <a href="/components/qr-code"> QR Code </a>
+              </li>
+
+              <li>
+                <a href="/components/radio"> Radio </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-button"> Radio Button </a>
+              </li>
+
+              <li>
+                <a href="/components/radio-group"> Radio Group </a>
+              </li>
+
+              <li>
+                <a href="/components/range"> Range </a>
+              </li>
+
+              <li>
+                <a href="/components/rating"> Rating </a>
+              </li>
+
+              <li>
+                <a href="/components/relative-time"> Relative Time </a>
+              </li>
+
+              <li>
+                <a href="/components/resize-observer"> Resize Observer </a>
+              </li>
+
+              <li>
+                <a href="/components/select"> Select </a>
+              </li>
+
+              <li>
+                <a href="/components/skeleton"> Skeleton </a>
+              </li>
+
+              <li>
+                <a href="/components/spinner"> Spinner </a>
+              </li>
+
+              <li>
+                <a href="/components/split-panel"> Split Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/switch"> Switch </a>
+              </li>
+
+              <li>
+                <a href="/components/tab"> Tab </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-group"> Tab Group </a>
+              </li>
+
+              <li>
+                <a href="/components/tab-panel"> Tab Panel </a>
+              </li>
+
+              <li>
+                <a href="/components/tag"> Tag </a>
+              </li>
+
+              <li>
+                <a href="/components/textarea"> Textarea </a>
+              </li>
+
+              <li>
+                <a href="/components/tooltip"> Tooltip </a>
+              </li>
+
+              <li>
+                <a href="/components/tree"> Tree </a>
+              </li>
+
+              <li>
+                <a href="/components/tree-item"> Tree Item </a>
+              </li>
+
+              <li>
+                <a href="/components/visually-hidden"> Visually Hidden </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h2>Design Tokens</h2>
+            <ul>
+              <li><a href="/tokens/typography">Typography</a></li>
+              <li><a href="/tokens/color">Color</a></li>
+              <li><a href="/tokens/spacing">Spacing</a></li>
+              <li><a href="/tokens/elevation">Elevation</a></li>
+              <li><a href="/tokens/border-radius">Border Radius</a></li>
+              <li><a href="/tokens/transition">Transition</a></li>
+              <li><a href="/tokens/z-index">Z-index</a></li>
+              <li><a href="/tokens/more">More Tokens</a></li>
+            </ul>
+          </li>
+          <li>
+            <h2>Tutorials</h2>
+            <ul>
+              <li><a href="/tutorials/integrating-with-astro">Integrating with Astro</a></li>
+              <li><a href="/tutorials/integrating-with-laravel">Integrating with Laravel</a></li>
+              <li><a href="/tutorials/integrating-with-nextjs" class="active-link">Integrating with NextJS</a></li>
+              <li><a href="/tutorials/integrating-with-rails">Integrating with Rails</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <article id="content" class="content content--with-toc">
+        <div class="content__toc">
+          <ul>
+            <li class="top"><a href="#">Integrating with NextJS</a></li>
+            <li data-level="2"><a href="#usage-with-app-router-nextjs-14">Usage with App Router (NextJS 14)</a></li>
+            <li data-level="3"><a href="#working-with-esm">Working with ESM</a></li>
+            <li data-level="3"><a href="#installing-packages">Installing packages</a></li>
+            <li data-level="3"><a href="#modifying-your-next-config">Modifying your Next Config</a></li>
+            <li data-level="3"><a href="#nextjs-14-webpack-config">NextJS 14 Webpack Config</a></li>
+            <li data-level="3">
+              <a href="#importing-the-pure-uis-css-default-theme">Importing the Pure UI’s CSS (default theme)</a>
+            </li>
+            <li data-level="3"><a href="#writing-a-setup-component">Writing a “setup” component</a></li>
+            <li data-level="3">
+              <a href="#writing-components-that-use-pure-ui">Writing components that use Pure UI</a>
+            </li>
+            <li data-level="2"><a href="#usage-with-pages-router-nextjs-12">Usage with Pages Router (NextJS 12)</a></li>
+            <li data-level="3"><a href="#enabling-esm">Enabling ESM</a></li>
+            <li data-level="3"><a href="#importing-the-default-theme">Importing the Default Theme</a></li>
+            <li data-level="3"><a href="#defining-custom-elements">Defining Custom Elements</a></li>
+            <li data-level="3"><a href="#using-our-new-component-in-code">Using Our New Component In Code</a></li>
+            <li data-level="2"><a href="#additional-resources">Additional Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="content__body">
+          <h1>Integrating with NextJS</h1>
+          <p>This page explains how to integrate Pure UI with a NextJS app.</p>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              This is a community-maintained document. Please <a href="/resources/community">ask the community</a> if
+              you have questions about this integration. You can also
+              <a
+                href="https://github.com/ssjblue197/pure-ui/blob/next/docs/tutorials/integrating-with-nextjs.md"
+                class="external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                >suggest improvements</a
+              >
+              to make it better.
+            </p>
+          </div>
+          <p>There are 2 guides available:</p>
+          <ul>
+            <li><a href="#usage-with-app-router-nextjs-14">Usage with App Router NextJS 14</a></li>
+            <li><a href="#usage-with-pages-router-nextjs-12">Usage with Pages Router NextJS 12</a></li>
+          </ul>
+          <h2 id="usage-with-app-router-nextjs-14" class="anchor-heading">
+            Usage with App Router (NextJS 14)<a
+              href="#usage-with-app-router-nextjs-14"
+              aria-label='Direct link to "Usage with App Router (NextJS 14)"'
+            ></a>
+          </h2>
+          <ul>
+            <li>Node: v20.11.1</li>
+            <li>NextJS: 14.2.4</li>
+            <li>Pure UI: 2.15.1</li>
+          </ul>
+          <h3 id="working-with-esm" class="anchor-heading">
+            Working with ESM<a href="#working-with-esm" aria-label='Direct link to "Working with ESM"'></a>
+          </h3>
+          <p>
+            If you haven’t already, create your NextJS app. You can find the documentation for that here:
+            <a
+              href="https://nextjs.org/docs/getting-started/installation"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >https://nextjs.org/docs/getting-started/installation</a
+            >
+          </p>
+          <p>
+            After you’ve created your app, the first step to using Pure UI is modifying your
+            <code>package.json</code> to have <code>"type": "module"</code> in it since Pure UI ships ES Modules.
+          </p>
+          <pre><code class="language-json" id="code-block-134"><span class="token comment">// package.json</span>
+<span class="token punctuation">{</span>
+  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"module"</span>
+<span class="token punctuation">}</span>
+</code><p-copy-button class="copy-code-button" from="code-block-134"></p-copy-button></pre>
+          <h3 id="installing-packages" class="anchor-heading">
+            Installing packages<a href="#installing-packages" aria-label='Direct link to "Installing packages"'></a>
+          </h3>
+          <p>To get started using Pure UI with NextJS, the following packages must be installed.</p>
+          <pre><code class="language-bash" id="code-block-135"><span class="token function">npm</span> <span class="token function">install</span> pure-uikit copy-webpack-plugin
+</code><p-copy-button class="copy-code-button" from="code-block-135"></p-copy-button></pre>
+          <p>
+            Pure UI for obvious reasons, and the <code>copy-webpack-plugin</code> will be used later for adding our
+            icons to our <code>public/</code> folder.
+          </p>
+          <h3 id="modifying-your-next-config" class="anchor-heading">
+            Modifying your Next Config<a
+              href="#modifying-your-next-config"
+              aria-label='Direct link to "Modifying your Next Config"'
+            ></a>
+          </h3>
+          <p>
+            We’ll start with modifying our <code>next.config.js</code> to copy Pure UI’s assets and to properly work
+            with ESM.
+          </p>
+          <p>Here’s what your <code>next.config.js</code> should look like:</p>
+          <h3 id="nextjs-14-webpack-config" class="anchor-heading">
+            NextJS 14 Webpack Config<a
+              href="#nextjs-14-webpack-config"
+              aria-label='Direct link to "NextJS 14 Webpack Config"'
+            ></a>
+          </h3>
+          <p>
+            In order to add Pure UI’s assets to the final build output, we need to modify <code>next.config.js</code> to
+            look like this.
+          </p>
+          <pre><code class="language-javascript" id="code-block-136"><span class="token comment">// next.config.js</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> dirname<span class="token punctuation">,</span> resolve <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"path"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"url"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> CopyPlugin <span class="token keyword">from</span> <span class="token string">"copy-webpack-plugin"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> __dirname <span class="token operator">=</span> <span class="token function">dirname</span><span class="token punctuation">(</span><span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/** @type {import('next').NextConfig} */</span>
+<span class="token keyword">const</span> nextConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">experimental</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">esmExternals</span><span class="token operator">:</span> <span class="token string">"loose"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">webpack</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">config<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    config<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>
+      <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">patterns</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token literal-property property">from</span><span class="token operator">:</span> <span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">"node_modules/pure-uikit/dist/assets/"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token literal-property property">to</span><span class="token operator">:</span> <span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">"public/pure-ui-assets/assets/"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> config<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> nextConfig<span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-136"></p-copy-button></pre>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              This will copy the files from <code>node_modules/pure-uikit/dist/assets</code> into your
+              <code>public/pure-ui-assets</code> folder on every development serve or build. You may want to avoid
+              committing these into your repo. To do so, simply add <code>public/pure-ui-assets</code> into your
+              <code>.gitignore</code> folder
+            </p>
+          </div>
+          <h3 id="importing-the-pure-uis-css-default-theme" class="anchor-heading">
+            Importing the Pure UI’s CSS (default theme)<a
+              href="#importing-the-pure-uis-css-default-theme"
+              aria-label='Direct link to "Importing the Pure UI&apos;s CSS (default theme)"'
+            ></a>
+          </h3>
+          <p>
+            Once we’ve got our webpack config / next config setup, lets modify our <code>app/layout.tsx</code> to
+            include Pure UI’s default theme.
+          </p>
+          <pre><code class="language-javascript" id="code-block-137"><span class="token comment">// app/layout.tsx</span>
+<span class="token keyword">import</span> <span class="token string">"./globals.css"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">"pure-uikit/dist/themes/light.css"</span><span class="token punctuation">;</span>
+<span class="token comment">// We can also import the dark theme here as well.</span>
+<span class="token comment">// import "pure-uikit/dist/themes/dark.css";</span>
+</code><p-copy-button class="copy-code-button" from="code-block-137"></p-copy-button></pre>
+          <h3 id="writing-a-setup-component" class="anchor-heading">
+            Writing a “setup” component<a
+              href="#writing-a-setup-component"
+              aria-label='Direct link to "Writing a "setup" component"'
+            ></a>
+          </h3>
+          <p>
+            Now, we need to create a <code>Pure UISetup</code> component that will be a client component in charge of
+            setting the <code>basePath</code> for our assets / icons.
+          </p>
+          <p>To do so, create a file called <code>app/pure-ui-setup.tsx</code></p>
+          <pre><code class="language-typescript" id="code-block-138"><span class="token string">'use client'</span><span class="token punctuation">;</span>
+<span class="token comment">// ^ Make sure to have 'use client'; because `setBasePath()` requires access to `document`.</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> setBasePath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"pure-uikit/dist/utilities/base-path.js"</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> Pure <span class="token function">UISetup</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  children<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  children<span class="token operator">:</span> React<span class="token punctuation">.</span>ReactNode
+<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">setBasePath</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/pure-ui-assets/</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">{</span>children<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+<span class="token punctuation">}</span>
+</code><p-copy-button class="copy-code-button" from="code-block-138"></p-copy-button></pre>
+          <div role="alert" class="callout callout--warning">
+            <p>Don’t forget to mark your Pure UI components and Pure UI setup with ‘use client’.</p>
+          </div>
+          <p>Then we’ll add this setup component into <code>app/layout.tsx</code></p>
+          <p>Our <code>layout.tsx</code> Should now look something like this:</p>
+          <pre><code class="language-diff" id="code-block-139">import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import "pure-uikit/dist/themes/light.css";
+</span></span>
+<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import Pure UISetup from "./pure-ui-setup";
+</span></span>
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> title: "Create Next App",
+</span><span class="token prefix unchanged"> </span><span class="token line"> description: "Generated by create next app",
+</span></span>};
+
+export default function RootLayout({
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> children,
+</span></span>}: {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> children: React.ReactNode;
+</span></span>}) {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> return (
+</span><span class="token prefix unchanged"> </span><span class="token line">   &lt;html lang="en"&gt;
+</span><span class="token prefix unchanged"> </span><span class="token line">     &lt;body className={inter.className}&gt;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">         &lt;Pure UISetup&gt;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">           {children}
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">         &lt;/Pure UISetup&gt;
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">     &lt;/body&gt;
+</span><span class="token prefix unchanged"> </span><span class="token line">   &lt;/html&gt;
+</span><span class="token prefix unchanged"> </span><span class="token line"> );
+</span></span>}
+</code><p-copy-button class="copy-code-button" from="code-block-139"></p-copy-button></pre>
+          <h3 id="writing-components-that-use-pure-ui" class="anchor-heading">
+            Writing components that use Pure UI<a
+              href="#writing-components-that-use-pure-ui"
+              aria-label='Direct link to "Writing components that use Pure UI"'
+            ></a>
+          </h3>
+          <p>
+            Now that we have the setup in place, we can write an <code>app/page.tsx</code> to use Pure UI components in
+            combination with the <code>dynamic()</code> component loader from NextJS.
+          </p>
+          <p>
+            Here’s what that would look like, do note the <code>"use client";</code> at the top of the component is
+            required.
+          </p>
+          <pre><code class="language-typescript" id="code-block-140"><span class="token comment">// app/page.tsx</span>
+<span class="token string">'use client'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> dynamic <span class="token keyword">from</span> <span class="token string">"next/dynamic"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> SlButton <span class="token operator">=</span> <span class="token function">dynamic</span><span class="token punctuation">(</span>
+  <span class="token comment">// Notice how we use the full path to the component. If you only do `import("pure-uikit/dist/react")` you will load the entire component library and not get tree shaking.</span>
+  <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"pure-uikit/dist/react/button/index.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token function-variable function">loading</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token operator">&lt;</span>p<span class="token operator">&gt;</span>Loading<span class="token operator">...</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    ssr<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> SlIcon <span class="token operator">=</span> <span class="token function">dynamic</span><span class="token punctuation">(</span>
+  <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"pure-uikit/dist/react/icon/index.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token function-variable function">loading</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token operator">&lt;</span>p<span class="token operator">&gt;</span>Loading<span class="token operator">...</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    ssr<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Home</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>main<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>SlButton<span class="token operator">&gt;</span>Test<span class="token operator">&lt;</span><span class="token operator">/</span>SlButton<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>SlIcon name<span class="token operator">=</span><span class="token string">"gear"</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>main<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code><p-copy-button class="copy-code-button" from="code-block-140"></p-copy-button></pre>
+          <p>Now you should be up and running with NextJS + Pure UI!</p>
+          <p>
+            If you’re stuck, there’s an
+            <a
+              href="https://github.com/konnorRogers/pure-ui-nextjs-lazy"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >example repo here</a
+            >
+            you can checkout.
+          </p>
+          <h2 id="usage-with-pages-router-nextjs-12" class="anchor-heading">
+            Usage with Pages Router (NextJS 12)<a
+              href="#usage-with-pages-router-nextjs-12"
+              aria-label='Direct link to "Usage with Pages Router (NextJS 12)"'
+            ></a>
+          </h2>
+          <ul>
+            <li>Node: 16.13.1</li>
+            <li>NextJS: 12.1.6</li>
+            <li>Pure UI: 2.0.0-beta.74</li>
+          </ul>
+          <p>To get started using Pure UI with NextJS, the following packages must be installed.</p>
+          <pre><code class="language-bash" id="code-block-141"><span class="token function">yarn</span> <span class="token function">add</span> pure-uikit copy-webpack-plugin next-compose-plugins next-transpile-modules
+</code><p-copy-button class="copy-code-button" from="code-block-141"></p-copy-button></pre>
+          <h3 id="enabling-esm" class="anchor-heading">
+            Enabling ESM<a href="#enabling-esm" aria-label='Direct link to "Enabling ESM"'></a>
+          </h3>
+          <p>
+            Because Pure UI utilizes ESM, we need to modify our <code>package.json</code> to support ESM packages.
+            Simply add the following to your root of <code>package.json</code>:
+          </p>
+          <pre><code id="code-block-142">"type": "module"
+</code><p-copy-button class="copy-code-button" from="code-block-142"></p-copy-button></pre>
+          <p>
+            There’s one more step to enable ESM in NextJS, but we’ll tackle that in our Next configuration modification.
+          </p>
+          <h3 id="importing-the-default-theme" class="anchor-heading">
+            Importing the Default Theme<a
+              href="#importing-the-default-theme"
+              aria-label='Direct link to "Importing the Default Theme"'
+            ></a>
+          </h3>
+          <p>The next step is to import Pure UI’s default theme (stylesheet) in your <code>_app.js</code> file:</p>
+          <pre><code class="language-css" id="code-block-143">import <span class="token string">'pure-uikit/dist/themes/light.css'</span><span class="token punctuation">;</span>
+</code><p-copy-button class="copy-code-button" from="code-block-143"></p-copy-button></pre>
+          <h3 id="defining-custom-elements" class="anchor-heading">
+            Defining Custom Elements<a
+              href="#defining-custom-elements"
+              aria-label='Direct link to "Defining Custom Elements"'
+            ></a>
+          </h3>
+          <p>
+            After importing the theme, you’ll need to import the JavaScript files for Pure UI. However, this is a bit
+            tricky to do in NextJS thanks to the SSR environment not having any of the required browser APIs to define
+            endpoints.
+          </p>
+          <p>
+            We’ll want to create a component that uses
+            <a
+              href="https://reactjs.org/docs/hooks-reference.html#uselayouteffect"
+              class="external-link"
+              rel="noopener noreferrer"
+              target="_blank"
+              >React’s <code>useLayoutEffect</code></a
+            >
+            to add in the custom components before the first render:
+          </p>
+          <pre><code class="language-javascript" id="code-block-144"><span class="token keyword">function</span> <span class="token function">CustomEls</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> <span class="token constant">URL</span> <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// useRef to avoid re-renders</span>
+  <span class="token keyword">const</span> customEls <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">useLayoutEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>customEls<span class="token punctuation">.</span>current<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"pure-uikit/dist/utilities/base-path"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> setBasePath <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token function">setBasePath</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">URL</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/static/static</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token comment">// This imports all components</span>
+      <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">"pure-uikit/dist/react"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// If you're wanting to selectively import components, replace this line with your own definitions</span>
+
+      <span class="token comment">// import("pure-uikit/dist/components/button/button");</span>
+      customEls<span class="token punctuation">.</span>current <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token constant">URL</span><span class="token punctuation">,</span> customEls<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code><p-copy-button class="copy-code-button" from="code-block-144"></p-copy-button></pre>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              If we use <code>useEffect</code> instead of <code>useLayoutEffect</code>, the initial render will occur
+              with the expected <code>p-</code> props applied, but the subsequent render (caused by the
+              <code>useEffect</code>) will remove those props as the custom components initialize. We <em>must</em> use
+              <code>useLayoutEffect</code> to have expected behavior
+            </p>
+          </div>
+          <div role="alert" class="callout callout--tip">
+            <p>
+              This will import all Pure UI components for convenience. To selectively import components, refer to the
+              <a href="/getting-started/installation#using-webpack">Using webpack</a> section of the docs.
+            </p>
+          </div>
+          <p>
+            You may be wondering where the <code>URL</code> property is coming from. We’ll address that in the next few
+            sections.
+          </p>
+          <h3 id="using-our-new-component-in-code" class="anchor-heading">
+            Using Our New Component In Code<a
+              href="#using-our-new-component-in-code"
+              aria-label='Direct link to "Using Our New Component In Code"'
+            ></a>
+          </h3>
+          <p>
+            While we need to use <code>useLayoutEffect</code> for the initial render, NextJS will throw a warning at us
+            for trying to use <code>useLayoutEffect</code> in SSR, which is disallowed. To fix this problem, we’ll
+            conditionally render the <code>CustomEls</code> component to only render in the browser
+          </p>
+          <pre><code class="language-javascript" id="code-block-145"><span class="token keyword">function</span> <span class="token function">MyApp</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> Component<span class="token punctuation">,</span> pageProps<span class="token punctuation">,</span> <span class="token constant">URL</span> <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> isBrowser <span class="token operator">=</span> <span class="token keyword">typeof</span> window <span class="token operator">!==</span> <span class="token string">"undefined"</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span><span class="token operator">&gt;</span>
+      <span class="token punctuation">{</span>isBrowser <span class="token operator">&amp;&amp;</span> <span class="token operator">&lt;</span>CustomEls <span class="token constant">URL</span><span class="token operator">=</span><span class="token punctuation">{</span><span class="token constant">URL</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">}</span>
+      <span class="token operator">&lt;</span>Component <span class="token punctuation">{</span><span class="token operator">...</span>pageProps<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code><p-copy-button class="copy-code-button" from="code-block-145"></p-copy-button></pre>
+          <h2 id="additional-resources" class="anchor-heading">
+            Additional Resources<a href="#additional-resources" aria-label='Direct link to "Additional Resources"'></a>
+          </h2>
+          <ul>
+            <li>
+              There is a third-party
+              <a
+                href="https://github.com/crutchcorn/nextjs-pure-ui-example"
+                class="external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                >example repo</a
+              >, courtesy of
+              <a href="https://github.com/crutchcorn" class="external-link" rel="noopener noreferrer" target="_blank"
+                >crutchcorn</a
+              >, available to help you get started using Pages Router.
+            </li>
+            <li>
+              There is an
+              <a
+                href="https://github.com/konnorRogers/pure-ui-nextjs-lazy"
+                class="external-link"
+                rel="noopener noreferrer"
+                target="_blank"
+                >example repo</a
+              >
+              here using the App Router.
+            </li>
+          </ul>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
