@@ -462,7 +462,7 @@
   --p-input-spacing-medium: var(--p-spacing-medium);
   --p-input-spacing-large: var(--p-spacing-large);
 
-  --p-input-focus-ring-color: hsl(230 88.7% 48.4% / 40%);
+  --p-input-focus-ring-color: hsla(260, 77%, 70%, 0.24);
   --p-input-focus-ring-offset: 0;
 
   --p-input-filled-background-color: var(--p-color-neutral-100);
