@@ -8,7 +8,7 @@ A forward-thinking library of web components.
 - Includes an official dark theme 🌛
 - Built with accessibility in mind ♿️
 
-Designed in Hanoi, Vietnam by [Mr.P](https://www.facebook.com/ssjblue197).
+Develop in Hanoi, Vietnam by [Mr.P](https://www.facebook.com/ssjblue197).
 
 ---
 
@@ -18,7 +18,7 @@ Source: [https://github.com/ssjblue197/pure-ui](https://github.com/ssjblue197/pu
 
 ---
 
-## Pure UI makers 🥾
+## Pure UI makers :arrow_double_up:
 
 Pure UI maker, or "Pure UI developers," can use this documentation to learn how to build Pure UI from source. You will need Node >= 14.17 to build and run the project locally.
 
