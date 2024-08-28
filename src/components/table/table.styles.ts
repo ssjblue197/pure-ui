@@ -21,6 +21,7 @@ export default css`
     --table-border-radius: var(--p-border-radius-x-large);
 
     --table-row-hover-background-color: var(--p-color-neutral-0);
+    --table-cell-background-color: var(--p-color-neutral-0);
     --table-cell-hover-background-color: var(--p-color-primary-50);
 
     --table-cell-min-height: 40px;
@@ -60,7 +61,7 @@ export default css`
     font-weight: var(--p-font-weight-medium);
     font-size: var(--p-font-size-x-small);
     padding: var(--table-header-cell-padding);
-    justify-self: stretch;
+    justify-items: stretch;
     background-color: var(--p-color-gray-50);
     border-bottom: var(--table-border-horizontal-width) var(--table-border-horizontal-style)
       var(--table-border-horizontal-color);
@@ -90,6 +91,7 @@ export default css`
 
   .table-footer {
     grid-column: 1 / -1;
+    max-width: 100%;
     justify-self: stretch;
     justify-content: center;
     align-items: center;
@@ -108,13 +110,20 @@ export default css`
   .table-cell {
     display: flex;
     padding: 0.5rem;
-    justify-self: stretch;
-    justify-content: center;
-    align-items: center;
+    justify-items: stretch;
     color: var(--p-color-gray-600);
     font-weight: var(--p-font-weight-normal);
     font-size: var(--p-font-size-small);
     padding: var(--table-body-cell-padding);
+    flex-flow: 1 1 auto;
+  }
+
+  .table-cell--sticky {
+    position: sticky;
+  }
+
+  .table-row .table-cell {
+    background-color: var(--table-cell-background-color);
   }
 
   .table-row .table-cell:hover {

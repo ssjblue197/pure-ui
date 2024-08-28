@@ -8,6 +8,10 @@ export default css`
     cursor: pointer;
   }
 
+  button::part(base) {
+    font-weight: var(--p-font-weight-medium);
+  }
+
   .paginate {
     display: flex;
     align-items: center;

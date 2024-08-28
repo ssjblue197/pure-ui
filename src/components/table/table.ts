@@ -1,4 +1,5 @@
 import PTable from "./table.component.js";
+import type { HTMLTemplateResult } from "lit";
 
 export * from "./table.component.js";
 export default PTable;
@@ -14,7 +15,7 @@ export interface ColumnConfig {
   sort?: boolean; // 'asc' or 'desc'
   comparator?: (T: unknown) => void;
   filter?: boolean;
-  headerTitle?: string;
+  headerName?: string;
   width?: string;
   minWidth?: string;
   maxWidth?: string;
@@ -23,14 +24,26 @@ export interface ColumnConfig {
   filterable?: boolean;
   filterOptions?: string[] | object[];
   editable?: boolean;
-  render?: (T: unknown) => void;
+  render?: (T: unknown) => string;
+  renderSlot?: (T: unknown) => symbol | HTMLTemplateResult | undefined;
+  alignItems?: "flex-start" | "flex-end" | "center";
+  justifyContent?: "flex-start" | "flex-end" | "center";
+  justifyItems?: "flex-start" | "flex-end" | "center";
+  classes?: string;
+  truncate?: boolean;
+  sticky?: "start" | "end";
+  stickyOffset?: number;
 }
 
-export interface TableOptions<TableRowData> {
+export interface TableRowData {
+  [key: string]: unknown;
+}
+
+export interface TableOptions<T> {
   columns: ColumnConfig[];
-  data: TableRowData[];
-  onRowSelected?: (row: TableRowData) => void;
-  getSelectedRows?: () => TableRowData[];
+  data: T[];
+  onRowSelected?: (row: T) => void;
+  getSelectedRows?: () => T[];
 }
 
 PTable.define("p-table");
