@@ -4,7 +4,7 @@ export default css`
   :host {
     display: inline-block;
     position: relative;
-    width: auto;
+    width: 100%;
     cursor: pointer;
   }
 

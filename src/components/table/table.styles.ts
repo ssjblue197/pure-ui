@@ -1,0 +1,123 @@
+import { css } from "lit";
+
+export default css`
+  :host {
+    display: block;
+    --table-header-cell-padding: var(--p-spacing-small) var(--p-spacing-large);
+    --table-body-cell-padding: var(--p-spacing-medium) var(--p-spacing-large);
+    --table-footer-cell-padding: var(--p-spacing-small) var(--p-spacing-medium);
+
+    --table-border-horizontal-width: 1px;
+    --table-border-horizontal-style: solid;
+    --table-border-horizontal-color: var(--p-color-neutral-200);
+
+    --table-border-vertical-width: 1px;
+    --table-border-vertical-style: solid;
+    --table-border-vertical-color: var(--p-color-neutral-200);
+
+    --table-border-width: 1px;
+    --table-border-color: var(--p-color-neutral-200);
+    --table-border-style: solid;
+    --table-border-radius: var(--p-border-radius-x-large);
+
+    --table-row-hover-background-color: var(--p-color-neutral-0);
+    --table-cell-hover-background-color: var(--p-color-primary-50);
+
+    --table-cell-min-height: 40px;
+    --table-cell-max-height: 1fr;
+
+    --table-cell-min-width: 100px;
+    --table-cell-max-width: 1fr;
+
+    --table-row-gap: 0;
+    --table-column-gap: 0;
+  }
+
+  .table {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, minmax(var(--table-cell-min-width), var(--table-cell-max-width)));
+    grid-template-rows: repeat(auto-fill, minmax(var(--table-cell-min-height), var(--table-cell-max-height)));
+    row-gap: var(--table-row-gap);
+    column-gap: var(--table-column-gap);
+    border: var(--table-border-width) var(--table-border-style) var(--table-border-color);
+    border-radius: var(--table-border-radius);
+    box-shadow: 0px 1px 2px 0px #1018280d;
+    overflow: auto;
+  }
+  .table-header,
+  .table-body,
+  .table-row {
+    display: contents;
+  }
+
+  .table-header.table-header--hidden {
+    display: none;
+  }
+
+  .table-header .table-cell {
+    color: var(--p-color-gray-600);
+    font-weight: var(--p-font-weight-medium);
+    font-size: var(--p-font-size-x-small);
+    padding: var(--table-header-cell-padding);
+    justify-self: stretch;
+    background-color: var(--p-color-gray-50);
+    border-bottom: var(--table-border-horizontal-width) var(--table-border-horizontal-style)
+      var(--table-border-horizontal-color);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .table-header .table-cell:not(:last-child) {
+    border-right: var(--table-border-vertical-width) var(--table-border-vertical-style)
+      var(--table-border-vertical-color);
+  }
+
+  .table-row .table-cell:not(:last-child) {
+    border-right: var(--table-border-vertical-width) var(--table-border-vertical-style)
+      var(--table-border-horizontal-color);
+  }
+
+  // .table-row:hover .table-cell {
+  //   background-color: var(--table-row-hover-background-color);
+  // }
+
+  .table-row:not(:last-child) .table-cell {
+    border-bottom: var(--table-border-horizontal-width) var(--table-border-horizontal-style)
+      var(--table-border-horizontal-color);
+  }
+
+  .table-footer {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    justify-content: center;
+    align-items: center;
+    padding: var(--table-footer-cell-padding);
+  }
+
+  .table-footer.table-footer--hidden {
+    display: none;
+  }
+
+  .table-footer {
+    border-top: var(--table-border-horizontal-width) var(--table-border-horizontal-style)
+      var(--table-border-horizontal-color);
+  }
+
+  .table-cell {
+    display: flex;
+    padding: 0.5rem;
+    justify-self: stretch;
+    justify-content: center;
+    align-items: center;
+    color: var(--p-color-gray-600);
+    font-weight: var(--p-font-weight-normal);
+    font-size: var(--p-font-size-small);
+    padding: var(--table-body-cell-padding);
+  }
+
+  .table-row .table-cell:hover {
+    background-color: var(--table-cell-hover-background-color);
+  }
+`;
