@@ -119,82 +119,90 @@ export default class PTable extends PureElement {
   render() {
     return html` <div
       class=${classMap({
-        table: true,
+        "table-wrapper": true,
       })}
-      style="grid-template-columns: repeat(${this.options.columns.length}, auto);"
     >
       <div
         class=${classMap({
-          "table-header": true,
-          "table-header--hidden": this.hideHeader,
+          table: true,
         })}
+        style="grid-template-columns: repeat(${this.options.columns.length}, auto);"
       >
-        ${this.options.columns.map(
-          i => html`
-            <div
-              class=${classMap({
-                "table-cell": true,
-              })}
-              style=${styleMap({
-                display: i?.hide ? "none" : "flex",
-                alignItems: i?.alignItems || "center",
-                justifyContent: i?.justifyContent || "flex-start",
-                textOverflow: i?.truncate ? "ellipsis" : "unset",
-                whiteSpace: i?.truncate ? "nowrap" : "unset",
-                overflow: i?.truncate ? "hidden" : "unset",
-                position: i?.sticky ? "sticky" : "relative",
-                left: i?.sticky === "start" ? `${i?.stickyOffset || 0}px` : "unset",
-                right: i?.sticky === "end" ? `${i?.stickyOffset || 0}px` : "unset",
-                borderLeft: i?.sticky === "end" ? "1px solid var(--p-color-gray-200)" : "",
-              })}
-            >
-              ${i?.headerName}
-            </div>
-          `,
-        )}
-      </div>
-      <div
-        class=${classMap({
-          "table-body": true,
-        })}
-      >
-        ${this.currentItems.map(
-          i => html`
-            <div
-              class=${classMap({
-                "table-row": true,
-              })}
-            >
-              ${this.options.columns.map(
-                k => html`
-                  <div
-                    class=${classMap({
-                      "table-cell": true,
-                      [String(k.classes)]: k.classes || false,
-                    })}
-                    style=${styleMap({
-                      width: k?.width || k?.maxWidth || "auto",
-                      minWidth: k?.minWidth || "auto",
-                      maxWidth: k?.maxWidth || "unset",
-                      display: k?.hide ? "none" : "flex",
-                      alignItems: k?.alignItems || "center",
-                      justifyContent: k?.justifyContent || "flex-start",
-                      textOverflow: k?.truncate ? "ellipsis" : "unset",
-                      whiteSpace: k?.truncate ? "nowrap" : "unset",
-                      overflow: k?.truncate ? "hidden" : "unset",
-                      position: k?.sticky ? "sticky" : "relative",
-                      left: k?.sticky === "start" ? `${k?.stickyOffset || 0}px` : "unset",
-                      right: k?.sticky === "end" ? `${k?.stickyOffset || 0}px` : "unset",
-                      borderLeft: k?.sticky === "end" ? "1px solid var(--p-color-gray-200)" : "",
-                    })}
-                  >
-                    ${k.render ? k.render(i) : k.field ? html` <span>${getNestedValue(i, k.field)}</span> ` : ""}
-                  </div>
-                `,
-              )}
-            </div>
-          `,
-        )}
+        <div
+          class=${classMap({
+            "table-header": true,
+            "table-header--hidden": this.hideHeader,
+          })}
+        >
+          ${this.options.columns.map(
+            i => html`
+              <div
+                class=${classMap({
+                  "table-cell": true,
+                })}
+                style=${styleMap({
+                  display: i?.hide ? "none" : "flex",
+                  alignItems: i?.alignItems || "center",
+                  justifyContent: i?.justifyContent || "flex-start",
+                  textOverflow: i?.truncate ? "ellipsis" : "unset",
+                  whiteSpace: i?.truncate ? "nowrap" : "unset",
+                  overflow: i?.truncate ? "hidden" : "unset",
+                  position: i?.sticky ? "sticky" : "relative",
+                  left: i?.sticky === "start" ? `${i?.stickyOffset || 0}px` : "unset",
+                  right: i?.sticky === "end" ? `${i?.stickyOffset || 0}px` : "unset",
+                  borderLeft: i?.sticky === "end" ? "1px solid var(--p-color-gray-200)" : "",
+                  borderRight: i?.sticky === "start" ? "1px solid var(--p-color-gray-200)" : "",
+                })}
+              >
+                ${i?.headerName}
+              </div>
+            `,
+          )}
+        </div>
+        <div
+          class=${classMap({
+            "table-body": true,
+          })}
+        >
+          ${this.currentItems.map(
+            i => html`
+              <div
+                class=${classMap({
+                  "table-row": true,
+                })}
+              >
+                ${this.options.columns.map(
+                  k => html`
+                    <div
+                      class=${classMap({
+                        "table-cell": true,
+                        [String(k.classes)]: k.classes || false,
+                      })}
+                      style=${styleMap({
+                        width: k?.width || k?.maxWidth || "auto",
+                        minWidth: k?.minWidth || "auto",
+                        maxWidth: k?.maxWidth || "unset",
+                        display: k?.hide ? "none" : "flex",
+                        alignItems: k?.alignItems || "center",
+                        justifyContent: k?.justifyContent || "flex-start",
+                        textOverflow: k?.truncate ? "ellipsis" : "unset",
+                        whiteSpace: k?.truncate ? "nowrap" : "unset",
+                        overflow: k?.truncate ? "hidden" : "unset",
+                        position: k?.sticky ? "sticky" : "relative",
+                        left: k?.sticky === "start" ? `${k?.stickyOffset || 0}px` : "unset",
+                        right: k?.sticky === "end" ? `${k?.stickyOffset || 0}px` : "unset",
+                        borderLeft: k?.sticky === "end" ? "1px solid var(--p-color-gray-200)" : "",
+                        borderRight: k?.sticky === "start" ? "1px solid var(--p-color-gray-200)" : "",
+                      })}
+                    >
+                      ${k.render ? k.render(i) : k.field ? html` <span>${getNestedValue(i, k.field)}</span> ` : ""}
+                    </div>
+                  `,
+                )}
+              </div>
+            `,
+          )}
+        </div>
       </div>
       <div
         class=${classMap({

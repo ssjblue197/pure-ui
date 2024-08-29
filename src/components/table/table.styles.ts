@@ -34,16 +34,23 @@ export default css`
     --table-column-gap: 0;
   }
 
+  .table-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border: var(--table-border-width) var(--table-border-style) var(--table-border-color);
+    border-radius: var(--table-border-radius);
+    box-shadow: 0px 1px 2px 0px #1018280d;
+  }
+
   .table {
     width: 100%;
-    display: grid;
+    display: inline-grid;
     grid-template-columns: repeat(1, minmax(var(--table-cell-min-width), var(--table-cell-max-width)));
     grid-template-rows: repeat(auto-fill, minmax(var(--table-cell-min-height), var(--table-cell-max-height)));
     row-gap: var(--table-row-gap);
     column-gap: var(--table-column-gap);
-    border: var(--table-border-width) var(--table-border-style) var(--table-border-color);
-    border-radius: var(--table-border-radius);
-    box-shadow: 0px 1px 2px 0px #1018280d;
+    position: relative;
     overflow: auto;
   }
   .table-header,
@@ -75,6 +82,12 @@ export default css`
       var(--table-border-vertical-color);
   }
 
+  .table-body {
+    width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: auto;
+  }
+
   .table-row .table-cell:not(:last-child) {
     border-right: var(--table-border-vertical-width) var(--table-border-vertical-style)
       var(--table-border-horizontal-color);
@@ -90,8 +103,7 @@ export default css`
   }
 
   .table-footer {
-    grid-column: 1 / -1;
-    max-width: 100%;
+    width: 100%;
     justify-self: stretch;
     justify-content: center;
     align-items: center;
@@ -111,6 +123,8 @@ export default css`
     display: flex;
     padding: 0.5rem;
     justify-items: stretch;
+    justify-self: stretch;
+    align-self: stretch;
     color: var(--p-color-gray-600);
     font-weight: var(--p-font-weight-normal);
     font-size: var(--p-font-size-small);
@@ -118,7 +132,7 @@ export default css`
     flex-flow: 1 1 auto;
   }
 
-  .table-cell--sticky {
+  .table-cell.table-cell--sticky {
     position: sticky;
   }
 
