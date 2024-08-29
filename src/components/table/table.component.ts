@@ -4,7 +4,6 @@ import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { getNestedValue } from "../../utilities/object.js";
 import { styleMap } from "lit/directives/style-map.js";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import { watch } from "../../internal/watch.js";
 import componentStyles from "../../styles/component.styles.js";
 import PPaginate from "../paginate/paginate.component.js";
@@ -189,11 +188,7 @@ export default class PTable extends PureElement {
                       borderLeft: k?.sticky === "end" ? "1px solid var(--p-color-gray-200)" : "",
                     })}
                   >
-                    ${k.render
-                      ? unsafeHTML(k.render(i))
-                      : k.field
-                        ? html` <span>${getNestedValue(i, k.field)}</span> `
-                        : ""}
+                    ${k.render ? k.render(i) : k.field ? html` <span>${getNestedValue(i, k.field)}</span> ` : ""}
                   </div>
                 `,
               )}
