@@ -2,7 +2,6 @@ import { css } from "lit";
 
 export default css`
   :host {
-    display: block;
     --table-header-cell-padding: var(--p-spacing-small) var(--p-spacing-large);
     --table-body-cell-padding: var(--p-spacing-medium) var(--p-spacing-large);
     --table-footer-cell-padding: var(--p-spacing-small) var(--p-spacing-medium);
@@ -45,7 +44,7 @@ export default css`
 
   .table {
     width: 100%;
-    display: inline-grid;
+    display: grid !important;
     grid-template-columns: repeat(1, minmax(var(--table-cell-min-width), var(--table-cell-max-width)));
     grid-template-rows: repeat(auto-fill, minmax(var(--table-cell-min-height), var(--table-cell-max-height)));
     row-gap: var(--table-row-gap);

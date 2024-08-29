@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 // import { LocalizeController } from "../../utilities/localize.js";
 import { classMap } from "lit/directives/class-map.js";
 import { getNestedValue } from "../../utilities/object.js";
@@ -47,26 +47,6 @@ export default class PTable extends PureElement {
    */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /**
-   * Indicates that the header row of the table should be hidden.
-   *
-   * @attribute hideHeader
-   * @type {boolean}
-   * @defaultValue false
-   */
-  @property({ type: Boolean, reflect: true, attribute: "hide-header" }) hideHeader = false;
-
-  /**
-   * Indicates that the footer row of the table should be hidden.
-   *
-   * @attribute hideFooter
-   * @type {boolean}
-   * @defaultValue false
-   */
-  @property({ type: Boolean, reflect: true, attribute: "hide-footer" }) hideFooter = false;
-
-  @property({ type: Boolean, reflect: true, attribute: "local-paginate" }) localPaginate = true;
-
   @property({ type: Object }) options: TableOptions<TableRowData> = {
     columns: [],
     data: [],
@@ -78,6 +58,8 @@ export default class PTable extends PureElement {
 
   @state() totalItems = 0;
 
+  @query(".table-wrapper") tableWrapper: HTMLElement;
+
   // Computed property using a getter
   /**
    * Returns the current page of items based on the current page, page size, and total items.
@@ -87,7 +69,7 @@ export default class PTable extends PureElement {
    */
   get currentItems() {
     // If the table is not local paginated, return all items.
-    if (!this.localPaginate) return this.options.data;
+    if (!this.options?.paginate) return this.options.data;
 
     // If there are no total items, return an empty array.
     if (this.totalItems === 0) return [];
@@ -101,13 +83,45 @@ export default class PTable extends PureElement {
   }
 
   @watch("options")
-  handleExampleChange() {
+  handleApplyOptionsChange() {
     // do something
     this.totalItems = this.options.data.length;
   }
 
   connectedCallback() {
     super.connectedCallback();
+  }
+
+  private handleEventDispatch = (e: Event) => {
+    // do something
+    // Find the closest element with the class "row"
+    const path = e.composedPath();
+
+    const closestRow = path.find(element => (element as HTMLElement)?.classList?.contains("table-row")) as HTMLElement;
+
+    if (closestRow) {
+      // Now you have the row element and can access its data or handle it as needed
+      const rowElement = closestRow as HTMLElement | null;
+
+      const rowValue = (
+        rowElement as HTMLElement & {
+          "data-row": TableRowData;
+        }
+      )?.["data-row"];
+
+      // Dispatch a custom event with the row data
+      this.dispatchEvent(new CustomEvent(e.type, { detail: rowValue, bubbles: true, composed: true }));
+    }
+  };
+
+  protected firstUpdated(): void {
+    // do something
+    this.tableWrapper.addEventListener("click", this.handleEventDispatch.bind(this));
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.tableWrapper.removeEventListener("click", this.handleEventDispatch.bind(this));
   }
 
   private handleChangePage(e: CustomEvent & { detail: { page: number } }) {
@@ -131,7 +145,7 @@ export default class PTable extends PureElement {
         <div
           class=${classMap({
             "table-header": true,
-            "table-header--hidden": this.hideHeader,
+            "table-header--hidden": !!this.options?.hideHeader,
           })}
         >
           ${this.options.columns.map(
@@ -141,6 +155,9 @@ export default class PTable extends PureElement {
                   "table-cell": true,
                 })}
                 style=${styleMap({
+                  width: i?.width || "auto",
+                  minWidth: i?.minWidth || "auto",
+                  maxWidth: i?.maxWidth || "unset",
                   display: i?.hide ? "none" : "flex",
                   alignItems: i?.alignItems || "center",
                   justifyContent: i?.justifyContent || "flex-start",
@@ -170,6 +187,7 @@ export default class PTable extends PureElement {
                 class=${classMap({
                   "table-row": true,
                 })}
+                .data-row=${i}
               >
                 ${this.options.columns.map(
                   k => html`
@@ -179,7 +197,7 @@ export default class PTable extends PureElement {
                         [String(k.classes)]: k.classes || false,
                       })}
                       style=${styleMap({
-                        width: k?.width || k?.maxWidth || "auto",
+                        width: k?.width || "auto",
                         minWidth: k?.minWidth || "auto",
                         maxWidth: k?.maxWidth || "unset",
                         display: k?.hide ? "none" : "flex",
@@ -207,11 +225,11 @@ export default class PTable extends PureElement {
       <div
         class=${classMap({
           "table-footer": true,
-          "table-footer--hidden": this.hideFooter,
+          "table-footer--hidden": !!this.options?.hideFooter,
         })}
       >
         <slot name="paginate">
-          ${this.localPaginate
+          ${this.options?.paginate
             ? html`
                 <p-paginate
                   size="small"

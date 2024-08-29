@@ -44,6 +44,14 @@ export interface TableOptions<T> {
   data: T[];
   onRowSelected?: (row: T) => void;
   getSelectedRows?: () => T[];
+  selectable?: boolean;
+  draggable?: boolean;
+  resizable?: boolean;
+  hideHeader?: boolean;
+  hideFooter?: boolean;
+  paginate?: boolean;
+  footerSlot?: () => symbol | HTMLTemplateResult | undefined;
+  headerSlot?: () => symbol | HTMLTemplateResult | undefined;
 }
 
 PTable.define("p-table");

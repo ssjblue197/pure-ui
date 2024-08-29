@@ -8,16 +8,18 @@ layout: component
 ```html:preview
 <p-table
   class="table"
+  @click="test"
 >
 </p-table>
 <script>
   const table = document.querySelector('.table');
 
   table.options = {
+    paginate: true,
     columns: [{field: 'name',
     id: 'name',
     headerName: 'Full name',
-    minWidth: '120px',
+    minWidth: '300px',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },{field: 'age',
@@ -26,7 +28,7 @@ layout: component
   },{field: 'address.street',
     id: 'street',
     headerName: 'Street',
-    maxWidth: '200px',
+    maxWidth: '400px',
   },{field: 'address.department',
     id: 'department',
     headerName: 'Department',
@@ -258,6 +260,10 @@ layout: component
     },
     "status": 1
   }]
+  }
+
+  const test = (e) => {
+    console.log(e)
   }
 </script>
 
