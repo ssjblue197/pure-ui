@@ -56,6 +56,7 @@ export default css`
   .table-body,
   .table-row {
     display: contents;
+    position: relative;
   }
 
   .table-header.table-header--hidden {
@@ -99,6 +100,22 @@ export default css`
   .table-row:not(:last-child) .table-cell {
     border-bottom: var(--table-border-horizontal-width) var(--table-border-horizontal-style)
       var(--table-border-horizontal-color);
+  }
+
+  .table-row-expanded {
+    grid-column: 1 / -1;
+    position: relative;
+    overflow: hidden;
+    border-bottom: var(--table-border-horizontal-width) var(--table-border-horizontal-style)
+      var(--table-border-horizontal-color);
+  }
+
+  .table-row-expand-icon {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    cursor: pointer;
   }
 
   .table-footer {

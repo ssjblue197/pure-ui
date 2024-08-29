@@ -52,6 +52,9 @@ export interface TableOptions<T> {
   paginate?: boolean;
   footerSlot?: () => symbol | HTMLTemplateResult | undefined;
   headerSlot?: () => symbol | HTMLTemplateResult | undefined;
+  expandable?: boolean;
+  onRowExpand?: (row: T) => symbol | HTMLTemplateResult | undefined;
+  onRowCollapse?: (row: T) => symbol | HTMLTemplateResult | undefined;
 }
 
 PTable.define("p-table");

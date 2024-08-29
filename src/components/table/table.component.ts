@@ -7,6 +7,7 @@ import { styleMap } from "lit/directives/style-map.js";
 import { watch } from "../../internal/watch.js";
 import componentStyles from "../../styles/component.styles.js";
 import PPaginate from "../paginate/paginate.component.js";
+import PTag from "../tag/tag.component.js";
 import PureElement from "../../internal/pure-ui-element.js";
 import styles from "./table.styles.js";
 import type { CSSResultGroup } from "lit";
@@ -18,7 +19,7 @@ import type { TableOptions, TableRowData } from "./table.ts";
  * @status experimental
  * @since 2.0
  *
- * @dependency p-example
+ * @dependency p-tag
  *
  * @event p-change - Emitted as an example.
  *
@@ -34,6 +35,7 @@ export default class PTable extends PureElement {
 
   static dependencies = {
     "p-paginate": PPaginate,
+    "p-tag": PTag,
   };
 
   // private readonly localize = new LocalizeController(this);
@@ -51,6 +53,8 @@ export default class PTable extends PureElement {
     columns: [],
     data: [],
   };
+
+  @property({ type: Boolean, reflect: true }) loading: boolean = false;
 
   @state() currentPage = 1;
 
@@ -86,6 +90,7 @@ export default class PTable extends PureElement {
   handleApplyOptionsChange() {
     // do something
     this.totalItems = this.options.data.length;
+    this.requestUpdate();
   }
 
   connectedCallback() {

@@ -16,6 +16,10 @@ layout: component
 
   table.options = {
     paginate: true,
+    expandable: true,
+    onRowExpand: function(row) {
+      return `<button>Test thu ma thoi</button>`
+    },
     columns: [{field: 'name',
     id: 'name',
     headerName: 'Full name',
@@ -262,9 +266,6 @@ layout: component
   }]
   }
 
-  const test = (e) => {
-    console.log(e)
-  }
 </script>
 
 
