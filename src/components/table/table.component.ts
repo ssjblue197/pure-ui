@@ -111,6 +111,16 @@ export default class PTable extends PureElement {
         newVal.data.some((row, index) => row !== oldVal.data[index])
       );
     },
+    converter: {
+      fromAttribute: (value: string) => {
+        if (!value) return null;
+        return JSON.parse(value) as TableOptions<TableRowData>;
+      },
+      toAttribute: (value: TableOptions<TableRowData>) => {
+        if (!value) return null;
+        return JSON.stringify(value);
+      },
+    },
   })
   options: TableOptions<TableRowData> = {
     columns: [],
