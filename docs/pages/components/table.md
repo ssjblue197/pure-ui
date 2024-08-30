@@ -57,7 +57,7 @@ layout: component
 
   setTimeout(() => {
     console.log('123123');
-    
+
     table.options.data = [{
     "name": "Alice",
     "age": "28",

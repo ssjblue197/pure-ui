@@ -52,9 +52,16 @@ export default class PTable extends PureElement {
   @property({
     type: Object,
     reflect: true,
-    hasChanged(newVal: number, oldVal: number) {
-      const hasChanged: boolean = JSON.stringify(newVal) !== JSON.stringify(oldVal);
-      return hasChanged;
+    hasChanged(newVal: TableOptions<TableRowData>, oldVal: TableOptions<TableRowData>) {
+      if (!oldVal) return true;
+
+      // Example of a simple deep comparison
+      return (
+        newVal.columns.length !== oldVal.columns.length ||
+        newVal.data.length !== oldVal.data.length ||
+        newVal.columns.some((col, index) => col !== oldVal.columns[index]) ||
+        newVal.data.some((row, index) => row !== oldVal.data[index])
+      );
     },
   })
   options: TableOptions<TableRowData> = {
@@ -98,15 +105,6 @@ export default class PTable extends PureElement {
 
     // Return the current page of items.
     return this.items.slice(start, end);
-  }
-
-  updated(changedProperties) {
-    console.log("myObject changed:", changedProperties);
-
-    if (changedProperties.has("options")) {
-      console.log("myObject has mutated:", this.options);
-      // Additional actions here if needed
-    }
   }
 
   @watch("options")

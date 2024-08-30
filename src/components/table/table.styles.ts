@@ -174,7 +174,7 @@ export default css`
   .table-empty .table-empty__label {
     color: var(--p-color-gray-500);
     font-weight: var(--p-font-weight-normal);
-    font-size: var(--p-font-size-small);
+    font-size: var(--p-font-size-x-small);
     padding: 0.5rem;
   }
 `;
