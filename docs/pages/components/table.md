@@ -14,13 +14,15 @@ layout: component
 <script>
   const table = document.querySelector('.table');
 
+  table.loading = true;
+
   table.options = {
     paginate: true,
     selectable: true,
     columns: [{field: 'name',
     id: 'name',
     headerName: 'Full name',
-    minWidth: '160px',
+    minWidth: '120px',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },{field: 'age',
@@ -42,22 +44,14 @@ layout: component
   }, {field: 'status',
     id: 'status',
     headerName: 'Status',
-    render: (row) => `${row.status ? 'Active' : 'Inactive'}`,
-  }, {field: '',
-    id: 'action',
-    headerName: 'Action',
-    render: (row) => {
-      `<p-button outline variant="primary" size="small">Support</p-button>`
-    },
-    sticky: 'end'
+    render: (row) => `${String(row.status) == '1' ? 'Active' : 'Inactive'}`,
+    justifyContent: 'center',
   }
   ],
   data: []
   }
 
   setTimeout(() => {
-    console.log('123123');
-
     table.options.data = [{
     "name": "Alice",
     "age": "28",
@@ -269,6 +263,8 @@ layout: component
   }]
 
   table.options = JSON.parse(JSON.stringify(table.options));
+
+  table.loading = false;
 
   }, 3000);
 

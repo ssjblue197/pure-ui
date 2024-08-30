@@ -6,6 +6,7 @@ import { property, query, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { watch } from "../../internal/watch.js";
 import componentStyles from "../../styles/component.styles.js";
+import PIcon from "../icon/icon.js";
 import PPaginate from "../paginate/paginate.component.js";
 import PTag from "../tag/tag.component.js";
 import PureElement from "../../internal/pure-ui-element.js";
@@ -14,21 +15,37 @@ import type { CSSResultGroup } from "lit";
 import type { TableOptions, TableRowData } from "./table.ts";
 
 /**
- * @summary Short summary of the component's intended use.
+ * @summary The Table component is used to display data in a table format.
  * @documentation https://pureui.xyz/components/table
- * @status experimental
- * @since 2.0
+ * @status stable
+ * @since 1.1.15
  *
  * @dependency p-tag
+ * @dependency p-paginate
+ * @dependency p-icon
  *
- * @event p-change - Emitted as an example.
+ * @event p-change - Emitted when the current page value changes.
  *
  * @slot - The default slot.
  * @slot example - An example slot.
  *
  * @csspart base - The component's base wrapper.
  *
- * @cssproperty --example - An example CSS custom property.
+ * @cssproperty --table-header-cell-padding - Set padding for header cell.
+ * @cssproperty --table-body-cell-padding - Set padding for body cell.
+ * @cssproperty --table-footer-padding - Set padding for footer cell.
+ * @cssproperty --table-border-horizontal-width - Set border width horizontal.
+ * @cssproperty --table-border-horizontal-style - Set border style horizontal.
+ * @cssproperty --table-border-horizontal-color - Set border color horizontal.
+ * @cssproperty --table-border-vertical-width - Set border width vertical.
+ * @cssproperty --table-border-vertical-style - Set border style vertical.
+ * @cssproperty --table-border-vertical-color - Set border color vertical.
+ * @cssproperty --table-border-vertical-color - Set border color vertical.
+ * @cssproperty --table-border-vertical-color - Set border color vertical.
+ * @cssproperty --table-border-vertical-color - Set border color vertical.
+ * @cssproperty --table-border-vertical-color - Set border color vertical.
+ *
+ *
  */
 export default class PTable extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
@@ -36,6 +53,7 @@ export default class PTable extends PureElement {
   static dependencies = {
     "p-paginate": PPaginate,
     "p-tag": PTag,
+    "p-icon": PIcon,
   };
 
   private readonly localize = new LocalizeController(this);
@@ -49,6 +67,36 @@ export default class PTable extends PureElement {
    */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
+  /**
+   * The options for the table.
+   *
+   * @property options
+   * @type {TableOptions<TableRowData>}
+   * @defaultValue { columns: [], data: [] }
+   * @reflect
+   *
+   * @description
+   * This property is an object that contains the columns and data for the table.
+   * The `columns` property is an array of objects, where each object represents a
+   * column and has the following properties:
+   *
+   * - `field`: The field in the row data that the column represents.
+   * - `headerName`: The text to display in the column header.
+   * - `width`: The width of the column.
+   * - `minWidth`: The minimum width of the column.
+   * - `maxWidth`: The maximum width of the column.
+   * - `alignItems`: The alignment of the content in the column.
+   * - `justifyContent`: The justification of the content in the column.
+   * - `justifyItems`: The justification of the items in the column.
+   * - `truncate`: Whether to truncate the content in the column.
+   * - `classes`: The CSS classes to apply to the column.
+   * - `sticky`: Whether the column should be sticky.
+   * - `stickyOffset`: The offset from the top of the scroll container at which the column should become sticky.
+   *
+   * The `data` property is an array of objects, where each object represents a row
+   * in the table.
+   *
+   * */
   @property({
     type: Object,
     reflect: true,
@@ -69,14 +117,44 @@ export default class PTable extends PureElement {
     data: [],
   };
 
+  /**
+   * Whether the table is currently loading data.
+   *
+   * @type {boolean}
+   * @default false
+   */
   @property({ type: Boolean, reflect: true }) loading: boolean = false;
 
+  /**
+   * The current page of items based on the current `pageSize` and `totalItems`.
+   *
+   * @type {number}
+   * @default 1
+   */
   @state() currentPage = 1;
 
+  /**
+   * The number of items to display per page.
+   *
+   * @type {number}
+   * @default 10
+   */
   @state() pageSize = 10;
 
+  /**
+   * The total number of items in the table.
+   *
+   * @type {number}
+   * @default 0
+   */
   @state() totalItems = 0;
 
+  /**
+   * The current page of items.
+   *
+   * @type {Array<TableRowData>}
+   * @default []
+   */
   @property({
     type: Array,
     reflect: true,
@@ -109,9 +187,6 @@ export default class PTable extends PureElement {
 
   @watch("options")
   handleApplyOptionsChange() {
-    // do something
-    console.log("options", this.options);
-
     this.totalItems = this.options.data.length;
     this.items = this.options.data;
   }
@@ -156,6 +231,7 @@ export default class PTable extends PureElement {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const page = Number(e.detail.page);
     this.currentPage = page;
+    this.emit("p-change");
   }
 
   render() {

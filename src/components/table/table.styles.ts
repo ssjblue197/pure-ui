@@ -4,7 +4,7 @@ export default css`
   :host {
     --table-header-cell-padding: var(--p-spacing-small) var(--p-spacing-large);
     --table-body-cell-padding: var(--p-spacing-medium) var(--p-spacing-large);
-    --table-footer-cell-padding: var(--p-spacing-small) var(--p-spacing-medium);
+    --table-footer-padding: var(--p-spacing-small) var(--p-spacing-medium);
 
     --table-border-horizontal-width: 1px;
     --table-border-horizontal-style: solid;
@@ -19,9 +19,9 @@ export default css`
     --table-border-style: solid;
     --table-border-radius: var(--p-border-radius-x-large);
 
-    --table-row-hover-background-color: var(--p-color-neutral-0);
+    --table-row-hover-background-color: var(--p-color-primary-50);
     --table-cell-background-color: var(--p-color-neutral-0);
-    --table-cell-hover-background-color: var(--p-color-primary-50);
+    --table-cell-hover-background-color: var(--p-color-neutral0);
 
     --table-cell-min-height: 40px;
     --table-cell-max-height: 1fr;
@@ -123,7 +123,7 @@ export default css`
     justify-self: stretch;
     justify-content: center;
     align-items: center;
-    padding: var(--table-footer-cell-padding);
+    padding: var(--table-footer-padding);
   }
 
   .table-footer.table-footer--hidden {
