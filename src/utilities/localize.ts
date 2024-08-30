@@ -31,6 +31,7 @@ export interface Translation extends DefaultTranslation {
   goToSlide: (slide: number, count: number) => string;
   hidePassword: string;
   loading: string;
+  empty?: string;
   nextPage?: string;
   nextMonth?: string; // TODO - add to other language packs and remove optional ? flag
   nextYear?: string; // TODO - add to other language packs and remove optional ? flag

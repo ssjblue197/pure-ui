@@ -83,8 +83,8 @@ It's up to you to make the source files available to your app. One way to do thi
 Once you've done that, add the following tags to your page. Make sure to update `href` and `src` so they point to the route you created.
 
 ```html
-<link rel="stylesheet" href="/pure-ui/%NPMDIR%/themes/light.css" />
-<script type="module" src="/pure-ui/%NPMDIR%/pure-ui.js"></script>
+<link rel="stylesheet" href="/pure-uikit/%NPMDIR%/themes/light.css" />
+<script type="module" src="/pure-uikit/%NPMDIR%/pure-ui.js"></script>
 ```
 
 Alternatively, [you can use a bundler](#bundling).
@@ -101,13 +101,13 @@ However, if you're [cherry picking](#cherry-picking) or [bundling](#bundling) Pu
 
 ```html
 <!-- Option 1: the data-pure-ui attribute -->
-<script src="bundle.js" data-pure-ui="/path/to/pure-ui/%NPMDIR%"></script>
+<script src="bundle.js" data-pure-ui="/path/to/pure-uikit/%NPMDIR%"></script>
 
 <!-- Option 2: the setBasePath() method -->
 <script src="bundle.js"></script>
 <script type="module">
   import { setBasePath } from "pure-uikit/%NPMDIR%/utilities/base-path.js";
-  setBasePath("/path/to/pure-ui/%NPMDIR%");
+  setBasePath("/path/to/pure-uikit/%NPMDIR%");
 </script>
 ```
 
@@ -142,9 +142,9 @@ Cherry picking can be done from [the CDN](#cdn-installation-easiest) or from [np
 Here's an example that loads only the button component. Again, if you're not using a module resolver, you'll need to adjust the path to point to the folder Pure UI is in.
 
 ```html
-<link rel="stylesheet" href="/path/to/pure-ui/%NPMDIR%/themes/light.css" />
+<link rel="stylesheet" href="/path/to/pure-uikit/%NPMDIR%/themes/light.css" />
 
-<script type="module" data-pure-ui="/path/to/pure-ui/%NPMDIR%">
+<script type="module" data-pure-ui="/path/to/pure-uikit/%NPMDIR%">
   import "pure-uikit/%NPMDIR%/components/button/button.js";
 
   // <p-button> is ready to use!
@@ -180,7 +180,7 @@ import "pure-uikit/%NPMDIR%/components/rating/rating.js";
 import { setBasePath } from "pure-uikit/%NPMDIR%/utilities/base-path.js";
 
 // Set the base path to the folder you copied Pure UI's assets to
-setBasePath("/path/to/pure-ui/%NPMDIR%");
+setBasePath("/path/to/pure-uikit/%NPMDIR%");
 
 // <p-button>, <p-icon>, <p-input>, and <p-rating> are ready to use!
 ```

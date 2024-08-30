@@ -11,7 +11,7 @@ Components can be localized by importing the appropriate translation file and se
 ```html
 <html lang="es">
   <head>
-    <script type="module" src="/path/to/pure-ui/dist/translations/es.js"></script>
+    <script type="module" src="/path/to/pure-uikit/dist/translations/es.js"></script>
   </head>
 
   <body>
@@ -38,7 +38,7 @@ You do not need to load translations up front. You can import them dynamically e
 document.documentElement.lang = "de";
 
 // Import the translation
-import("/path/to/pure-ui/dist/translations/de.js");
+import("/path/to/pure-uikit/dist/translations/de.js");
 ```
 
 ### Translation Resolution

@@ -1,8 +1,8 @@
-import { html } from "lit";
-import { property, query, state } from "lit/decorators.js";
-// import { LocalizeController } from "../../utilities/localize.js";
 import { classMap } from "lit/directives/class-map.js";
 import { getNestedValue } from "../../utilities/object.js";
+import { html } from "lit";
+import { LocalizeController } from "../../utilities/localize.js";
+import { property, query, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { watch } from "../../internal/watch.js";
 import componentStyles from "../../styles/component.styles.js";
@@ -38,7 +38,7 @@ export default class PTable extends PureElement {
     "p-tag": PTag,
   };
 
-  // private readonly localize = new LocalizeController(this);
+  private readonly localize = new LocalizeController(this);
 
   /**
    * Indicates that the element is disabled.
@@ -49,7 +49,15 @@ export default class PTable extends PureElement {
    */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  @property({ type: Object }) options: TableOptions<TableRowData> = {
+  @property({
+    type: Object,
+    reflect: true,
+    hasChanged(newVal: number, oldVal: number) {
+      const hasChanged: boolean = JSON.stringify(newVal) !== JSON.stringify(oldVal);
+      return hasChanged;
+    },
+  })
+  options: TableOptions<TableRowData> = {
     columns: [],
     data: [],
   };
@@ -62,6 +70,12 @@ export default class PTable extends PureElement {
 
   @state() totalItems = 0;
 
+  @property({
+    type: Array,
+    reflect: true,
+  })
+  items: TableRowData[] = [];
+
   @query(".table-wrapper") tableWrapper: HTMLElement;
 
   // Computed property using a getter
@@ -73,7 +87,7 @@ export default class PTable extends PureElement {
    */
   get currentItems() {
     // If the table is not local paginated, return all items.
-    if (!this.options?.paginate) return this.options.data;
+    if (!this.options?.paginate) return this.items;
 
     // If there are no total items, return an empty array.
     if (this.totalItems === 0) return [];
@@ -83,14 +97,25 @@ export default class PTable extends PureElement {
     const end = start + this.pageSize;
 
     // Return the current page of items.
-    return this.options.data.slice(start, end);
+    return this.items.slice(start, end);
+  }
+
+  updated(changedProperties) {
+    console.log("myObject changed:", changedProperties);
+
+    if (changedProperties.has("options")) {
+      console.log("myObject has mutated:", this.options);
+      // Additional actions here if needed
+    }
   }
 
   @watch("options")
   handleApplyOptionsChange() {
     // do something
+    console.log("options", this.options);
+
     this.totalItems = this.options.data.length;
-    this.requestUpdate();
+    this.items = this.options.data;
   }
 
   connectedCallback() {
@@ -186,47 +211,72 @@ export default class PTable extends PureElement {
             "table-body": true,
           })}
         >
-          ${this.currentItems.map(
-            i => html`
-              <div
-                class=${classMap({
-                  "table-row": true,
-                })}
-                .data-row=${i}
-              >
-                ${this.options.columns.map(
-                  k => html`
-                    <div
-                      class=${classMap({
-                        "table-cell": true,
-                        [String(k.classes)]: k.classes || false,
-                      })}
-                      style=${styleMap({
-                        width: k?.width || "auto",
-                        minWidth: k?.minWidth || "auto",
-                        maxWidth: k?.maxWidth || "unset",
-                        display: k?.hide ? "none" : "flex",
-                        alignItems: k?.alignItems || "center",
-                        justifyContent: k?.justifyContent || "flex-start",
-                        textOverflow: k?.truncate ? "ellipsis" : "unset",
-                        whiteSpace: k?.truncate ? "nowrap" : "unset",
-                        overflow: k?.truncate ? "hidden" : "unset",
-                        position: k?.sticky ? "sticky" : "relative",
-                        left: k?.sticky === "start" ? `${k?.stickyOffset || 0}px` : "unset",
-                        right: k?.sticky === "end" ? `${k?.stickyOffset || 0}px` : "unset",
-                        borderLeft: k?.sticky === "end" ? "1px solid var(--p-color-gray-200)" : "",
-                        borderRight: k?.sticky === "start" ? "1px solid var(--p-color-gray-200)" : "",
-                      })}
-                    >
-                      ${k.render ? k.render(i) : k.field ? html` <span>${getNestedValue(i, k.field)}</span> ` : ""}
-                    </div>
-                  `,
-                )}
-              </div>
-            `,
-          )}
+          ${!this.loading && this.currentItems.length > 0
+            ? this.currentItems.map(
+                i => html`
+                  <div
+                    class=${classMap({
+                      "table-row": true,
+                    })}
+                    .data-row=${i}
+                  >
+                    ${this.options.columns.map(
+                      k => html`
+                        <div
+                          class=${classMap({
+                            "table-cell": true,
+                            [String(k.classes)]: k.classes || false,
+                          })}
+                          style=${styleMap({
+                            width: k?.width || "auto",
+                            minWidth: k?.minWidth || "auto",
+                            maxWidth: k?.maxWidth || "unset",
+                            display: k?.hide ? "none" : "flex",
+                            alignItems: k?.alignItems || "center",
+                            justifyContent: k?.justifyContent || "flex-start",
+                            textOverflow: k?.truncate ? "ellipsis" : "unset",
+                            whiteSpace: k?.truncate ? "nowrap" : "unset",
+                            overflow: k?.truncate ? "hidden" : "unset",
+                            position: k?.sticky ? "sticky" : "relative",
+                            left: k?.sticky === "start" ? `${k?.stickyOffset || 0}px` : "unset",
+                            right: k?.sticky === "end" ? `${k?.stickyOffset || 0}px` : "unset",
+                            borderLeft: k?.sticky === "end" ? "1px solid var(--p-color-gray-200)" : "",
+                            borderRight: k?.sticky === "start" ? "1px solid var(--p-color-gray-200)" : "",
+                          })}
+                        >
+                          ${k.render ? k.render(i) : k.field ? html` <span>${getNestedValue(i, k.field)}</span> ` : ""}
+                        </div>
+                      `,
+                    )}
+                  </div>
+                `,
+              )
+            : ""}
         </div>
       </div>
+      ${this.loading
+        ? html`
+            <div
+              class=${classMap({
+                "table-loading": true,
+              })}
+            >
+              <p-spinner style="font-size: 30px; --track-width: 4px;"></p-spinner>
+            </div>
+          `
+        : ""}
+      ${!this.loading && this.currentItems.length === 0
+        ? html`
+            <div
+              class=${classMap({
+                "table-empty": true,
+              })}
+            >
+              <p-icon name="box"></p-icon>
+              <span class="table-empty__label">${this.localize.term("empty")}</span>
+            </div>
+          `
+        : ""}
       <div
         class=${classMap({
           "table-footer": true,

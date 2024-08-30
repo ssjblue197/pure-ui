@@ -16,14 +16,11 @@ layout: component
 
   table.options = {
     paginate: true,
-    expandable: true,
-    onRowExpand: function(row) {
-      return `<button>Test thu ma thoi</button>`
-    },
+    selectable: true,
     columns: [{field: 'name',
     id: 'name',
     headerName: 'Full name',
-    minWidth: '300px',
+    minWidth: '160px',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },{field: 'age',
@@ -45,7 +42,7 @@ layout: component
   }, {field: 'status',
     id: 'status',
     headerName: 'Status',
-    render: (row) => `<p-tag variant="${row.status ? 'success' : 'danger'}" size="small">${row.status ? 'Active' : 'Inactive'}</p-tag>`,
+    render: (row) => `${row.status ? 'Active' : 'Inactive'}`,
   }, {field: '',
     id: 'action',
     headerName: 'Action',
@@ -55,7 +52,13 @@ layout: component
     sticky: 'end'
   }
   ],
-  data: [{
+  data: []
+  }
+
+  setTimeout(() => {
+    console.log('123123');
+    
+    table.options.data = [{
     "name": "Alice",
     "age": "28",
     "address": {
@@ -264,7 +267,10 @@ layout: component
     },
     "status": 1
   }]
-  }
+
+  table.options = JSON.parse(JSON.stringify(table.options));
+
+  }, 3000);
 
 </script>
 

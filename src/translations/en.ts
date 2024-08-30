@@ -16,6 +16,7 @@ const translation: Translation = {
   goToSlide: (slide, count) => `Go to slide ${slide} of ${count}`,
   hidePassword: "Hide password",
   loading: "Loading",
+  empty: "Empty",
   nextPage: "Next",
   nextMonth: "Next month",
   nextYear: "Next year",

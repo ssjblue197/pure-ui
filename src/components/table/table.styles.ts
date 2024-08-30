@@ -159,4 +159,22 @@ export default css`
   .table-row .table-cell:hover {
     background-color: var(--table-cell-hover-background-color);
   }
+
+  .table-loading,
+  .table-empty {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    grid-column: 1 / -1;
+  }
+
+  .table-empty .table-empty__label {
+    color: var(--p-color-gray-500);
+    font-weight: var(--p-font-weight-normal);
+    font-size: var(--p-font-size-small);
+    padding: 0.5rem;
+  }
 `;

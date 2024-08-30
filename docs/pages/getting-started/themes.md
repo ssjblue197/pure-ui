@@ -34,7 +34,7 @@ To activate a theme, import it and apply the theme's class to the `<html>` eleme
 ```html
 <html class="p-theme-dark">
   <head>
-    <link rel="stylesheet" href="path/to/pure-ui/%NPMDIR%/themes/dark.css" />
+    <link rel="stylesheet" href="path/to/pure-uikit/%NPMDIR%/themes/dark.css" />
   </head>
 
   <body>
@@ -54,8 +54,8 @@ You can activate themes on various containers throughout the page. This example 
 ```html
 <html>
   <head>
-    <link rel="stylesheet" href="path/to/pure-ui/%NPMDIR%/themes/light.css" />
-    <link rel="stylesheet" href="path/to/pure-ui/%NPMDIR%/themes/dark.css" />
+    <link rel="stylesheet" href="path/to/pure-uikit/%NPMDIR%/themes/light.css" />
+    <link rel="stylesheet" href="path/to/pure-uikit/%NPMDIR%/themes/dark.css" />
   </head>
 
   <body>
