@@ -27,9 +27,15 @@ import type { TableOptions, TableRowData } from "./table.ts";
  * @event p-change - Emitted when the current page value changes.
  *
  * @slot - The default slot.
- * @slot example - An example slot.
+ * @slot paginate - An optional slot for paginate element.
  *
- * @csspart base - The component's base wrapper.
+ * @csspart table-wrapper - The component's table wrapper.
+ * @csspart table-header - The component's table header wrapper.
+ * @csspart table-body - The component's table body wrapper.
+ * @csspart table-loading - The component's table loading wrapper.
+ * @csspart table-empty - The component's table empty wrapper.
+ * @csspart table-footer - The component's table footer wrapper.
+ *
  *
  * @cssproperty --table-header-cell-padding - Set padding for header cell.
  * @cssproperty --table-body-cell-padding - Set padding for body cell.
@@ -40,10 +46,20 @@ import type { TableOptions, TableRowData } from "./table.ts";
  * @cssproperty --table-border-vertical-width - Set border width vertical.
  * @cssproperty --table-border-vertical-style - Set border style vertical.
  * @cssproperty --table-border-vertical-color - Set border color vertical.
- * @cssproperty --table-border-vertical-color - Set border color vertical.
- * @cssproperty --table-border-vertical-color - Set border color vertical.
- * @cssproperty --table-border-vertical-color - Set border color vertical.
- * @cssproperty --table-border-vertical-color - Set border color vertical.
+ * @cssproperty --table-border-width - Set table border width.
+ * @cssproperty --table-border-color - Set table border color.
+ * @cssproperty --table-border-style - Set table border style.
+ * @cssproperty --table-border-radius - Set table border radius.
+ * @cssproperty --table-row-hover-background-color - Set table row hover background color.
+ * @cssproperty --table-cell-background-color - Set table cell background color.
+ * @cssproperty --table-cell-hover-background-color - Set table cell hover background color.
+ * @cssproperty --table-cell-min-height - Set table cell min height.
+ * @cssproperty --table-cell-max-height - Set table cell max height.
+ * @cssproperty --table-cell-min-width - Set table cell min width.
+ * @cssproperty --table-cell-max-width - Set table cell max width.
+ *
+ *
+ *
  *
  *
  */
@@ -100,17 +116,6 @@ export default class PTable extends PureElement {
   @property({
     type: Object,
     reflect: true,
-    hasChanged(newVal: TableOptions<TableRowData>, oldVal: TableOptions<TableRowData>) {
-      if (!oldVal) return true;
-
-      // Example of a simple deep comparison
-      return (
-        newVal.columns.length !== oldVal.columns.length ||
-        newVal.data.length !== oldVal.data.length ||
-        newVal.columns.some((col, index) => col !== oldVal.columns[index]) ||
-        newVal.data.some((row, index) => row !== oldVal.data[index])
-      );
-    },
     converter: {
       fromAttribute: (value: string) => {
         if (!value) return null;
@@ -124,8 +129,9 @@ export default class PTable extends PureElement {
   })
   options: TableOptions<TableRowData> = {
     columns: [],
-    data: [],
   };
+
+  @property({ type: Array, reflect: true }) data: TableRowData[] = [];
 
   /**
    * Whether the table is currently loading data.
@@ -195,10 +201,10 @@ export default class PTable extends PureElement {
     return this.items.slice(start, end);
   }
 
-  @watch("options")
+  @watch("data")
   handleApplyOptionsChange() {
-    this.totalItems = this.options.data.length;
-    this.items = this.options.data;
+    this.totalItems = this.data.length;
+    this.items = this.data;
   }
 
   connectedCallback() {
@@ -249,6 +255,7 @@ export default class PTable extends PureElement {
       class=${classMap({
         "table-wrapper": true,
       })}
+      part="table-wrapper"
     >
       <div
         class=${classMap({
@@ -261,6 +268,7 @@ export default class PTable extends PureElement {
             "table-header": true,
             "table-header--hidden": !!this.options?.hideHeader,
           })}
+          part="table-header"
         >
           ${this.options.columns.map(
             i => html`
@@ -294,6 +302,7 @@ export default class PTable extends PureElement {
           class=${classMap({
             "table-body": true,
           })}
+          part="table-body"
         >
           ${!this.loading && this.currentItems.length > 0
             ? this.currentItems.map(
@@ -344,6 +353,7 @@ export default class PTable extends PureElement {
               class=${classMap({
                 "table-loading": true,
               })}
+              part="table-loading"
             >
               <p-spinner style="font-size: 30px; --track-width: 4px;"></p-spinner>
             </div>
@@ -355,6 +365,7 @@ export default class PTable extends PureElement {
               class=${classMap({
                 "table-empty": true,
               })}
+              part="table-empty"
             >
               <p-icon name="box"></p-icon>
               <span class="table-empty__label">${this.localize.term("empty")}</span>
@@ -366,6 +377,7 @@ export default class PTable extends PureElement {
           "table-footer": true,
           "table-footer--hidden": !!this.options?.hideFooter,
         })}
+        part="table-footer"
       >
         <slot name="paginate">
           ${this.options?.paginate

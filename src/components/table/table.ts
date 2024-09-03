@@ -41,7 +41,6 @@ export interface TableRowData {
 
 export interface TableOptions<T> {
   columns: ColumnConfig[];
-  data: T[];
   onRowSelected?: (row: T) => void;
   getSelectedRows?: () => T[];
   selectable?: boolean;

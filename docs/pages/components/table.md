@@ -47,12 +47,11 @@ layout: component
     render: (row) => `${String(row.status) == '1' ? 'Active' : 'Inactive'}`,
     justifyContent: 'center',
   }
-  ],
-  data: []
+  ]
   }
 
   setTimeout(() => {
-    table.options.data = [{
+    table.data = [{
     "name": "Alice",
     "age": "28",
     "address": {
@@ -272,15 +271,3 @@ layout: component
 
 
 ```
-
-## Examples
-
-### First Example
-
-TODO
-
-### Second Example
-
-TODO
-
-[component-metadata:p-table]
