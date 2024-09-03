@@ -131,6 +131,17 @@ export default class PTable extends PureElement {
     columns: [],
   };
 
+  /**
+   * The data to display in the table.
+   *
+   * This property is an array of objects, where each object represents a row
+   * in the table. The properties of each object will be used to populate the
+   * columns in the table. The column headers will be determined by the
+   * `options.columns` property.
+   *
+   * @type {TableRowData[]}
+   * @default []
+   */
   @property({ type: Array, reflect: true }) data: TableRowData[] = [];
 
   /**
@@ -165,12 +176,6 @@ export default class PTable extends PureElement {
    */
   @state() totalItems = 0;
 
-  /**
-   * The current page of items.
-   *
-   * @type {Array<TableRowData>}
-   * @default []
-   */
   @property({
     type: Array,
     reflect: true,

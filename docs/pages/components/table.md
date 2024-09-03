@@ -7,12 +7,11 @@ layout: component
 
 ```html:preview
 <p-table
-  class="table"
-  @click="test"
+  class="table-example"
 >
 </p-table>
 <script>
-  const table = document.querySelector('.table');
+  const table = document.querySelector('.table-example');
 
   table.loading = true;
 
