@@ -6,7 +6,6 @@ import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import { property, query, state } from "lit/decorators.js";
-import { styleMap } from "lit/directives/style-map.js";
 import { watch } from "../../internal/watch.js";
 import componentStyles from "../../styles/component.styles.js";
 import formControlStyles from "../../styles/form-control.styles.js";
@@ -51,7 +50,7 @@ export default class PCheckbox extends PureElement implements PureFormControl {
     defaultValue: (control: PCheckbox) => control.defaultChecked,
     setValue: (control: PCheckbox, checked: boolean) => (control.checked = checked),
   });
-  private readonly hasSlotController = new HasSlotController(this, "help-text", "label");
+  private readonly hasSlotController = new HasSlotController(this, "help-text");
 
   @query('input[type="checkbox"]') input: HTMLInputElement;
 
@@ -189,7 +188,6 @@ export default class PCheckbox extends PureElement implements PureFormControl {
 
   render() {
     const hasHelpTextSlot = this.hasSlotController.test("help-text");
-    const hasLabelSlot = this.hasSlotController.test("label");
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
 
     //
@@ -262,11 +260,7 @@ export default class PCheckbox extends PureElement implements PureFormControl {
               : ""}
           </span>
 
-          <div
-            part="label"
-            class="checkbox__label"
-            style=${styleMap({ display: !hasLabelSlot ? "none" : "inline-block" })}
-          >
+          <div part="label" class="checkbox__label">
             <slot></slot>
           </div>
         </label>
