@@ -165,12 +165,12 @@ export default class PTable extends PureElement {
   @property({ type: Boolean, reflect: true }) loading: boolean = false;
 
   /**
-   * The current page of items based on the current `pageSize` and `totalItems`.
+   * The current page of items based on the current `limit` and `total`.
    *
    * @type {number}
    * @default 1
    */
-  @property({ type: Number, reflect: true, attribute: "current-page" }) currentPage = 1;
+  @property({ type: Number, reflect: true }) page = 1;
 
   /**
    * The number of items to display per page.
@@ -178,7 +178,7 @@ export default class PTable extends PureElement {
    * @type {number}
    * @default 10
    */
-  @property({ type: Number, reflect: true, attribute: "page-size" }) pageSize = 10;
+  @property({ type: Number, reflect: true }) limit = 10;
 
   /**
    * The total number of items in the table.
@@ -186,7 +186,7 @@ export default class PTable extends PureElement {
    * @type {number}
    * @default 0
    */
-  @property({ type: Number, reflect: true, attribute: "total-items" }) totalItems = 0;
+  @property({ type: Number, reflect: true }) total = 0;
 
   @property({
     type: Array,
@@ -211,11 +211,11 @@ export default class PTable extends PureElement {
     if (!this.options?.paginate) return this.items;
 
     // If there are no total items, return an empty array.
-    if (this.totalItems === 0) return [];
+    if (this.total === 0) return [];
 
     // Calculate the start and end indices for the current page.
-    const start = (this.currentPage - 1) * this.pageSize;
-    const end = start + this.pageSize;
+    const start = (this.page - 1) * this.limit;
+    const end = start + this.limit;
 
     // Return the current page of items.
     return this.items.slice(start, end);
@@ -223,7 +223,7 @@ export default class PTable extends PureElement {
 
   @watch("data")
   handleApplyOptionsChange() {
-    this.totalItems = this.data.length;
+    this.total = this.data.length;
     this.items = this.data;
   }
 
@@ -314,7 +314,7 @@ export default class PTable extends PureElement {
   private handleChangePage(e: CustomEvent & { detail: { page: number } }) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const page = Number(e.detail.page);
-    this.currentPage = page;
+    this.page = page;
 
     // Handle recovering the temporal selected rows when the page changes
     this.tmpSelectedRows = [];
@@ -385,7 +385,9 @@ export default class PTable extends PureElement {
         })}
         style="grid-template-columns: repeat(${this.options?.selectable
           ? this.options.columns.length + 1
-          : this.options.columns.length}, auto);"
+          : this.options.columns.length}, auto); max-height: ${this.options?.maxHeight || "auto"};
+          min-height: ${this.options?.minHeight || "auto"};
+          "
       >
         <div
           class=${classMap({
@@ -551,9 +553,9 @@ export default class PTable extends PureElement {
                 <p-paginate
                   size="small"
                   variant="default"
-                  total=${this.totalItems}
-                  page=${this.currentPage}
-                  pageSize=${this.pageSize}
+                  total=${this.total}
+                  page=${this.page}
+                  limit=${this.limit}
                   @p-change=${this.handleChangePage}
                 ></p-paginate>
               `

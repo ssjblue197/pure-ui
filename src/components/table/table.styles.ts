@@ -46,7 +46,7 @@ export default css`
     width: 100%;
     display: grid !important;
     grid-template-columns: repeat(1, minmax(var(--table-cell-min-width), var(--table-cell-max-width)));
-    grid-template-rows: repeat(auto-fill, minmax(var(--table-cell-min-height), var(--table-cell-max-height)));
+    // grid-template-rows: repeat(auto-fill, minmax(var(--table-cell-min-height), var(--table-cell-max-height)));
     row-gap: var(--table-row-gap);
     column-gap: var(--table-column-gap);
     position: relative;
@@ -80,6 +80,9 @@ export default css`
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    position: sticky !important;
+    top: 0;
+    z-index: 1;
   }
 
   .table-header .table-cell:not(:last-child) {

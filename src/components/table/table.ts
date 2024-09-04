@@ -42,6 +42,8 @@ export interface TableRowData {
 export interface TableOptions<T> {
   columns: ColumnConfig[];
   getSelectedRows?: () => T[];
+  minHeight?: string;
+  maxHeight?: string;
   selectable?: boolean;
   draggable?: boolean;
   hideHeader?: boolean;
