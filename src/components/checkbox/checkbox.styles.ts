@@ -9,6 +9,7 @@ export default css`
     position: relative;
     display: inline-flex;
     align-items: flex-start;
+    justify-content: center;
     font-family: var(--p-input-font-family);
     font-weight: var(--p-input-font-weight);
     color: var(--p-input-label-color);

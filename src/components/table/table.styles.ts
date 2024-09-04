@@ -63,6 +63,11 @@ export default css`
     display: none;
   }
 
+  .table-cell.table-cell--resizable {
+    resize: horizontal;
+    overflow: auto;
+  }
+
   .table-header .table-cell {
     color: var(--p-color-gray-600);
     font-weight: var(--p-font-weight-medium);

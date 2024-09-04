@@ -6,6 +6,7 @@ import { property, query, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { watch } from "../../internal/watch.js";
 import componentStyles from "../../styles/component.styles.js";
+import PCheckbox from "../checkbox/checkbox.component.js";
 import PIcon from "../icon/icon.js";
 import PPaginate from "../paginate/paginate.component.js";
 import PTag from "../tag/tag.component.js";
@@ -25,6 +26,7 @@ import type { TableOptions, TableRowData } from "./table.ts";
  * @dependency p-icon
  *
  * @event p-change - Emitted when the current page value changes.
+ * @event p-table-row-select - Emitted when the rows selected changed.
  *
  * @slot - The default slot.
  * @slot paginate - An optional slot for paginate element.
@@ -66,10 +68,14 @@ import type { TableOptions, TableRowData } from "./table.ts";
 export default class PTable extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
+  private resizeObserver: ResizeObserver;
+  private observedElements: HTMLElement[] = [];
+
   static dependencies = {
     "p-paginate": PPaginate,
     "p-tag": PTag,
     "p-icon": PIcon,
+    "p-checkbox": PCheckbox,
   };
 
   private readonly localize = new LocalizeController(this);
@@ -129,6 +135,12 @@ export default class PTable extends PureElement {
   })
   options: TableOptions<TableRowData> = {
     columns: [],
+    paginate: true,
+    draggable: false,
+    hideHeader: false,
+    hideFooter: false,
+    expandable: false,
+    selectable: false,
   };
 
   /**
@@ -158,7 +170,7 @@ export default class PTable extends PureElement {
    * @type {number}
    * @default 1
    */
-  @state() currentPage = 1;
+  @property({ type: Number, reflect: true, attribute: "current-page" }) currentPage = 1;
 
   /**
    * The number of items to display per page.
@@ -166,7 +178,7 @@ export default class PTable extends PureElement {
    * @type {number}
    * @default 10
    */
-  @state() pageSize = 10;
+  @property({ type: Number, reflect: true, attribute: "page-size" }) pageSize = 10;
 
   /**
    * The total number of items in the table.
@@ -174,13 +186,16 @@ export default class PTable extends PureElement {
    * @type {number}
    * @default 0
    */
-  @state() totalItems = 0;
+  @property({ type: Number, reflect: true, attribute: "total-items" }) totalItems = 0;
 
   @property({
     type: Array,
     reflect: true,
   })
   items: TableRowData[] = [];
+
+  @state() selectedRows: TableRowData[] = [];
+  @state() tmpSelectedRows: TableRowData[] = [];
 
   @query(".table-wrapper") tableWrapper: HTMLElement;
 
@@ -212,8 +227,52 @@ export default class PTable extends PureElement {
     this.items = this.data;
   }
 
+  @watch("disabled", { waitUntilFirstUpdate: true })
+  handleDisabledChange() {
+    if (this.disabled) {
+      this.stopObserver();
+    } else {
+      this.startObserver();
+    }
+  }
+
+  private startObserver() {
+    const elements = this.shadowRoot?.querySelectorAll(".table-header .table-cell.table-cell--resizable") as unknown;
+
+    // Unwatch previous elements
+    this.observedElements.forEach(el => this.resizeObserver.unobserve(el));
+    this.observedElements = [];
+
+    // Watch new elements
+    (elements as HTMLElement[]).forEach(el => {
+      this.resizeObserver.observe(el);
+      this.observedElements.push(el);
+    });
+  }
+
+  private stopObserver() {
+    this.resizeObserver.disconnect();
+  }
+
+  private handleAttachResizeObserved() {
+    this.resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
+      if (Array.isArray(entries) && entries.length > 0) {
+        const currentResizedElement = entries[0]?.target;
+        const currentColumnIndex = currentResizedElement.getAttribute("data-column-index");
+        const rowData = this.shadowRoot?.querySelectorAll(".table-body .table-row") as unknown;
+        Array.from(rowData as HTMLElement[]).map((el: HTMLElement) => {
+          const cellResize = el.querySelector(`.table-cell[data-column-index="${currentColumnIndex}"]`);
+          if (cellResize) {
+            (cellResize as HTMLElement).style.width = `${currentResizedElement.clientWidth}px`;
+          }
+        });
+      }
+    });
+  }
+
   connectedCallback() {
     super.connectedCallback();
+    this.handleAttachResizeObserved();
   }
 
   private handleEventDispatch = (e: Event) => {
@@ -241,18 +300,76 @@ export default class PTable extends PureElement {
   protected firstUpdated(): void {
     // do something
     this.tableWrapper.addEventListener("click", this.handleEventDispatch.bind(this));
+    if (!this.disabled) {
+      this.startObserver();
+    }
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
     this.tableWrapper.removeEventListener("click", this.handleEventDispatch.bind(this));
+    this.stopObserver();
   }
 
   private handleChangePage(e: CustomEvent & { detail: { page: number } }) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const page = Number(e.detail.page);
     this.currentPage = page;
+
+    // Handle recovering the temporal selected rows when the page changes
+    this.tmpSelectedRows = [];
+    this.currentItems.forEach(selectedRow => {
+      if (this.selectedRows.includes(selectedRow)) {
+        this.tmpSelectedRows = [...this.tmpSelectedRows, selectedRow];
+      }
+    });
+
     this.emit("p-change");
+  }
+
+  private handleSelectAll(e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (this.tmpSelectedRows.length === this.currentItems.length && this.tmpSelectedRows.length > 0) {
+      this.tmpSelectedRows = [];
+      this.selectedRows = this.selectedRows.filter(
+        selectedRow =>
+          !this.currentItems.some(currentRow => JSON.stringify(currentRow) === JSON.stringify(selectedRow)),
+      );
+    } else {
+      this.tmpSelectedRows = this.currentItems;
+      this.currentItems.forEach(selectedRow => {
+        if (!this.selectedRows.some(currentRow => JSON.stringify(currentRow) === JSON.stringify(selectedRow))) {
+          this.selectedRows = [...this.selectedRows, selectedRow];
+        }
+      });
+    }
+    // Wait for the tree items' DOM to update before emitting
+    Promise.all(this.selectedRows.map(el => el.updateComplete)).then(() => {
+      this.emit("p-table-row-select", { detail: { selection: this.selectedRows } });
+    });
+  }
+
+  private handleSelectRow(e: Event, r: TableRowData) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (this.selectedRows.some(currentRow => JSON.stringify(currentRow) === JSON.stringify(r))) {
+      this.selectedRows = this.selectedRows.filter(selectedRow => JSON.stringify(selectedRow) !== JSON.stringify(r));
+      this.tmpSelectedRows = this.tmpSelectedRows.filter(
+        selectedRow => JSON.stringify(selectedRow) !== JSON.stringify(r),
+      );
+    } else {
+      this.selectedRows = [...this.selectedRows, r];
+      this.tmpSelectedRows = [...this.tmpSelectedRows, r];
+    }
+    // Wait for the tree items' DOM to update before emitting
+    Promise.all(this.selectedRows.map(el => el.updateComplete)).then(() => {
+      this.emit("p-table-row-select", { detail: { selection: this.selectedRows, row: r } });
+    });
+  }
+
+  getSelectedRows() {
+    return this.selectedRows;
   }
 
   render() {
@@ -266,7 +383,9 @@ export default class PTable extends PureElement {
         class=${classMap({
           table: true,
         })}
-        style="grid-template-columns: repeat(${this.options.columns.length}, auto);"
+        style="grid-template-columns: repeat(${this.options?.selectable
+          ? this.options.columns.length + 1
+          : this.options.columns.length}, auto);"
       >
         <div
           class=${classMap({
@@ -275,12 +394,34 @@ export default class PTable extends PureElement {
           })}
           part="table-header"
         >
+          ${this.options?.selectable
+            ? html`
+                <div
+                  class=${classMap({
+                    "table-cell": true,
+                  })}
+                  style=${styleMap({
+                    width: "auto",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  })}
+                >
+                  <p-checkbox
+                    ?checked=${this.tmpSelectedRows.length > 0 &&
+                    this.tmpSelectedRows.length === this.currentItems.length}
+                    @click=${this.handleSelectAll}
+                  ></p-checkbox>
+                </div>
+              `
+            : ""}
           ${this.options.columns.map(
-            i => html`
+            (i, index) => html`
               <div
                 class=${classMap({
                   "table-cell": true,
+                  "table-cell--resizable": !!i?.resizable,
                 })}
+                data-column-index=${index}
                 style=${styleMap({
                   width: i?.width || "auto",
                   minWidth: i?.minWidth || "auto",
@@ -290,7 +431,7 @@ export default class PTable extends PureElement {
                   justifyContent: i?.justifyContent || "flex-start",
                   textOverflow: i?.truncate ? "ellipsis" : "unset",
                   whiteSpace: i?.truncate ? "nowrap" : "unset",
-                  overflow: i?.truncate ? "hidden" : "unset",
+                  overflow: i?.truncate ? "hidden" : i?.resizable ? "auto" : "unset",
                   position: i?.sticky ? "sticky" : "relative",
                   left: i?.sticky === "start" ? `${i?.stickyOffset || 0}px` : "unset",
                   right: i?.sticky === "end" ? `${i?.stickyOffset || 0}px` : "unset",
@@ -318,13 +459,33 @@ export default class PTable extends PureElement {
                     })}
                     .data-row=${i}
                   >
+                    ${this.options?.selectable
+                      ? html`
+                          <div
+                            class=${classMap({
+                              "table-cell": true,
+                            })}
+                            style=${styleMap({
+                              width: "auto",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            })}
+                          >
+                            <p-checkbox
+                              ?checked=${this.selectedRows.includes(i)}
+                              @click=${(e: Event) => this.handleSelectRow(e, i)}
+                            ></p-checkbox>
+                          </div>
+                        `
+                      : ""}
                     ${this.options.columns.map(
-                      k => html`
+                      (k, idx) => html`
                         <div
                           class=${classMap({
                             "table-cell": true,
                             [String(k.classes)]: k.classes || false,
                           })}
+                          data-column-index=${idx}
                           style=${styleMap({
                             width: k?.width || "auto",
                             minWidth: k?.minWidth || "auto",

@@ -33,3 +33,4 @@ export type { PSlideChangeEvent } from "./p-slide-change.js";
 export type { PStartEvent } from "./p-start.js";
 export type { PTabHideEvent } from "./p-tab-hide.js";
 export type { PTabShowEvent } from "./p-tab-show.js";
+export type { PTableRowSelectEvent } from "./p-table-row-select.js";

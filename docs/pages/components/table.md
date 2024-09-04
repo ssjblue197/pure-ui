@@ -9,10 +9,11 @@ layout: component
 <p-table
   class="table-example"
 >
+
 </p-table>
 <script>
   const table = document.querySelector('.table-example');
-
+  
   table.loading = true;
 
   table.options = {
@@ -21,9 +22,12 @@ layout: component
     columns: [{field: 'name',
     id: 'name',
     headerName: 'Full name',
-    minWidth: '120px',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    resizable: true,
+    width: '150px',
+    minWidth: '120px',
+    maxWidth: '300px'
   },{field: 'age',
     id: 'age',
     headerName: 'Age',

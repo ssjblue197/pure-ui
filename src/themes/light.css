@@ -488,8 +488,8 @@
 
   /* Toggles (checkboxes, radios, switches) */
   --p-toggle-size-small: 1rem; /* 16px */
-  --p-toggle-size-medium: 1.5rem; /* 24px */
-  --p-toggle-size-large: 2rem; /* 32px */
+  --p-toggle-size-medium: 1.25rem; /* 20px */
+  --p-toggle-size-large: 1.5rem; /* 24px */
 
   /*
    * Overlays

@@ -41,11 +41,9 @@ export interface TableRowData {
 
 export interface TableOptions<T> {
   columns: ColumnConfig[];
-  onRowSelected?: (row: T) => void;
   getSelectedRows?: () => T[];
   selectable?: boolean;
   draggable?: boolean;
-  resizable?: boolean;
   hideHeader?: boolean;
   hideFooter?: boolean;
   paginate?: boolean;
