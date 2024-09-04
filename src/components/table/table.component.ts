@@ -260,7 +260,7 @@ export default class PTable extends PureElement {
         const currentResizedElement = entries[0]?.target;
         const currentColumnIndex = currentResizedElement.getAttribute("data-column-index");
         const rowData = this.shadowRoot?.querySelectorAll(".table-body .table-row") as unknown;
-        Array.from(rowData as HTMLElement[]).map((el: HTMLElement) => {
+        Array.from(rowData as HTMLElement[]).forEach((el: HTMLElement) => {
           const cellResize = el.querySelector(`.table-cell[data-column-index="${currentColumnIndex}"]`);
           if (cellResize) {
             (cellResize as HTMLElement).style.width = `${currentResizedElement.clientWidth}px`;

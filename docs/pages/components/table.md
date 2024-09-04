@@ -13,7 +13,7 @@ layout: component
 </p-table>
 <script>
   const table = document.querySelector('.table-example');
-  
+
   table.loading = true;
 
   table.options = {

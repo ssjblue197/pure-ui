@@ -262,7 +262,11 @@ export default class PCheckbox extends PureElement implements PureFormControl {
               : ""}
           </span>
 
-          <div part="label" class="checkbox__label" style=${styleMap({ display: !hasLabelSlot ? "none" : "inline-block" })}>
+          <div
+            part="label"
+            class="checkbox__label"
+            style=${styleMap({ display: !hasLabelSlot ? "none" : "inline-block" })}
+          >
             <slot></slot>
           </div>
         </label>
