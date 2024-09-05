@@ -61,6 +61,7 @@ export default css`
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    font-size: var(--p-font-size-small);
   }
   .file-upload-item__label__size {
     font-size: var(--p-font-size-x-small);

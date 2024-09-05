@@ -87,7 +87,6 @@ export default class PPaginate extends PureElement {
     if (newPage === "...") return;
     this.page = Number(newPage);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-expect-error
     this.emit("p-change", {
       detail: { page: this.page },
     });

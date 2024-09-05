@@ -195,7 +195,7 @@ The FileUpload component can be used inside a form as a replacement for `<input 
 
 ```jsx:react
 import { useRef } from 'react';
-import { PFileUpload, SlButton } from 'pure-uikit/dist/react';
+import { PFileUpload, PButton } from 'pure-uikit/dist/react';
 
 const App = () => {
   const form = useRef(null);
@@ -212,12 +212,12 @@ const App = () => {
       <br />
       <input type="file" name="native-input" multiple></input>
       <br />
-      <SlButton type="reset" variant="default">
+      <PButton type="reset" variant="default">
         Reset
-      </SlButton>
-      <SlButton type="submit" variant="primary">
+      </PButton>
+      <PButton type="submit" variant="primary">
         Submit
-      </SlButton>
+      </PButton>
     </form>
   );
 };
@@ -250,7 +250,7 @@ The FileUpload component can be used inside a form as a replacement for `<input 
 
 ```jsx:react
 import { useRef } from 'react';
-import { PFileUpload, SlButton } from 'pure-uikit/dist/react';
+import { PFileUpload, PButton } from 'pure-uikit/dist/react';
 import { serialize } from '../dist/utilities/form.js';
 
 const App = () => {
@@ -268,12 +268,12 @@ const App = () => {
       <br />
       <input type="file" name="native-input" multiple></input>
       <br />
-      <SlButton type="reset" variant="default">
+      <PButton type="reset" variant="default">
         Reset
-      </SlButton>
-      <SlButton type="submit" variant="primary">
+      </PButton>
+      <PButton type="submit" variant="primary">
         Submit
-      </SlButton>
+      </PButton>
     </form>
   );
 };
@@ -284,13 +284,13 @@ const App = () => {
 To upload a file, listen to the `p-change` event and handle the received file. This example uses [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), but the same could be achieved with axios or the fetch API.
 
 ```html:preview
-<p-file-upload class="upload-file" multiple></p-file-upload>
+<p-file-upload class="upload-file"></p-file-upload>
 
 <script type="module">
   const fileUpload = document.querySelector('.upload-file');
   fileUpload.addEventListener('p-change', event => {
     event.preventDefault();
-    const fileInfo = event.detail;
+    const fileInfo = event.detail?.[0];
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8080');
     xhr.setRequestHeader('Content-Type', fileInfo.file.type);
@@ -301,7 +301,7 @@ To upload a file, listen to the `p-change` event and handle the received file. T
 
 ```jsx:react
 import { useRef } from 'react';
-import { PFileUpload, SlButton } from 'pure-uikit/dist/react';
+import { PFileUpload, PButton } from 'pure-uikit/dist/react';
 import { serialize } from '../dist/utilities/form.js';
 
 const App = () => {
@@ -309,7 +309,7 @@ const App = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const fileInfo = event.detail;
+    const fileInfo = event.detail?.[0];
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8080');
     xhr.setRequestHeader('Content-Type', fileInfo.file.type);
@@ -318,16 +318,16 @@ const App = () => {
 
   return (
     <form onSubmit={handleSubmit} ref={form}>
-      <PFileUpload name="p-file-upload" multiple></PFileUpload>
+      <PFileUpload name="p-file-upload"></PFileUpload>
       <br />
-      <input type="file" name="native-input" multiple></input>
+      <input type="file" name="native-input"></input>
       <br />
-      <SlButton type="reset" variant="default">
+      <PButton type="reset" variant="default">
         Reset
-      </SlButton>
-      <SlButton type="submit" variant="primary">
+      </PButton>
+      <PButton type="submit" variant="primary">
         Submit
-      </SlButton>
+      </PButton>
     </form>
   );
 };
@@ -338,13 +338,13 @@ const App = () => {
 Set `loading` to `true` on the FileInfo object to add a loading indicator to the FileUploadItem.
 
 ```html:preview
-<p-file-upload class="upload-file-loading" multiple></p-file-upload>
+<p-file-upload class="upload-file-loading"></p-file-upload>
 
 <script type="module">
   const fileUpload = document.querySelector('.upload-file-loading');
   fileUpload.addEventListener('p-change', async event => {
     event.preventDefault();
-    const fileInfo = event.detail;
+    const fileInfo = event.detail?.[0];
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8080/upload/');
     xhr.setRequestHeader('Content-Type', fileInfo.file.type);
@@ -360,7 +360,7 @@ Set `loading` to `true` on the FileInfo object to add a loading indicator to the
 
 ```jsx:react
 import { useRef } from 'react';
-import { PFileUpload, SlButton } from 'pure-uikit/dist/react';
+import { PFileUpload, PButton } from 'pure-uikit/dist/react';
 import { serialize } from '../dist/utilities/form.js';
 
 const App = () => {
@@ -368,7 +368,7 @@ const App = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const fileInfo = event.detail;
+    const fileInfo = event.detail?.[0];
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8080');
     xhr.setRequestHeader('Content-Type', fileInfo.file.type);
@@ -384,16 +384,16 @@ const App = () => {
 
   return (
     <form onSubmit={handleSubmit} ref={form}>
-      <PFileUpload name="p-file-upload" multiple></PFileUpload>
+      <PFileUpload name="p-file-upload"></PFileUpload>
       <br />
-      <input type="file" name="native-input" multiple></input>
+      <input type="file" name="native-input"></input>
       <br />
-      <SlButton type="reset" variant="default">
+      <PButton type="reset" variant="default">
         Reset
-      </SlButton>
-      <SlButton type="submit" variant="primary">
+      </PButton>
+      <PButton type="submit" variant="primary">
         Submit
-      </SlButton>
+      </PButton>
     </form>
   );
 };
@@ -404,13 +404,13 @@ const App = () => {
 To handle errors in a [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) the `upload.onerror` callback can be used.
 
 ```html:preview
-<p-file-upload class="upload-file-errors" multiple></p-file-upload>
+<p-file-upload class="upload-file-errors"></p-file-upload>
 
 <script type="module">
   const fileUpload = document.querySelector('.upload-file-errors');
   fileUpload.addEventListener('p-change', async event => {
     event.preventDefault();
-    const fileInfo = event.detail;
+    const fileInfo = event.detail?.[0];
     const xhr = new XMLHttpRequest();
     xhr.upload.onerror = event => {
       console.error('error:', event);
@@ -429,7 +429,7 @@ To handle errors in a [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/
 
 ```jsx:react
 import { useRef } from 'react';
-import { PFileUpload, SlButton } from 'pure-uikit/dist/react';
+import { PFileUpload, PButton } from 'pure-uikit/dist/react';
 import { serialize } from '../dist/utilities/form.js';
 
 const App = () => {
@@ -437,7 +437,7 @@ const App = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const fileInfo = event.detail;
+    const fileInfo = event.detail?.[0];
     const xhr = new XMLHttpRequest();
 
     xhr.upload.onerror = event => {
@@ -458,16 +458,16 @@ const App = () => {
 
   return (
     <form onSubmit={handleSubmit} ref={form}>
-      <PFileUpload name="p-file-upload" multiple></PFileUpload>
+      <PFileUpload name="p-file-upload"></PFileUpload>
       <br />
-      <input type="file" name="native-input" multiple></input>
+      <input type="file" name="native-input"></input>
       <br />
-      <SlButton type="reset" variant="default">
+      <PButton type="reset" variant="default">
         Reset
-      </SlButton>
-      <SlButton type="submit" variant="primary">
+      </PButton>
+      <PButton type="submit" variant="primary">
         Submit
-      </SlButton>
+      </PButton>
     </form>
   );
 };
@@ -478,13 +478,13 @@ const App = () => {
 The [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) provides an `upload.onprogress` callback that can be used to change the `progress` attribute on the FileInfo object.
 
 ```html:preview
-<p-file-upload class="upload-file-progress" multiple></p-file-upload>
+<p-file-upload class="upload-file-progress"></p-file-upload>
 
 <script type="module">
   const fileUpload = document.querySelector('.upload-file-progress');
   fileUpload.addEventListener('p-change', async event => {
     event.preventDefault();
-    const fileInfo = event.detail;
+    const fileInfo = event.detail?.[0];
     const xhr = new XMLHttpRequest();
     xhr.upload.onprogress = event => {
       if (event.lengthComputable) {
@@ -509,7 +509,7 @@ The [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpReq
 
 ```jsx:react
 import { useRef } from 'react';
-import { PFileUpload, SlButton } from 'pure-uikit/dist/react';
+import { PFileUpload, PButton } from 'pure-uikit/dist/react';
 import { serialize } from '../dist/utilities/form.js';
 
 const App = () => {
@@ -517,7 +517,7 @@ const App = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const fileInfo = event.detail;
+    const fileInfo = event.detail?.[0];
     const xhr = new XMLHttpRequest();
 
     xhr.upload.onprogress = event => {
@@ -544,16 +544,16 @@ const App = () => {
 
   return (
     <form onSubmit={handleSubmit} ref={form}>
-      <PFileUpload name="p-file-upload" multiple></PFileUpload>
+      <PFileUpload name="p-file-upload"></PFileUpload>
       <br />
-      <input type="file" name="native-input" multiple></input>
+      <input type="file" name="native-input"></input>
       <br />
-      <SlButton type="reset" variant="default">
+      <PButton type="reset" variant="default">
         Reset
-      </SlButton>
-      <SlButton type="submit" variant="primary">
+      </PButton>
+      <PButton type="submit" variant="primary">
         Submit
-      </SlButton>
+      </PButton>
     </form>
   );
 };
@@ -570,11 +570,11 @@ Set the `image` slot to customize the appearance of the image within the dropzon
 ```
 
 ```jsx:react
-import { PFileUpload, SlQrCode } from 'pure-uikit/dist/react';
+import { PFileUpload, PQrCode } from 'pure-uikit/dist/react';
 
 const App = () => (
   <PFileUpload>
-    <SlQrCode slot="image" value="https://pureui.xyz/" />;
+    <PQrCode slot="image" value="https://pureui.xyz/" />;
   </PFileUpload>
 );
 ```
@@ -604,7 +604,7 @@ Set the `content` slot to customize the appearance of the dropzone.
 ```
 
 ```jsx:react
-import { PFileUpload, SlCard, SlRating } from '@sda-se/ocean-design-system/dist/react';
+import { PFileUpload, PCard, PRating } from 'pure-uikit/dist/react';
 
 const css = `
   .card-footer {
@@ -620,12 +620,12 @@ const css = `
 const App = () => (
   <>
     <PFileUpload>
-      <SlCard slot="content" className="card-footer">
+      <PCard slot="content" className="card-footer">
         This card is a dropzone. You can drag all sorts of things in it!
         <div slot="footer">
-          <SlRating></SlRating>
+          <PRating></PRating>
         </div>
-      </SlCard>
+      </PCard>
     </PFileUpload>
 
     <style>{css}</style>

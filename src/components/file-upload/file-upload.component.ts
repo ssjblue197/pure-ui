@@ -57,7 +57,7 @@ export default class PFileUpload extends PureElement implements PureFormControl 
   };
 
   private readonly formControlController = new FormControlController(this, {
-    assumeInteractionOn: ["p-blur", "p-input", "p-select", "p-change"],
+    assumeInteractionOn: ["p-change", "p-remove"],
   });
   private readonly localize = new LocalizeController(this);
 
@@ -74,11 +74,11 @@ export default class PFileUpload extends PureElement implements PureFormControl 
   /** The input's name attribute. */
   @property() name: string;
 
-  public get value(): File[] {
+  public get value(): string | File[] {
     if (Array.isArray(this.files)) {
       return this.files.map(file => file.file);
     }
-    return [];
+    return "";
   }
 
   public set value(file: string | File | File[]) {
@@ -178,18 +178,9 @@ export default class PFileUpload extends PureElement implements PureFormControl 
     }
 
     this.files = this.multiple ? [...this.files, fileInfo] : [fileInfo];
-
-    console.log("this.files", this.files);
-    console.log("this.warning", {
-      input: this.fileInput,
-    });
-
-    this.emit("p-change", { detail: { files: this.files } });
   }
 
   handleFiles(fileList: FileList | null) {
-    console.log("handleFiles", fileList);
-
     if (!fileList || fileList.length === 0) {
       return;
     }
@@ -201,6 +192,8 @@ export default class PFileUpload extends PureElement implements PureFormControl 
     }
 
     Object.values(fileList).forEach(file => this.addFile(file));
+
+    this.emit("p-change", { detail: this.files });
   }
 
   onDragLeave(): void {
@@ -241,8 +234,9 @@ export default class PFileUpload extends PureElement implements PureFormControl 
 
   handleFileRemove(index: number) {
     const fileInfo = this.files[index];
-    this.emit("p-remove", { detail: { file: fileInfo } });
+    this.emit("p-remove", { detail: fileInfo });
     this.files = this.files.filter((_, fileIndex) => fileIndex !== index);
+    this.emit("p-change", { detail: this.files });
   }
 
   get description(): string {
