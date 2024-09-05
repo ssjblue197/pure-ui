@@ -4,6 +4,8 @@ import componentStyles from "../../styles/component.styles.js";
 export default css`
   ${componentStyles}
   :host {
+    --border-radius: var(--p-border-radius-large);
+    --border-style: solid;
     display: contents;
     /* For better Developer Experience, we'll reset the margin here so the base part can inherit it */
     margin: 0;
@@ -12,8 +14,8 @@ export default css`
     position: relative;
     display: flex;
     background-color: var(--p-panel-background-color);
-    border: var(--p-panel-border-width) solid var(--p-panel-border-color);
-    border-radius: var(--p-border-radius-medium);
+    border: var(--p-panel-border-width) var(--border-style) var(--p-panel-border-color);
+    border-radius: var(--border-radius);
     font-family: var(--p-font-sans);
     font-size: var(--p-font-size-medium);
     font-weight: var(--p-font-weight-normal);
@@ -61,7 +63,7 @@ export default css`
     flex-direction: column;
   }
   .file-upload-item__label__size {
-    font-size: var(--p-font-size-small);
+    font-size: var(--p-font-size-x-small);
     line-height: var(--p-line-height-dense);
   }
   .file-upload-item__close-button {
@@ -70,6 +72,7 @@ export default css`
     align-items: center;
     font-size: var(--p-font-size-large);
     padding-right: var(--p-spacing-medium);
+    color: var(--p-color-neutral-500);
   }
   .file-upload-item--warning {
     border-color: var(--p-color-warning-600);

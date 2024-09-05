@@ -565,7 +565,7 @@ Set the `image` slot to customize the appearance of the image within the dropzon
 
 ```html:preview
 <p-file-upload>
-  <p-qr-code slot="image" value="https://shoelace.style/"></p-qr-code>
+  <p-qr-code slot="image" value="https://pureui.xyz/"></p-qr-code>
 </p-file-upload>
 ```
 
@@ -574,7 +574,7 @@ import { PFileUpload, SlQrCode } from 'pure-uikit/dist/react';
 
 const App = () => (
   <PFileUpload>
-    <SlQrCode slot="image" value="https://shoelace.style/" />;
+    <SlQrCode slot="image" value="https://pureui.xyz/" />;
   </PFileUpload>
 );
 ```
@@ -611,8 +611,8 @@ const css = `
     max-width: 300px;
   }
   .card-footer [slot="footer"] {
-    display: flex; 
-    justify-content: space-between; 
+    display: flex;
+    justify-content: space-between;
     align-items: center;
   }
 `;

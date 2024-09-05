@@ -23,7 +23,7 @@ import type { PureFormControl } from "../../internal/pure-ui-element.js";
  * @dependency p-progress-bar
  * @dependency p-icon
  * @dependency p-icon-button
- * @dependency p-upload-file-item
+ * @dependency p-file-upload-item
  *
  * @slot label - The dropzone's label. Alternatively, you can use the image slot and label prop.
  * @slot image - The dropzone's image.
@@ -53,7 +53,7 @@ export default class PFileUpload extends PureElement implements PureFormControl 
     "p-icon": PIcon,
     "p-icon-button": PIconButton,
     "p-progress-bar": PProgressBar,
-    "p-upload-file-item": PFileUploadItem,
+    "p-file-upload-item": PFileUploadItem,
   };
 
   private readonly formControlController = new FormControlController(this, {
@@ -74,14 +74,18 @@ export default class PFileUpload extends PureElement implements PureFormControl 
   /** The input's name attribute. */
   @property() name: string;
 
-  public get value(): string | File {
-    if (this.files.length > 0) {
-      return `C:\\fakepath\\${this.files[0].file.name}`;
+  public get value(): File[] {
+    if (Array.isArray(this.files)) {
+      return this.files.map(file => file.file);
     }
-    return "";
+    return [];
   }
 
-  public set value(file: string | File) {
+  public set value(file: string | File | File[]) {
+    if (Array.isArray(file)) {
+      this.files = file.map(f => ({ file: f }));
+      return;
+    }
     if (file instanceof File) {
       this.files = [{ file }];
       return;
@@ -175,10 +179,17 @@ export default class PFileUpload extends PureElement implements PureFormControl 
 
     this.files = this.multiple ? [...this.files, fileInfo] : [fileInfo];
 
+    console.log("this.files", this.files);
+    console.log("this.warning", {
+      input: this.fileInput,
+    });
+
     this.emit("p-change", { detail: { files: this.files } });
   }
 
   handleFiles(fileList: FileList | null) {
+    console.log("handleFiles", fileList);
+
     if (!fileList || fileList.length === 0) {
       return;
     }
@@ -274,7 +285,9 @@ export default class PFileUpload extends PureElement implements PureFormControl 
           accept=${this.accept}
           ?multiple=${this.multiple}
           @change="${this.handleFileInputChange}"
-          value=${this.value}
+          value=${Array.isArray(this.value)
+            ? this.value.map((f: File | string) => (f instanceof File ? f.name : f)).join(",")
+            : ""}
         />
         ${this.buttonOnly
           ? browseFilesButton

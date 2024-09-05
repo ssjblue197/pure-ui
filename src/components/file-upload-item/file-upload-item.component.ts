@@ -174,12 +174,7 @@ export default class PFileUploadItem extends PureElement {
                 @keyup=${this.handleTriggerKeyUp}
               >
                 <slot name="close-button">
-                  <p-icon-button
-                    part="close-button"
-                    exportparts="base:close-button__base"
-                    name="x"
-                    library="system"
-                  ></p-icon-button>
+                  <p-icon-button part="close-button" name="x" exportparts="base:close-button__base"></p-icon-button>
                 </slot>
               </span>
             `
