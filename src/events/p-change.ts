@@ -1,4 +1,8 @@
-export type PChangeEvent = CustomEvent<Record<PropertyKey, never>>;
+import type { FileInfo } from "../components/file-upload/library.js";
+
+export type PChangeEvent = CustomEvent<{
+  files?: FileInfo[];
+}>;
 
 declare global {
   interface GlobalEventHandlersEventMap {

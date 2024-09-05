@@ -21,16 +21,22 @@ export interface Translation extends DefaultTranslation {
   $name: string; // e.g. English, Español
   $dir: "ltr" | "rtl";
 
+  browseFiles?: string;
   carousel: string;
   clearEntry: string;
   close: string;
   copied: string;
   copy: string;
   currentValue: string;
+  dragDrop?: string;
+  fileSizeExceeded?: string;
+  fileTypeNotAccepted?: string;
   error: string;
   goToSlide: (slide: number, count: number) => string;
   hidePassword: string;
   loading: string;
+  maxFiles?: string;
+  noMultipleFiles?: string;
   empty?: string;
   nextPage?: string;
   nextMonth?: string; // TODO - add to other language packs and remove optional ? flag

@@ -60,6 +60,8 @@ export { default as PTree } from "./components/tree/tree.js";
 export { default as PTreeItem } from "./components/tree-item/tree-item.js";
 export { default as PVisuallyHidden } from "./components/visually-hidden/visually-hidden.js";
 export { default as PTable } from "./components/table/table.js";
+export { default as PFileUpload } from './components/file-upload/file-upload.js';
+export { default as PFileUploadItem } from './components/file-upload-item/file-upload-item.js';
 /* plop:component */
 
 // Utilities

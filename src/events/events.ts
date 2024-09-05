@@ -1,3 +1,4 @@
+export type { PAbortEvent } from "./p-abort.js";
 export type { PAfterCollapseEvent } from "./p-after-collapse.js";
 export type { PAfterExpandEvent } from "./p-after-expand.js";
 export type { PAfterHideEvent } from "./p-after-hide.js";
@@ -9,6 +10,7 @@ export type { PClearEvent } from "./p-clear.js";
 export type { PCloseEvent } from "./p-close.js";
 export type { PCollapseEvent } from "./p-collapse.js";
 export type { PCopyEvent } from "./p-copy.js";
+export type { PDropEvent } from "./p-drop.js";
 export type { PErrorEvent } from "./p-error.js";
 export type { PExpandEvent } from "./p-expand.js";
 export type { PFinishEvent } from "./p-finish.js";
