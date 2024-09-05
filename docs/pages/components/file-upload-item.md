@@ -15,8 +15,8 @@ File items represent an uploaded file and provides information about file type, 
 ```
 
 ```jsx:react
-import { SlFileUploadItem } from '@sda-se/ocean-design-system/dist/react';
-const App = () => <SlFileUploadItem></SlFileUploadItem>;
+import { PFileUploadItem } from 'pure-uikit/dist/react';
+const App = () => <PFileUploadItem></PFileUploadItem>;
 ```
 
 ## Examples
