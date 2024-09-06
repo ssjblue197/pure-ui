@@ -305,7 +305,6 @@ export default class PCalendar extends PureElement implements PureFormControl {
    * The mode of the calendar.
    * - "default": calendar is displayed in a popup.
    * - "inline": calendar is displayed inline.
-   * TODO in future....
    * @attribute mode
    * @type {"default" | "inline"}
    * @default "default"
@@ -598,8 +597,11 @@ export default class PCalendar extends PureElement implements PureFormControl {
     event.stopPropagation();
 
     if (String(this.value) !== "") {
-      // this.setSelectedOptions([]);
       this.displayInput.blur();
+      this.value = [];
+      this.setSelectedOptions([]);
+      this.displayLabel = "";
+      this.keyword = "";
 
       // Emit after update
       this.updateComplete.then(() => {
@@ -1004,10 +1006,6 @@ export default class PCalendar extends PureElement implements PureFormControl {
     const isPlaceholderVisible =
       this.placeholder &&
       ((Array.isArray(this.value) && this.value.length === 0) || (!Array.isArray(this.value) && !this.value));
-
-    //
-    // TODO - December is not showing a label because the month is calculated as Sat Jan 01 2022 00:00:00 GMT-0500
-    //
 
     const calendarInline = html`
       <div

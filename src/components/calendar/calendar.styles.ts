@@ -7,7 +7,7 @@ export default css`
   :host {
     --border-color: var(--p-color-neutral-200);
     --border-radius: var(--p-input-border-radius-large);
-    --border-width: 1px;
+    --border-width: 0px;
     --border-style: solid;
     --calendar-background-color: var(--p-surface);
     --calendar-box-shadow: var(--p-shadow-medium);
