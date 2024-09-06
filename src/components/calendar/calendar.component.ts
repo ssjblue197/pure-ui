@@ -367,6 +367,18 @@ export default class PCalendar extends PureElement implements PureFormControl {
     this.placeholder = this.type === "range" ? "MM/DD/YYYY - MM/DD/YYYY" : "MM/DD/YYYY";
   }
 
+  firstUpdated() {
+    // Initialize the selected options from the value.
+    // If the value is not an array, wrap it in one so we can handle it as an array.
+    if (Array.isArray(this.value)) {
+      this.selectedOptions = this.value;
+    } else {
+      this.selectedOptions = this.value ? [this.value] : [];
+      this.keyword = getDateLabelWithFormat(this.selectedOptions[0]);
+      this.displayLabel = this.keyword;
+    }
+  }
+
   private addOpenListeners() {
     //
     // Listen on the root node instead of the document in case the elements are inside a shadow root
@@ -842,8 +854,8 @@ export default class PCalendar extends PureElement implements PureFormControl {
           // When no items are selected, keep the value empty so the placeholder shows old value
           this.placeholder = this.type === "range" ? "MM/DD/YYYY - MM/DD/YYYY" : "MM/DD/YYYY";
         }
-        this.displayLabel = "";
-        this.keyword = "";
+        // this.displayLabel = "";
+        // this.keyword = "";
       }
       if (!document.activeElement || document.activeElement !== this.displayInput) {
         this.displayInput.focus({ preventScroll: true });

@@ -189,7 +189,7 @@ export default css`
 
   @media (min-width: 768px) {
     /* CSS styles for tablet devices */
-    .calendar__day[part~="day-current-focus"] {
+    .calendar__day[part~="day-current-focus"]:not([part~="day-selected"]) {
       background-color: var(--p-color-rose-100);
     }
   }
