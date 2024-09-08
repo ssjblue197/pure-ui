@@ -6,7 +6,9 @@ layout: component
 ---
 
 ```html:preview
-<p-calendar mode="inline" type="multiple" class="calendar-preview">
+<p-calendar type="multiple" class="calendar-preview"
+  format="YYYY-MM-DD"
+>
   <div slot="footer"></div>
 </p-calendar>
 
@@ -16,13 +18,9 @@ layout: component
   const today = new Date();
 
   calendar.value = [
-    new Date(today.getFullYear(), today.getMonth(), 12),
-    new Date(today.getFullYear(), today.getMonth(), 14),
-    new Date(today.getFullYear(), today.getMonth(), 17),
-    new Date(today.getFullYear(), today.getMonth(), 19)
+    '2024-09-09',
   ];
 
-  console.log('calendar', {calendar});
 
 </script>
 ```
@@ -34,7 +32,9 @@ layout: component
 Month and day labels can be customized using the `month-labels` and `day-labels` attributes. Note that month names are localized automatically based on the component's `lang` attribute, falling back to the document language.
 
 ```html:preview
-<p-calendar month-labels="short" day-labels="narrow">
+<p-calendar month-labels="short" day-labels="narrow" 
+  format="YYYY-MM-DD"
+>
 </p-calendar>
 ```
 

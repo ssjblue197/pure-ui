@@ -17,6 +17,7 @@ import { html } from "lit";
 import { LocalizeController } from "../../utilities/localize.js";
 import { partMap } from "../../internal/part-map.js";
 import { property, query, state } from "lit/decorators.js";
+import dateFormatter from "pure-date-format";
 // import { scrollIntoView } from "../../internal/scroll.js";
 // import { shadowQuery } from "../../utilities/shadow.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
@@ -154,9 +155,9 @@ export default class PCalendar extends PureElement implements PureFormControl {
    * | `ss`  | Second, numeric (00-59) |
    *
    * @type {string}
-   * @default "YYYY-MM-DD"
+   * @default ""
    */
-  @property({ reflect: true }) formatter: string = "YYYY-MM-DD";
+  @property({ reflect: true }) format: string = "";
 
   /**
    * Indicates whether the calendar is in typing mode.
@@ -203,7 +204,41 @@ export default class PCalendar extends PureElement implements PureFormControl {
    * value attribute will be a space-delimited list of values based on the dates selected, and the value property will
    * be an array. **For this reason, values must not contain spaces.**
    */
-  @property({ type: Array }) value: Date | Date[] = [];
+  @property({ type: Array }) _value: Date | Date[] = [];
+
+  public get value(): string | Date | (string | Date)[] {
+    if (Array.isArray(this._value)) {
+      return this._value.map(v => {
+        if (v instanceof Date) {
+          return this.format ? dateFormatter().from(v, this.format) : v;
+        } else {
+          //TODO: handle check if can parser value to Date object
+          return this.format ? v : new Date(v);
+        }
+      });
+    } else {
+      return this._value instanceof Date ? dateFormatter().from(this._value, this.format) : this._value;
+    }
+  }
+
+  public set value(value: string | string[]) {
+    if (Array.isArray(value)) {
+      this._value = value.map(v => {
+        if (typeof v === "string") {
+          //TODO: handle check if can parser value to Date object when format is not provided
+          return this.format ? dateFormatter().to(v, this.format) : new Date(v);
+        } else {
+          return v;
+        }
+      });
+    } else {
+      if (typeof value === "string") {
+        this._value = this.format ? dateFormatter().to(value, this.format) : new Date(value);
+      } else {
+        this._value = value;
+      }
+    }
+  }
 
   /** The default value of the form control. Primarily used for resetting the form control. */
   @defaultValue() defaultValue: Date | Date[] = new Date();
@@ -212,7 +247,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
   @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
 
   /** Placeholder text to show as a hint when the select is empty. */
-  @property() placeholder = "MM/DD/YYYY";
+  @property() placeholder = "";
 
   /**
    * The maximum number of selected options to show when `multiple` is true. After the maximum, "+n" will be shown to
@@ -287,7 +322,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
         removable
         @p-remove=${(event: PRemoveEvent) => this.handleTagRemove(event, option)}
       >
-        ${getDateLabelWithFormat(option)}
+        ${this.format ? dateFormatter().from(option, this.format) : getDateLabelWithFormat(option)}
       </p-tag>
     `;
   };
@@ -347,7 +382,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
 
   /** When true, dates from the previous and next month will also be shown to fill out the grid. */
   @property({ attribute: "show-adjacent-dates", type: Boolean })
-  showAdjacentDates = true;
+  showAdjacentDates = false;
 
   /** Gets the validity state object */
   get validity() {
@@ -363,16 +398,32 @@ export default class PCalendar extends PureElement implements PureFormControl {
     super.connectedCallback();
     // Because this is a form control, it shouldn't be opened initially
     this.open = false;
-    this.placeholder = this.type === "range" ? "MM/DD/YYYY - MM/DD/YYYY" : "MM/DD/YYYY";
+    this.placeholder = this.type === "range" ? `${this.format} - ${this.format}` : this.format;
+
+    if (Array.isArray(this.value)) {
+      this._value = this.value.map(v => {
+        if (typeof v === "string") {
+          return this.format ? dateFormatter().to(v, this.format) : new Date(v);
+        } else {
+          return v;
+        }
+      });
+    } else {
+      if (typeof this.value === "string") {
+        this._value = this.format ? dateFormatter().to(this.value, this.format) : new Date(this.value);
+      } else {
+        this._value = this.value;
+      }
+    }
   }
 
   firstUpdated() {
     // Initialize the selected options from the value.
     // If the value is not an array, wrap it in one so we can handle it as an array.
-    if (Array.isArray(this.value)) {
-      this.selectedOptions = this.value;
+    if (Array.isArray(this._value)) {
+      this.selectedOptions = this._value;
     } else {
-      this.selectedOptions = this.value ? [this.value] : [];
+      this.selectedOptions = this._value ? [this._value] : [];
       this.keyword = getDateLabelWithFormat(this.selectedOptions[0]);
       this.displayLabel = this.keyword;
     }
@@ -596,9 +647,9 @@ export default class PCalendar extends PureElement implements PureFormControl {
   private handleClearClick(event: MouseEvent) {
     event.stopPropagation();
 
-    if (String(this.value) !== "") {
+    if (String(this._value) !== "") {
       this.displayInput.blur();
-      this.value = [];
+      this._value = [];
       this.setSelectedOptions([]);
       this.displayLabel = "";
       this.keyword = "";
@@ -619,51 +670,51 @@ export default class PCalendar extends PureElement implements PureFormControl {
   }
 
   private checkIsDuplicateDate(day: CalendarDay) {
-    if (!Array.isArray(this.value)) return false;
-    return this.value.some(d => isSameDay(d, day.date));
+    if (!Array.isArray(this._value)) return false;
+    return this._value.some(d => isSameDay(d, day.date));
   }
 
   private handleSetTemporaryEndDate(day: CalendarDay) {
-    if (Array.isArray(this.value) && this.value.length === 1 && this.type === "range") {
+    if (Array.isArray(this._value) && this._value.length === 1 && this.type === "range") {
       this.temporalEndDate = day.date;
     }
   }
 
   private handleSelectDate(day: CalendarDay) {
-    const oldValue = structuredClone(this.value);
+    const oldValue = structuredClone(this._value);
     switch (this.type) {
       case "single":
-        this.value = day.date;
+        this._value = day.date;
         if (this.closeOnSelect) {
           this.hide();
         }
-        this.setSelectedOptions([this.value]);
+        this.setSelectedOptions([this._value]);
         break;
       case "multiple":
-        if (Array.isArray(this.value)) {
+        if (Array.isArray(this._value)) {
           if (this.checkIsDuplicateDate(day)) {
-            this.value = this.value.filter(d => !isSameDay(d, day.date));
+            this._value = this._value.filter(d => !isSameDay(d, day.date));
           } else {
-            this.value = [...this.value, day.date];
+            this._value = [...this._value, day.date];
           }
-          this.setSelectedOptions(this.value);
+          this.setSelectedOptions(this._value);
         }
         break;
       case "range":
-        if (Array.isArray(this.value)) {
-          if (this.value.length === 2) {
+        if (Array.isArray(this._value)) {
+          if (this._value.length === 2) {
             this.temporalEndDate = undefined;
-            this.value = [day.date];
-          } else if (this.value.length === 1) {
-            this.value = this.value[0] >= day.date ? [day.date, this.value[0]] : [this.value[0], day.date];
+            this._value = [day.date];
+          } else if (this._value.length === 1) {
+            this._value = this._value[0] >= day.date ? [day.date, this._value[0]] : [this._value[0], day.date];
             this.temporalEndDate = undefined;
             if (this.closeOnSelect) {
               this.hide();
             }
           } else {
-            this.value = [day.date];
+            this._value = [day.date];
           }
-          this.setSelectedOptions(this.value);
+          this.setSelectedOptions(this._value);
         }
         break;
       default:
@@ -677,7 +728,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
       }
     });
 
-    if (this.value !== oldValue) {
+    if (this._value !== oldValue) {
       // Emit after updating
       this.updateComplete.then(() => {
         this.emit("p-input");
@@ -690,7 +741,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
     event.stopPropagation();
     if (!this.disabled) {
       this.setSelectedOptions(this.selectedOptions.filter(d => !isSameDay(d, option)));
-      this.value = structuredClone(this.selectedOptions);
+      this._value = structuredClone(this.selectedOptions);
       // Emit after updating
       this.updateComplete.then(() => {
         this.emit("p-input");
@@ -725,24 +776,28 @@ export default class PCalendar extends PureElement implements PureFormControl {
   private selectionChanged() {
     switch (this.type) {
       case "single":
-        this.keyword = getDateLabelWithFormat(this.selectedOptions[0]);
+        this.keyword = this.format
+          ? dateFormatter().from(this.selectedOptions[0], this.format)
+          : getDateLabelWithFormat(this.selectedOptions[0]);
         this.displayLabel = this.keyword;
-        this.value = structuredClone(this.selectedOptions[0]);
+        this._value = structuredClone(this.selectedOptions[0]);
         break;
       case "range":
         this.keyword = "";
         if (this.selectedOptions.length === 1) {
-          this.keyword = `${getDateLabelWithFormat(this.selectedOptions[0])} - `;
+          this.keyword = `${this.format ? dateFormatter().from(this.selectedOptions[0], this.format) : getDateLabelWithFormat(this.selectedOptions[0])} - `;
         } else if (this.selectedOptions.length === 2) {
-          this.keyword = `${getDateLabelWithFormat(this.selectedOptions[0])} - ${getDateLabelWithFormat(this.selectedOptions[1])}`;
+          this.keyword = this.format
+            ? `${dateFormatter().from(this.selectedOptions[0], this.format)} - ${dateFormatter().from(this.selectedOptions[1], this.format)}`
+            : `${getDateLabelWithFormat(this.selectedOptions[0])} - ${getDateLabelWithFormat(this.selectedOptions[1])}`;
         }
         this.displayLabel = this.keyword;
-        this.value = structuredClone(this.selectedOptions);
+        this._value = structuredClone(this.selectedOptions);
         break;
       case "multiple":
-        this.placeholder = "MM/DD/YYYY";
+        this.placeholder = this.format ? this.format : "MM/DD/YYYY";
         // this.displayLabel = this.placeholder;
-        this.value = structuredClone(this.selectedOptions);
+        this._value = structuredClone(this.selectedOptions);
         break;
       default:
         break;
@@ -854,7 +909,10 @@ export default class PCalendar extends PureElement implements PureFormControl {
       if (this.typing) {
         if (this.selectedOptions.length > 0) {
           // When no items are selected, keep the value empty so the placeholder shows old value
-          this.placeholder = this.type === "range" ? "MM/DD/YYYY - MM/DD/YYYY" : "MM/DD/YYYY";
+          this.placeholder =
+            this.type === "range"
+              ? `${this.format ? `${this.format} - ${this.format}` : "MM/DD/YYYY - MM/DD/YYYY"}`
+              : this.format || "MM/DD/YYYY";
         }
         // this.displayLabel = "";
         // this.keyword = "";
@@ -1002,10 +1060,10 @@ export default class PCalendar extends PureElement implements PureFormControl {
     const hasClearIcon =
       this.clearable &&
       !this.disabled &&
-      ((Array.isArray(this.value) && this.value.length > 0) || (!Array.isArray(this.value) && this.value));
+      ((Array.isArray(this._value) && this._value.length > 0) || (!Array.isArray(this._value) && this._value));
     const isPlaceholderVisible =
       this.placeholder &&
-      ((Array.isArray(this.value) && this.value.length === 0) || (!Array.isArray(this.value) && !this.value));
+      ((Array.isArray(this._value) && this._value.length === 0) || (!Array.isArray(this._value) && !this._value));
 
     const calendarInline = html`
       <div
@@ -1105,26 +1163,26 @@ export default class PCalendar extends PureElement implements PureFormControl {
               const isCurrentSelect = this.currentOption ? isSameDay(this.currentOption, day.date) : false;
               switch (this.type) {
                 case "single":
-                  isSelected = this.value && !Array.isArray(this.value) && isSameDay(this.value, day.date);
+                  isSelected = this._value && !Array.isArray(this._value) && isSameDay(this._value, day.date);
                   break;
                 case "multiple":
-                  isSelected = Array.isArray(this.value) ? this.value.some(d => isSameDay(d, day.date)) : false;
+                  isSelected = Array.isArray(this._value) ? this._value.some(d => isSameDay(d, day.date)) : false;
                   break;
                 case "range":
-                  if (Array.isArray(this.value) && this.value.length > 0) {
-                    isSelected = this.value.some(d => isSameDay(d, day.date));
-                    if (this.value.length === 2) {
-                      isSelectedInRange = day.date > this.value[0] && day.date < this.value[1];
+                  if (Array.isArray(this._value) && this._value.length > 0) {
+                    isSelected = this._value.some(d => isSameDay(d, day.date));
+                    if (this._value.length === 2) {
+                      isSelectedInRange = day.date > this._value[0] && day.date < this._value[1];
                     }
-                    if (this.value.length === 1) {
+                    if (this._value.length === 1) {
                       isSelectedInRange = this.temporalEndDate
-                        ? (day.date > this.value[0] && day.date < this.temporalEndDate) ||
-                          (day.date < this.value[0] && day.date > this.temporalEndDate)
+                        ? (day.date > this._value[0] && day.date < this.temporalEndDate) ||
+                          (day.date < this._value[0] && day.date > this.temporalEndDate)
                         : false;
                     }
 
-                    isSelectionStart = isSameDay(this.value[0], day.date);
-                    isSelectionEnd = isSameDay(this.value[this.value.length - 1], day.date);
+                    isSelectionStart = isSameDay(this._value[0], day.date);
+                    isSelectionEnd = isSameDay(this._value[this._value.length - 1], day.date);
                   }
                   break;
                 default:
@@ -1212,7 +1270,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
                   type="text"
                   ?disabled=${this.disabled}
                   ?required=${this.required}
-                  .value=${Array.isArray(this.value) ? this.value.join(", ") : this.value.toLocaleDateString()}
+                  .value=${Array.isArray(this._value) ? this._value.join(", ") : this._value.toLocaleDateString()}
                   tabindex="-1"
                   aria-hidden="true"
                   @focus=${() => this.focus()}
@@ -1293,7 +1351,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
                       type="text"
                       ?disabled=${this.disabled}
                       ?required=${this.required}
-                      .value=${Array.isArray(this.value) ? this.value.join(", ") : this.value?.toLocaleDateString()}
+                      .value=${Array.isArray(this._value) ? this._value.join(", ") : this._value?.toLocaleDateString()}
                       tabindex="-1"
                       aria-hidden="true"
                       @focus=${() => this.focus()}
