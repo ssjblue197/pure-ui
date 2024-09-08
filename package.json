@@ -1,7 +1,7 @@
 {
     "name": "pure-uikit",
     "description": "A forward-thinking library of web components.",
-    "version": "1.1.40",
+    "version": "1.2.0",
     "homepage": "https://pureui.xyz",
     "author": "Mr.P",
     "license": "MIT",
@@ -74,7 +74,7 @@
         "composed-offset-position": "^0.0.4",
         "lit": "^3.0.0",
         "pure-animations": "^1.0.0",
-        "pure-date-format": "^1.0.0",
+        "pure-date-format": "^1.0.5",
         "pure-localize": "^1.0.0",
         "qr-creator": "^1.0.0"
     },

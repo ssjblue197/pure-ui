@@ -422,9 +422,22 @@ export default class PCalendar extends PureElement implements PureFormControl {
     // If the value is not an array, wrap it in one so we can handle it as an array.
     if (Array.isArray(this._value)) {
       this.selectedOptions = this._value;
+      if (this.type === "range") {
+        this.keyword = "";
+        if (this.selectedOptions.length === 1) {
+          this.keyword = `${this.format ? dateFormatter().from(this.selectedOptions[0], this.format) : getDateLabelWithFormat(this.selectedOptions[0])} - `;
+        } else if (this.selectedOptions.length === 2) {
+          this.keyword = this.format
+            ? `${dateFormatter().from(this.selectedOptions[0], this.format)} - ${dateFormatter().from(this.selectedOptions[1], this.format)}`
+            : `${getDateLabelWithFormat(this.selectedOptions[0])} - ${getDateLabelWithFormat(this.selectedOptions[1])}`;
+        }
+        this.displayLabel = this.keyword;
+      }
     } else {
       this.selectedOptions = this._value ? [this._value] : [];
-      this.keyword = getDateLabelWithFormat(this.selectedOptions[0]);
+      this.keyword = this.format
+        ? dateFormatter().from(this.selectedOptions[0], this.format)
+        : getDateLabelWithFormat(this.selectedOptions[0]);
       this.displayLabel = this.keyword;
     }
   }
@@ -529,6 +542,24 @@ export default class PCalendar extends PureElement implements PureFormControl {
       if (!this.open) {
         this.show();
         return;
+      }
+
+      if (this.keyword) {
+        const isValid = dateFormatter().isValid(this.keyword, this.format);
+        if (!isValid) {
+          return;
+        } else {
+          this.handleSelectDate({
+            date: dateFormatter().to(this.keyword, this.format),
+            isToday: false,
+            isWeekday: false,
+            isWeekend: false,
+            isCurrentMonth: false,
+            isPreviousMonth: false,
+            isNextMonth: false,
+          });
+          return;
+        }
       }
 
       // If it is open, update the value based on the current selection and close it
@@ -776,10 +807,10 @@ export default class PCalendar extends PureElement implements PureFormControl {
   private selectionChanged() {
     switch (this.type) {
       case "single":
-        this.keyword = this.format
+        this.keyword = "";
+        this.displayLabel = this.format
           ? dateFormatter().from(this.selectedOptions[0], this.format)
           : getDateLabelWithFormat(this.selectedOptions[0]);
-        this.displayLabel = this.keyword;
         this._value = structuredClone(this.selectedOptions[0]);
         break;
       case "range":
@@ -801,6 +832,17 @@ export default class PCalendar extends PureElement implements PureFormControl {
         break;
       default:
         break;
+    }
+
+    // If the value is an array of dates, set the year and month to the last date in the array.
+    // If the value is a single date, set the year and month to that date.
+    // This is used to position the calendar when it is opened.
+    if (Array.isArray(this._value) && this._value.length > 0) {
+      this.year = this._value[this._value.length - 1].getFullYear();
+      this.month = this._value[this._value.length - 1].getMonth() + 1;
+    } else if (this._value instanceof Date) {
+      this.year = this._value.getFullYear();
+      this.month = this._value.getMonth() + 1;
     }
 
     // Update validity

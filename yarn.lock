@@ -8465,10 +8465,10 @@ pure-animations@^1.0.0:
   resolved "https://registry.yarnpkg.com/pure-animations/-/pure-animations-1.0.1.tgz#b0121a0d7b0d5e4a75c300fc963f585d55f93fc3"
   integrity sha512-NPKCgZZ1+mAWeo5QwS06vW3kFgheTZq1v8gbdH6gcZy1IKZPMJ82i1yp4+dNLuCBiAOLwG0mWEf+QHhu5f2pUA==
 
-pure-date-format@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/pure-date-format/-/pure-date-format-1.0.0.tgz#c16e134f2d8c05c74fbfa391a3ef9c994522dded"
-  integrity sha512-RCnpSXBLz8fQdPT2nBsSX0z4vbmZP2VnzFD9emqAl2ZgutgIk8INYr5V8ZbMVjN/ozhLcvzfy5i74MpfU5wFFw==
+pure-date-format@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/pure-date-format/-/pure-date-format-1.0.5.tgz#fb70e2862c3e014f2c7778a23aa0d2d4756b6cd4"
+  integrity sha512-+WB91EtfCGvw/gAH+PhrSWgg3ooQR+l606sW835MpkvP+9K/o/F/swXu+uTh99/C7JeR6VNxNtWnqSdyCWLkcA==
 
 pure-localize@^1.0.0:
   version "1.0.0"

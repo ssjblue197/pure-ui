@@ -6,7 +6,7 @@ layout: component
 ---
 
 ```html:preview
-<p-calendar type="multiple" class="calendar-preview"
+<p-calendar type="range" class="calendar-preview"
   format="YYYY-MM-DD"
 >
   <div slot="footer"></div>
@@ -19,6 +19,7 @@ layout: component
 
   calendar.value = [
     '2024-09-09',
+    '2024-09-12',
   ];
 
 
@@ -32,7 +33,7 @@ layout: component
 Month and day labels can be customized using the `month-labels` and `day-labels` attributes. Note that month names are localized automatically based on the component's `lang` attribute, falling back to the document language.
 
 ```html:preview
-<p-calendar month-labels="short" day-labels="narrow" 
+<p-calendar month-labels="short" day-labels="narrow"
   format="YYYY-MM-DD"
 >
 </p-calendar>

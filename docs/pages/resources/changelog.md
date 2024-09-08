@@ -12,6 +12,10 @@ Components with the <p-badge variant="warning" pill>Experimental</p-badge> badge
 
 New versions of Pure UI are released as-needed and generally occur when a critical mass of changes have accumulated. At any time, you can see what's coming in the next release by visiting [next.pureui.xyz](https://next.pureui.xyz).
 
+## 1.2.0
+
+- Calendar support formatter & parser Date Object from input string
+
 ## 1.1.32
 
 - Add upload file component
