@@ -771,6 +771,7 @@ export default class PSelect extends PureElement implements PureFormControl {
 
     // Select only the options that match the new value
     this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
+    this.emit("p-change");
   }
 
   @watch("open", { waitUntilFirstUpdate: true })

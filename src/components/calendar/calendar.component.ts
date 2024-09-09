@@ -206,6 +206,12 @@ export default class PCalendar extends PureElement implements PureFormControl {
    */
   @property({ type: Array }) _value: Date | Date[] = [];
 
+  static get properties() {
+    return {
+      value: { type: Object },
+    };
+  }
+
   public get value(): string | Date | (string | Date)[] {
     if (Array.isArray(this._value)) {
       return this._value.map(v => {
@@ -238,6 +244,8 @@ export default class PCalendar extends PureElement implements PureFormControl {
         this._value = value;
       }
     }
+    this.setSelectedOptions(Array.isArray(this._value) ? this._value : [this._value]);
+    this.emit("p-change");
   }
 
   /** The default value of the form control. Primarily used for resetting the form control. */
