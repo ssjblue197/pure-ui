@@ -245,7 +245,6 @@ export default class PCalendar extends PureElement implements PureFormControl {
       }
     }
     this.setSelectedOptions(Array.isArray(this._value) ? this._value : [this._value]);
-    this.emit("p-change");
   }
 
   /** The default value of the form control. Primarily used for resetting the form control. */

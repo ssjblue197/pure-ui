@@ -163,6 +163,7 @@ export default class PSelect extends PureElement implements PureFormControl {
       fromAttribute: (value: string) => value.split(" "),
       toAttribute: (value: string[]) => value.join(" "),
     },
+    reflec: true,
   })
   value: string | string[] = "";
 
@@ -712,9 +713,11 @@ export default class PSelect extends PureElement implements PureFormControl {
     if (this.multiple) {
       this.value = this.selectedOptions.map(el => el.value);
       this.placeholder = this.localize.term("numOptionsSelected", this.selectedOptions.length);
+      this.displayLabel = " ";
     } else {
       this.value = this.selectedOptions[0]?.value ?? "";
       this.placeholder = this.selectedOptions[0]?.getTextLabel() ?? "";
+      this.displayLabel = this.selectedOptions[0]?.getTextLabel() ?? "";
     }
 
     // Update validity
@@ -769,9 +772,7 @@ export default class PSelect extends PureElement implements PureFormControl {
     const allOptions = this.getAllOptions();
     const value = Array.isArray(this.value) ? this.value : [this.value];
 
-    // Select only the options that match the new value
     this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
-    this.emit("p-change");
   }
 
   @watch("open", { waitUntilFirstUpdate: true })
