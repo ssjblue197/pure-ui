@@ -163,7 +163,6 @@ export default class PSelect extends PureElement implements PureFormControl {
       fromAttribute: (value: string) => value.split(" "),
       toAttribute: (value: string[]) => value.join(" "),
     },
-    reflect: true,
   })
   value: string | string[] = "";
 
@@ -326,7 +325,7 @@ export default class PSelect extends PureElement implements PureFormControl {
     if (!this.multiple) {
       this.displayLabel = this.selectedOptions.map(option => option.getTextLabel()).join(", ");
     } else {
-      this.displayLabel = " ";
+      this.displayLabel = "";
     }
     this.emit("p-blur");
   }
@@ -712,8 +711,8 @@ export default class PSelect extends PureElement implements PureFormControl {
     // Update the value and display label
     if (this.multiple) {
       this.value = this.selectedOptions.map(el => el.value);
-      this.placeholder = this.localize.term("numOptionsSelected", this.selectedOptions.length);
-      this.displayLabel = " ";
+      // this.placeholder = this.localize.term("numOptionsSelected", this.selectedOptions.length);
+      this.displayLabel = this.placeholder;
     } else {
       this.value = this.selectedOptions[0]?.value ?? "";
       this.placeholder = this.selectedOptions[0]?.getTextLabel() ?? "";
@@ -809,11 +808,11 @@ export default class PSelect extends PureElement implements PureFormControl {
       if (this.showSearch) {
         if (this.selectedOptions.length > 0) {
           // When no items are selected, keep the value empty so the placeholder shows old value
-          if (this.multiple) {
-            this.placeholder = this.localize.term("numOptionsSelected", this.selectedOptions.length);
-          } else {
-            this.placeholder = this.selectedOptions[0].getTextLabel();
-          }
+          // if (this.multiple) {
+          //   this.placeholder = this.localize.term("numOptionsSelected", this.selectedOptions.length);
+          // } else {
+          //   this.placeholder = this.selectedOptions[0].getTextLabel();
+          // }
         }
         this.displayLabel = "";
         this.keyword = "";

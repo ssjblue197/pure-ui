@@ -14,6 +14,7 @@ export default css`
     display: inline-block;
     color: var(--p-input-label-color);
     margin-bottom: var(--p-spacing-3x-small);
+    font-weight: var(--p-font-weight-medium);
   }
 
   .form-control--has-label.form-control--small .form-control__label {

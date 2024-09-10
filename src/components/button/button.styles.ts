@@ -10,13 +10,13 @@ export default css`
 
   .button {
     display: inline-flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
     width: 100%;
     border-style: solid;
     border-width: var(--p-input-border-width);
     font-family: var(--p-input-font-family);
-    font-weight: var(--p-font-weight-normal);
+    font-weight: var(--p-font-weight-medium);
     text-decoration: none;
     user-select: none;
     -webkit-user-select: none;
