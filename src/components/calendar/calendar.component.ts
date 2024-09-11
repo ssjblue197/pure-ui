@@ -860,7 +860,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
         if (this.selectedOptions.length === 1) {
           this.keyword = `${this.format ? dateFormatter().from(this.selectedOptions[0], this.format) : getDateLabelWithFormat(this.selectedOptions[0])} - `;
         } else if (this.selectedOptions.length === 2) {
-          this.selectedOptions = this.selectedOptions.sort((a, b) => a.getTime() - b.getTime());
+          this.selectedOptions.sort((a, b) => a.getTime() - b.getTime());
           this.keyword = this.format
             ? `${dateFormatter().from(this.selectedOptions[0], this.format)} - ${dateFormatter().from(this.selectedOptions[1], this.format)}`
             : `${getDateLabelWithFormat(this.selectedOptions[0])} - ${getDateLabelWithFormat(this.selectedOptions[1])}`;
