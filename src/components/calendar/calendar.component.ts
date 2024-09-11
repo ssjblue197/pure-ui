@@ -775,7 +775,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
             this.temporalEndDate = undefined;
             this._value = [day.date];
           } else if (this._value.length === 1) {
-            this._value = this._value[0] >= day.date ? [day.date, this._value[0]] : [this._value[0], day.date];
+            this._value = [this._value[0], day.date].sort((a, b) => a.getTime() - b.getTime());
             this.temporalEndDate = undefined;
             if (this.closeOnSelect) {
               this.hide();
@@ -801,7 +801,9 @@ export default class PCalendar extends PureElement implements PureFormControl {
       // Emit after updating
       this.updateComplete.then(() => {
         this.emit("p-input");
-        this.emit("p-change");
+        if (this.type !== "range" || (Array.isArray(this._value) && this._value.length === 2)) {
+          this.emit("p-change");
+        }
       });
     }
   }
