@@ -6,8 +6,8 @@ layout: component
 ---
 
 ```html:preview
-<p-calendar type="range" class="calendar-preview"
-  format="YYYY-MM-DD"
+<p-calendar type="range" interface="month" class="calendar-preview"
+  format="YYYY-MM"
 >
   <div slot="footer"></div>
 </p-calendar>
@@ -18,8 +18,8 @@ layout: component
   const today = new Date();
 
   calendar.value = [
-    '2024-09-09',
-    '2024-10-09',
+    '2024-09',
+    '2024-10',
   ];
 
 

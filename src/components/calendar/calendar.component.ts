@@ -1121,11 +1121,11 @@ export default class PCalendar extends PureElement implements PureFormControl {
     event?.preventDefault();
   }
 
-  @watch("month")
-  @watch("year")
-  handleMonthChange() {
-    this.emit("p-change");
-  }
+  // @watch("month")
+  // @watch("year")
+  // handleMonthChange() {
+  //   this.emit("p-change");
+  // }
 
   render() {
     if (this.month < 1 || this.month > 12) {
