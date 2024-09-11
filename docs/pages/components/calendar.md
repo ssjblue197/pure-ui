@@ -22,6 +22,10 @@ layout: component
     '2024-10',
   ];
 
+  calendar.addEventListener('p-change', (e) => {
+    calendar.value = e.target.value;
+  })
+
 
 </script>
 ```

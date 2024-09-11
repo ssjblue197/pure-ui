@@ -750,7 +750,6 @@ export default class PCalendar extends PureElement implements PureFormControl {
   }
 
   private handleSelectDate(day: CalendarDay) {
-    const oldValue = structuredClone(this._value);
     switch (this.type) {
       case "single":
         this._value = day.date;
@@ -773,15 +772,17 @@ export default class PCalendar extends PureElement implements PureFormControl {
         if (Array.isArray(this._value)) {
           if (this._value.length === 2) {
             this.temporalEndDate = undefined;
-            this._value = [day.date];
+            this._value = [structuredClone(day.date)];
           } else if (this._value.length === 1) {
-            this._value = [this._value[0], day.date].sort((a, b) => a.getTime() - b.getTime());
+            this._value = [structuredClone(this._value[0]), structuredClone(day.date)].sort(
+              (a, b) => a.getTime() - b.getTime(),
+            );
             this.temporalEndDate = undefined;
             if (this.closeOnSelect) {
               this.hide();
             }
           } else {
-            this._value = [day.date];
+            this._value = [structuredClone(day.date)];
           }
           this.setSelectedOptions(this._value);
         }
@@ -795,17 +796,12 @@ export default class PCalendar extends PureElement implements PureFormControl {
       if (this.mode === "default") {
         this.displayInput.focus({ preventScroll: true });
       }
+      this.emit("p-input");
+      if (this.type !== "range" || (Array.isArray(this._value) && this._value.length === 2)) {
+        this.emit("p-change");
+      }
+      this.requestUpdate();
     });
-
-    if (this._value !== oldValue) {
-      // Emit after updating
-      this.updateComplete.then(() => {
-        this.emit("p-input");
-        if (this.type !== "range" || (Array.isArray(this._value) && this._value.length === 2)) {
-          this.emit("p-change");
-        }
-      });
-    }
   }
 
   private handleTagRemove(event: PRemoveEvent, option: Date) {
