@@ -814,7 +814,6 @@ export default class PSelect extends PureElement implements PureFormControl {
           //   this.placeholder = this.selectedOptions[0].getTextLabel();
           // }
         }
-        this.displayLabel = "";
         this.keyword = "";
         this.displayInput.focus({ preventScroll: true });
       }

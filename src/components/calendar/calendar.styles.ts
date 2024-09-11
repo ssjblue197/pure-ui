@@ -34,18 +34,33 @@ export default css`
     height: 2rem !important;
   }
 
+  .calendar__header-button.calendar__header-button--disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+
+  .calendar__header-button.calendar__header-button--hidden {
+    display: none;
+  }
+
   .calendar__label {
     flex: 1 1 auto;
     text-align: center;
     font-weight: var(--p-font-weight-medium);
   }
 
+  .calendar__months,
   .calendar__days {
     isolation: isolate;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
   }
 
+  .calendar__months {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .calendar__month,
   .calendar__day {
     position: relative;
     display: flex;
@@ -64,16 +79,18 @@ export default css`
     cursor: pointer;
   }
 
+  .calendar__month--empty,
   .calendar__day--empty {
     cursor: default;
     background-color: var(--p-color-neutral-50);
   }
 
+  .calendar__month:not(.calendar__month--empty):not([part~="month-selected"]):hover,
   .calendar__day:not(.calendar__day--empty):not([part~="day-selected"]):hover {
     background-color: var(--p-color-primary-200);
     color: var(--p-color-neutral-900);
   }
-
+  .calendar__month:not(.calendar__month--empty):active,
   .calendar__day:not(.calendar__day--empty):active {
     background-color: var(--p-color-primary-300);
   }
@@ -92,28 +109,32 @@ export default css`
   .calendar__day:nth-child(1) {
     border-top-left-radius: 0;
   }
-
   .calendar__day:nth-child(7) {
     border-top-right-radius: 0;
   }
-
+  .calendar__month:nth-last-child(1),
   .calendar__day:nth-last-child(1) {
     border-bottom-right-radius: 0;
   }
-
+  .calendar__month:nth-last-child(4),
   .calendar__day:nth-last-child(7) {
     border-bottom-left-radius: 0;
   }
 
+  .calendar.calendar--has-footer .calendar__month:nth-last-child(1),
+  .calendar__month:nth-last-child(4),
   .calendar.calendar--has-footer .calendar__day:nth-last-child(1),
   .calendar__day:nth-last-child(7) {
     border-radius: 0;
   }
-
+  .calendar__month:not(:nth-child(4n)),
   .calendar__day:not(:nth-child(7n)) {
     border-right: none;
   }
-
+  .calendar__month:nth-last-child(1),
+  .calendar__month:nth-last-child(2),
+  .calendar__month:nth-last-child(3),
+  .calendar__month:nth-last-child(4),
   .calendar__day:nth-last-child(1),
   .calendar__day:nth-last-child(2),
   .calendar__day:nth-last-child(3),
@@ -149,22 +170,23 @@ export default css`
     color: var(--p-color-green-600);
     background-color: var(--p-color-green-200);
   }
-
+  .calendar__month[part~="month-selected-in-range"],
   .calendar__day[part~="day-selected-in-range"] {
     background-color: var(--p-color-primary-300);
   }
-
+  .calendar__month[part~="month-selected"],
   .calendar__day[part~="day-selected"] {
     background-color: var(--p-color-primary-600);
     color: var(--p-color-neutral-0) !important;
   }
 
+  .calendar__month[part~="month-selection-start"],
   .calendar__day[part~="day-selection-start"] {
     background-color: var(--p-color-primary-600) !important;
     color: var(--p-color-neutral-0) !important;
     font-weight: var(--p-font-weight-medium) !important;
   }
-
+  .calendar__month[part~="month-selection-end"],
   .calendar__day[part~="day-selection-end"] {
     background-color: var(--p-color-primary-600) !important;
     color: var(--p-color-neutral-0) !important;
@@ -189,6 +211,7 @@ export default css`
 
   @media (min-width: 768px) {
     /* CSS styles for tablet devices */
+    .calendar__month[part~="month-current-focus"]:not([part~="month-selected"]),
     .calendar__day[part~="day-current-focus"]:not([part~="day-selected"]) {
       background-color: var(--p-color-rose-100);
     }

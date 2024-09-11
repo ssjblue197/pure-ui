@@ -8,6 +8,7 @@ import {
   getAllDayNames,
   getDateDifferentFrom,
   getDateLabelWithFormat,
+  getMonthDifferentFrom,
   getMonthName,
   isSameDay,
 } from "../../internal/calendar.js";
@@ -30,7 +31,7 @@ import PPopup from "../popup/popup.component.js";
 import PTag from "../tag/tag.component.js";
 import PureElement from "../../internal/pure-ui-element.js";
 import styles from "./calendar.styles.js";
-import type { CalendarDay } from "../../internal/calendar.js";
+import type { CalendarDay, CalendarInterface } from "../../internal/calendar.js";
 import type { CSSResultGroup, TemplateResult } from "lit";
 import type { PRemoveEvent } from "../../events/p-remove.js";
 import type { PureFormControl } from "../../internal/pure-ui-element.js";
@@ -366,6 +367,18 @@ export default class PCalendar extends PureElement implements PureFormControl {
   @property({ reflect: true }) type: "single" | "multiple" | "range" = "single";
 
   /**
+   * The interface of the calendar.
+   * - "day": a regular calendar for selecting day according to Calendar type .
+   * - "month": a calendar for selecting a month and year according to Calendar type .
+   * - "year": a calendar for selecting a year according to Calendar type .
+   *
+   * @attribute interface
+   * @type {"day" | "month" | "year"}
+   * @default "day"
+   */
+  @property({ reflect: true }) interface: CalendarInterface = "day";
+
+  /**
    * If `true`, the calendar will automatically receive focus when it open.
    * This can be useful when using the calendar in a dialog or other scenario where it should
    * receive focus without requiring the user to click on it.
@@ -552,20 +565,22 @@ export default class PCalendar extends PureElement implements PureFormControl {
       }
 
       if (this.keyword) {
-        const isValid = dateFormatter().isValid(this.keyword, this.format);
-        if (!isValid) {
-          return;
-        } else {
-          this.handleSelectDate({
-            date: dateFormatter().to(this.keyword, this.format),
-            isToday: false,
-            isWeekday: false,
-            isWeekend: false,
-            isCurrentMonth: false,
-            isPreviousMonth: false,
-            isNextMonth: false,
-          });
-          return;
+        if (this.type !== "range" || (Array.isArray(this._value) && this._value.length === 0)) {
+          const isValid = dateFormatter().isValid(this.keyword, this.format);
+          if (!isValid) {
+            return;
+          } else {
+            this.handleSelectDate({
+              date: dateFormatter().to(this.keyword, this.format),
+              isToday: false,
+              isWeekday: false,
+              isWeekend: false,
+              isCurrentMonth: false,
+              isPreviousMonth: false,
+              isNextMonth: false,
+            });
+            return;
+          }
         }
       }
 
@@ -595,17 +610,33 @@ export default class PCalendar extends PureElement implements PureFormControl {
         let newCurrentOption = undefined;
         switch (event.key) {
           case "ArrowUp":
-            newCurrentOption = getDateDifferentFrom(this.currentOption, -7);
+            if (this.interface === "day") {
+              newCurrentOption = getDateDifferentFrom(this.currentOption, -7);
+            } else if (this.interface === "month") {
+              newCurrentOption = getMonthDifferentFrom(this.currentOption, -4);
+            }
             break;
           case "ArrowDown":
-            newCurrentOption = getDateDifferentFrom(this.currentOption, 7);
+            if (this.interface === "day") {
+              newCurrentOption = getDateDifferentFrom(this.currentOption, 7);
+            } else if (this.interface === "month") {
+              newCurrentOption = getMonthDifferentFrom(this.currentOption, 4);
+            }
             break;
           case "ArrowLeft":
-            newCurrentOption = getDateDifferentFrom(this.currentOption, -1);
+            if (this.interface === "day") {
+              newCurrentOption = getDateDifferentFrom(this.currentOption, -1);
+            } else if (this.interface === "month") {
+              newCurrentOption = getMonthDifferentFrom(this.currentOption, -1);
+            }
             break;
           case "ArrowRight":
           case "Tab":
-            newCurrentOption = getDateDifferentFrom(this.currentOption, 1);
+            if (this.interface === "day") {
+              newCurrentOption = getDateDifferentFrom(this.currentOption, 1);
+            } else if (this.interface === "month") {
+              newCurrentOption = getMonthDifferentFrom(this.currentOption, 1);
+            }
             break;
           default:
             break;
@@ -790,7 +821,11 @@ export default class PCalendar extends PureElement implements PureFormControl {
 
   // Gets an array of all <p-option> elements
   private getAllOptions() {
-    return [...generateCalendarGrid(this.year, this.month)];
+    return [
+      ...generateCalendarGrid(this.year, this.month, {
+        interface: this.interface,
+      }),
+    ];
   }
 
   // Sets the current option, which is the option the user is currently interacting with (e.g. via keyboard). Only one
@@ -1099,8 +1134,12 @@ export default class PCalendar extends PureElement implements PureFormControl {
 
     const lang = this.lang || document.documentElement.lang;
     const month = new Date(this.year, this.month - 1, 1);
-    const dayGrid = generateCalendarGrid(this.year, this.month);
+    const calendarGrid = generateCalendarGrid(this.year, this.month, {
+      interface: this.interface,
+    });
     const dayNames = getAllDayNames(lang, this.dayLabels);
+
+    const hasNavigateMonth = ["day"].includes(this.interface);
 
     const hasLabelSlot = this.hasSlotController.test("label");
     const hasHelpTextSlot = this.hasSlotController.test("help-text");
@@ -1149,6 +1188,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
             class=${classMap({
               "calendar__header-button": true,
               "calendar__header-button--disabled": this.disabled,
+              "calendar__header-button--hidden": !hasNavigateMonth,
             })}
           >
             <p-icon-button name="chevron-left" label=${this.localize.term("previousMonth")}></p-icon-button>
@@ -1157,7 +1197,9 @@ export default class PCalendar extends PureElement implements PureFormControl {
           <slot name="header-prefix"></slot>
 
           <span class="calendar__label">
-            <span class="calendar__month-label">${getMonthName(month, lang, this.monthLabels)}</span>
+            <span class="calendar__month-label"
+              >${hasNavigateMonth ? getMonthName(month, lang, this.monthLabels) : ""}</span
+            >
             <span class="calendar__year-label">${month.getFullYear()}</span>
           </span>
 
@@ -1170,6 +1212,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
             class=${classMap({
               "calendar__header-button": true,
               "calendar__header-button--disabled": this.disabled,
+              "calendar__header-button--hidden": !hasNavigateMonth,
             })}
           >
             <p-icon-button name="chevron-right" label=${this.localize.term("nextMonth")}></p-icon-button>
@@ -1187,86 +1230,148 @@ export default class PCalendar extends PureElement implements PureFormControl {
           </p-button>
         </header>
 
-        <div class="calendar__days">
-          ${[0, 1, 2, 3, 4, 5, 6].map(day => {
-            return html`
-              <span
-                part=${partMap({
-                  day: true,
-                  "day-label": true,
-                  "day-weekday": day > 0 && day < 6,
-                  "day-weekend": day === 0 || day === 6,
-                })}
-                class="calendar__day"
-              >
-                ${dayNames[day]}
-              </span>
-            `;
-          })}
-          ${dayGrid.map(day => {
-            if (day.isCurrentMonth || this.showAdjacentDates) {
-              let isSelected = false;
-              let isSelectionStart = false;
-              let isSelectionEnd = false;
-              let isSelectedInRange = false;
-              const isCurrentSelect = this.currentOption ? isSameDay(this.currentOption, day.date) : false;
-              switch (this.type) {
-                case "single":
-                  isSelected = this._value && !Array.isArray(this._value) && isSameDay(this._value, day.date);
-                  break;
-                case "multiple":
-                  isSelected = Array.isArray(this._value) ? this._value.some(d => isSameDay(d, day.date)) : false;
-                  break;
-                case "range":
-                  if (Array.isArray(this._value) && this._value.length > 0) {
-                    isSelected = this._value.some(d => isSameDay(d, day.date));
-                    if (this._value.length === 2) {
-                      isSelectedInRange = day.date > this._value[0] && day.date < this._value[1];
-                    }
-                    if (this._value.length === 1) {
-                      isSelectedInRange = this.temporalEndDate
-                        ? (day.date > this._value[0] && day.date < this.temporalEndDate) ||
-                          (day.date < this._value[0] && day.date > this.temporalEndDate)
-                        : false;
-                    }
+        ${this.interface === "day"
+          ? html`<div class="calendar__days">
+              ${[0, 1, 2, 3, 4, 5, 6].map(day => {
+                return html`
+                  <span
+                    part=${partMap({
+                      day: true,
+                      "day-label": true,
+                      "day-weekday": day > 0 && day < 6,
+                      "day-weekend": day === 0 || day === 6,
+                    })}
+                    class="calendar__day"
+                  >
+                    ${dayNames[day]}
+                  </span>
+                `;
+              })}
+              ${calendarGrid.map(day => {
+                if (day.isCurrentMonth || this.showAdjacentDates) {
+                  let isSelected = false;
+                  let isSelectionStart = false;
+                  let isSelectionEnd = false;
+                  let isSelectedInRange = false;
+                  const isCurrentSelect = this.currentOption ? isSameDay(this.currentOption, day.date) : false;
+                  switch (this.type) {
+                    case "single":
+                      isSelected = this._value && !Array.isArray(this._value) && isSameDay(this._value, day.date);
+                      break;
+                    case "multiple":
+                      isSelected = Array.isArray(this._value) ? this._value.some(d => isSameDay(d, day.date)) : false;
+                      break;
+                    case "range":
+                      if (Array.isArray(this._value) && this._value.length > 0) {
+                        isSelected = this._value.some(d => isSameDay(d, day.date));
+                        if (this._value.length === 2) {
+                          isSelectedInRange = day.date > this._value[0] && day.date < this._value[1];
+                        }
+                        if (this._value.length === 1) {
+                          isSelectedInRange = this.temporalEndDate
+                            ? (day.date > this._value[0] && day.date < this.temporalEndDate) ||
+                              (day.date < this._value[0] && day.date > this.temporalEndDate)
+                            : false;
+                        }
 
-                    isSelectionStart = isSameDay(this._value[0], day.date);
-                    isSelectionEnd = isSameDay(this._value[this._value.length - 1], day.date);
+                        isSelectionStart = isSameDay(this._value[0], day.date);
+                        isSelectionEnd = isSameDay(this._value[this._value.length - 1], day.date);
+                      }
+                      break;
+                    default:
+                      break;
                   }
-                  break;
-                default:
-                  break;
-              }
 
-              return html`
-                <button
-                  type="button"
-                  part=${partMap({
-                    day: true,
-                    "day-current-focus": isCurrentSelect,
-                    "day-current-month": day.isCurrentMonth,
-                    "day-previous-month": day.isPreviousMonth,
-                    "day-next-month": day.isNextMonth,
-                    "day-today": day.isToday,
-                    "day-weekday": day.isWeekday,
-                    "day-weekend": day.isWeekend,
-                    "day-selected": isSelected,
-                    "day-selected-in-range": isSelectedInRange,
-                    "day-selection-start": isSelectionStart,
-                    "day-selection-end": isSelectionEnd,
-                  })}
-                  class="calendar__day"
-                  @mouseup=${() => this.handleSelectDate(day)}
-                  @mouseenter=${() => this.handleSetTemporaryEndDate(day)}
-                >
-                  ${day.date.getDate()}
-                </button>
-              `;
-            }
+                  return html`
+                    <button
+                      type="button"
+                      part=${partMap({
+                        day: true,
+                        "day-current-focus": isCurrentSelect,
+                        "day-current-month": day.isCurrentMonth,
+                        "day-previous-month": day.isPreviousMonth,
+                        "day-next-month": day.isNextMonth,
+                        "day-today": day.isToday,
+                        "day-weekday": day.isWeekday,
+                        "day-weekend": day.isWeekend,
+                        "day-selected": isSelected,
+                        "day-selected-in-range": isSelectedInRange,
+                        "day-selection-start": isSelectionStart,
+                        "day-selection-end": isSelectionEnd,
+                      })}
+                      class="calendar__day"
+                      @mouseup=${() => this.handleSelectDate(day)}
+                      @mouseenter=${() => this.handleSetTemporaryEndDate(day)}
+                    >
+                      ${day.date.getDate()}
+                    </button>
+                  `;
+                }
 
-            return html` <div class="calendar__day calendar__day--empty"></div> `;
-          })}
-        </div>
+                return html` <div class="calendar__day calendar__day--empty"></div> `;
+              })}
+            </div>`
+          : null}
+        ${this.interface === "month"
+          ? html`<div class="calendar__months">
+              ${calendarGrid.map((monthItem: CalendarDay) => {
+                let isSelected = false;
+                let isSelectionStart = false;
+                let isSelectionEnd = false;
+                let isSelectedInRange = false;
+                const isCurrentSelect = this.currentOption ? isSameDay(this.currentOption, monthItem.date) : false;
+                switch (this.type) {
+                  case "single":
+                    isSelected = this._value && !Array.isArray(this._value) && isSameDay(this._value, monthItem.date);
+                    break;
+                  case "multiple":
+                    isSelected = Array.isArray(this._value)
+                      ? this._value.some(d => isSameDay(d, monthItem.date))
+                      : false;
+                    break;
+                  case "range":
+                    if (Array.isArray(this._value) && this._value.length > 0) {
+                      isSelected = this._value.some(d => isSameDay(d, monthItem.date));
+                      if (this._value.length === 2) {
+                        isSelectedInRange = monthItem.date > this._value[0] && monthItem.date < this._value[1];
+                      }
+                      if (this._value.length === 1) {
+                        isSelectedInRange = this.temporalEndDate
+                          ? (monthItem.date > this._value[0] && monthItem.date < this.temporalEndDate) ||
+                            (monthItem.date < this._value[0] && monthItem.date > this.temporalEndDate)
+                          : false;
+                      }
+
+                      isSelectionStart = isSameDay(this._value[0], monthItem.date);
+                      isSelectionEnd = isSameDay(this._value[this._value.length - 1], monthItem.date);
+                    }
+                    break;
+                  default:
+                    break;
+                }
+
+                return html`
+                  <button
+                    type="button"
+                    part=${partMap({
+                      month: true,
+                      "month-current": monthItem.isCurrentMonth,
+                      "month-current-focus": isCurrentSelect,
+                      "month-selected": isSelected,
+                      "month-selected-in-range": isSelectedInRange,
+                      "month-selection-start": isSelectionStart,
+                      "month-selection-end": isSelectionEnd,
+                    })}
+                    class="calendar__month"
+                    @mouseup=${() => this.handleSelectDate(monthItem)}
+                    @mouseenter=${() => this.handleSetTemporaryEndDate(monthItem)}
+                  >
+                    ${getMonthName(monthItem.date, lang, this.monthLabels)}
+                  </button>
+                `;
+              })}
+            </div>`
+          : null}
 
         <footer class="calendar__footer">
           ${this.showToday

@@ -85,6 +85,35 @@ One or more dates can be selected by setting the `value` property. An array of d
 </script>
 ```
 
+### Calendar interface
+
+The calendar component will render different grid based on the value of the `interface` attribute, which can be set to `"day"`, `"month"`. The default interface is `"day"`.
+
+When the interface is `"day"`, the calendar renders a grid of days in the month. The grid has seven columns (for each day of the week) and as many rows as necessary to display the days of the month. The days are displayed in a 7xN grid, with the current day highlighted.
+
+When the interface is `"month"`, the calendar renders a grid of months in the year. The grid has 4 columns and as many rows as necessary to display the months of the year. The months are displayed in a 4xN grid, with the current month highlighted.
+
+```html:preview
+<p-calendar type="range" class="calendar-preview"
+  format="YYYY-MM-DD"
+>
+  <div slot="footer"></div>
+</p-calendar>
+
+<script>
+
+  const calendar = document.querySelector('.calendar-preview');
+  const today = new Date();
+
+  calendar.value = [
+    '2024-09-08',
+    '2024-09-10',
+  ];
+
+
+</script>
+```
+
 ### Mode Display
 
 The `mode` property determines how the calendar is displayed. When set to `inline`, the calendar is displayed inline with the rest of the content, rather than in a popup (default).

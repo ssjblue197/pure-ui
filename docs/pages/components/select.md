@@ -48,6 +48,11 @@ Use the `label` attribute to give the select an accessible label. For labels tha
   <p-option value="option-2">Option 2</p-option>
   <p-option value="option-3">Option 3</p-option>
 </p-select>
+
+<script>
+  const  select = document.querySelector(.select)
+
+</script>
 ```
 
 ```jsx:react
