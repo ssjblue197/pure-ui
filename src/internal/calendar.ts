@@ -1,3 +1,7 @@
+import dateFormatter from "pure-date-format";
+
+const dateFormat = dateFormatter();
+
 export interface CalendarDay {
   date: Date;
   isToday: boolean;
@@ -8,8 +12,11 @@ export interface CalendarDay {
   isNextMonth: boolean;
 }
 
+export type CalendarInterface = "day" | "month" | "year";
+
 export interface CalendarGridOptions {
   weekStartsWith: "sunday" | "monday";
+  interface: CalendarInterface;
 }
 
 /** Generates a calendar grid. Month should be 1-12, not 0-11. */
@@ -20,73 +27,93 @@ export function generateCalendarGrid(year: number, month: number, options?: Part
   const lastDayOfMonth = new Date(year, month, 0).getDate();
   const lastDayOfPreviousMonth =
     month === 1 ? new Date(year - 1, 1, 0).getDate() : new Date(year, month - 1, 0).getDate();
-  const dayGrid: CalendarDay[] = [];
+  const calendarGrid: CalendarDay[] = [];
   let day = 1;
 
-  do {
-    const date = new Date(year, month - 1, day);
-    let dayOfWeek = new Date(year, month - 1, day).getDay();
+  switch (options?.interface) {
+    case "day":
+      do {
+        const date = new Date(year, month - 1, day);
+        let dayOfWeek = new Date(year, month - 1, day).getDay();
 
-    if (weekStartsWith === "sunday") {
-      //
-      // TODO
-      //
-    }
+        if (weekStartsWith === "sunday") {
+          //
+          // TODO
+          //
+        }
 
-    // Days in the previous month
-    if (day === 1) {
-      let lastMonthDay = lastDayOfPreviousMonth - dayThisMonthStartsWith + 1;
-      for (let i = 0; i < dayThisMonthStartsWith; i++) {
-        const dayOfLastMonth = new Date(year, month - 2, lastMonthDay);
+        // Days in the previous month
+        if (day === 1) {
+          let lastMonthDay = lastDayOfPreviousMonth - dayThisMonthStartsWith + 1;
 
-        dayGrid.push({
-          date: dayOfLastMonth,
-          isToday: isSameDay(dayOfLastMonth, today),
-          isWeekday: isWeekday(dayOfLastMonth),
-          isWeekend: isWeekend(dayOfLastMonth),
-          isCurrentMonth: false,
-          isPreviousMonth: true,
+          for (let i = 0; i < dayThisMonthStartsWith; i++) {
+            const dayOfLastMonth = new Date(year, month - 2, lastMonthDay);
+
+            calendarGrid.push({
+              date: dayOfLastMonth,
+              isToday: isSameDay(dayOfLastMonth, today),
+              isWeekday: isWeekday(dayOfLastMonth),
+              isWeekend: isWeekend(dayOfLastMonth),
+              isCurrentMonth: false,
+              isPreviousMonth: true,
+              isNextMonth: false,
+            });
+
+            lastMonthDay++;
+          }
+        }
+
+        calendarGrid.push({
+          date,
+          isToday: isSameDay(date, today),
+          isWeekday: isWeekday(date),
+          isWeekend: isWeekend(date),
+          isCurrentMonth: true,
+          isPreviousMonth: false,
           isNextMonth: false,
         });
 
-        lastMonthDay++;
-      }
-    }
+        // Days in the next month
+        if (day === lastDayOfMonth) {
+          let nextMonthDay = 1;
+          for (dayOfWeek; dayOfWeek < 6; dayOfWeek++) {
+            const dayOfNextMonth = new Date(year, month, nextMonthDay);
 
-    dayGrid.push({
-      date,
-      isToday: isSameDay(date, today),
-      isWeekday: isWeekday(date),
-      isWeekend: isWeekend(date),
-      isCurrentMonth: true,
-      isPreviousMonth: false,
-      isNextMonth: false,
-    });
+            calendarGrid.push({
+              date: dayOfNextMonth,
+              isToday: isSameDay(dayOfNextMonth, today),
+              isWeekday: isWeekday(dayOfNextMonth),
+              isWeekend: isWeekend(dayOfNextMonth),
+              isCurrentMonth: false,
+              isPreviousMonth: false,
+              isNextMonth: true,
+            });
 
-    // Days in the next month
-    if (day === lastDayOfMonth) {
-      let nextMonthDay = 1;
-      for (dayOfWeek; dayOfWeek < 6; dayOfWeek++) {
-        const dayOfNextMonth = new Date(year, month, nextMonthDay);
+            nextMonthDay++;
+          }
+        }
 
-        dayGrid.push({
-          date: dayOfNextMonth,
-          isToday: isSameDay(dayOfNextMonth, today),
-          isWeekday: isWeekday(dayOfNextMonth),
-          isWeekend: isWeekend(dayOfNextMonth),
-          isCurrentMonth: false,
+        day++;
+      } while (day <= lastDayOfMonth);
+      break;
+    case "month":
+      Array.from({ length: 12 }).map((_: number, idx: number) => {
+        return calendarGrid.push({
+          date: new Date(year, idx, 1),
+          isToday: false,
+          isWeekday: false,
+          isWeekend: false,
+          isCurrentMonth: idx === month - 1,
           isPreviousMonth: false,
-          isNextMonth: true,
+          isNextMonth: false,
         });
+      });
+      break;
+    default:
+      break;
+  }
 
-        nextMonthDay++;
-      }
-    }
-
-    day++;
-  } while (day <= lastDayOfMonth);
-
-  return dayGrid;
+  return calendarGrid;
 }
 
 /** Generates a localized array of day names. */
@@ -152,4 +179,8 @@ export function getDateLabelWithFormat(date: Date, locale = "en-GB", format?: In
 
 export function getDateDifferentFrom(date: Date, days: number) {
   return new Date(date.getTime() + days * 24 * 60 * 60 * 1000);
+}
+
+export function getMonthDifferentFrom(date: Date, months: number) {
+  return dateFormat.add(date, months, "months");
 }

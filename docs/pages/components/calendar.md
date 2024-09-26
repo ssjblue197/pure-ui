@@ -6,8 +6,8 @@ layout: component
 ---
 
 ```html:preview
-<p-calendar type="range" class="calendar-preview"
-  format="YYYY-MM-DD"
+<p-calendar type="range" interface="month" class="calendar-preview"
+  format="YYYY-MM"
 >
   <div slot="footer"></div>
 </p-calendar>
@@ -18,9 +18,13 @@ layout: component
   const today = new Date();
 
   calendar.value = [
-    '2024-09-09',
-    '2024-09-12',
+    '2024-09',
+    '2024-10',
   ];
+
+  calendar.addEventListener('p-change', (e) => {
+    calendar.value = e.target.value;
+  })
 
 
 </script>
@@ -82,6 +86,35 @@ One or more dates can be selected by setting the `value` property. An array of d
     new Date(today.getFullYear(), today.getMonth(), 12),
     new Date(today.getFullYear(), today.getMonth(), 19)
   ];
+</script>
+```
+
+### Calendar interface
+
+The calendar component will render different grid based on the value of the `interface` attribute, which can be set to `"day"`, `"month"`. The default interface is `"day"`.
+
+When the interface is `"day"`, the calendar renders a grid of days in the month. The grid has seven columns (for each day of the week) and as many rows as necessary to display the days of the month. The days are displayed in a 7xN grid, with the current day highlighted.
+
+When the interface is `"month"`, the calendar renders a grid of months in the year. The grid has 4 columns and as many rows as necessary to display the months of the year. The months are displayed in a 4xN grid, with the current month highlighted.
+
+```html:preview
+<p-calendar type="range" interface="month" class="calendar-interface"
+  format="YYYY-MM"
+>
+  <div slot="footer"></div>
+</p-calendar>
+
+<script>
+
+  const calendar = document.querySelector('.calendar-interface');
+  const today = new Date();
+
+  calendar.value = [
+    '2024-09',
+    '2024-09',
+  ];
+
+
 </script>
 ```
 
