@@ -183,6 +183,8 @@ export default class PPaginate extends PureElement {
                     </p-button>
                   </p-dropdown>
                 `;
+              } else {
+                return html` <span>${page}</span> `;
               }
             } else {
               return html`
