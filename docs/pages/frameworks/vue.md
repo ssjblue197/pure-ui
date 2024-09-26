@@ -126,3 +126,10 @@ Here is an example:
   </div>
 </p-drawer>
 ```
+
+## Boilerplate
+
+To add Pure UI to your Vue 3 app quickly, you can use the [Pure UI Vue Boilerplate](https://github.com/ssjblue197/PureUI-Vue-Boilerplate), which has already been configured to work with Pure UI.
+:::tip
+Try out Boilerplate for Vue 3? [Pure UI Vue Boilerplate!](https://github.com/ssjblue197/PureUI-Vue-Boilerplate)
+:::

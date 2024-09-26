@@ -8,6 +8,7 @@ layout: component
 ```html:preview
 <p-table
   class="table-example"
+  limit="2"
 >
 
 </p-table>

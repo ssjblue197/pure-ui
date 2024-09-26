@@ -31,9 +31,11 @@ export interface Translation extends DefaultTranslation {
   dragDrop?: string;
   fileSizeExceeded?: string;
   fileTypeNotAccepted?: string;
+  firstPage?: string;
   error: string;
   goToSlide: (slide: number, count: number) => string;
   hidePassword: string;
+  lastPage?: string;
   loading: string;
   maxFiles?: string;
   noMultipleFiles?: string;

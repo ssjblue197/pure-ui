@@ -123,23 +123,85 @@ export default class PPaginate extends PureElement {
           ${this.localize.term("previousPage")}
         </p-button>
         <div class="paginate__items">
-          ${pages.map(
-            page => html`
-              <p-button
-                size=${this.size}
-                variant=${this.variant}
-                @click="${() => this.changePage(page)}"
-                ?disabled="${this.page === page || this.disabled}"
-                class=${classMap({
-                  page: true,
-                  "page--active": Number(this.page) === Number(page) && String(this.page) !== "...",
-                })}
-                ?circle=${this.pill}
-              >
-                ${page}
-              </p-button>
-            `,
-          )}
+          ${pages.map((page, pIdx) => {
+            if (page === "...") {
+              if (pIdx === 0) {
+                return html`
+                  <p-dropdown>
+                    <p-button
+                      slot="trigger"
+                      size=${this.size}
+                      variant=${this.variant}
+                      ?disabled="${this.disabled}"
+                      class=${classMap({
+                        page: true,
+                      })}
+                      ?circle=${this.pill}
+                    >
+                      ${page}
+                    </p-button>
+                    <p-button
+                      size=${this.size}
+                      variant=${this.variant}
+                      @click="${() => this.changePage(1)}"
+                      ?disabled="${this.disabled}"
+                      class=${classMap({
+                        page: true,
+                      })}
+                      ?circle=${this.pill}
+                    >
+                      ${this.localize.term("firstPage")}
+                    </p-button>
+                  </p-dropdown>
+                `;
+              } else if (pIdx === pages.length - 1) {
+                return html`
+                  <p-dropdown>
+                    <p-button
+                      slot="trigger"
+                      size=${this.size}
+                      variant=${this.variant}
+                      ?disabled="${this.disabled}"
+                      class=${classMap({
+                        page: true,
+                      })}
+                      ?circle=${this.pill}
+                    >
+                      ${page}
+                    </p-button>
+                    <p-button
+                      size=${this.size}
+                      variant=${this.variant}
+                      @click="${() => this.changePage(Math.ceil(this.total / this.limit))}"
+                      ?disabled="${this.disabled}"
+                      class=${classMap({
+                        page: true,
+                      })}
+                      ?circle=${this.pill}
+                    >
+                      ${this.localize.term("lastPage")}
+                    </p-button>
+                  </p-dropdown>
+                `;
+              }
+            } else {
+              return html`
+                <p-button
+                  size=${this.size}
+                  variant=${this.variant}
+                  @click="${() => this.changePage(page)}"
+                  ?disabled="${this.page === page || this.disabled}"
+                  class=${classMap({
+                    page: true,
+                    "page--active": Number(this.page) === Number(page) && String(this.page) !== "...",
+                  })}
+                  ?circle=${this.pill}
+                >
+                  ${page}
+                </p-button>
+              `;
+            }
+          })}
         </div>
         <p-button
           size=${this.size}
