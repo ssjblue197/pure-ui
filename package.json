@@ -151,5 +151,8 @@
     },
     "directories": {
         "doc": "docs"
+    },
+    "resolutions": {
+        "inquirer": "9.3.5"
     }
 }
