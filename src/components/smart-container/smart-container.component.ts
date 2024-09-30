@@ -124,12 +124,14 @@ export default class PSmartContainer extends PureElement {
     return html` <div class="smart-container" part="base">
       <slot></slot>
       <p-dropdown>
-        <p-button slot="trigger">
-          <slot name="icon">
+        <slot name="icon" slot="trigger">
+          <p-button>
             <p-icon name="funnel"></p-icon>
-          </slot>
-        </p-button>
-        <p-menu part="dropdown-menu" class="smart_container__dropdown-menu"></p-menu>
+          </p-button>
+        </slot>
+        <p-menu part="dropdown-menu">
+          <div class="smart_container__dropdown-menu"></div>
+        </p-menu>
       </p-dropdown>
     </div>`;
   }

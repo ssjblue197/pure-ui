@@ -12,7 +12,11 @@ export default css`
     flex-wrap: nowrap;
     gap: var(--p-spacing-x-small);
   }
-  .smart-container__dropdown-menu {
+  .smart_container__dropdown-menu {
     min-width: 200px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: var(--p-spacing-x-small);
+    padding: 0 var(--p-spacing-x-small);
   }
 `;
