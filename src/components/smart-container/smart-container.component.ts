@@ -1,5 +1,4 @@
 import { html } from "lit";
-// import { LocalizeController } from '../../utilities/localize.js';
 import { property, query } from "lit/decorators.js";
 import { watch } from "../../internal/watch.js";
 import componentStyles from "../../styles/component.styles.js";
@@ -18,20 +17,18 @@ import type { CSSResultGroup } from "lit";
  *
  * @dependency p-dropdown
  *
-//  * @event p-event-name - Emitted as an example.
- *
  * @slot - The default slot.
- * @slot example - An example slot.
+ * @slot icon - The icon slot.
  *
  * @csspart base - The component's base wrapper.
- *
- * @cssproperty --example - An example CSS custom property.
+ * @csspart dropdown-menu - The dropdown menu.
  */
 export default class PSmartContainer extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
 
   private resizeObserver: ResizeObserver;
   private observedElements: HTMLElement[] = [];
+  private overlapElements: number[] = [];
 
   static dependencies = {
     "p-dropdown": PDropdown,
@@ -39,14 +36,12 @@ export default class PSmartContainer extends PureElement {
     "p-button": PButton,
   };
 
-  // private readonly localize = new LocalizeController(this);
-
   /** An example attribute. */
   @property() attr = "example";
 
   @query(".smart-container") smartContainer: HTMLElement;
 
-  @query("smart_container__dropdown-menu") dropdownMenu: HTMLElement;
+  @query(".smart_container__dropdown-menu") dropdownMenu: HTMLElement;
 
   @watch("example")
   handleExampleChange() {
@@ -71,6 +66,12 @@ export default class PSmartContainer extends PureElement {
 
   protected firstUpdated(): void {
     // do something
+    const slot = this.shadowRoot?.querySelector("slot:not([name])");
+    const elements = (slot as HTMLSlotElement)?.assignedElements({ flatten: true }) as HTMLElement[];
+
+    elements.forEach((el: HTMLElement) => {
+      this.dropdownMenu?.appendChild(el.cloneNode(true));
+    });
     this.startObserver();
   }
 
@@ -78,45 +79,36 @@ export default class PSmartContainer extends PureElement {
     super.connectedCallback();
 
     this.resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
+      this.overlapElements = [];
       const slot = this.shadowRoot?.querySelector("slot:not([name])");
-      const dropdownMenu = this.shadowRoot?.querySelector(".smart_container__dropdown-menu");
-      const overlapElements: HTMLElement[] = [];
 
       if (!slot || !entries.length) return;
 
       const container = entries[0]?.contentRect;
       const elements = (slot as HTMLSlotElement)?.assignedElements({ flatten: true }) as HTMLElement[];
 
-      const lastElement = elements[elements.length - 1];
-
-      // Check existing dropdown elements
-      if (dropdownMenu) {
-        const dropdownElements = dropdownMenu.children as unknown as HTMLElement[];
-
-        // Move back elements from dropdown to main container if there's space
-        Array.from(dropdownElements).forEach((el: HTMLElement) => {
-          if (el.offsetWidth <= container.width - (lastElement.offsetLeft + lastElement.offsetWidth)) {
-            const cloneNode = el.cloneNode(true) as HTMLElement;
-            slot.appendChild(cloneNode); // Move it back to the slot
-            console.log("element moved back", slot);
-            el.remove();
-          }
-        });
-      }
+      elements.forEach((el: HTMLElement) => {
+        el.style.display = "block";
+      });
 
       // Handle overflow of slotted elements
-      elements.forEach((el: HTMLElement) => {
+      elements.forEach((el: HTMLElement, index: number) => {
         if (el.offsetLeft + el.offsetWidth > container.width) {
-          const cloneNode = el.cloneNode(true) as HTMLElement;
-          overlapElements.push(cloneNode);
-          el.remove();
+          this.overlapElements.push(index);
+          el.style.display = "none";
         }
       });
 
-      if (overlapElements.length > 0) {
-        overlapElements.forEach((el: HTMLElement) => {
-          dropdownMenu?.appendChild(el);
+      if (this.overlapElements.length > 0) {
+        Array.from(this.dropdownMenu.children).forEach((el: HTMLElement, index: number) => {
+          if (this.overlapElements.includes(index)) {
+            el.style.display = "block";
+          } else {
+            el.style.display = "none";
+          }
         });
+      } else {
+        this.dropdownMenu.style.display = "none";
       }
 
       this.requestUpdate();
@@ -129,7 +121,7 @@ export default class PSmartContainer extends PureElement {
   }
 
   render() {
-    return html`<div class="smart-container" part="base">
+    return html` <div class="smart-container" part="base">
       <slot></slot>
       <p-dropdown>
         <p-button slot="trigger">
@@ -137,7 +129,7 @@ export default class PSmartContainer extends PureElement {
             <p-icon name="funnel"></p-icon>
           </slot>
         </p-button>
-        <p-menu part="dropdown-menu" class="smart_container__dropdown-menu"> </p-menu>
+        <p-menu part="dropdown-menu" class="smart_container__dropdown-menu"></p-menu>
       </p-dropdown>
     </div>`;
   }
