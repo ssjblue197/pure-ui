@@ -24,14 +24,3 @@ layout: component
 </p-smart-container>
 ```
 
-## Examples
-
-### First Example
-
-TODO
-
-### Second Example
-
-TODO
-
-[component-metadata:p-smart-container]

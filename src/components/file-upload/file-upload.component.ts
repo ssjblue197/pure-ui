@@ -235,7 +235,7 @@ export default class PFileUpload extends PureElement implements PureFormControl 
   handleFileRemove(index: number) {
     const fileInfo = this.files[index];
     this.emit("p-remove", { detail: fileInfo });
-    this.files = this.files.filter((_, fileIndex) => fileIndex !== index);
+    this.files.splice(index, 1);
     this.emit("p-change", { detail: this.files });
   }
 
@@ -319,6 +319,7 @@ export default class PFileUpload extends PureElement implements PureFormControl 
                       progress=${ifDefined(fileInfo.progress)}
                       @p-hide=${(event: CustomEvent) => {
                         event.stopPropagation();
+                        event.preventDefault();
                         this.handleFileRemove(index);
                       }}
                     >
