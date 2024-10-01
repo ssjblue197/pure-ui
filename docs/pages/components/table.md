@@ -275,3 +275,164 @@ layout: component
 
 
 ```
+
+
+## TableOptions Interface
+
+The `TableOptions<T>` interface defines the configuration options for the table component. Below is a breakdown of each property:
+
+```typescript
+export interface TableOptions<T> {
+  columns: ColumnConfig[];
+  minHeight?: string;
+  maxHeight?: string;
+  selectable?: boolean;
+  hideHeader?: boolean;
+  hideFooter?: boolean;
+  paginate?: boolean;
+}
+```
+
+### `columns`
+- **Type**: `ColumnConfig[]`
+- **Required**: Yes
+- **Description**: Defines the structure of columns in the table. The `ColumnConfig` array specifies how each column should be displayed, including options like the `field` (the data property associated with the column), `headerName` (the display name of the column), and other layout-related properties like `width`.
+
+### `getSelectedRows`
+- **Type**: `() => T[]`
+- **Required**: No
+- **Description**: A callback function that returns an array of selected rows. This is useful when the table has the `selectable` option enabled, allowing you to retrieve the selected rows programmatically.
+
+### `minHeight`
+- **Type**: `string`
+- **Required**: No
+- **Description**: Sets a minimum height for the table. The value can be provided in any valid CSS unit such as `px`, `%`, `em`, `rem`, etc. Ensures that the table will not shrink smaller than this height even if it contains little content.
+
+### `maxHeight`
+- **Type**: `string`
+- **Required**: No
+- **Description**: Sets a maximum height for the table. When the table's content exceeds this height, a scrollbar will appear to allow vertical scrolling. The value can be defined using any CSS height unit.
+
+### `selectable`
+- **Type**: `boolean`
+- **Required**: No
+- **Default**: `false`
+- **Description**: When set to `true`, rows in the table become selectable. This allows users to select one or multiple rows, which can later be retrieved using the `getSelectedRows` method.
+
+### `hideHeader`
+- **Type**: `boolean`
+- **Required**: No
+- **Default**: `false`
+- **Description**: When set to `true`, the header row (the row that displays column titles) is hidden from view. This can be useful when displaying minimalistic tables or when the header information is not required.
+
+### `hideFooter`
+- **Type**: `boolean`
+- **Required**: No
+- **Default**: `false`
+- **Description**: When set to `true`, the footer row is hidden from view. This is useful for tables that do not require a footer for pagination or summary information.
+
+### `paginate`
+- **Type**: `boolean`
+- **Required**: No
+- **Default**: `false`
+- **Description**: Enables pagination in the table. When set to `true`, the table will only display a limited number of rows per page, and users can navigate between different pages of data.
+
+
+## ColumnConfig Properties
+
+The `TableOptions<T>` interface defines the configuration options for the table component. Below is a breakdown of each property:
+
+```typescript
+export interface ColumnConfig {
+  field?: string;
+  hide?: boolean;
+  resizable?: boolean;
+  headerName?: string;
+  width?: string;
+  minWidth?: string;
+  maxWidth?: string;
+  render?: (T: unknown) => string;
+  alignItems?: "flex-start" | "flex-end" | "center";
+  justifyContent?: "flex-start" | "flex-end" | "center";
+  justifyItems?: "flex-start" | "flex-end" | "center";
+  classes?: string;
+  truncate?: boolean;
+  sticky?: "start" | "end";
+  stickyOffset?: number;
+}
+```
+
+### `field`
+- **Type**: `string`
+- **Required**: No
+- **Description**: The key in the data object that corresponds to the column’s value. This maps the column to the specific field in the data.
+
+### `hide`
+- **Type**: `boolean`
+- **Required**: No
+- **Description**: When set to `true`, this column will be hidden from the table.
+
+### `resizable`
+- **Type**: `boolean`
+- **Required**: No
+- **Description**: Makes the column resizable, allowing users to adjust the width of the column by dragging.
+
+### `headerName`
+- **Type**: `string`
+- **Required**: No
+- **Description**: The display name of the column in the header.
+
+### `width`
+- **Type**: `string`
+- **Required**: No
+- **Description**: Defines the width of the column. Can be set in any valid CSS unit like `px`, `em`, `%`, etc.
+
+### `minWidth`
+- **Type**: `string`
+- **Required**: No
+- **Description**: Sets the minimum width of the column in any valid CSS unit.
+
+### `maxWidth`
+- **Type**: `string`
+- **Required**: No
+- **Description**: Sets the maximum width of the column in any valid CSS unit.
+
+### `render`
+- **Type**: `(T: unknown) => string`
+- **Required**: No
+- **Description**: A custom render function that returns the HTML content as a string for each cell in the column.
+
+### `alignItems`
+- **Type**: `"flex-start" | "flex-end" | "center"`
+- **Required**: No
+- **Description**: Controls how the column content is aligned along the cross-axis (vertical) inside the column. Aligns to start, end, or center.
+
+### `justifyContent`
+- **Type**: `"flex-start" | "flex-end" | "center"`
+- **Required**: No
+- **Description**: Defines how the column content is aligned along the main axis (horizontal) inside the column.
+
+### `justifyItems`
+- **Type**: `"flex-start" | "flex-end" | "center"`
+- **Required**: No
+- **Description**: Defines the alignment of items inside the cell, aligning the content within the cell based on the specified value.
+
+### `classes`
+- **Type**: `string`
+- **Required**: No
+- **Description**: Additional CSS classes to apply to the column cells.
+
+### `truncate`
+- **Type**: `boolean`
+- **Required**: No
+- **Description**: If set to `true`, cell content that overflows will be truncated with ellipsis (`...`). This is useful for managing long content in limited column width.
+
+### `sticky`
+- **Type**: `"start" | "end"`
+- **Required**: No
+- **Description**: Makes the column sticky, so it stays in place when scrolling. `start` sticks the column to the left, and `end` sticks the column to the right.
+
+### `stickyOffset`
+- **Type**: `number`
+- **Required**: No
+- **Description**: Defines the offset (in pixels) for the sticky column from the edge (left or right) when the `sticky` option is used.

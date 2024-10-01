@@ -121,7 +121,7 @@ export default class PTable extends PureElement {
    * */
   @property({
     type: Object,
-    reflect: true,
+    reflect: false,
     converter: {
       fromAttribute: (value: string) => {
         if (!value) return null;
@@ -154,7 +154,7 @@ export default class PTable extends PureElement {
    * @type {TableRowData[]}
    * @default []
    */
-  @property({ type: Array, reflect: true }) data: TableRowData[] = [];
+  @property({ type: Array, reflect: false }) data: TableRowData[] = [];
 
   /**
    * Whether the table is currently loading data.
@@ -190,7 +190,7 @@ export default class PTable extends PureElement {
 
   @property({
     type: Array,
-    reflect: true,
+    reflect: false,
   })
   items: TableRowData[] = [];
 

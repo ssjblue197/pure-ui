@@ -2,8 +2,8 @@ import { css } from "lit";
 
 export default css`
   :host {
-    --table-header-cell-padding: var(--p-spacing-small) var(--p-spacing-large);
-    --table-body-cell-padding: var(--p-spacing-medium) var(--p-spacing-large);
+    --table-header-cell-padding: var(--p-spacing-small) var(--p-spacing-medium);
+    --table-body-cell-padding: var(--p-spacing-small) var(--p-spacing-medium);
     --table-footer-padding: var(--p-spacing-small) var(--p-spacing-medium);
 
     --table-border-horizontal-width: 1px;
@@ -153,7 +153,6 @@ export default css`
     font-weight: var(--p-font-weight-normal);
     font-size: var(--p-font-size-small);
     padding: var(--table-body-cell-padding);
-    flex-flow: 1 1 auto;
   }
 
   .table-cell.table-cell--sticky {
