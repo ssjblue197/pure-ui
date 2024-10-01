@@ -23,4 +23,3 @@ layout: component
   <p-button>Click</p-button>
 </p-smart-container>
 ```
-
