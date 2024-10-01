@@ -10,7 +10,7 @@ export default css`
     --table-border-horizontal-style: solid;
     --table-border-horizontal-color: var(--p-color-neutral-200);
 
-    --table-border-vertical-width: 1px;
+    --table-border-vertical-width: 0px;
     --table-border-vertical-style: solid;
     --table-border-vertical-color: var(--p-color-neutral-200);
 
