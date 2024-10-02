@@ -107,8 +107,6 @@ export default class PSmartContainer extends PureElement {
             el.style.display = "none";
           }
         });
-      } else {
-        this.dropdownMenu.style.display = "none";
       }
 
       this.requestUpdate();
