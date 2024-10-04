@@ -125,15 +125,14 @@ export default class PSmartContainer extends PureElement {
 
   protected firstUpdated(): void {
     this.startObserver();
+    // Trigger initial resize
+    this.smartContainer.dispatchEvent(new Event("resize"));
   }
 
   connectedCallback(): void {
     super.connectedCallback();
 
     this.resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => this.handleResize(entries));
-
-    // Trigger initial resize
-    this.smartContainer.dispatchEvent(new Event("resize"));
   }
 
   disconnectedCallback(): void {
