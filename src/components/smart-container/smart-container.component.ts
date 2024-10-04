@@ -107,7 +107,8 @@ export default class PSmartContainer extends PureElement {
         }
       } else {
         // Handle overflow of slotted elements
-        elements.forEach((el: HTMLElement) => {
+        for (let i = elements.length - 1; i > 0; i--) {
+          const el = elements[i];
           let triggerElementWidth = 0;
           if (this.dropdownContent.children.length > 0) {
             triggerElementWidth = this.dropdown.offsetWidth;
@@ -116,7 +117,7 @@ export default class PSmartContainer extends PureElement {
             el.dataset.oldWidth = String(el.offsetWidth);
             this.dropdownContent?.appendChild(el);
           }
-        });
+        }
       }
 
       if (this.dropdownContent.children.length > 0) {
