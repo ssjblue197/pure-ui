@@ -41,7 +41,9 @@ export default class PSmartContainer extends PureElement {
 
   @query(".smart-container") smartContainer: HTMLElement;
 
-  @query(".smart_container__dropdown-menu") dropdownMenu: HTMLElement;
+  @query(".smart_container__dropdown") dropdown: PDropdown;
+
+  @query(".smart_container__dropdown-content") dropdownContent: HTMLElement;
 
   @watch("example")
   handleExampleChange() {
@@ -80,8 +82,8 @@ export default class PSmartContainer extends PureElement {
       const elements = (slot as HTMLSlotElement)?.assignedElements({ flatten: true }) as HTMLElement[];
       const lastElement = elements[elements.length - 1];
 
-      if (this.dropdownMenu.children.length > 0) {
-        const lastChild = this.dropdownMenu.lastElementChild as HTMLElement;
+      if (this.dropdownContent.children.length > 0) {
+        const lastChild = this.dropdownContent.lastElementChild as HTMLElement;
 
         if (lastChild) {
           const width = Number(lastChild.dataset.oldWidth);
@@ -95,9 +97,17 @@ export default class PSmartContainer extends PureElement {
       elements.forEach((el: HTMLElement) => {
         if (el.offsetLeft + el.offsetWidth > container.width) {
           el.dataset.oldWidth = String(el.offsetWidth);
-          this.dropdownMenu?.appendChild(el);
+          this.dropdownContent?.appendChild(el);
         }
       });
+
+      if (this.dropdownContent.children.length > 0) {
+        this.dropdown.style.width = "auto";
+        this.dropdown.style.visibility = "visible";
+      } else {
+        this.dropdown.style.visibility = "hidden";
+        this.dropdown.style.width = "0px";
+      }
 
       this.requestUpdate();
     });
@@ -111,14 +121,14 @@ export default class PSmartContainer extends PureElement {
   render() {
     return html` <div class="smart-container" part="base">
       <slot></slot>
-      <p-dropdown>
-        <slot name="icon" slot="trigger">
+      <p-dropdown class="smart_container__dropdown">
+        <slot name="trigger" slot="trigger">
           <p-button>
             <p-icon name="funnel"></p-icon>
           </p-button>
         </slot>
         <p-menu part="dropdown-menu">
-          <div class="smart_container__dropdown-menu"></div>
+          <div class="smart_container__dropdown-content"></div>
         </p-menu>
       </p-dropdown>
     </div>`;
