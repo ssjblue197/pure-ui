@@ -59,7 +59,7 @@ export default class PSmartContainer extends PureElement {
     const elements = (slot as HTMLSlotElement)?.assignedElements({ flatten: true }) as HTMLElement[];
     const lastElement = elements[elements.length - 1];
 
-    if (container.width > this.backupContainerWidth) {
+    if (this.backupContainerWidth > 0 && container.width > this.backupContainerWidth) {
       if (this.dropdownContent.children.length > 1) {
         const lastChild = this.dropdownContent.lastElementChild as HTMLElement;
 
