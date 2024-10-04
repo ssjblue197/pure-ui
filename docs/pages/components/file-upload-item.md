@@ -8,7 +8,8 @@ layout: component
 File items represent an uploaded file and provides information about file type, file size etc.
 
 ```html:preview
-<p-file-upload-item>
+<p-file-upload-item
+>
   filename_lorem_ipsum.jpg
   <p-icon name="file-earmark" slot="image"></p-icon>
 </p-file-upload-item>

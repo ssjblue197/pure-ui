@@ -28,7 +28,7 @@ export default class PSmartContainer extends PureElement {
 
   private resizeObserver: ResizeObserver;
   private observedElements: HTMLElement[] = [];
-  private overlapElements: number[] = [];
+  // private overlapElements: number[] = [];
 
   static dependencies = {
     "p-dropdown": PDropdown,
@@ -65,13 +65,6 @@ export default class PSmartContainer extends PureElement {
   }
 
   protected firstUpdated(): void {
-    // do something
-    const slot = this.shadowRoot?.querySelector("slot:not([name])");
-    const elements = (slot as HTMLSlotElement)?.assignedElements({ flatten: true }) as HTMLElement[];
-
-    elements.forEach((el: HTMLElement) => {
-      this.dropdownMenu?.appendChild(el.cloneNode(true));
-    });
     this.startObserver();
   }
 
@@ -79,35 +72,32 @@ export default class PSmartContainer extends PureElement {
     super.connectedCallback();
 
     this.resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
-      this.overlapElements = [];
       const slot = this.shadowRoot?.querySelector("slot:not([name])");
 
       if (!slot || !entries.length) return;
 
       const container = entries[0]?.contentRect;
       const elements = (slot as HTMLSlotElement)?.assignedElements({ flatten: true }) as HTMLElement[];
+      const lastElement = elements[elements.length - 1];
 
-      elements.forEach((el: HTMLElement) => {
-        el.style.display = "block";
-      });
+      if (this.dropdownMenu.children.length > 0) {
+        const lastChild = this.dropdownMenu.lastElementChild as HTMLElement;
+
+        if (lastChild) {
+          const width = Number(lastChild.dataset.oldWidth);
+          if (lastElement.offsetLeft + lastElement.offsetWidth + width < container.width) {
+            this.append(lastChild);
+          }
+        }
+      }
 
       // Handle overflow of slotted elements
-      elements.forEach((el: HTMLElement, index: number) => {
+      elements.forEach((el: HTMLElement) => {
         if (el.offsetLeft + el.offsetWidth > container.width) {
-          this.overlapElements.push(index);
-          el.style.display = "none";
+          el.dataset.oldWidth = String(el.offsetWidth);
+          this.dropdownMenu?.appendChild(el);
         }
       });
-
-      if (this.overlapElements.length > 0) {
-        Array.from(this.dropdownMenu.children).forEach((el: HTMLElement, index: number) => {
-          if (this.overlapElements.includes(index)) {
-            el.style.display = "block";
-          } else {
-            el.style.display = "none";
-          }
-        });
-      }
 
       this.requestUpdate();
     });
