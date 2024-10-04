@@ -12,11 +12,12 @@ export default css`
     flex-wrap: nowrap;
     gap: var(--p-spacing-x-small);
   }
-  .smart_container__dropdown-menu {
-    min-width: 200px;
+  .smart_container__dropdown-content {
+    min-width: 300px;
     display: flex;
     flex-flow: column nowrap;
     gap: var(--p-spacing-x-small);
     padding: 0 var(--p-spacing-x-small);
+    position: relative;
   }
 `;
