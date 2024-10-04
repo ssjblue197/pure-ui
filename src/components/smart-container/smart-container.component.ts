@@ -28,7 +28,7 @@ export default class PSmartContainer extends PureElement {
 
   private resizeObserver: ResizeObserver;
   private observedElements: HTMLElement[] = [];
-  // private overlapElements: number[] = [];
+  private containerWidth: number = 0;
 
   static dependencies = {
     "p-dropdown": PDropdown,
@@ -82,24 +82,42 @@ export default class PSmartContainer extends PureElement {
       const elements = (slot as HTMLSlotElement)?.assignedElements({ flatten: true }) as HTMLElement[];
       const lastElement = elements[elements.length - 1];
 
-      if (this.dropdownContent.children.length > 0) {
-        const lastChild = this.dropdownContent.lastElementChild as HTMLElement;
+      if (container.width > this.containerWidth) {
+        if (this.dropdownContent.children.length > 1) {
+          const lastChild = this.dropdownContent.lastElementChild as HTMLElement;
 
-        if (lastChild) {
-          const width = Number(lastChild.dataset.oldWidth);
-          if (lastElement.offsetLeft + lastElement.offsetWidth + width < container.width) {
-            this.append(lastChild);
+          if (lastChild) {
+            const width = Number(lastChild.dataset.oldWidth);
+            if (
+              lastElement.offsetLeft + lastElement.offsetWidth + width <
+              container.width - this.dropdown.offsetWidth
+            ) {
+              this.append(lastChild);
+            }
+          }
+        } else if (this.dropdownContent.children.length === 1) {
+          const lastChild = this.dropdownContent.lastElementChild as HTMLElement;
+
+          if (lastChild) {
+            const width = Number(lastChild.dataset.oldWidth);
+            if (lastElement.offsetLeft + lastElement.offsetWidth + width < container.width) {
+              this.append(lastChild);
+            }
           }
         }
+      } else {
+        // Handle overflow of slotted elements
+        elements.forEach((el: HTMLElement) => {
+          let triggerElementWidth = 0;
+          if (this.dropdownContent.children.length > 0) {
+            triggerElementWidth = this.dropdown.offsetWidth;
+          }
+          if (el.offsetLeft + el.offsetWidth > container.width - triggerElementWidth) {
+            el.dataset.oldWidth = String(el.offsetWidth);
+            this.dropdownContent?.appendChild(el);
+          }
+        });
       }
-
-      // Handle overflow of slotted elements
-      elements.forEach((el: HTMLElement) => {
-        if (el.offsetLeft + el.offsetWidth > container.width) {
-          el.dataset.oldWidth = String(el.offsetWidth);
-          this.dropdownContent?.appendChild(el);
-        }
-      });
 
       if (this.dropdownContent.children.length > 0) {
         this.dropdown.style.width = "auto";
@@ -108,6 +126,8 @@ export default class PSmartContainer extends PureElement {
         this.dropdown.style.visibility = "hidden";
         this.dropdown.style.width = "0px";
       }
+
+      this.containerWidth = entries[0]?.contentRect.width;
 
       this.requestUpdate();
     });
