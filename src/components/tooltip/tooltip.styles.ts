@@ -51,5 +51,6 @@ export default css`
     pointer-events: none;
     user-select: none;
     -webkit-user-select: none;
+    word-break: break-all;
   }
 `;
