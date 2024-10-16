@@ -549,6 +549,8 @@ export default class PSelect extends PureElement implements PureFormControl {
     const option = target.closest("p-option");
     const oldValue = this.value;
 
+    this.setCurrentOption(option);
+
     if (option && !option.disabled) {
       if (this.multiple) {
         this.toggleOptionSelection(option);
