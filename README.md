@@ -1,6 +1,10 @@
-# PureUI Documentation
+# PureUI
+
+Documentation: [Pure UI](https://pureui.xyz)
 
 Welcome to **PureUI**, a lightweight, customizable web component library based on **Shoelace Style**. PureUI extends Shoelace with advanced components designed for building responsive and interactive user interfaces with minimal effort.
+
+PureUI is built with web components, which means that you can use them in any framework you like, such as React, Vue, Angular, or even vanilla JavaScript. Web components are also framework-agnostic, so you can easily switch between frameworks without having to rewrite your UI code. Additionally, web components are encapsulated, which means that they are self-contained and don't pollute the global namespace, making it easier to maintain and debug your code.
 
 ## Table of Contents
 
@@ -67,6 +71,7 @@ Here’s a brief overview of some of the most common and advanced PureUI compone
 - **Select Combobox**: A customizable dropdown with search functionality.
 - **Paginate**: A pagination component to navigate large datasets easily.
 - **File Upload**: A flexible file upload component with drag-and-drop support.
+- **More**: We encourage you to build more components and share them with the community. Please refer to the [Community](https://pureui.xyz/resources/community/) section for more information.
 
 ## 5. Customization
 
@@ -132,14 +137,6 @@ PureUI is licensed under the **MIT License**. See the [LICENSE](https://github.c
 ---
 
 Thank you for choosing PureUI! We hope this library helps you build amazing user interfaces quickly and easily. For more information, visit our [official website](https://pureui.xuz).
-
----
-
-Develop in Hanoi, Vietnam by [Mr.P](https://www.facebook.com/ssjblue197).
-
----
-
-Documentation: [Pure UI](https://pureui.xyz)
 
 ### What are you using to build Pure UI?
 
