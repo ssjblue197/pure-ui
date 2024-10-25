@@ -139,19 +139,7 @@ Develop in Hanoi, Vietnam by [Mr.P](https://www.facebook.com/ssjblue197).
 
 ---
 
-<!-- Documentation: [Pure UI](https://pureui.xyz) -->
-
-Source: [https://github.com/ssjblue197/pure-ui](https://github.com/ssjblue197/pure-ui)
-
----
-
-## Pure UI makers :arrow_double_up:
-
-Pure UI maker, or "Pure UI developers," can use this documentation to learn how to build Pure UI from source. You will need Node >= 14.17 to build and run the project locally.
-
-**You don't need to do any of this to use Pure UI!** This page is for people who want to contribute to the project, tinker with the source, or create a custom build of Pure UI.
-
-If that's not what you're trying to do, the [documentation website](https://pureui.xyz) is where you want to be.
+Documentation: [Pure UI](https://pureui.xyz)
 
 ### What are you using to build Pure UI?
 
