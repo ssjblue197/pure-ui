@@ -23,6 +23,7 @@ PureUI is built with web components, which means that you can use them in any fr
 **PureUI** is a collection of web components designed to streamline the process of building modern UIs. It enhances **Shoelace** by adding more advanced components while maintaining simplicity and performance. With PureUI, you can easily integrate responsive, accessible, and themeable elements into your web applications.
 
 ### Key Features:
+
 - **Customizable**: Built with customization in mind, PureUI components can be easily themed and adjusted to fit your design needs.
 - **Responsive**: PureUI provides components that adapt seamlessly to different screen sizes.
 - **Lightweight**: Focused on performance and efficiency, PureUI is designed to stay lightweight and fast.
@@ -34,16 +35,19 @@ PureUI is built with web components, which means that you can use them in any fr
 PureUI can be easily installed using **npm**, **yarn**, or a CDN.
 
 ### npm
+
 ```bash
 npm install pure-uikit
 ```
 
 ### yarn
+
 ```bash
 yarn add pure-uikit
 ```
 
 ### CDN
+
 Include the following script tag in your HTML file:
 
 ```html
@@ -78,6 +82,7 @@ Here’s a brief overview of some of the most common and advanced PureUI compone
 PureUI is designed to be highly customizable. You can override default styles using CSS variables or modify component behavior via attributes and methods.
 
 ### Example:
+
 To customize a **Button**, you can use the following CSS variables:
 
 ```css
@@ -90,6 +95,7 @@ p-button {
 ## 6. Examples
 
 ### Basic SmartContainer Example
+
 ```html
 <p-smart-container>
   <h1>Welcome to PureUI</h1>
@@ -98,11 +104,13 @@ p-button {
 ```
 
 ### Calendar Example
+
 ```html
 <p-calendar></p-calendar>
 ```
 
 ### Data Table Example
+
 ```html
 <p-table>
   <!-- table data here -->
@@ -110,6 +118,7 @@ p-button {
 ```
 
 ### File Upload Example
+
 ```html
 <p-file-upload></p-file-upload>
 ```
@@ -136,7 +145,7 @@ PureUI is licensed under the **MIT License**. See the [LICENSE](https://github.c
 
 ---
 
-Thank you for choosing PureUI! We hope this library helps you build amazing user interfaces quickly and easily. For more information, visit our [official website](https://pureui.xuz).
+Thank you for choosing PureUI! We hope this library helps you build amazing user interfaces quickly and easily. For more information, visit our [official website](https://pureui.xyz).
 
 ### What are you using to build Pure UI?
 

@@ -6,8 +6,8 @@ layout: component
 ---
 
 ```html:preview
-<p-calendar type="range" interface="month" class="calendar-preview"
-  format="YYYY-MM"
+<p-calendar type="single" class="calendar-preview"
+  format="YYYY-MM-DD"
 >
   <div slot="footer"></div>
 </p-calendar>
@@ -18,8 +18,7 @@ layout: component
   const today = new Date();
 
   calendar.value = [
-    '2024-09',
-    '2024-10',
+    '2024-09-11',
   ];
 
   calendar.addEventListener('p-change', (e) => {
@@ -98,8 +97,8 @@ When the interface is `"day"`, the calendar renders a grid of days in the month.
 When the interface is `"month"`, the calendar renders a grid of months in the year. The grid has 4 columns and as many rows as necessary to display the months of the year. The months are displayed in a 4xN grid, with the current month highlighted.
 
 ```html:preview
-<p-calendar type="range" interface="month" class="calendar-interface"
-  format="YYYY-MM"
+<p-calendar type="single"  class="calendar-interface"
+  format="YYYY-MM-DD"
 >
   <div slot="footer"></div>
 </p-calendar>
@@ -110,8 +109,7 @@ When the interface is `"month"`, the calendar renders a grid of months in the ye
   const today = new Date();
 
   calendar.value = [
-    '2024-09',
-    '2024-09',
+    '2024-09-11',
   ];
 
 

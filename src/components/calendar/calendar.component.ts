@@ -1,8 +1,6 @@
+import type { CSSResultGroup, TemplateResult } from "lit";
+import type { CalendarDay, CalendarInterface } from "../../internal/calendar.js";
 import { animateTo, stopAnimations } from "../../internal/animate.js";
-import { classMap } from "lit/directives/class-map.js";
-import { debounce } from "../../internal/debounce.js";
-import { defaultValue } from "../../internal/default-value.js";
-import { FormControlController } from "../../internal/form.js";
 import {
   generateCalendarGrid,
   getAllDayNames,
@@ -13,28 +11,31 @@ import {
   isSameDay,
 } from "../../internal/calendar.js";
 import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
-import { HasSlotController } from "../../internal/slot.js";
-import { html } from "lit";
-import { LocalizeController } from "../../utilities/localize.js";
-import { partMap } from "../../internal/part-map.js";
 import { property, query, state } from "lit/decorators.js";
+
+import { FormControlController } from "../../internal/form.js";
+import { HasSlotController } from "../../internal/slot.js";
+import { LocalizeController } from "../../utilities/localize.js";
+import PIcon from "../icon/icon.component.js";
+import PPopup from "../popup/popup.component.js";
+import type { PRemoveEvent } from "../../events/p-remove.js";
+import PTag from "../tag/tag.component.js";
+import PureElement from "../../internal/pure-ui-element.js";
+import type { PureFormControl } from "../../internal/pure-ui-element.js";
+import { classMap } from "lit/directives/class-map.js";
+import componentStyles from "../../styles/component.styles.js";
 import dateFormatter from "pure-date-format";
+import { debounce } from "../../internal/debounce.js";
+import { defaultValue } from "../../internal/default-value.js";
+import formControlStyles from "../../styles/form-control.styles.js";
+import { html } from "lit";
+import { partMap } from "../../internal/part-map.js";
+import styles from "./calendar.styles.js";
 // import { scrollIntoView } from "../../internal/scroll.js";
 // import { shadowQuery } from "../../utilities/shadow.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import { waitForEvent } from "../../internal/event.js";
 import { watch } from "../../internal/watch.js";
-import componentStyles from "../../styles/component.styles.js";
-import formControlStyles from "../../styles/form-control.styles.js";
-import PIcon from "../icon/icon.component.js";
-import PPopup from "../popup/popup.component.js";
-import PTag from "../tag/tag.component.js";
-import PureElement from "../../internal/pure-ui-element.js";
-import styles from "./calendar.styles.js";
-import type { CalendarDay, CalendarInterface } from "../../internal/calendar.js";
-import type { CSSResultGroup, TemplateResult } from "lit";
-import type { PRemoveEvent } from "../../events/p-remove.js";
-import type { PureFormControl } from "../../internal/pure-ui-element.js";
 
 export interface RenderDayOptions {
   disabled?: boolean;
@@ -847,10 +848,10 @@ export default class PCalendar extends PureElement implements PureFormControl {
   private selectionChanged() {
     switch (this.type) {
       case "single":
-        this.keyword = "";
         this.displayLabel = this.format
           ? dateFormatter().from(this.selectedOptions[0], this.format)
           : getDateLabelWithFormat(this.selectedOptions[0]);
+        this.keyword = this.displayLabel;
         this._value = structuredClone(this.selectedOptions[0]);
         break;
       case "range":
