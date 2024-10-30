@@ -1,5 +1,5 @@
-import { registerTranslation } from "pure-localize";
 import type { Translation } from "../utilities/localize.js";
+import { registerTranslation } from "pure-localize";
 
 const translation: Translation = {
   $code: "vi",
@@ -16,6 +16,7 @@ const translation: Translation = {
   goToSlide: (slide, count) => `Chuyển đến trang ${slide} trong ${count}`,
   hidePassword: "Ẩn mật khẩu",
   loading: "Đang tải",
+  nextPage: "Trang sau",
   nextMonth: "Tháng sau",
   nextYear: "Năm sau",
   nextSlide: "Trang tiếp theo",
@@ -24,6 +25,7 @@ const translation: Translation = {
     if (num === 1) return "1 lựa chọn đã được chọn";
     return `${num} lựa chọn đã được chọn`;
   },
+  previousPage: "Trang trước",
   previousMonth: "Tháng trước",
   previousYear: "Năm trước",
   previousSlide: "Trang trước",
