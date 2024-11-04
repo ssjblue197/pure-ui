@@ -3,7 +3,11 @@ import { html } from "lit/static-html.js";
 import { LocalizeController } from "../../utilities/localize.js";
 import { property } from "lit/decorators.js";
 import componentStyles from "../../styles/component.styles.js";
+import PButton from "../button/button.component.js";
+import PButtonGroup from "../button-group/button-group.component.js";
+import PFormatNumber from "../format-number/format-number.component.js";
 import PIcon from "../icon/icon.component.js";
+import PSelect from "../select/select.component.js";
 import PureElement from "../../internal/pure-ui-element.js";
 import styles from "./paginate.styles.js";
 import type { CSSResultGroup } from "lit";
@@ -18,6 +22,7 @@ import type { CSSResultGroup } from "lit";
  * @dependency p-button
  *
  * @event p-change - Emitted when the page changed.
+ * @event p-change-limit - Emitted when the page limit changed.
  *
  * @slot prefix - A presentational prefix icon or similar element.
  * @slot suffix - A presentational suffix icon or similar element.
@@ -29,6 +34,10 @@ export default class PPaginate extends PureElement {
   static styles: CSSResultGroup = [componentStyles, styles];
   static dependencies = {
     "p-icon": PIcon,
+    "p-select": PSelect,
+    "p-format-number": PFormatNumber,
+    "p-button": PButton,
+    "p-button-group": PButtonGroup,
   };
 
   private readonly localize = new LocalizeController(this);
@@ -60,6 +69,8 @@ export default class PPaginate extends PureElement {
   /** The limit visible pages to show. */
   @property({ type: Number, reflect: true, attribute: "max-visible-pages" }) maxVisiblePages: number = 3;
 
+  @property({ type: Array, attribute: "page-list" }) pageList: number[] = [10, 20, 30, 40, 50];
+
   private getPages() {
     const totalPages = Math.ceil(this.total / this.limit);
     let pages: (number | string)[] = Array.from({ length: totalPages }, (_, i) => i + 1);
@@ -81,6 +92,15 @@ export default class PPaginate extends PureElement {
     }
 
     return pages;
+  }
+
+  changeLimit(newLimit: number) {
+    this.limit = newLimit;
+    this.page = 1;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    this.emit("p-change-limit", {
+      detail: { limit: this.limit },
+    });
   }
 
   changePage(newPage: number | string) {
@@ -110,19 +130,38 @@ export default class PPaginate extends PureElement {
     const pages = this.getPages();
     return html`
       <div class="paginate">
-        <p-button
-          size=${this.size}
-          variant=${this.variant}
-          ?disabled="${this.page === 1 || this.disabled}"
-          @click="${this.prevPage}"
-          ?circle=${this.pill}
-        >
-          <slot name="prefix" part="prefix" slot="prefix">
-            <p-icon name="arrow-left"></p-icon>
-          </slot>
-          ${this.localize.term("previousPage")}
-        </p-button>
-        <div class="paginate__items">
+        <div class="paginate__summary">
+          <p-select
+            label=""
+            ?disabled="${this.disabled}"
+            size=${this.size}
+            .value=${String(this.limit)}
+            class="paginate__select_limit"
+            @p-change="${(e: Event) => this.changeLimit(Number((e.target as HTMLInputElement)?.value))}"
+          >
+            ${this.pageList.map(page => {
+              return html`<p-option value=${String(page)}>${page} / page</p-option>`;
+            })}
+          </p-select>
+          <span class="paginate__summary-text">
+            of total
+            <p-format-number value=${this.total}></p-format-number>
+            results
+          </span>
+        </div>
+        <p-button-group>
+          <p-button
+            size=${this.size}
+            variant=${this.variant}
+            ?disabled="${this.page === 1 || this.disabled}"
+            @click="${this.prevPage}"
+            ?circle=${this.pill}
+          >
+            <slot name="prefix" part="prefix" slot="prefix">
+              <p-icon name="arrow-left"></p-icon>
+            </slot>
+            ${this.localize.term("previousPage")}
+          </p-button>
           ${pages.map((page, pIdx) => {
             if (page === "...") {
               if (pIdx === 0) {
@@ -204,19 +243,19 @@ export default class PPaginate extends PureElement {
               `;
             }
           })}
-        </div>
-        <p-button
-          size=${this.size}
-          variant=${this.variant}
-          ?disabled="${this.page === Math.ceil(this.total / this.limit) || this.disabled}"
-          @click="${this.nextPage}"
-          ?circle=${this.pill}
-        >
-          <slot slot="suffix" name="suffix" part="suffix">
-            <p-icon name="arrow-right"></p-icon>
-          </slot>
-          ${this.localize.term("nextPage")}
-        </p-button>
+          <p-button
+            size=${this.size}
+            variant=${this.variant}
+            ?disabled="${this.page === Math.ceil(this.total / this.limit) || this.disabled}"
+            @click="${this.nextPage}"
+            ?circle=${this.pill}
+          >
+            <slot slot="suffix" name="suffix" part="suffix">
+              <p-icon name="arrow-right"></p-icon>
+            </slot>
+            ${this.localize.term("nextPage")}
+          </p-button>
+        </p-button-group>
       </div>
     `;
   }

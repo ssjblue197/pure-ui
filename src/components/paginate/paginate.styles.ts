@@ -21,6 +21,16 @@ export default css`
     gap: var(--p-spacing-x-small);
   }
 
+  @media only screen and (max-width: 768px) {
+    .paginate {
+      justify-content: center !important;
+    }
+    .paginate__summary {
+      display: none !important;
+    }
+  }
+
+  .paginate__summary,
   .paginate__items {
     display: flex;
     align-items: center;
@@ -29,9 +39,25 @@ export default css`
     position: relative;
     gap: var(--p-spacing-x-small);
   }
+  .paginate__select_limit {
+    width: 128px;
+    font-weight: var(--p-font-weight-medium);
+  }
+
+  .paginate__summary-text {
+    font-family: var(--p-font-sans);
+    font-size: var(--p-font-size-small);
+    font-weight: var(--p-font-weight-medium);
+    line-height: var(--p-line-height-normal);
+    letter-spacing: var(--p-letter-spacing-normal);
+    color: var(--p-color-gray-600);
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+  }
 
   .page::part(base) {
-    border: none !important;
+    // border: none !important;
   }
 
   .page::part(base):hover {

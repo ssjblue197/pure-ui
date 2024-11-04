@@ -1,5 +1,5 @@
-import type { Translation } from "../utilities/localize.js";
 import { registerTranslation } from "pure-localize";
+import type { Translation } from "../utilities/localize.js";
 
 const translation: Translation = {
   $code: "vi",

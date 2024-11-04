@@ -7,6 +7,7 @@ layout: component
 
 ```html:preview
 <p-paginate></p-paginate>
+
 ```
 
 ```jsx:react

@@ -6,6 +6,7 @@ export type { PAfterShowEvent } from "./p-after-show.js";
 export type { PBlurEvent } from "./p-blur.js";
 export type { PCancelEvent } from "./p-cancel.js";
 export type { PChangeEvent } from "./p-change.js";
+export type { PChangeLimitEvent } from "./p-change-limit.js";
 export type { PClearEvent } from "./p-clear.js";
 export type { PCloseEvent } from "./p-close.js";
 export type { PCollapseEvent } from "./p-collapse.js";
