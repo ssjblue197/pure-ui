@@ -74,7 +74,7 @@ export default class PPaginate extends PureElement {
   @property({ type: Array, attribute: "page-list" }) pageList: number[] = [10, 20, 30, 40, 50];
 
   private getPages() {
-    const totalPages = Math.ceil(this.total / this.limit);
+    const totalPages = Math.ceil(Number(this.total) / Number(this.limit));
     let pages: (number | string)[] = Array.from({ length: totalPages }, (_, i) => i + 1);
 
     const page = this.page;
@@ -97,7 +97,7 @@ export default class PPaginate extends PureElement {
   }
 
   changeLimit(newLimit: number) {
-    this.limit = newLimit;
+    this.limit = Number(newLimit);
     this.page = 1;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     this.emit("p-change-limit", {
@@ -121,9 +121,9 @@ export default class PPaginate extends PureElement {
   }
 
   nextPage() {
-    const totalPages = Math.ceil(this.total / this.limit);
-    if (this.page < totalPages) {
-      this.changePage(this.page + 1);
+    const totalPages = Math.ceil(Number(this.total) / Number(this.limit));
+    if (Number(this.page) < totalPages) {
+      this.changePage(Number(this.page) + 1);
     }
   }
   render() {
@@ -155,7 +155,7 @@ export default class PPaginate extends PureElement {
           <p-button
             size=${this.size}
             variant=${this.variant}
-            ?disabled="${this.page === 1 || this.disabled}"
+            ?disabled="${Number(this.page) === 1 || this.disabled}"
             @click="${this.prevPage}"
             ?circle=${this.pill}
           >
@@ -213,7 +213,7 @@ export default class PPaginate extends PureElement {
                     <p-button
                       size=${this.size}
                       variant=${this.variant}
-                      @click="${() => this.changePage(Math.ceil(this.total / this.limit))}"
+                      @click="${() => this.changePage(Math.ceil(Number(this.total) / Number(this.limit)))}"
                       ?disabled="${this.disabled}"
                       class=${classMap({
                         page: true,
@@ -248,7 +248,7 @@ export default class PPaginate extends PureElement {
           <p-button
             size=${this.size}
             variant=${this.variant}
-            ?disabled="${this.page === Math.ceil(this.total / this.limit) || this.disabled}"
+            ?disabled="${this.page === Math.ceil(Number(this.total) / Number(this.limit)) || this.disabled}"
             @click="${this.nextPage}"
             ?circle=${this.pill}
           >
