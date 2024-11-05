@@ -312,6 +312,8 @@ export default class PTable extends PureElement {
   }
 
   private handleChangePage(e: CustomEvent & { detail: { page: number } }) {
+    e?.preventDefault();
+    e?.stopPropagation();
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const page = Number(e.detail.page);
     this.page = page;
@@ -324,10 +326,14 @@ export default class PTable extends PureElement {
       }
     });
 
-    this.emit("p-change");
+    this.emit("p-change", {
+      detail: { page: this.page },
+    });
   }
 
   private handleChangeLimit(e: CustomEvent & { detail: { limit: number } }) {
+    e?.preventDefault();
+    e?.stopPropagation();
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const limit = Number(e.detail?.limit);
     this.limit = limit;
