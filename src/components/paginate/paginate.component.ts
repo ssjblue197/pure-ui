@@ -96,6 +96,12 @@ export default class PPaginate extends PureElement {
     return pages;
   }
 
+  handleChangeLimit(e: Event) {
+    e?.preventDefault();
+    e?.stopPropagation();
+    this.changeLimit(Number((e.target as HTMLInputElement)?.value));
+  }
+
   changeLimit(newLimit: number) {
     this.limit = Number(newLimit);
     this.page = 1;
@@ -139,7 +145,7 @@ export default class PPaginate extends PureElement {
             size=${this.size}
             .value=${String(this.limit)}
             class="paginate__select_limit"
-            @p-change="${(e: Event) => this.changeLimit(Number((e.target as HTMLInputElement)?.value))}"
+            @p-change="${(e: Event) => handleChangeLimit(e)}"
           >
             ${this.pageList.map(page => {
               return html`<p-option value=${String(page)}>${page} / page</p-option>`;
