@@ -100,9 +100,6 @@ export default class PPaginate extends PureElement {
     this.limit = newLimit;
     this.page = 1;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    this.emit("p-change", {
-      detail: { page: this.page },
-    });
     this.emit("p-change-limit", {
       detail: { limit: this.limit },
     });
