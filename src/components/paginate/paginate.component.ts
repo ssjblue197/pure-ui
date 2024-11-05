@@ -58,13 +58,13 @@ export default class PPaginate extends PureElement {
   @property({ type: Boolean, reflect: true }) pill = false;
 
   /** The total items to paginate. */
-  @property({ type: Number, reflect: true }) total: number = 119;
+  @property({ type: Number, reflect: true }) total: number = 0;
 
   /** The current page. */
   @property({ type: Number, reflect: true }) page: number = 1;
 
   /** The limit items in a page. */
-  @property({ type: Number, reflect: true }) limit: number = 12;
+  @property({ type: Number, reflect: true }) limit: number = 10;
 
   /** The limit visible pages to show. */
   @property({ type: Number, reflect: true, attribute: "max-visible-pages" }) maxVisiblePages: number = 3;

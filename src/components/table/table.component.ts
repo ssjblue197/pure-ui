@@ -327,6 +327,14 @@ export default class PTable extends PureElement {
     this.emit("p-change");
   }
 
+  private handleChangeLimit(e: CustomEvent & { detail: { limit: number } }) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    const limit = Number(e.detail?.limit);
+    this.limit = limit;
+    this.page = 1;
+    this.emit("p-change-limit");
+  }
+
   private handleSelectAll(e: Event) {
     e.preventDefault();
     e.stopPropagation();
@@ -557,6 +565,7 @@ export default class PTable extends PureElement {
                   page=${this.page}
                   limit=${this.limit}
                   @p-change=${this.handleChangePage}
+                  @p-change-limit=${this.handleChangeLimit}
                 ></p-paginate>
               `
             : ""}

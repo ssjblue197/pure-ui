@@ -1,4 +1,4 @@
-export type PChangeLimitEvent = CustomEvent<Record<PropertyKey, never>>;
+export type PChangeLimitEvent = CustomEvent<Record<PropertyKey, unknown>>;
 
 declare global {
   interface GlobalEventHandlersEventMap {
