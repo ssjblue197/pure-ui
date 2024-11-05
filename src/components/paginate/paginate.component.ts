@@ -7,6 +7,7 @@ import PButton from "../button/button.component.js";
 import PButtonGroup from "../button-group/button-group.component.js";
 import PFormatNumber from "../format-number/format-number.component.js";
 import PIcon from "../icon/icon.component.js";
+import POption from "../option/option.component.js";
 import PSelect from "../select/select.component.js";
 import PureElement from "../../internal/pure-ui-element.js";
 import styles from "./paginate.styles.js";
@@ -35,6 +36,7 @@ export default class PPaginate extends PureElement {
   static dependencies = {
     "p-icon": PIcon,
     "p-select": PSelect,
+    "p-option": POption,
     "p-format-number": PFormatNumber,
     "p-button": PButton,
     "p-button-group": PButtonGroup,
@@ -98,6 +100,9 @@ export default class PPaginate extends PureElement {
     this.limit = newLimit;
     this.page = 1;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    this.emit("p-change", {
+      detail: { page: this.page },
+    });
     this.emit("p-change-limit", {
       detail: { limit: this.limit },
     });

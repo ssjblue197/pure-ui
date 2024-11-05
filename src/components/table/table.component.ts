@@ -214,7 +214,7 @@ export default class PTable extends PureElement {
     if (this.total === 0) return [];
 
     // Calculate the start and end indices for the current page.
-    const start = (this.page - 1) * this.limit;
+    const start = ((this.page || 1) - 1) * this.limit;
     const end = start + this.limit;
 
     // Return the current page of items.
@@ -332,7 +332,9 @@ export default class PTable extends PureElement {
     const limit = Number(e.detail?.limit);
     this.limit = limit;
     this.page = 1;
-    this.emit("p-change-limit");
+    this.emit("p-change-limit", {
+      detail: { limit: limit },
+    });
   }
 
   private handleSelectAll(e: Event) {
