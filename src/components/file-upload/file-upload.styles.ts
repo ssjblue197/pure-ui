@@ -27,6 +27,11 @@ export default css`
     border: var(--border-width) var(--border-style) var(--p-color-neutral-300);
     border-radius: var(--border-radius);
   }
+  .file-upload:not(.file-upload--disabled):hover .file-upload__label {
+    border-color: var(--p-color-primary-500);
+    background-color: var(--p-color-primary-50);
+    cursor: pointer;
+  }
   .file-upload__label__container {
     display: flex;
     flex-direction: column;

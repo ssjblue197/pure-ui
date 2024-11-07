@@ -145,7 +145,7 @@ export default class PPaginate extends PureElement {
             size=${this.size}
             .value=${String(this.limit)}
             class="paginate__select_limit"
-            @p-change="${(e: Event) => handleChangeLimit(e)}"
+            @p-change="${(e: Event) => this.handleChangeLimit(e)}"
           >
             ${this.pageList.map(page => {
               return html`<p-option value=${String(page)}>${page} / page</p-option>`;

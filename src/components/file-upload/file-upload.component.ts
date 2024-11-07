@@ -225,6 +225,7 @@ export default class PFileUpload extends PureElement implements PureFormControl 
   }
 
   handleBrowseFileClick() {
+    if (this.disabled) return;
     this.fileInput.click();
   }
 
@@ -248,7 +249,11 @@ export default class PFileUpload extends PureElement implements PureFormControl 
 
   render() {
     const browseFilesButton = html`
-      <div @click="${this.handleBrowseFileClick}">
+      <div @click="${(e: Event) => {
+        e?.preventDefault();
+        e?.stopPropagation();
+        this.handleBrowseFileClick();
+      }}">
         <slot name="button">
           <p-button
             part="button"
@@ -286,7 +291,9 @@ export default class PFileUpload extends PureElement implements PureFormControl 
         ${this.buttonOnly
           ? browseFilesButton
           : html`
-              <div id="dropzone" @drop="${this.onDrop}" @dragover="${this.onDragOver}" @dragleave="${this.onDragLeave}">
+              <div id="dropzone" @drop="${this.onDrop}" @dragover="${this.onDragOver}" @dragleave="${this.onDragLeave}"
+              @click="${this.handleBrowseFileClick}"
+              >
                 <slot name="label">
                   <div part="label" class="file-upload__label">
                     <div class="file-upload__label__container">
