@@ -6,7 +6,7 @@ layout: component
 ---
 
 ```html:preview
-<p-smart-container>
+<p-smart-container rtl>
   <p-button>Click</p-button>
   <p-button>Click</p-button>
   <p-button>Click</p-button>

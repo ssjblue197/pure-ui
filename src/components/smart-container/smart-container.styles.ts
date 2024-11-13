@@ -12,6 +12,9 @@ export default css`
     flex-wrap: nowrap;
     gap: var(--p-spacing-x-small);
   }
+  .smart-container__rtl {
+    justify-content: flex-end !important;
+  }
   .smart_container__dropdown-content {
     min-width: 300px;
     display: flex;

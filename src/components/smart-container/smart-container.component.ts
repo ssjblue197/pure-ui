@@ -1,3 +1,4 @@
+import { classMap } from "lit/directives/class-map.js";
 import { html } from "lit";
 import { property, query } from "lit/decorators.js";
 import { watch } from "../../internal/watch.js";
@@ -36,8 +37,12 @@ export default class PSmartContainer extends PureElement {
     "p-button": PButton,
   };
 
-  /** An example attribute. */
-  @property() attr = "example";
+  /**
+   * Whether the component is in a right-to-left context. This property is
+   * automatically set when the component is rendered in a context with a
+   * `dir="rtl"` attribute on a parent element.
+   */
+  @property({ type: Boolean, reflect: true }) rtl = false;
 
   @query(".smart-container") smartContainer: HTMLElement;
 
@@ -64,7 +69,7 @@ export default class PSmartContainer extends PureElement {
 
     const elements = (slot as HTMLSlotElement)?.assignedElements({ flatten: true }) as HTMLElement[];
 
-    const lastElement = elements[elements.length - 1];
+    const lastElement = this.rtl ? elements[0] : elements[elements.length - 1];
 
     if (this.backupContainerWidth > 0 && container.width > this.backupContainerWidth) {
       if (this.dropdownContent.children.length > 1) {
@@ -73,7 +78,11 @@ export default class PSmartContainer extends PureElement {
         if (lastChild) {
           const width = Number(lastChild.dataset.oldWidth);
           if (lastElement.offsetLeft + lastElement.offsetWidth + width < container.width - this.dropdown.offsetWidth) {
-            this.append(lastChild);
+            if (this.rtl) {
+              this.prepend(lastChild);
+            } else {
+              this.append(lastChild);
+            }
           }
         }
       } else if (this.dropdownContent.children.length === 1) {
@@ -88,15 +97,25 @@ export default class PSmartContainer extends PureElement {
       }
     } else {
       // Handle overflow of slotted elements
-      for (let i = elements.length - 1; i > 0; i--) {
-        const el = elements[i];
-        let triggerElementWidth = 0;
-        if (this.dropdownContent.children.length > 0) {
-          triggerElementWidth = this.dropdown.offsetWidth;
+      if (this.rtl) {
+        for (let i = 0; i < elements.length - 1; i++) {
+          const el = elements[i];
+          if (el.offsetLeft < 0) {
+            el.dataset.oldWidth = String(el.offsetWidth);
+            this.dropdownContent?.appendChild(el);
+          }
         }
-        if (el.offsetLeft + el.offsetWidth + prefixWidth + suffixWidth > container.width - triggerElementWidth) {
-          el.dataset.oldWidth = String(el.offsetWidth);
-          this.dropdownContent?.appendChild(el);
+      } else {
+        for (let i = elements.length - 1; i > 0; i--) {
+          const el = elements[i];
+          let triggerElementWidth = 0;
+          if (this.dropdownContent.children.length > 0) {
+            triggerElementWidth = this.dropdown.offsetWidth;
+          }
+          if (el.offsetLeft + el.offsetWidth + prefixWidth + suffixWidth + triggerElementWidth > container.width) {
+            el.dataset.oldWidth = String(el.offsetWidth);
+            this.dropdownContent?.appendChild(el);
+          }
         }
       }
     }
@@ -149,7 +168,15 @@ export default class PSmartContainer extends PureElement {
   }
 
   render() {
-    return html` <div class="smart-container" part="base">
+    const isRTL = this.rtl;
+
+    return html` <div
+      part="base"
+      class=${classMap({
+        "smart-container": true,
+        "smart-container__rtl": isRTL,
+      })}
+    >
       <div class="smart_container__prefix">
         <slot name="prefix"></slot>
       </div>
