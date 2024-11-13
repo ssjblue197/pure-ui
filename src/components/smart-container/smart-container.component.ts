@@ -69,29 +69,28 @@ export default class PSmartContainer extends PureElement {
 
     const elements = (slot as HTMLSlotElement)?.assignedElements({ flatten: true }) as HTMLElement[];
 
-    const lastElement = this.rtl ? elements[0] : elements[elements.length - 1];
+    const lastElement = elements[elements.length - 1];
 
     if (this.backupContainerWidth > 0 && container.width > this.backupContainerWidth) {
       if (this.dropdownContent.children.length > 1) {
-        const lastChild = this.dropdownContent.lastElementChild as HTMLElement;
+        const lastChildOfDropdown = this.dropdownContent.lastElementChild as HTMLElement;
 
-        if (lastChild) {
-          const width = Number(lastChild.dataset.oldWidth);
-          if (lastElement.offsetLeft + lastElement.offsetWidth + width < container.width - this.dropdown.offsetWidth) {
-            if (this.rtl) {
-              this.prepend(lastChild);
-            } else {
-              this.append(lastChild);
-            }
+        if (lastChildOfDropdown) {
+          const lastChildOfDropdownWidth = Number(lastChildOfDropdown.dataset.oldWidth);
+          if (
+            lastElement.offsetLeft + lastElement.offsetWidth + lastChildOfDropdownWidth + this.dropdown.offsetWidth <
+            container.width
+          ) {
+            this.append(lastChildOfDropdown);
           }
         }
       } else if (this.dropdownContent.children.length === 1) {
-        const lastChild = this.dropdownContent.lastElementChild as HTMLElement;
+        const lastChildOfDropdown = this.dropdownContent.lastElementChild as HTMLElement;
 
-        if (lastChild) {
-          const width = Number(lastChild.dataset.oldWidth);
+        if (lastChildOfDropdown) {
+          const width = Number(lastChildOfDropdown.dataset.oldWidth);
           if (lastElement.offsetLeft + lastElement.offsetWidth + width < container.width) {
-            this.append(lastChild);
+            this.append(lastChildOfDropdown);
           }
         }
       }
@@ -101,8 +100,9 @@ export default class PSmartContainer extends PureElement {
         for (let i = 0; i < elements.length - 1; i++) {
           const el = elements[i];
           if (el.offsetLeft < 0) {
-            el.dataset.oldWidth = String(el.offsetWidth);
-            this.dropdownContent?.appendChild(el);
+            const dropElement = elements[elements.length - 1];
+            dropElement.dataset.oldWidth = String(dropElement.offsetWidth);
+            this.dropdownContent?.appendChild(dropElement);
           }
         }
       } else {
@@ -123,9 +123,11 @@ export default class PSmartContainer extends PureElement {
     if (this.dropdownContent.children.length > 0) {
       this.dropdown.style.width = "auto";
       this.dropdown.style.visibility = "visible";
+      this.dropdown.style.position = "relative";
     } else {
       this.dropdown.style.visibility = "hidden";
       this.dropdown.style.width = "0px";
+      this.dropdown.style.position = "fixed";
     }
 
     this.backupContainerWidth = entries[0]?.contentRect.width;
