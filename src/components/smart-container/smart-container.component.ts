@@ -52,11 +52,18 @@ export default class PSmartContainer extends PureElement {
 
   private handleResize(entries: ResizeObserverEntry[]) {
     const slot = this.shadowRoot?.querySelector("slot:not([name])");
+    const prefixElement = this.shadowRoot?.querySelector(".smart_container__prefix");
+    const suffixElement = this.shadowRoot?.querySelector(".smart_container__suffix");
+
+    const prefixWidth = (prefixElement as HTMLElement)?.offsetWidth || 0;
+    const suffixWidth = (suffixElement as HTMLElement)?.offsetWidth || 0;
 
     if (!slot || !entries.length) return;
 
     const container = entries[0]?.contentRect;
+
     const elements = (slot as HTMLSlotElement)?.assignedElements({ flatten: true }) as HTMLElement[];
+
     const lastElement = elements[elements.length - 1];
 
     if (this.backupContainerWidth > 0 && container.width > this.backupContainerWidth) {
@@ -87,7 +94,7 @@ export default class PSmartContainer extends PureElement {
         if (this.dropdownContent.children.length > 0) {
           triggerElementWidth = this.dropdown.offsetWidth;
         }
-        if (el.offsetLeft + el.offsetWidth > container.width - triggerElementWidth) {
+        if (el.offsetLeft + el.offsetWidth + prefixWidth + suffixWidth > container.width - triggerElementWidth) {
           el.dataset.oldWidth = String(el.offsetWidth);
           this.dropdownContent?.appendChild(el);
         }
@@ -116,6 +123,7 @@ export default class PSmartContainer extends PureElement {
 
     // Watch new elements
     this.resizeObserver.observe(containerElement as HTMLElement);
+
     this.observedElements.push(containerElement as HTMLElement);
   }
 
@@ -142,6 +150,9 @@ export default class PSmartContainer extends PureElement {
 
   render() {
     return html` <div class="smart-container" part="base">
+      <div class="smart_container__prefix">
+        <slot name="prefix"></slot>
+      </div>
       <slot></slot>
       <p-dropdown class="smart_container__dropdown">
         <slot name="trigger" slot="trigger">
@@ -153,6 +164,9 @@ export default class PSmartContainer extends PureElement {
           <div class="smart_container__dropdown-content"></div>
         </p-menu>
       </p-dropdown>
+      <div class="smart_container__suffix">
+        <slot name="suffix"></slot>
+      </div>
     </div>`;
   }
 }

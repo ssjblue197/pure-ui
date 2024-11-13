@@ -947,6 +947,23 @@ export default class PCalendar extends PureElement implements PureFormControl {
   @watch("value", { waitUntilFirstUpdate: true })
   handleValueChange() {
     // Select only the options that match the new value
+    if (Array.isArray(this.value)) {
+      this._value = this.value.map(v => {
+        if (typeof v === "string") {
+          //TODO: handle check if can parser value to Date object when format is not provided
+          return this.format ? dateFormatter().to(v, this.format) : new Date(v);
+        } else {
+          return v;
+        }
+      });
+    } else {
+      if (typeof this.value === "string") {
+        this._value = this.format ? dateFormatter().to(this.value, this.format) : new Date(this.value);
+      } else {
+        this._value = this.value;
+      }
+    }
+    this.setSelectedOptions(Array.isArray(this._value) ? this._value : [this._value]);
   }
 
   @watch("open", { waitUntilFirstUpdate: true })
