@@ -115,10 +115,10 @@ export default class POption extends PureElement {
       this.value = String(this.value);
     }
 
-    if (this.value.includes(" ")) {
-      console.error(`Option values cannot include a space. All spaces have been replaced with underscores.`, this);
-      this.value = this.value.replace(/ /g, "_");
-    }
+    // if (this.value.includes(" ")) {
+    //   console.error(`Option values cannot include a space. All spaces have been replaced with underscores.`, this);
+    //   this.value = this.value.replace(/ /g, "_");
+    // }
   }
 
   /** Returns a plain text label based on the option's content. */
