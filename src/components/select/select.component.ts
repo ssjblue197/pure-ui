@@ -160,8 +160,8 @@ export default class PSelect extends PureElement implements PureFormControl {
    */
   @property({
     converter: {
-      fromAttribute: (value: string) => value.split(" "),
-      toAttribute: (value: string[]) => value.join(" "),
+      fromAttribute: (value: string) => value.split(", "),
+      toAttribute: (value: string[]) => value.join(", "),
     },
   })
   value: string | string[] = "";
