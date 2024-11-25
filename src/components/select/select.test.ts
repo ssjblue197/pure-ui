@@ -383,7 +383,7 @@ describe("<p-select>", () => {
     it("should serialize its name and value in FormData when multiple options are selected", async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
-          <p-select name="a" value="option-2 option-3" multiple>
+          <p-select name="a" value="option-2, option-3" multiple>
             <p-option value="option-1">Option 1</p-option>
             <p-option value="option-2">Option 2</p-option>
             <p-option value="option-3">Option 3</p-option>
@@ -412,7 +412,7 @@ describe("<p-select>", () => {
     it("should serialize its name and value in JSON when multiple options are selected", async () => {
       const form = await fixture<HTMLFormElement>(html`
         <form>
-          <p-select name="a" value="option-2 option-3" multiple>
+          <p-select name="a" value="option-2, option-3" multiple>
             <p-option value="option-1">Option 1</p-option>
             <p-option value="option-2">Option 2</p-option>
             <p-option value="option-3">Option 3</p-option>
@@ -533,7 +533,7 @@ describe("<p-select>", () => {
 
   it("should emit p-change and p-input when a tag is removed", async () => {
     const el = await fixture<PSelect>(html`
-      <p-select value="option-1 option-2 option-3" multiple>
+      <p-select value="option-1, option-2, option-3" multiple>
         <p-option value="option-1">Option 1</p-option>
         <p-option value="option-2">Option 2</p-option>
         <p-option value="option-3">Option 3</p-option>
@@ -583,7 +583,7 @@ describe("<p-select>", () => {
 
   it("should have rounded tags when using the pill attribute", async () => {
     const el = await fixture<PSelect>(html`
-      <p-select value="option-1 option-2" multiple pill>
+      <p-select value="option-1, option-2" multiple pill>
         <p-option value="option-1">Option 1</p-option>
         <p-option value="option-2">Option 2</p-option>
         <p-option value="option-3">Option 3</p-option>
