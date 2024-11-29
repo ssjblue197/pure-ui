@@ -1079,7 +1079,7 @@ export default class PSelect extends PureElement implements PureFormControl {
   }
 }
 
-setDefaultAnimation("calendar.show", {
+setDefaultAnimation("select.show", {
   keyframes: [
     { opacity: 0, scale: 0.9 },
     { opacity: 1, scale: 1 },
@@ -1087,7 +1087,7 @@ setDefaultAnimation("calendar.show", {
   options: { duration: 100, easing: "ease" },
 });
 
-setDefaultAnimation("calendar.hide", {
+setDefaultAnimation("select.hide", {
   keyframes: [
     { opacity: 1, scale: 1 },
     { opacity: 0, scale: 0.9 },
