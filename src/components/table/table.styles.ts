@@ -157,6 +157,7 @@ export default css`
 
   .table-cell.table-cell--sticky {
     position: sticky;
+    z-index: 1;
   }
 
   .table-row .table-cell {

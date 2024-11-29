@@ -456,7 +456,6 @@ export default class PTable extends PureElement {
                   right: i?.sticky === "end" ? `${i?.stickyOffset || 0}px` : "unset",
                   borderLeft: i?.sticky === "end" ? "1px solid var(--p-color-gray-200)" : "",
                   borderRight: i?.sticky === "start" ? "1px solid var(--p-color-gray-200)" : "",
-                  zIndex: i?.sticky ? 1 : "inherit",
                 })}
               >
                 ${i?.headerName}
@@ -503,6 +502,7 @@ export default class PTable extends PureElement {
                         <div
                           class=${classMap({
                             "table-cell": true,
+                            "table-cell--sticky": !!k?.sticky,
                             [String(k.classes)]: k.classes || false,
                           })}
                           data-column-index=${idx}
