@@ -438,6 +438,7 @@ export default class PTable extends PureElement {
                 class=${classMap({
                   "table-cell": true,
                   "table-cell--resizable": !!i?.resizable,
+                  "table-cell--sticky": !!i?.sticky,
                 })}
                 data-column-index=${index}
                 style=${styleMap({
@@ -455,6 +456,7 @@ export default class PTable extends PureElement {
                   right: i?.sticky === "end" ? `${i?.stickyOffset || 0}px` : "unset",
                   borderLeft: i?.sticky === "end" ? "1px solid var(--p-color-gray-200)" : "",
                   borderRight: i?.sticky === "start" ? "1px solid var(--p-color-gray-200)" : "",
+                  zIndex: i?.sticky ? 1 : "inherit",
                 })}
               >
                 ${i?.headerName}
