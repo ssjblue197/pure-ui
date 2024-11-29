@@ -210,7 +210,9 @@ export default class PPopup extends PureElement {
 
     // Start the positioner after the first update
     await this.updateComplete;
-    this.start();
+    if (this.active) {
+      this.start();
+    }
   }
 
   disconnectedCallback() {
