@@ -144,6 +144,7 @@ export default class PCheckbox extends PureElement implements PureFormControl {
   handleStateChange() {
     this.input.checked = this.checked; // force a sync update
     this.input.indeterminate = this.indeterminate; // force a sync update
+    this.value = String(this.checked); //Sync value with checked to use form control value
     this.formControlController.updateValidity();
   }
 
