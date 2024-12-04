@@ -9,16 +9,13 @@ toc: false
 <div class="splash-start">
 <img class="splash-logo" src="/assets/images/wordmark.svg" alt="Pure UI">
 
-# <p-visually-hidden>Pure UI:</p-visually-hidden> A forward-thinking library of web components.
+# <p-visually-hidden>Pure UI:</p-visually-hidden> Elevate Your Web Development Experience 🌟
 
-- Works with all frameworks 🧩
-- Works with CDNs 🚛
-- Fully customizable with CSS 🎨
-- Includes a dark theme 🌛
-- Built with accessibility in mind ♿️
-- First-class [React support](/frameworks/react) ⚛️
-- Built-in localization 💬
-- Open source 😸
+- Lightweight, fully customizable 🎨, scalable, and built on modern web standards.
+- Compatible with all frameworks 🧩
+- Support a light/dark theme 🌛
+- Builtin localization 💬
+- Included more advance components: Calendar, Data Table, Form, Smart Container, Combobox and more!
 
 </div>
 <div class="splash-end">

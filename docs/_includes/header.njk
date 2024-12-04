@@ -1,0 +1,36 @@
+<div id="header">
+    <div class="left-header">
+        <img src="{{ assetUrl('images/logo.png') }}" alt="Pure UI" id="logo" />
+        <span class="version">v{{ meta.version }}</span>
+    </div>
+    <span id="slogan">
+    PureUI: Simplify, Customize, Innovate.
+    </span>
+    <div class="right-header">
+    <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
+        <p-icon name="search"></p-icon>
+        <span>Search</span>
+    </button>
+    {# Icon toolbar #}
+    <div id="icon-toolbar">
+      {# GitHub #}
+      <a href="https://github.com/ssjblue197/Pure-UI-Document" title="View Pure UI on GitHub">
+        <p-icon name="github"></p-icon>
+      </a>
+
+      {# Theme selector #}
+      <p-dropdown id="theme-selector" placement="bottom-end" distance="3">
+        <p-button slot="trigger" size="small" variant="text" caret title="Press \ to toggle">
+          <p-icon class="only-light" name="sun-fill"></p-icon>
+          <p-icon class="only-dark" name="moon-fill"></p-icon>
+        </p-button>
+        <p-menu>
+          <p-menu-item type="checkbox" value="light">Light</p-menu-item>
+          <p-menu-item type="checkbox" value="dark">Dark</p-menu-item>
+          <p-divider></p-divider>
+          <p-menu-item type="checkbox" value="auto">System</p-menu-item>
+        </p-menu>
+      </p-dropdown>
+    </div>
+    </div>
+</div>

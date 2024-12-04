@@ -64,65 +64,25 @@
       </svg>
     </button>
 
-    {# Icon toolbar #}
-    <div id="icon-toolbar">
-      {# GitHub #}
-      <a href="https://github.com/ssjblue197/Pure-UI-Document" title="View Pure UI on GitHub">
-        <p-icon name="github"></p-icon>
-      </a>
-
-      {# Theme selector #}
-      <p-dropdown id="theme-selector" placement="bottom-end" distance="3">
-        <p-button slot="trigger" size="small" variant="text" caret title="Press \ to toggle">
-          <p-icon class="only-light" name="sun-fill"></p-icon>
-          <p-icon class="only-dark" name="moon-fill"></p-icon>
-        </p-button>
-        <p-menu>
-          <p-menu-item type="checkbox" value="light">Light</p-menu-item>
-          <p-menu-item type="checkbox" value="dark">Dark</p-menu-item>
-          <p-divider></p-divider>
-          <p-menu-item type="checkbox" value="auto">System</p-menu-item>
-        </p-menu>
-      </p-dropdown>
-    </div>
-
-    <aside id="sidebar" data-preserve-scroll>
-      <header>
-        <a href="/">
-          <img src="{{ assetUrl('images/wordmark.svg') }}" alt="Pure UI" />
-        </a>
-        <div class="sidebar-version">
-          {{ meta.version }}
-        </div>
-      </header>
-
-      <button class="search-box" type="button" title="Press / to search" aria-label="Search" data-plugin="search">
-        <p-icon name="search"></p-icon>
-        <span>Search</span>
-      </button>
-
-      <nav>
-        {% include 'sidebar.njk' %}
-      </nav>
-    </aside>
-
-    {# Content #}
-    <main>
-      <article id="content" class="content{% if toc %} content--with-toc{% endif %}">
-        {% if toc %}
-          <div class="content__toc">
-            <ul>
-              <li class="top"><a href="#">{{ meta.title }}</a></li>
-            </ul>
-          </div>
-        {% endif %}
-
+    <div id="container">
+      {% include 'header.njk' %}
+      <div id="page-content">
+      <aside id="sidebar" data-preserve-scroll>
+        <nav>
+          {% include 'sidebar.njk' %}
+        </nav>
+      </aside>
+      {# Content #}
+      <div id="content">
         <div class="content__body">
           {% block content %}
             {{ content | safe }}
           {% endblock %}
         </div>
-      </article>
-    </main>
+      </div>
+      </div>
+    </div>
+
+
   </body>
 </html>
