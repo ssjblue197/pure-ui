@@ -73,11 +73,21 @@
         </nav>
       </aside>
       {# Content #}
-      <div id="content">
-        <div class="content__body">
-          {% block content %}
-            {{ content | safe }}
-          {% endblock %}
+      <div id="content" class="{% if toc %} content--with-toc{% endif %}">
+        <div class="content--wrapper">
+          <div class="content__body">
+            {% block content %}
+              {{ content | safe }}
+            {% endblock %}
+          </div>
+          {% if toc %}
+            <div class="content__toc">
+              <ul>
+                <li class="top"><a href="#">{{ meta.title }}</a></li>
+              </ul>
+            </div>
+          {% endif %}
+        
         </div>
       </div>
       </div>

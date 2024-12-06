@@ -925,19 +925,14 @@ main {
 }
 
 /* Component layouts */
-.content {
-  display: grid;
-  grid-template-columns: 100%;
-  gap: 2rem;
-  position: relative;
-  max-width: var(--docs-content-max-width);
-  margin: 0 auto;
-}
 
-.content--with-toc {
-  /* There's a 2rem gap, so we need to remove it from the column */
-  grid-template-columns: calc(75% - 2rem) min(25%, var(--docs-content-toc-max-width));
-  max-width: calc(var(--docs-content-max-width) + var(--docs-content-toc-max-width));
+.content--wrapper {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .content__body {
@@ -946,7 +941,7 @@ main {
   max-width: 1200px;
 }
 
-.content:not(.content--with-toc) .content__toc {
+#content:not(.content--with-toc) .content__toc {
   display: none;
 }
 

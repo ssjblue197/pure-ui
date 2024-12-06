@@ -94,7 +94,7 @@
 (() => {
     document.addEventListener("click", event => {
         const link = event.target.closest("a");
-        const id = (link?.hash ?? "").substr(1);
+        const id = (link?.hash?? "").substr(1);
         const isFragment = link?.hasAttribute("href") && link?.getAttribute("href").startsWith("#");
 
         if (!link || !isFragment || link.getAttribute("data-smooth-link") === "false") {
@@ -127,6 +127,7 @@
 (() => {
     // This will be stale if its not a function.
     const getLinks = () => [...document.querySelectorAll(".content__toc a")];
+    console.log("getLinks()", getLinks());
     const linkTargets = new WeakMap();
     const visibleTargets = new WeakSet();
     const observer = new IntersectionObserver(handleIntersect, {
