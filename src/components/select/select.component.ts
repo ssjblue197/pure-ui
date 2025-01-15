@@ -923,6 +923,8 @@ export default class PSelect extends PureElement implements PureFormControl {
 
   render() {
     const hasLabelSlot = this.hasSlotController.test("label");
+    const hasPrependRowSlot = this.hasSlotController.test("prepend-row");
+    const hasAppendRowSlot = this.hasSlotController.test("append-row");
     const hasHelpTextSlot = this.hasSlotController.test("help-text");
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
@@ -1061,7 +1063,13 @@ export default class PSelect extends PureElement implements PureFormControl {
               @mouseup=${this.handleOptionClick}
               @slotchange=${this.handleDefaultSlotChange}
             >
+              ${hasPrependRowSlot
+                ? html`<slot name="prepend-row" class="listbox__prepend" part="prepend-row"></slot>`
+                : null}
               <slot></slot>
+              ${hasAppendRowSlot
+                ? html`<slot name="append-row" class="listbox__append" part="append-row"></slot>`
+                : null}
             </div>
           </p-popup>
         </div>

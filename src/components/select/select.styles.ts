@@ -339,4 +339,19 @@ export default css`
     padding-block: var(--p-spacing-2x-small);
     padding-inline: var(--p-spacing-x-large);
   }
+
+  .listbox__prepend {
+    display: block;
+    padding: var(--p-spacing-x-small) var(--p-spacing-x-large);
+    position: "sticky";
+    top: 0;
+    border-bottom: 1px solid var(--p-panel-border-color);
+  }
+  .listbox__append {
+    display: block;
+    padding: var(--p-spacing-x-small) var(--p-spacing-x-large);
+    position: "sticky";
+    bottom: 0;
+    border-top: 1px solid var(--p-panel-border-color);
+  }
 `;

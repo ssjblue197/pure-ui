@@ -950,6 +950,7 @@ main {
   display: flex;
   flex-direction: column;
   margin-top: 0;
+  min-width: 260px;
 }
 
 .content__toc ul {
