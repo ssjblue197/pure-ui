@@ -1050,23 +1050,23 @@ export default class PSelect extends PureElement implements PureFormControl {
                 <p-icon library="system" name="chevron-down"></p-icon>
               </slot>
             </div>
-
-            <div
-              id="listbox"
-              role="listbox"
-              aria-expanded=${this.open ? "true" : "false"}
-              aria-multiselectable=${this.multiple ? "true" : "false"}
-              aria-labelledby="label"
-              part="listbox"
-              class="select__listbox"
-              tabindex="-1"
-              @mouseup=${this.handleOptionClick}
-              @slotchange=${this.handleDefaultSlotChange}
-            >
+            <div class="select__listbox">
               ${hasPrependRowSlot
                 ? html`<slot name="prepend-row" class="listbox__prepend" part="prepend-row"></slot>`
                 : null}
-              <slot></slot>
+              <div
+                id="listbox"
+                role="listbox"
+                aria-expanded=${this.open ? "true" : "false"}
+                aria-multiselectable=${this.multiple ? "true" : "false"}
+                aria-labelledby="label"
+                part="listbox"
+                tabindex="-1"
+                @mouseup=${this.handleOptionClick}
+                @slotchange=${this.handleDefaultSlotChange}
+              >
+                <slot></slot>
+              </div>
               ${hasAppendRowSlot
                 ? html`<slot name="append-row" class="listbox__append" part="append-row"></slot>`
                 : null}
