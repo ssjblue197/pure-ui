@@ -13,6 +13,7 @@ layout: component
   <p-option value="option-4">Option 4</p-option>
   <p-option value="option-5">Option 5</p-option>
   <p-option value="option-6">Option 6</p-option>
+  <div slot="append-row">Append row</div>
 </p-select>
 ```
 

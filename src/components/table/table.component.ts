@@ -399,6 +399,7 @@ export default class PTable extends PureElement {
         class=${classMap({
           table: true,
         })}
+        part="table"
         style="grid-template-columns: repeat(${this.options?.selectable
           ? this.options.columns.length + 1
           : this.options.columns.length}, auto); max-height: ${this.options?.maxHeight || "unset"};
