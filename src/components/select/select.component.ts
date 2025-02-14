@@ -1050,7 +1050,7 @@ export default class PSelect extends PureElement implements PureFormControl {
                 <p-icon library="system" name="chevron-down"></p-icon>
               </slot>
             </div>
-            <div class="select__listbox">
+            <div class="select__listbox" part="select__listbox">
               ${hasPrependRowSlot
                 ? html`<slot name="prepend-row" class="listbox__prepend" part="prepend-row"></slot>`
                 : null}
