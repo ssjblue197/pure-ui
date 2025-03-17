@@ -384,6 +384,12 @@ export default class PTable extends PureElement {
     });
   }
 
+  private handleRowClick(e: Event, r: TableRowData) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.emit("click", { detail: { row: r } });
+  }
+
   getSelectedRows() {
     return this.selectedRows;
   }
@@ -478,6 +484,7 @@ export default class PTable extends PureElement {
                       "table-row": true,
                     })}
                     .data-row=${i}
+                    @click=${(e: Event) => this.handleRowClick(e, i)}
                   >
                     ${this.options?.selectable
                       ? html`

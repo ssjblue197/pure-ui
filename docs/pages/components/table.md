@@ -15,6 +15,10 @@ layout: component
 <script>
   const table = document.querySelector('.table-example');
 
+  table.addEventListener('click', (e) => {
+    console.log(e);
+  })
+
   table.loading = true;
 
   table.options = {
@@ -26,9 +30,8 @@ layout: component
     alignItems: 'center',
     justifyContent: 'flex-start',
     resizable: true,
-    width: '150px',
     minWidth: '120px',
-    maxWidth: '300px'
+    sticky: 'start'
   },{field: 'age',
     id: 'age',
     headerName: 'Age',

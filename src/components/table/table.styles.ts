@@ -21,7 +21,7 @@ export default css`
 
     --table-row-hover-background-color: var(--p-color-primary-50);
     --table-cell-background-color: var(--p-color-neutral-0);
-    --table-cell-hover-background-color: var(--p-color-neutral0);
+    --table-cell-hover-background-color: var(--p-color-primary-50);
 
     --table-cell-min-height: 40px;
     --table-cell-max-height: 1fr;
@@ -101,9 +101,9 @@ export default css`
       var(--table-border-horizontal-color);
   }
 
-  // .table-row:hover .table-cell {
-  //   background-color: var(--table-row-hover-background-color);
-  // }
+  .table-row:hover .table-cell {
+    background-color: var(--table-row-hover-background-color);
+  }
 
   .table-row:not(:last-child) .table-cell {
     border-bottom: var(--table-border-horizontal-width) var(--table-border-horizontal-style)
@@ -157,7 +157,7 @@ export default css`
 
   .table-cell.table-cell--sticky {
     position: sticky;
-    z-index: 1;
+    z-index: 2 !important;
   }
 
   .table-row .table-cell {
