@@ -102,7 +102,7 @@ export default css`
   }
 
   .table-row:hover .table-cell {
-    background-color: var(--table-row-hover-background-color);
+    background-color: var(--table-row-hover-background-color) !important;
   }
 
   .table-row:not(:last-child) .table-cell {
@@ -160,12 +160,22 @@ export default css`
     z-index: 2 !important;
   }
 
+  .table-cell.table-cell--sticky::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--table-border-horizontal-color); /* Border color */
+  }
+
   .table-row .table-cell {
     background-color: var(--table-cell-background-color);
   }
 
   .table-row .table-cell:hover {
-    background-color: var(--table-cell-hover-background-color);
+    background-color: var(--table-cell-hover-background-color) !important;
   }
 
   .table-loading,

@@ -461,8 +461,8 @@ export default class PTable extends PureElement {
                   position: i?.sticky ? "sticky" : "relative",
                   left: i?.sticky === "start" ? `${i?.stickyOffset || 0}px` : "unset",
                   right: i?.sticky === "end" ? `${i?.stickyOffset || 0}px` : "unset",
-                  borderLeft: i?.sticky === "end" ? "1px solid var(--p-color-gray-200)" : "",
-                  borderRight: i?.sticky === "start" ? "1px solid var(--p-color-gray-200)" : "",
+                  borderLeft: i?.sticky === "end" ? "1px solid var(--p-color-gray-200)" : "unset",
+                  borderRight: i?.sticky === "start" ? "1px solid var(--p-color-gray-200)" : "unset",
                 })}
               >
                 ${i?.headerName}
