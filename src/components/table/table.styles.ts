@@ -153,6 +153,8 @@ export default css`
     font-weight: var(--p-font-weight-normal);
     font-size: var(--p-font-size-small);
     padding: var(--table-body-cell-padding);
+    min-height: round(var(--table-cell-min-height), 1px);
+    max-height: round(var(--table-cell-max-height), 1px);
   }
 
   .table-cell.table-cell--sticky {
