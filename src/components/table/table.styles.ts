@@ -160,16 +160,6 @@ export default css`
     z-index: 2 !important;
   }
 
-  .table-cell.table-cell--sticky::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: var(--table-border-horizontal-color); /* Border color */
-  }
-
   .table-row .table-cell {
     background-color: var(--table-cell-background-color);
   }
