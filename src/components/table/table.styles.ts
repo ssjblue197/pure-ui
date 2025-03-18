@@ -19,6 +19,7 @@ export default css`
     --table-border-style: solid;
     --table-border-radius: var(--p-border-radius-x-large);
 
+    --table-row-expand-background-color: var(--p-color-gray-50);
     --table-row-hover-background-color: var(--p-color-primary-50);
     --table-cell-background-color: var(--p-color-neutral-0);
     --table-cell-hover-background-color: var(--p-color-primary-50);
@@ -110,20 +111,40 @@ export default css`
       var(--table-border-horizontal-color);
   }
 
-  .table-row-expanded {
+  .table-row-expand {
     grid-column: 1 / -1;
     position: relative;
     overflow: hidden;
-    border-bottom: var(--table-border-horizontal-width) var(--table-border-horizontal-style)
-      var(--table-border-horizontal-color);
+    height: 0px;
+    transition: height 0.5s ease;
+    will-change: auto;
   }
 
-  .table-row-expand-icon {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 50%);
+  .table-row-expand:hover {
+    background-color: var(--table-row-hover-background-color) !important;
+  }
+
+  .table-row-expand.table-row-expand--is-open {
+    padding: var(--table-header-cell-padding);
+    border-bottom: var(--table-border-horizontal-width) var(--table-border-horizontal-style)
+      var(--table-border-horizontal-color);
+    background-color: var(--table-row-expand-background-color);
+    height: auto !important;
+  }
+
+  .row-expand-icon-container {
+    position: relative;
     cursor: pointer;
+    transition: transform 0.5s ease;
+    transform: rotate(0);
+    transform-origin: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .row-expand-icon-container.row-expand-icon-container--is-open {
+    transform: rotate(180deg);
   }
 
   .table-footer {

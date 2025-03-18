@@ -50,6 +50,7 @@ export interface TableOptions<T> {
   hideFooter?: boolean;
   paginate?: boolean;
   expandable?: boolean;
+  rowExpandRender?: (T: unknown) => string;
   onRowExpand?: (row: T) => symbol | HTMLTemplateResult | undefined;
   onRowCollapse?: (row: T) => symbol | HTMLTemplateResult | undefined;
 }

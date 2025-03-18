@@ -14,6 +14,7 @@ import PureElement from "../../internal/pure-ui-element.js";
 import styles from "./table.styles.js";
 import type { CSSResultGroup } from "lit";
 import type { TableOptions, TableRowData } from "./table.ts";
+// import { scrollIntoView } from "../../internal/scroll";
 
 /**
  * @summary The Table component is used to display data in a table format.
@@ -390,6 +391,20 @@ export default class PTable extends PureElement {
     this.emit("click", { detail: { row: r } });
   }
 
+  private handleExpandRow(e: Event, rIndex: number) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log(this.options);
+    const rowElement = this.shadowRoot!.querySelector(`[data-row-index="${rIndex}"]`);
+    if (rowElement) {
+      const expandRow = rowElement.parentElement!.querySelector(".table-row-expand");
+      const expandIcon = rowElement.querySelector(".row-expand-icon-container");
+      expandIcon!.classList.toggle("row-expand-icon-container--is-open");
+      expandRow!.classList.toggle("table-row-expand--is-open");
+    }
+    this.requestUpdate();
+  }
+
   getSelectedRows() {
     return this.selectedRows;
   }
@@ -406,9 +421,9 @@ export default class PTable extends PureElement {
           table: true,
         })}
         part="table"
-        style="grid-template-columns: repeat(${this.options?.selectable
-          ? this.options.columns.length + 1
-          : this.options.columns.length}, auto); max-height: ${this.options?.maxHeight || "unset"};
+        style="grid-template-columns: repeat(${this.options.columns.length +
+        (this.options?.selectable ? 1 : 0) +
+        (this.options?.expandable ? 1 : 0)}, auto); max-height: ${this.options?.maxHeight || "unset"};
           min-height: ${this.options?.minHeight || "auto"};
           "
       >
@@ -469,6 +484,20 @@ export default class PTable extends PureElement {
               </div>
             `,
           )}
+          ${this.options?.expandable
+            ? html`
+                <div
+                  class=${classMap({
+                    "table-cell": true,
+                  })}
+                  style=${styleMap({
+                    width: "auto",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  })}
+                ></div>
+              `
+            : ""}
         </div>
         <div
           class=${classMap({
@@ -477,13 +506,14 @@ export default class PTable extends PureElement {
           part="table-body"
         >
           ${!this.loading && this.currentItems.length > 0
-            ? this.currentItems.map(
-                i => html`
+            ? this.currentItems.map((i, rIdx) => {
+                const rowElement = html`
                   <div
                     class=${classMap({
                       "table-row": true,
                     })}
                     .data-row=${i}
+                    data-row-index=${rIdx}
                     @click=${(e: Event) => this.handleRowClick(e, i)}
                   >
                     ${this.options?.selectable
@@ -535,9 +565,39 @@ export default class PTable extends PureElement {
                         </div>
                       `,
                     )}
+                    ${this.options?.expandable
+                      ? html`
+                          <div
+                            class=${classMap({
+                              "table-cell": true,
+                            })}
+                            style=${styleMap({
+                              width: "auto",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              cursor: "pointer",
+                            })}
+                            @click=${(e: Event) => this.handleExpandRow(e, rIdx)}
+                          >
+                            <span class="row-expand-icon-container">
+                              <slot name="row-expand-icon">
+                                <p-icon name="chevron-down"></p-icon>
+                              </slot>
+                            </span>
+                          </div>
+                        `
+                      : ""}
                   </div>
-                `,
-              )
+                `;
+                const rowExpandElement = html` <div
+                  class=${classMap({
+                    "table-row-expand": true,
+                  })}
+                >
+                  ${this.options.rowExpandRender ? this.options.rowExpandRender(i) : ""}
+                </div>`;
+                return html` <div style="display: contents;">${rowElement} ${rowExpandElement}</div> `;
+              })
             : ""}
         </div>
       </div>

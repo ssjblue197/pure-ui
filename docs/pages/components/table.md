@@ -24,14 +24,16 @@ layout: component
   table.options = {
     paginate: true,
     selectable: true,
+    expandable:  true,
+    rowExpandRender: (row) => {
+      return `${String(row)}`;
+    },
     columns: [{field: 'name',
     id: 'name',
     headerName: 'Full name',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    resizable: true,
     minWidth: '120px',
-    sticky: 'start'
   },{field: 'age',
     id: 'age',
     headerName: 'Age',
