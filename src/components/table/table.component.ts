@@ -489,6 +489,7 @@ export default class PTable extends PureElement {
                 <div
                   class=${classMap({
                     "table-cell": true,
+                    "table-cell--sticky": true,
                   })}
                   style=${styleMap({
                     width: "auto",
@@ -570,12 +571,16 @@ export default class PTable extends PureElement {
                           <div
                             class=${classMap({
                               "table-cell": true,
+                              "table-cell--sticky": true,
                             })}
                             style=${styleMap({
                               width: "auto",
                               alignItems: "center",
                               justifyContent: "center",
                               cursor: "pointer",
+                              position: "sticky",
+                              right: 0,
+                              // borderLeft: "1px solid var(--p-color-gray-50)",
                             })}
                             @click=${(e: Event) => this.handleExpandRow(e, rIdx)}
                           >
