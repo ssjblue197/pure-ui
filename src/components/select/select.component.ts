@@ -714,7 +714,7 @@ export default class PSelect extends PureElement implements PureFormControl {
     if (this.multiple) {
       this.value = this.selectedOptions.map(el => el.value);
       // this.placeholder = this.localize.term("numOptionsSelected", this.selectedOptions.length);
-      this.displayLabel = this.placeholder;
+      // this.displayLabel = this.placeholder;
     } else {
       this.value = this.selectedOptions[0]?.value ?? "";
       this.placeholder = this.selectedOptions[0]?.getTextLabel() ?? "";
