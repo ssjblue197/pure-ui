@@ -773,6 +773,12 @@ export default class PSelect extends PureElement implements PureFormControl {
     const allOptions = this.getAllOptions();
     const value = Array.isArray(this.value) ? this.value : [this.value];
 
+    if (value.length > 0) {
+      this.displayInput.setAttribute("placeholder", "");
+    } else {
+      this.displayInput.setAttribute("placeholder", this.placeholder);
+    }
+
     this.setSelectedOptions(allOptions.filter(el => value.includes(el.value)));
   }
 

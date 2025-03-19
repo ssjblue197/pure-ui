@@ -125,7 +125,6 @@ export default css`
   }
 
   .table-row-expand.table-row-expand--is-open {
-    padding: var(--table-header-cell-padding);
     border-bottom: var(--table-border-horizontal-width) var(--table-border-horizontal-style)
       var(--table-border-horizontal-color);
     background-color: var(--table-row-expand-background-color);
