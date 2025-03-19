@@ -120,10 +120,6 @@ export default css`
     will-change: auto;
   }
 
-  .table-row-expand:hover {
-    background-color: var(--table-row-hover-background-color) !important;
-  }
-
   .table-row-expand.table-row-expand--is-open {
     border-bottom: var(--table-border-horizontal-width) var(--table-border-horizontal-style)
       var(--table-border-horizontal-color);
