@@ -807,7 +807,7 @@ export default class PSelect extends PureElement implements PureFormControl {
       await animateTo(this.popup.popup, keyframes, options);
       // Make sure the current option is scrolled into view (required for Safari)
       if (this.currentOption) {
-        scrollIntoView(this.currentOption, this.listbox, "vertical", "smooth");
+        scrollIntoView(this.currentOption, this.listbox, "vertical", "auto");
       }
 
       this.emit("p-after-show");
