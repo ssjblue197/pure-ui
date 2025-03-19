@@ -443,7 +443,7 @@ export default class PTable extends PureElement {
                   style=${styleMap({
                     width: "auto",
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: "flex-start",
                   })}
                 >
                   <p-checkbox
@@ -513,6 +513,7 @@ export default class PTable extends PureElement {
                     class=${classMap({
                       "table-row": true,
                     })}
+                    part="table-row"
                     .data-row=${i}
                     data-row-index=${rIdx}
                     @click=${(e: Event) => this.handleRowClick(e, i)}
@@ -526,8 +527,9 @@ export default class PTable extends PureElement {
                             style=${styleMap({
                               width: "auto",
                               alignItems: "center",
-                              justifyContent: "center",
+                              justifyContent: "flex-start",
                             })}
+                            part="table-cell"
                           >
                             <p-checkbox
                               ?checked=${this.selectedRows.includes(i)}
@@ -544,6 +546,7 @@ export default class PTable extends PureElement {
                             "table-cell--sticky": !!k?.sticky,
                             [String(k.classes)]: k.classes || false,
                           })}
+                          part="table-cell"
                           data-column-index=${idx}
                           style=${styleMap({
                             width: k?.width || "auto",
@@ -573,6 +576,7 @@ export default class PTable extends PureElement {
                               "table-cell": true,
                               "table-cell--sticky": true,
                             })}
+                            part="table-cell"
                             style=${styleMap({
                               width: "auto",
                               alignItems: "center",
