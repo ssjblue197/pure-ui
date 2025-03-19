@@ -13,6 +13,18 @@ layout: component
   <p-option value="option-4">Option 4</p-option>
   <p-option value="option-5">Option 5</p-option>
   <p-option value="option-6">Option 6</p-option>
+  <p-option value="option-11">Option 11</p-option>
+  <p-option value="option-21">Option 21</p-option>
+  <p-option value="option-31">Option 31</p-option>
+  <p-option value="option-41">Option 41</p-option>
+  <p-option value="option-51">Option 51</p-option>
+  <p-option value="option-61">Option 61</p-option>
+  <p-option value="option-12">Option 12</p-option>
+  <p-option value="option-22">Option 22</p-option>
+  <p-option value="option-32">Option 32</p-option>
+  <p-option value="option-42">Option 42</p-option>
+  <p-option value="option-52">Option 52</p-option>
+  <p-option value="option-62">Option 62</p-option>
   <div slot="append-row">Append row</div>
 </p-select>
 ```
