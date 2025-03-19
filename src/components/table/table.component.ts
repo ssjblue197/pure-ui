@@ -576,7 +576,7 @@ export default class PTable extends PureElement {
                             style=${styleMap({
                               width: "auto",
                               alignItems: "center",
-                              justifyContent: "center",
+                              justifyContent: "flex-end",
                               cursor: "pointer",
                               position: "sticky",
                               right: 0,
