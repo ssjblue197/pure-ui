@@ -208,7 +208,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
    */
   @property({ type: Array }) _value: Date | Date[] = [];
 
-  @property({ type: String, reflect: true }) weekStartsWith = "monday";
+  @property({ type: String, reflect: true, attribute: "week-starts-with" }) weekStartsWith = "monday";
 
   static get properties() {
     return {
@@ -1253,7 +1253,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
 
         ${this.interface === "day"
           ? html`<div class="calendar__days">
-              ${[0, 1, 2, 3, 4, 5, 6].map(day => {
+              ${(this.weekStartsWith === "sunday" ? [6, 0, 1, 2, 3, 4, 5] : [0, 1, 2, 3, 4, 5, 6]).map(day => {
                 return html`
                   <span
                     part=${partMap({

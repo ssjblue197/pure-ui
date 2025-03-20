@@ -586,13 +586,21 @@ export default class PTable extends PureElement {
                               right: 0,
                               // borderLeft: "1px solid var(--p-color-gray-50)",
                             })}
-                            @click=${(e: Event) => this.handleExpandRow(e, rIdx)}
+                            @click=${(e: Event) => {
+                              if (this.options?.rowExpandable!(i)) {
+                                this.handleExpandRow(e, rIdx);
+                              }
+                            }}
                           >
-                            <span class="row-expand-icon-container">
-                              <slot name="row-expand-icon">
-                                <p-icon name="chevron-down"></p-icon>
-                              </slot>
-                            </span>
+                            ${this.options?.rowExpandable!(i)
+                              ? html`
+                                  <span class="row-expand-icon-container">
+                                    <slot name="row-expand-icon">
+                                      <p-icon name="chevron-down"></p-icon>
+                                    </slot>
+                                  </span>
+                                `
+                              : ""}
                           </div>
                         `
                       : ""}
