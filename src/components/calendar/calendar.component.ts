@@ -208,6 +208,8 @@ export default class PCalendar extends PureElement implements PureFormControl {
    */
   @property({ type: Array }) _value: Date | Date[] = [];
 
+  @property({ type: String, reflect: true }) weekStartsWith = "monday";
+
   static get properties() {
     return {
       value: { type: Object },
@@ -823,6 +825,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
     return [
       ...generateCalendarGrid(this.year, this.month, {
         interface: this.interface,
+        weekStartsWith: this.weekStartsWith,
       }),
     ];
   }
@@ -1152,7 +1155,9 @@ export default class PCalendar extends PureElement implements PureFormControl {
     const month = new Date(this.year, this.month - 1, 1);
     const calendarGrid = generateCalendarGrid(this.year, this.month, {
       interface: this.interface,
+      weekStartsWith: this.weekStartsWith,
     });
+
     const dayNames = getAllDayNames(lang, this.dayLabels);
 
     const hasNavigateMonth = ["day"].includes(this.interface);

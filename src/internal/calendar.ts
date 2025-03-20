@@ -15,7 +15,7 @@ export interface CalendarDay {
 export type CalendarInterface = "day" | "month" | "year";
 
 export interface CalendarGridOptions {
-  weekStartsWith: "sunday" | "monday";
+  weekStartsWith: string; //"sunday" | "monday"
   interface: CalendarInterface;
 }
 
@@ -23,7 +23,8 @@ export interface CalendarGridOptions {
 export function generateCalendarGrid(year: number, month: number, options?: Partial<CalendarGridOptions>) {
   const weekStartsWith = options?.weekStartsWith || "sunday";
   const today = new Date();
-  const dayThisMonthStartsWith = new Date(year, month - 1, 1).getDay();
+  const dayThisMonthStartsWith =
+    weekStartsWith === "sunday" ? new Date(year, month - 1, 1).getDay() : new Date(year, month - 1, 1).getDay() - 1;
   const lastDayOfMonth = new Date(year, month, 0).getDate();
   const lastDayOfPreviousMonth =
     month === 1 ? new Date(year - 1, 1, 0).getDate() : new Date(year, month - 1, 0).getDate();
@@ -112,6 +113,8 @@ export function generateCalendarGrid(year: number, month: number, options?: Part
     default:
       break;
   }
+
+  console.log("calendarGrid", calendarGrid);
 
   return calendarGrid;
 }
