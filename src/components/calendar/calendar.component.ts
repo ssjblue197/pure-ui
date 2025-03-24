@@ -421,7 +421,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
     super.connectedCallback();
     // Because this is a form control, it shouldn't be opened initially
     this.open = false;
-    if (this.placeholder) {
+    if (!this.placeholder) {
       this.placeholder = this.type === "range" ? `${this.format} - ${this.format}` : this.format;
     }
 
