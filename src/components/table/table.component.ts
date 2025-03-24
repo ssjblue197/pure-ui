@@ -394,7 +394,6 @@ export default class PTable extends PureElement {
   private handleExpandRow(e: Event, rIndex: number) {
     e.preventDefault();
     e.stopPropagation();
-    console.log(this.options);
     const rowElement = this.shadowRoot!.querySelector(`[data-row-index="${rIndex}"]`);
     if (rowElement) {
       const expandRow = rowElement.parentElement!.querySelector(".table-row-expand");
@@ -592,7 +591,7 @@ export default class PTable extends PureElement {
                               }
                             }}
                           >
-                            ${this.options?.rowExpandable!(i)
+                            ${ this.options?.rowExpandable && this.options?.rowExpandable(i)
                               ? html`
                                   <span class="row-expand-icon-container">
                                     <slot name="row-expand-icon">

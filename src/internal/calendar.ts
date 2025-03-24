@@ -114,8 +114,6 @@ export function generateCalendarGrid(year: number, month: number, options?: Part
       break;
   }
 
-  console.log("calendarGrid", calendarGrid);
-
   return calendarGrid;
 }
 
