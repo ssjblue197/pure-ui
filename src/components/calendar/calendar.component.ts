@@ -421,7 +421,9 @@ export default class PCalendar extends PureElement implements PureFormControl {
     super.connectedCallback();
     // Because this is a form control, it shouldn't be opened initially
     this.open = false;
-    this.placeholder = this.type === "range" ? `${this.format} - ${this.format}` : this.format;
+    if (this.placeholder) {
+      this.placeholder = this.type === "range" ? `${this.format} - ${this.format}` : this.format;
+    }
 
     if (Array.isArray(this.value)) {
       this._value = this.value.map(v => {
@@ -959,9 +961,19 @@ export default class PCalendar extends PureElement implements PureFormControl {
           return v;
         }
       });
+      if (this.value.length > 0) {
+        this.displayInput.setAttribute("placeholder", "");
+      } else {
+        this.displayInput.setAttribute("placeholder", this.placeholder);
+      }
     } else {
       if (typeof this.value === "string") {
         this._value = this.format ? dateFormatter().to(this.value, this.format) : new Date(this.value);
+        if (this.value.length > 0) {
+          this.displayInput.setAttribute("placeholder", "");
+        } else {
+          this.displayInput.setAttribute("placeholder", this.placeholder);
+        }
       } else {
         this._value = this.value;
       }

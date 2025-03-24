@@ -591,7 +591,7 @@ export default class PTable extends PureElement {
                               }
                             }}
                           >
-                            ${ this.options?.rowExpandable && this.options?.rowExpandable(i)
+                            ${this.options?.rowExpandable && this.options?.rowExpandable(i)
                               ? html`
                                   <span class="row-expand-icon-container">
                                     <slot name="row-expand-icon">
