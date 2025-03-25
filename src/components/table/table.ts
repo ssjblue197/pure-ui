@@ -16,6 +16,7 @@ export interface ColumnConfig {
   comparator?: (T: unknown) => void;
   filter?: boolean;
   headerName?: string;
+  headerRender?: (T: unknown) => string;
   width?: string;
   minWidth?: string;
   maxWidth?: string;

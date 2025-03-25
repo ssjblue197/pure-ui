@@ -479,7 +479,7 @@ export default class PTable extends PureElement {
                   borderRight: i?.sticky === "start" ? "1px solid var(--p-color-gray-200)" : "unset",
                 })}
               >
-                ${i?.headerName}
+                ${i?.headerRender ? i?.headerRender(i) : i?.headerName}
               </div>
             `,
           )}
