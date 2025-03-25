@@ -386,7 +386,7 @@ export default class PTable extends PureElement {
   }
 
   private handleRowClick(e: Event, r: TableRowData) {
-    e.preventDefault();
+    // e.preventDefault();
     e.stopPropagation();
     this.emit("click", { detail: { row: r } });
   }
