@@ -776,7 +776,7 @@ export default class PSelect extends PureElement implements PureFormControl {
     if (this.multiple) {
       value = Array.isArray(this.value) ? this.value : [];
     } else {
-      value = [this.value];
+      value = Array.isArray(this.value) ? this.value : [this.value];
     }
 
     if (value.length > 0) {
