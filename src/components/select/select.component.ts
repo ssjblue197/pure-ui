@@ -771,7 +771,7 @@ export default class PSelect extends PureElement implements PureFormControl {
   @watch("value", { waitUntilFirstUpdate: true })
   handleValueChange() {
     const allOptions = this.getAllOptions();
-    const value = Array.isArray(this.value) ? this.value : [this.value];
+    const value = Array.isArray(this.value) ? this.value : this.value ? [this.value] : [];
 
     if (value.length > 0) {
       this.displayInput.setAttribute("placeholder", "");
