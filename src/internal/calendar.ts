@@ -23,11 +23,13 @@ export interface CalendarGridOptions {
 export function generateCalendarGrid(year: number, month: number, options?: Partial<CalendarGridOptions>) {
   const weekStartsWith = options?.weekStartsWith || "sunday";
   const today = new Date();
-  const dayThisMonthStartsWith =
-    weekStartsWith === "sunday" ? new Date(year, month - 1, 1).getDay() : new Date(year, month - 1, 1).getDay() - 1;
+  const firstOfMonth = new Date(year, month - 1, 1);
+  const dayThisMonthStartsWith = weekStartsWith === "sunday" ? firstOfMonth.getDay() : (firstOfMonth.getDay() + 6) % 7;
+
   const lastDayOfMonth = new Date(year, month, 0).getDate();
   const lastDayOfPreviousMonth =
-    month === 1 ? new Date(year - 1, 1, 0).getDate() : new Date(year, month - 1, 0).getDate();
+    month === 1 ? new Date(year - 1, 12, 0).getDate() : new Date(year, month - 1, 0).getDate();
+
   const calendarGrid: CalendarDay[] = [];
   let day = 1;
 
@@ -35,35 +37,24 @@ export function generateCalendarGrid(year: number, month: number, options?: Part
     case "day":
       do {
         const date = new Date(year, month - 1, day);
-        let dayOfWeek = new Date(year, month - 1, day).getDay();
-
-        if (weekStartsWith === "sunday") {
-          //
-          // TODO
-          //
-        }
-
-        // Days in the previous month
+        // Fill in days from previous month
         if (day === 1) {
           let lastMonthDay = lastDayOfPreviousMonth - dayThisMonthStartsWith + 1;
-
           for (let i = 0; i < dayThisMonthStartsWith; i++) {
-            const dayOfLastMonth = new Date(year, month - 2, lastMonthDay);
-
+            const d = new Date(year, month - 2, lastMonthDay++);
             calendarGrid.push({
-              date: dayOfLastMonth,
-              isToday: isSameDay(dayOfLastMonth, today),
-              isWeekday: isWeekday(dayOfLastMonth),
-              isWeekend: isWeekend(dayOfLastMonth),
+              date: d,
+              isToday: isSameDay(d, today),
+              isWeekday: isWeekday(d),
+              isWeekend: isWeekend(d),
               isCurrentMonth: false,
               isPreviousMonth: true,
               isNextMonth: false,
             });
-
-            lastMonthDay++;
           }
         }
 
+        // Current month
         calendarGrid.push({
           date,
           isToday: isSameDay(date, today),
@@ -74,32 +65,30 @@ export function generateCalendarGrid(year: number, month: number, options?: Part
           isNextMonth: false,
         });
 
-        // Days in the next month
+        // Fill in days from next month
         if (day === lastDayOfMonth) {
           let nextMonthDay = 1;
-          for (dayOfWeek; dayOfWeek < 6; dayOfWeek++) {
-            const dayOfNextMonth = new Date(year, month, nextMonthDay);
-
+          while (calendarGrid.length % 7 !== 0) {
+            const d = new Date(year, month, nextMonthDay++);
             calendarGrid.push({
-              date: dayOfNextMonth,
-              isToday: isSameDay(dayOfNextMonth, today),
-              isWeekday: isWeekday(dayOfNextMonth),
-              isWeekend: isWeekend(dayOfNextMonth),
+              date: d,
+              isToday: isSameDay(d, today),
+              isWeekday: isWeekday(d),
+              isWeekend: isWeekend(d),
               isCurrentMonth: false,
               isPreviousMonth: false,
               isNextMonth: true,
             });
-
-            nextMonthDay++;
           }
         }
 
         day++;
       } while (day <= lastDayOfMonth);
       break;
+
     case "month":
-      Array.from({ length: 12 }).map((_: number, idx: number) => {
-        return calendarGrid.push({
+      Array.from({ length: 12 }).forEach((_, idx) => {
+        calendarGrid.push({
           date: new Date(year, idx, 1),
           isToday: false,
           isWeekday: false,
@@ -109,8 +98,6 @@ export function generateCalendarGrid(year: number, month: number, options?: Part
           isNextMonth: false,
         });
       });
-      break;
-    default:
       break;
   }
 

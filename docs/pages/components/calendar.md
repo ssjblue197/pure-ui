@@ -8,6 +8,8 @@ layout: component
 ```html:preview
 <p-calendar type="single" class="calendar-preview"
   format="YYYY-MM-DD"
+  show-adjacent-dates
+  week-starts-with="sunday"
 >
   <div slot="footer"></div>
 </p-calendar>
@@ -18,7 +20,7 @@ layout: component
   const today = new Date();
 
   calendar.value = [
-    '2025-03-20',
+    '2025-04-09',
   ];
 
   calendar.addEventListener('p-change', (e) => {
