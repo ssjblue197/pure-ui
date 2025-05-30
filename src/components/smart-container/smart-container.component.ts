@@ -1,4 +1,5 @@
 import { classMap } from "lit/directives/class-map.js";
+import { HasSlotController } from "../../internal/slot.js";
 import { html } from "lit";
 import { property, query } from "lit/decorators.js";
 import { watch } from "../../internal/watch.js";
@@ -9,6 +10,7 @@ import PIcon from "../icon/icon.js";
 import PureElement from "../../internal/pure-ui-element.js";
 import styles from "./smart-container.styles.js";
 import type { CSSResultGroup } from "lit";
+
 
 /**
  * @summary This is a responsive container component that handles dynamic content overflow and provides an interactive dropdown menu for hidden items. It observes and manages content inside its slots, automatically adjusting the layout to handle overflow situations..
@@ -30,6 +32,8 @@ export default class PSmartContainer extends PureElement {
   private resizeObserver: ResizeObserver;
   private observedElements: HTMLElement[] = [];
   private backupContainerWidth: number = 0;
+
+  private readonly hasSlotController = new HasSlotController(this, "prefix", "suffix");
 
   static dependencies = {
     "p-dropdown": PDropdown,
@@ -177,7 +181,9 @@ export default class PSmartContainer extends PureElement {
   protected firstUpdated(): void {
     this.startObserver();
     // Trigger initial resize
-    this.smartContainer.dispatchEvent(new Event("resize"));
+    setTimeout(()=> {
+      this.smartContainer.dispatchEvent(new Event("resize"));
+    }, 10)
   }
 
   connectedCallback(): void {
@@ -199,23 +205,25 @@ export default class PSmartContainer extends PureElement {
       class=${classMap({
         "smart-container": true,
         "smart-container__rtl": isRTL,
+        "smart-container--has-prefix": this.hasSlotController.test("prefix"),
+        "smart-container--has-suffix": this.hasSlotController.test("suffix"),
       })}
     >
-      <div class="smart_container__prefix">
+      <div class="smart-container__prefix">
         <slot name="prefix"></slot>
       </div>
       <slot></slot>
-      <p-dropdown class="smart_container__dropdown">
+      <p-dropdown class="smart-container__dropdown">
         <slot name="trigger" slot="trigger">
           <p-button>
             <p-icon name="funnel"></p-icon>
           </p-button>
         </slot>
         <p-menu part="dropdown-menu">
-          <div class="smart_container__dropdown-content"></div>
+          <div class="smart-container__dropdown-content"></div>
         </p-menu>
       </p-dropdown>
-      <div class="smart_container__suffix">
+      <div class="smart-container__suffix">
         <slot name="suffix"></slot>
       </div>
     </div>`;
