@@ -11,7 +11,6 @@ import PureElement from "../../internal/pure-ui-element.js";
 import styles from "./smart-container.styles.js";
 import type { CSSResultGroup } from "lit";
 
-
 /**
  * @summary This is a responsive container component that handles dynamic content overflow and provides an interactive dropdown menu for hidden items. It observes and manages content inside its slots, automatically adjusting the layout to handle overflow situations..
  * @documentation https://pureui.xyz/components/smart-container
@@ -50,9 +49,9 @@ export default class PSmartContainer extends PureElement {
 
   @query(".smart-container") smartContainer: HTMLElement;
 
-  @query(".smart_container__dropdown") dropdown: PDropdown;
+  @query(".smart-container__dropdown") dropdown: PDropdown;
 
-  @query(".smart_container__dropdown-content") dropdownContent: HTMLElement;
+  @query(".smart-container__dropdown-content") dropdownContent: HTMLElement;
 
   @watch("example")
   handleExampleChange() {
@@ -61,8 +60,8 @@ export default class PSmartContainer extends PureElement {
 
   private handleResize(entries: ResizeObserverEntry[]) {
     const slot = this.shadowRoot?.querySelector("slot:not([name])");
-    const prefixElement = this.shadowRoot?.querySelector(".smart_container__prefix");
-    const suffixElement = this.shadowRoot?.querySelector(".smart_container__suffix");
+    const prefixElement = this.shadowRoot?.querySelector(".smart-container__prefix");
+    const suffixElement = this.shadowRoot?.querySelector(".smart-container__suffix");
 
     const prefixWidth = (prefixElement as HTMLElement)?.offsetWidth || 0;
     const suffixWidth = (suffixElement as HTMLElement)?.offsetWidth || 0;
@@ -121,7 +120,7 @@ export default class PSmartContainer extends PureElement {
       }
     } else {
       // Handle overflow of slotted elements
-
+      
       if (this.rtl) {
         for (let i = 0; i <= elements.length - 1; i++) {
           const el = elements[i];
@@ -135,7 +134,7 @@ export default class PSmartContainer extends PureElement {
         for (let i = elements.length - 1; i >= 0; i--) {
           const el = elements[i];
           let triggerElementWidth = 0;
-          if (this.dropdownContent.children.length > 0) {
+          if (this.dropdownContent && this.dropdownContent.children.length > 0) {
             triggerElementWidth = this.dropdown.offsetWidth;
           }
           if (el.offsetLeft + el.offsetWidth + prefixWidth + suffixWidth + triggerElementWidth > container.width) {
@@ -146,14 +145,16 @@ export default class PSmartContainer extends PureElement {
       }
     }
 
-    if (this.dropdownContent.children.length > 0) {
+    if (this.dropdownContent && this.dropdownContent.children.length > 0) {
       this.dropdown.style.width = "auto";
       this.dropdown.style.visibility = "visible";
       this.dropdown.style.position = "relative";
     } else {
-      this.dropdown.style.visibility = "hidden";
-      this.dropdown.style.width = "0px";
-      this.dropdown.style.position = "fixed";
+      if (this.dropdown) {
+        this.dropdown.style.visibility = "hidden";
+        this.dropdown.style.width = "0px";
+        this.dropdown.style.position = "fixed";
+      }
     }
 
     this.backupContainerWidth = entries[0]?.contentRect.width;
@@ -181,9 +182,7 @@ export default class PSmartContainer extends PureElement {
   protected firstUpdated(): void {
     this.startObserver();
     // Trigger initial resize
-    setTimeout(()=> {
-      this.smartContainer.dispatchEvent(new Event("resize"));
-    }, 10)
+    this.smartContainer.dispatchEvent(new Event("resize"));
   }
 
   connectedCallback(): void {
