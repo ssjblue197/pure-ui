@@ -120,12 +120,12 @@ export default class PSmartContainer extends PureElement {
       }
     } else {
       // Handle overflow of slotted elements
-      
+
       if (this.rtl) {
         for (let i = 0; i <= elements.length - 1; i++) {
           const el = elements[i];
           if (el.offsetLeft < 0) {
-            const dropElement = elements[elements.length - 1];
+            const dropElement = elements[i];
             dropElement.dataset.oldWidth = String(dropElement.offsetWidth);
             this.dropdownContent?.appendChild(dropElement);
           }
