@@ -91,7 +91,10 @@ export default class PSmartContainer extends PureElement {
 
             if (lastChildOfDropdown) {
               const width = Number(lastChildOfDropdown.dataset.oldWidth);
-              if (lastElement.offsetLeft + lastElement.offsetWidth + prefixWidth + suffixWidth + width < container.width) {
+              if (
+                lastElement.offsetLeft + lastElement.offsetWidth + prefixWidth + suffixWidth + width <
+                container.width
+              ) {
                 this.append(lastChildOfDropdown);
               }
             }
