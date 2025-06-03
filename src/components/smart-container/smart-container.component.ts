@@ -84,7 +84,11 @@ export default class PSmartContainer extends PureElement {
               lastElement.offsetLeft + lastElement.offsetWidth + lastChildOfDropdownWidth + this.dropdown.offsetWidth <
               container.width
             ) {
-              this.append(lastChildOfDropdown);
+              if (this.rtl) {
+                this.prepend(lastChildOfDropdown);
+              } else {
+                this.append(lastChildOfDropdown);
+              }
             }
           }
         } else if (this.dropdownContent.children.length === 1) {
@@ -93,7 +97,11 @@ export default class PSmartContainer extends PureElement {
           if (lastChildOfDropdown) {
             const width = Number(lastChildOfDropdown.dataset.oldWidth);
             if (lastElement.offsetLeft + lastElement.offsetWidth + width < container.width) {
-              this.append(lastChildOfDropdown);
+              if (this.rtl) {
+                this.prepend(lastChildOfDropdown);
+              } else {
+                this.append(lastChildOfDropdown);
+              }
             }
           }
         }
@@ -104,7 +112,11 @@ export default class PSmartContainer extends PureElement {
           if (lastChildOfDropdown) {
             const lastChildOfDropdownWidth = Number(lastChildOfDropdown.dataset.oldWidth);
             if (lastChildOfDropdownWidth + this.dropdown.offsetWidth < container.width) {
-              this.append(lastChildOfDropdown);
+              if (this.rtl) {
+                this.prepend(lastChildOfDropdown);
+              } else {
+                this.append(lastChildOfDropdown);
+              }
             }
           }
         } else if (this.dropdownContent.children.length === 1) {
@@ -113,7 +125,11 @@ export default class PSmartContainer extends PureElement {
           if (lastChildOfDropdown) {
             const width = Number(lastChildOfDropdown.dataset.oldWidth);
             if (width < container.width) {
-              this.append(lastChildOfDropdown);
+              if (this.rtl) {
+                this.prepend(lastChildOfDropdown);
+              } else {
+                this.append(lastChildOfDropdown);
+              }
             }
           }
         }
