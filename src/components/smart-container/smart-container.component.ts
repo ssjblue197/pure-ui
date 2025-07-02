@@ -119,7 +119,9 @@ export default class PSmartContainer extends PureElement {
         for (let i = 0; i <= elements.length - 1; i++) {
           const el = elements[i];
           if (el.offsetLeft < 0) {
-            const dropElement = elements[elements.length - 1];
+            const currentLength = ((slot as HTMLSlotElement)?.assignedElements({ flatten: true }) as HTMLElement[])
+              ?.length;
+            const dropElement = elements[currentLength - 1];
             dropElement.dataset.oldWidth = String(dropElement.offsetWidth);
             this.dropdownContent?.appendChild(dropElement);
           }
