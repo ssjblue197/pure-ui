@@ -94,7 +94,7 @@ To copy data from an attribute, use `from="id[attr]"` where `id` is the id of th
 <br><br>
 
 <!-- Copies the link's "href" attribute -->
-<a id="my-link" href="https://pureui.xyz/">Pure UI Website</a>
+<a id="my-link" href="https://pureui.online/">Pure UI Website</a>
 <p-copy-button from="my-link[href]"></p-copy-button>
 ```
 
@@ -117,7 +117,7 @@ const App = () => (
     <br /><br />
 
     {/* Copies the link's "href" attribute */}
-    <a id="my-link" href="https://pureui.xyz/">Pure UI Website</a>
+    <a id="my-link" href="https://pureui.online/">Pure UI Website</a>
     <PCopyButton from="my-link[href]" />
   </>
 );

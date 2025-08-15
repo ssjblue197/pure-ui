@@ -14,7 +14,7 @@ import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Menu items provide options for the user to pick from in a menu.
- * @documentation https://pureui.xyz/components/menu-item
+ * @documentation https://pureui.online/components/menu-item
  * @status stable
  * @since 1.0
  *

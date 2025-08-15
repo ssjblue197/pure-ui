@@ -40,7 +40,7 @@ Import the Pure UI default theme (stylesheet) in `/resources/css/app.css`:
 
 ### Import Your Pure UI Components
 
-Import each Pure UI component you plan to use in `/resources/js/bootstrap.js`. Use the full path to each component (as outlined in the [Cherry Picking instructions](https://pureui.xyz/getting-started/installation#cherry-picking)). You can find the full import statement for a component in the _Importing_ section of the component's documentation (use the _Bundler_ import). Your imports should look similar to:
+Import each Pure UI component you plan to use in `/resources/js/bootstrap.js`. Use the full path to each component (as outlined in the [Cherry Picking instructions](https://pureui.online/getting-started/installation#cherry-picking)). You can find the full import statement for a component in the _Importing_ section of the component's documentation (use the _Bundler_ import). Your imports should look similar to:
 
 ```js
 import "pure-uikit/dist/components/button/button.js";

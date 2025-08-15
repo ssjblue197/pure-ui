@@ -13,7 +13,7 @@ import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Compare visual differences between similar photos with a sliding panel.
- * @documentation https://pureui.xyz/components/image-comparer
+ * @documentation https://pureui.online/components/image-comparer
  * @status stable
  * @since 1.0
  *

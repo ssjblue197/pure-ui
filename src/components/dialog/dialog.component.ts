@@ -18,7 +18,7 @@ import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Dialogs, sometimes called "modals", appear above the page and require the user's immediate attention.
- * @documentation https://pureui.xyz/components/dialog
+ * @documentation https://pureui.online/components/dialog
  * @status stable
  * @since 1.0
  *

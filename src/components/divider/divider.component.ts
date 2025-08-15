@@ -7,7 +7,7 @@ import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Dividers are used to visually separate or group elements.
- * @documentation https://pureui.xyz/components/divider
+ * @documentation https://pureui.online/components/divider
  * @status stable
  * @since 1.0
  *

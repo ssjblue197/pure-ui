@@ -13,7 +13,7 @@ import type { CSSResultGroup } from "lit";
 
 /**
  * @summary This is a responsive container component that handles dynamic content overflow and provides an interactive dropdown menu for hidden items. It observes and manages content inside its slots, automatically adjusting the layout to handle overflow situations..
- * @documentation https://pureui.xyz/components/smart-container
+ * @documentation https://pureui.online/components/smart-container
  * @status stable
  * @since 1.2.17
  *

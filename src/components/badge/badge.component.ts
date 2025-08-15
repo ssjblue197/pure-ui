@@ -8,7 +8,7 @@ import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Badges are used to draw attention and display statuses or counts.
- * @documentation https://pureui.xyz/components/badge
+ * @documentation https://pureui.online/components/badge
  * @status stable
  * @since 1.0
  *

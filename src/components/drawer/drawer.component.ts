@@ -19,7 +19,7 @@ import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.
- * @documentation https://pureui.xyz/components/drawer
+ * @documentation https://pureui.online/components/drawer
  * @status stable
  * @since 1.0
  *

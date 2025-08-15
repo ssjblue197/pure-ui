@@ -8,7 +8,7 @@ import type { CSSResultGroup } from "lit";
 
 /**
  * @summary The Resize Observer component offers a thin, declarative interface to the [`ResizeObserver API`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver).
- * @documentation https://pureui.xyz/components/resize-observer
+ * @documentation https://pureui.online/components/resize-observer
  * @status stable
  * @since 1.0
  *

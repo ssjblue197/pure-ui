@@ -565,7 +565,7 @@ Set the `image` slot to customize the appearance of the image within the dropzon
 
 ```html:preview
 <p-file-upload>
-  <p-qr-code slot="image" value="https://pureui.xyz/"></p-qr-code>
+  <p-qr-code slot="image" value="https://pureui.online/"></p-qr-code>
 </p-file-upload>
 ```
 
@@ -574,7 +574,7 @@ import { PFileUpload, PQrCode } from 'pure-uikit/dist/react';
 
 const App = () => (
   <PFileUpload>
-    <PQrCode slot="image" value="https://pureui.xyz/" />;
+    <PQrCode slot="image" value="https://pureui.online/" />;
   </PFileUpload>
 );
 ```

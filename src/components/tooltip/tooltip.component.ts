@@ -14,7 +14,7 @@ import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Tooltips display additional information based on a specific action.
- * @documentation https://pureui.xyz/components/tooltip
+ * @documentation https://pureui.online/components/tooltip
  * @status stable
  * @since 1.0
  *

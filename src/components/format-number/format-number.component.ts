@@ -4,7 +4,7 @@ import PureElement from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Formats a number using the specified locale and options.
- * @documentation https://pureui.xyz/components/format-number
+ * @documentation https://pureui.online/components/format-number
  * @status stable
  * @since 1.0
  */

@@ -5,7 +5,7 @@ import PureElement from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Formats a date/time using the specified locale and options.
- * @documentation https://pureui.xyz/components/format-date
+ * @documentation https://pureui.online/components/format-date
  * @status stable
  * @since 1.0
  */

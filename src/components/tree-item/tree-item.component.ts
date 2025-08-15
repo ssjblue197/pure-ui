@@ -17,7 +17,7 @@ import type { CSSResultGroup, PropertyValueMap } from "lit";
 
 /**
  * @summary A tree item serves as a hierarchical node that lives inside a [tree](/components/tree).
- * @documentation https://pureui.xyz/components/tree-item
+ * @documentation https://pureui.online/components/tree-item
  * @status stable
  * @since 1.0
  *

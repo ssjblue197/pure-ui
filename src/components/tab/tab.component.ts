@@ -13,7 +13,7 @@ let id = 0;
 
 /**
  * @summary Tabs are used inside [tab groups](/components/tab-group) to represent and activate [tab panels](/components/tab-panel).
- * @documentation https://pureui.xyz/components/tab
+ * @documentation https://pureui.online/components/tab
  * @status stable
  * @since 1.0
  *

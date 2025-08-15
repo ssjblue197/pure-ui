@@ -13,7 +13,7 @@ import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Ratings give users a way to quickly view and provide feedback.
- * @documentation https://pureui.xyz/components/rating
+ * @documentation https://pureui.online/components/rating
  * @status stable
  * @since 1.0
  *

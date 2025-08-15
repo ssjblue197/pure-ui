@@ -28,7 +28,7 @@ module.exports = function (eleventyConfig) {
   //
   // Global data
   //
-  eleventyConfig.addGlobalData("baseUrl", "https://pureui.xyz/"); // the production URL
+  eleventyConfig.addGlobalData("baseUrl", "https://pureui.online/"); // the production URL
   eleventyConfig.addGlobalData("layout", "default"); // make 'default' the default layout
   eleventyConfig.addGlobalData("toc", true); // enable the table of contents
   eleventyConfig.addGlobalData("meta", {

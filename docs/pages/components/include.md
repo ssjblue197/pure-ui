@@ -10,13 +10,13 @@ Included files are asynchronously requested using `window.fetch()`. Requests are
 The included content will be inserted into the `<p-include>` element's default slot so it can be easily accessed and styled through the light DOM.
 
 ```html:preview
-<p-include src="https://pureui.xyz/assets/examples/include.html"></p-include>
+<p-include src="https://pureui.online/assets/examples/include.html"></p-include>
 ```
 
 ```jsx:react
 import PInclude from 'pure-uikit/dist/react/include';
 
-const App = () => <PInclude src="https://pureui.xyz/assets/examples/include.html" />;
+const App = () => <PInclude src="https://pureui.online/assets/examples/include.html" />;
 ```
 
 ## Examples
@@ -28,7 +28,7 @@ When an include file loads successfully, the `p-load` event will be emitted. You
 If the request fails, the `p-error` event will be emitted. In this case, `event.detail.status` will contain the resulting HTTP status code of the request, e.g. 404 (not found).
 
 ```html
-<p-include src="https://pureui.xyz/assets/examples/include.html"></p-include>
+<p-include src="https://pureui.online/assets/examples/include.html"></p-include>
 
 <script>
   const include = document.querySelector("p-include");

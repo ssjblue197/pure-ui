@@ -1,6 +1,6 @@
 # PureUI
 
-Documentation: [Pure UI](https://pureui.xyz)
+Documentation: [Pure UI](https://pureui.online)
 
 Welcome to **PureUI**, a lightweight, customizable web component library based on **Shoelace Style**. PureUI extends Shoelace with advanced components designed for building responsive and interactive user interfaces with minimal effort.
 
@@ -75,7 +75,7 @@ Here’s a brief overview of some of the most common and advanced PureUI compone
 - **Select Combobox**: A customizable dropdown with search functionality.
 - **Paginate**: A pagination component to navigate large datasets easily.
 - **File Upload**: A flexible file upload component with drag-and-drop support.
-- **More**: We encourage you to build more components and share them with the community. Please refer to the [Community](https://pureui.xyz/resources/community/) section for more information.
+- **More**: We encourage you to build more components and share them with the community. Please refer to the [Community](https://pureui.online/resources/community/) section for more information.
 
 ## 5. Customization
 
@@ -127,7 +127,7 @@ p-button {
 
 Each component in PureUI comes with its own set of attributes, properties, and events.
 
-For full API details, visit the [API documentation page](https://pureui.xyz/).
+For full API details, visit the [API documentation page](https://pureui.online/).
 
 ## 8. Contributing
 
@@ -137,7 +137,7 @@ We welcome contributions to PureUI! If you'd like to contribute, please follow t
 2. Create a new branch.
 3. Submit a pull request.
 
-For detailed guidelines, check out our [contribution guide](https://pureui.xyz/resources/contributing/).
+For detailed guidelines, check out our [contribution guide](https://pureui.online/resources/contributing/).
 
 ## 9. License
 
@@ -145,7 +145,7 @@ PureUI is licensed under the **MIT License**. See the [LICENSE](https://github.c
 
 ---
 
-Thank you for choosing PureUI! We hope this library helps you build amazing user interfaces quickly and easily. For more information, visit our [official website](https://pureui.xyz).
+Thank you for choosing PureUI! We hope this library helps you build amazing user interfaces quickly and easily. For more information, visit our [official website](https://pureui.online).
 
 ### What are you using to build Pure UI?
 

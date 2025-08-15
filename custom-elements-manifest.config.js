@@ -211,7 +211,7 @@ export default {
       referencesTemplate: (_, tag) => [
         {
           name: "Documentation",
-          url: `https://pureui.xyz/components/${tag.replace("p-", "")}`,
+          url: `https://pureui.online/components/${tag.replace("p-", "")}`,
         },
       ],
     }),
@@ -223,7 +223,7 @@ export default {
       referencesTemplate: (_, tag) => {
         return {
           name: "Documentation",
-          url: `https://pureui.xyz/components/${tag.replace("p-", "")}`,
+          url: `https://pureui.online/components/${tag.replace("p-", "")}`,
         };
       },
     }),

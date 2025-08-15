@@ -18,7 +18,7 @@ import type { TableOptions, TableRowData } from "./table.ts";
 
 /**
  * @summary The Table component is used to display data in a table format.
- * @documentation https://pureui.xyz/components/table
+ * @documentation https://pureui.online/components/table
  * @status stable
  * @since 1.1.15
  *

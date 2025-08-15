@@ -26,7 +26,7 @@ import type POption from "../option/option.component.js";
 
 /**
  * @summary Selects allow you to choose items from a menu of predefined options.
- * @documentation https://pureui.xyz/components/select
+ * @documentation https://pureui.online/components/select
  * @status stable
  * @since 1.0
  *

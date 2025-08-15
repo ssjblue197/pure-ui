@@ -12,7 +12,7 @@ import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Copies text data to the clipboard when the user clicks the trigger.
- * @documentation https://pureui.xyz/components/copy
+ * @documentation https://pureui.online/components/copy
  * @status experimental
  * @since 2.7
  *

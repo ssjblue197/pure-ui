@@ -20,7 +20,7 @@ const availableUnits: UnitConfig[] = [
 
 /**
  * @summary Outputs a localized time phrase relative to the current date and time.
- * @documentation https://pureui.xyz/components/relative-time
+ * @documentation https://pureui.online/components/relative-time
  * @status stable
  * @since 1.0
  */

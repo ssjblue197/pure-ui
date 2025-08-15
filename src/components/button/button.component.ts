@@ -16,7 +16,7 @@ import type { PureFormControl } from "../../internal/pure-ui-element.js";
 
 /**
  * @summary Buttons represent actions that are available to the user.
- * @documentation https://pureui.xyz/components/button
+ * @documentation https://pureui.online/components/button
  * @status stable
  * @since 1.0
  *

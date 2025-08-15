@@ -1,15 +1,15 @@
 {
     "name": "pure-uikit",
     "description": "A forward-thinking library of web components.",
-    "version": "1.6.29",
-    "homepage": "https://pureui.xyz",
+    "version": "1.6.30",
+    "homepage": "https://pureui.online",
     "author": "Mr.P",
     "license": "MIT",
     "customElements": "dist/custom-elements.json",
     "web-types": "./dist/web-types.json",
     "contributes": {
         "html": {
-        "customData": ["./dist/vscode.html-custom-data.json"]
+            "customData": ["./dist/vscode.html-custom-data.json"]
         }
     },
     "type": "module",

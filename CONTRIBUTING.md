@@ -2,4 +2,4 @@
 
 Before contributing, please review the contributions guidelines at:
 
-[pureui.xyz/resources/contributing](https://pureui.xyz/resources/contributing)
+[pureui.online/resources/contributing](https://pureui.online/resources/contributing)

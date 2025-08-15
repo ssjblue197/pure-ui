@@ -10,7 +10,7 @@ import type PBreadcrumbItem from "../breadcrumb-item/breadcrumb-item.js";
 
 /**
  * @summary Breadcrumbs provide a group of links so users can easily navigate a website's hierarchy.
- * @documentation https://pureui.xyz/components/breadcrumb
+ * @documentation https://pureui.online/components/breadcrumb
  * @status stable
  * @since 1.0
  *

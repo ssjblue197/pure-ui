@@ -6,7 +6,7 @@ import type { CSSResultGroup } from "lit";
 
 /**
  * @summary Menu labels are used to describe a group of menu items.
- * @documentation https://pureui.xyz/components/menu-label
+ * @documentation https://pureui.online/components/menu-label
  * @status stable
  * @since 1.0
  *
