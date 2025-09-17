@@ -32,6 +32,10 @@ export default css`
 
     --table-row-gap: 0;
     --table-column-gap: 0;
+
+    --table-header-font-size: var(--p-font-size-x-small);
+    --table-header-font-weight: var(--p-font-weight-medium);
+    --table-body-font-size: var(--p-font-size-small);
   }
 
   .table-wrapper {
@@ -71,8 +75,8 @@ export default css`
 
   .table-header .table-cell {
     color: var(--p-color-gray-600);
-    font-weight: var(--p-font-weight-medium);
-    font-size: var(--p-font-size-x-small);
+    font-weight: var(--table-header-font-weight);
+    font-size: var(--table-header-font-size);
     padding: var(--table-header-cell-padding);
     justify-items: stretch;
     background-color: var(--p-color-gray-50);
@@ -167,7 +171,7 @@ export default css`
     align-self: stretch;
     color: var(--p-color-gray-600);
     font-weight: var(--p-font-weight-normal);
-    font-size: var(--p-font-size-small);
+    font-size: var(--table-body-font-size);
     padding: var(--table-body-cell-padding);
     min-height: round(var(--table-cell-min-height), 1px);
     max-height: round(var(--table-cell-max-height), 1px);

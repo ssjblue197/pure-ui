@@ -862,8 +862,8 @@ export default class PSelect extends PureElement implements PureFormControl {
     if (this.keyword) {
       allOptions.forEach(option => {
         option.hidden =
-          !option.getTextLabel().toLowerCase().includes(this.keyword.toLowerCase()) &&
-          !option.value.toLowerCase().includes(this.keyword.toLowerCase());
+          !option.getTextLabel().toLowerCase().includes(this.keyword.toLowerCase())
+          //  && !option.value.toLowerCase().includes(this.keyword.toLowerCase());
       });
       const availableOptions = allOptions.filter(el => !el.hidden);
       if (availableOptions.length > 0) {
