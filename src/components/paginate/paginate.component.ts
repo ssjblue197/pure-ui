@@ -137,8 +137,8 @@ export default class PPaginate extends PureElement {
     /* eslint-disable lit/binding-positions */
     const pages = this.getPages();
     return html`
-      <div class="paginate">
-        <div class="paginate__summary">
+      <div class="paginate" part="base">
+        <div class="paginate__summary" part="paginate-limit">
           <p-select
             label=""
             ?disabled="${this.disabled}"
@@ -157,8 +157,9 @@ export default class PPaginate extends PureElement {
             results
           </span>
         </div>
-        <p-button-group>
+        <p-button-group part="paginate-action">
           <p-button
+            part="previous"
             size=${this.size}
             variant=${this.variant}
             ?disabled="${Number(this.page) === 1 || this.disabled}"
@@ -176,6 +177,7 @@ export default class PPaginate extends PureElement {
                 return html`
                   <p-dropdown>
                     <p-button
+                      part="page"
                       slot="trigger"
                       size=${this.size}
                       variant=${this.variant}
@@ -205,6 +207,7 @@ export default class PPaginate extends PureElement {
                 return html`
                   <p-dropdown>
                     <p-button
+                      part="page"
                       slot="trigger"
                       size=${this.size}
                       variant=${this.variant}
@@ -236,6 +239,7 @@ export default class PPaginate extends PureElement {
             } else {
               return html`
                 <p-button
+                  part="page"
                   size=${this.size}
                   variant=${this.variant}
                   @click="${() => this.changePage(page)}"
@@ -252,6 +256,7 @@ export default class PPaginate extends PureElement {
             }
           })}
           <p-button
+            part="next"
             size=${this.size}
             variant=${this.variant}
             ?disabled="${this.page === Math.ceil(Number(this.total) / Number(this.limit)) || this.disabled}"

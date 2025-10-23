@@ -40,7 +40,7 @@ export default css`
     gap: var(--p-spacing-x-small);
   }
   .paginate__select_limit {
-    width: 128px;
+    width: 140px;
     font-weight: var(--p-font-weight-medium);
   }
 
