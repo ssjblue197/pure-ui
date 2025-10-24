@@ -185,6 +185,12 @@ export default class PSelect extends PureElement implements PureFormControl {
   @property({ attribute: "max-options-visible", type: Number })
   maxOptionsVisible = 3;
 
+  /**
+   * Distance of the select's menu from the select's combobox.
+   */
+  @property({ attribute: "distance", type: Number })
+  distance = 0;
+
   /** Disables the select control. */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
@@ -965,6 +971,7 @@ export default class PSelect extends PureElement implements PureFormControl {
 
         <div part="form-control-input" class="form-control-input">
           <p-popup
+            exportparts="popup:select_popup"
             class=${classMap({
               select: true,
               "select--standard": true,
@@ -985,6 +992,7 @@ export default class PSelect extends PureElement implements PureFormControl {
             strategy=${this.hoist ? "fixed" : "absolute"}
             flip
             shift
+            distance=${this.distance}
             sync="width"
             auto-size="vertical"
             auto-size-padding="10"

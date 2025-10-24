@@ -140,6 +140,8 @@ export default class PPaginate extends PureElement {
       <div class="paginate" part="base">
         <div class="paginate__summary" part="paginate-limit">
           <p-select
+            part="paginate-limit_select"
+            exportparts="select_popup:select_base"
             label=""
             ?disabled="${this.disabled}"
             size=${this.size}
@@ -157,9 +159,10 @@ export default class PPaginate extends PureElement {
             results
           </span>
         </div>
-        <p-button-group part="paginate-action">
+        <p-button-group part="paginate-action" exportparts="base:button-group_base">
           <p-button
             part="previous"
+            exportparts="base:button-previous_base"
             size=${this.size}
             variant=${this.variant}
             ?disabled="${Number(this.page) === 1 || this.disabled}"
@@ -178,6 +181,7 @@ export default class PPaginate extends PureElement {
                   <p-dropdown>
                     <p-button
                       part="page"
+                      exportparts="base:button-page_base"
                       slot="trigger"
                       size=${this.size}
                       variant=${this.variant}
@@ -208,6 +212,7 @@ export default class PPaginate extends PureElement {
                   <p-dropdown>
                     <p-button
                       part="page"
+                      exportparts="base:button-page_base"
                       slot="trigger"
                       size=${this.size}
                       variant=${this.variant}
@@ -240,6 +245,7 @@ export default class PPaginate extends PureElement {
               return html`
                 <p-button
                   part="page"
+                  exportparts="base:button-page_base"
                   size=${this.size}
                   variant=${this.variant}
                   @click="${() => this.changePage(page)}"
@@ -257,6 +263,7 @@ export default class PPaginate extends PureElement {
           })}
           <p-button
             part="next"
+            exportparts="base:button-next_base"
             size=${this.size}
             variant=${this.variant}
             ?disabled="${this.page === Math.ceil(Number(this.total) / Number(this.limit)) || this.disabled}"
