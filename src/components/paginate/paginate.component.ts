@@ -153,7 +153,7 @@ export default class PPaginate extends PureElement {
               return html`<p-option value=${String(page)}>${page} / page</p-option>`;
             })}
           </p-select>
-          <span class="paginate__summary-text">
+          <span class="paginate__summary-text" part="paginate-summary">
             of total
             <p-format-number value=${this.total}></p-format-number>
             results
