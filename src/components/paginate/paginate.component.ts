@@ -141,7 +141,7 @@ export default class PPaginate extends PureElement {
         <div class="paginate__summary" part="paginate-limit">
           <p-select
             part="paginate-limit_select"
-            exportparts="select_popup:select_base"
+            exportparts="combobox:select_base"
             label=""
             ?disabled="${this.disabled}"
             size=${this.size}

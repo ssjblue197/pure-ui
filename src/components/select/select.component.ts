@@ -971,7 +971,6 @@ export default class PSelect extends PureElement implements PureFormControl {
 
         <div part="form-control-input" class="form-control-input">
           <p-popup
-            exportparts="popup:select_popup"
             class=${classMap({
               select: true,
               "select--standard": true,
