@@ -400,6 +400,7 @@ export default class PTable extends PureElement {
       const expandIcon = rowElement.querySelector(".row-expand-icon-container");
       expandIcon!.classList.toggle("row-expand-icon-container--is-open");
       expandRow!.classList.toggle("table-row-expand--is-open");
+      this.emit("p-table-row-select", { detail: { selection: this.selectedRows, row: this.data?.[rIndex] } });
     }
     this.requestUpdate();
   }
