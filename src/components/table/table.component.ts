@@ -82,6 +82,24 @@ export default class PTable extends PureElement {
   private readonly localize = new LocalizeController(this);
 
   /**
+   * Indicates that the alway show expand row or toggle it.
+   *
+   * @attribute disabled
+   * @type {boolean}
+   * @defaultValue false
+   */
+  @property({ type: Boolean, reflect: true }) toggle_expand = false;
+
+  /**
+   * Delay show row expand.
+   *
+   * @attribute disabled
+   * @type {Number}
+   * @defaultValue 50 ms
+   */
+  @property({ type: Number, reflect: true }) delay = 50;
+
+  /**
    * Indicates that the element is disabled.
    *
    * @attribute disabled
@@ -235,6 +253,10 @@ export default class PTable extends PureElement {
     } else {
       this.startObserver();
     }
+  }
+
+  private handleDelay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   private startObserver() {
@@ -391,15 +413,28 @@ export default class PTable extends PureElement {
     this.emit("click", { detail: { row: r } });
   }
 
-  private handleExpandRow(e: Event, rIndex: number) {
+  private async handleExpandRow(e: Event, rIndex: number) {
     e.preventDefault();
     e.stopPropagation();
     const rowElement = this.shadowRoot!.querySelector(`[data-row-index="${rIndex}"]`);
     if (rowElement) {
       const expandRow = rowElement.parentElement!.querySelector(".table-row-expand");
       const expandIcon = rowElement.querySelector(".row-expand-icon-container");
-      expandIcon!.classList.toggle("row-expand-icon-container--is-open");
-      expandRow!.classList.toggle("table-row-expand--is-open");
+
+      await this.handleDelay(Number(this.delay));
+      if (this.toggle_expand) {
+        expandIcon!.classList.toggle("row-expand-icon-container--is-open");
+        expandRow!.classList.toggle("table-row-expand--is-open");
+      } else {
+        if (expandIcon && !expandIcon.classList.contains("row-expand-icon-container--is-open")) {
+          expandIcon.classList.add("row-expand-icon-container--is-open");
+        }
+
+        if (expandRow && !expandRow.classList.contains("table-row-expand--is-open")) {
+          expandRow.classList.add("table-row-expand--is-open");
+        }
+      }
+
       this.emit("p-table-row-select", { detail: { selection: this.selectedRows, row: this.data?.[rIndex] } });
     }
     this.requestUpdate();
