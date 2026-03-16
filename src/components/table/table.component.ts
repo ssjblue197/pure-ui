@@ -421,7 +421,6 @@ export default class PTable extends PureElement {
       const expandRow = rowElement.parentElement!.querySelector(".table-row-expand");
       const expandIcon = rowElement.querySelector(".row-expand-icon-container");
 
-      await this.handleDelay(Number(this.delay));
       if (this.toggle_expand) {
         expandIcon!.classList.toggle("row-expand-icon-container--is-open");
         expandRow!.classList.toggle("table-row-expand--is-open");
@@ -437,6 +436,8 @@ export default class PTable extends PureElement {
 
       this.emit("p-table-row-select", { detail: { selection: this.selectedRows, row: this.data?.[rIndex] } });
     }
+    await this.handleDelay(Number(this.delay));
+
     this.requestUpdate();
   }
 
