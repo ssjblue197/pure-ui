@@ -172,3 +172,22 @@ export function getDateDifferentFrom(date: Date, days: number) {
 export function getMonthDifferentFrom(date: Date, months: number) {
   return dateFormat.add(date, months, "months");
 }
+
+/**
+ * Parses a date string to a local-time Date.
+ *
+ * `dateFormatter().to()` creates dates via `Date.UTC()`, which causes a timezone offset
+ * shift on devices west of UTC (e.g. PST = UTC-8). This helper adjusts the result back
+ * to local midnight so it aligns with the calendar grid (which uses local-time dates).
+ */
+export function parseToLocalDate(value: string, format?: string): Date {
+  if (format) {
+    const utcDate = dateFormatter().to(value, format);
+    return new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000);
+  }
+  const isoMatch = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (isoMatch) {
+    return new Date(+isoMatch[1], +isoMatch[2] - 1, +isoMatch[3]);
+  }
+  return new Date(value);
+}

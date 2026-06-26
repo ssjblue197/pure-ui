@@ -28,6 +28,9 @@ layout: component
     rowExpandRender: (row) => {
       return `${String(row)}`;
     },
+    rowExpandable: () => {
+      return true;
+    },
     columns: [{field: 'name',
     id: 'name',
     headerName: 'Full name',

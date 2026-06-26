@@ -421,6 +421,8 @@ export default class PTable extends PureElement {
       const expandRow = rowElement.parentElement!.querySelector(".table-row-expand");
       const expandIcon = rowElement.querySelector(".row-expand-icon-container");
 
+      console.log('String(this.toggle_expand) === "true"', this.toggle_expand, String(this.toggle_expand) === "true");
+
       if (String(this.toggle_expand) === "true") {
         expandIcon!.classList.toggle("row-expand-icon-container--is-open");
         expandRow!.classList.toggle("table-row-expand--is-open");

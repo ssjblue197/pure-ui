@@ -7,6 +7,7 @@ import {
   getMonthDifferentFrom,
   getMonthName,
   isSameDay,
+  parseToLocalDate,
 } from "../../internal/calendar.js";
 import { getAnimation, setDefaultAnimation } from "../../utilities/animation-registry.js";
 import { property, query, state } from "lit/decorators.js";
@@ -235,15 +236,14 @@ export default class PCalendar extends PureElement implements PureFormControl {
     if (Array.isArray(value)) {
       this._value = value.map(v => {
         if (typeof v === "string") {
-          //TODO: handle check if can parser value to Date object when format is not provided
-          return this.format ? dateFormatter().to(v, this.format) : new Date(v);
+          return parseToLocalDate(v, this.format || undefined);
         } else {
           return v;
         }
       });
     } else {
       if (typeof value === "string") {
-        this._value = this.format ? dateFormatter().to(value, this.format) : new Date(value);
+        this._value = parseToLocalDate(value, this.format || undefined);
       } else {
         this._value = value;
       }
@@ -428,14 +428,14 @@ export default class PCalendar extends PureElement implements PureFormControl {
     if (Array.isArray(this.value)) {
       this._value = this.value.map(v => {
         if (typeof v === "string") {
-          return this.format ? dateFormatter().to(v, this.format) : new Date(v);
+          return parseToLocalDate(v, this.format || undefined);
         } else {
           return v;
         }
       });
     } else {
       if (typeof this.value === "string") {
-        this._value = this.format ? dateFormatter().to(this.value, this.format) : new Date(this.value);
+        this._value = parseToLocalDate(this.value, this.format || undefined);
       } else {
         this._value = this.value;
       }
@@ -576,7 +576,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
             return;
           } else {
             this.handleSelectDate({
-              date: dateFormatter().to(this.keyword, this.format),
+              date: parseToLocalDate(this.keyword, this.format || undefined),
               isToday: false,
               isWeekday: false,
               isWeekend: false,
@@ -955,8 +955,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
     if (Array.isArray(this.value)) {
       this._value = this.value.map(v => {
         if (typeof v === "string") {
-          //TODO: handle check if can parser value to Date object when format is not provided
-          return this.format ? dateFormatter().to(v, this.format) : new Date(v);
+          return parseToLocalDate(v, this.format || undefined);
         } else {
           return v;
         }
@@ -968,7 +967,7 @@ export default class PCalendar extends PureElement implements PureFormControl {
       }
     } else {
       if (typeof this.value === "string") {
-        this._value = this.format ? dateFormatter().to(this.value, this.format) : new Date(this.value);
+        this._value = parseToLocalDate(this.value, this.format || undefined);
         if (this.value.length > 0) {
           this.displayInput.setAttribute("placeholder", "");
         } else {
